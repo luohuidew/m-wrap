@@ -1,0 +1,79 @@
+@import './mixin.scss';
+
+.middle {
+  @include middle();
+}
+
+.user-input {
+  border: none;
+  width: 250px;
+  height: 40px;
+  background: rgba(239, 239, 239, 1);
+  margin-bottom: 10px;
+  padding-left: 11px;
+  font-size: 14px;
+  line-height: 40px;
+
+  &::-webkit-input-placeholder {
+    /* placeholder颜色  */
+    color: #aab2bd;
+    /* placeholder字体大小  */
+    font-size: 14px;
+    /* placeholder位置  */
+    text-align: left;
+    vertical-align: middle;
+  }
+}
+
+.card-box {
+  position: relative;
+  overflow: hidden;
+  // padding: 26px 10px;
+  height: 224px;
+
+  .goods-card {
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    width: 355px;
+  }
+}
+
+.goods-card {
+  // height: 173px;
+  margin-bottom: 11px;
+  // width: 355px;
+}
+
+.stack-wrapper {
+  margin: 0 auto;
+  position: relative;
+  z-index: 1000;
+  height: 200px;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+.red-text {
+  color: #D70E19;
+}
+.red-btn {
+    // margin-top: 40px;
+    padding: 10px 0 30px 0;
+    background-color: #fff;
+    text-align: center;
+    a {
+      display: inline-block;
+      width: 250px;
+      height: 40px;
+      background: rgba(215, 14, 25, 1);
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+      border-radius: 20px;
+      text-align: center;
+      line-height: 40px;
+      color: #fff;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }

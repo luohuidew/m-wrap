@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, user-scalable=no, target-densitydpi=device-dpi">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/layout.css">
+  <title>PAY</title>
+</head>
+
+<body>
+
+  <div class="show-box">
+    <div class="img-tips">
+      <img src="./static/created.png" alt="">
+      <p> Order Summary</p>
+    </div>
+    <div class="order-info">
+      <p>Order: # <span id="order"></span></p>
+      <p>Order Total: <span id="total"></span> </p>
+    </div>
+  </div>
+  <!-- 测试的 -->
+  <div class="pay-form">
+    <form id="paymentForm" method="POST" action="">
+      <input type="hidden" name="dataValue" id="dataValue" />
+      <input type="hidden" name="dataDescriptor" id="dataDescriptor" />
+      <button type="button" class="AcceptUI" data-billingAddressOptions='{"show":false, "required":false}'
+        data-apiLoginID="87YXn3mP" data-clientKey="35N55mdG9ra8aVL44v477MV5SHBWt38FF5mRfPCZPcd82NV4c566kwB95zVX86UE"
+        data-acceptUIFormBtnTxt="Submit" data-acceptUIFormHeaderTxt="Card Information" data-responseHandler="responseHandler">Continue
+        Checkout
+      </button>
+    </form>
+  </div>
+  <div class="loading">
+    <span class="loadingUI">Payments <span class="load-text l1"></span><span class="load-text l2"></span><span class="load-text l3"></span></span>
+  </div>
+  <script src="./js/jquery.min.js"></script>
+  <script type="text/javascript" src="https://js.authorize.net/v3/AcceptUI.js"></script>
+  <script type="text/javascript">
+    var temp;
+    // document.getElementById('pay_btn').ontouchstart = function () {
+    //   let corejs = localStorage.getItem('corejs');
+    //   if (!corejs) {
+    //     // debugger;
+    //     window.location.reload();
+    //     localStorage.setItem('corejs', true);
+    //   };
+    // };
+    function responseHandler(response) {
+      if (response.messages.resultCode === "Error") {
+        var i = 0;
+        while (i < response.messages.message.length) {
+          console.log(
+            response.messages.message[i].code + ":" +
+            response.messages.message[i].text
+          );
+          i = i + 1;
+        }
+      } else {
+        paymentFormUpdate(response.opaqueData);
+      }
+    };
+
+    function nativeToJavaScript(res) {
+      temp = res;
+      if (temp.type == 201) {
+        $('#order').text(temp.data.order_no);
+        $('#total').text(temp.data.price);
+      }
+      var params = {
+        "type": 100,
+        "data": {
+          "payment": "1",
+          "message": "begin pay!"
+        }
+      };
+      if (temp.type == 200) {
+        window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
+      }
+    };
+
+    function paymentFormUpdate(opaqueData) {
+      document.getElementById("dataDescriptor").value = opaqueData.dataDescriptor;
+      document.getElementById("dataValue").value = opaqueData.dataValue;
+      // console.log(opaqueData);
+      var params = opaqueData;
+      if (temp) {
+        opaqueData.order_no = temp.data.order_no;
+      }
+      $('.loading').show();
+      $('.pay-form').hide();
+      $.ajax({
+        url: "https://app.weget.com/index.php/wap/pay/pay",
+        type: "post",
+        data: opaqueData,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        success: function (data, status, xhr) {
+          console.log(data);
+          if (data.code == 1000) {
+            console.log(data);
+            var params = {
+              "type": 101,
+              "code": data.code,
+              "data": data.data,
+              "message": data.message,
+              "http_code": xhr.status
+            };
+            window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
+          } else {
+            var params = {
+              "type": 101,
+              "code": data.code,
+              "data": data.data,
+              "message": data.message,
+              "http_code": xhr.status
+            };
+            window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
+          }
+        },
+        error: function (e, xhr, status, statusText) {
+          var params = {
+            "type": 101,
+            "data": e,
+            "http_code": xhr.status
+          };
+          window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+.login-in,
+.create {
+  width: 300px;
+  // height: 430px;
+  background-color: #ffffff;
+  margin: 0 auto;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  // border-radius: 8px;
+  text-align: center;
+  padding: 27px 27px 0 27px;
+
+  .forget {
+    text-align: right;
+
+    a {
+      color: #000;
+      font-size: 12px;
+      text-decoration: underline;
+    }
+  }
+
+  .agree-text {
+    color: rgba(155, 155, 155, 1);
+    font-size: 12px;
+    text-align: left;
+    margin-top: 10px;
+
+    span {
+      display: inline-block;
+      //   width: 18px;
+      //   height: 18px;
+      padding-left: 22px;
+      background: url('/static/img/icon/nochecked.png') no-repeat left center;
+      background-size: 14px 14px;
+    }
+
+    .active {
+      background: url('/static/img/icon/havechecked.png') no-repeat left center;
+      background-size: 14px 14px;
+    }
+
+    a {
+      padding-left: 6px;
+      color: #888;
+      font-size: 12px;
+      text-decoration: underline;
+    }
+  }
+}
+// .auth-in {
+//   width: 300px;
+//   // height: 430px;
+//   background-color: #ffffff;
+//   margin: 0 auto;
+//   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+//   // border-radius: 8px;
+//   text-align: center;
+//   padding: 0 27px 27px 27px;
+// }
+
+.title {
+  font-size: 24px;
+  color: rgba(0, 0, 0, 1);
+  line-height: 30px;
+  text-align: center;
+  padding: 7px 0 34px 0;
+  font-weight: 700;
+}
+
+input {
+  margin-bottom: 10px;
+}
+
+.login-btn {
+  display: block;
+  height: 40px;
+  font-size: 16px;
+  line-height: 40px;
+  color: #ffffff;
+  background: rgba(215, 14, 25, 1);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  margin-top: 23px;
+  &:hover {
+    background: rgba(215, 14, 25, 0.7);
+  }
+}
+
+.slice-line {
+  padding-top: 30px;
+  font-size: 12px;
+  font-family: AvertaStd-Semibold;
+  color: rgba(155, 155, 155, 1);
+  line-height: 15px;
+}
+
+.login-other {
+  vertical-align: top;
+  // padding: 11px 0 23px 0;
+
+  a {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0 7.5px;
+  }
+
+  img {
+    height: 26px;
+    width: 26px;
+    vertical-align: middle;
+  }
+}
+
+.create-des {
+      padding-top: 30px;
+  font-size: 12px;
+  color: rgba(155, 155, 155, 1);
+  text-decoration: underline;
+}

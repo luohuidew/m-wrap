@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>
+            登录
+        </title>
+    </head>
+    <body>
+    <input id="email"><br><br>
+    <button onclick="isEmail()">登录</button><br><br>
+    <input id="pass"><br><br>
+    <button onclick="">注册</button>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyA6y2HXzNynwp0jZMG-xNK_5h1IF1816mA",
+        authDomain: "test-d88eb.firebaseapp.com",
+        databaseURL: "https://test-d88eb.firebaseio.com",
+        projectId: "test-d88eb",
+        storageBucket: "",
+        messagingSenderId: "63953921461"
+    };
+    firebase.initializeApp(config);
+    function isEmail() {
+        Email = document.getElementById("email").value;
+        Password = document.getElementById("pass").value;
+        if (Email.search(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/) != -1)
+        {
+
+        }//return true;
+        else
+        {
+            alert("Error Email!");
+            return flase;
+        }
+        if(Password!="")
+        {
+            firebase.auth().signInWithEmailAndPassword(Email, Password).catch(function(error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                alert("Login failed!"+errorMessage);
+            });
+        }
+        else
+        {
+            alert("The password can not be empty!")
+        }
+    }
+    firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        // User is signed in.
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var providerData = user.providerData;
+        alert("Login successful");
+        alert(displayName+"|"+email+"|"+emailVerified+"|"+photoURL+"|"+isAnonymous+"|"+uid+"|"+providerData)
+    } else {
+        // User is signed out.
+        // ...
+    }
+    });
+    </script>
+    </body>
+</html>

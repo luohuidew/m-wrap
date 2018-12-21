@@ -1,0 +1,60 @@
+const data = [{
+  type:'desc',
+  url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_01.jpg'
+},{
+  type:'desc',
+  url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_02.jpg'
+},{
+  type:'video',
+  url:'https://we-get.s3.us-west-1.amazonaws.com/8673925545c03e0b9c47ff.mp4'
+},{
+  type:'desc',
+  url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_04.jpg'
+},{
+  type:'desc',
+  url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_05.jpg'
+},{
+  type:'desc',
+  url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_06.jpg'
+},{
+  type:'desc',
+  url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_07.jpg'
+},
+{
+  type:'goods',
+  url:[{
+    sku_id:'3908082054198178',
+    img_url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_08.jpg'
+  },{
+    sku_id:'3916243086545844',
+    img_url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_09.jpg'
+  }]
+},{
+  type:'goods',
+  url:[{
+    sku_id:'3908371540299794',
+    img_url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_10.jpg'
+  },{
+    sku_id:'4348751215863927',
+    img_url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_11.jpg'
+  }]
+},{
+  type:'goods',
+  url:[{
+    sku_id:'3934589562112164',
+    img_url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_12.jpg'
+  },{
+    sku_id:'4003100978783291',
+    img_url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_13.jpg'
+  }]
+},{
+  type:'goods',
+  url:[{
+    sku_id:'4355141179499016',
+    img_url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_14.jpg'
+  },{
+    sku_id:'4355104099627136',
+    img_url:'/static/img/activity-img/ac-3/Winter-The-smokey-eye-season_15.jpg'
+  }]
+}];
+export default data;

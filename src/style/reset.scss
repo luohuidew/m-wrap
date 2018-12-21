@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling : touch;
+}
+
+html,
+body,
+#app {
+    font-size: 16px;
+    height: 100%;
+    width: 100%;
+    font-family: 'PingFangSC-Semibold','AvertaStd-Bold', Arial, Helvetica, sans-serif;
+    background-color: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.page {
+    overflow: auto;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}

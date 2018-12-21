@@ -1,0 +1,37 @@
+import request from '@/utils/request'
+import store from '@/store';
+let token = store.state.token;
+export default {
+  detail(data = {}) {
+    data.token = token;
+    return request({
+      url: 'product/detail',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+  get_similar(data = {}) {
+    data.token = token;
+    return request({
+      url: 'product/getSimilarProducts',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+  confirm_order(data = {}) {
+    data.token = token;
+    return request({
+      url: 'checkout/confirm',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+  like(data = {}) {
+    data.token = token;
+    return request({
+      url: 'product/like?loading=no',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+}

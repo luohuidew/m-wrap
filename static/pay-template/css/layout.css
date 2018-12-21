@@ -1,0 +1,55 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+body {
+  position: relative;
+  background-color: #f3f3f3;
+}
+.pay-box {
+  width: 100%;
+  position: absolute;
+  top: 20%;
+  text-align: center;
+}
+.pay-box img {
+  height: 100px;
+}
+.tips-text {
+  color: #d70e19;
+  font-weight: bold;
+}
+.order-detail {
+  background-color: #fff;
+  text-align: left;
+  margin: 20px 0;
+  padding: 22px;
+}
+.order-detail p {
+  padding: 10px 0;
+}
+#paymentForm {
+  text-align: center;
+}
+#paymentForm .AcceptUI {
+  background-color: #d70e19;
+  color: #f3f3f3;
+  border: none;
+  padding: 10px 52px;
+  border-radius: 20px;
+}
+#AcceptUIContainer {
+  position: relative;
+  transform: translateX(10px);
+}
+#AcceptUIContainer > iframe {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
