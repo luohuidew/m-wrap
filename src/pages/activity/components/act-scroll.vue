@@ -7,8 +7,8 @@
           alt="">
       </li>
       <li>
+        <!-- <p> zhidong.qiu get YVES SAINT LAURENT VOLUPTE TINT-IN-OIL for Free  at 12-22 18:15</p> -->
         <p>{{activity_lists[show_index].nickname}} got {{activity_lists[show_index].name}} for FREE at {{ activity_lists[show_index].deal_time| timeDateServer }} </p>
-        <!-- <p>{{}}</p> -->
       </li>
     </ul>
   </h3>
@@ -54,7 +54,7 @@ export default {
           clearTimeout(temp_timer);
           return;
         }, 4000);
-        this.random_time = (Math.ceil(Math.random() * 10) * 1000)+4000;
+        this.random_time = Math.ceil(Math.random() * 10) * 1000 + 4000;
         clearTimeout(end_timer);
         // console.log(end_timer);
         // alert(typeof(end_timer));
@@ -103,9 +103,16 @@ export default {
     margin: 0 10px;
   }
   p {
+    height: 100%;
     font-size: 12px;
+    line-height: 18px;
     color: #fff;
-    margin-right: 10px;
+    padding: 0px 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .scroll-hidden {
     // width: 0;
