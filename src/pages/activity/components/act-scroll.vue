@@ -7,7 +7,7 @@
           alt="">
       </li>
       <li>
-        <p>{{activity_lists[show_index].nickname}} got {{activity_lists[show_index].nickname}} for FREE at {{ activity_lists[show_index].deal_time| timeDateServer }} </p>
+        <p>{{activity_lists[show_index].nickname}} got {{activity_lists[show_index].name}} for FREE at {{ activity_lists[show_index].deal_time| timeDateServer }} </p>
         <!-- <p>{{}}</p> -->
       </li>
     </ul>

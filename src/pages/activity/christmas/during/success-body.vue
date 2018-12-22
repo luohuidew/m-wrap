@@ -38,9 +38,6 @@ export default {
     to_download(id) {
       this.$router.push({
         name: "christmas-download",
-        query: {
-          id: this.uid
-        }
       });
     },
     to_lists() {

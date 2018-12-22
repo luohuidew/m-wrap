@@ -190,7 +190,7 @@ export default {
           group_id: this.submit_form.group_id
             ? this.submit_form.group_id + ""
             : undefined,
-          use_coupon_id: this.$route.query.use_coupon_id
+          user_coupon_id: this.$route.query.use_coupon_id
         }
       };
       let checkparams = {
