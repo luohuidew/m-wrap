@@ -1,37 +1,24 @@
 <template>
   <div class="activity">
     <div class="page-content">
-      <!-- <div class="success_user">
-        <ul>
-          <li></li>
-        </ul>
-      </div> -->
+      <act-scroll></act-scroll>
       <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
-import api from "@/api/activity";
+import actScroll from './components/act-scroll'
 export default {
   data() {
     return {
-      activity_lists:[]
+      
     };
   },
-  created(){
-    // this.get_user_activity_lists()
-  },
-  methods: {
-    get_user_activity_lists() {
-      api.activity_list().then(res => {
-        console.log(res);
-        // this.activity_lists = res.data;
-        // this.activity_lists = res.data;
-      });
-    }
-  },
-  components: {}
+  
+  components: {
+    actScroll
+  }
 };
 </script>
 
@@ -42,6 +29,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
 .page-content {
   width: 100%;
   flex: 1;
