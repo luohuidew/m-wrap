@@ -7,7 +7,7 @@
         <div class="download_woohoo">
           <img src="/static/img/christmas/Woohoo!Couponisalreadyinyourwegetaccount.@2x.png">
         </div>
-        <div class="download_coupon">
+        <div class="download_coupon" @click="to_apply">
           <img src="/static/img/christmas/Apply@2x.png">
           <ul class="download_apply">
               <li v-for="(item,index) in down_load" :key="index">
@@ -16,9 +16,9 @@
               </li>
           </ul>
         </div>
-        <div class="download_btn"  @click="to_groupbuy">
+        <!-- <div class="download_btn"  @click="to_groupbuy">
           <img src="/static/img/christmas/TryAgain@2x.png">
-        </div>
+        </div> -->
         <div class="download_phone">
           <img src="/static/img/christmas/googlecopy@3x@2x.png" class="mbt30">
           <img src="/static/img/christmas/3stepClick“ME”-”COUPONS”,checkyourcoupons@2x.png">
@@ -48,7 +48,7 @@
   },
    methods: {
     init_data() {
-      api.down_load().then(res => {
+      api.down_load({id:41}).then(res => {
         this.down_load = res.data
         console.log(this.down_load);
       });
@@ -61,8 +61,12 @@
            try:'hash'
          }
         });
+     },
+     to_apply(){
+
      }
    },
+
    components: {
 
    }

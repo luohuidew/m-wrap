@@ -1,14 +1,15 @@
 <template>
   <div class="dialog-box">
     <div class="content"
-      :class="show_transtion" @click="close_dialog">
-      <li class="img-box" >
+      :class="show_transtion">
+      <li class="img-box">
         <!-- <img :src="sku.cover_img"
           alt=""
           srcset=""> -->
         <img :src="new_cur_goods.goods_img_thumb"
           alt=""
-          srcset="" @click.stop="zoom_img(new_cur_goods)">
+          srcset=""
+          @click.stop="zoom_img(new_cur_goods)">
       </li>
       <ul class="choice-box">
         <li class="goods-title">
@@ -76,9 +77,13 @@
         sss
       </p>
     </temp-dialog> -->
-    <div class="big-img-box" v-if="show_big_img" @click.stop="show_big_img=false">
+    <div class="big-img-box"
+      v-if="show_big_img"
+      @click.stop="show_big_img=false">
       <div class="img-wrapper">
-        <img :src="new_cur_goods.goods_img" alt="" @click.stop="show_big_img=false">
+        <img :src="new_cur_goods.goods_img"
+          alt=""
+          @click.stop="show_big_img=false">
       </div>
       <div class="img-desc">
         {{new_cur_goods.attr_first_value}}
@@ -103,7 +108,7 @@ export default {
       new_attrList: undefined,
       have_goods: true,
       show_join_self: false,
-      show_big_img:false
+      show_big_img: false
     };
   },
   props: ["goods", "attrList", "curGoods", "sku"],
@@ -160,7 +165,7 @@ export default {
       this.new_attrList = JSON.parse(JSON.stringify(this.attrList));
       this.send_cur_goos();
     },
-    zoom_img(cur){
+    zoom_img(cur) {
       this.show_big_img = true;
       console.log(cur);
     },
@@ -184,7 +189,8 @@ export default {
           purchase_type: this.submit_form.purchase_type + "",
           group_id: this.submit_form.group_id
             ? this.submit_form.group_id + ""
-            : undefined
+            : undefined,
+          use_coupon_id: this.$route.query.use_coupon_id
         }
       };
       let checkparams = {
@@ -257,7 +263,7 @@ export default {
   z-index: 1000;
 }
 .big-img-box {
-   position: absolute;
+  position: absolute;
   width: 100%;
   height: 100%;
   background-color: #000;

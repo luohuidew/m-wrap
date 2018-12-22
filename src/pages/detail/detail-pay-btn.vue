@@ -39,6 +39,16 @@
         </div>
       </a>
     </template>
+    <template v-else-if="c_query.act_type=='christmas'">
+      <a class="group-status-buy"
+        href="javascript:;"
+        @click="close_tips(2)">
+        <div class="group-info">
+          <span class="user-info">APPLY THE GIFT FOR FREE</span>
+
+        </div>
+      </a>
+    </template>
     <template v-else>
       <a class="direct-buy buy-btn"
         href="javascript:;"
@@ -95,7 +105,8 @@ export default {
       cur_goods_id: undefined,
       cur_paynumber: 0,
       is_like: this.sku.is_like,
-      is_group: false
+      is_group: false,
+      c_query:this.$route.query
     };
   },
   computed: {

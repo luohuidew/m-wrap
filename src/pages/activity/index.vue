@@ -1,7 +1,7 @@
 <template>
   <div class="activity">
     <div class="page-content">
-      <act-scroll></act-scroll>
+      <act-scroll v-if="show_acroll"></act-scroll>
       <router-view></router-view>
     </div>
   </div>
@@ -14,6 +14,13 @@ export default {
     return {
       
     };
+  },
+  computed:{
+    show_acroll(){
+      let temp;
+      temp = this.$route.fullPath.indexOf('christmas')!==-1;
+      return temp;
+    }
   },
   
   components: {

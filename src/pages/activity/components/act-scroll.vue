@@ -21,14 +21,14 @@ export default {
   data() {
     return {
       activity_lists: [],
-      show_index: 0,
-      random_time: 6000,
+      show_index: -1,
+      random_time: 0,
       show_scroll_box: false
     };
   },
   created() {
     this.get_user_activity_lists();
-     this.random_show();
+    this.random_show();
   },
   mounted() {
     // this.random_show();
@@ -38,8 +38,6 @@ export default {
       api.activity_list({ number: 10 }).then(res => {
         console.log(res);
         this.activity_lists = res.data.successList;
-        // this.activity_lists = res.data;
-       
       });
     },
     random_show() {
@@ -54,14 +52,14 @@ export default {
         let temp_timer = setTimeout(() => {
           this.show_scroll_box = false;
           clearTimeout(temp_timer);
-          return ;
-        }, 3000);
-        this.random_time = Math.ceil(Math.random() * 10) * 1000;
+          return;
+        }, 4000);
+        this.random_time = (Math.ceil(Math.random() * 10) * 1000)+4000;
         clearTimeout(end_timer);
         // console.log(end_timer);
         // alert(typeof(end_timer));
         this.random_show();
-        return ;
+        return;
         // alert("外层");
       }, this.random_time);
     }
@@ -76,10 +74,11 @@ export default {
   position: fixed;
   display: flex;
   flex-direction: flex-end;
-  right: 0;
+  left: 0;
   top: 10%;
-  height: 50px;
+  height: 42px;
   width: auto;
+  overflow: hidden;
   max-width: 70%;
   z-index: 70;
   ul {
@@ -87,8 +86,8 @@ export default {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 30px 0 0 30px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 0 30px 30px 0;
     transform: translateX(0);
     opacity: 1;
     // max-width: 70%;
@@ -101,17 +100,17 @@ export default {
     border-radius: 50%;
     vertical-align: middle;
     font-size: 0;
-    margin: 0 15px;
+    margin: 0 10px;
   }
   p {
     font-size: 12px;
     color: #fff;
-    margin-right: 15px;
+    margin-right: 10px;
   }
   .scroll-hidden {
     // width: 0;
     // display: none;
-    transform: translateX(100%);
+    transform: translateX(-100%);
     width: 0;
     overflow: hidden;
     opacity: 0;
