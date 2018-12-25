@@ -14,7 +14,10 @@
               <p>{{item.name}}</p>
               <p>{{item.lamp_num}} lights</p>
               <p>End time：{{item.etime | dateServer}}</p>
-              <p @click="to_coupon(item.id)">
+              <p v-if="item.coupon_status!==2">
+                
+              </p>
+              <p v-else @click="to_coupon(item.id)" >
                 <img src="/static/img/christmas/icon/Mycoupon@2x.png" alt>
               </p>
             </div>
@@ -146,6 +149,8 @@ export default {
           }
           .info-text {
             margin-top: 12px;
+            font-size: 12px;
+            line-height: 14px;
             p {
               padding-top: 5px;
               position: relative;

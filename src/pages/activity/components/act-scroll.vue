@@ -8,7 +8,7 @@
       </li>
       <li>
         <!-- <p> zhidong.qiu get YVES SAINT LAURENT VOLUPTE TINT-IN-OIL for Free  at 12-22 18:15</p> -->
-        <p>{{activity_lists[show_index].nickname}} got {{activity_lists[show_index].name}} for FREE at {{ activity_lists[show_index].deal_time| timeDateServer }} </p>
+        <p>{{activity_lists[show_index].nickname}} got {{activity_lists[show_index].name}} for FREE at {{ activity_lists[show_index].deal_time| dateServerEnglish }} </p>
       </li>
     </ul>
   </h3>
@@ -47,7 +47,7 @@ export default {
         this.show_index += 1;
         if (this.show_index > this.activity_lists.length - 1) {
           this.show_index = 0;
-          this.get_user_activity_lists();
+          // this.get_user_activity_lists();
         }
         let temp_timer = setTimeout(() => {
           this.show_scroll_box = false;
@@ -79,7 +79,7 @@ export default {
   height: 42px;
   width: auto;
   overflow: hidden;
-  max-width: 70%;
+  max-width: 80%;
   z-index: 70;
   ul {
     height: 100%;

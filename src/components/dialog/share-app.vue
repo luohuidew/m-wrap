@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="show_share">
     <a class="downLoad"
       :href="to_app"
       target="_blank">Open In App</a>
@@ -11,6 +11,7 @@ export default {
   name: "",
   data() {
     return {
+      show_share:true,
       to_app: "/"
     };
   },
@@ -31,6 +32,10 @@ export default {
       let u = navigator.userAgent;
       let isAndroid = u.indexOf("Android") > -1 || u.indexOf("Adr") > -1; //android终端
       let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+      let isWeget = window.weget_mobile_type === "iOS";
+      if(isWeget){
+        this.show_share = false;
+      }
       // debugger;
       if (isiOS) {
         // debugger;

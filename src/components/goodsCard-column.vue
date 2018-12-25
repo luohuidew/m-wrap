@@ -5,18 +5,20 @@
         alt=""
         srcset="">
     </div>
-    <div class="goods-des" @click="to_detail(card_data.sku_id)">
+    <div class="goods-des"
+      @click="to_detail(card_data.sku_id)">
       <p class="goods-title">{{card_data.title}}</p>
       <div class="price-box">
         <p class="pay-price">
-          <span class="current" >
+          <span class="current">
             ${{card_data.alone_price}}
           </span>
         </p>
         <p class="goods-getter">
           <img v-for="(item,index) in card_data_img"
-            :key="index" :src="item.photo">
-            <img src="/static/img/icon/团购人点点点.png">
+            :key="index"
+            :src="item.photo">
+          <img src="/static/img/icon/团购人点点点.png">
         </p>
       </div>
       <p class="light-height-btn">
@@ -35,23 +37,35 @@ export default {
   data() {
     return {
       card_data: this.cardData,
-      card_data_img:this.cardData.bought_user.slice(0,2),
-      introduce:""
+      card_data_img: this.cardData.bought_user.slice(0, 2),
+      introduce: ""
     };
   },
   props: ["cardData"],
   components: {},
   methods: {
     to_detail(sku_id) {
-      let params = {
-        path: "/detail",
-        query: {
-          sku_id: sku_id
-        }
+      if (window.weget_mobile_type === "iOS") {
+        let params = {
+          type: 106,
+          data: {
+            route: "wemall:///public/route?type=6&id=" + sku_id + ""
+          }
+        };
+        window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
+        // alert('to login');
+      } else {
+        // this.$router.push({ path: "/detail", query: { sku_id: sku_id } });
+        let params = {
+          path: "/detail",
+          query: {
+            sku_id: sku_id
+          }
+        };
+        this.$router.push(params);
       };
-      this.$emit('stop','stop');
-      this.$router.push(params);
-    },
+      this.$emit("stop", "stop");
+    }
   }
 };
 </script>

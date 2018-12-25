@@ -10,14 +10,17 @@
         :key="index"
         @click="is_selected = index">
         <div class="address_radio">
-          <img v-if="is_selected===index" src="/static/img/icon/选择红.png">
-          <img v-else src="/static/img/icon/选择 灰.png">
+          <img v-if="is_selected===index"
+            src="/static/img/icon/选择红.png">
+          <img v-else
+            src="/static/img/icon/选择 灰.png">
         </div>
         <div class="address_main">
           <p class="nickname">
             <span>{{item.first_name}}</span>&nbsp;
             <span>{{item.last_name}}</span>
-            <span class="default-address" v-if="item.is_default===2">Default</span>
+            <span class="default-address"
+              v-if="item.is_default===2">Default</span>
           </p>
           <p>
             <span> {{item.address1}}</span>
@@ -48,8 +51,7 @@ export default {
   name: "",
   data() {
     return {
-      is_selected_shipping: 0,
-      is_selected: 0,
+      is_selected: -1,
       is_editor: false,
       address: {
         first_name: "",
@@ -81,11 +83,11 @@ export default {
       address.address_list().then(res => {
         console.log(res);
         this.address_lists = res.data;
-        this.address_lists.forEach((item,index)=>{
-          if(item.is_default===2){
-            this.is_selected = index;
-          }
-        })
+        this.address_lists.forEach((item, index) => {
+          // if (item.is_default === 2) {
+          //   this.is_selected = index;
+          // }
+        });
         //  this.selected_card(this.address_lists[0].id,0)
       });
     },
@@ -99,8 +101,17 @@ export default {
     },
     to_pay(index) {
       let cur_address = this.address_lists[index];
+      if (cur_address) {
+        if (this.$store.state.order_detail.address) {
+          if (cur_address.id !== this.$store.state.order_detail.address.id) {
+            this.$store.state.order_detail.change_address = true;
+          }
+        }else {
+            this.$store.state.order_detail.change_address = true;
+        }
+      }
       this.$store.state.order_detail.address = cur_address;
-      console.log(this.$store);
+      // console.log(this.$store);
       this.$router.go(-1);
     },
     to_address_edit(index) {
@@ -151,9 +162,9 @@ $linecolor: #e9e9e9;
 }
 .default-address {
   padding: 2px 6px;
-  background-color:#d70e19;
+  background-color: #d70e19;
   color: #fff;
-  margin-left:12px;
+  margin-left: 12px;
   font-size: 12px;
 }
 .address-content {
@@ -188,7 +199,7 @@ $linecolor: #e9e9e9;
       text-align: right;
       padding: 15px 10px;
       border-left: 1px solid #ddd;
-      color:#898989;
+      color: #898989;
     }
     span {
       font-size: 13px;

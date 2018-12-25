@@ -58,7 +58,7 @@
                   <p>Time left {{item.left_time | timeDiff}}</p>
                 </div>
               </div>
-              <div v-if="!router_group_id"
+              <div v-if="!no_join"
                 class="group-box"
                 @click="group_buy(item.group_id)">
                 <p>JOIN</p>
@@ -139,7 +139,8 @@ export default {
         image_url: ""
       },
       router_group_id: undefined,
-      share_token: ""
+      share_token: "",
+      act_type:this.$route.query.act_type
     };
   },
   created() {
@@ -157,6 +158,9 @@ export default {
           : this.this.router_group_id
       };
       return params;
+    },
+    no_join(){
+      return this.act_type || this.router_group_id;
     }
   },
   methods: {

@@ -6,35 +6,51 @@ let custom = {
   timeDateServer(timeStamp) {
     var date = new Date();
     date.setTime(timeStamp * 1000);
-    var y = date.getFullYear();    
-    var m = date.getMonth() + 1;    
-    m = m < 10 ? ('0' + m) : m;    
-    var d = date.getDate();    
-    d = d < 10 ? ('0' + d) : d;    
-    var h = date.getHours();  
-    h = h < 10 ? ('0' + h) : h;  
-    var minute = date.getMinutes();  
-    var second = date.getSeconds();  
-    minute = minute < 10 ? ('0' + minute) : minute;    
-    second = second < 10 ? ('0' + second) : second;   
-    return  m + '-' + d+' '+h+':'+minute;  
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    m = m < 10 ? ('0' + m) : m;
+    var d = date.getDate();
+    d = d < 10 ? ('0' + d) : d;
+    var h = date.getHours();
+    h = h < 10 ? ('0' + h) : h;
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    minute = minute < 10 ? ('0' + minute) : minute;
+    second = second < 10 ? ('0' + second) : second;
+    return m + '-' + d + ' ' + h + ':' + minute;
     // return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
   },
-  runTime(diff){
+  dateServerEnglish(timestamp) {
+    function add0(m) {
+      return m < 10 ? '0' + m : m
+    }
+    var time = new Date(timestamp * 1000);
+    var year = time.getFullYear();
+    var monthsInEng = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var month = time.getMonth();
+    var date = time.getDate();
+    var h = time.getHours();
+    h = h < 10 ? ('0' + h) : h;
+    var minute = time.getMinutes();
+    minute = minute < 10 ? ('0' + minute) : minute;
+    return monthsInEng[add0(month)] + '. ' + add0(date) + '  ' + h +':'+ minute;
+    // return monthsInEng[add0(month)] + '. ' + add0(date) + ', ' + year;
+  },
+  runTime(diff) {
     let temp_time = diff;
     let timer = setInterval(() => {
-        temp_time-=1;
-        if(temp_time<0){
-          clearInterval(timer);
-        }
-        return temp_time;
-      }, 1000);
+      temp_time -= 1;
+      if (temp_time < 0) {
+        clearInterval(timer);
+      }
+      return temp_time;
+    }, 1000);
   },
   timeDiff(diff) {
     // var date1 = '2015/05/01 00:00:00'; //开始时间
     // var date2 = new Date(); //结束时间
     // var date3 = date2.getTime() - new Date(date1).getTime(); //时间差的毫秒数      
-    if(diff<0){
+    if (diff < 0) {
       return '0:0:0'
     }
     //------------------------------
@@ -46,16 +62,16 @@ let custom = {
 
     var leave1 = date3 % (24 * 3600 * 1000) //计算天数后剩余的毫秒数
     var hours = Math.floor(leave1 / (3600 * 1000));
-    hours=(days * 24 + hours)>(days * 24 + hours)?hours:(days * 24 + hours);
-    hours = hours>9?hours:'0'+hours;
+    hours = (days * 24 + hours) > (days * 24 + hours) ? hours : (days * 24 + hours);
+    hours = hours > 9 ? hours : '0' + hours;
     //计算相差分钟数
     var leave2 = leave1 % (3600 * 1000) //计算小时数后剩余的毫秒数
     var minutes = Math.floor(leave2 / (60 * 1000))
-    minutes = minutes>9?minutes:'0'+minutes;
+    minutes = minutes > 9 ? minutes : '0' + minutes;
     //计算相差秒数
     var leave3 = leave2 % (60 * 1000) //计算分钟数后剩余的毫秒数
     var seconds = Math.round(leave3 / 1000)
-    seconds=seconds>9?seconds:'0'+seconds;
+    seconds = seconds > 9 ? seconds : '0' + seconds;
     return (hours + ":" + minutes + ":" + seconds)
   },
   formatWords(val) {
@@ -69,20 +85,20 @@ let custom = {
       else if (c != "\r")
         result = result + c;
     }
-    return result+'</p>';
+    return result + '</p>';
   },
-  Countdown(val){
+  Countdown(val) {
     // let temp = val;
     let countdown = 1300;
     let settime = () => {
-      if (countdown == 0) {        
+      if (countdown == 0) {
         // countdown = 60;
         return 0;
       } else {
         countdown--;
         return countdown
       }
-      setTimeout(function() {
+      setTimeout(function () {
         settime();
       }, 1000);
     };

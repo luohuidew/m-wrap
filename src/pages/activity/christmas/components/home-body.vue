@@ -174,9 +174,10 @@ export default {
     // padding: 6px;
     // background-color: #fff;
     & > .scroll-ul {
-      animation: scroll_board 60s infinite;
+      animation: scroll_board 60s linear infinite;
+      // animation: scroll_board 60s infinite;
       // animation-fill-mode: forwards;
-      // animation-timing-function:2s;
+      animation-timing-function:2s;
       // position: absolute;
       // left: 0;
       // top: 0;
@@ -186,7 +187,7 @@ export default {
         transform: translateY(0);
       }
       100% {
-        transform: translateY(-100%);
+        transform: translateY(-82%);
       }
     }
     .board-item {

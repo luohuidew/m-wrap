@@ -31,7 +31,8 @@
               <span>{{ship_method.key_name}}</span>
               <span class="second-title">{{ship_method.desc}} </span>
             </span>
-            <span>${{ship_method.price}}</span>
+            <span v-if="(ship_method.price-0)>0">${{ship_method.price}}</span>
+            <span v-else>{{ship_method.price}}</span>
           </p>
         </li>
       </ul>
@@ -56,9 +57,9 @@
       <ul>
         <li class="standard"
           @click="to_coupon()">
-          <p>
+          <p :class="{'no_select':!can_select_coupon}">
             <span>Coupon</span>
-            <span class="font-color">{{coupon?coupon.name:'Select Coupon'}}</span>
+            <span class="font-color">{{coupon.name?coupon.name:'Select Coupon'}}</span>
           </p>
         </li>
       </ul>
@@ -143,7 +144,9 @@ export default {
       address_item: undefined,
       order_form: undefined,
       ship_method: undefined,
-      is_click: false
+      is_click: false,
+      address_change: undefined,
+      can_select_coupon:true
     };
   },
   computed: {
@@ -160,7 +163,8 @@ export default {
         group_id: this.$route.query.group_id
           ? this.$route.query.group_id
           : undefined,
-        user_coupon_id: this.coupon ? this.coupon.id : undefined
+        user_coupon_id: this.coupon ? this.coupon.id : undefined,
+        address_change: this.address_change
       };
     }
   },
@@ -171,6 +175,12 @@ export default {
           let temp = res.data;
           for (var key in temp) {
             this.order_form[key] = temp[key];
+          }
+          if (res.data.ship_method) {
+            this.$store.state.info_lists = res.data.ship_method.list;
+            this.ship_method = res.data.ship_method.list[0];
+            this.$store.state.order_detail.delivery = undefined;
+            this.init_select_info(this.address_item);
           }
         });
       },
@@ -186,8 +196,8 @@ export default {
   methods: {
     init_data() {
       let params = this.submit_form;
-      console.log(this.submit_form);
-      console.log(params, "创建订单");
+      // console.log(this.submit_form);
+      // console.log(params, "创建订单");
       api
         .confirm_order(params)
         .then(res => {
@@ -196,24 +206,15 @@ export default {
           this.order_form = res.data;
           this.order_item = res.data.item;
           this.address_item = res.data.address;
+          this.coupon = res.data.coupon_data;
+          if(res.data.coupon_data.name){
+            this.can_select_coupon = false;
+          }
           this.ship_method = res.data.ship_method.list[0];
           this.$store.state.info_lists = res.data.ship_method.list;
           this.shipping_mothods_index = this.ship_method.key;
           this.is_selected_address = this.order_form.address.id;
-          let order_detail = this.$store.state.order_detail;
-          console.log(order_detail);
-          if (order_detail.address) {
-            this.address_item = order_detail.address;
-            this.is_selected_address = this.address_item.id;
-          }
-          // debugger;
-          if (order_detail.delivery) {
-            this.ship_method = order_detail.delivery;
-            this.shipping_mothods_index = this.ship_method.key;
-          }
-          if (order_detail.coupon) {
-            this.coupon = order_detail.coupon;
-          }
+          this.init_select_info(res.data.address);
           // debugger
         })
         .catch(res => {
@@ -224,6 +225,33 @@ export default {
             this.$router.go(-1);
           }
         });
+    },
+    // computed_select(){
+    //    let order_detail = this.$store.state.order_detail;
+    // },
+    init_select_info(default_address) {
+      /* 通过store获取的数据在下，优先级别高 */
+      let order_detail = this.$store.state.order_detail;
+      // console.log(order_detail);
+      if (order_detail.address) {
+        this.address_item = order_detail.address;
+        this.is_selected_address = this.address_item.id;
+        if (order_detail.change_address) {
+          this.address_change = 1;
+          this.$store.state.order_detail.change_address = false;
+        }
+        // if(this.address_item.id!==default_address.id){
+        //   this.address_change = 1;
+        // }
+      }
+      // debugger;
+      if (order_detail.delivery) {
+        this.ship_method = order_detail.delivery;
+        this.shipping_mothods_index = this.ship_method.key;
+      }
+      if (order_detail.coupon) {
+        this.coupon = order_detail.coupon;
+      }
     },
     to_address() {
       let params = {
@@ -241,7 +269,9 @@ export default {
       let params = {
         path: "/coupon"
       };
-      this.$router.push(params);
+      if(this.can_select_coupon){
+        this.$router.push(params);
+      }
     },
     to_accept() {
       this.is_click = true;
@@ -255,19 +285,29 @@ export default {
         //     order_no: res.order_no
         //   }
         // };
-        // debugger
+        // debugger;
         //  this.is_click = true;
-        let accpet_params = {
-          path: "/accept",
-          query: {
-            goods_id: this.$route.query.goods_id,
-            num: this.$route.query.num,
-            purchase_type: this.$route.query.purchase_type,
-            order_no: res.data.order_no,
-            total: this.order_form.order_total
-          }
-        };
-        this.$router.push(accpet_params);
+        if (res.data.free === 1) {
+          this.$router.replace({
+            path: "/callback",
+            query: {
+              order_no: res.data.order_no
+            }
+          });
+        } else {
+          let accpet_params = {
+            path: "/accept",
+            query: {
+              goods_id: this.$route.query.goods_id,
+              num: this.$route.query.num,
+              purchase_type: this.$route.query.purchase_type,
+              order_no: res.data.order_no,
+              total: res.data.total_fee
+              // total: this.order_form.order_total
+            }
+          };
+          this.$router.push(accpet_params);
+        }
         // this.$router.replace({path:'/accept',query:{order_no:res.data.order_no,total:this.order_form.order_total}});
       });
     }
@@ -320,6 +360,9 @@ $linecolor: #e9e9e9;
         // padding-right: 20px;
         padding: 20px 20px 20px 0;
         background: url("/static/img/icon/right.png") no-repeat right center;
+      }
+      .no_select {
+        background: none;
       }
     }
     .standard {

@@ -54,7 +54,7 @@
         :card-data="item"
         @stop="stop_time"></card>
     </div>
-    <share-app></share-app>
+    <!-- <share-app></share-app> -->
   </div>
 </template>
 

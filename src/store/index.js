@@ -16,6 +16,7 @@ const store = new Vuex.Store({
       delivery: undefined,
       payment: undefined,
       coupon: undefined,
+      change_address:false
     },
     info_lists: undefined,
     christmas_share_info:undefined,

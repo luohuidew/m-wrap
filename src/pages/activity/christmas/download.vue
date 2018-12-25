@@ -9,8 +9,8 @@
       </div>
       <!-- <div class="download_coupon"
         @click="to_apply(down_load)"> -->
-      <div class="download_coupon">
-        <img src="/static/img/christmas/Apply@2x.png">
+      <div v-if="down_load.use_coupon_id" class="download_coupon" @click="to_apply(down_load)">
+        <img src="/static/img/christmas/Apply@2x_detail.png">
         <ul class="download_apply">
           <li v-if="down_load.end_time">
             <span>{{down_load.name}}</span>
@@ -79,7 +79,7 @@ export default {
         path: "/detail",
         query: {
           sku_id: citem.sku_id,
-          use_coupon_id: citem.use_coupon_id,
+          user_coupon_id: citem.use_coupon_id,
           act_type: "christmas"
         }
       });

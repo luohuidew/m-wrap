@@ -17,8 +17,11 @@
               {{item.desc}}
             </span>
           </p>
-          <p class="shipping-price">
+          <p v-if="(item.price-0)>0" class="shipping-price">
             ${{item.price}}
+          </p>
+          <p v-else class="shipping-price">
+            {{item.price}}
           </p>
 
           <i></i>
@@ -38,7 +41,7 @@ export default {
   data() {
     return {
       delivery_lists: undefined,
-      is_selected_shipping: 0
+      is_selected_shipping: -1
     };
   },
   mounted() {

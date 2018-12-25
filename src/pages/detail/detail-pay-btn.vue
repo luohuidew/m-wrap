@@ -42,7 +42,7 @@
     <template v-else-if="c_query.act_type=='christmas'">
       <a class="group-status-buy"
         href="javascript:;"
-        @click="close_tips(2)">
+        @click="close_tips(1)">
         <div class="group-info">
           <span class="user-info">APPLY THE GIFT FOR FREE</span>
 
