@@ -78,7 +78,7 @@ service.interceptors.request.use(
     delete_emity_params(config.params);
     config.headers['Encrypt-Sign'] = set_header(config.data);
     // console.log(set_header(config.data),config.data);
-    return config
+    return config;
   },
   error => {
     // Do something with request error

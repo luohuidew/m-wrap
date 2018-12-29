@@ -1,7 +1,7 @@
 <template>
   <div id="activity-detail">
     <div class="detail-header">
-      <img src="/static/img/christmas/icon/主题@2x_77.png" alt>
+      <img src="/static/img/popballons/MYRECORDS.png" alt>
     </div>
     <ul class="detail-info" v-if="tableData.length!==0">
       <li v-for="(item,index) of tableData" :key="index">
@@ -15,7 +15,7 @@
               <p>{{item.lamp_num}} lights</p>
               <p>End time：{{item.etime | dateServer}}</p>
               <p v-if="item.coupon_status==2 || !item.coupon_status" @click="to_coupon(item.id)" >
-                <img src="/static/img/christmas/icon/Mycoupon@2x.png" alt>
+                <img src="/static/img/popballons/MYRECORDS.png" alt>
               </p>
               <p v-else>
 
@@ -99,12 +99,15 @@ export default {
   padding: 0 20px;
   z-index: 10;
   font-size: 0;
-  background: url("/static/img/christmas/icon/通用背景.jpg") no-repeat top
-    center;
-  background-size: 100% 100%;
+  // background: url("/static/img/christmas/icon/通用背景.jpg") no-repeat top
+  //   center;
+  // background-size: 100% 100%;
   .detail-header {
+    text-align: center;
+    padding-top: 14px;
     img {
-      width: 100%;
+      height: 28px;
+      width: auto;
     }
   }
   .detail-info {
@@ -112,7 +115,7 @@ export default {
     overflow: auto;
     font-size: 12px;
     color: #16352f;
-    padding: 30px 0px;
+    // padding: 30px 0px;
     margin: 0 auto;
     li {
       margin-top: 30px;

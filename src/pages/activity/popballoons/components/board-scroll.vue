@@ -1,28 +1,33 @@
 <template>
-  <div class="bulletin-board">
-    <p class="pepole-join">xxxx people got free gift</p>
-    <div class="board-texts">
-      <ul>
-        <li class="board-item"
-          v-for="index in 10"
-          :key="index">
-          <p>
-            <img src="/static/img/christmas/avator.png"
-              alt=""
-              srcset="">
-          </p>
-          <p class="user-box">
-            <span>abel he 5s ago</span>
-            <span>Got xxxxxxxxxxxxx for FREE</span>
-          </p>
-        </li>
-      </ul>
+   <div class="bulletin-board">
+      <div class="board-texts">
+        <ul :class="{'scroll-ul':boardLists.length>0}">
+          <li class="board-item"
+            v-for="(item,index) in boardLists"
+            :key="index">
+            <p>
+              <img class="user_photo"
+                :src="item.photo"
+                alt=""
+                srcset="">
+            </p>
+            <!-- 65765765765765 -->
+            <p class="user-box">
+              <span>{{item.nickname}} 1s ago</span>
+              <span>Got {{item.name}} for FREE</span>
+            </p>
+          </li>        
+        </ul>
+      </div>
+      <img src="/static/img/popballons/background_title.png"
+        class="board-background-title"
+        alt=""
+        srcset="">
+      <img class="board-background-img"
+        src="/static/img/popballons/background_scroll.png"
+        alt=""
+        srcset="">
     </div>
-    <img class="board-background-img"
-      src="/static/img/christmas/Qeaql.com拷贝.png"
-      alt=""
-      srcset="">
-  </div>
 </template>
 
 <script>
@@ -31,6 +36,7 @@ export default {
   data() {
     return {};
   },
+  props:['boardLists'],
   mounted() {},
   computed: {},
   methods: {},
@@ -41,10 +47,12 @@ export default {
 <style lang='scss' scoped>
 .bulletin-board {
   position: relative;
-  margin-top: -44px;
-  font-size: 14px;
+  margin-top: 30px;
+  font-size: 0;
   /* margin-bottom: 10px; */
-  padding-bottom: 10px;
+  // padding-bottom: 10px;
+  padding: 10px 28px;
+  text-align: center;
   // transform: translateY(-90px);
   .pepole-join {
     position: absolute;
@@ -61,23 +69,29 @@ export default {
     width: 100%;
     height: auto;
   }
+  .board-background-title {
+    height: 50px;
+    width: auto;
+    text-align: center;
+  }
   .board-texts {
     position: absolute;
     left: 50%;
-    top: 46%;
+    top: 36%;
     transform: translateX(-50%);
-    width: 70%;
-    height: 34%;
+    width: 80%;
+    height: 48%;
     z-index: 10;
     font-size: 11px;
     color: #fff;
     overflow: hidden;
     // padding: 6px;
     // background-color: #fff;
-    & > ul {
-      animation: scroll_board 100s infinite;
+    & > .scroll-ul {
+      animation: scroll_board 60s linear infinite;
+      // animation: scroll_board 60s infinite;
       // animation-fill-mode: forwards;
-      // animation-timing-function:2s;
+      animation-timing-function: 2s;
       // position: absolute;
       // left: 0;
       // top: 0;
@@ -87,29 +101,44 @@ export default {
         transform: translateY(0);
       }
       100% {
-        transform: translateY(-100%);
+        transform: translateY(-82%);
       }
     }
     .board-item {
       display: flex;
-      height: 50%;
-      border-top: 1px solid #78141888;
+      height: 50px;
+      // border-top: 1px solid #78141888;
       padding: 4px 10px;
-      // transform: scale(0.5);
+      color: #000;
+      justify-content: center;
       &:nth-child(1) {
         border: none;
       }
       img {
-        width: auto;
-        height: 100%;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
       }
+      p {
+        display: flex;
+        align-items: center;
+      }
       .user-box {
-        // flex:1;
+        // flex: 1;
         padding-left: 20px;
         display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        font-size: 12px;
+        line-height: 16px;
         flex-direction: column;
-        // align-items: center;
+        align-items: flex-start;
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: left;
+        }
       }
       .sku-box {
         width: 130px;

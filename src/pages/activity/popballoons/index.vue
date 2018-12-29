@@ -1,40 +1,64 @@
 <template>
   <div class="popballoons">
-    <img src="/static/img/popballons/WeGetLOGO.png"
-      alt=""
-      class="pop-logo">
-   <router-view></router-view>  
+    <div class="pop-logo">
+      <img src="/static/img/popballons/WeGetLOGO.png"
+        alt="">
+    </div>
+    <div class="fixed-nav">
+      <ac-fixed  @open="is_rules_show=true"></ac-fixed>
+    </div>
+    <router-view></router-view>
     <ac-link></ac-link>
+    <ac-rules v-if="is_rules_show"
+      @close="is_rules_show=false"></ac-rules>
   </div>
 </template>
 
 <script>
-import acLink from './components/ac-link'
+import acLink from "./components/ac-link";
+import acFixed from "./components/ac-fixed";
+import acRules from "./components/dialog-rules";
+
 export default {
   name: "",
   data() {
     return {
+      is_rules_show: false
     };
   },
-  created() {
-  },
+  created() {},
   mounted() {
     // alert(window.webkit);
   },
   computed: {},
-  components: {   
-    acLink
+  components: {
+    acLink,
+    acFixed,
+    acRules
   }
 };
 </script>
 
 <style lang='scss'>
 .popballoons {
-  background-color: #2B2B2B;
+  position: relative;
+  background-color: #2b2b2b;
+  font-size: 14px;
 }
 .pop-logo {
+  // height: 35px;
+  width: auto;
+  padding: 14px 0 8px 0;
+  text-align: center;
+  img {
     height: 35px;
     width: auto;
-    margin: 18px 0 8px 0;
   }
+}
+.fixed-nav {
+  position: absolute;
+  right: 0;
+  top: 114px;
+  z-index: 20;
+}
 </style>
