@@ -7,7 +7,7 @@ const CM = {
     // Vue.$router.back(-1);
     that.$router.back(-1)
   },
-  is_weixn() {
+  is_weixin() {
     if (ua.indexOf('micromessenger') !== -1) {
       return true;
     } else {
@@ -35,7 +35,19 @@ const CM = {
     } else {
       return false;
     }
-  }, 
+  },
+  weget_device_link(params,cb){
+    let cur_device = localStorage.getItem('device');
+    if(cur_device==='android'){
+      return window.weget_mobile_type.nativeToJavaScript(params);    
+    }else if(cur_device==='ios'){
+      return  window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
+    }else {
+      if(cb){
+        return cb();
+      }
+    }
+  }
 }
 Vue.prototype.$CM = CM;
 export default  CM;

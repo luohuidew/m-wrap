@@ -66,7 +66,7 @@ export default {
       bind_email: "",
       other_form: {},
       ua: {
-        no_facebook: this.$CM.is_ins() || this.$CM.is_snapchat()
+        no_facebook: this.$CM.is_ins() || this.$CM.is_weixin() || this.$CM.is_snapchat()
       }
     };
   },

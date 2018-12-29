@@ -1,28 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import pay from '@/pages/pay'
 Vue.use(Router)
 export default new Router({
   mode: 'history',
   linkActiveClass: 'active-route',
-  routes: [
-    // {
-    //   path: '/load',
-    //   name: 'load',
-    //   component: load,
-    //   redirect: '/load/login',
-    //   children: [{
-    //       path: 'login',
-    //       name: 'login',
-    //       component: login,
-    //     },
-    //     {
-    //       path: 'create',
-    //       name: 'create',
-    //       component: create,
-    //     }
-    //   ]
-    // },
+  routes: [  
+    {
+      path: '/test',
+      name: 'test',
+      component: () =>
+        import('@/pages/test'),
+      meta: {
+        title: 'test',
+        keepAlive: false
+      }
+    },
     {
       path: '/login',
       name: 'login',
@@ -275,6 +267,96 @@ export default new Router({
                 keepAlive: false
               }
             },
+            {
+              path: 'popballoons',
+              name: 'popballoons',
+              redirect: '/activity/popballoons/popballoons-home',
+              component: () =>
+                import('@/pages/activity/popballoons'),
+              meta: {
+                title: 'popballoons home',
+                keepAlive: true
+              },
+              children:[
+                {
+                  path: 'popballoons-home',
+                  name: 'popballoons-home',
+                  component: () =>
+                    import('@/pages/activity/popballoons/home'),
+                  meta: {
+                    title: 'popballoons home',
+                    keepAlive: false
+                  }
+                },
+                {
+                  path: 'popballoons-lists',
+                  name: 'popballoons-lists',
+                  component: () =>
+                    import('@/pages/activity/popballoons/lists'),
+                  meta: {
+                    title: 'popballoons-lists',
+                    keepAlive: false
+                  }
+                },
+                {
+                  path: 'popballoons-download',
+                  name: 'popballoons-download',
+                  component: () =>
+                    import('@/pages/activity/popballoons/download'),
+                  meta: {
+                    title: 'popballoons-download',
+                    keepAlive: false
+                  }
+                },
+                {
+                  path: 'popballoons-results',
+                  name: 'popballoons-results',
+                  component: () =>
+                    import('@/pages/activity/popballoons/results'),
+                  meta: {
+                    title: 'popballoons-results',
+                    keepAlive: false
+                  }
+                },
+                {
+                  path: 'popballoons-groupbuy',
+                  name: 'popballoons-groupbuy',
+                  component: () =>
+                    import('@/pages/activity/popballoons/groupbuy'),
+                  meta: {
+                    title: 'popballoons-groupbuy',
+                    keepAlive: true
+                  }
+                }, {
+                  path: 'popballoons-during',
+                  name: 'popballoons-during',
+                  component: () =>
+                    import('@/pages/activity/popballoons/during/index.vue'),
+                  meta: {
+                    title: 'popballoons-during',
+                    keepAlive: false
+                  }
+                },{
+                  path: 'popballoons-detail',
+                  name: 'popballoons-detail',
+                  component: () =>
+                    import('@/pages/activity/popballoons/detail.vue'),
+                  meta: {
+                    title: 'popballoons-detail',
+                    keepAlive: false
+                  }
+                },{
+                  path: 'popballoons-gift',
+                  name: 'popballoons-gift',
+                  component: () =>
+                    import('@/pages/activity/popballoons/gift.vue'),
+                  meta: {
+                    title: 'popballoons-gift',
+                    keepAlive: false
+                  }
+                },
+              ]
+            },                       
           ]
         },
         {

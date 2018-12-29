@@ -15,13 +15,13 @@
 
 <script>
 import api from "@/api/trial";
-import product from '@/api/share'
+import product from "@/api/share";
 export default {
   name: "submit",
   data() {
     return {
       is_ios: false,
-      share_info:undefined
+      share_info: undefined
     };
   },
   computed: {
@@ -33,10 +33,10 @@ export default {
   mounted() {
     if (window.weget_mobile_type === "iOS") {
       this.is_ios = true;
-    };
-    product.getShareInfo({share_type:4}).then(res=>{
+    }
+    product.getShareInfo({ share_type: 4 }).then(res => {
       this.share_info = res.data;
-    })
+    });
   },
   methods: {
     to_home() {

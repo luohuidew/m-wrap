@@ -5,11 +5,16 @@
         <b>About us</b>
       </div>
       <div class="about_text">
-        Located in Portland, Oregon, Weget is an online beauty buying platform that creates an interactive shopping environment where beauty lovers, Influencers, and brands can all engage. We create fun activities for engagement that allow our customers to get the products they love at a discount by engaging in a fun social way. We launch a variety of group-buys, flash sales, giveaways, and discount activities that keep the platform lively and engaging. You can even earn points toward products by posting on the platform and giving product reviews.
-        <br/>
-        <br/>
-        <br/>
-        We sell a variety of carefully curated luxury brands and trusted classics like Chanel, YSL, Urban Decay, Laura Mercier, Tom Ford, Mac, and NARs and more. We hope to add local brands to our online buying platform and help promote smaller Independent beauty brands.
+        Everyone can buy. Everyone can sell. We can get more together. These are the ideals that
+        founders Edison and David established WeGet on. Where KOLs, business owners, and
+        customers of all kinds can come together and create a magical place where they get what
+        they desire. WeGet’s mission is to provide customers on all ends both excellent service, and
+        the best prices. Accomplished by building bridges between people who can group together
+        to get more. By providing acitivites for engagement and excitment everyday. By empowering
+        customers with the lowest prices. By giving them a place to show who they are. That is what
+        WeGet is all about. We at WeGet believe that with every group that succeeds, every
+        business that finds its start, and every KOL who can connect to their following the
+        unimaginable becomes reality.
       </div>
       <!-- <div class="about_text pd20">
         <b>Prospects of Weget</b>

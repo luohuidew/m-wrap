@@ -28,39 +28,43 @@ export default {
   watch: {
     $route: {
       handler(to, from) {
-        document.title = this.$route.meta.title
-          ? this.$route.meta.title
-          : "Weget";
-        if (to.path == "/home/weget") {
-          this.transitionName = "slide-right";
-        } else {
-          this.transitionName = "slide-left";
-        }
+        this.init_meta();
+        this.init_transtion(to, from);
+        this.init_device();
       },
       immediate: true,
       deep: true
     }
   },
+  created() {
+    // let query_device_type = this.$route.query.device_type;
+    // console.log(query_device_type);
+    // console.log(this.$route);
+    // console.log(window.location.href);
+    // debugger;
+  },
   mounted() {
-    // alert(window.weget_mobile_type);
-    // alert(window.cookies);
-    // if (window.weget_mobile_type === "iOS") {
-    //   alert(window.weget_mobile_type);
-    //   let params = {
-    //     type: 109,
-    //     data: {}
-    //   };
-    //   window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
-    //   // alert('to login');
-    //   // window.nativeToJavaScript_sendToken = function (res) {
-    //   //   // alert(JSON.stringify(res));
-    //   //   let token = res.token;
-    //   //   setToken(token);
-    //   //   if (getToken()) {
-    //   //     window.location.reload();
-    //   //   }
-    //   // }
-    // }
+    // console.log("路由参数", this.$route.query.device_type);
+  },
+  methods: {
+    init_meta() {
+      document.title = this.$route.meta.title
+        ? this.$route.meta.title
+        : "Weget";
+    },
+    init_transtion(to, from) {
+      if (to.path == "/home/weget") {
+        this.transitionName = "slide-right";
+      } else {
+        this.transitionName = "slide-left";
+      }
+    },
+    init_device() {
+      let query_device_type = this.$route.query.device_type;
+      if (query_device_type) {
+        localStorage.setItem("device", query_device_type);
+      };
+    }
   },
   components: {
     loginAuto,
