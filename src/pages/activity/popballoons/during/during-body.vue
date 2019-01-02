@@ -1,44 +1,27 @@
 <template>
   <div class="tree-home-box"
     v-if="showData.sku_image">
-    <img v-if="Percentage===0"
-      src="/static/img/christmas/lightsetup@2x.png">
-    <img v-if="Percentage===1"
-      :src="lighting_tree1[cur_index]">
-    <img v-if="Percentage===2"
-      :src="lighting_tree2[cur_index]">
-    <img v-if="Percentage===3"
-      :src="lighting_tree3[cur_index]">
-    <img v-if="Percentage===4"
-      :src="lighting_tree4[cur_index]">
-    <img v-if="Percentage===5"
-      :src="lighting_tree5[cur_index]">
-    <img v-if="Percentage===6"
-      :src="lighting_tree6[cur_index]">
-    <img v-if="Percentage===7"
-      :src="lighting_tree7[cur_index]">
-    <img v-if="Percentage===8"
-      :src="lighting_tree8[cur_index]">
-    <img v-if="Percentage===9"
-      :src="lighting_tree9[cur_index]">
-    <img v-if="Percentage===10"
-      :src="lighting_tree10[cur_index]">
+    <div class="bg-pop-box">
+      <!-- <img src="/static/img/popballoons/background/big_box_pop.png"
+        alt=""> -->
+    </div>
     <div class="tips-info">
       <img :src="showData.sku_image"
         alt=""
         srcset="">
     </div>
     <div class="btn-click">
-      <img src="/static/img/christmas/icon/Sharewithyourfriends@2x.png"
+      <img src="/static/img/popballoons/btn/btn-4Sharetoyourfriends@2x.png"
         alt=""
         srcset=""
         @click="to_share(uid)">
       <ac-copy v-if="!is_ios">
         <img slot="box"
-          src="/static/img/christmas/icon/ShareLink@2x.png"
+          src="/static/img/popballoons/btn/share_link.png"
           alt=""
           srcset=""
-          height="50">
+          height="40px" 
+          style="height:40px">
         <p slot="tips">This link has been copied. <br /> Go share to your friends!</p>
       </ac-copy>
     </div>
@@ -48,7 +31,9 @@
         alt=""
         srcset="">
     </div> -->
-    <div class="bulletin-board">
+    <scroll v-if="showData.lampHelper"
+      :board-lists="showData.lampHelper"></scroll>
+    <!-- <div class="bulletin-board">
       <p class="pepole-join">Decorators</p>
       <div class="board-texts">
         <div class="scroll-box">
@@ -71,7 +56,7 @@
         src="/static/img/christmas/Qeaql.com拷贝.png"
         alt=""
         srcset="">
-    </div>
+    </div> -->
     <!-- <div class="banner-board"
       @click.stop="to_home">
       <img class="board-img"
@@ -114,14 +99,15 @@
 let timer;
 import acCopy from "../components/ac-copy";
 import fbMsShare from "../components/fb-ms-share";
-import api from "@/api/christmas";
+import api from "@/api/newyear";
+import scroll from "../components/board-scroll";
 export default {
   name: "",
   data() {
     return {
       /*  */
       // uid:undefined,
-      is_ios: sessionStorage.getItem('is_ios')==='yes',
+      is_ios: sessionStorage.getItem("is_ios") === "yes",
       is_fb_show: false,
       share_info: this.$store.state.christmas_share_info,
       showData: {},
@@ -276,7 +262,8 @@ export default {
   },
   components: {
     fbMsShare,
-    acCopy
+    acCopy,
+    scroll
   }
 };
 </script>
@@ -288,16 +275,24 @@ export default {
   position: relative;
   z-index: 0;
   // transform: translateY(-73px);
-  & > img {
-    width: 100%;
-    height: auto;
-    min-height: 520px;
-    padding-left: 5px;
+  .bg-pop-box {
+    width: 230px;
+    height: 400px;
+    margin: 0 auto;
+    text-align: center;
+    background: url('/static/img/popballoons/background/big_box_pop.png') no-repeat center bottom;
+    background-size: 100% auto;
+    & > img {
+      width: 100%;
+      height: auto;
+      // min-height: 520px;
+      // padding-left: 5px;
+    }
   }
   .tips-info {
     position: absolute;
     left: 50%;
-    top: 180px;
+    top: 280px;
     text-align: center;
     transform: translate(-50%, -50%);
     img {
@@ -313,116 +308,16 @@ export default {
     }
   }
   .btn-click {
-    position: absolute;
-    left: 50%;
-    top: 330px;
-    transform: translateX(-50%);
+    // position: absolute;
+    // left: 50%;
+    // top: 330px;
+    // transform: translateX(-50%);
     text-align: center;
     img {
       height: 50px;
       margin-top: 10px;
       width: auto;
     }
-  }
-}
-.bulletin-board {
-  position: relative;
-  margin-top: -44px;
-  font-size: 14px;
-  padding-bottom: 60px;
-  // padding-bottom: 10px;
-  // transform: translateY(-90px);
-  .pepole-join {
-    position: absolute;
-    left: 0;
-    top: 24%;
-    width: 100%;
-    height: 24px;
-    z-index: 10;
-    font-size: 13px;
-    color: rgb(255, 150, 4);
-    text-align: center;
-  }
-  .board-background-img {
-    width: 100%;
-    height: auto;
-  }
-  .board-texts {
-    position: absolute;
-    left: 50%;
-    top: 37%;
-    transform: translateX(-50%);
-    width: 70%;
-    height: 28%;
-    z-index: 10;
-    font-size: 11px;
-    color: #fff;
-    overflow: hidden;
-    // padding: 6px;
-    // background-color: #fff;
-    .scroll-box {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      overflow-y: hidden;
-    }
-    .scroll-ul {
-      animation: scroll_board 20s linear 2s infinite;
-    }
-    @keyframes scroll_board {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-80%);
-      }
-    }
-    .board-item {
-      display: flex;
-      height: 50%;
-      border-top: 1px solid #78141888;
-      padding: 4px 10px;
-      // transform: scale(0.5);
-      &:nth-child(1) {
-        border: none;
-      }
-      .item-left {
-        width: 60%;
-        display: flex;
-        align-items: center;
-        img {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          margin-right: 10px;
-        }
-        span {
-          width: 90px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
-      .user-box {
-        flex: 1;
-        padding-left: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 10px;
-        // flex-direction: column;
-        // align-items: center;
-      }
-    }
-  }
-}
-.banner-board {
-  padding: 0 10px;
-  // transform: translateY(-42px);
-  padding-bottom: 20px;
-  img {
-    width: 100%;
-    height: auto;
   }
 }
 #app .dialog-tips {

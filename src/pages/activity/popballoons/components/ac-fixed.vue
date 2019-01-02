@@ -2,17 +2,17 @@
   <div class="pop-nav" v-show="show_fixed">
     <ul>
       <li>
-        <img src="/static/img/popballons/yinle.png"
+        <img src="/static/img/popballoons/yinle.png"
           alt="music"
           srcset="">
       </li>
       <li @click="show_rules">
-        <img src="/static/img/popballons/Rules.png"
+        <img src="/static/img/popballoons/Rules.png"
           alt="rules"
           srcset="">
       </li>
       <li @click="to_history">
-        <img src="/static/img/popballons/Records.png"
+        <img src="/static/img/popballoons/Records.png"
           alt="recode"
           srcset="">
       </li>
@@ -29,7 +29,8 @@ export default {
   mounted() {},
   computed: {
     show_fixed(){
-      let temp = this.$route.fullpath.indexOf('popballoons-gift')!==-1;
+      let temp = this.$route.fullPath.indexOf('popballoons-gift')==-1;
+      // console.log(this.$route.fullPath.indexOf('popballoons-gift'));
       return temp
     }
   },

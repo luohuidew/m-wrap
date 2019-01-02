@@ -175,7 +175,7 @@
 let timer;
 import { getToken } from "@/utils/auth";
 import during from "./during/index.vue";
-import api from "@/api/christmas";
+import api from "@/api/newyear";
 import acRules from "./components/ac-rules";
 import acGift from "./components/ac-gift";
 import rules from "./components/dialog-rules";

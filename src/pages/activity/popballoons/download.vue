@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import api from "@/api/christmas";
+import api from "@/api/newyear";
 export default {
   name: "",
   data() {

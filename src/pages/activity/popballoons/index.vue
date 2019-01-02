@@ -1,11 +1,12 @@
 <template>
   <div class="popballoons">
-    <div class="pop-logo">
-      <img src="/static/img/popballons/WeGetLOGO.png"
+    <div class="pop-logo"
+      v-if="show_logo">
+      <img src="/static/img/popballoons/WeGetLOGO.png"
         alt="">
     </div>
     <div class="fixed-nav">
-      <ac-fixed  @open="is_rules_show=true"></ac-fixed>
+      <ac-fixed @open="is_rules_show=true"></ac-fixed>
     </div>
     <router-view></router-view>
     <ac-link></ac-link>
@@ -26,11 +27,16 @@ export default {
       is_rules_show: false
     };
   },
+  computed: {
+    show_logo() {
+      console.log();
+      return this.$route.fullPath.indexOf("popballoons-during") === -1;
+    }
+  },
   created() {},
   mounted() {
     // alert(window.webkit);
   },
-  computed: {},
   components: {
     acLink,
     acFixed,
@@ -48,7 +54,7 @@ export default {
 .pop-logo {
   // height: 35px;
   width: auto;
-  padding: 14px 0 8px 0;
+  padding: 14px 0 14px 0;
   text-align: center;
   img {
     height: 35px;

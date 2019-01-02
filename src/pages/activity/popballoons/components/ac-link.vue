@@ -3,17 +3,17 @@
     <ul>
       <li class="top-line">
         <a href="https://www.facebook.com/wegetofficial">
-          <img src="/static/img/popballons/GOLD_TEXTURE.png"
+          <img src="/static/img/popballoons/GOLD_TEXTURE.png"
             alt="FB"
             srcset="">
         </a>
         <a href="https://www.instagram.com/shopweget">
-          <img src="/static/img/popballons/GOLD_TEXTURE_87.png"
+          <img src="/static/img/popballoons/GOLD_TEXTURE_87.png"
             alt="INS"
             srcset="">
         </a>
         <a href="https://www.youtube.com/channel/UCJ2SmCasimMk8TCHxloaMtA">
-          <img src="/static/img/popballons/GOLD_TEXTURE_69.png"
+          <img src="/static/img/popballoons/GOLD_TEXTURE_69.png"
             alt="Youtube"
             srcset="">
         </a>

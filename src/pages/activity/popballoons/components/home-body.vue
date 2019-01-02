@@ -2,7 +2,7 @@
   <div class="tree-home-box">
     <!-- 背景图 -->
     <div class="home-bg">
-      <!-- <img src="/static/img/popballons/Popballoonswinyourfavorites_90.png"
+      <!-- <img src="/static/img/popballoons/Popballoonswinyourfavorites_90.png"
         alt=""
         srcset=""> -->
       <div class="pop-gif">
@@ -11,14 +11,14 @@
           srcset="">
       </div>
       <div class="pop-gif">
-        <!-- <img src="/static/img/popballons/gif/pop-transtion.png"
+        <!-- <img src="/static/img/popballoons/gif/pop-transtion.png"
           alt=""
           srcset=""> -->
       </div>
     </div>
     <div class="btn-click"
       @click="to_lists">
-      <img src="/static/img/popballons/start.png"
+      <img src="/static/img/popballoons/start.png"
         alt=""
         srcset="">
     </div>
@@ -30,7 +30,7 @@
 
 <script>
 let timer;
-import api from "@/api/christmas";
+import api from "@/api/newyear";
 import scroll from "./board-scroll";
 export default {
   name: "",
@@ -96,7 +96,7 @@ export default {
     width: 100%;
     height: 654px;
     font-size: 0;
-    background: url("/static/img/popballons/Popballoonswinyourfavorites_90.png")
+    background: url("/static/img/popballoons/background/PopballoonswinGIFTS.png")
       no-repeat top center;
     background-size: contain;
     .pop-gif {

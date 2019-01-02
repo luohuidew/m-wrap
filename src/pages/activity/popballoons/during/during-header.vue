@@ -2,27 +2,37 @@
   <div class="home-tips-box"
     v-if="showData">
     <div class="them">
-      <img src="/static/img/christmas/icon/主题@2x_72.png"
+      <img src="/static/img/popballoons/background/coupon_box.png"
         alt="">
     </div>
     <p class="run-time">
-      <span v-for="(item,index) in time"
+      <span>
+        {{time[0]}}
+        {{time[1]}}
+      </span>
+      <span class="time-pointer">
+        :
+      </span>
+      <span>
+        {{time[3]}}
+        {{time[4]}}
+      </span>
+      <span class="time-pointer">
+        :
+      </span>
+      <span>
+        {{time[6]}}
+        {{time[7]}}
+      </span>
+      <!-- <span v-for="(item,index) in time"
         :class="'time-'+(index+1)+''"
-        :key="index">{{item}}</span>
+        :key="index">{{item}}</span> -->
     </p>
-    <span class="need-persion">{{showData.lessCount}}</span>
-    <!-- <p class="need-num">
-      <span>Only need {{showData.lessCount}} people to complete the tree.</span>
-      <span>Share Immediately!</span>
-    </p> -->
-    <div class="rules-tips-box">
-      <ac-rules @open="is_rules_show=true"></ac-rules>
-    </div>
-    <div class="gift-tips-box">
-      <ac-gift></ac-gift>
-    </div>
-    <rules v-if="is_rules_show"
-      @close="is_rules_show=false"></rules>
+    <!-- <span class="need-persion">{{showData.lessCount}}</span> -->
+    <p class="need-num">
+      <span>Only {{showData.lessCount}} balloons need to be popped.</span>
+      <span> Share to your friends now!!</span>
+    </p>
   </div>
 </template>
 
@@ -31,14 +41,14 @@ let timer;
 import acRules from "../components/ac-rules";
 import acGift from "../components/ac-gift";
 import rules from "../components/dialog-rules";
-import api from "@/api/christmas";
+import api from "@/api/newyear";
 export default {
   name: "",
   data() {
     return {
       time: 0,
-      showData: {},
-      is_rules_show: false
+      showData: {}
+      // is_rules_show: false
       // time: [0, 0, 0, 0, 0, 0]
     };
   },
@@ -132,33 +142,46 @@ export default {
     flex-direction: column;
     justify-content: center;
     position: absolute;
-    left: 0;
-    top: 55%;
-    width: 100%;
-    color: #fff;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 292px;
+    color: #2c2c2c;
     z-index: 20;
-    font-size: 14px;
+    font-size: 24px;
     span {
       text-align: center;
-      &:nth-child(1) {
-        font-size: 12px;
-      }
+      // &:nth-child(1) {
+      //   font-size: 12px;
+      // }
     }
   }
   .run-time {
     position: absolute;
-    width: 100%;
-    height: 24px;
-    bottom: 11%;
-    left: 0;
+    width: 227px;
+    height: 55px;
+    bottom: 0%;
+    left: 50%;
     z-index: 30;
-    span {
-      position: absolute;
-      left: 0;
-      top: 0;
-      font-size: 18px;
-      font-weight: bold;
-      color: #fff;
+    background: url("/static/img/popballoons/background/run_time_box.png")
+      no-repeat center center;
+    background-size: 100%;
+    transform: translate(-50%, 60%);
+    color: #3d3d3d;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 55px;
+    // span {
+    //   position: absolute;
+    //   left: 0;
+    //   top: 0;
+    //   color: #3d3d3d;
+    //   font-size: 30px;
+    // }
+    .time-pointer {
+      font-size: 30px;
+      font-weight: normal;
     }
     .time-1 {
       left: 28px;

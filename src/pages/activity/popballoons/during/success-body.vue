@@ -37,7 +37,7 @@ export default {
   methods: {
     to_download(id) {
       this.$router.push({
-        name: "christmas-download",
+        name: "popballoons-download",
       });
     },
     to_lists() {

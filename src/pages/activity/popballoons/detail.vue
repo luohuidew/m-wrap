@@ -1,47 +1,40 @@
 <template>
   <div class="christmas-detail">
-    <div class="christmas-header">
-      <img src="/static/img/christmas/icon/Completelightswithin48houstogetthis.png"
+    <div class="popballoons-header">
+      <img src="/static/img/popballoons/icon/Goodtaste!.png"
         alt=""
         srcset="">
-      <span class="lap_number">{{req_data.lamp_num}}</span>
+      <span class="lap_number">Pop {{req_data.lamp_num}} balloons within
+        24 hours to win!</span>
     </div>
-    <div class="christmas-content">
-      <img :src="req_data.detail_image"
+    <div class="popballoons-content">
+      <img :src="req_data.sku_image"
         alt="">
+      <div class="price-box">
+        <p>REG</p>
+        <p>$37</p>
+      </div>
     </div>
-    <div class="christmas-btn">
+    <div class="pop-description">
+      YSL
+      Lip stain
+      101 Chrome red
+    </div>
+    <div class="popballoons-btn">
       <span @click="to_lists">
-        <img src="/static/img/christmas/icon/Stillthinking@2x.png"
+        <img src="/static/img/popballoons/btn/btn-3Stillthinking@2x.png"
           alt="">
       </span>
       <span @click="to_during">
-        <img src="/static/img/christmas/icon/Iwantit@2x.png"
+        <img src="/static/img/popballoons/btn/btn-3Iwantit@2x.png"
           alt=""></span>
     </div>
-    <!-- <fb-ms-share v-show="is_fb_show"
-      @close="close_href">
-      <template>       
-        <span slot="btn-top"
-          @click="share_type(1)"
-          class="tips-btns">
-          <img src="/static/img/christmas/矢量智能对象@2x_38.png"
-            alt="Facebook">
-        </span>
-        <span slot="btn-buttom"
-          @click="share_type(2)"
-          class="tips-btns">
-          <img src="/static/img/christmas/矢量智能对象@2x.png"
-            alt="Messenger">
-        </span>
-      </template>
-    </fb-ms-share> -->
   </div>
 </template>
 
 <script>
 import fbMsShare from "./components/fb-ms-share";
-import api from "@/api/christmas";
+import api from "@/api/newyear";
 export default {
   name: "",
   data() {
@@ -86,39 +79,16 @@ export default {
             //   this.is_fb_show = true;
             // } else {
             //   }
-            this.$router.replace({ name: "christmas-during" });
+            this.$router.replace({ name: "popballoons-during" });
           })
           .catch(res => {
-            this.$router.replace({ name: "christmas" });
+            this.$router.replace({ name: "popballoons" });
           });
       }
     },
     to_lists() {
       this.$router.go(-1);
-    },
-    share_type(type) {
-      let params;
-      if (type === 1) {
-        params = {
-          type: 107,
-          data: this.share_info
-        };
-      } else {
-        params = {
-          //108 分享内容到Messenger
-          type: 108,
-          data: this.share_info
-        };
-      }
-      window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
-    },
-    close_href() {
-      let params = {
-        path: "/activity/christmas-during"
-        // query: this.share_params
-      };
-      this.$router.replace(params);
-    }
+    },   
   },
   components: {
     fbMsShare
@@ -134,55 +104,93 @@ export default {
   height: auto;
   padding: 0 20px;
   font-size: 0;
-  background: url("/static/img/christmas/icon/通用背景.jpg") no-repeat top
-    center;
-  background-size: 100% 100%;
 }
-.christmas-header {
+.popballoons-header {
   position: relative;
-  width: 320px;
+  width: 350px;
   max-width: 100%;
+  height: 180px;
   position: relative;
-  padding: 20px 0px 30px 0px;
+  background: url("/static/img/popballoons/background/coupon_box.png") no-repeat
+    center center;
+  background-size: 100%;
+  // padding: 20px 0px 30px 0px;
   margin: 0 auto;
+  text-align: center;
   img {
     position: relative;
-    margin: 0 auto;
-    height: auto;
-    width: 100%;
+    margin-top: 32px;
+    width: 177px;
+    height: 30px;
   }
   .lap_number {
     position: absolute;
-    left: 45%;
+    width: 240px;
+    left: 50%;
     top: 53.5%;
-    font-size: 18px;
-    color: #d5832f;
-    font-weight: bold;
+    transform: translateX(-50%);
+    font-size: 23px;
+    color: #2c2c2c;
+    // font-weight: bold;
   }
 }
 
-.christmas-content {
+.popballoons-content {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 50px auto 25px auto;
+  text-align: center;
+  background: url("/static/img/popballoons/background/sku_bg.png") no-repeat
+    center center;
+  background-size: 100%;
   // flex: 1;
   // overflow: auto;
   text-align: center;
+  .price-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 7%;
+    right: 12%;
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    font-size: 12px;
+    background-color: #000;
+    color: #e3c388;
+  }
   img {
-    width: 180px;
-    height: auto;
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translateX(-50%);
+    height: 80%;
+    width: auto;
   }
 }
-.christmas-btn {
+.pop-description {
+  margin: 0 auto;
+  width: 50%;
+  font-size: 20px;
+  color: #ECCFA0;
+  text-align: center;
+}
+.popballoons-btn {
   // height: 40px;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  margin-top: 50px;
+  padding: 10px 0;
+  margin-top: 30px;
   span {
     // background-color: #f90;
     color: #fff;
     padding: 10px 0px;
   }
   img {
-    height: 50px;
+    height: 45px;
   }
 }
 </style>

@@ -1,11 +1,15 @@
 <template>
   <div id="activity-detail">
     <div class="detail-header">
-      <img src="/static/img/popballons/MYRECORDS.png" alt>
+      <img src="/static/img/popballoons/MYRECORDS.png"
+        alt>
     </div>
-    <ul class="detail-info" v-if="tableData.length!==0">
-      <li v-for="(item,index) of tableData" :key="index">
-        <div class="detail_box success" v-if="item.status===3">
+    <ul class="detail-info"
+      v-if="tableData.length!==0">
+      <li v-for="(item,index) of tableData"
+        :key="index">
+        <div class="detail_box success"
+          v-if="item.status===3">
           <div class="middle">
             <div class="info-img">
               <img :src="item.sku_image">
@@ -14,8 +18,10 @@
               <p>{{item.name}}</p>
               <p>{{item.lamp_num}} lights</p>
               <p>End time：{{item.etime | dateServer}}</p>
-              <p v-if="item.coupon_status==2 || !item.coupon_status" @click="to_coupon(item.id)" >
-                <img src="/static/img/popballons/MYRECORDS.png" alt>
+              <p v-if="item.coupon_status==2 || !item.coupon_status"
+                @click="to_coupon(item.id)">
+                <img src="/static/img/popballoons/btn/btn-1MYCOUPON@2x.png"
+                  alt>
               </p>
               <p v-else>
 
@@ -23,7 +29,8 @@
             </div>
           </div>
         </div>
-        <div v-if="item.status===2" class="detail_box fail">
+        <div v-if="item.status===2"
+          class="detail_box fail">
           <div class="middle">
             <div class="info-img">
               <img :src="item.sku_image">
@@ -40,14 +47,16 @@
         </div>
       </li>
     </ul>
-    <div class="norecord" v-if="is_no">
-      <img src="/static/img/christmas/icon/Norecord@2x.png" alt>
+    <div class="norecord"
+      v-if="is_no">
+      <img src="/static/img/christmas/icon/Norecord@2x.png"
+        alt>
     </div>
   </div>
 </template>
 
 <script>
-import api from "@/api/christmas";
+import api from "@/api/newyear";
 export default {
   name: "",
   data() {
@@ -93,7 +102,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height:100%;
+  min-height: 100%;
   height: 100%;
   overflow: hidden;
   padding: 0 20px;
@@ -111,7 +120,7 @@ export default {
     }
   }
   .detail-info {
-    flex:1;
+    flex: 1;
     overflow: auto;
     font-size: 12px;
     color: #16352f;
@@ -120,12 +129,12 @@ export default {
     li {
       margin-top: 30px;
       .success {
-        background: url("/static/img/christmas/icon/成功表情@2x.png") no-repeat
-          top center;
+        background: url("/static/img/popballoons/coupon_box.png") no-repeat top
+          center;
       }
       .fail {
-        background: url("/static/img/christmas/icon/失败表情@2x.png") no-repeat
-          top center;
+        background: url("/static/img/popballoons/coupon_box.png") no-repeat top
+          center;
       }
       .detail_box {
         background-size: 100% 100%;
@@ -133,30 +142,35 @@ export default {
         height: 132px;
         position: relative;
         margin: 0 auto;
+        padding: 12px;
         .middle {
           display: flex;
           position: absolute;
+          align-items: center;
           height: 119px;
-          width: 250px;
+          width: 90%;
           top: 50%;
           left: 10px;
           transform: translateY(-50%);
           padding: 10px 0;
           .info-img {
-            height: 110px;
-            width: 96px;
+            height: 100%;
+            margin-left: 12px;
+            // width: 96px;
             img {
-              height: 100%;
+              height: 80%;
               width: auto;
             }
           }
           .info-text {
-            margin-top: 12px;
+            flex: 1;
+            margin-left: 20px;
             font-size: 12px;
             line-height: 14px;
+            height: 100%;
             p {
               padding-top: 5px;
-              position: relative;
+              // position: relative;
               img,
               b {
                 position: absolute;

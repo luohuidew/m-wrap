@@ -30,7 +30,7 @@
           <!-- <img src="/static/img/christmas/icon/christmas_rules.png" alt> -->
           <span class="close-icon"
             @click="close_dialog">
-            <img src="/static/img/popballons/X.png"
+            <img src="/static/img/popballoons/X.png"
               alt=""></span>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default {
     text-align: center;
     .rules-content {
       height: 100%;
-      background: url("/static/img/popballons/eventrules.png") no-repeat top
+      background: url("/static/img/popballoons/eventrules.png") no-repeat top
         center;
       font-size: 12px;
       background-size: auto 100%;

@@ -19,12 +19,12 @@
           </li>        
         </ul>
       </div>
-      <img src="/static/img/popballons/background_title.png"
+      <img src="/static/img/popballoons/background_title.png"
         class="board-background-title"
         alt=""
         srcset="">
       <img class="board-background-img"
-        src="/static/img/popballons/background_scroll.png"
+        src="/static/img/popballoons/background_scroll.png"
         alt=""
         srcset="">
     </div>

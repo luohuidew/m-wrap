@@ -35,7 +35,7 @@
 <script>
 let timer;
 import { getToken, removeToken, setToken } from "@/utils/auth";
-import api from "@/api/christmas";
+import api from "@/api/newyear";
 import share from "@/api/share";
 import successHeader from "./success-header";
 import failHeader from "./fail-header";
@@ -196,16 +196,16 @@ export default {
 <style lang='scss'>
 .christmas {
   // position: relative;
-  width: 375px;
+  // width: 375px;
   // min-width: 100%;
   // min-height: 100%;
   // height: 920px;
   // min-width: 100%;
-  padding: 0 20px;
+  padding:20px;
   // overflow: auto;
   font-size: 0;
-  background: url("/static/img/christmas/首页背景.jpg") no-repeat top center;
-  background-size: 100% 100%;
+  // background: url("/static/img/christmas/首页背景.jpg") no-repeat top center;
+  // background-size: 100% 100%;
   z-index: 0;
 }
 .rules-tips-box {
