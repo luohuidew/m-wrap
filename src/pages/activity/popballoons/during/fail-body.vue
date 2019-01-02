@@ -4,24 +4,16 @@
       src="/static/img/christmas/lightsetup@2x的副本.png"
       alt=""
       srcset="">
-    <div class="tips-info">
-      <!-- <img class="you-got-it"
-        src="/static/img/christmas/Sorry,TimesUp.Treewasnotlitintime@2x.png"
-        alt=""
-        srcset=""> -->
+    <div class="tips-info">     
       <img src="/static/img/christmas/失败表情@2x.png"
         alt=""
         srcset="">
     </div>
     <div class="btn-click">
-      <img src="/static/img/christmas/TryAgain@2x.png"
+      <img src="/static/img/popballoons/btn/btn-5TryAgain@2x.png"
         alt=""
         srcset=""
-        @click="to_lists">
-      <!-- <img src="/static/img/christmas/Sharewithyourfriends@2x.png"
-        alt=""
-        srcset=""
-        @click="to_share(uid)"> -->
+        @click="to_lists">     
     </div>
   </div>
 </template>

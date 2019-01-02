@@ -2,7 +2,9 @@
   <div class="btn-dialog">
     <div class="bg-wrapper">
       <div class="bg-img">
-        <!-- <img class="box-bg" src="/static/img/christmas/矢量智能对象@2x_39.png" alt=""> -->
+        <img class="box-bg"
+          src="/static/img/popballoons/icon/sad.png"
+          alt="">
         <!-- <p class="tips-text">Lit one light</p> -->
         <div class="btn-group">
           <slot name="dialog-desc"></slot>
@@ -10,7 +12,10 @@
           <slot name="btn-buttom"></slot>
         </div>
         <span class="close-icon"
-          @click.stop="close_dialog"></span>
+          @click.stop="close_dialog">
+          <img src="/static/img/popballoons/icon/X.png"
+            alt=""
+            srcset=""></span>
       </div>
     </div>
   </div>
@@ -54,13 +59,15 @@ export default {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 350px;
-  height: 564px;
-  background: url("/static/img/christmas/icon/失败表情@2x_46.png") no-repeat
-    center center;
+  width: 300px;
+  height: 430px;
+  background: url("/static/img/popballoons/background/click_tips_box.png")
+    no-repeat center center;
   background-size: 100% 100%;
+  text-align: center;
   .box-bg {
-    width: 100%;
+    margin-top: 50px;
+    width: 136px;
     height: auto;
   }
   .btn-group {
@@ -71,10 +78,10 @@ export default {
     position: absolute;
     text-align: center;
     left: 50%;
-    top: 50%;
+    top: 52%;
     transform: translateX(-50%);
-    width: 184px;
-    height: 120px;
+    width: 90%;
+    /* height: 120px; */
   }
   .tips-text {
     position: absolute;
@@ -91,8 +98,9 @@ export default {
   }
   .close-icon {
     position: absolute;
-    top: 0;
-    right: 35px;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 50px;
     height: 50px;
   }

@@ -1,16 +1,36 @@
 <template>
   <div class="home-tips-box">
     <img class="them"
-      src="/static/img/christmas/icon/主题@2x_60.png"
+      src="/static/img/popballoons/background/coupon_box.png"
       alt="">    
-    <div class="rules-tips-box">
-      <ac-rules @open="is_rules_show=true"></ac-rules>
-    </div>
-    <div class="gift-tips-box">
-      <ac-gift></ac-gift>
-    </div>
-    <rules v-if="is_rules_show"
-      @close="is_rules_show=false"></rules>
+  <p class="run-time">
+      <span>
+        {{time[0]}}
+        {{time[1]}}
+      </span>
+      <span class="time-pointer">
+        :
+      </span>
+      <span>
+        {{time[3]}}
+        {{time[4]}}
+      </span>
+      <span class="time-pointer">
+        :
+      </span>
+      <span>
+        {{time[6]}}
+        {{time[7]}}
+      </span>
+      <!-- <span v-for="(item,index) in time"
+        :class="'time-'+(index+1)+''"
+        :key="index">{{item}}</span> -->
+    </p>
+    <!-- <span class="need-persion">{{showData.lessCount}}</span> -->
+    <p class="need-num">
+      <span>Your balloons weren’t all popped on time. </span>
+      <span> Don’t give up, try next time</span>
+    </p>   
   </div>
 </template>
 
@@ -22,6 +42,7 @@ export default {
   name: "",
   data() {
     return {
+      time:"00:00:00",
       run_time: [0, 0, 0, 0, 0, 0],
       is_rules_show:false
     };
@@ -48,20 +69,64 @@ export default {
   max-width: 100%;
   margin: 0 auto;
   position: relative;
-  z-index: 5;
+  z-index: 10;
+  .need-persion {
+    position: absolute;
+    left: 156px;
+    top: 47px;
+    width: 40px;
+    height: 22px;
+    text-align: center;
+    z-index: 30;
+    font-size: 18px;
+    color: #d5832f;
+    font-weight: bold;
+  }
+  .need-num {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 292px;
+    color: #2c2c2c;
+    z-index: 20;
+    font-size: 24px;
+    span {
+      text-align: center;
+      // &:nth-child(1) {
+      //   font-size: 12px;
+      // }
+    }
+  }
   .run-time {
     position: absolute;
-    width: 100%;
-    height: 24px;
-    bottom: 20px;
-    left: 0;
-    span {
-      position: absolute;
-      left: 0;
-      top: 0;
-      font-size: 18px;
-      font-weight: bold;
-      color: #fff;
+    width: 227px;
+    height: 55px;
+    bottom: 0%;
+    left: 50%;
+    z-index: 30;
+    background: url("/static/img/popballoons/background/run_time_box.png")
+      no-repeat center center;
+    background-size: 100%;
+    transform: translate(-50%, 60%);
+    color: #3d3d3d;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 55px;
+    // span {
+    //   position: absolute;
+    //   left: 0;
+    //   top: 0;
+    //   color: #3d3d3d;
+    //   font-size: 30px;
+    // }
+    .time-pointer {
+      font-size: 30px;
+      font-weight: normal;
     }
     .time-1 {
       left: 28px;
@@ -69,28 +134,34 @@ export default {
     .time-2 {
       left: 72px;
     }
-    .time-3 {
+    .time-4 {
       left: 132px;
     }
-    .time-4 {
+    .time-5 {
       left: 176px;
     }
-    .time-5 {
+    .time-7 {
       left: 237px;
     }
-    .time-6 {
+    .time-8 {
       left: 281px;
     }
-    .point-1 {
+    .time-3 {
       left: 105px;
     }
-    .point-2 {
+    .time-6 {
       left: 209px;
     }
   }
   .them {
     width: 100%;
     height: auto;
+    position: relative;
+    z-index: 20;
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
   // background: url("/static/img/christmas/主题.png") no-repeat top center;
   // background-size: 100% auto;
@@ -99,6 +170,7 @@ export default {
     bottom: 20px;
     right: -3px;
     transform: translateY(100%);
+    z-index: 0;
     img {
       width: 70px;
     }
@@ -108,7 +180,7 @@ export default {
     bottom: 26px;
     left: 7px;
     transform: translateY(100%);
-    z-index: 99;
+    z-index: 50;
   }
 }
 </style>

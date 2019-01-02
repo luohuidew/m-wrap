@@ -211,7 +211,7 @@ export default {
         this.$emit("share", "share");
         console.log("share");
         let params = {
-          path: "/activity/christmas-groupbuy",
+          path: "/activity/popballoons/popballoons-groupbuy",
           query: {
             id: cuid,
             user_name: this.userName.replace(" ", "_")

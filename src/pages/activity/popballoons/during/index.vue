@@ -56,7 +56,7 @@ export default {
   name: "",
   data() {
     return {
-      info_type: 0,
+      info_type: 2,
       run_time: "",
       user_id: "",
       user_name: "",
@@ -99,7 +99,7 @@ export default {
           this.user_name = res.data.user_name;
           this.is_ready = true;
           if (this.info_type === 5 || this.info_type === 4) {
-            this.$router.replace({ name: "christmas" });
+            this.$router.replace({ name: "popballoons" });
           }
           if (res.data.isShow) {
             this.is_show_try = res.data.isShow;
@@ -116,7 +116,7 @@ export default {
           };
           let data =
             window.location.origin +
-            "/activity/christmas-groupbuy?id=" +
+            "/activity/popballoons/popballoons-groupbuy?id=" +
             res.data.id +
             "&user_name=" +
             res.data.user_name.replace(" ", "_");
@@ -124,7 +124,7 @@ export default {
           share.getShareInfo(params).then(res => {
             console.log(res);
             this.login_load.clear();
-            this.info_type = result.data.status;
+            // this.info_type = result.data.status;
             this.$store.commit("set_christmas_share_info", res.data);
           });
         });
@@ -149,7 +149,7 @@ export default {
       this.$emit("share", "share");
     },
     to_lists() {
-      this.$router.push({ name: "christmas-lists" });
+      this.$router.push({ name: "popballoons-lists" });
     }
     // timeDiff(diff) {
     //   // var date1 = '2015/05/01 00:00:00'; //开始时间

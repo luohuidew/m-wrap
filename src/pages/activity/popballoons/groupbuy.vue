@@ -8,10 +8,17 @@
       <div class="home-tips-box">
         <img v-if="christmat.status===1"
           class="them"
-          src="/static/img/christmas/icon/主题@2x_80.png">
-        <img v-else
+          src="/static/img/popballoons/background/coupon_box.png">
+        <!-- <img v-else
           class="them"
-          src="/static/img/christmas/icon/主题@2x_75.png">
+          src="/static/img/christmas/icon/主题@2x_75.png"> -->
+        <div class="pop-img-title">
+          <img v-if="christmat.status===1"
+            src="/static/img/popballoons/icon/sweet.png"
+            style="height:30px">
+          <img v-else
+            src="/static/img/popballoons/icon/timesup.png">
+        </div>
         <ul class="user-detail">
           <li class="user-phone">
             <p><img :src="user_info.photo"
@@ -23,53 +30,19 @@
             <!-- <p class="black">{{christmat.count}} people get the free gift today</p> -->
           </li>
         </ul>
-        <div class="rules-tips-box">
+        <!-- <div class="rules-tips-box">
           <ac-rules @open="is_rules_show=true"></ac-rules>
-        </div>
+        </div> -->
         <!-- <div class="gift-tips-box">
         <ac-gift></ac-gift>
       </div> -->
-        <rules v-if="is_rules_show"
-          @close="is_rules_show=false"></rules>
+        <!-- <rules v-if="is_rules_show"
+          @close="is_rules_show=false"></rules> -->
       </div>
       <div class="tree-home-box">
-        <img v-if="Percentage===0"
-          src="/static/img/christmas/lightsetup@2x.png"
-          class="tree_photo">
-        <img v-if="Percentage===1"
-          :src="lighting_tree1[cur_index]"
-          class="tree_photo">
-        <img v-if="Percentage===2"
-          :src="lighting_tree2[cur_index]"
-          class="tree_photo">
-        <img v-if="Percentage===3"
-          :src="lighting_tree3[cur_index]"
-          class="tree_photo">
-        <img v-if="Percentage===4"
-          :src="lighting_tree4[cur_index]"
-          class="tree_photo">
-        <img v-if="Percentage===5"
-          :src="lighting_tree5[cur_index]"
-          class="tree_photo">
-        <img v-if="Percentage===6"
-          :src="lighting_tree6[cur_index]"
-          class="tree_photo">
-        <img v-if="Percentage===7"
-          :src="lighting_tree7[cur_index]"
-          class="tree_photo">
-        <img v-if="Percentage===8"
-          :src="lighting_tree8[cur_index]"
-          class="tree_photo">
-        <img v-if="Percentage===9"
-          :src="lighting_tree9[cur_index]"
-          class="tree_photo">
-        <img v-if="Percentage===10"
-          :src="lighting_tree10[cur_index]"
-          class="tree_photo">
-        <!-- <div class="finished_photo"
-        v-if="christmat.status!==1">
-        <img src="/static/img/christmas/Theeventyourfriendstartedhasfinished.png">
-      </div> -->
+        <div class="bg-pop-box">
+
+        </div>
         <div class="goods_photo">
           <img :src="christmat_info.sku_image"
             class="goods_img">
@@ -82,11 +55,11 @@
           <a href="javascript:;"
             @click="link_light"
             v-if="christmat.status===1">
-            <img src="/static/img/christmas/icon/Sure_help@2x_0.png">
+            <img src="/static/img/popballoons/btn/pop_help.png">
           </a>
           <a href="javascript:;"
             @click="try_again">
-            <img src="/static/img/christmas/icon/Iwantone_too@2x.png">
+            <img src="/static/img/popballoons/btn/pop_want.png">
           </a>
           <!-- <a href="javascript:;"
           v-if="christmat.status!==1">
@@ -96,7 +69,7 @@
         </a> -->
         </div>
       </div>
-      <div class="bulletin-board">
+      <!-- <div class="bulletin-board">
         <p class="pepole-join">Decorators</p>
         <div class="board-texts">
           <div class="scroll-box">
@@ -118,7 +91,9 @@
         </div>
         <img class="board-background-img"
           src="/static/img/christmas/Qeaql.com拷贝.png">
-      </div>
+      </div> -->
+      <scroll v-if="help_user"
+        :board-lists="help_user"></scroll>
       <!-- <div class="bulletin-adv"
       @click.stop="to_home">
       <img class="adv-background-img"
@@ -129,7 +104,7 @@
         @closerules="show_rules=false"></rule>
       <!-- <share-box v-show="show_share_box"
         @close="show_share_box=false"></share-box> -->
-      <btn-box-fun v-if="lap_status===1"
+      <!-- <btn-box-fun v-if="lap_status===1"
         v-show="show_btn_box"
         @close="close_reload">
         <span slot="dialog-desc"
@@ -138,21 +113,26 @@
           You helped
           {{user_info.user_name}}!
         </span>
-      </btn-box-fun>
-      <btn-box-sad v-else
+      </btn-box-fun> -->
+      <btn-box-click
         v-show="show_btn_box"
-        @close="show_btn_box = false">
+        @close="show_btn_box = false" 
+        :status="lap_status">
         <span slot="dialog-desc"
           class="desc-text">
-          <template v-if="lap_status===2">
+          <template v-if="lap_status===1">
+            Thank You!<br>
+            You helped
+            {{user_info.user_name}}!
+          </template>
+          <template v-else-if="lap_status===2">
             Oops, times up !
           </template>
           <template v-else-if="lap_status===3">
             Uh-oh invalid, you cannot light up your own tree.
           </template>
           <template v-else-if="lap_status===4">
-            Tree lighting failed !<br />
-            One chance per day. Come back tomorrow!
+            Sorry, you already used your one chance today.Come back tomorrow
           </template>
           <template v-else-if="lap_status===5">
             Tree lighting failed.<br />
@@ -162,7 +142,7 @@
             Oops, bad network connection !
           </template>
         </span>
-      </btn-box-sad>
+      </btn-box-click>
     </template>
     <ac-tips @close="close_first_tips"
       v-show="show_first_tips"></ac-tips>
@@ -184,8 +164,9 @@ import rule from "./components/dialog-rules";
 import shareBox from "./components/share-btn";
 import btnBoxFun from "./components/dialog-btn-fun";
 import acTips from "./components/ac-tips";
-import btnBoxSad from "./components/dialog-btn-sad";
+import btnBoxClick from "./components/dialog-btn-click";
 import banner from "./components/ac-banner";
+import scroll from "./components/board-scroll";
 export default {
   name: "",
   data() {
@@ -206,56 +187,6 @@ export default {
       is_rules_show: false,
       is_ready: false,
       lap_status: 0,
-      lighting_tree1: [
-        "/static/img/christmas/lighting/点灯1-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯1-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯1-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree2: [
-        "/static/img/christmas/lighting/点灯2-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯2-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯2-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree3: [
-        "/static/img/christmas/lighting/点灯3-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯3-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯3-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree4: [
-        "/static/img/christmas/lighting/点灯4-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯4-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯4-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree5: [
-        "/static/img/christmas/lighting/点灯5-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯5-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯5-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree6: [
-        "/static/img/christmas/lighting/点灯6-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯6-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯6-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree7: [
-        "/static/img/christmas/lighting/点灯7-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯7-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯7-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree8: [
-        "/static/img/christmas/lighting/点灯8-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯8-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯8-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree9: [
-        "/static/img/christmas/lighting/点灯9-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯9-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯9-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree10: [
-        "/static/img/christmas/lighting/点灯10-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯10-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯10-3_gaitubao_com_375x580.png"
-      ],
       cur_index: 0,
       Percentage: 0
     };
@@ -273,7 +204,7 @@ export default {
       api.help_tips().then(res => {
         if (res.data.isAlert === 1) {
           sessionStorage.setItem("first_sign", "yes");
-        } 
+        }
         // else {
         //   sessionStorage.setItem("first_sign", "no");
         // }
@@ -300,12 +231,12 @@ export default {
     },
     close_first_tips() {
       this.show_first_tips = false;
-      sessionStorage.setItem('first_sign','no');
+      sessionStorage.setItem("first_sign", "no");
       window.location.reload();
     },
     try_again() {
       this.$router.push({
-        name: "christmas"
+        name: "popballoons"
       });
     },
     init_data() {
@@ -378,13 +309,14 @@ export default {
     rule,
     shareBox,
     btnBoxFun,
-    btnBoxSad,
+    btnBoxClick,
     acRules,
     acGift,
     rules,
     banner,
     during,
-    acTips
+    acTips,
+    scroll
   }
 };
 </script>
@@ -398,20 +330,53 @@ export default {
   padding: 0 20px;
   z-index: 10;
   font-size: 0;
-  background: url("/static/img/christmas/首页背景.jpg") no-repeat top center;
-  background-size: 100% 100%;
+  // background: url("/static/img/christmas/首页背景.jpg") no-repeat top center;
+  // background-size: 100% 100%;
 }
 .mbt10 {
   margin-bottom: 10px;
 }
+.bg-pop-box {
+  position: relative;
+  width: 230px;
+  height: 460px;
+  margin: 0 auto;
+  text-align: center;
+  background: url("/static/img/popballoons/background/small_box_pop.png")
+    no-repeat center bottom;
+  background-size: 100% auto;
+  & > img {
+    width: 100%;
+    height: auto;
+    // min-height: 520px;
+    // padding-left: 5px;
+  }
+}
 .home-tips-box {
   width: 335px;
   position: relative;
-  margin: 0 auto;
+  margin: 20px auto 0 auto;
+
   .them {
     width: 100%;
     height: auto;
     z-index: 40;
+  }
+  .pop-img-title {
+    // display: flex;
+    // justify-content: center;
+    // align-self: center;
+    top: 28px;
+    position: absolute;
+    width: 85%;
+    height: 54px;
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+    img {
+      height: 100%;
+      width: auto;
+    }
   }
   .user-detail {
     position: absolute;
@@ -434,7 +399,7 @@ export default {
     }
     .user-info {
       width: 80%;
-      color: #fff;
+      color: #2c2c2c;
       p {
         width: 100%;
         padding: 0 10px;
@@ -471,7 +436,6 @@ export default {
 }
 .tree-home-box {
   width: 100%;
-  padding-left: 20px;
   position: relative;
   .tree_photo {
     width: 100%;
@@ -491,7 +455,7 @@ export default {
     width: 30%;
     height: 100px;
     position: absolute;
-    top: 40%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -60%);
     float: left;
@@ -514,10 +478,11 @@ export default {
     }
   }
   .btn-click {
-    position: absolute;
-    left: 50%;
-    bottom: 75px;
-    transform: translateX(-50%);
+    // position: absolute;
+    // left: 50%;
+    // bottom: 75px;
+    // transform: translateX(-50%);
+    text-align: center;
     img {
       height: 50px;
       margin-bottom: 10px;
@@ -525,99 +490,99 @@ export default {
   }
 }
 .desc-text {
-  font-size: 16px;
-  line-height: 22px;
-  color: #fff;
+  font-size: 25px;
+  line-height: 34px;
+  color: #2c2c2c;
 }
-.bulletin-board {
-  position: relative;
-  margin-top: -44px;
-  font-size: 14px;
-  padding-bottom: 10px;
-  .pepole-join {
-    position: absolute;
-    left: 0;
-    top: 30%;
-    width: 100%;
-    height: 24px;
-    z-index: 10;
-    font-size: 13px;
-    color: rgb(255, 150, 4);
-    text-align: center;
-  }
-  .board-background-img {
-    width: 100%;
-    height: auto;
-  }
-  .board-texts {
-    position: absolute;
-    left: 49%;
-    top: 46%;
-    transform: translateX(-47%);
-    width: 70%;
-    height: 34%;
-    z-index: 0;
-    font-size: 11px;
-    color: #fff;
-    overflow-y: hidden;
-    // overflow-x: hidden;
-    .scroll-box {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      overflow-y: hidden;
-    }
-    .scroll-ul {
-      animation: scroll_board 20s linear 2s infinite;
-    }
-    @keyframes scroll_board {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-80%);
-      }
-    }
-    .board-item {
-      position: relative;
-      display: flex;
-      height: 50%;
-      border-top: 1px solid #78141888;
-      padding: 4px 10px;
-      // z-index: 0;
-      // justify-content: space-between;
-      // transform: scale(0.5);
-      &:nth-child(1) {
-        border: none;
-      }
-      .item-left {
-        width: 60%;
-        display: flex;
-        align-items: center;
-        img {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          margin-right: 10px;
-        }
-        span {
-          width: 90px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
-      .user-box {
-        flex: 1;
-        padding-left: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 10px;
-      }
-    }
-  }
-}
+// .bulletin-board {
+//   position: relative;
+//   margin-top: -44px;
+//   font-size: 14px;
+//   padding-bottom: 10px;
+//   .pepole-join {
+//     position: absolute;
+//     left: 0;
+//     top: 30%;
+//     width: 100%;
+//     height: 24px;
+//     z-index: 10;
+//     font-size: 13px;
+//     color: rgb(255, 150, 4);
+//     text-align: center;
+//   }
+//   .board-background-img {
+//     width: 100%;
+//     height: auto;
+//   }
+//   .board-texts {
+//     position: absolute;
+//     left: 49%;
+//     top: 46%;
+//     transform: translateX(-47%);
+//     width: 70%;
+//     height: 34%;
+//     z-index: 0;
+//     font-size: 11px;
+//     color: #fff;
+//     overflow-y: hidden;
+//     // overflow-x: hidden;
+//     .scroll-box {
+//       width: 100%;
+//       height: 100%;
+//       overflow: hidden;
+//       overflow-y: hidden;
+//     }
+//     .scroll-ul {
+//       animation: scroll_board 20s linear 2s infinite;
+//     }
+//     @keyframes scroll_board {
+//       0% {
+//         transform: translateY(0);
+//       }
+//       100% {
+//         transform: translateY(-80%);
+//       }
+//     }
+//     .board-item {
+//       position: relative;
+//       display: flex;
+//       height: 50%;
+//       border-top: 1px solid #78141888;
+//       padding: 4px 10px;
+//       // z-index: 0;
+//       // justify-content: space-between;
+//       // transform: scale(0.5);
+//       &:nth-child(1) {
+//         border: none;
+//       }
+//       .item-left {
+//         width: 60%;
+//         display: flex;
+//         align-items: center;
+//         img {
+//           width: 30px;
+//           height: 30px;
+//           border-radius: 50%;
+//           margin-right: 10px;
+//         }
+//         span {
+//           width: 90px;
+//           white-space: nowrap;
+//           overflow: hidden;
+//           text-overflow: ellipsis;
+//         }
+//       }
+//       .user-box {
+//         flex: 1;
+//         padding-left: 20px;
+//         display: flex;
+//         align-items: center;
+//         justify-content: space-between;
+//         font-size: 10px;
+//       }
+//     }
+//   }
+// }
 .bulletin-adv {
   transform: translateY(-10px);
   padding: 0 10px;

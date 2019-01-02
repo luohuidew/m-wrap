@@ -3,7 +3,8 @@
     <h3><span></span><span class="pop-text-banner-title">TITLE</span><span></span></h3>
     <ul class="product-lists">
       <li v-for="(item,index) in similar_lists"
-        :key="index">
+        :key="index"
+        v-if="index<lists_length">
         <div class="img-box">
           <img :src="item.cover_img"
             alt=""
@@ -18,7 +19,11 @@
         </div>
       </li>
     </ul>
-    
+    <p class="pop-more-click">
+      <img src="/static/img/popballoons/btn/btn-4more@2x.png"
+        alt=""
+        srcset="">
+    </p>
   </div>
 </template>
 
@@ -35,7 +40,13 @@ export default {
     this.init_data();
   },
   mounted() {},
-  computed: {},
+  computed: {
+    lists_length() {
+      let temp_num = this.similar_lists.length;
+      let slice_num = temp_num % 3;
+      return temp_num > 3 ? temp_num - slice_num : temp_num;
+    }
+  },
   methods: {
     init_data() {
       api.get_similar_product({ sku_id: 4418074150966099 }).then(res => {
@@ -132,6 +143,15 @@ export default {
         }
       }
     }
+  }
+}
+.pop-more-click {
+  height: 50px;
+  margin-top: 20px;
+  text-align: center;
+  img {
+    height: 100%;
+    width: auto;
   }
 }
 </style>

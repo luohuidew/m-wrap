@@ -29,8 +29,9 @@ export default {
   },
   computed: {
     show_logo() {
-      console.log();
-      return this.$route.fullPath.indexOf("popballoons-during") === -1;
+      let is_during = this.$route.fullPath.indexOf("popballoons-during") !== -1;
+      let is_group = this.$route.fullPath.indexOf("popballoons-groupbuy") !== -1;
+      return !(is_during || is_group);
     }
   },
   created() {},

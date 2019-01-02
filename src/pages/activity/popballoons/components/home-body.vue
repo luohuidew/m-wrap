@@ -24,7 +24,6 @@
     </div>
     <scroll v-if="board_lists.length"
       :board-lists="board_lists"></scroll>
-
   </div>
 </template>
 
