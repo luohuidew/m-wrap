@@ -3,14 +3,21 @@
     <div class="bg-wrapper">
       <div class="bg-img">
         <!-- <img class="box-bg" src="/static/img/christmas/矢量智能对象@2x_39.png" alt=""> -->
-        <!-- <p class="tips-text">Lit one light</p> -->
-        <slot name="dialog-desc" class="tips-text"></slot>
+        <p class="tips-text">
+          <slot name="dialog-desc">
+
+          </slot>
+        </p>
         <div class="btn-group">
           <slot name="btn-top"></slot>
           <slot name="btn-other"></slot>
           <slot name="btn-buttom"></slot>
         </div>
-        <span class="close-icon" @click.stop="close_dialog"></span>
+        <span class="close-icon"
+          @click.stop="close_dialog">
+          <img src="/static/img/popballoons/icon/X.png"
+            alt="">
+        </span>
       </div>
     </div>
   </div>
@@ -25,9 +32,9 @@ export default {
   mounted() {},
   computed: {},
   methods: {
-    close_dialog(){
-      console.log('link');
-      this.$emit('close','close');
+    close_dialog() {
+      console.log("link");
+      this.$emit("close", "close");
     }
   },
   components: {}
@@ -42,7 +49,7 @@ export default {
   z-index: 999;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
 }
 .bg-wrapper {
   position: relative;
@@ -56,9 +63,9 @@ export default {
   transform: translate(-50%, -50%);
   width: 350px;
   height: 564px;
-  background: url("/static/img/christmas/icon/组2@2x_54.png") no-repeat
-    center center;
-  background-size: 100% 100%;
+  background: url("/static/img/popballoons/background/click_tips_box.png")
+    no-repeat center center;
+  // background-size: 100% 100%;
   .box-bg {
     width: 100%;
     height: auto;
@@ -70,9 +77,9 @@ export default {
     justify-content: space-around;
     position: absolute;
     left: 50%;
-    top:43%;
+    top: 50%;
     transform: translateX(-50%);
-    width: 184px;
+    width: 219px;
     height: 160px;
     img {
       width: 100%;
@@ -81,12 +88,13 @@ export default {
   }
   .tips-text {
     position: absolute;
-    top: 70px;
-    left: 12px;
-    width: 140px;
-    height: 70px;
-    font-size: 12px;
-    color:#fff;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    font-size: 25px;
+    line-height: 40px;
+    color: #2c2c2c;
     display: flex;
     text-align: center;
     justify-content: center;
@@ -94,14 +102,12 @@ export default {
   }
   .close-icon {
     position: absolute;
-    top:0;
-    right: 35px;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 50px;
     height: 50px;
+    text-align: center;
   }
-  // .box-bg {
-  //   position: absolute;
-  //   width: 100%;
-  // }
 }
 </style>

@@ -30,6 +30,7 @@ export default {
       handler(to, from) {
         this.init_meta();
         this.init_transtion(to, from);
+        // debugger;
         this.init_device();
       },
       immediate: true,
@@ -62,8 +63,9 @@ export default {
     init_device() {
       let query_device_type = this.$route.query.device_type;
       if (query_device_type) {
+        // debugger;
         localStorage.setItem("device", query_device_type);
-      };
+      }
     }
   },
   components: {

@@ -1,10 +1,11 @@
 <template>
   <div class="ac-chr-banner">
-    <h3><span></span><span class="pop-text-banner-title">TITLE</span><span></span></h3>
+    <h3><span></span><span class="pop-text-banner-title">MORE YOU MAY LIKE</span><span></span></h3>
     <ul class="product-lists">
       <li v-for="(item,index) in similar_lists"
         :key="index"
-        v-if="index<lists_length">
+        v-if="index<lists_length"
+        @click="to_sku_detail(item.sku_id)">
         <div class="img-box">
           <img :src="item.cover_img"
             alt=""
@@ -19,7 +20,8 @@
         </div>
       </li>
     </ul>
-    <p class="pop-more-click">
+    <p class="pop-more-click"
+      @click="to_home">
       <img src="/static/img/popballoons/btn/btn-4more@2x.png"
         alt=""
         srcset="">
@@ -49,26 +51,39 @@ export default {
   },
   methods: {
     init_data() {
-      api.get_similar_product({ sku_id: 4418074150966099 }).then(res => {
+      api.get_similar_product().then(res => {
         console.log(res);
         this.similar_lists = res.data;
       });
     },
     to_home() {
-      // api.back_index().then(res => {
-      //   console.log(res);
-      // });
-      // if (window.weget_mobile_type === "iOS") {
-      //   let share_params = {
-      //     type: 105,
-      //     data: {}
-      //   };
-      //   window.webkit.messageHandlers.javaScriptToNative.postMessage(
-      //     share_params
-      //   );
-      // } else {
-      //   this.$router.push("/");
-      // }
+      let href_params = {
+        type: 105,
+        data: {}
+      };
+      let temp = this.$CM.weget_device_link(href_params);
+      if (temp === "h5") {
+        this.$router.push({
+          path: "/"
+        });
+      }
+    },
+    to_sku_detail(sku_id) {
+      let href_params = {
+        type: 106,
+        data: {
+          route: "wemall:///public/route?type=6&id=" + sku_id + ""
+        }
+      };
+      let temp = this.$CM.weget_device_link(href_params);
+      if (temp === "h5") {
+        this.$router.push({
+          path: "/detail",
+          query: {
+            sku_id: sku_id
+          }
+        });
+      }
     }
   },
   components: {}
@@ -89,6 +104,9 @@ export default {
       background-color: #eccfa0;
     }
     .pop-text-banner-title {
+      width: auto;
+      padding: 0 8px;
+      font-size: 12px;
       height: auto;
       background-color: transparent;
       color: #eccfa0;
@@ -108,8 +126,9 @@ export default {
       background: #fff;
       font-size: 0;
       img {
-        width: 100px;
-        height: 100px;
+        width: 100%;
+        max-height: 100px;
+        object-fit: cover;
       }
     }
     .banner-sku-desc {

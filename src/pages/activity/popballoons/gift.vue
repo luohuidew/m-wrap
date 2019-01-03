@@ -46,12 +46,12 @@
           </div>
         </div>
       </li>
+      <li class="norecord"
+        v-if="is_no">
+        <img src="/static/img/christmas/icon/Norecord@2x.png"
+          alt>
+      </li>
     </ul>
-    <div class="norecord"
-      v-if="is_no">
-      <img src="/static/img/christmas/icon/Norecord@2x.png"
-        alt>
-    </div>
   </div>
 </template>
 
@@ -100,9 +100,11 @@ export default {
 <style lang='scss' scoped>
 #activity-detail {
   display: flex;
+  min-height: calc(100% - 188px);
   flex-direction: column;
   width: 100%;
-  min-height: 100%;
+  flex: 1;
+  // min-height: 100%;
   height: 100%;
   overflow: hidden;
   padding: 0 20px;
@@ -121,6 +123,7 @@ export default {
   }
   .detail-info {
     flex: 1;
+    min-height: calc(100% - 188px);
     overflow: auto;
     font-size: 12px;
     color: #16352f;

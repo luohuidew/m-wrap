@@ -1,23 +1,20 @@
 <template>
   <div class="tree-home-box">
-    <img src="/static/img/christmas/星星@2x.png"
-      alt=""
-      srcset="">
+    <div class="bg-pop-box">
+      <!-- <img src="/static/img/popballoons/background/big_box_pop.png"
+        alt=""> -->
+    </div>
     <div class="tips-info">
-      <!-- <img class="you-got-it"
-        src="/static/img/christmas/YouGotIt@2x.png"
-        alt=""
-        srcset=""> -->
-      <img src="/static/img/christmas/成功表情@2x.png"
+      <img src="/static/img/popballoons/icon/fun.png"
         alt=""
         srcset="">
     </div>
     <div class="btn-click">
-      <img src="/static/img/christmas/Checkyourcoupons@2x.png"
+      <img src="/static/img/popballoons/btn/btn-8Checkyourcoupons@2x.png"
         alt=""
         srcset=""
         @click="to_download">
-      <img src="/static/img/christmas/TryAgain@2x.png"
+      <img src="/static/img/popballoons/btn/btn-5TryAgain@2x.png"
         alt=""
         srcset=""
         @click="to_lists">
@@ -36,9 +33,9 @@ export default {
   computed: {},
   methods: {
     to_download(id) {
-      this.$router.push({
-        name: "popballoons-download",
-      });
+      // this.$router.push({
+      //   name: "popballoons-download"
+      // });
     },
     to_lists() {
       sessionStorage.setItem("temp_status", "5");
@@ -72,52 +69,58 @@ export default {
 <style lang='scss' scoped>
 .tree-home-box {
   width: 100%;
-  padding-bottom: 24px;
+  // padding-left: 24px;
   position: relative;
-  img {
-    width: 100%;
-    height: auto;
-    padding-left:5px;
+  z-index: 0;
+  // transform: translateY(-73px);
+  .bg-pop-box {
+    width: 230px;
+    height: 400px;
+    margin: 0 auto;
+    text-align: center;
+    background: url("/static/img/popballoons/background/big_box_pop.png")
+      no-repeat center bottom;
+    background-size: 100% auto;
+    & > img {
+      width: 100%;
+      height: auto;
+      // min-height: 520px;
+      // padding-left: 5px;
+    }
   }
   .tips-info {
     position: absolute;
     left: 50%;
-    top: 33%;
+    top: 280px;
     text-align: center;
     transform: translate(-50%, -50%);
     img {
-      display: block;
       width: 104px;
       height: auto;
-      margin: 20px auto;
     }
     .you-got-it {
       // display: inline-block;
-
       width: 160px;
       height: auto;
-      margin: 30px auto;
+      margin-bottom: 20px;
+      // margin: 0 auto;
     }
   }
   .btn-click {
-    position: absolute;
-    left: 50%;
-    top: 60%;
-    transform: translateX(-50%);
+    // position: absolute;
+    // left: 50%;
+    // top: 330px;
+    // transform: translateX(-50%);
     text-align: center;
     img {
-      height: 40px;
+      height: 50px;
       margin-top: 10px;
       width: auto;
     }
   }
 }
-.banner-board {
-  padding: 0 10px;
-  // transform: translateY(-42px);
-  img {
-    width: 100%;
-    height: auto;
-  }
+#app .dialog-tips {
+  transform: translateY(100%);
+  background-color: transparent;
 }
 </style>

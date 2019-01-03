@@ -13,7 +13,7 @@ export default {
   init_lists(data = {}) {
     data.token = token;
     return request({
-      url: 'christmas/chriList',
+      url: 'newyear/chriList',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -21,7 +21,7 @@ export default {
   watch_detail(data = {}) {
     data.token = token;
     return request({
-      url: 'christmas/activityDetail',
+      url: 'newyear/activityDetail',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -29,7 +29,7 @@ export default {
   user_detail(data = {}) {
     data.token = token;
     return request({
-      url: 'christmas/activityItems',
+      url: 'newyear/activityItems',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -37,7 +37,7 @@ export default {
   add_sku(data = {}) {
     data.token = token;
     return request({
-      url: 'christmas/addUserChri',
+      url: 'newyear/addUserChri',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -45,7 +45,7 @@ export default {
   init_info(data = {}) {
     data.token = token;
     return request({
-      url: 'christmas/getLampHelperList?loading=no',
+      url: 'newyear/getLampHelperList?loading=no',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -53,7 +53,7 @@ export default {
   init_status(data = {}) {
     data.token = token;
     return request({
-      url: 'christmas/christmasIndex?loading=no',
+      url: 'newyear/christmasIndex?loading=no',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -61,7 +61,7 @@ export default {
   share_detail(data = {}) {
     data.token = token;
     return request({
-      url: 'christmas/shareChristmasDetail',
+      url: 'newyear/shareChristmasDetail',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -77,7 +77,7 @@ export default {
   help_light(data = {}) {
     data.token = token;
     return request({
-      url: 'christmas/lightOnNotify',
+      url: 'newyear/lightOnNotify',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -85,7 +85,7 @@ export default {
   help_tips(data = {}) {
     data.token = token;
     return request({
-      url: 'christmas/alertUser',
+      url: 'newyear/alertUser',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -93,7 +93,7 @@ export default {
   down_load(data = {}) {
     data.token = token;
     return request({
-      url: 'christmas/getCouponList',
+      url: 'newyear/getCouponList',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -101,7 +101,7 @@ export default {
   back_index(data = {}) {
     data.token = token;
     return request({
-      url: 'christmas/hitShopNow',
+      url: 'newyear/hitShopNow',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -109,7 +109,7 @@ export default {
   get_similar_product(data = {}){
     data.token = token;
     return request({
-      url: 'product/getSimilarProducts',
+      url: 'newyear/getSimilarProducts',
       method: 'post',
       data: JSON.stringify(data),
     })

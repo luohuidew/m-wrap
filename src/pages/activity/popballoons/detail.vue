@@ -8,17 +8,15 @@
         24 hours to win!</span>
     </div>
     <div class="popballoons-content">
-      <img :src="req_data.sku_image"
+      <img :src="req_data.image"
         alt="">
       <div class="price-box">
         <p>REG</p>
-        <p>$37</p>
+        <p>${{req_data.price}}</p>
       </div>
     </div>
     <div class="pop-description">
-      YSL
-      Lip stain
-      101 Chrome red
+      {{req_data.name}}
     </div>
     <div class="popballoons-btn">
       <span @click="to_lists">
@@ -165,9 +163,9 @@ export default {
   img {
     position: absolute;
     left: 50%;
-    bottom: 5%;
+    bottom: 12%;
     transform: translateX(-50%);
-    height: 80%;
+    height: 66%;
     width: auto;
   }
 }

@@ -1,33 +1,29 @@
 <template>
-   <div class="bulletin-board">
-      <div class="board-texts">
-        <ul :class="{'scroll-ul':boardLists.length>0}">
-          <li class="board-item"
-            v-for="(item,index) in boardLists"
-            :key="index">
-            <p>
-              <img class="user_photo"
-                :src="item.photo"
-                alt=""
-                srcset="">
-            </p>
-            <!-- 65765765765765 -->
-            <p class="user-box">
-              <span>{{item.nickname}} 1s ago</span>
-              <span>Got {{item.name}} for FREE</span>
-            </p>
-          </li>        
-        </ul>
-      </div>
-      <img src="/static/img/popballoons/icon/con_scroll.png"
-        class="board-background-title"
-        alt=""
-        srcset="">
-      <img class="board-background-img"
-        src="/static/img/popballoons/background_scroll.png"
-        alt=""
-        srcset="">
+  <div class="bulletin-board">
+    <div class="board-texts">
+      <ul :class="{'scroll-ul':boardLists.length>0}">
+        <li class="board-item"
+          v-for="(item,index) in boardLists"
+          :key="index">
+          <p class="item-left">
+            <img :src="item.photo">
+            <span>{{item.nickName}} Lit for me</span>
+          </p>
+          <p class="user-box">
+            <span>{{item.time | timeDateServer}}</span>
+          </p>
+        </li>
+      </ul>
     </div>
+    <img src="/static/img/popballoons/icon/lamp_scroll.png"
+      class="board-background-title"
+      alt=""
+      srcset="">
+    <img class="board-background-img"
+      src="/static/img/popballoons/background_scroll.png"
+      alt=""
+      srcset="">
+  </div>
 </template>
 
 <script>
@@ -36,7 +32,7 @@ export default {
   data() {
     return {};
   },
-  props:['boardLists'],
+  props: ["boardLists"],
   mounted() {},
   computed: {},
   methods: {},
@@ -51,7 +47,7 @@ export default {
   font-size: 0;
   /* margin-bottom: 10px; */
   // padding-bottom: 10px;
-  padding: 10px 28px;
+  padding: 10px 0px;
   text-align: center;
   // transform: translateY(-90px);
   .pepole-join {
@@ -105,43 +101,41 @@ export default {
       }
     }
     .board-item {
+      position: relative;
       display: flex;
-      height: 50px;
-      // border-top: 1px solid #78141888;
+      height: 50%;
+      border-top: 1px solid #78141888;
       padding: 4px 10px;
       color: #000;
-      justify-content: center;
+      // z-index: 0;
+      // justify-content: space-between;
+      // transform: scale(0.5);
       &:nth-child(1) {
         border: none;
       }
-      img {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-      }
-      p {
+      .item-left {
+        width: 60%;
         display: flex;
         align-items: center;
-      }
-      .user-box {
-        // flex: 1;
-        padding-left: 20px;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        font-size: 12px;
-        line-height: 16px;
-        flex-direction: column;
-        align-items: flex-start;
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
         span {
+          width: 90px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          text-align: left;
         }
       }
-      .sku-box {
-        width: 130px;
+      .user-box {
+        flex: 1;
+        padding-left: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         font-size: 10px;
       }
     }

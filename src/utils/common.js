@@ -21,7 +21,7 @@ const CM = {
       return false;
     }
   },
-  is_ins() {    
+  is_ins() {
     // console.log(ua);
     if (ua.indexOf('instagram') !== -1) {
       return true;
@@ -29,25 +29,28 @@ const CM = {
       return false;
     }
   },
-  is_facebook() {    
+  is_facebook() {
     if (ua.indexOf('fbav') !== -1) {
       return true;
     } else {
       return false;
     }
   },
-  weget_device_link(params,cb){
+  is_weget(){
     let cur_device = localStorage.getItem('device');
-    if(cur_device==='android'){
-      return window.weget_mobile_type.nativeToJavaScript(params);    
-    }else if(cur_device==='ios'){
-      return  window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
-    }else {
-      if(cb){
-        return cb();
-      }
+    return (cur_device === 'android' || cur_device === 'ios');
+  },
+  weget_device_link(params) {
+    console.log('device_type_params',params);
+    let cur_device = localStorage.getItem('device');
+    if (cur_device === 'android') {
+      return window.weget_mobile_type.nativeToJavaScript(params);
+    } else if (cur_device === 'ios') {
+      return window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
+    } else {
+      return 'h5';
     }
   }
 }
 Vue.prototype.$CM = CM;
-export default  CM;
+export default CM;

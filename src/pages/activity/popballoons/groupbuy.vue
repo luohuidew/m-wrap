@@ -6,8 +6,7 @@
     </template>
     <template v-else>
       <div class="home-tips-box">
-        <img v-if="christmat.status===1"
-          class="them"
+        <img class="them"
           src="/static/img/popballoons/background/coupon_box.png">
         <!-- <img v-else
           class="them"
@@ -114,9 +113,8 @@
           {{user_info.user_name}}!
         </span>
       </btn-box-fun> -->
-      <btn-box-click
-        v-show="show_btn_box"
-        @close="show_btn_box = false" 
+      <btn-box-click v-show="show_btn_box"
+        @close="show_btn_box = false"
         :status="lap_status">
         <span slot="dialog-desc"
           class="desc-text">
@@ -145,7 +143,13 @@
       </btn-box-click>
     </template>
     <ac-tips @close="close_first_tips"
-      v-show="show_first_tips"></ac-tips>
+      v-show="show_first_tips">
+      <span slot="dialog-desc"
+        class="tips-desc">
+        You got coupons worth $50 in your Weget wallet!<br />
+        Go use them at Weget App right now !
+      </span>
+    </ac-tips>
     <share-box v-show="show_share_box"
       @close="close_share_alert_to_app"></share-box>
   </div>
@@ -166,7 +170,7 @@ import btnBoxFun from "./components/dialog-btn-fun";
 import acTips from "./components/ac-tips";
 import btnBoxClick from "./components/dialog-btn-click";
 import banner from "./components/ac-banner";
-import scroll from "./components/board-scroll";
+import scroll from "./components/lamp-scroll";
 export default {
   name: "",
   data() {
@@ -494,95 +498,10 @@ export default {
   line-height: 34px;
   color: #2c2c2c;
 }
-// .bulletin-board {
-//   position: relative;
-//   margin-top: -44px;
-//   font-size: 14px;
-//   padding-bottom: 10px;
-//   .pepole-join {
-//     position: absolute;
-//     left: 0;
-//     top: 30%;
-//     width: 100%;
-//     height: 24px;
-//     z-index: 10;
-//     font-size: 13px;
-//     color: rgb(255, 150, 4);
-//     text-align: center;
-//   }
-//   .board-background-img {
-//     width: 100%;
-//     height: auto;
-//   }
-//   .board-texts {
-//     position: absolute;
-//     left: 49%;
-//     top: 46%;
-//     transform: translateX(-47%);
-//     width: 70%;
-//     height: 34%;
-//     z-index: 0;
-//     font-size: 11px;
-//     color: #fff;
-//     overflow-y: hidden;
-//     // overflow-x: hidden;
-//     .scroll-box {
-//       width: 100%;
-//       height: 100%;
-//       overflow: hidden;
-//       overflow-y: hidden;
-//     }
-//     .scroll-ul {
-//       animation: scroll_board 20s linear 2s infinite;
-//     }
-//     @keyframes scroll_board {
-//       0% {
-//         transform: translateY(0);
-//       }
-//       100% {
-//         transform: translateY(-80%);
-//       }
-//     }
-//     .board-item {
-//       position: relative;
-//       display: flex;
-//       height: 50%;
-//       border-top: 1px solid #78141888;
-//       padding: 4px 10px;
-//       // z-index: 0;
-//       // justify-content: space-between;
-//       // transform: scale(0.5);
-//       &:nth-child(1) {
-//         border: none;
-//       }
-//       .item-left {
-//         width: 60%;
-//         display: flex;
-//         align-items: center;
-//         img {
-//           width: 30px;
-//           height: 30px;
-//           border-radius: 50%;
-//           margin-right: 10px;
-//         }
-//         span {
-//           width: 90px;
-//           white-space: nowrap;
-//           overflow: hidden;
-//           text-overflow: ellipsis;
-//         }
-//       }
-//       .user-box {
-//         flex: 1;
-//         padding-left: 20px;
-//         display: flex;
-//         align-items: center;
-//         justify-content: space-between;
-//         font-size: 10px;
-//       }
-//     }
-//   }
-// }
+.tips-desc {
+  color: #2c2c2c;
+  font-size: 25px;
+}
 .bulletin-adv {
   transform: translateY(-10px);
   padding: 0 10px;

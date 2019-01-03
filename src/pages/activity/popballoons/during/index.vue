@@ -5,7 +5,8 @@
       <during-header @showrules="show_rules=true"
         v-show="!share_show"></during-header>
       <during-body :uid="user_id"
-        :user-name="user_name"
+        :user-name="user_name" 
+        :res="req_data"
         @share="share_to_group"></during-body>
     </template>
     <template v-if="info_type===2">
@@ -56,7 +57,7 @@ export default {
   name: "",
   data() {
     return {
-      info_type: 2,
+      info_type: 0,
       run_time: "",
       user_id: "",
       user_name: "",
@@ -95,6 +96,7 @@ export default {
         .then(res => {
           console.log(res);
           /* 1.进行，2，失败，3成功 */
+          this.req_data = res.data;
           this.user_id = res.data.id;
           this.user_name = res.data.user_name;
           this.is_ready = true;
@@ -124,7 +126,7 @@ export default {
           share.getShareInfo(params).then(res => {
             console.log(res);
             this.login_load.clear();
-            // this.info_type = result.data.status;
+            this.info_type = result.data.status;
             this.$store.commit("set_christmas_share_info", res.data);
           });
         });

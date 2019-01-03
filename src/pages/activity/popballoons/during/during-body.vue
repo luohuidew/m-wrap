@@ -1,12 +1,12 @@
 <template>
   <div class="tree-home-box"
-    v-if="showData.sku_image">
+    v-if="showData.lamp_num">
     <div class="bg-pop-box">
       <!-- <img src="/static/img/popballoons/background/big_box_pop.png"
         alt=""> -->
     </div>
     <div class="tips-info">
-      <img :src="showData.sku_image"
+      <img :src="showData.image"
         alt=""
         srcset="">
     </div>
@@ -20,7 +20,7 @@
           src="/static/img/popballoons/btn/share_link.png"
           alt=""
           srcset=""
-          height="40px" 
+          height="40px"
           style="height:40px">
         <p slot="tips">This link has been copied. <br /> Go share to your friends!</p>
       </ac-copy>
@@ -67,23 +67,27 @@
     <fb-ms-share v-show="is_fb_show"
       @close="close_href">
       <template>
+        <span slot="dialog-desc">
+          You’re almost done.<br />
+          Share!
+        </span>
         <span slot="btn-top"
           @click="share_type(1)"
           class="tips-btns">
-          <img src="/static/img/christmas/矢量智能对象@2x_38.png"
+          <img src="/static/img/popballoons/btn/btn-7Facebook@2x.png"
             alt="Facebook">
         </span>
         <span slot="btn-other"
           @click="share_type(2)"
           class="tips-btns">
-          <img src="/static/img/christmas/矢量智能对象@2x.png"
+          <img src="/static/img/popballoons/btn/btn-7Messenger@2x.png"
             alt="Messenger">
         </span>
         <span slot="btn-buttom"
           class="tips-btns">
           <ac-copy>
             <img slot="box"
-              src="/static/img/christmas/icon/dashujukeshihuaico-@2x.png"
+              src="/static/img/popballoons/btn/btn-7ShareLink@2x.png"
               alt=""
               srcset="">
             <p slot="tips"
@@ -100,7 +104,7 @@ let timer;
 import acCopy from "../components/ac-copy";
 import fbMsShare from "../components/fb-ms-share";
 import api from "@/api/newyear";
-import scroll from "../components/board-scroll";
+import scroll from "../components/lamp-scroll";
 export default {
   name: "",
   data() {
@@ -111,56 +115,6 @@ export default {
       is_fb_show: false,
       share_info: this.$store.state.christmas_share_info,
       showData: {},
-      lighting_tree1: [
-        "/static/img/christmas/lighting/点灯1-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯1-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯1-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree2: [
-        "/static/img/christmas/lighting/点灯2-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯2-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯2-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree3: [
-        "/static/img/christmas/lighting/点灯3-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯3-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯3-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree4: [
-        "/static/img/christmas/lighting/点灯4-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯4-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯4-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree5: [
-        "/static/img/christmas/lighting/点灯5-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯5-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯5-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree6: [
-        "/static/img/christmas/lighting/点灯6-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯6-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯6-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree7: [
-        "/static/img/christmas/lighting/点灯7-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯7-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯7-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree8: [
-        "/static/img/christmas/lighting/点灯8-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯8-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯8-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree9: [
-        "/static/img/christmas/lighting/点灯9-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯9-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯9-3_gaitubao_com_375x580.png"
-      ],
-      lighting_tree10: [
-        "/static/img/christmas/lighting/点灯10-1_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯10-2_gaitubao_com_375x580.png",
-        "/static/img/christmas/lighting/点灯10-3_gaitubao_com_375x580.png"
-      ],
       cur_index: 0,
       Percentage: 0
     };
@@ -204,12 +158,12 @@ export default {
       });
     },
     to_share(cuid) {
-      if (window.weget_mobile_type === "iOS") {
+      if (this.$CM.is_weget()) {
         this.is_fb_show = true;
         this.$parent.share_show = true;
       } else {
         this.$emit("share", "share");
-        console.log("share");
+        // console.log("share");
         let params = {
           path: "/activity/popballoons/popballoons-groupbuy",
           query: {
@@ -234,7 +188,7 @@ export default {
           data: this.share_info
         };
       }
-      window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
+      let temp = this.$CM.weget_device_link(params);      
     },
     close_href() {
       this.is_fb_show = false;
@@ -244,20 +198,6 @@ export default {
       //   // query: this.share_params
       // };
       // this.$router.replace(params);
-    },
-
-    to_home() {
-      if (window.weget_mobile_type === "iOS") {
-        let share_params = {
-          type: 105,
-          data: {}
-        };
-        window.webkit.messageHandlers.javaScriptToNative.postMessage(
-          share_params
-        );
-      } else {
-        this.$router.push("/");
-      }
     }
   },
   components: {
@@ -280,7 +220,8 @@ export default {
     height: 400px;
     margin: 0 auto;
     text-align: center;
-    background: url('/static/img/popballoons/background/big_box_pop.png') no-repeat center bottom;
+    background: url("/static/img/popballoons/background/big_box_pop.png")
+      no-repeat center bottom;
     background-size: 100% auto;
     & > img {
       width: 100%;
@@ -292,11 +233,11 @@ export default {
   .tips-info {
     position: absolute;
     left: 50%;
-    top: 280px;
+    top: 274px;
     text-align: center;
     transform: translate(-50%, -50%);
     img {
-      width: 104px;
+      width: 154px;
       height: auto;
     }
     .you-got-it {

@@ -49,6 +49,8 @@ export default {
 <style lang='scss'>
 .popballoons {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: #2b2b2b;
   font-size: 14px;
 }

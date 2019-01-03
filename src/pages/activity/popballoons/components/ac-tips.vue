@@ -3,22 +3,27 @@
     <div class="bg-wrapper">
       <div class="bg-img">
         <!-- <img class="box-bg" src="/static/img/christmas/矢量智能对象@2x_39.png" alt=""> -->
-        <!-- <p class="tips-text">Lit one light</p> -->
-        <slot name="dialog-desc"
-          class="tips-text"></slot>
+        <p class="tips-text">
+          <slot name="dialog-desc"
+            class="">
+          </slot>
+        </p>
         <div class="btn-group">
           <!-- <slot name="btn-top"></slot>
           <slot name="btn-buttom"></slot> -->
           <span>
-            <a target="_blank" href="https://itunes.apple.com/us/app/weget-mall/id1439887303?mt=8">
-              <img src="/static/img/christmas/icon/btn-shop-now.png"               
+            <a target="_blank"
+              href="https://itunes.apple.com/us/app/weget-mall/id1439887303?mt=8">
+              <img src="/static/img/popballoons/btn/btn-6CheckourApp@2x.png"
                 alt="">
             </a>
           </span>
 
         </div>
         <span class="close-icon"
-          @click.stop="close_dialog"></span>
+          @click.stop="close_dialog">
+            <img src="/static/img/popballoons/icon/X.png" alt="" srcset="">
+          </span>
       </div>
     </div>
   </div>
@@ -34,7 +39,7 @@ export default {
   computed: {},
   methods: {
     close_dialog() {
-      this.$emit('close','close');
+      this.$emit("close", "close");
       // this.$router.replace({
       //   name: "christmas"
       // });
@@ -73,9 +78,9 @@ export default {
   transform: translate(-50%, -50%);
   width: 350px;
   height: 564px;
-  background: url("/static/img/christmas/icon/dialog-new-sign-up.png") no-repeat
-    center center;
-  background-size: 100% 100%;
+  background: url("/static/img/popballoons/background/click_tips_box.png")
+    no-repeat center center;
+  // background-size: auto 100%;
   .box-bg {
     width: 100%;
     height: auto;
@@ -87,10 +92,10 @@ export default {
     justify-content: space-around;
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 65%;
     transform: translateX(-50%);
     width: 184px;
-    height: 165px;
+    height: 86px;
     img {
       width: 100%;
       height: auto;
@@ -98,12 +103,13 @@ export default {
   }
   .tips-text {
     position: absolute;
-    top: 70px;
-    left: 12px;
-    width: 140px;
-    height: 70px;
-    font-size: 12px;
-    color: #fff;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    font-size: 25px;
+    line-height: 40px;
+    color: #2c2c2c;
     display: flex;
     text-align: center;
     justify-content: center;
@@ -112,9 +118,11 @@ export default {
   .close-icon {
     position: absolute;
     top: 0;
-    right: 35px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 50px;
     height: 50px;
+    text-align: center;
   }
   // .box-bg {
   //   position: absolute;

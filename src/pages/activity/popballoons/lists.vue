@@ -15,10 +15,10 @@
           <p class="balloons-num-title">
             {{item.lamp_num}} balloons = $0
           </p>
-          <img :src="item.sku_image">
+          <img :src="item.image">
           <div class="price-box">
             <p>REG</p>
-            <p>$37</p>
+            <p>${{item.price}}</p>
           </div>
         </li>
       </ul>
@@ -55,6 +55,11 @@ export default {
   },
   created() {
     this.init_data();
+  },
+  filters:{
+    change_num(val){
+      return Math.ceil(val);
+    }
   },
   computed: {},
   methods: {
@@ -202,7 +207,7 @@ export default {
       img {
         position: absolute;
         left: 50%;
-        bottom: 5%;
+        bottom: 12%;
         transform: translateX(-50%);
         height: 100px;
         width: auto;
