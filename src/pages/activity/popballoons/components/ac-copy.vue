@@ -16,7 +16,7 @@ export default {
   name: "",
   data() {
     return {
-      message: this.$store.state.christmas_share_params,
+      message: this.$store.state.popballoons_share_params,
       show_tips: false
     };
   },
@@ -69,6 +69,7 @@ export default {
   opacity: 1;
 }
 .hidden {
+  display: none;
   opacity: 0;
 }
 </style>

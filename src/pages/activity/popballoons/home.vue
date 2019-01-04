@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import homeHeader from "./components/home-header";
 import homeBody from "./components/home-body";
 export default {
   name: "",
@@ -23,7 +22,7 @@ export default {
   },
   computed: {},
   components: {
-    homeHeader,
+   
     homeBody,
   }
 };
@@ -40,7 +39,7 @@ export default {
   // overflow: hidden;
   // font-size: 0;
   // background: url("/static/img/christmas/首页背景.jpg") no-repeat top center;
-  background-color: #333;
+  // background-color: #333;
   // padding: 0 30px;
   // background-size: 100% 100%;
 }

@@ -4,27 +4,27 @@
       <img src="/static/img/popballoons/MYRECORDS.png"
         alt>
     </div>
-    <ul class="detail-info"
-      v-if="tableData.length!==0">
+    <ul class="detail-info">
       <li v-for="(item,index) of tableData"
         :key="index">
         <div class="detail_box success"
           v-if="item.status===3">
           <div class="middle">
             <div class="info-img">
-              <img :src="item.sku_image">
+              <img :src="item.image">
             </div>
             <div class="info-text">
               <p>{{item.name}}</p>
               <p>{{item.lamp_num}} lights</p>
               <p>End time：{{item.etime | dateServer}}</p>
-              <p v-if="item.coupon_status==2 || !item.coupon_status"
-                @click="to_coupon(item.id)">
+              <p v-if="item.coupon_status==2"
+                @click="to_coupon(item.id)"
+                class="btn-jump">
                 <img src="/static/img/popballoons/btn/btn-1MYCOUPON@2x.png"
                   alt>
               </p>
-              <p v-else>
-
+              <p v-else class="btn-jump">
+                 Successful !
               </p>
             </div>
           </div>
@@ -33,14 +33,14 @@
           class="detail_box fail">
           <div class="middle">
             <div class="info-img">
-              <img :src="item.sku_image">
+              <img :src="item.image">
             </div>
             <div class="info-text">
               <p>{{item.name}}</p>
               <p>{{item.lamp_num}} lights</p>
               <p>End time：{{item.etime | dateServer}}</p>
               <p class="btn-jump">
-                <b>Times up!</b>
+                <span>Times up!</span>
               </p>
             </div>
           </div>
@@ -78,7 +78,7 @@ export default {
         let temp_flag = this.tableData.some((item, index) => {
           return item.status === 2 || item.status === 3;
         });
-        this.is_no = !temp_flag;
+        this.is_no = !temp_flag || res.data.length === 0;
         console.log(temp_flag);
         console.log(this.tableData);
       });
@@ -86,7 +86,7 @@ export default {
     to_coupon(id) {
       console.log(id);
       this.$router.push({
-        path: "christmas-download",
+        path: "/activity/popballoons/popballoons-download",
         query: {
           id: id
         }
@@ -157,9 +157,13 @@ export default {
           transform: translateY(-50%);
           padding: 10px 0;
           .info-img {
-            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            width: 100px;
+            text-align: center;
             margin-left: 12px;
-            // width: 96px;
             img {
               height: 80%;
               width: auto;
@@ -167,25 +171,20 @@ export default {
           }
           .info-text {
             flex: 1;
-            margin-left: 20px;
+            margin-left: 10px;
             font-size: 12px;
             line-height: 14px;
             height: 100%;
-            p {
-              padding-top: 5px;
-              // position: relative;
-              img,
-              b {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
+            .btn-jump {
+              margin-top: 10px;
+              img {
                 width: 95px;
                 height: auto;
               }
-              b {
-                width: 65px;
-                padding: 5px 0;
-              }
+            }
+            p {
+              padding-top: 5px;
+              // position: relative;
             }
           }
         }

@@ -4,7 +4,10 @@
       <div class="bg-img">
         <!-- <img class="box-bg" src="/static/img/christmas/矢量智能对象@2x_39.png" alt=""> -->
         <div class="btn-group">
-          <div class="rules-content">
+          <div class="rules-content-dialog">
+            <img src="/static/img/popballoons/eventrules.png"
+              alt=""
+              srcset="">
             <ul>
               <li>1.The user starts the balloon game and invites friends to pop the balloons.</li>
 
@@ -92,15 +95,26 @@ export default {
     height: 90vh;
     width: 100%;
     text-align: center;
-    .rules-content {
-      height: 100%;
-      background: url("/static/img/popballoons/eventrules.png") no-repeat top
-        center;
-      font-size: 12px;
-      background-size: auto 100%;
-      padding: 26% 16% 14% 16%;
+    .rules-content-dialog {
+      position: relative;
+      display: inline-block;
+      // height: 100%;
+      // background: url("/static/img/popballoons/eventrules.png") no-repeat top
+      //   center;
+      font-size: 9px;
+      // background-size: auto 100%;
+      // padding: 26% 16% 14% 16%;
+      img {
+        width: 300px;
+        height: 90vh;
+      }
       ul {
-        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 106px;
+        width: 300px;
+        height: 65vh;
+        padding: 0 20px;
         overflow: auto;
         li {
           padding-bottom: 14px;

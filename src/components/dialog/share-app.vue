@@ -11,7 +11,7 @@ export default {
   name: "",
   data() {
     return {
-      show_share:true,
+      show_share: true,
       to_app: "/"
     };
   },
@@ -32,8 +32,10 @@ export default {
       let u = navigator.userAgent;
       let isAndroid = u.indexOf("Android") > -1 || u.indexOf("Adr") > -1; //android终端
       let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-      let isWeget = localStorage.getItem('device');
-      if(isWeget){
+      let isWeget =
+        localStorage.getItem("device") === "ios" ||
+        localStorage.getItem("device") === "android";
+      if (isWeget) {
         this.show_share = false;
       }
       // debugger;
@@ -59,7 +61,7 @@ export default {
 .downLoad {
   position: fixed;
   right: 0;
-  top: 32px;
+  top: 70px;
   // transform: translateY(-50px);
   display: block;
   height: 32px;

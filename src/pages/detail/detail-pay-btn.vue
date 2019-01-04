@@ -39,7 +39,7 @@
         </div>
       </a>
     </template>
-    <template v-else-if="c_query.act_type=='christmas'">
+    <template v-else-if="c_query.act_type">
       <a class="group-status-buy"
         href="javascript:;"
         @click="close_tips(1)">

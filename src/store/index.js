@@ -16,12 +16,14 @@ const store = new Vuex.Store({
       delivery: undefined,
       payment: undefined,
       coupon: undefined,
-      change_address:false
+      change_address: false
     },
     info_lists: undefined,
-    christmas_share_info:undefined,
-    christmas_share_params:undefined,
-    is_ios:window.weget_mobile_type === "iOS"
+    christmas_share_info: undefined,
+    christmas_share_params: undefined,
+    popballoons_share_info: undefined,
+    popballoons_share_params: undefined,
+    is_ios: window.weget_mobile_type === "iOS"
   },
   getters: {
     token: () => {
@@ -29,9 +31,9 @@ const store = new Vuex.Store({
     },
   },
   mutations: {
-   /*  increment(state, n) {
-      state.count += n
-    }, */
+    /*  increment(state, n) {
+       state.count += n
+     }, */
     set_token(state, data) {
       // 变更状态
       state.token = data;
@@ -49,6 +51,16 @@ const store = new Vuex.Store({
       // 变更状态
       Vue.set(state, 'christmas_share_params', data);
       // state.christmas_share_info = data;
+    },
+    set_popballoons_share_info(state, data) {
+      // 变更状态
+      Vue.set(state, 'popballoons_share_info', data);
+      // state.popballoons_share_info = data;
+    },
+    set_popballoons_share_params(state, data) {
+      // 变更状态
+      Vue.set(state, 'popballoons_share_params', data);
+      // state.popballoons_share_info = data;
     },
   }
 })

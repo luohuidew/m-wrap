@@ -1,6 +1,7 @@
 <template>
   <div id="weget"
     v-scroll="get_more_data">
+    <home-header></home-header>
     <banner></banner>
     <!-- <activity></activity> -->
     <!-- <show></show> -->
@@ -19,6 +20,7 @@ import show from "./weget/show.vue";
 import final from "./weget/final.vue";
 import newArrival from "./weget/new.vue";
 import sale from "./weget/sale.vue";
+import homeHeader from '@/components/home-header'
 export default {
   name: "",
   data() {
@@ -54,7 +56,8 @@ export default {
     final,
     newArrival,
     sale,
-    shareApp
+    shareApp,
+    homeHeader
   }
 };
 </script>

@@ -36,6 +36,22 @@ let custom = {
     return monthsInEng[add0(month)] + '. ' + add0(date) + '  ' + h +':'+ minute;
     // return monthsInEng[add0(month)] + '. ' + add0(date) + ', ' + year;
   },
+  dateServerEnglishYMD(timestamp) {
+    function add0(m) {
+      return m < 10 ? '0' + m : m
+    }
+    var time = new Date(timestamp * 1000);
+    var year = time.getFullYear();
+    var monthsInEng = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var month = time.getMonth();
+    var date = time.getDate();
+    var h = time.getHours();
+    h = h < 10 ? ('0' + h) : h;
+    var minute = time.getMinutes();
+    minute = minute < 10 ? ('0' + minute) : minute;
+    return monthsInEng[add0(month)] + '. ' + add0(date);
+    // return monthsInEng[add0(month)] + '. ' + add0(date) + ', ' + year;
+  },
   runTime(diff) {
     let temp_time = diff;
     let timer = setInterval(() => {

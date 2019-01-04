@@ -2,7 +2,7 @@
   <div class="popballoons">
     <div class="pop-logo"
       v-if="show_logo">
-      <img src="/static/img/popballoons/WeGetLOGO.png"
+      <img src="/static/img/popballoons/icon/logo.png"
         alt="">
     </div>
     <div class="fixed-nav">
@@ -51,13 +51,14 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: #2b2b2b;
+  background: url('/static/img/popballoons/background-all.png') repeat center center;
+  background-size: 100%;
   font-size: 14px;
 }
 .pop-logo {
   // height: 35px;
   width: auto;
-  padding: 14px 0 14px 0;
+  padding: 14px 0 7px 0;
   text-align: center;
   img {
     height: 35px;

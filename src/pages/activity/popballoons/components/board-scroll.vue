@@ -1,33 +1,39 @@
 <template>
-   <div class="bulletin-board">
-      <div class="board-texts">
-        <ul :class="{'scroll-ul':boardLists.length>0}">
-          <li class="board-item"
-            v-for="(item,index) in boardLists"
-            :key="index">
-            <p>
-              <img class="user_photo"
-                :src="item.photo"
-                alt=""
-                srcset="">
-            </p>
-            <!-- 65765765765765 -->
-            <p class="user-box">
-              <span>{{item.nickname}} 1s ago</span>
-              <span>Got {{item.name}} for FREE</span>
-            </p>
-          </li>        
-        </ul>
-      </div>
-      <img src="/static/img/popballoons/icon/con_scroll.png"
+  <div class="bulletin-board">
+    <div class="board-texts">
+      <ul :class="{'scroll-ul':boardLists.length>0}">
+        <li class="board-item"
+          v-for="(item,index) in boardLists"
+          :key="index">
+          <p>
+            <img class="user_photo"
+              :src="item.photo"
+              alt=""
+              srcset="">
+          </p>
+          <!-- 65765765765765 -->
+          <p class="user-box">
+            <span>{{item.user_name}} 1s ago</span>
+            <span>Got {{item.name}} for FREE</span>
+          </p>
+        </li>
+      </ul>
+    </div>
+    <!-- <img src="/static/img/popballoons/icon/con_scroll.png"
         class="board-background-title"
         alt=""
-        srcset="">
-      <img class="board-background-img"
+        srcset=""> -->
+    <div class="board-background-title">
+
+    </div>
+    <div class="board-background-img">
+
+    </div>
+    <!-- <img class="board-background-img"
         src="/static/img/popballoons/background_scroll.png"
         alt=""
-        srcset="">
-    </div>
+        srcset=""> -->
+  </div>
 </template>
 
 <script>
@@ -36,7 +42,7 @@ export default {
   data() {
     return {};
   },
-  props:['boardLists'],
+  props: ["boardLists"],
   mounted() {},
   computed: {},
   methods: {},
@@ -65,14 +71,20 @@ export default {
     color: rgb(255, 150, 4);
     text-align: center;
   }
-  .board-background-img {
-    width: 100%;
-    height: auto;
-  }
   .board-background-title {
-    height: 50px;
-    width: auto;
+    background: url("/static/img/popballoons/icon/con_scroll.png") no-repeat
+      center center;
+    background-size: auto 100%;
+    height: 60px;
+    // height: 50px;
+    // width: auto;
     text-align: center;
+  }
+  .board-background-img {
+    background: url("/static/img/popballoons/background/background_scroll@2x.png")
+      no-repeat center center;
+    background-size: auto 100%;
+    height: 140px;
   }
   .board-texts {
     position: absolute;
@@ -133,7 +145,14 @@ export default {
         line-height: 16px;
         flex-direction: column;
         align-items: flex-start;
+        overflow: hidden;
+        // width: 208px;
+        // display: -webkit-box;
+        // -webkit-line-clamp: 1;
+        // -webkit-box-orient: vertical;
+        // text-overflow: ellipsis;
         span {
+          width: 188px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;

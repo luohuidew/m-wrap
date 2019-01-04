@@ -33,9 +33,9 @@ export default {
   computed: {},
   methods: {
     to_download(id) {
-      // this.$router.push({
-      //   name: "popballoons-download"
-      // });
+      this.$router.push({
+        name: "popballoons-download"
+      });
     },
     to_lists() {
       sessionStorage.setItem("temp_status", "5");
@@ -95,7 +95,7 @@ export default {
     text-align: center;
     transform: translate(-50%, -50%);
     img {
-      width: 104px;
+      width: 140px;
       height: auto;
     }
     .you-got-it {

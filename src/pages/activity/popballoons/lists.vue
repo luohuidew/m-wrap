@@ -25,7 +25,17 @@
     </div>
     <rules v-if="is_rules_show"
       @close="is_rules_show=false"></rules>
-    <no-repeat v-if="show_repeat"></no-repeat>
+    <!-- <no-repeat v-if="show_repeat"></no-repeat> -->
+    <ac-tips @close="close_repeat_tips"
+      v-show="show_repeat">
+      <span slot="dialog-desc"
+        class="tips-desc">
+        You’ve got 3 gifts. <br/>
+        Time to leave some for others.<br/>
+        Check our App
+        for more surprises!
+      </span>
+    </ac-tips>
   </div>
 </template>
 
@@ -36,6 +46,8 @@ import rules from "./components/dialog-rules";
 import { getToken } from "@/utils/auth";
 import api from "@/api/newyear";
 import share from "@/api/share";
+import acTips from "./components/ac-tips";
+
 // import btnBox from "./components/dialog-btn";
 import shareBox from "./components/share-btn";
 import { Toast } from "vant";
@@ -56,8 +68,8 @@ export default {
   created() {
     this.init_data();
   },
-  filters:{
-    change_num(val){
+  filters: {
+    change_num(val) {
       return Math.ceil(val);
     }
   },
@@ -94,12 +106,12 @@ export default {
           console.log(res);
           let params = {
             id: res.data.id,
-            share_type: 5,
+            share_type: 6,
             user_name: res.data.user_name
           };
           share.getShareInfo(params).then(res => {
             console.log(res);
-            this.$store.commit("set_christmas_share_info", res.data);
+            this.$store.commit("set_popballoons_share_info", res.data);
           });
         });
       api.init_lists({ type: 2 }).then(res => {
@@ -112,12 +124,16 @@ export default {
         path: "/activity/popballoons/popballoons-detail",
         query: { id: cid }
       });
+    },
+    close_repeat_tips() {
+      this.$router.go(-1);
     }
   },
   components: {
     acRules,
     noRepeat,
-    rules
+    rules,
+    acTips
   }
 };
 </script>
@@ -199,7 +215,7 @@ export default {
         border-radius: 50%;
         font-size: 12px;
         background-color: #000;
-        color: #E3C388;
+        color: #e3c388;
         p {
           text-align: center;
         }

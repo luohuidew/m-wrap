@@ -1,5 +1,5 @@
 <template>
-  <div class="christmas"
+  <div class="popballoons-during"
     v-if="is_ready">
     <template v-if="info_type===1">
       <during-header @showrules="show_rules=true"
@@ -23,7 +23,7 @@
     <!-- <div class="banner-board"
       @click.stop="to_home">
       <img class="board-img"
-        src="/static/img/christmas/广告.png"
+        src="/static/img/popballoons/广告.png"
         alt=""
         srcset="">
     </div> -->
@@ -113,7 +113,7 @@ export default {
           let result = res;
           let params = {
             id: res.data.id,
-            share_type: 5,
+            share_type: 6,
             user_name: res.data.user_name
           };
           let data =
@@ -122,12 +122,12 @@ export default {
             res.data.id +
             "&user_name=" +
             res.data.user_name.replace(" ", "_");
-          this.$store.commit("set_christmas_share_params", data);
+          this.$store.commit("set_popballoons_share_params", data);
           share.getShareInfo(params).then(res => {
             console.log(res);
             this.login_load.clear();
             this.info_type = result.data.status;
-            this.$store.commit("set_christmas_share_info", res.data);
+            this.$store.commit("set_popballoons_share_info", res.data);
           });
         });
       // }
@@ -196,7 +196,7 @@ export default {
 </script>
 
 <style lang='scss'>
-.christmas {
+.popballoons-during {
   // position: relative;
   // width: 375px;
   // min-width: 100%;
@@ -206,7 +206,7 @@ export default {
   padding:20px;
   // overflow: auto;
   font-size: 0;
-  // background: url("/static/img/christmas/首页背景.jpg") no-repeat top center;
+  // background: url("/static/img/popballoons/首页背景.jpg") no-repeat top center;
   // background-size: 100% 100%;
   z-index: 0;
 }

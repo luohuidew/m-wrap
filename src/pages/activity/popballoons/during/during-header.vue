@@ -120,7 +120,7 @@ export default {
 
 <style lang='scss' scoped>
 .home-tips-box {
-  width: 320px;
+  // width: 320px;
   max-width: 100%;
   margin: 0 auto;
   position: relative;
@@ -148,7 +148,8 @@ export default {
     width: 292px;
     color: #2c2c2c;
     z-index: 20;
-    font-size: 24px;
+    font-size: 22px;
+    line-height: 32px;
     span {
       text-align: center;
       // &:nth-child(1) {

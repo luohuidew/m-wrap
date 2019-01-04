@@ -8,7 +8,8 @@
       </p>
     </div>
     <ul class="apply-coupon">
-      <li class="apply-title">
+      <li class="apply-title"
+        @click="to_sku_detail(down_load.sku_id,down_load.use_coupon_id)">
         <img src="/static/img/popballoons/icon/coupon_apply.png"
           alt=""
           srcset="">
@@ -17,8 +18,8 @@
           srcset="">
       </li>
       <li class="apply-end-time">
-        <p>Yves Saint laurent LIP STAIN 101 Chrome Red Clash</p>
-        <p>Expires on 20/12/2108</p>
+        <p>{{down_load.name}}</p>
+        <p>Expires on {{down_load.end_time*1000 | dateServerEnglishYMD}}</p>
       </li>
     </ul>
     <div class="apply-desc">
@@ -30,14 +31,48 @@
 </template>
 
 <script>
+import api from "@/api/newyear";
 export default {
   name: "",
   data() {
-    return {};
+    return {
+      down_load: {},
+      id: this.$route.query.id
+    };
+  },
+  created() {
+    this.init_data();
   },
   mounted() {},
   computed: {},
-  methods: {},
+  methods: {
+    init_data() {
+      // console.log(this.id);
+      api.down_load({ id: this.id }).then(res => {
+        this.down_load = res.data;
+        console.log(res);
+      });
+    },
+    to_sku_detail(sku_id, coupon_id) {
+      let href_params = {
+        type: 106,
+        data: {
+          route: "wemall:///public/route?type=6&id=" + sku_id + ""
+        }
+      };
+      let temp = this.$CM.weget_device_link(href_params);
+      if (temp === "h5") {
+        this.$router.push({
+          path: "/detail",
+          query: {
+            sku_id: sku_id,
+            user_coupon_id: coupon_id,
+            act_type: "popballoons"
+          }
+        });
+      }
+    }
+  },
   components: {}
 };
 </script>

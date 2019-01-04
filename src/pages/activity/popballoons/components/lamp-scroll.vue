@@ -7,7 +7,7 @@
           :key="index">
           <p class="item-left">
             <img :src="item.photo">
-            <span>{{item.nickName}} Lit for me</span>
+            <span>{{item.user_name}} Lit for me</span>
           </p>
           <p class="user-box">
             <span>{{item.time | timeDateServer}}</span>
@@ -104,7 +104,7 @@ export default {
       position: relative;
       display: flex;
       height: 50%;
-      border-top: 1px solid #78141888;
+      // border-top: 1px solid #78141888;
       padding: 4px 10px;
       color: #000;
       // z-index: 0;

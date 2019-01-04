@@ -73,7 +73,7 @@ export default {
     text-align: center;
     transform: translate(-50%, -50%);
     img {
-      width: 104px;
+      width: 140px;
       height: auto;
     }
     .you-got-it {

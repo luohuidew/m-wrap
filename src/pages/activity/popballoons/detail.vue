@@ -43,7 +43,7 @@ export default {
       },
       is_fb_show: false,
       can_click: true,
-      share_info: this.$store.state.christmas_share_info
+      share_info: this.$store.state.popballoons_share_info
     };
   },
   created() {

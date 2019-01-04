@@ -12,7 +12,7 @@
           class="them"
           src="/static/img/christmas/icon/主题@2x_75.png"> -->
         <div class="pop-img-title">
-          <img v-if="christmat.status===1"
+          <img v-if="christmas.status===1"
             src="/static/img/popballoons/icon/sweet.png"
             style="height:30px">
           <img v-else
@@ -25,8 +25,8 @@
           </li>
           <li class="user-info">
             <p></p>
-            <p class="second">Help your friends <span class="weight-words">{{user_info.user_name}}</span> to light up the tree to get free <span class="weight-words">{{christmat_info.name}}</span> </p>
-            <!-- <p class="black">{{christmat.count}} people get the free gift today</p> -->
+            <p class="second">Pop a balloon for your friend <span>{{user_info.user_name}}</span> to win free <span>{{christmas_info.name}}</span> </p>
+            <!-- <p class="black">{{christmas.count}} people get the free gift today</p> -->
           </li>
         </ul>
         <!-- <div class="rules-tips-box">
@@ -40,81 +40,39 @@
       </div>
       <div class="tree-home-box">
         <div class="bg-pop-box">
-
+          <div class="price-box">
+            <p>REG</p>
+            <p>${{christmas_info.price}}</p>
+          </div>
         </div>
         <div class="goods_photo">
-          <img :src="christmat_info.sku_image"
+          <img :src="christmas_info.image"
             class="goods_img">
+
         </div>
-        <div class="date_photo">
-          <img :src="christmat_info.date_image"
+        <!-- <div class="date_photo">
+          <img :src="christmas_info.date_image"
             class="date_img">
-        </div>
+        </div> -->
         <div class="btn-click">
           <a href="javascript:;"
             @click="link_light"
-            v-if="christmat.status===1">
+            v-if="christmas.status===1">
             <img src="/static/img/popballoons/btn/pop_help.png">
           </a>
           <a href="javascript:;"
             @click="try_again">
             <img src="/static/img/popballoons/btn/pop_want.png">
-          </a>
-          <!-- <a href="javascript:;"
-          v-if="christmat.status!==1">
-          <img src="/static/img/christmas/Sharewithyourfriends@2x.png"
-            alt="分享给好友"
-            @click="to_share_f">
-        </a> -->
+          </a>         
         </div>
-      </div>
-      <!-- <div class="bulletin-board">
-        <p class="pepole-join">Decorators</p>
-        <div class="board-texts">
-          <div class="scroll-box">
-            <ul :class="{'scroll-ul':help_user.length>0}"
-              v-if="help_user.length">
-              <li class="board-item"
-                v-for="(item,index) in help_user"
-                :key="index">
-                <p class="item-left">
-                  <img :src="item.photo">
-                  <span>{{item.user_name}} Lit for me</span>
-                </p>
-                <p class="user-box">
-                  <span>{{item.time | timeDateServer}}</span>
-                </p>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <img class="board-background-img"
-          src="/static/img/christmas/Qeaql.com拷贝.png">
-      </div> -->
+      </div>    
       <scroll v-if="help_user"
-        :board-lists="help_user"></scroll>
-      <!-- <div class="bulletin-adv"
-      @click.stop="to_home">
-      <img class="adv-background-img"
-        src="/static/img/christmas/广告.png">
-    </div> -->
+        :board-lists="help_user"></scroll>    
       <banner :style="{'margin-top':'0px'}"></banner>
       <rule v-show="show_rules"
-        @closerules="show_rules=false"></rule>
-      <!-- <share-box v-show="show_share_box"
-        @close="show_share_box=false"></share-box> -->
-      <!-- <btn-box-fun v-if="lap_status===1"
-        v-show="show_btn_box"
-        @close="close_reload">
-        <span slot="dialog-desc"
-          class="desc-text">
-          Thank You!<br>
-          You helped
-          {{user_info.user_name}}!
-        </span>
-      </btn-box-fun> -->
+        @closerules="show_rules=false"></rule>     
       <btn-box-click v-show="show_btn_box"
-        @close="show_btn_box = false"
+        @close="close_reload(lap_status)"
         :status="lap_status">
         <span slot="dialog-desc"
           class="desc-text">
@@ -127,7 +85,7 @@
             Oops, times up !
           </template>
           <template v-else-if="lap_status===3">
-            Uh-oh invalid, you cannot light up your own tree.
+            You cannot pop a balloon for yourself.
           </template>
           <template v-else-if="lap_status===4">
             Sorry, you already used your one chance today.Come back tomorrow
@@ -176,9 +134,9 @@ export default {
   data() {
     return {
       from_myself: false,
-      christmat: {},
+      christmas: {},
       user_info: {},
-      christmat_info: {},
+      christmas_info: {},
       help_user: [],
       uid: this.$route.query.id,
       show_rules: false,
@@ -253,29 +211,31 @@ export default {
         .share_detail({ id: this.$route.query.id })
         .then(res => {
           console.log(res);
-          this.christmat = res.data;
+          this.christmas = res.data;
           this.user_info = res.data.user_info;
-          this.christmat_info = res.data.christmat_info;
+          this.christmas_info = res.data.christmas_info;
           this.help_user = res.data.help_user;
           this.Percentage = Math.ceil(
-            (this.help_user.length / this.christmat.lamp_num) * 10
+            (this.help_user.length / this.christmas.lamp_num) * 10
           );
           console.log(this.Percentage);
           this.Percentage = this.Percentage > 10 ? 10 : this.Percentage;
           this.is_ready = true;
           // console.log(this.help_user.length);
-          // console.log(this.christmat.lamp_num);
+          // console.log(this.christmas.lamp_num);
         })
         .catch(res => {
           console.log(res.err);
         });
     },
-    close_reload() {
+    close_reload(lap_status) {
       this.show_btn_box = false;
       if (sessionStorage.getItem("first_sign") === "yes") {
         this.show_first_tips = true;
       } else {
-        window.location.reload();
+        if (lap_status === 1) {
+          window.location.reload();
+        }
       }
     },
     link_light() {
@@ -355,6 +315,25 @@ export default {
     // min-height: 520px;
     // padding-left: 5px;
   }
+  .price-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 5%;
+    right: 24%;
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    font-size: 12px;
+    background-color: #000;
+    color: #e3c388;
+    z-index: 10;
+    p {
+      text-align: center;
+    }
+  }
 }
 .home-tips-box {
   width: 335px;
@@ -385,12 +364,12 @@ export default {
   .user-detail {
     position: absolute;
     width: 85%;
-    height: 80px;
-    top: 83px;
+    // height: 80px;
+    top: 80px;
     left: 50%;
     align-items: center;
     transform: translateX(-50%);
-    font-size: 9px;
+    font-size: 10px;
     display: flex;
     .user-phone {
       width: 20%;
@@ -441,6 +420,7 @@ export default {
 .tree-home-box {
   width: 100%;
   position: relative;
+  margin-top: -40px;
   .tree_photo {
     width: 100%;
     height: auto;
@@ -459,13 +439,14 @@ export default {
     width: 30%;
     height: 100px;
     position: absolute;
-    top: 60%;
+    top: 67%;
     left: 50%;
     transform: translate(-50%, -60%);
     float: left;
+    text-align: center;
     .goods_img {
-      height: auto;
-      width: 100%;
+      height: 100%;
+      width: auto;
     }
   }
   .date_photo {

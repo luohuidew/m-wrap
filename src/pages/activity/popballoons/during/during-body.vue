@@ -4,11 +4,16 @@
     <div class="bg-pop-box">
       <!-- <img src="/static/img/popballoons/background/big_box_pop.png"
         alt=""> -->
-    </div>
-    <div class="tips-info">
-      <img :src="showData.image"
-        alt=""
-        srcset="">
+      <div class="tips-info">
+        <img :src="showData.image"
+          alt=""
+          srcset="">
+
+      </div>
+      <div class="price-box">
+        <p>REG</p>
+        <p>${{showData.price}}</p>
+      </div>
     </div>
     <div class="btn-click">
       <img src="/static/img/popballoons/btn/btn-4Sharetoyourfriends@2x.png"
@@ -113,7 +118,7 @@ export default {
       // uid:undefined,
       is_ios: sessionStorage.getItem("is_ios") === "yes",
       is_fb_show: false,
-      share_info: this.$store.state.christmas_share_info,
+      share_info: this.$store.state.popballoons_share_info,
       showData: {},
       cur_index: 0,
       Percentage: 0
@@ -188,7 +193,7 @@ export default {
           data: this.share_info
         };
       }
-      let temp = this.$CM.weget_device_link(params);      
+      let temp = this.$CM.weget_device_link(params);
     },
     close_href() {
       this.is_fb_show = false;
@@ -216,6 +221,7 @@ export default {
   z-index: 0;
   // transform: translateY(-73px);
   .bg-pop-box {
+    position: relative;
     width: 230px;
     height: 400px;
     margin: 0 auto;
@@ -230,6 +236,24 @@ export default {
       // padding-left: 5px;
     }
   }
+  .price-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 11%;
+    right: 14%;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    font-size: 14px;
+    background-color: #000;
+    color: #e3c388;
+    p {
+      text-align: center;
+    }
+  }
   .tips-info {
     position: absolute;
     left: 50%;
@@ -237,9 +261,10 @@ export default {
     text-align: center;
     transform: translate(-50%, -50%);
     img {
-      width: 154px;
-      height: auto;
+      width: auto;
+      height: 152px;
     }
+
     .you-got-it {
       // display: inline-block;
       width: 160px;

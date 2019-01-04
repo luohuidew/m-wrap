@@ -4,12 +4,20 @@
     <ul class="product-lists">
       <li v-for="(item,index) in similar_lists"
         :key="index"
-        v-if="index<lists_length"
         @click="to_sku_detail(item.sku_id)">
         <div class="img-box">
           <img :src="item.cover_img"
             alt=""
             srcset="">
+          <div class="mask-info">
+            <div class="mask-icon"
+              v-if="item.mask_info.mask_title"
+              :style="{'background':'url('+item.mask_info.mask_bg_image+') no-repeat center center','background-size':'auto 100%'}">
+              <div :class="{'hot':item.mask_info.mask_type===1,'new':item.mask_info.mask_type===2,'off':item.mask_info.mask_type===3}">
+                <p>{{item.mask_info.mask_title}}</p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="banner-sku-desc">
           <p class="sku-desc">{{item.title}}</p>
@@ -121,11 +129,44 @@ export default {
   font-size: 14px;
   li {
     width: 31%;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 1px 2px #2c2c2c;
     .img-box {
+      position: relative;
       background: #fff;
       font-size: 0;
-      img {
+      .mask-info {
+        position: absolute;
+        left: 6px;
+        top: 6px;
+        width: 43px;
+        height: 45px;
+        // border-radius: 50%;
+        // overflow: hidden;
+        .mask-icon {
+          height: 100%;
+          width: 100%;
+          // background: url('') no-repeat center center;
+          background-size: auto 100%;
+          border-radius: 50%;
+          overflow: hidden;
+          font-size: 12px;
+          line-height: 13px;
+          color: #fff;
+          text-align: center;
+          .hot {
+            margin: 22px auto;
+          }
+          .new {
+            margin: 15px auto;
+          }
+          .off {
+            margin: 8px auto;
+          }
+        }
+      }
+      & > img {
         width: 100%;
         max-height: 100px;
         object-fit: cover;
@@ -141,10 +182,11 @@ export default {
       text-align: center;
       font-size: 12px;
       .sku-desc {
-        flex: 1;
+        // flex: 1;
         padding: 8px 8px 0 8px;
-        font-size: 13px;
-        line-height: 18px;
+        height: 36px;
+        font-size: 12px;
+        line-height: 14px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
