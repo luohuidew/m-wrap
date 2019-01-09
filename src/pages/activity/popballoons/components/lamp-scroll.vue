@@ -1,13 +1,13 @@
 <template>
   <div class="bulletin-board">
     <div class="board-texts">
-      <ul :class="{'scroll-ul':boardLists.length>0}">
+      <ul :class="{'scroll-ul':boardLists.length>3}">
         <li class="board-item"
           v-for="(item,index) in boardLists"
           :key="index">
           <p class="item-left">
             <img :src="item.photo">
-            <span>{{item.user_name}} Lit for me</span>
+            <span>{{item.user_name}} popped for me</span>
           </p>
           <p class="user-box">
             <span>{{item.time | timeDateServer}}</span>
@@ -114,7 +114,7 @@ export default {
         border: none;
       }
       .item-left {
-        width: 60%;
+        width: 65%;
         display: flex;
         align-items: center;
         img {
@@ -124,7 +124,7 @@ export default {
           margin-right: 10px;
         }
         span {
-          width: 90px;
+          // width: 90px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -132,7 +132,7 @@ export default {
       }
       .user-box {
         flex: 1;
-        padding-left: 20px;
+        padding-left: 8px;
         display: flex;
         align-items: center;
         justify-content: space-between;

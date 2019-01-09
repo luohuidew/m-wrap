@@ -23,10 +23,15 @@ export default {
           title: "",
           path:'/login?autoshow=1'
         },       
+        // {
+        //   img_url: "https://we-get.s3.us-west-1.amazonaws.com/8292970065c1310de446f4.gif",
+        //   title: "",
+        //   path:'/activity/christmas'
+        // },       
         {
-          img_url: "https://we-get.s3.us-west-1.amazonaws.com/8292970065c1310de446f4.gif",
+          img_url: "https://we-get.s3.us-west-1.amazonaws.com/6763566675c2ef36e78b2f.gif",
           title: "",
-          path:'/activity/christmas'
+          path:'/activity/popballoons'
         },       
       ]
     };

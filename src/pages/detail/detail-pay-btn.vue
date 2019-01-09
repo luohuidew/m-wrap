@@ -64,9 +64,7 @@
       </a>
     </template>
     <attr-dialog v-if="show_dialog"
-      @close="close_emity"
-      @change="get_cur_goods"
-      @done="to_create"
+      @close="close_emity"     
       :sku="sku"
       :goods="goods"
       :attr-list="attrList"

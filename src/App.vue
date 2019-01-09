@@ -46,6 +46,8 @@ export default {
   },
   mounted() {
     // console.log("路由参数", this.$route.query.device_type);
+    // const ua = navigator.userAgent.toLowerCase();
+    // alert(ua);
   },
   methods: {
     init_meta() {

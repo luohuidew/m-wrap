@@ -1,9 +1,9 @@
 <template>
   <div class="christmas-detail">
     <div class="popballoons-header">
-      <img src="/static/img/popballoons/icon/Goodtaste!.png"
+      <!-- <img src="/static/img/popballoons/icon/Goodtaste!.png"
         alt=""
-        srcset="">
+        srcset=""> -->
       <span class="lap_number">Pop {{req_data.lamp_num}} balloons within
         24 hours to win!</span>
     </div>
@@ -86,7 +86,7 @@ export default {
     },
     to_lists() {
       this.$router.go(-1);
-    },   
+    }
   },
   components: {
     fbMsShare
@@ -109,7 +109,7 @@ export default {
   max-width: 100%;
   height: 180px;
   position: relative;
-  background: url("/static/img/popballoons/background/coupon_box.png") no-repeat
+  background: url("/static/img/popballoons/background/Goodtaste.png") no-repeat
     center center;
   background-size: 100%;
   // padding: 20px 0px 30px 0px;
@@ -127,7 +127,8 @@ export default {
     left: 50%;
     top: 53.5%;
     transform: translateX(-50%);
-    font-size: 23px;
+    font-size: 22px;
+    line-height: 28px;
     color: #2c2c2c;
     // font-weight: bold;
   }
@@ -167,13 +168,14 @@ export default {
     transform: translateX(-50%);
     height: 66%;
     width: auto;
+    max-width: 100%;
   }
 }
 .pop-description {
   margin: 0 auto;
   width: 50%;
   font-size: 20px;
-  color: #ECCFA0;
+  color: #eccfa0;
   text-align: center;
 }
 .popballoons-btn {

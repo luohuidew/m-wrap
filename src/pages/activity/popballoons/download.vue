@@ -8,18 +8,21 @@
       </p>
     </div>
     <ul class="apply-coupon">
-      <li class="apply-title"
-        @click="to_sku_detail(down_load.sku_id,down_load.use_coupon_id)">
+      <li class="apply-title">
         <img src="/static/img/popballoons/icon/coupon_apply.png"
           alt=""
           srcset="">
-        <img src="/static/img/popballoons/btn/btn-6apply@2x.png"
+        <img v-if="down_load.coupon_status===2" src="/static/img/popballoons/btn/btn-6apply@2x.png"
           alt=""
-          srcset="">
+          srcset=""
+          @click="to_sku_detail(down_load.sku_id,down_load.use_coupon_id)">
+          <span v-if="down_load.coupon_status===3">Used</span>
+          <span v-if="down_load.coupon_status===4">Expires</span>
       </li>
-      <li class="apply-end-time">
+      <li class="apply-end-time"
+        v-if="down_load.end_time">
         <p>{{down_load.name}}</p>
-        <p>Expires on {{down_load.end_time*1000 | dateServerEnglishYMD}}</p>
+        <p>Expires on {{down_load.end_time | dateServerEnglishYMD}}</p>
       </li>
     </ul>
     <div class="apply-desc">
@@ -57,11 +60,18 @@ export default {
       let href_params = {
         type: 106,
         data: {
-          route: "wemall:///public/route?type=6&id=" + sku_id + ""
+          route:
+            "wemall:///public/route?type=6&coupon_id=" +
+            coupon_id +
+            "?id=" +
+            sku_id +
+            ""
         }
       };
-      let temp = this.$CM.weget_device_link(href_params);
-      if (temp === "h5") {
+      // let temp = this.$CM.weget_device_link(href_params);
+      // if (temp === "h5") {
+      //   }
+      if (coupon_id) {
         this.$router.push({
           path: "/detail",
           query: {
@@ -111,6 +121,15 @@ export default {
     img {
       height: 25px;
       width: auto;
+    }
+    span {
+      display: inline-block;
+      padding: 4px 10px;
+      background-color: #8f7d7d;
+      color: #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    
     }
   }
   .apply-end-time {

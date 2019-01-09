@@ -2,8 +2,8 @@
   <div class="home-tips-box">
     <img class="them"
       src="/static/img/popballoons/background/coupon_box.png"
-      alt="">    
-  <p class="run-time">
+      alt="">
+    <p class="run-time">
       <span>
         {{time[0]}}
         {{time[1]}}
@@ -30,7 +30,7 @@
     <p class="need-num">
       <span>Your balloons weren’t all popped on time. </span>
       <span> Don’t give up, try next time</span>
-    </p>   
+    </p>
   </div>
 </template>
 
@@ -42,9 +42,9 @@ export default {
   name: "",
   data() {
     return {
-      time:"00:00:00",
+      time: "00:00:00",
       run_time: [0, 0, 0, 0, 0, 0],
-      is_rules_show:false
+      is_rules_show: false
     };
   },
   mounted() {},
@@ -93,7 +93,8 @@ export default {
     width: 292px;
     color: #2c2c2c;
     z-index: 20;
-    font-size: 24px;
+    font-size: 22px;
+    line-height: 32px;
     span {
       text-align: center;
       // &:nth-child(1) {

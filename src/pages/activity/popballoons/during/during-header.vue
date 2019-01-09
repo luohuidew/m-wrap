@@ -30,7 +30,7 @@
     </p>
     <!-- <span class="need-persion">{{showData.lessCount}}</span> -->
     <p class="need-num">
-      <span>Only {{showData.lessCount}} balloons need to be popped.</span>
+      <span>Only {{showData.lessCount}} <span v-if="showData.lessCount>1">balloons</span><span v-else>balloons</span> need to be popped.</span>
       <span> Share to your friends now!!</span>
     </p>
   </div>

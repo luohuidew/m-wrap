@@ -13,7 +13,7 @@
             srcset="">
         </a>
         <a href="https://www.youtube.com/channel/UCJ2SmCasimMk8TCHxloaMtA">
-          <img src="/static/img/popballoons/icon/GOLD_TEXTURE@2x.png"
+          <img src="/static/img/popballoons/icon/GOLD_TEXTURE@2x_95.png"
             alt="Youtube"
             srcset="">
         </a>

@@ -1,5 +1,6 @@
 <template>
   <div class="popballoons">
+     <ac-top></ac-top>
     <div class="pop-logo"
       v-if="show_logo">
       <img src="/static/img/popballoons/icon/logo.png"
@@ -19,7 +20,7 @@
 import acLink from "./components/ac-link";
 import acFixed from "./components/ac-fixed";
 import acRules from "./components/dialog-rules";
-
+import acTop from './components/ac-top'
 export default {
   name: "",
   data() {
@@ -41,7 +42,8 @@ export default {
   components: {
     acLink,
     acFixed,
-    acRules
+    acRules,
+    acTop
   }
 };
 </script>
@@ -68,7 +70,7 @@ export default {
 .fixed-nav {
   position: absolute;
   right: 0;
-  top: 114px;
+  top: 70px;
   z-index: 20;
 }
 </style>

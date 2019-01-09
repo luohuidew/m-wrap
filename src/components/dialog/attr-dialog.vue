@@ -60,7 +60,7 @@
         <li class="done-btn">
           <a href="javacript:;"
             v-if="have_goods"
-            @click.stop="create_order()">Done</a>
+            @click="create_order">Done</a>
           <a href="javacript:;"
             v-else
             class="no-goods">out of stock</a>
@@ -180,40 +180,60 @@ export default {
     },
     check_order() {},
     create_order() {
-      // console.log(this.submit_form);
+      // debugger;
       let params = {
-        path: "/pay",
+        path: "/home/me",
         query: {
-          goods_id: this.submit_form.goods_id + "",
+          goods_id: this.submit_form.goods_id.toString(),
           num: this.submit_form.num + "",
           purchase_type: this.submit_form.purchase_type + "",
           group_id: this.submit_form.group_id
             ? this.submit_form.group_id + ""
             : undefined,
-          user_coupon_id: this.$route.query.use_coupon_id
+          coupon_id: this.$route.query.user_coupon_id
+            ? this.$route.query.user_coupon_id + ""
+            : undefined
         }
       };
-      let checkparams = {
-        address_id: undefined,
-        ship_method: undefined,
-        goods_id: this.submit_form.goods_id + "",
-        num: this.submit_form.num + "",
-        purchase_type: this.submit_form.purchase_type + "",
-        group_id: this.$route.query.group_id
-          ? this.$route.query.group_id
-          : undefined,
-        user_coupon_id: undefined
-      };
-      // console.log(checkparams,'检测订单query');
-      let data = checkparams;
-      this.$emit("done", data);
+      let cur_url =
+        window.location.origin +
+        "/pay?goods_id=" +
+        params.query.goods_id +
+        "&num=" +
+        params.query.num +
+        "&purchase_type=" +
+        params.query.purchase_type;
+      if (params.query.group_id) {
+        cur_url += "&group_id=" + params.query.group_id;
+      }
+      if (params.query.coupon_id) {
+        cur_url += "&coupon_id=" + params.query.coupon_id;
+      }
+      console.log(cur_url);
+      // debugger;
+      window.location.href = cur_url;
+      window.event.returnValue = false;
+      // let checkparams = {
+      //   address_id: undefined,
+      //   ship_method: undefined,
+      //   goods_id: this.submit_form.goods_id + "",
+      //   num: this.submit_form.num + "",
+      //   purchase_type: this.submit_form.purchase_type + "",
+      //   group_id: this.$route.query.group_id
+      //     ? this.$route.query.group_id
+      //     : undefined,
+      //   user_coupon_id: undefined
+      // };
+      // let data = checkparams;
+      // this.$emit("done", data);
       // api
       //   .confirm_order(checkparams)
       //   .then(res => {
       //     console.log(res, "检测订单res");
-      if (params.query.num) {
-        this.$router.push(params);
-      }
+      // this.$router.push(params);
+      // debugger;
+      // if (params.query.num) {
+      // }
       // })
       // .catch(res => {
       //   console.log(res);

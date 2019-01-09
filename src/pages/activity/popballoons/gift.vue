@@ -1,7 +1,7 @@
 <template>
   <div id="activity-detail">
     <div class="detail-header">
-      <img src="/static/img/popballoons/MYRECORDS.png"
+      <img src="/static/img/popballoons/icon/MYRECORDS.png"
         alt>
     </div>
     <ul class="detail-info">
@@ -15,7 +15,7 @@
             </div>
             <div class="info-text">
               <p>{{item.name}}</p>
-              <p>{{item.lamp_num}} lights</p>
+              <p>{{item.lamp_num}} balloons</p>
               <p>End time：{{item.etime | dateServer}}</p>
               <p v-if="item.coupon_status==2"
                 @click="to_coupon(item.id)"
@@ -24,7 +24,7 @@
                   alt>
               </p>
               <p v-else class="btn-jump">
-                 Successful !
+                 Used !
               </p>
             </div>
           </div>
@@ -37,7 +37,7 @@
             </div>
             <div class="info-text">
               <p>{{item.name}}</p>
-              <p>{{item.lamp_num}} lights</p>
+              <p>{{item.lamp_num}} balloons</p>
               <p>End time：{{item.etime | dateServer}}</p>
               <p class="btn-jump">
                 <span>Times up!</span>
@@ -48,7 +48,7 @@
       </li>
       <li class="norecord"
         v-if="is_no">
-        <img src="/static/img/christmas/icon/Norecord@2x.png"
+        <img src="/static/img/popballoons/icon/Norecord@2x.png"
           alt>
       </li>
     </ul>

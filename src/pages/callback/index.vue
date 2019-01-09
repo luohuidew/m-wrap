@@ -4,6 +4,11 @@
       <div class="type-success">
         <p class="buy-alone"
           v-if="order_info">{{order_info.title}}</p>
+        <div v-if="type===1"
+          class="success-btn gray">
+          <a href="javascript:;"
+            @click="go_home">GO HOME</a>
+        </div>
         <template v-if="type===3">
           <p class="buy-wait-group"><span> </span>{{order_info.sub_title}}</p>
           <!-- <div class="share-btn">
@@ -35,10 +40,7 @@
           </a>
         </div>
       </div>
-      <!-- <div class="success-btn gray">
-        <a href="javascript:;"
-          @click="go_home">GO HOME</a>
-      </div> -->
+
       <!-- <div class="success-btn gray">
         <a href="javascript:;">OPEN IN APP</a>
       </div> -->
@@ -59,7 +61,7 @@
 </template>
 
 <script>
-import shareApp from '@/components/dialog/share-app'
+import shareApp from "@/components/dialog/share-app";
 import card from "@/components/goodsCard-column";
 import api from "@/api/order";
 export default {
@@ -117,7 +119,7 @@ export default {
           clearInterval(timer);
           if (this.is_continue) {
             if (this.type === 3) {
-            // if (this.type !== 1 && this.type != 2) {
+              // if (this.type !== 1 && this.type != 2) {
               this.go_share();
             }
           }
@@ -125,7 +127,16 @@ export default {
       }, 1000);
     },
     go_home() {
-      this.$router.push({ path: "/home/weget" });
+      let href_params = {
+        type: 105,
+        data: {}
+      };
+      let temp = this.$CM.weget_device_link(href_params);
+      if (temp === "h5") {
+        this.$router.push({
+          path: "/"
+        });
+      }
     },
     go_share() {
       let params = {
@@ -222,6 +233,14 @@ export default {
     &:hover {
       opacity: 0.8;
     }
+  }
+}
+.success-btn {
+  padding-top: 16px;
+  padding-bottom: 0;
+  text-align: center;
+  a {
+    padding: 0 50px;
   }
 }
 .share-btn {

@@ -2,7 +2,7 @@
   <div class="order-detail"
     v-if="order_form">
     <div class="shiping item-box">
-      <div class="tips-for-group">
+      <div class="tips-for-group" v-if="!is_apply">
         <p>Complete groups receive products; incomplete receive full refunds.</p>
       </div>
       <h3>SHIPPING</h3>
@@ -146,7 +146,8 @@ export default {
       ship_method: undefined,
       is_click: false,
       address_change: undefined,
-      can_select_coupon:true
+      can_select_coupon:true,
+      is_apply:this.$route.query.coupon_id
     };
   },
   computed: {

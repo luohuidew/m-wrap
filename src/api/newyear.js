@@ -113,5 +113,13 @@ export default {
       method: 'post',
       data: JSON.stringify(data),
     })
-  }
+  },
+  activity_list(data={}) {
+    data.token = token;
+    return request({
+      url: 'newyear/getMessageTopN',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  }, 
 }
