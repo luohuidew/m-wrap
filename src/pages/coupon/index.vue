@@ -1,34 +1,23 @@
 <template>
   <div class="coupon">
-    <div class="get-coupon">
+    <!-- <div class="get-coupon">
       <input type="text"
         placeholder="Enter coupon code">
       <span>Apply</span>
-    </div>
+    </div> -->
     <ul class="coupon-list">
-      <li v-if="coupon_list.length"
-        :class="index===is_checked?'active':''"
-        class="coupon-item"
-        v-for="(item,index) in coupon_list"
-        :key="index"
-        @click="choice_cur(index,item)">
-        <!-- <div class="left-coupon">
-          <p class="coupon-title">
-            {{item.name}}
-          </p>
-          <p>
-            {{item.desc}}
-          </p>
-        </div>
-        <div class="right-coupon">
-          <p class="out-time">Valid Until {{item.end_time | dateServer}}</p>
-          <p><a href="javascript:;"
-              @click="go_back(item)">USE <i class="right-white"></i></a></p>
-        </div> -->
-        <p class="coupon-title"> {{item.name}}</p>
-        <p class="coupon-desc">{{item.desc}}</p>
-        <p class="coupon-time">Expires on {{item.end_time | dateServer}} </p>
-      </li>
+      <template v-if="coupon_list.length">
+
+        <li :class="index===is_checked?'active':''"
+          class="coupon-item"
+          v-for="(item,index) in coupon_list"
+          :key="index"
+          @click="choice_cur(index,item)">
+          <p class="coupon-title"> {{item.name}}</p>
+          <p class="coupon-desc">{{item.desc}}</p>
+          <p class="coupon-time">Expires on {{item.end_time | dateServer}} </p>
+        </li>
+      </template>
     </ul>
     <div class="done-btn">
       <a href="javascript:;"
@@ -112,7 +101,7 @@ export default {
   flex: 1;
   overflow: auto;
   font-family: "AvertaStd-Bold";
-  padding:0 10px;
+  padding: 0 10px;
   .coupon-title {
     font-size: 24px;
     font-weight: bold;
@@ -141,7 +130,7 @@ export default {
   padding: 15px;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  margin-bottom:14px;
+  margin-bottom: 14px;
   cursor: pointer;
   & > p {
     padding-right: 90px;
@@ -153,7 +142,7 @@ export default {
 .done-btn {
   text-align: center;
   background-color: #fff;
-  padding:10px 0;
+  padding: 10px 0;
   a {
     display: inline-block;
     width: 250px;
