@@ -1,36 +1,105 @@
 <template>
   <div class="about_page">
-    <div class="about_content">
-      <div class="about_text pd20">
-        <b>ABOUT US</b>
+    <header class="about_head">
+      <img src="/static/img/about/关于我们4切图_02.jpg">
+    </header>
+    <section>
+      <img src="/static/img/about/关于我们4切图_06.jpg">
+    </section>
+    <section>
+      <img src="/static/img/about/关于我们4切图_08.jpg">
+    </section>
+    <section>
+      <img src="/static/img/about/关于我们4切图_10.jpg">
+    </section>
+    <footer>
+      <div class="about_row1">
+        <!-- <img class="bgimg" src="/static/img/about/icon bg@2x.png"> -->
+        <p>
+          <a href="javascript:;">
+            <img src="/static/img/about/底部logo@2x.png">
+          </a>
+          <a href="https://www.facebook.com/wegetofficial">
+            <img src="/static/img/about/iconF@2x.png">
+          </a>
+          <a href="https://www.instagram.com/shopweget">
+            <img src="/static/img/about/iconO@2x.png">
+          </a>
+          <a href="https://www.youtube.com/channel/UCJ2SmCasimMk8TCHxloaMtA">
+            <img src="/static/img/about/iconA@2x.png">
+          </a>
+        </p>
       </div>
-      <div class="about_text">
-        Located in Portland, Oregon, Weget is an online beauty buying platform that creates an interactive shopping environment where beauty lovers, Influencers, and brands can all engage. We create fun activities for engagement that allow our customers to get the products they love at a discount by engaging in a fun social way. We launch a variety of group-buys, flash sales, giveaways, and discount activities that keep the platform lively and engaging. You can even earn points toward products by posting on the platform and giving product reviews.
-        <br/>
-        <br/>       
-        We sell a variety of carefully curated luxury brands and trusted classics like Chanel, YSL, Urban Decay, Laura Mercier, Tom Ford, Mac, and NARs and more. We hope to add local brands to our online buying platform and help promote smaller Independent beauty brands.
+      <div class="about_row2">
+        <img class="bgimg" src="/static/img/about/底部@2x.png">
       </div>
-      <!-- <div class="about_text pd20">
-        <b>Prospects of Weget</b>
-      </div>
-      <div class="about_text">
-        Social media is currently the most popular platform, not only are users sharing lifestyles, it is changing people’s ideas of beauty, fashioning them for everyone, causing the industry to grow. Weget brings a successful business operation model in China to the U.S. to create a mobile app that integrates users, brands, and KOL of beauty products.
-      </div> -->
-    </div>
+    </footer>
   </div>
 </template>
 <script>
 export default {};
 </script>
 <style lang="scss" scoped>
-.about_content {
-  padding: 20px;
-  .about_text {
-    padding: 10px 0;
-    line-height: 1.5;
+.about_page {
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  min-width: 100%;
+  .about_head {
+    width: 100%;
+    padding: 20px 0;
+    margin: 0 auto;
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
-  .pdt20 {
-    padding: 20px;
+  section {
+    padding-bottom: 20px;
+    img {
+      width: 100%;
+    }
+  }
+  footer {
+    background: #000;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .bgimg {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    div.about_row1 {
+      width: 100%;
+      height: 80px;
+      background: url("/static/img/about/icon bg@2x.png") no-repeat;
+      background: cover;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      p {
+        position: absolute;
+        width: 80%;
+        height: 22px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        a {
+          margin: 0 15px;
+          img {
+            height: 22px;
+          }
+        }
+      }
+    }
+    // div.about_row2{
+    //   height: 50px;
+    //   background: #000;
+    //   color: rgb(124, 124, 124);
+    // }
   }
 }
 </style>
