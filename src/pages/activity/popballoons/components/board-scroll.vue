@@ -1,7 +1,7 @@
 <template>
   <div class="bulletin-board">
     <div class="board-texts">
-      <ul :class="{'scroll-ul':boardLists.length>0}">
+      <ul :class="{'scroll-ul':boardLists.length>2}">
         <li class="board-item"
           v-for="(item,index) in boardLists"
           :key="index">
@@ -13,7 +13,7 @@
           </p>
           <!-- 65765765765765 -->
           <p class="user-box">
-            <span>{{item.user_name}} 1s ago</span>
+            <span>{{item.user_name}} {{(new Date().getTime()) - (item.deal_time*1000)| timeAgo}} ago</span>
             <span>Got {{item.name}} for FREE</span>
           </p>
         </li>
@@ -46,6 +46,12 @@ export default {
   mounted() {},
   computed: {},
   methods: {},
+  filters: {
+    format_time(val) {
+      let time_str = "1 s";
+      return time_str;
+    }
+  },
   components: {}
 };
 </script>

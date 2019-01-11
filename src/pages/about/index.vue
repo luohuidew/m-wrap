@@ -13,12 +13,25 @@
       <img src="/static/img/about/关于我们4切图_10.jpg">
     </section>
     <footer>
-      <div>
+      <div class="about_row1">
+        <!-- <img class="bgimg" src="/static/img/about/icon bg@2x.png"> -->
         <p>
-          <img src="/static/img/about/iconF@2x.png">
-          <img src="/static/img/about/iconO@2x.png">
-          <img src="/static/img/about/iconA@2x.png">
+          <a href="javascript:;">
+            <img src="/static/img/about/底部logo@2x.png">
+          </a>
+          <a href="https://www.facebook.com/wegetofficial">
+            <img src="/static/img/about/iconF@2x.png">
+          </a>
+          <a href="https://www.instagram.com/shopweget">
+            <img src="/static/img/about/iconO@2x.png">
+          </a>
+          <a href="https://www.youtube.com/channel/UCJ2SmCasimMk8TCHxloaMtA">
+            <img src="/static/img/about/iconA@2x.png">
+          </a>
         </p>
+      </div>
+      <div class="about_row2">
+        <img class="bgimg" src="/static/img/about/底部@2x.png">
       </div>
     </footer>
   </div>
@@ -48,29 +61,45 @@ export default {};
     }
   }
   footer {
+    background: #000;
     width: 100%;
-    height: 131px;
-    background: url("/static/img/about/关于我们4切图_12.jpg");
-    background-size: cover;
-    div {
+    display: flex;
+    flex-direction: column;
+    .bgimg {
       width: 100%;
-      text-align: right;
-      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+    div.about_row1 {
+      width: 100%;
       height: 80px;
-      line-height: 80px;
-      padding-right: 30px;
+      background: url("/static/img/about/icon bg@2x.png") no-repeat;
+      background: cover;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
       p {
-        height: 70px;
         position: absolute;
+        width: 80%;
+        height: 22px;
         top: 50%;
-        transform: translateY(-50%);
-        right: 50px;
-        img {
-          height: 25px;
-          margin-right: 20px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        a {
+          margin: 0 15px;
+          img {
+            height: 22px;
+          }
         }
       }
     }
+    // div.about_row2{
+    //   height: 50px;
+    //   background: #000;
+    //   color: rgb(124, 124, 124);
+    // }
   }
 }
 </style>

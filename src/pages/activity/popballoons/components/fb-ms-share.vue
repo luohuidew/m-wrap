@@ -65,7 +65,7 @@ export default {
   height: 564px;
   background: url("/static/img/popballoons/background/click_tips_box.png")
     no-repeat center center;
-  // background-size: 100% 100%;
+  // background-size: 90% auto;
   .box-bg {
     width: 100%;
     height: auto;

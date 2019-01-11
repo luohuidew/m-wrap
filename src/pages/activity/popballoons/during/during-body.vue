@@ -20,13 +20,11 @@
         alt=""
         srcset=""
         @click="to_share(uid)">
-      <ac-copy v-if="!is_ios">
+      <ac-copy v-if="!is_weget">
         <img slot="box"
           src="/static/img/popballoons/btn/share_link.png"
           alt=""
-          srcset=""
-          height="40px"
-          style="height:40px">
+          srcset="">
         <p slot="tips">This link has been copied. <br /> Go share to your friends!</p>
       </ac-copy>
     </div>
@@ -116,7 +114,7 @@ export default {
     return {
       /*  */
       // uid:undefined,
-      is_ios: sessionStorage.getItem("is_ios") === "yes",
+      is_weget: localStorage.getItem('device'),
       is_fb_show: false,
       share_info: this.$store.state.popballoons_share_info,
       showData: {},
@@ -218,7 +216,9 @@ export default {
   width: 100%;
   // padding-left: 24px;
   position: relative;
-  z-index: 0;
+
+  // z-index: 20;
+  margin-top: 26px;
   // transform: translateY(-73px);
   .bg-pop-box {
     position: relative;
@@ -263,6 +263,7 @@ export default {
     img {
       width: auto;
       height: 152px;
+      max-width: 200px;
     }
 
     .you-got-it {

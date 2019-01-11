@@ -115,7 +115,7 @@ export default {
     // transform: translateX(-50%);
     text-align: center;
     img {
-      height: 40px;
+      height: 45px;
       margin: 10px 0 8px 0;
       width: auto;
     }

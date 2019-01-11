@@ -3,8 +3,7 @@
 module.exports = {
   // 选项...
   baseUrl: process.env.NODE_ENV === 'production' ?
-    '' : '/',
-  // assetsDir: 'assets', // 静态资源目录 (js, css, img, fonts)
+    '' : '/',  
 
   // configureWebpack: config => {
   //   if (process.env.NODE_ENV === 'production') {
@@ -19,6 +18,5 @@ module.exports = {
   //     };
   //     config.optimization.minimizer[0].options.sourceMap = false;
   //   }
-
   // }
 }

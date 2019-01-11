@@ -3,14 +3,21 @@
     v-show="show_fixed">
     <ul>
       <li>
-        <img src="/static/img/popballoons/icon/yinle@2x.png"
+        <img v-if="isPlaying"
+          src="/static/img/popballoons/icon/yinle@2x.png"
           alt="music"
-          srcset="">
-        <!-- <audio autoplay="autoplay"
-          controls="">
-          <source src="/static/img/popballoons/popballoons.mp3"
+          srcset=""
+          @click="stop_play">
+        <img v-else
+          src="/static/img/popballoons/icon/stop.png"
+          alt="music"
+          srcset=""
+          @click="start_play">
+        <audio id="audio"
+          loop="loop">
+          <source src="/static/bgmusic.mp3"
             type="audio/mpeg" />
-        </audio> -->
+        </audio>
         <!-- <video controls=""
           autoplay="autoplay"
           name="media">
@@ -35,9 +42,18 @@
 export default {
   name: "",
   data() {
-    return {};
+    return {
+      isPlaying: false
+    };
   },
-  mounted() {},
+  mounted() {
+    setTimeout(() => {
+      this.start_play();
+      // var audio = document.querySelector("#audio");
+      // let temp = audio.play();
+      // console.log(temp);
+    }, 3000);
+  },
   computed: {
     show_fixed() {
       let temp = this.$route.fullPath.indexOf("popballoons-gift") == -1;
@@ -55,18 +71,28 @@ export default {
       };
       this.$router.push(params);
     },
-    play() {
+    start_play() {
       var audio = document.querySelector("#audio");
+      // console.log(audio);
       if (!this.isPlaying) {
-        audio.play();
-        this.isPlaying = true;
+        // debugger;
+        let temp = audio.play();
+        temp.then(()=>{
+          this.isPlaying = true;
+          console.log('resolve')
+        }).catch(()=>{
+          this.isPlaying = false;
+          console.log('reject')
+        })
+        console.log(temp);
       }
     },
-    stop() {
+    stop_play() {
       var audio = document.querySelector("#audio");
       if (this.isPlaying) {
         audio.pause();
-        audio.currentTime = 0;
+        // audio.currentTime = 0;
+        this.isPlaying = false;
       }
     }
   },

@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'christmas':!from_myself}"
+  <div :class="{'popballoons-group':!from_myself}"
     v-if="is_ready">
     <template v-if="from_myself">
       <during @share="show_share_box=true"></during>
@@ -14,7 +14,8 @@
         <div class="pop-img-title">
           <img v-if="christmas.status===1"
             src="/static/img/popballoons/icon/sweet.png"
-            style="height:30px">
+            style="height: 35px;
+    marginTop: 10px;">
           <img v-else
             src="/static/img/popballoons/icon/timesup.png">
         </div>
@@ -63,20 +64,21 @@
           <a href="javascript:;"
             @click="try_again">
             <img src="/static/img/popballoons/btn/pop_want.png">
-          </a>         
+          </a>
         </div>
-      </div>    
+      </div>
       <scroll v-if="help_user"
-        :board-lists="help_user"></scroll>    
+        :board-lists="help_user"></scroll>
       <banner :style="{'margin-top':'0px'}"></banner>
       <rule v-show="show_rules"
-        @closerules="show_rules=false"></rule>     
+        @closerules="show_rules=false"></rule>
       <btn-box-click v-show="show_btn_box"
         @close="close_reload(lap_status)"
         :status="lap_status">
         <span slot="dialog-desc"
           class="desc-text">
           <template v-if="lap_status===1">
+            <br/>          
             Thank You!<br>
             You helped
             {{user_info.user_name}}!
@@ -280,7 +282,7 @@ export default {
     banner,
     during,
     acTips,
-    scroll
+    scroll,
   }
 };
 </script>
@@ -296,6 +298,9 @@ export default {
   font-size: 0;
   // background: url("/static/img/christmas/首页背景.jpg") no-repeat top center;
   // background-size: 100% 100%;
+}
+.popballoons-group {
+  padding: 0 20px;
 }
 .mbt10 {
   margin-bottom: 10px;
@@ -349,7 +354,7 @@ export default {
     // display: flex;
     // justify-content: center;
     // align-self: center;
-    top: 28px;
+    top: 20px;
     position: absolute;
     width: 85%;
     height: 54px;
@@ -365,7 +370,7 @@ export default {
     position: absolute;
     width: 85%;
     // height: 80px;
-    top: 80px;
+    top: 88px;
     left: 50%;
     align-items: center;
     transform: translateX(-50%);
@@ -420,7 +425,7 @@ export default {
 .tree-home-box {
   width: 100%;
   position: relative;
-  margin-top: -40px;
+  margin-top: -60px;
   .tree_photo {
     width: 100%;
     height: auto;
@@ -439,7 +444,7 @@ export default {
     width: 30%;
     height: 100px;
     position: absolute;
-    top: 67%;
+    top: 390px;
     left: 50%;
     transform: translate(-50%, -60%);
     float: left;
@@ -447,6 +452,8 @@ export default {
     .goods_img {
       height: 100%;
       width: auto;
+      max-width: 100%;
+      object-fit: contain;
     }
   }
   .date_photo {
@@ -467,6 +474,7 @@ export default {
     // left: 50%;
     // bottom: 75px;
     // transform: translateX(-50%);
+    // height: 120px;
     text-align: center;
     img {
       height: 50px;

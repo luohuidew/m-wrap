@@ -2,12 +2,18 @@
   <div class="btn-dialog">
     <div class="bg-wrapper">
       <div class="bg-img">
-        <img v-if="status===1" class="box-bg"
-          src="/static/img/popballoons/icon/fun.png"
-          alt="">
-        <img v-else class="box-bg"
+        <img v-if="status!==1"
+          class="box-bg"
           src="/static/img/popballoons/icon/sad.png"
           alt="">
+        <!-- <img v-else
+          class="box-bg"
+          src="/static/img/popballoons/icon/sad.png"
+          alt=""> -->
+        <div v-else
+          class="box-bg-trs">
+          <trans></trans>
+        </div>
         <!-- <p class="tips-text">Lit one light</p> -->
         <div class="btn-group">
           <slot name="dialog-desc"></slot>
@@ -25,12 +31,13 @@
 </template>
 
 <script>
+import trans from "./transtion-img";
 export default {
   name: "",
   data() {
     return {};
   },
-  props:['status'],
+  props: ["status"],
   mounted() {},
   computed: {},
   methods: {
@@ -39,7 +46,9 @@ export default {
       this.$emit("close", "close");
     }
   },
-  components: {}
+  components: {
+    trans
+  }
 };
 </script>
 
@@ -65,13 +74,21 @@ export default {
   transform: translate(-50%, -50%);
   width: 300px;
   height: 430px;
-  background: url("/static/img/popballoons/background/click_tips_box.png")
-    no-repeat center center;
+  background: url("/static/img/popballoons/background/no_pop.png") no-repeat
+    center center;
   background-size: 100% 100%;
   text-align: center;
   .box-bg {
     margin-top: 50px;
     width: 136px;
+    height: auto;
+  }
+  .box-bg-trs {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    // width: 136px;
+    text-align: center;
     height: auto;
   }
   .btn-group {

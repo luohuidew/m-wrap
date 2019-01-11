@@ -45,25 +45,21 @@ export default {
   components: {},
   methods: {
     to_detail(sku_id) {
-      if (window.weget_mobile_type === "iOS") {
-        let params = {
-          type: 106,
-          data: {
-            route: "wemall:///public/route?type=6&id=" + sku_id + ""
-          }
-        };
-        window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
-        // alert('to login');
-      } else {
-        // this.$router.push({ path: "/detail", query: { sku_id: sku_id } });
-        let params = {
+      let href_params = {
+        type: 106,
+        data: {
+          route: "wemall:///public/route?type=6&id=" + sku_id + ""
+        }
+      };
+      let temp = this.$CM.weget_device_link(href_params);
+      if (temp === "h5") {
+        this.$router.push({
           path: "/detail",
           query: {
             sku_id: sku_id
           }
-        };
-        this.$router.push(params);
-      };
+        });
+      }
       this.$emit("stop", "stop");
     }
   }

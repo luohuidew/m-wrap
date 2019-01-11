@@ -198,7 +198,7 @@ export default {
         font-size: 14px;
         border-radius: 4px;
         // height: 43px;
-        background: url("/static/img/popballoons/pop-list-title.png") no-repeat
+        background: url("/static/img/popballoons/background/pop-list-title.png") no-repeat
           center center;
         background-size: 90% 100%;
       }
@@ -227,6 +227,7 @@ export default {
         transform: translateX(-50%);
         height: 100px;
         width: auto;
+        max-width: 100%;
       }
     }
   }

@@ -5,7 +5,7 @@
       <during-header @showrules="show_rules=true"
         v-show="!share_show"></during-header>
       <during-body :uid="user_id"
-        :user-name="user_name" 
+        :user-name="user_name"
         :res="req_data"
         @share="share_to_group"></during-body>
     </template>
@@ -100,9 +100,14 @@ export default {
           this.user_id = res.data.id;
           this.user_name = res.data.user_name;
           this.is_ready = true;
-          if (this.info_type === 5 || this.info_type === 4) {
+          this.info_type = res.data.status;
+          if (this.info_type === 4) {
+            this.$router.replace({ name: "popballoons-lists" });
+          }
+          if (this.info_type === 5) {
             this.$router.replace({ name: "popballoons" });
           }
+          // debugger;
           if (res.data.isShow) {
             this.is_show_try = res.data.isShow;
           }
@@ -126,7 +131,6 @@ export default {
           share.getShareInfo(params).then(res => {
             console.log(res);
             this.login_load.clear();
-            this.info_type = result.data.status;
             this.$store.commit("set_popballoons_share_info", res.data);
           });
         });
@@ -203,12 +207,12 @@ export default {
   // min-height: 100%;
   // height: 920px;
   // min-width: 100%;
-  padding:20px;
+  padding: 20px;
   // overflow: auto;
   font-size: 0;
   // background: url("/static/img/popballoons/首页背景.jpg") no-repeat top center;
   // background-size: 100% 100%;
-  z-index: 0;
+  // z-index: 0;
 }
 .rules-tips-box {
   z-index: 40;

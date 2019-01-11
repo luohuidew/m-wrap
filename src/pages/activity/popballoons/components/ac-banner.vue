@@ -136,6 +136,7 @@ export default {
       position: relative;
       background: #fff;
       font-size: 0;
+      z-index: 0;
       .mask-info {
         position: absolute;
         left: 6px;
@@ -168,7 +169,8 @@ export default {
       }
       & > img {
         width: 100%;
-        max-height: 100px;
+        height: auto;
+        max-height: 120px;
         object-fit: cover;
       }
     }

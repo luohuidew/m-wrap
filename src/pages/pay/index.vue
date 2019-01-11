@@ -52,14 +52,18 @@
         </li> -->
       </ul>
     </div>
-    <div class="coupon-box item-box" id="promocoded">
-      <h3>PROMO CODED</h3>
+    <div class="coupon-box item-box"
+      id="promocoded">
+      <h3>PROMO</h3>
       <ul>
         <li class="standard"
           @click="to_coupon()">
           <p :class="{'no_select':!can_select_coupon}">
             <span>Coupon</span>
-            <span class="font-color">{{coupon.name?coupon.name:'Select Coupon'}}</span>
+            <span class="font-color"
+              v-if="coupon">{{coupon.name?coupon.name:'Select Coupon'}}</span>
+            <span class="font-color"
+              v-else>Select Coupon</span>
           </p>
         </li>
         <li class="borderor">
@@ -68,11 +72,18 @@
         </li>
         <li>
           <div class="enter-code">
-            <input type="text" @blur="go_check(code_number)" v-model="code_number" class="code-gray" placeholder="Enter Pormo Code">
-            <button>APPLY</button>
+            <input type="text"
+              class="code-gray"
+              v-model="cur_code"
+              placeholder="Enter Pormo Code">
+            <button @click="check_code(cur_code)">APPLY</button>
           </div>
+
         </li>
       </ul>
+    </div>
+    <div class="code-tips" v-show="code_tips">
+      {{code_tips}}
     </div>
     <div class="item">
       <h3>Summary</h3>
@@ -144,6 +155,7 @@
 <script>
 import accept from "./accept.vue";
 import api from "@/api/pay";
+import code from "@/api/code";
 export default {
   name: "",
   data() {
@@ -156,8 +168,10 @@ export default {
       ship_method: undefined,
       is_click: false,
       address_change: undefined,
-      can_select_coupon:true,
-      code_number:''
+      can_select_coupon: true,
+      code_tips: "",
+      cur_code: "",
+      right_code: undefined
     };
   },
   computed: {
@@ -175,7 +189,8 @@ export default {
           ? this.$route.query.group_id
           : undefined,
         user_coupon_id: this.coupon ? this.coupon.id : undefined,
-        address_change: this.address_change
+        address_change: this.address_change,
+        code_number: this.right_code
       };
     }
   },
@@ -218,7 +233,7 @@ export default {
           this.order_item = res.data.item;
           this.address_item = res.data.address;
           this.coupon = res.data.coupon_data;
-          if(res.data.coupon_data.name){
+          if (res.data.coupon_data.name) {
             this.can_select_coupon = false;
           }
           this.ship_method = res.data.ship_method.list[0];
@@ -236,6 +251,18 @@ export default {
             this.$router.go(-1);
           }
         });
+    },
+    check_code(code_num) {
+      code.checkCode({ code_number: code_num }).then(res => {
+        this.code_tips = res.data.message;
+        if (res.data.type === 1) {
+          this.right_code = this.cur_code;
+          this.coupon = undefined;
+          // this.$forceUpdate();
+        } else {
+          this.right_code = undefined;
+        }
+      });
     },
     // computed_select(){
     //    let order_detail = this.$store.state.order_detail;
@@ -280,7 +307,9 @@ export default {
       let params = {
         path: "/coupon"
       };
-      if(this.can_select_coupon){
+      if (this.can_select_coupon) {
+        this.right_code = undefined;
+        this.cur_code = undefined;
         this.$router.push(params);
       }
     },
@@ -408,6 +437,7 @@ $linecolor: #e9e9e9;
       // font-size: 18px;
       padding: 20px 0 10px 20px;
       font-weight: bold;
+      background-color: #f3f3f3;
     }
     ul {
       display: flex;
@@ -488,27 +518,36 @@ $linecolor: #e9e9e9;
     }
   }
 }
-#promocoded{
-  ul{
+.code-tips {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  // height: 40px;
+  background-color: #f3f3f3;
+  color: #d70e19;
+}
+#promocoded {
+  ul {
     padding: 0;
   }
-  li{
+  li {
     padding-left: 20px;
     border: 0;
-    p{
+    p {
       padding-top: 15px;
       padding-bottom: 15px;
     }
   }
-  .borderor{
-    padding-left:0;
+
+  .borderor {
+    padding-left: 0;
     padding-right: 0;
     height: 10px;
     font-size: 12px;
     line-height: 10px;
     position: relative;
-    div{
-      border-top: 1px solid #b6b6b6;;
+    div {
+      border-top: 1px solid #b6b6b6;
       width: 46%;
       height: 1px;
       position: absolute;
@@ -516,12 +555,12 @@ $linecolor: #e9e9e9;
       transform: translateY(-50%);
       left: 0;
     }
-    div.orright{
+    div.orright {
       right: 0;
       left: auto;
-    }    
-    span{
-      color: #b6b6b6;;
+    }
+    span {
+      color: #b6b6b6;
       position: absolute;
       width: 8%;
       text-align: center;
@@ -529,16 +568,16 @@ $linecolor: #e9e9e9;
       transform: translateX(-50%);
     }
   }
-  .enter-code{
+  .enter-code {
     font-size: 14px;
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
-    .code-gray{
+    .code-gray {
       color: #b6b6b6;
       border: 0;
     }
-    button{
+    button {
       width: 80px;
       height: 30px;
       line-height: 30px;
