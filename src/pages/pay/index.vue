@@ -52,7 +52,7 @@
         </li> -->
       </ul>
     </div>
-    <div class=" coupon-box item-box">
+    <div class="coupon-box item-box" id="promocoded">
       <h3>PROMO CODED</h3>
       <ul>
         <li class="standard"
@@ -61,6 +61,16 @@
             <span>Coupon</span>
             <span class="font-color">{{coupon.name?coupon.name:'Select Coupon'}}</span>
           </p>
+        </li>
+        <li class="borderor">
+          <div class="orleft"></div><span class="gray">OR</span>
+          <div class="orright"></div>
+        </li>
+        <li>
+          <div class="enter-code">
+            <input type="text" @blur="go_check(code_number)" v-model="code_number" class="code-gray" placeholder="Enter Pormo Code">
+            <button>APPLY</button>
+          </div>
         </li>
       </ul>
     </div>
@@ -146,7 +156,8 @@ export default {
       ship_method: undefined,
       is_click: false,
       address_change: undefined,
-      can_select_coupon:true
+      can_select_coupon:true,
+      code_number:''
     };
   },
   computed: {
@@ -474,6 +485,67 @@ $linecolor: #e9e9e9;
     .waiting {
       background: #f3f3f3;
       color: #c9caca;
+    }
+  }
+}
+#promocoded{
+  ul{
+    padding: 0;
+  }
+  li{
+    padding-left: 20px;
+    border: 0;
+    p{
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+  }
+  .borderor{
+    padding-left:0;
+    padding-right: 0;
+    height: 10px;
+    font-size: 12px;
+    line-height: 10px;
+    position: relative;
+    div{
+      border-top: 1px solid #b6b6b6;;
+      width: 46%;
+      height: 1px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+    }
+    div.orright{
+      right: 0;
+      left: auto;
+    }    
+    span{
+      color: #b6b6b6;;
+      position: absolute;
+      width: 8%;
+      text-align: center;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  .enter-code{
+    font-size: 14px;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    .code-gray{
+      color: #b6b6b6;
+      border: 0;
+    }
+    button{
+      width: 80px;
+      height: 30px;
+      line-height: 30px;
+      background: #d70e19;
+      border: 0;
+      color: #fff;
+      border-radius: 20px;
     }
   }
 }
