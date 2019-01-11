@@ -9,7 +9,10 @@
           v-if="sku.mask_info.mask_title"
           :style="{'background':'url('+sku.mask_info.mask_bg_image+') no-repeat center center','background-size':'auto 100%'}">
           <div :class="{'hot':sku.mask_info.mask_type===1,'new':sku.mask_info.mask_type===2,'off':sku.mask_info.mask_type===3}">
-            <p v-html="discount_text"></p>
+            <p class="mask-text">
+              <span v-for="(item,index) in discount_text"
+                :key="index">{{item}}</span>
+            </p>
           </div>
         </div>
       </div>
@@ -52,10 +55,7 @@ export default {
   data() {
     return {
       bought_user: this.sku.bought_user.slice(0, 4),
-      discount_text:
-        "<p>" +
-        this.sku.mask_info.mask_title.toString().replace(/\n|\r\n/g, "<br/>") +
-        "</p>"
+      discount_text: this.sku.mask_info.mask_title.split(/\n|\r\n/g)
     };
   },
   props: ["sku"],
@@ -107,6 +107,12 @@ export default {
       }
       .off {
         margin: 8px auto;
+      }
+      .mask-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
     }
   }

@@ -16,10 +16,12 @@
       <ul class="form-box">
         <li v-if="is_selected===1">
           <p class="email"><input type="text"
-              placeholder="Email Address" v-model="login_data.email"></p>
+              placeholder="Email Address"
+              v-model="login_data.email"></p>
           <p class="password"><input type="password"
-              placeholder="Password" v-model="login_data.password"></p>
-          <p class="forget"><span  @click.stop="to_reset">Forgot Password？</span></p>
+              placeholder="Password"
+              v-model="login_data.password"></p>
+          <p class="forget"><span @click.stop="to_reset">Forgot Password？</span></p>
           <p class="link-btn">
             <a href="javascript:;"
               @click="login">Login</a>
@@ -27,16 +29,20 @@
         </li>
         <li v-else>
           <p class="email"><input type="text"
-              placeholder="Email Address" v-model="signup_data.email"></p>
+              placeholder="Email Address"
+              v-model="signup_data.email"></p>
           <p class="password"><input type="password"
-              placeholder="Password" v-model="signup_data.password"></p>
+              placeholder="Password"
+              v-model="signup_data.password"></p>
           <p class="display-name">
             <input type="text"
               class="first-name"
-              placeholder="First Name" v-model="signup_data.first_name">
+              placeholder="First Name"
+              v-model="signup_data.first_name">
             <input type="text"
               class="last-name"
-              placeholder="Last Name" v-model="signup_data.last_name">
+              placeholder="Last Name"
+              v-model="signup_data.last_name">
           </p>
           <p class="link-btn">
             <a href="javascript:;"
@@ -46,9 +52,9 @@
       </ul>
     </div>
     <div class="agree-policy">
-          <p>By joining,  you agree to our</p>
-          <p class="unline-text" @click.stop="to_policy">Privacy Policy</p>
-        </div>
+      <p>By joining, you agree to our</p>
+      <p class="unline-text"><span @click.stop="to_policy"> Privacy Policy</span></p>
+    </div>
   </div>
 </template>
 
@@ -59,15 +65,15 @@ export default {
     return {
       is_selected: 0,
       tab_title: ["SIGN UP", "SIGN IN"],
-      login_data:{
-        email:'',
-        password:''
+      login_data: {
+        email: "",
+        password: ""
       },
-      signup_data:{
-        email:'',
-        password:'',
-        first_name:'',
-        last_name:''
+      signup_data: {
+        email: "",
+        password: "",
+        first_name: "",
+        last_name: ""
       }
     };
   },
@@ -94,13 +100,12 @@ export default {
       };
       this.$emit("submit-form", data);
     },
-    to_policy(){
-      this.$router.push({name:'statement'});
+    to_policy() {
+      this.$router.push({ name: "statement" });
     },
-    to_reset(){
-      this.$router.push({name:'reset-pass'});
+    to_reset() {
+      this.$router.push({ name: "reset-pass" });
     }
-    
   },
   components: {}
 };

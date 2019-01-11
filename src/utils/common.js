@@ -2,14 +2,14 @@ import Vue from 'vue';
 // import Meta from 'vue-meta';
 // Vue.use(Meta);
 const ua = navigator.userAgent.toLowerCase();
-console.log(ua);
+// alert(ua);
 const CM = {
   goback(that) {
     // Vue.$router.back(-1);
     that.$router.back(-1)
   },
   is_safari() {
-    if (ua.indexOf('safari') !== -1 && ua.indexOf('chrome') == -1) {
+    if (ua.indexOf('safari') !== -1 && (ua.indexOf('chrome') == -1) && (ua.indexOf('crios') == -1)) {
       return true;
     } else {
       return false;
