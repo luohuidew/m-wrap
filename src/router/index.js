@@ -94,7 +94,18 @@ export default new Router({
           title: '',
           keepAlive: false
         }
-      }]
+      },
+      {
+        path: 'ac-4',
+        name: 'ac-4',
+        component: () =>
+          import('@/pages/article/ac-4'),
+        meta: {
+          title: '',
+          keepAlive: false
+        }
+      }
+    ]
     },
 
     {
