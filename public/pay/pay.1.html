@@ -18,7 +18,7 @@
     </div>
     <div class="order-info">
       <p>Order: # <span id="order"></span></p>
-      <p>Order Total: <span id="total"></span> </p>
+      <p>Order Total: $<span id="total"></span> </p>
     </div>
   </div>
   <!-- 测试的 -->
@@ -53,17 +53,15 @@
     /* 
     初始化函数获取order */
     function init_data() {
-      // debugger;
       var order_no = GetQueryString('order_no');
       var total = GetQueryString('total');
       $('#order').text(order_no);
       $('#total').text(total);
-      if ($('#pay_btn')[0].dataset.apiloginid) {
-        // debugger;
-        var scpt = document.createElement("script");
-        scpt.src = "https://js.authorize.net/v3/AcceptUI.js";
-        document.getElementsByTagName("head")[0].appendChild(scpt);
-      }
+      // if ($('#pay_btn')[0].dataset.apiloginid) {
+      //   var scpt = document.createElement("script");
+      //   scpt.src = "https://js.authorize.net/v3/AcceptUI.js";
+      //   document.getElementsByTagName("head")[0].appendChild(scpt);
+      // }
     }
     /* 发送支付的信息返回 */
     function send_message(params) {
@@ -113,14 +111,12 @@
       console.log(opaqueData);
       var params = opaqueData;
       params.order_no = GetQueryString('order_no');
-      // debugger;
       $('.loading').show();
       $('.pay-form').hide();
       let ajax_url = "http://app.weget.pzjhw.com:8088/index.php/wap/pay/pay";
       if (window.location.href.indexOf('https://') !== -1) {
         ajax_url = "https://app.weget.com/wap/pay/pay";
       }
-      debugger;
       $.ajax({
         url: ajax_url,
         type: "post",

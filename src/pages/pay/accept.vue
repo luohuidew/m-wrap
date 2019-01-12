@@ -9,7 +9,7 @@
     <template v-else>
       <iframe class="pay-frame"
         ref="payAccept"
-        :src="'/pay/pay.2.html?order_no='+order_no+'&total='+total"
+        :src="'/pay/pay.1.html?order_no='+order_no+'&total='+total"
         frameborder="0"></iframe>
     </template>
     <div class="loading-box"
@@ -40,7 +40,7 @@ window.close = function(response) {
   console.log(response);
   if (response.code == 1000) {
     window.location.replace(
-      // window.location.origin + "/callback?order_no=" + response.data.order_no
+      window.location.origin + "/callback?order_no=" + response.data.order_no
     );
   }else {
     alert(response.message);
@@ -48,7 +48,7 @@ window.close = function(response) {
     // console.log(callback_url);
     setTimeout(()=>{
 
-      // window.location.replace(callback_url);
+      window.location.replace(callback_url);
     },3000);
   }
 };

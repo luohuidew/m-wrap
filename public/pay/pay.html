@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./css/layout.css">
   <title>PAY</title>
 </head>
+
 <body>
   <div class="show-box">
     <div class="img-tips">
@@ -16,7 +17,7 @@
     </div>
     <div class="order-info">
       <p>Order: # <span id="order"></span></p>
-      <p>Order Total: <span id="total"></span> </p>
+      <p>Order Total: $<span id="total"></span> </p>
     </div>
   </div>
   <!-- 测试的 -->
@@ -56,18 +57,10 @@
       var total = GetQueryString('total');
       $('#order').text(order_no);
       $('#total').text(total);
-      if ($('#pay_btn')[0].dataset.apiloginid) {
-        // debugger;
-        var scpt = document.createElement("script");
-        scpt.src = "https://jstest.authorize.net/v3/AcceptUI.js";
-        document.getElementsByTagName("head")[0].appendChild(scpt);
-      }
     }
     /* 发送支付的信息返回 */
     function send_message(params) {
       if (GetQueryString('device_type') == 'android') {
-
-
         window.weget_mobile_type.nativeToJavaScript_pay(JSON.stringify(params));
         // alert(JSON.stringify(params));
       } else if (GetQueryString('device_type') == 'ios') {
@@ -118,7 +111,7 @@
       if (window.location.href.indexOf('https://') !== -1) {
         ajax_url = "https://app.weget.com/wap/pay/pay";
       }
-      debugger;
+      // debugger;
       $.ajax({
         url: ajax_url,
         type: "post",

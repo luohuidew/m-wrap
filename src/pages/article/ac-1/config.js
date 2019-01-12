@@ -39,13 +39,6 @@ const data = [{
       img_url: '/static/img/activity-img/ac-1/Get-the-fabulous-smile-without-a-fancy-toothpaste_08.jpg'
     }]
   },
-  // {
-  //   type: 'goods',
-  //   url: [{
-  //     sku_id: '',
-  //     img_url: '/static/img/activity-img/ac-1/Get-the-fabulous-smile-without-a-fancy-toothpaste_09.jpg'
-  //   }]
-  // },
    {
     type: 'goods',
     url: [{

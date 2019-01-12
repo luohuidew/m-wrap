@@ -16,6 +16,16 @@ export default new Router({
       }
     },
     {
+      path: '/store',
+      name: 'store',
+      component: () =>
+        import('@/pages/store'),
+      meta: {
+        title: 'store',
+        keepAlive: false
+      }
+    },
+    {
       path: '/login',
       name: 'login',
       component: () =>
@@ -94,7 +104,18 @@ export default new Router({
           title: '',
           keepAlive: false
         }
-      }]
+      },
+      {
+        path: 'ac-4',
+        name: 'ac-4',
+        component: () =>
+          import('@/pages/article/ac-4'),
+        meta: {
+          title: '',
+          keepAlive: false
+        }
+      }
+    ]
     },
 
     {

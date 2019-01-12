@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- <home-header></home-header> -->
     <transition :name="transitionName">
       <router-view class="child-view"></router-view>
       <!-- <router-view></router-view> -->
@@ -13,6 +14,7 @@
 <script>
 import shareApp from "@/components/dialog/share-app";
 import loginAuto from "@/pages/login/auth/facebook.vue";
+import homeHeader from '@/components/home-header';
 export default {
   name: "App",
   data() {
@@ -72,7 +74,8 @@ export default {
   },
   components: {
     loginAuto,
-    shareApp
+    shareApp,
+    homeHeader
   }
 };
 </script>
@@ -83,11 +86,11 @@ export default {
   /* margin-top:50px; */
 }
 .child-view {
-  position: absolute;
-  left: 0;
-  top: 0;
+  /* position: absolute; */
+  /* left: 0; */
+  /* top: 0; */
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
 .slide-left-enter,
