@@ -104,6 +104,26 @@ export default new Router({
           title: '',
           keepAlive: false
         }
+      },
+      {
+        path: 'ac-5',
+        name: 'ac-5',
+        component: () =>
+          import('@/pages/article/ac-5'),
+        meta: {
+          title: '',
+          keepAlive: false
+        }
+      },
+      {
+        path: 'ac-6',
+        name: 'ac-6',
+        component: () =>
+          import('@/pages/article/ac-6'),
+        meta: {
+          title: '',
+          keepAlive: false
+        }
       }
     ]
     },
