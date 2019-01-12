@@ -73,8 +73,9 @@ export default {};
     div.about_row1 {
       width: 100%;
       height: 80px;
-      background: url("/static/img/about/icon bg@2x.png") no-repeat;
-      background: cover;
+      // background: url("/static/img/about/icon bg@2x.png") no-repeat;
+      // background: cover;
+      background-color: rgb(33,33,33);
       margin: 0;
       padding: 0;
       overflow: hidden;

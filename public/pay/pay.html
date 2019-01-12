@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=416, user-scalable=no, target-densitydpi=device-dpi">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/layout.css">
+  <title>PAY</title>
+</head>
+<body>
+  <div class="show-box">
+    <div class="img-tips">
+      <img src="./static/created.png" alt="">
+      <p> Order Summary</p>
+    </div>
+    <div class="order-info">
+      <p>Order: # <span id="order"></span></p>
+      <p>Order Total: <span id="total"></span> </p>
+    </div>
+  </div>
+  <!-- 测试的 -->
+  <div class="pay-form">
+    <form id="paymentForm" method="POST" action="">
+      <input type="hidden" name="dataValue" id="dataValue" />
+      <input type="hidden" name="dataDescriptor" id="dataDescriptor" />
+      <button type="button" class="AcceptUI" data-billingAddressOptions='{"show":false, "required":false}'
+        data-apiLoginID="87YXn3mP" data-clientKey="35N55mdG9ra8aVL44v477MV5SHBWt38FF5mRfPCZPcd82NV4c566kwB95zVX86UE"
+        data-acceptUIFormBtnTxt="Submit" data-acceptUIFormHeaderTxt="Card Information" data-responseHandler="responseHandler">Continue
+        Checkout
+      </button>
+    </form>
+  </div>
+  <div class="loading">
+    <span class="loadingUI">Payments <span class="load-text l1"></span><span class="load-text l2"></span><span class="load-text l3"></span></span>
+  </div>
+  <script src="./js/jquery.min.js"></script>
+  <script type="text/javascript" src="https://js.authorize.net/v3/AcceptUI.js"></script>
+  <script type="text/javascript">
+    var temp;
+    $(function () {
+      init_data();
+    })
+    /* 截取url参数 */
+    function GetQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return r[2];
+      return null;
+    };
+    /* 
+    初始化函数获取order */
+    function init_data() {
+      // debugger;
+      var order_no = GetQueryString('order_no');
+      var total = GetQueryString('total');
+      $('#order').text(order_no);
+      $('#total').text(total);
+      if ($('#pay_btn')[0].dataset.apiloginid) {
+        // debugger;
+        var scpt = document.createElement("script");
+        scpt.src = "https://jstest.authorize.net/v3/AcceptUI.js";
+        document.getElementsByTagName("head")[0].appendChild(scpt);
+      }
+    }
+    /* 发送支付的信息返回 */
+    function send_message(params) {
+      if (GetQueryString('device_type') == 'android') {
+
+
+        window.weget_mobile_type.nativeToJavaScript_pay(JSON.stringify(params));
+        // alert(JSON.stringify(params));
+      } else if (GetQueryString('device_type') == 'ios') {
+        window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
+      } else {
+        top.close(params);
+      }
+    }
+    /* 点击按钮获取秘钥 */
+    function responseHandler(response) {
+      if (response.messages.resultCode === "Error") {
+        var i = 0;
+        while (i < response.messages.message.length) {
+          console.log(
+            response.messages.message[i].code + ":" +
+            response.messages.message[i].text
+          );
+          i = i + 1;
+        }
+      } else {
+        paymentFormUpdate(response.opaqueData);
+      }
+    }
+    /* 
+      ios调用的方法
+    */
+    function nativeToJavaScript(res) {
+      temp = res;
+      if (temp.type == 1000) {
+        // $('#order').text(temp.data.order_no);
+        // $('#total').text(temp.data.price);
+      }
+    }
+    /* 
+      支付的参数方法
+    */
+    function paymentFormUpdate(opaqueData) {
+
+      document.getElementById("dataDescriptor").value = opaqueData.dataDescriptor;
+      document.getElementById("dataValue").value = opaqueData.dataValue;
+      console.log(opaqueData);
+      var params = opaqueData;
+      params.order_no = GetQueryString('order_no');
+      // debugger;
+      $('.loading').show();
+      $('.pay-form').hide();
+      let ajax_url = "http://app.weget.pzjhw.com:8088/index.php/wap/pay/pay";
+      if (window.location.href.indexOf('https://') !== -1) {
+        ajax_url = "https://app.weget.com/wap/pay/pay";
+      }
+      debugger;
+      $.ajax({
+        url: ajax_url,
+        type: "post",
+        data: params,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        success: function (data, status, xhr) {
+          var params = {
+            "type": 101,
+            "code": data.code,
+            "data": data.data,
+            "message": data.message,
+            "http_code": xhr.status
+          };
+          send_message(params);
+        },
+        error: function (e, xhr, status, statusText) {
+          var params = {
+            "type": 101,
+            "data": e,
+            "http_code": xhr.status
+          };
+          send_message(params);
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>
