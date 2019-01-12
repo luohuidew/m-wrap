@@ -17,24 +17,24 @@
          activity_lists:[
              {
                  title:'New arrival',
-                 img_url:'',
-                 href_path:'newArrival'
+                 img_url:'https://we-get.s3.us-west-1.amazonaws.com/46645505c39a4ab25c2d.jpg',
+                 href_path:'/article/ac-5'
              },
              {
                  title:'limited time',
-                 img_url:'',
-                 href_path:'limited'
+                 img_url:'https://we-get.s3.us-west-1.amazonaws.com/13810214285c39a4956a559.jpg',
+                 href_path:'/article/ac-4'
              },
-             {
-                 title:'$9.9',
-                 img_url:'',
-                 href_path:'cheap'
-             },
-             {
-                 title:'',
-                 img_url:'/static/img/free.png',
-                 href_path:'free'
-             },
+            //  {
+            //      title:'$9.9',
+            //      img_url:'',
+            //      href_path:'cheap'
+            //  },
+            //  {
+            //      title:'',
+            //      img_url:'/static/img/free.png',
+            //      href_path:'free'
+            //  },
          ]
      }
    },
@@ -43,7 +43,7 @@
    },
    methods:{
        to_activity(path){
-           this.$router.push({name:path});
+           this.$router.push({path:path});
        }
    }
  }
@@ -51,18 +51,18 @@
 
 <style lang="scss" scoped>
 .activity {
-    height:294px;
+    // height:294px;
     padding:10px;
     ul {
         display: flex;
         width:100%;
-        height:100%;
+        // height:100%;
         justify-content: space-between;
         flex-wrap: wrap;
         li {
             width:49%;
             height:47%;
-            background-color: #ccc;
+            // background-color: #ccc;
             overflow: hidden;
             img {
                 width:100%;

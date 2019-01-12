@@ -3,7 +3,7 @@
     v-scroll="get_more_data">
     <home-header></home-header>
     <banner></banner>
-    <!-- <activity></activity> -->
+    <activity></activity>
     <!-- <show></show> -->
     <!-- <final></final> -->
     <!-- <new-arrival></new-arrival> -->

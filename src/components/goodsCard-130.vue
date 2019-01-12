@@ -117,8 +117,8 @@ export default {
     }
   }
   img {
-    height: 100%;
-    width: 100%;
+    height: 156px;
+    width: 156px;
   }
 }
 .goods-des {

@@ -78,7 +78,7 @@ export default {
     display: inline-block;
     padding-right: 20px;
     li {
-      width: 170px;
+      // width: 170px;
       //   height: 175px;
       // background-color: blueviolet;
       display: inline-block;
