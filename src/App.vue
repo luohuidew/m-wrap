@@ -1,10 +1,15 @@
 <template>
   <div id="app">
-    <!-- <home-header></home-header> -->
-    <transition :name="transitionName">
-      <router-view class="child-view"></router-view>
-      <!-- <router-view></router-view> -->
-    </transition>
+    <div class="page-head" >
+      <home-header v-if="!no_head"></home-header>
+    </div>
+    <div class="page-body" :class="{'in-app':no_head}">
+      <transition :name="transitionName">
+        <router-view class="child-view"></router-view>
+        <!-- <router-view></router-view> -->
+      </transition>
+
+    </div>
     <!-- <div class="auto-login"> -->
     <!-- <login-auto></login-auto> -->
     <!-- </div> -->
@@ -14,7 +19,7 @@
 <script>
 import shareApp from "@/components/dialog/share-app";
 import loginAuto from "@/pages/login/auth/facebook.vue";
-import homeHeader from '@/components/home-header';
+import homeHeader from "@/components/home-header";
 export default {
   name: "App",
   data() {
@@ -25,6 +30,17 @@ export default {
   computed: {
     share_token() {
       return this.$store.state.share_token;
+    },
+    no_head(){
+      let temp = this.$route.path;
+      if(temp==='/accept' || (
+        localStorage.getItem("device") === "ios" ||
+        localStorage.getItem("device") === "android"
+      )){
+        return true
+      }else {
+        return false;
+      }
     }
   },
   watch: {
@@ -53,9 +69,9 @@ export default {
   },
   methods: {
     init_meta() {
-      document.title = this.$route.meta.title
-        ? this.$route.meta.title
-        : "Weget";
+      // document.title = this.$route.meta.title
+      //   ? this.$route.meta.title
+      //   : "Weget";
     },
     init_transtion(to, from) {
       if (to.path == "/home/weget") {
@@ -82,8 +98,22 @@ export default {
 
 <style>
 #app {
+  /* display: flex; */
+  /* height: 100%; */
+  flex-direction: column;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   /* margin-top:50px; */
+}
+.page-head {
+  /* height: 50px; */
+  /* background-color: #f3f3f3; */
+}
+.page-body {
+  /* flex:1; */
+  height: calc(100% - 50px);
+}
+.in-app {
+  height: 100%;
 }
 .child-view {
   /* position: absolute; */

@@ -10,6 +10,7 @@
 </head>
 
 <body>
+
   <div class="show-box">
     <div class="img-tips">
       <img src="./static/created.png" alt="">
@@ -25,8 +26,8 @@
     <form id="paymentForm" method="POST" action="">
       <input type="hidden" name="dataValue" id="dataValue" />
       <input type="hidden" name="dataDescriptor" id="dataDescriptor" />
-      <button type="button" class="AcceptUI" data-billingAddressOptions='{"show":false, "required":false}'
-        data-apiLoginID="87YXn3mP" data-clientKey="35N55mdG9ra8aVL44v477MV5SHBWt38FF5mRfPCZPcd82NV4c566kwB95zVX86UE"
+      <button id="pay_btn" type="button" class="AcceptUI" data-billingAddressOptions='{"show":false, "required":true}'
+        data-apiLoginID="5CMZa8dphY89" data-clientKey="3N5ZK9drwKYgtZP34n5Z25uLy6t63FnRtzdXhWs28XVM4bp4u3NrbK8Gh3BSjZzd"
         data-acceptUIFormBtnTxt="Submit" data-acceptUIFormHeaderTxt="Card Information" data-responseHandler="responseHandler">Continue
         Checkout
       </button>
@@ -36,7 +37,7 @@
     <span class="loadingUI">Payments <span class="load-text l1"></span><span class="load-text l2"></span><span class="load-text l3"></span></span>
   </div>
   <script src="./js/jquery.min.js"></script>
-  <script type="text/javascript" src="https://js.authorize.net/v3/AcceptUI.js"></script>
+  <script type="text/javascript" src="https://jstest.authorize.net/v3/AcceptUI.js"></script>
   <script type="text/javascript">
     var temp;
     $(function () {
@@ -52,15 +53,21 @@
     /* 
     初始化函数获取order */
     function init_data() {
-      // debugger;
       var order_no = GetQueryString('order_no');
       var total = GetQueryString('total');
       $('#order').text(order_no);
       $('#total').text(total);
+      // if ($('#pay_btn')[0].dataset.apiloginid) {
+      //   var scpt = document.createElement("script");
+      //   scpt.src = "https://js.authorize.net/v3/AcceptUI.js";
+      //   document.getElementsByTagName("head")[0].appendChild(scpt);
+      // }
     }
     /* 发送支付的信息返回 */
     function send_message(params) {
       if (GetQueryString('device_type') == 'android') {
+
+
         window.weget_mobile_type.nativeToJavaScript_pay(JSON.stringify(params));
         // alert(JSON.stringify(params));
       } else if (GetQueryString('device_type') == 'ios') {
@@ -104,16 +111,10 @@
       console.log(opaqueData);
       var params = opaqueData;
       params.order_no = GetQueryString('order_no');
-      // debugger;
       $('.loading').show();
-      $('.pay-form').hide();
-      let ajax_url = "http://app.weget.pzjhw.com:8088/index.php/wap/pay/pay";
-      if (window.location.href.indexOf('https://') !== -1) {
-        ajax_url = "https://app.weget.com/wap/pay/pay";
-      }
-      // debugger;
+      $('.pay-form').hide();     
       $.ajax({
-        url: 'https://app.weget.com/wap/pay/pay',
+        url: 'https://www.weget.com/index.php/wap/pay/pay',
         type: "post",
         data: params,
         headers: {

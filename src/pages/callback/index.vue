@@ -187,10 +187,17 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  
 }
 .sku-item {
   // flex:1;
+  width: 50%;
   max-width: 49%;
+  .goods-img {
+    img {
+      height: 170px;
+    }
+  }
 }
 .sale-list-tips {
   border-top: 1px solid #e9e9e9;

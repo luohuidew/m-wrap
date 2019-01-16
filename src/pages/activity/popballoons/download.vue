@@ -61,7 +61,7 @@ export default {
         type: 106,
         data: {
           route:
-            "wemall:///public/route?type=6&coupon_id=" +
+            "wemall://public/route?type=6&coupon_id=" +
             coupon_id +
             "?id=" +
             sku_id +

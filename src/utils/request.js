@@ -120,56 +120,41 @@ service.interceptors.response.use(
       // console.log(JSON.stringify(res.message));
       if (res.code === 1207 || res.code === 1209) {
         /* 清空旧的token */
-        removeToken();
+        
+        let params;
+        if (getToken()) {
+          params = {
+            type: 104,
+            data: {}
+          };
+          removeToken();
+        } else {
+          params = {
+            type: 103,
+            data: {}
+          };
+        }
         // console.log(window.weget_mobile_type);
         /* window.weget_mobile_type   用来检测是否处于 */
         // alert(window.weget_mobile_type)
         /* 判断登录，选择不同的登录方式 */
-        if (localStorage.getItem('device')==='ios') {
-          /* ios环境的判断 */
-          let params;
-          if (res.code === 1207) {
-            params = {
-              type: 103,
-              data: {}
-            };
-          }
-          if (res.code === 1209) {
-            params = {
-              type: 104,
-              data: {}
-            };
-          }
-          window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
-        } else if(localStorage.getItem('device')==='android') {
+        if (localStorage.getItem('device') === 'ios') {      
+          let temp_params = params
+          window.webkit.messageHandlers.javaScriptToNative.postMessage(temp_params);
+        } else if (localStorage.getItem('device') === 'android') {
           /* android环境的判断 */
-          let params;
-          if (res.code === 1207) {
-            params = {
-              type: 103,
-              data: {}
-            };
-          }
-          if (res.code === 1209) {
-            params = {
-              type: 104,
-              data: {}
-            };
-          }
-          // window.weget_mobile_type.nativeToJavaScript(params);
-          let and_token = window.weget_mobile_type.nativeToJavaScript_sendToken();     
+          let temp_params = JSON.stringify(params);
+          window.weget_mobile_type.nativeToJavaScript(temp_params);
+          let and_token = window.weget_mobile_type.nativeToJavaScript_sendToken();
           if (and_token) {
-            setToken(and_token);
-            if (getToken()) {
-              // window.location.reload();
-            }
+            setToken(and_token);           
           }
         } else {
           // alert($CM.is_ins());
           /* h5环境的判断 */
           if ($CM.is_ins() || $CM.is_snapchat() || $CM.is_weixin()) {
             /* 第三方 */
-            window.location.href = window.location.origin + "/login?autoshow=1&redirect=" +encodeURIComponent(window.location.href);
+            window.location.href = window.location.origin + "/login?autoshow=1&redirect=" + encodeURIComponent(window.location.href);
           } else {
             window.location.href = window.location.origin + "/login?redirect=" + encodeURIComponent(window.location.href);
           }

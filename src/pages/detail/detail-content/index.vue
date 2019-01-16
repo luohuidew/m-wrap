@@ -29,8 +29,8 @@
           </div>
           <div class="price-box">
             <p class="price">
-              <span class="cur-price">${{cur_goods.alone_price}}</span>
-              <span class="old-price">${{cur_goods.market_price}}</span>
+              <span class="cur-price">${{cur_goods.group_price}}</span>
+              <span class="old-price">${{cur_goods.alone_price}}</span>
             </p>
             <p class="like-number">
               {{sku.bought_num}} bought
@@ -70,7 +70,7 @@
         <!-- <group v-if="group"
           :group="group"
           :goods="cur_goods"></group> -->
-        <div class="store-box" v-if="store_info.store_id">
+        <!-- <div class="store-box" v-if="store_info.store_id">
           <div class="store-title">
             <p>
               <img :src="store_info.logo"
@@ -95,14 +95,16 @@
               <span>Bought</span>
             </li>
           </ul>
-        </div>
+        </div> -->
+        <detail-store :item="store_info"></detail-store>
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
         <!-- <shipping></shipping> -->
         <review v-if="review"
           :review="review"></review>
         <!-- <detail-welog></detail-welog> -->
-        <!-- <similar ></similar> -->
+        <similar-cate v-if="same_category.data" :data-list="same_category.data"></similar-cate>
+        <similar-brand v-if="same_brand.data" :data-list="same_brand.data"></similar-brand>
       </div>
     </div>
     <detail-pay-btn v-if="cur_goods"
@@ -112,7 +114,7 @@
       :cur-goods="cur_goods"
       :attr-list="attr_list"
       :cur_group_id="cur_group_id"
-      ref="change_btn"></detail-pay-btn>
+      ref="change_btn" class="btn-detail"></detail-pay-btn>
     <share-app :token="share_token"
       v-if="share_token"></share-app>
     <!-- <share-app v-else></share-app> -->
@@ -125,10 +127,12 @@ import shareApp from "@/components/dialog/share-app";
 // import goodsDes from "./goods-des.vue";
 // import group from "./group.vue";
 import detailMore from "./detail-more.vue";
+import detailStore from "./detail-store"
 // import shipping from "./shipping.vue";
 import review from "./review.vue";
 // import detailWelog from "./detail-welog.vue";
-// import similar from "./similar.vue";
+import similarBrand from "./similar-brand";
+import similarCate from "./similar-cate";
 import detailPayBtn from "../detail-pay-btn.vue";
 import api from "@/api/product";
 import share from "@/api/share";
@@ -165,6 +169,8 @@ export default {
         share_url: "",
         image_url: ""
       },
+      same_brand:undefined,
+      same_category:undefined,
       router_group_id: undefined,
       share_token: "",
       act_type: this.$route.query.act_type
@@ -228,6 +234,7 @@ export default {
       let share_params;
       api.detail(params).then(res => {
         console.log(res);
+        document.title = res.data.sku.title;
         let temp_data = res.data;
         for (let key in temp_data) {
           this[key] = temp_data[key];
@@ -238,6 +245,7 @@ export default {
           share_type: 2
         };
         let that = this;
+
         share.getShareInfo(share_params).then(res => {
           let share_token = res.data.share_token;
           // this.$store.state.share_token = share_token;
@@ -287,10 +295,12 @@ export default {
     // goodsDes,
     // group,
     detailMore,
+    detailStore,
     // shipping,
     review,
     // detailWelog,
-    // similar,
+    similarBrand,
+    similarCate,
     detailPayBtn,
     shareApp
   }
@@ -313,6 +323,9 @@ export default {
   }
 }
 
+.btn-detail {
+  margin-top: 30px;
+}
 .group {
   padding: 20px 20px 30px 20px;
   font-size: 14px;
@@ -337,80 +350,80 @@ export default {
     text-overflow: ellipsis;
   }
 }
-.store-box {
-  padding: 20px;
-  border-top: 10px solid #f8f8f8;
-  border-bottom: 10px solid #f8f8f8;
-  .store-title {
-    display: flex;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #f3f3f3;
-    & > p {
-      display: flex;
-      align-items: center;
-    }
-    img {
-      width: 50px;
-      height: 50px;
-    }
-    .store-desc {
-      flex: 1;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: bold;
-      padding: 0 40px 0 10px;
-      .desc-min {
-        height: 26px;
-        // display: -webkit-box;
-        font-size: 12px;
-        padding-top: 10px;
-        color: #9b9b9b;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-    .store-btn {
-      width: 60px;
-      display: flex;
-      a {
-        width: 100%;
-        font-size: 12px;
-        border: 1px solid #f3f3f3;
-        color: #9b9b9b;
-        text-align: center;
-        height: 30px;
-        line-height: 30px;
-        // padding: 8px 0;
-        border-radius: 13px;
-      }
-    }
-  }
-  .store-account {
-    padding-top: 18px;
-    display: flex;
-    justify-content: center;
-    li {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      &:nth-child(1) {
-        border-right: 1px solid #f3f3f3;
-      }
-      span {
-        font-size: 14px;
-        &:nth-child(2) {
-          padding-top: 10px;
-          font-size: 12px;
-          color: #9b9b9b;
-        }
-      }
-    }
-  }
-}
+// .store-box {
+//   padding: 20px;
+//   border-top: 10px solid #f8f8f8;
+//   border-bottom: 10px solid #f8f8f8;
+//   .store-title {
+//     display: flex;
+//     padding-bottom: 20px;
+//     border-bottom: 1px solid #f3f3f3;
+//     & > p {
+//       display: flex;
+//       align-items: center;
+//     }
+//     img {
+//       width: 50px;
+//       height: 50px;
+//     }
+//     .store-desc {
+//       flex: 1;
+//       flex-direction: column;
+//       align-items: flex-start;
+//       justify-content: center;
+//       font-size: 18px;
+//       font-weight: bold;
+//       padding: 0 40px 0 10px;
+//       .desc-min {
+//         height: 26px;
+//         // display: -webkit-box;
+//         font-size: 12px;
+//         padding-top: 10px;
+//         color: #9b9b9b;
+//         overflow: hidden;
+//         text-overflow: ellipsis;
+//       }
+//     }
+//     .store-btn {
+//       width: 60px;
+//       display: flex;
+//       a {
+//         width: 100%;
+//         font-size: 12px;
+//         border: 1px solid #f3f3f3;
+//         color: #9b9b9b;
+//         text-align: center;
+//         height: 30px;
+//         line-height: 30px;
+//         // padding: 8px 0;
+//         border-radius: 13px;
+//       }
+//     }
+//   }
+//   .store-account {
+//     padding-top: 18px;
+//     display: flex;
+//     justify-content: center;
+//     li {
+//       flex: 1;
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: center;
+//       align-items: center;
+//       &:nth-child(1) {
+//         border-right: 1px solid #f3f3f3;
+//       }
+//       span {
+//         font-size: 14px;
+//         &:nth-child(2) {
+//           padding-top: 10px;
+//           font-size: 12px;
+//           color: #9b9b9b;
+//         }
+//       }
+//     }
+//   }
+// }
 .title-box {
   display: flex;
   justify-content: space-between;

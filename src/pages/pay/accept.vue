@@ -44,11 +44,11 @@ window.close = function(response) {
     );
   }else {
     alert(response.message);
-    let callback_url = window.location.origin + '/pay' +  window.location.search;
+    // let callback_url = window.location.origin + '/pay' +  window.location.search;
     // console.log(callback_url);
     setTimeout(()=>{
-
-      window.location.replace(callback_url);
+      window.history.go(-1);
+      // window.location.replace(callback_url);
     },3000);
   }
 };
@@ -127,7 +127,7 @@ export default {
 
 <style lang='scss' scoped>
 .accept {
-  height: 100%;
+  height: 100vh;
 }
 .pay-frame {
   height: 100%;

@@ -50,9 +50,12 @@ const CM = {
   },
   weget_device_link(params) {
     console.log('device_type_params', params);
+    // alert(JSON.stringify(params));
     let cur_device = localStorage.getItem('device');
     if (cur_device === 'android') {
-      return window.weget_mobile_type.nativeToJavaScript(params);
+      // alert('我是安卓');
+      let temp_params = JSON.stringify(params);
+      return window.weget_mobile_type.nativeToJavaScript(temp_params);
     } else if (cur_device === 'ios') {
       return window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
     } else {

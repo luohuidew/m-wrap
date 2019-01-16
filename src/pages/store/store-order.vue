@@ -5,7 +5,7 @@
       <ul>
         <li v-for="(item,index) in req_data"
           :key="index">
-          <sale-list :card-data=item></sale-list>
+          <sale-list :card-data="item" class="sku-item" :group-id="item.group_buy_info.group_id"></sale-list>
         </li>
       </ul>     
     </div>
@@ -13,16 +13,13 @@
 </template>
 
 <script>
-import saleList from "@/components/goodsCard-column";
+import saleList from "@/components/goodsCard-column-scroll";
 // import api from "@/api/product";
 export default {
   name: "",
   data() {
     return {
       req_data: this.infoData.group_buy_list,
-      req_order: undefined,
-      req_detail: undefined,
-      req_address: undefined,
       cur_select: 0
     };
   },
@@ -62,7 +59,7 @@ export default {
   padding: 20px 0 20px 20px;
   background-color: #F8F8F8;
   h3 {
-    font-size: 20px;
+    font-size:14px;
     color: #4a4a4a;
     font-weight: normal;
     padding-bottom: 20px;
@@ -91,6 +88,9 @@ export default {
         width: 100%;
         height: 100%;
         //   object-fit: contain;
+      }
+      .sku-item {
+        width: 150px;
       }
     }
   }

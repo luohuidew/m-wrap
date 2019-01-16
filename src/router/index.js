@@ -16,6 +16,26 @@ export default new Router({
       }
     },
     {
+      path: '/hot',
+      name: 'hot',
+      component: () =>
+        import('@/pages/hot'),
+      meta: {
+        title: 'hot',
+        keepAlive: false
+      }
+    },
+    {
+      path: '/query',
+      name: 'query',
+      component: () =>
+        import('@/pages/query'),
+      meta: {
+        title: 'query',
+        keepAlive: false
+      }
+    },
+    {
       path: '/store',
       name: 'store',
       component: () =>

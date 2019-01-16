@@ -8,5 +8,12 @@ export default {
       method: 'post',
       data: JSON.stringify(data),
     })
-  }  
+  },
+  homeData(data={}) {
+    return request({
+      url: 'weget/index',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },  
 }

@@ -346,7 +346,7 @@ export default {
               // total: this.order_form.order_total
             }
           };
-          this.$router.push(accpet_params);
+          this.$router.replace(accpet_params);
         }
         // this.$router.replace({path:'/accept',query:{order_no:res.data.order_no,total:this.order_form.order_total}});
       });

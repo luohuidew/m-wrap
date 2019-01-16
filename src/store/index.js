@@ -23,7 +23,8 @@ const store = new Vuex.Store({
     christmas_share_params: undefined,
     popballoons_share_info: undefined,
     popballoons_share_params: undefined,
-    is_ios: window.weget_mobile_type === "iOS"
+    is_ios: window.weget_mobile_type === "iOS",
+    is_load_position:false
   },
   getters: {
     token: () => {

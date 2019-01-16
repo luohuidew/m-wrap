@@ -7,7 +7,11 @@ export function getToken() {
 }
 
 export function setToken(token) {
-  return Cookies.set(TokenKey, token)
+  let month = new Date().getMonth();
+  let day = new Date().getDate();
+  return Cookies.set(TokenKey, token, {
+    expires: new Date(2019, month + 1, day)
+  })
 }
 
 export function removeToken() {

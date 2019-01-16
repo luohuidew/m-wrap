@@ -1,12 +1,21 @@
 <template>
   <div class="home-header"
     v-if="show_header">
+    <img class="home-logo"
+      @click="to_home"
+      src="/static/img/icon/big-logo.png"
+      alt="">
     <p class="weget-header-title">
-      <span class="to-login" @click="to_login" v-if="!hove_token">
+      <span class="to-login"
+        @click="to_login"
+        v-if="!hove_token">
         Login
       </span>
-      <span class="to-user" v-else>
-        <img :src="user_info.photo" alt="" srcset="">{{user_info.user_name}}
+      <span class="to-user"
+        v-else>
+        <img :src="user_info.photo"
+          alt=""
+          srcset="">{{user_info.user_name}}
       </span>
       <span class="to-about"
         @click="to_about">
@@ -22,10 +31,17 @@ export default {
   name: "",
   data() {
     return {
-      user_info:{}
+      user_info: {}
     };
   },
-  created(){
+  watch:{
+    $route:{
+      handler(){
+        
+      }
+    }
+  },
+  created() {
     this.init_user();
   },
   mounted() {},
@@ -36,10 +52,11 @@ export default {
         localStorage.getItem("device") === "android"
       );
     },
-    hove_token(){
+    hove_token() {
       console.log(this.$store.state.token);
       return this.$store.state.token;
-    }
+    },
+    
   },
   methods: {
     to_about() {
@@ -48,20 +65,23 @@ export default {
       });
     },
     to_login() {
-       this.$router.push({
+      this.$router.push({
         path: "/login",
-        query:{
-
-        }
+        query: {}
       });
     },
-    init_user(){
-      if(this.hove_token){
+    to_home() {
+      this.$router.push({
+        path: "/"
+      });
+    },
+    init_user() {
+      if (this.hove_token) {
         api.PersonalCenter({}).then(res => {
           console.log(res);
           this.$store.state.user = res.data.user_info;
           this.user_info = res.data.user_info;
-          // setToken(res.data.token);       
+          // setToken(res.data.token);
         });
       }
     }
@@ -71,13 +91,26 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.home-header {
+  position: relative;
+  background-color: #fff;
+  .home-logo {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    height: 70%;
+    // img {
+    //   height: 70%;
+    // }
+  }
+}
 .weget-header-title {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   height: 50px;
-  background: url("/static/img/icon/big-logo.png") no-repeat 30px center;
-  background-size: auto 70%;
+  // background: url("/static/img/icon/big-logo.png") no-repeat 30px center;
+  // background-size: auto 70%;
   font-size: 14px;
 }
 .to-login {

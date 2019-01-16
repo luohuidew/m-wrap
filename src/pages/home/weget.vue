@@ -1,9 +1,9 @@
 <template>
   <div id="weget"
     v-scroll="get_more_data">
-    <home-header></home-header>
-    <banner></banner>
-    <activity></activity>
+    <!-- <home-header></home-header> -->
+    <banner :banner-data="nav_data.banner"></banner>
+    <activity :activity-data="nav_data.activity"></activity>
     <!-- <show></show> -->
     <!-- <final></final> -->
     <!-- <new-arrival></new-arrival> -->
@@ -21,13 +21,18 @@ import final from "./weget/final.vue";
 import newArrival from "./weget/new.vue";
 import sale from "./weget/sale.vue";
 import homeHeader from '@/components/home-header'
+import api from '@/api/weget'
 export default {
   name: "",
   data() {
     return {
       c_selected: undefined,
-      share_token:''
+      share_token:'',
+      nav_data:{}
     };
+  },
+  created(){
+    this.init_data();
   },
   methods: {
     get_more_data(data) {
@@ -47,6 +52,11 @@ export default {
       }
       // console.log(this.$children);
       console.log(data);
+    },
+    init_data(){
+      api.homeData().then(res=>{
+        this.nav_data = res.data
+      })
     }
   },
   components: {

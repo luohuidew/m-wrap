@@ -17,7 +17,7 @@ export default {
   name: "",
   data() {
     return {
-      goods_list: this.listsData.data
+      goods_list: this.listsData
     };
   },
   props: ["listsData"],

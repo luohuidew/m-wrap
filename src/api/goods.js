@@ -2,14 +2,14 @@ import request from '@/utils/request'
 import store from '@/store'
 let token  = store.state.token;
 export default {
-  homeData(data={}) {
-    data.token = token;
-    return request({
-      url: 'weget/index',
-      method: 'post',
-      data: JSON.stringify(data),
-    })
-  },
+  // homeData(data={}) {
+  //   data.token = token;
+  //   return request({
+  //     url: 'weget/index',
+  //     method: 'post',
+  //     data: JSON.stringify(data),
+  //   })
+  // },
   saleList(data={}) {
     data.token= token;
     return request({

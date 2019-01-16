@@ -60,7 +60,7 @@ export default {
           let params = {
             type: 106,
             data: {
-              route: "wemall:///public/route?type=6&id=" + sku_id + ""
+              route: "wemall://public/route?type=6&id=" + sku_id + ""
             }
           };
           window.webkit.messageHandlers.javaScriptToNative.postMessage(params);

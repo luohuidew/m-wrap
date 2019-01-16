@@ -112,13 +112,9 @@
       var params = opaqueData;
       params.order_no = GetQueryString('order_no');
       $('.loading').show();
-      $('.pay-form').hide();
-      let ajax_url = "http://app.weget.pzjhw.com:8088/index.php/wap/pay/pay";
-      if (window.location.href.indexOf('https://') !== -1) {
-        ajax_url = "https://app.weget.com/wap/pay/pay";
-      }
+      $('.pay-form').hide();      
       $.ajax({
-        url: ajax_url,
+        url: 'https://www.weget.com/index.php/wap/pay/pay',
         type: "post",
         data: params,
         headers: {

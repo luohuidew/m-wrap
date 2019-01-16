@@ -71,6 +71,7 @@ export default {
 <style lang='scss' scoped>
 .goods-card {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   background-color: #fff;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
