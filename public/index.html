@@ -6,13 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
   <base href="/">
-  <title id="titleId">Weget.com | Beauty & fashion at group discount prices everyday </title>
+  <title>Weget.com | Beauty & fashion at group discount prices everyday </title>
   <meta name="description" content="Weget is an online retailer that brings buyers together to get group pricing on the hottest beauty products, skincare, and fashion. Shopping make we happy.">
   <meta name="keywords" content="beauty,cosmetic,discount,skincare,online shopping,Apps,coupon,Dior,YSL,channel,tom ford,fashion">
   <script data-fixed="true">
     /* 判断设备做转换页面 */ ! function () {
+      var base_url = "https://www.weget.com";
+      if (window.location.origin.indexOf("https") === -1) {
+        base_url = "http://www.middleware.weget.com";
+      }
+      var cur_location =
+        base_url + window.location.pathname + window.location.search;
       if (/iphone|ios|android|ipod/i.test(navigator.userAgent.toLowerCase()) == false) {
-        location.href = 'https://www.weget.com';
+        window.location.href = cur_location;
       };
     }();
   </script>

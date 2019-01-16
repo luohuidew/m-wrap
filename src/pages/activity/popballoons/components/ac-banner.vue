@@ -80,7 +80,7 @@ export default {
       let href_params = {
         type: 106,
         data: {
-          route: "wemall:///public/route?type=6&id=" + sku_id + ""
+          route: "wemall://public/route?type=6&id=" + sku_id + ""
         }
       };
       let temp = this.$CM.weget_device_link(href_params);

@@ -34,4 +34,12 @@ export default {
       data: JSON.stringify(data),
     })
   },
+  query_lists(data = {}) {
+    data.token = token;
+    return request({
+      url: 'product/getFullGoodsList',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
 }

@@ -41,7 +41,7 @@ export default {
       introduce: ""
     };
   },
-  props: ["cardData"],
+  props: ["cardData", "groupId"],
   components: {},
   methods: {
     to_detail(sku_id) {
@@ -53,14 +53,28 @@ export default {
       };
       let temp = this.$CM.weget_device_link(href_params);
       if (temp === "h5") {
-        this.$router.push({
+        let params = {
           path: "/detail",
           query: {
             sku_id: sku_id
           }
-        });
+        };
+        if (this.groupId) {
+          params.query.status = 1;
+          params.query.group_id = this.groupId;
+          window.location.href =
+            window.location.origin +
+            "/detail?sku_id=" +
+            sku_id +
+            "&status=1&group_id=" +
+            this.groupId;
+        } else {
+          window.location.href =
+            window.location.origin + "/detail?sku_id=" + sku_id;
+        }
+        // this.$router.push(params);
       }
-      this.$emit("stop", "stop");
+      // this.$emit("stop", "stop");
     }
   }
 };
@@ -88,14 +102,13 @@ export default {
   overflow: hidden;
   img {
     width: 100%;
+    height: 130px;
+    max-height: 130px;
     // max-height: 172px;
     object-fit: cover;
   }
 }
 .goods-des {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   height: 50%;
   padding: 10px;
@@ -133,7 +146,9 @@ export default {
     }
     .current {
       color: #d80c18;
-      font-size: 18px;
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .old {
       font-size: 14px;

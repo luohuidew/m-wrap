@@ -2,7 +2,8 @@
 
 <template>
   <div class="detail-pay-btn">
-    <div class="fee-per" @click.stop="to_fee">
+    <div class="fee-per"
+      @click.stop="to_fee">
       <p>ONE TIME shipping fee PER day</p>
       <i></i>
     </div>
@@ -64,7 +65,7 @@
       </a>
     </template>
     <attr-dialog v-if="show_dialog"
-      @close="close_emity"     
+      @close="close_emity"
       :sku="sku"
       :goods="goods"
       :attr-list="attrList"
@@ -104,7 +105,7 @@ export default {
       cur_paynumber: 0,
       is_like: this.sku.is_like,
       is_group: false,
-      c_query:this.$route.query
+      c_query: this.$route.query
     };
   },
   computed: {
@@ -156,8 +157,8 @@ export default {
         // this.close_tips(2,this.$route.query.group_id);
       }
     },
-    to_fee(){
-      this.$router.push({path:'/nopostal'});
+    to_fee() {
+      this.$router.push({ path: "/nopostal" });
     },
     to_create(data) {
       // console.log(data);
@@ -213,7 +214,7 @@ export default {
           };
           this.$router.push(redirect_params);
         } else {
-          this.show_dialog = true;  
+          this.show_dialog = true;
         }
       }
       this.show_dialog_tips = false;
@@ -304,6 +305,11 @@ export default {
         display: block;
       }
       .user-info {
+        display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
         font-size: 14px;
         font-weight: bold;
         line-height: 24px;

@@ -51,6 +51,7 @@ export default {
     background: url("/static/img/elements/Artboard 2@2x.png") no-repeat top
       right;
     background-size: auto 80px;
+    transform: translate(-30px,30px);
   }
   .is-safari {
     position: absolute;

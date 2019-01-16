@@ -1,8 +1,8 @@
 <template>
   <div class='sale'>
     <div class="weget-title">
-      <p class="main-title">SALE LIST</p>
-      <p class="min-title">Exclusive Beauty Deals</p>
+      <p class="main-title">Exclusive Beauty Deals</p>
+      <!-- <p class="min-title">Exclusive Beauty Deals</p> -->
     </div>
     <div class="list-box">
       <template v-for="(item,index) in sku_lists">
@@ -48,5 +48,8 @@ export default {
 <style lang='scss' scoped>
 .sale {
   padding: 10px 10px;
+}
+.main-title {
+  font-size: 22px;
 }
 </style>

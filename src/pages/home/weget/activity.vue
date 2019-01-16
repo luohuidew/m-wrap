@@ -1,75 +1,63 @@
 <template>
- <div class="activity">
-     <ul>
-         <li v-for="(item,index) in activity_lists"
-          :key="index"
-          @click="to_activity(item.href_path)">
-             <img :src="item.img_url" :alt="item.title" srcset="">
-         </li>
-     </ul>
- </div>
+  <div class="activity">
+    <ul>
+      <!-- <li v-for="(item,index) in activityData"
+        :key="index"
+        @click="to_activity(item.route)">
+        <img :src="item.image_url"
+          :alt="item.title"
+          srcset="">
+      </li> -->
+      <li>
+          <img :src="activityData[0].image_url" alt="" srcset="" @click="to_activity(activityData[0].route)">
+      </li>
+      <li>
+          <img :src="activityData[1].image_url" alt="" srcset="" @click="to_activity(activityData[1].route)">
+          <img :src="activityData[2].image_url" alt="" srcset="" @click="to_activity(activityData[2].route)">
+      </li>
+      <li>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
- export default {
-   data () {
-     return {
-         activity_lists:[
-             {
-                 title:'New arrival',
-                 img_url:'',
-                 href_path:'newArrival'
-             },
-             {
-                 title:'limited time',
-                 img_url:'',
-                 href_path:'limited'
-             },
-             {
-                 title:'$9.9',
-                 img_url:'',
-                 href_path:'cheap'
-             },
-             {
-                 title:'',
-                 img_url:'/static/img/free.png',
-                 href_path:'free'
-             },
-         ]
-     }
-   },
-   components: {
-
-   },
-   methods:{
-       to_activity(path){
-           this.$router.push({name:path});
-       }
-   }
- }
+export default {
+  data() {
+    return {
+      activity_lists: this.activityData
+    };
+  },
+  props: ["activityData"],
+  components: {},
+  methods: {
+    to_activity(path) {
+      this.$router.push({ path: path });
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
 .activity {
-    height:294px;
-    padding:10px;
-    ul {
-        display: flex;
-        width:100%;
-        height:100%;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        li {
-            width:49%;
-            height:47%;
-            background-color: #ccc;
-            overflow: hidden;
-            img {
-                width:100%;
-                height:auto;
-            }
-        }
+  // height:294px;
+  padding: 10px;
+  ul {
+    display: flex;
+    width: 100%;
+    // height:100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    li {
+      width: 49%;
+      height: 47%;
+      // background-color: #ccc;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: auto;
+      }
     }
+  }
 }
- 
 </style>

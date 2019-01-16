@@ -71,14 +71,15 @@ export default {
 <style lang='scss' scoped>
 .goods-card {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   background-color: #fff;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
 }
 .goods-img {
   position: relative;
-  width: 170px;
-  height: 170px;
+  width: 150px;
+  height: 150px;
   font-size: 0;
   .mask-info {
     position: absolute;
@@ -117,8 +118,8 @@ export default {
     }
   }
   img {
-    height: 100%;
-    width: 100%;
+    height: 156px;
+    width: 156px;
   }
 }
 .goods-des {

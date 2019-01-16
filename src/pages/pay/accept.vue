@@ -3,13 +3,13 @@
     <template v-if="is_https">
       <iframe class="pay-frame"
         ref="payAccept"
-        :src="'/pay-h5/pay.html?order_no='+order_no+'&total='+total"
+        :src="'/pay/pay.html?order_no='+order_no+'&total='+total"
         frameborder="0"></iframe>
     </template>
     <template v-else>
       <iframe class="pay-frame"
         ref="payAccept"
-        :src="'/pay-h5/pay.1.html?order_no='+order_no+'&total='+total"
+        :src="'/pay/pay.1.html?order_no='+order_no+'&total='+total"
         frameborder="0"></iframe>
     </template>
     <div class="loading-box"
@@ -40,14 +40,15 @@ window.close = function(response) {
   console.log(response);
   if (response.code == 1000) {
     window.location.replace(
-      location.origin + "/callback?order_no=" + response.data.order_no
+      window.location.origin + "/callback?order_no=" + response.data.order_no
     );
   }else {
     alert(response.message);
-    let callback_url = window.location.origin + '/pay' +  window.location.search;
+    // let callback_url = window.location.origin + '/pay' +  window.location.search;
     // console.log(callback_url);
     setTimeout(()=>{
-      window.location.replace(callback_url);
+      window.history.go(-1);
+      // window.location.replace(callback_url);
     },3000);
   }
 };
@@ -126,7 +127,7 @@ export default {
 
 <style lang='scss' scoped>
 .accept {
-  height: 100%;
+  height: 100vh;
 }
 .pay-frame {
   height: 100%;

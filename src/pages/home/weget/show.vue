@@ -1,19 +1,22 @@
 <template>
- <div class="show">
-     <div class="weget-title">
-        <p class="main-title">WELOG</p>
-        <p class="min-title">Fail Makeup Celebrities` Choice</p>
-     </div>
-     <div class="show-list">
-         <ul>
-            <li v-for="(item,index) in show_lists" :key="index">
-                <img :src="item.img_url" alt="" srcset="">    
-            </li>        
-         </ul>
-       <!-- <van-swipe :autoplay="3000" :show-indicators="false">
+  <div class="show">
+    <div class="weget-title">
+      <p class="main-title">WELOG</p>
+      <p class="min-title">Fail Makeup Celebrities` Choice</p>
+    </div>
+    <div class="show-list">
+      <ul>
+        <li v-for="(item,index) in show_lists"
+          :key="index">
+          <img :src="item.img_url"
+            alt=""
+            srcset="">
+        </li>
+      </ul>
+      <!-- <van-swipe :autoplay="3000" :show-indicators="false">
         </van-swipe> -->
-     </div>
- </div>
+    </div>
+  </div>
 </template>
 
 <script>
