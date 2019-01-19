@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <div class="page-head" >
+    <div class="page-head">
       <home-header v-if="!no_head"></home-header>
     </div>
-    <div class="page-body" :class="{'in-app':no_head}">
+    <div class="page-body"
+      :class="{'in-app':no_head}">
       <transition :name="transitionName">
-        <router-view class="child-view"></router-view>
+        <router-view class="child-view"
+          :key="new Date().getTime()"></router-view>
         <!-- <router-view></router-view> -->
       </transition>
 
@@ -31,14 +33,15 @@ export default {
     share_token() {
       return this.$store.state.share_token;
     },
-    no_head(){
+    no_head() {
       let temp = this.$route.path;
-      if(temp==='/accept' || (
-        localStorage.getItem("device") === "ios" ||
-        localStorage.getItem("device") === "android"
-      )){
-        return true
-      }else {
+      if (
+        temp === "/accept" ||
+        (localStorage.getItem("device") === "ios" ||
+          localStorage.getItem("device") === "android")
+      ) {
+        return true;
+      } else {
         return false;
       }
     }

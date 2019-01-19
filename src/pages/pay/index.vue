@@ -82,7 +82,8 @@
         </li>
       </ul>
     </div>
-    <div class="code-tips" v-show="code_tips">
+    <div class="code-tips"
+      v-show="code_tips">
       {{code_tips}}
     </div>
     <div class="item">
@@ -247,13 +248,19 @@ export default {
           console.log(res, "join self error");
           if (res.code === 2209) {
             // alert(res.message);
-
             this.$router.go(-1);
           }
         });
     },
     check_code(code_num) {
-      code.checkCode({ code_number: code_num }).then(res => {
+      if (!code_num) {
+        return false;
+      }
+      let params = {
+        code_number: code_num,
+        sku_id: this.order_form.item.sku_id
+      };
+      code.checkCode(params).then(res => {
         this.code_tips = res.data.message;
         if (res.data.type === 1) {
           this.right_code = this.cur_code;

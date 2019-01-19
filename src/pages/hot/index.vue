@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       sku_lists: [],
-      cur_lists: undefined
+      cur_lists_data: undefined
     };
   },
   created() {
@@ -29,21 +29,17 @@ export default {
     init_data(params = this.$route.query) {
       // let params = this.$route.query;
       api.get_lists(params).then(res => {
-        this.cur_lists = res.data.extend;
+        this.cur_lists_data = res.data.extend;
         res.data.data.forEach(item => {
           this.sku_lists.push(item);
         });
       });
     },
     get_more_data(data) {
-      let params = {
-        id: this.cur_lists.select_id,
-        limit: 4,
-        sku_id: this.$route.query.sku_id,
-        type: 5
-      };
+      console.log('hot caroll');
+      let params =  this.$route.query;
+      params.id = this.cur_lists_data.selectId;     
       this.init_data(params);
-      // console.log(data);
     }
   },
   components: {

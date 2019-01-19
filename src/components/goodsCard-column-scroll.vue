@@ -62,15 +62,19 @@ export default {
         if (this.groupId) {
           params.query.status = 1;
           params.query.group_id = this.groupId;
-          window.location.href =
-            window.location.origin +
-            "/detail?sku_id=" +
-            sku_id +
-            "&status=1&group_id=" +
-            this.groupId;
+          this.$router.push(params);
+          // params.query.status = 1;
+          // params.query.group_id = this.groupId;
+          // window.location.href =
+          //   window.location.origin +
+          //   "/detail?sku_id=" +
+          //   sku_id +
+          //   "&status=1&group_id=" +
+          //   this.groupId;
         } else {
-          window.location.href =
-            window.location.origin + "/detail?sku_id=" + sku_id;
+          this.$router.push(params);
+          // window.location.href =
+          //   window.location.origin + "/detail?sku_id=" + sku_id;
         }
         // this.$router.push(params);
       }
