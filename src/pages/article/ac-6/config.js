@@ -1,6 +1,6 @@
 const data = [{
     type: 'desc',
-    url: '/static/img/activity-img/ac-6/眼影盘专题页-移动端_01.jpg'
+    url: '/static/img/activity-img/ac-6/眼影盘专题页-移动端_01.1.jpg'
   },
   {
     type: 'goods',

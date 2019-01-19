@@ -1,6 +1,6 @@
 const data = [{
         type: 'desc',
-        url: '/static/img/activity-img/ac-4/Blush-Essentials_01.jpg'
+        url: '/static/img/activity-img/ac-4/Blush-Essentials_01.1.jpg'
     }, {
         type: 'desc',
         url: '/static/img/activity-img/ac-4/Blush-Essentials_02.jpg'
