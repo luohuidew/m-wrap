@@ -106,8 +106,8 @@ export default {
   overflow: hidden;
   img {
     width: 100%;
-    height: 130px;
-    max-height: 130px;
+    // height: 130px;
+    max-height: 150px;
     // max-height: 172px;
     object-fit: cover;
   }
@@ -118,7 +118,7 @@ export default {
   padding: 10px;
   .goods-title {
     overflow: hidden;
-    width: 152px;
+    // width: 152px;
     text-overflow: ellipsis;
     font-size: 12px;
     min-height: 28px;

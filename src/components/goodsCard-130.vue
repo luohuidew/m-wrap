@@ -79,7 +79,7 @@ export default {
 .goods-img {
   position: relative;
   width: 150px;
-  height: 150px;
+  max-height: 156px;
   font-size: 0;
   .mask-info {
     position: absolute;
