@@ -36,7 +36,19 @@ import api from "@/api/search"
 
 <style lang='scss' scoped>
 .search-home {
+  display: flex;
   height: 100%;
+  & > div {
+    height: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+  }
+  .aside-bar {
+    width: 90px;
+  }
+  .lists-box {
+    flex:1;
+  }
 }
  
 </style>
