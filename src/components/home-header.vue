@@ -21,6 +21,10 @@
         @click="to_about">
         About Us
       </span>
+      <span class="to-search"
+        @click="to_search">
+        <img src="/static/img/icon/search@2x.png" alt="" srcset="">
+      </span>
     </p>
   </div>
 </template>
@@ -73,6 +77,11 @@ export default {
     to_home() {
       this.$router.push({
         path: "/"
+      });
+    },
+    to_search() {
+      this.$router.push({
+        path: "/search"
       });
     },
     init_user() {
@@ -138,6 +147,16 @@ export default {
 .to-about {
   padding: 0 10px;
   border-left: 1px solid #000;
+  // text-decoration: underline;
+}
+.to-search {
+  padding: 0 20px 0 10px;
+  border-left: 1px solid #000;
+  font-size: 0;
+  img {
+    width: 18px;
+    height: 18px;
+  }
   // text-decoration: underline;
 }
 </style>

@@ -16,6 +16,16 @@ export default new Router({
       }
     },
     {
+      path: '/search',
+      name: 'search',
+      component: () =>
+        import('@/pages/search'),
+      meta: {
+        title: 'search',
+        keepAlive: false
+      }
+    },
+    {
       path: '/hot',
       name: 'hot',
       component: () =>
