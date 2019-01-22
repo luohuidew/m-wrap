@@ -1,24 +1,14 @@
 <template>
   <div class="article-detail">
     <header>
-      <img src="/static/img/activity-img/ac-5/new/Why-Group-Buy_01.jpg"
-        alt="">
-      <img src="/static/img/activity-img/ac-5/new/Why-Group-Buy_02.jpg"
-        alt="">
+        <img src="/static/img/activity-img/ac-5/Why-Group-Buy_01.jpg" alt="">
+        <img src="/static/img/activity-img/ac-5/Why-Group-Buy_02.jpg" alt="">
     </header>
     <section class="two-img ">
-      <img class="ac-5_jpg"
-        src="/static/img/activity-img/ac-5/new/Why-Group-Buy_03.jpg"
-        alt="">
-      <img class="ac-5_gif"
-        src="https://we-get.s3.us-west-1.amazonaws.com/14319173905c42f8bf1151a.gif"
-        alt="">
-      <img class="ac-jpg"
-        src="/static/img/activity-img/ac-5/new/Why-Group-Buy_04.jpg"
-        alt="" style="margin-top:24px">
-      <img class="ac-5_gif"
-        src="https://we-get.s3.us-west-1.amazonaws.com/3476083945c42f899aae46.gif"
-        alt="">
+        <img class="ac-5_gif" src="/static/img/activity-img/ac-5/jiarutuan.gif" alt="">
+        <img class="ac-5_jpg" src="/static/img/activity-img/ac-5/Why-Group-Buy_04.jpg" alt="">
+        <img class="ac-5_gif" src="/static/img/activity-img/ac-5/kaituan.gif" alt="">
+        <img class="ac-jpg" src="/static/img/activity-img/ac-5/Why-Group-Buy_06.jpg" alt="">
     </section>
     <footer>
       <div class="about_row1">
@@ -39,8 +29,7 @@
         </p>
       </div>
       <div class="about_row2">
-        <img class="bgimg"
-          src="/static/img/about/底部@2x.png">
+        <img class="bgimg" src="/static/img/about/底部@2x.png">
       </div>
     </footer>
   </div>
@@ -49,7 +38,7 @@
 <script>
 // import data from "./config";
 export default {
-  name: ""
+  name: "",
 };
 </script>
 
@@ -64,11 +53,11 @@ export default {
 .two-img {
   text-align: center;
   margin: 20px auto;
-  .ac-5_gif {
+  .ac-5_gif{
     height: 450px;
     margin-bottom: 30px;
   }
-  .ac-5_jpg {
+  .ac-5_jpg{
     width: 100%;
   }
 }
