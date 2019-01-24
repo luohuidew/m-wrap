@@ -1,7 +1,7 @@
 <template>
   <div class="store-box"
     v-if="item.store_id">
-    <div class="store-title">
+    <div class="store-title" @click.stop="to_store(item.store_id)">
       <p>
         <img :src="item.logo"
           alt="">

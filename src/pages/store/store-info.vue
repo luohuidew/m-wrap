@@ -30,7 +30,7 @@
         <span>Bought</span>
       </li>
     </ul>
-    <div class="store-banner">
+    <div class="store-banner" v-if="store_info.store_banner_list.length">
       <banner :banner-data="store_info.store_banner_list"></banner>
     </div>
   </div>
@@ -81,7 +81,6 @@ export default {
     display: flex;
     padding-bottom: 10px;
     padding-top: 118px;
-    border-bottom: 1px solid #f3f3f3;
     background: #ffffff url("") no-repeat left top;
     background-size: 100% 150px;
     .logo-box {
@@ -126,7 +125,8 @@ export default {
     }
   }
   .store-description {
-    padding: 0 28px;
+    margin: 0 28px;
+    border-top: 1px solid #f3f3f3;
     .desc-min {
       // height: 26px;
       // display: -webkit-box;

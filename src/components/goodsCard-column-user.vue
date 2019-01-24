@@ -21,9 +21,9 @@
         <span class="current">
           ${{card_data.alone_price}}
         </span>
-        <span class="old">
+        <!-- <span class="old">
           ${{card_data.market_price}}
-        </span>
+        </span> -->
       </p>
       <p class="light-height-btn">
         <a class="link-btn"
