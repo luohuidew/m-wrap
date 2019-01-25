@@ -4,7 +4,7 @@
       <img :src="sku.cover_img"
         alt=""
         srcset="">
-      <div class="mask-info">
+      <!-- <div class="mask-info">
         <div class="mask-icon"
           v-if="sku.mask_info.mask_title"
           :style="{'background':'url('+sku.mask_info.mask_bg_image+') no-repeat center center','background-size':'auto 100%'}">
@@ -15,7 +15,7 @@
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="goods-des">
       <p class="goods-title"
@@ -34,9 +34,9 @@
         <span class="current">
           ${{sku.group_price}}
         </span>
-        <span class="old">
+        <!-- <span class="old">
           ${{sku.market_price}}
-        </span>
+        </span> -->
       </p>
       <p class="light-height-btn">
         <a class="link-btn"
@@ -79,7 +79,7 @@ export default {
 .goods-img {
   position: relative;
   width: 150px;
-  height: 150px;
+  max-height: 156px;
   font-size: 0;
   .mask-info {
     position: absolute;

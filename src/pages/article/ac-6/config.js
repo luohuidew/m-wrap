@@ -1,6 +1,6 @@
 const data = [{
     type: 'desc',
-    url: '/static/img/activity-img/ac-6/眼影盘专题页-移动端_01.jpg'
+    url: '/static/img/activity-img/ac-6/眼影盘专题页-移动端_01.1.jpg'
   },
   {
     type: 'goods',
@@ -40,8 +40,8 @@ const data = [{
   {
     type: 'goods',
     url: [{
-      sku_id: '4546358215664683',
-      img_url: '/static/img/activity-img/ac-6/4546358215664683.jpg'
+      sku_id: '4477364414659687',
+      img_url: '/static/img/activity-img/ac-6/4477364414659687.jpg'
     }]
   },
   {

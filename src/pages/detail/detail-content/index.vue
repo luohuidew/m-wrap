@@ -176,6 +176,11 @@ export default {
       act_type: this.$route.query.act_type
     };
   },
+  beforeRouteLeave(to,from,next){
+    let title = "Weget.com | Beauty & fashion at group discount prices everyday";
+    document.title = title;
+    next();
+  },
   created() {
     this.init_data();
   },

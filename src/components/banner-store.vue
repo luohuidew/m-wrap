@@ -26,18 +26,20 @@ export default {
       banner_lists: this.bannerData
     };
   },
-  props:{
-    bannerData:{
-      type:Array,
-      default:undefined
+  props: {
+    bannerData: {
+      type: Array,
+      default: undefined
     }
   },
   // props:["bannerData"],
-  created() {    
-  },
+  created() {},
   methods: {
     to_path(path) {
-      this.$router.push({ path: path });
+      if (path) {
+        window.location.href = path;
+      }
+      // this.$router.push({ path: path });
     }
   },
   components: {}

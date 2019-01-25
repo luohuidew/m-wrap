@@ -9,7 +9,7 @@
           <img :src="item.cover_img"
             alt=""
             srcset="">
-          <div class="mask-info">
+          <!-- <div class="mask-info">
             <div class="mask-icon"
               v-if="item.mask_info.mask_title"
               :style="{'background':'url('+item.mask_info.mask_bg_image+') no-repeat center center','background-size':'auto 100%'}">
@@ -17,13 +17,13 @@
                 <p>{{item.mask_info.mask_title}}</p>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="banner-sku-desc">
           <p class="sku-desc">{{item.title}}</p>
           <p class="price-box">
             <span class="cur-price">${{item.group_price}}</span>
-            <span class="old-price">${{item.market_price}}</span>
+            <!-- <span class="old-price">${{item.market_price}}</span> -->
           </p>
         </div>
       </li>

@@ -15,9 +15,9 @@
              <span class="current">
                  ${{card_data.current_price}}
              </span>
-             <span class="old">
+             <!-- <span class="old">
                  ${{card_data.old_price}}
-             </span>
+             </span> -->
          </p>
          <p class="light-height-btn">
             <a class="link-btn" :class="card_data.is_disable?'disable':''" href="javascript:;" @click="to_detail(card_data.goods_id)">Remind</a>
