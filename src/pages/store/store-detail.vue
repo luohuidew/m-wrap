@@ -2,7 +2,8 @@
   <div class="store-lists">
     <h3>Daily WOW</h3>
     <div class="">
-      <div class="list-box" v-if="goods_list">
+      <div class="list-box"
+        v-if="goods_list">
         <sale-list v-for="(item,index) in goods_list"
           :sku="item"
           :key="index"></sale-list>
@@ -12,7 +13,7 @@
 </template>
 
 <script>
-import saleList from "@/components/goodsCard-130";
+import saleList from "@/components/card-list-row";
 export default {
   name: "",
   data() {
@@ -39,10 +40,9 @@ export default {
 
 <style lang='scss' scoped>
 .store-lists {
-  padding: 0 20px;
   h3 {
-    padding-left: 10px;
-    padding-bottom: 20px;
+    padding-left: 20px;
+    // padding-bottom: 20px;
     padding-top: 30px;
   }
 }

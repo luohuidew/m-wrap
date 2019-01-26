@@ -5,15 +5,14 @@
       <div class="content">
         <div class='goods-des'>
           <div class="img-box">
-            <!-- <div class="mask-info">
+            <div class="mask-info"
+              v-for="(mask_info,index) in sku.show_tag"
+              :key="index">
               <div class="mask-icon"
-                v-if="sku.mask_info.mask_title"
-                :style="{'background':'url('+sku.mask_info.mask_bg_image+') no-repeat center center','background-size':'auto 100%'}">
-                <div :class="{'hot':sku.mask_info.mask_type===1,'new':sku.mask_info.mask_type===2,'off':sku.mask_info.mask_type===3}">
-                  <p v-html="discount_text"></p>
-                </div>
+                v-if="mask_info.mask_type===3"
+                :style="{'background':'url('+mask_info.mask_bg_image+') no-repeat center center','background-size':'auto 100%'}">
               </div>
-            </div> -->
+            </div>
             <van-swipe>
               <van-swipe-item v-for="(item,index) in sku.img_urls"
                 :key="index">
@@ -24,9 +23,6 @@
               </van-swipe-item>
             </van-swipe>
           </div>
-          <div class="goods-info">
-            {{sku.title}}
-          </div>
           <div class="price-box">
             <p class="price">
               <span class="cur-price">${{cur_goods.group_price}}</span>
@@ -35,6 +31,18 @@
             <p class="like-number">
               {{sku.bought_num}} bought
             </p>
+          </div>
+          <div class="icon-box">
+            <template v-for="(mask_info,index) in sku.show_tag">
+              <img :src="mask_info.mask_bg_image"
+                alt=""
+                srcset=""
+                v-if="mask_info.mask_type!==3"
+                :key="index">
+            </template>
+          </div>
+          <div class="goods-info">
+            {{sku.title}}
           </div>
         </div>
         <div class='group'
@@ -103,8 +111,10 @@
         <review v-if="review"
           :review="review"></review>
         <!-- <detail-welog></detail-welog> -->
-        <similar-cate v-if="same_category.data" :data-list="same_category.data"></similar-cate>
-        <similar-brand v-if="same_brand.data" :data-list="same_brand.data"></similar-brand>
+        <similar-cate v-if="same_category.data"
+          :data-list="same_category.data"></similar-cate>
+        <similar-brand v-if="same_brand.data"
+          :data-list="same_brand.data"></similar-brand>
       </div>
     </div>
     <detail-pay-btn v-if="cur_goods"
@@ -114,7 +124,8 @@
       :cur-goods="cur_goods"
       :attr-list="attr_list"
       :cur_group_id="cur_group_id"
-      ref="change_btn" class="btn-detail"></detail-pay-btn>
+      ref="change_btn"
+      class="btn-detail"></detail-pay-btn>
     <share-app :token="share_token"
       v-if="share_token"></share-app>
     <!-- <share-app v-else></share-app> -->
@@ -127,7 +138,7 @@ import shareApp from "@/components/dialog/share-app";
 // import goodsDes from "./goods-des.vue";
 // import group from "./group.vue";
 import detailMore from "./detail-more.vue";
-import detailStore from "./detail-store"
+import detailStore from "./detail-store";
 // import shipping from "./shipping.vue";
 import review from "./review.vue";
 // import detailWelog from "./detail-welog.vue";
@@ -169,15 +180,16 @@ export default {
         share_url: "",
         image_url: ""
       },
-      same_brand:undefined,
-      same_category:undefined,
+      same_brand: undefined,
+      same_category: undefined,
       router_group_id: undefined,
       share_token: "",
       act_type: this.$route.query.act_type
     };
   },
-  beforeRouteLeave(to,from,next){
-    let title = "Weget.com | Beauty & fashion at group discount prices everyday";
+  beforeRouteLeave(to, from, next) {
+    let title =
+      "Weget.com | Beauty & fashion at group discount prices everyday";
     document.title = title;
     next();
   },
@@ -355,80 +367,6 @@ export default {
     text-overflow: ellipsis;
   }
 }
-// .store-box {
-//   padding: 20px;
-//   border-top: 10px solid #f8f8f8;
-//   border-bottom: 10px solid #f8f8f8;
-//   .store-title {
-//     display: flex;
-//     padding-bottom: 20px;
-//     border-bottom: 1px solid #f3f3f3;
-//     & > p {
-//       display: flex;
-//       align-items: center;
-//     }
-//     img {
-//       width: 50px;
-//       height: 50px;
-//     }
-//     .store-desc {
-//       flex: 1;
-//       flex-direction: column;
-//       align-items: flex-start;
-//       justify-content: center;
-//       font-size: 18px;
-//       font-weight: bold;
-//       padding: 0 40px 0 10px;
-//       .desc-min {
-//         height: 26px;
-//         // display: -webkit-box;
-//         font-size: 12px;
-//         padding-top: 10px;
-//         color: #9b9b9b;
-//         overflow: hidden;
-//         text-overflow: ellipsis;
-//       }
-//     }
-//     .store-btn {
-//       width: 60px;
-//       display: flex;
-//       a {
-//         width: 100%;
-//         font-size: 12px;
-//         border: 1px solid #f3f3f3;
-//         color: #9b9b9b;
-//         text-align: center;
-//         height: 30px;
-//         line-height: 30px;
-//         // padding: 8px 0;
-//         border-radius: 13px;
-//       }
-//     }
-//   }
-//   .store-account {
-//     padding-top: 18px;
-//     display: flex;
-//     justify-content: center;
-//     li {
-//       flex: 1;
-//       display: flex;
-//       flex-direction: column;
-//       justify-content: center;
-//       align-items: center;
-//       &:nth-child(1) {
-//         border-right: 1px solid #f3f3f3;
-//       }
-//       span {
-//         font-size: 14px;
-//         &:nth-child(2) {
-//           padding-top: 10px;
-//           font-size: 12px;
-//           color: #9b9b9b;
-//         }
-//       }
-//     }
-//   }
-// }
 .title-box {
   display: flex;
   justify-content: space-between;
@@ -497,30 +435,48 @@ export default {
 }
 .goods-des {
   background-color: #fff;
-  margin-bottom: 10px;
+   border-bottom: 10px solid #f8f8f8;
+   padding-bottom: 16px;
   & > div {
-    padding: 10px 20px 0 20px;
+    padding: 0 20px;
   }
   .img-box {
-    padding: 0;
-    .mask-icon {
-      height: 100%;
-      width: 100%;
-      // background: url('') no-repeat center center;
-      background-size: auto 100%;
-      border-radius: 50%;
-      overflow: hidden;
-      font-size: 12px;
-      color: #fff;
-      text-align: center;
-      .hot {
-        margin: 22px auto;
-      }
-      .new {
-        margin: 15px auto;
-      }
-      .off {
-        margin: 8px auto;
+    position: relative;
+    .mask-info {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      width: 80px;
+      height: 80px;
+      z-index: 10;
+      // border-radius: 50%;
+      // overflow: hidden;
+      .mask-icon {
+        height: 100%;
+        width: 100%;
+        // background: url('') no-repeat center center;
+        background-size: auto 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        font-size: 12px;
+        line-height: 13px;
+        color: #fff;
+        text-align: center;
+        .hot {
+          margin: 22px auto;
+        }
+        .new {
+          margin: 15px auto;
+        }
+        .off {
+          margin: 8px auto;
+        }
+        .mask-text {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
   }
@@ -530,28 +486,41 @@ export default {
   height: 364px;
   object-fit: cover;
 }
-.goods-info {
-  // max-width: 85%;
-  //   max-height: 65px;
+.icon-box {
+  font-size: 0;
+  cursor: pointer;
+  height: 18px;
+  // margin-bottom: 18px;
+  overflow: hidden;
+  margin: 15px 0;
+  padding: 0;
+  img {
+    margin-right: 10px;
+    height: 18px;
+    width: auto;
+  }
+}
+.goods-info {  
   font-size: 16px;
   line-height: 20px;
-  font-weight: bold;
+  color: #4a4a4a;
 }
 .price-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 0;
+  margin-top: 15px;
   .cur-price {
-    color: #d80c18;
+    color: #000000;
     font-size: 26px;
     font-weight: bold;
   }
   .old-price {
-    color: #9b9b9b;
-    font-size: 16px;
+    color: #898989;
+    font-size: 14px;
     text-decoration-line: line-through;
-    padding-left: 10px;
+    padding-left: 16px;
   }
   .like-number {
     font-size: 14px;

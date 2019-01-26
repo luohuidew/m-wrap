@@ -9,6 +9,7 @@
         </p>
         <p class="store-desc">
           <span>{{store_info.name}}</span>
+          <span class="creat-time"> Store Since {{store_info.open_time}}</span>
         </p>
 
       </div>
@@ -30,7 +31,8 @@
         <span>Bought</span>
       </li>
     </ul>
-    <div class="store-banner" v-if="store_info.store_banner_list.length">
+    <div class="store-banner"
+      v-if="store_info.store_banner_list.length">
       <banner :banner-data="store_info.store_banner_list"></banner>
     </div>
   </div>
@@ -101,11 +103,17 @@ export default {
     .store-desc {
       flex: 1;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: flex-start!important;
       justify-content: flex-end;
       font-size: 18px;
       font-weight: bold;
-      padding: 0 40px 10px 10px;
+      padding: 0 40px 4px 10px;
+      .creat-time {
+        font-size: 10px;
+        color: #9b9b9b;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
     .store-btn {

@@ -15,7 +15,7 @@
 
 <script>
 import banner from "@/components/banner.vue";
-import goodsCard from "@/components/goodsCard.vue";
+import goodsCard from "@/components/card-list-row";
 export default {
   data() {
     return {};

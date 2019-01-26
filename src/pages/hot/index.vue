@@ -11,7 +11,7 @@
 
 <script>
 import api from "@/api/goods";
-import goodsCard from "@/components/goodsCard.vue";
+import goodsCard from "@/components/card-list-row";
 export default {
   name: "",
   data() {
@@ -52,6 +52,6 @@ export default {
 .query-lists {
   height: 100%;
   overflow: auto;
-  padding: 10px;
+  padding: 10px 0;
 }
 </style>

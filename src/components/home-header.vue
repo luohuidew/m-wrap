@@ -112,6 +112,7 @@ export default {
   // background: url("/static/img/icon/big-logo.png") no-repeat 30px center;
   // background-size: auto 70%;
   font-size: 14px;
+  box-shadow: 2px 0px 2px #ccc;
 }
 .to-login {
   padding: 0 10px 0 20px;

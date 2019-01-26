@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import goodsCard from "@/components/goodsCard.vue";
+import goodsCard from "@/components/card-list-row";
 import api from "@/api/goods";
 export default {
   name: "",
@@ -47,7 +47,7 @@ export default {
 
 <style lang='scss' scoped>
 .sale {
-  padding: 10px 10px;
+  padding: 10px 0px;
 }
 .main-title {
   font-size: 22px;

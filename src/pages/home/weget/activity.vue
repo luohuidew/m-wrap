@@ -8,13 +8,13 @@
           :alt="item.title"
           srcset="">
       </li> -->
-      <li>
+      <li class="one-block">
         <img :src="activityData[0].image_url"
           alt=""
           srcset=""
           @click="to_activity(activityData[0].route)">
       </li>
-      <li>
+      <li class="two-block">
         <img :src="activityData[1].image_url"
           alt=""
           srcset=""
@@ -23,9 +23,7 @@
           alt=""
           srcset=""
           @click="to_activity(activityData[2].route)">
-      </li>
-      <li>
-      </li>
+      </li>      
     </ul>
   </div>
 </template>
@@ -50,26 +48,39 @@ export default {
 <style lang="scss" scoped>
 .activity {
   // height:294px;
-  padding: 10px;
+  padding: 10px 0;
   ul {
     display: flex;
     width: 100%;
-    // height:270px;
+    height:270px;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     font-size: 0;
+    padding: 0 5px;
+    .one-block{
+      img {
+        height: 100%;
+      }
+    }
+    .two-block {
+      // img {
+        
+      // }
+    }
     li {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: 49%;
+      width: 50%;
       height: 100%;
+      padding: 5px;
       // background-color: #ccc;
-      overflow: hidden;
+      // overflow: hidden;
       img {
         width: 100%;
         height: auto;
-        margin: 5px;
+        border-radius: 8px;
+        // margin: 5px;
       }
     }
   }
