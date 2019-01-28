@@ -68,10 +68,7 @@ export default {
   ul {
     white-space: nowrap;
     display: inline-block;
-    li {
-      width: 170px;
-      //   height: 175px;
-      // background-color: blueviolet;
+    li {     
       display: inline-block;
       vertical-align: middle;
       padding-left: 10px;

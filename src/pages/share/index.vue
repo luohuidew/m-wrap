@@ -83,26 +83,7 @@ import success from "./success";
 import api from "@/api/share";
 import sku from "@/api/product";
 export default {
-  name: "",
-  metaInfo() {
-    return {
-      meta: [
-        { property: "og:title", content: "weget" },
-        { property: "og:title", content: this.title },
-        { property: "og:description", content: this.description },
-        { property: "og:url", content: this.share_url },
-        { property: "og:image", content: this.image_url }
-      ]
-    };
-  },
-  // metaInfo: {
-  //   // title will be injected into parent titleTemplate
-  //   title: "About Us",
-  //   meta: [
-  //     { charset: 'utf-8' },
-  //     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
-  //   ]
-  // },
+  name: "",  
   data() {
     return {
       order: undefined,
@@ -256,6 +237,7 @@ export default {
 
 }
 .group-box {
+  padding: 20px 0;
   & > div {
     display: flex;
     flex-direction: column;

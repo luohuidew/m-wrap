@@ -1,55 +1,32 @@
 <template>
-  <div class='goods-card'
-    @click="to_detail(card_data.sku_id)">
+  <div class='goods-card'>
     <div class="goods-img">
       <img :src="card_data.cover_img"
         alt=""
         srcset="">
-      <div class="mask-info"
-        v-for="(mask_info,index) in card_data.show_tag"
-        :key="index">
-        <div class="mask-icon"
-          v-if="mask_info.mask_type===3"
-          :style="{'background':'url('+mask_info.mask_bg_image+') no-repeat center center','background-size':'auto 100%'}">
-        </div>
-      </div>
     </div>
-    <div class="goods-des">
+    <div class="goods-des"
+      @click="to_detail(card_data.sku_id)">
       <p class="goods-title">{{card_data.title}}</p>
-      <div class="icon-box">
-        <template v-for="(mask_info,index) in card_data.show_tag">
-          <img :src="mask_info.mask_bg_image"
-            alt=""
-            srcset=""
-            v-if="mask_info.mask_type!==3"
-            :key="index">
-        </template>
-      </div>
       <div class="price-box">
         <p class="pay-price">
           <span class="current">
             ${{card_data.alone_price}}
           </span>
         </p>
-        <div class="buyer-box"
-          v-if="card_data_img.length">
+        <p class="goods-getter">
           <img v-for="(item,index) in card_data_img"
             :key="index"
-            :src="item.photo"
-            :style="{right:(index+1)*12+'px',zIndex:10-index}">
-          <img src="/static/img/icon/团购人点点点.png"
-            v-if="card_data_img.length">
-          <!-- <p class="goods-getter">
-          </p> -->
-
-        </div>
+            :src="item.photo">
+          <img src="/static/img/icon/团购人点点点.png">
+        </p>
       </div>
-      <!-- <p class="light-height-btn">
+      <p class="light-height-btn">
         <a class="link-btn"
           href="javascript:;">Get Now <i><img src="/static/img/icon/get now大.png"
               alt=""
               srcset=""></i></a>
-      </p> -->
+      </p>
     </div>
   </div>
 </template>
@@ -110,130 +87,72 @@ export default {
 <style lang='scss' scoped>
 .goods-card {
   display: flex;
-  width: 150px;
-  padding: 10px;
+  // width: 172px;
   flex-direction: column;
   justify-content: space-between;
   background-color: #fff;
+  // margin-right: 10px;
   overflow: hidden;
-  border-radius: 8px;
-  border: 1px solid #eeeeee;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
 }
 .price-box {
-  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // .goods-getter {
-  //   font-size: 0;
-  //   position: relative;
-  // }
-  img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 10;
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin-right: 5px;
-  }
 }
 .goods-img {
-  position: relative;
-  width: 130px;
-  height: 130px;
-  font-size: 0;
-  .mask-info {
-    position: absolute;
-    left: 5px;
-    top: 5px;
-    width: 38px;
-    height: 38px;
-    z-index: 10;
-    // border-radius: 50%;
-    // overflow: hidden;
-    .mask-icon {
-      height: 100%;
-      width: 100%;
-      // background: url('') no-repeat center center;
-      background-size: auto 100%;
-      border-radius: 50%;
-      overflow: hidden;
-      font-size: 12px;
-      line-height: 13px;
-      color: #fff;
-      text-align: center;
-      .hot {
-        margin: 22px auto;
-      }
-      .new {
-        margin: 15px auto;
-      }
-      .off {
-        margin: 8px auto;
-      }
-      .mask-text {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-    }
-  }
+  width: 100%;
+  // max-height: 172px;
+  overflow: hidden;
   img {
-    height: 100%;
     width: 100%;
-    // border: 1px solid #eeeeee;
-    border-radius: 8px;
+    // height: 130px;
+    max-height: 150px;
+    // max-height: 172px;
+    object-fit: cover;
   }
 }
 .goods-des {
   width: 100%;
   height: 50%;
-  padding: 10px 0;
+  padding: 10px;
   .goods-title {
-    height: 30px;
-    font-size: 14px;
-    line-height: 16px;
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    white-space: normal;
-    -webkit-box-orient: vertical;
+    // width: 152px;
     text-overflow: ellipsis;
-    color: #4a4a4a;
-    margin-bottom: 10px;
+    font-size: 12px;
+    min-height: 28px;
+    font-family: "AvertaStd-Semibold";
+    text-overflow: ellipsis;
+    // font-weight: 700;
+    color: #000;
   }
-  .icon-box {
+  .goods-getter {
     font-size: 0;
-    cursor: pointer;
-    height: 16px;
-    margin-bottom: 10px;
-    overflow: hidden;
+    //   padding-top:10px;
     img {
-      margin-right: 10px;
-      height: 16px;
-      width: auto;
+      vertical-align: middle;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
     }
   }
-
   .pay-number {
     padding-top: 10px;
     font-size: 12px;
     color: #9b9b9b;
   }
   .pay-price {
+    // padding-top: 11px;
     font-size: 18px;
-    color: #000;
     span {
       font-weight: bold;
     }
     .current {
-      // font-size: 14px;
-      // overflow: hidden;
-      // text-overflow: ellipsis;
+      color: #d80c18;
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .old {
       font-size: 14px;

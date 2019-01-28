@@ -7,12 +7,13 @@
     <ul class="des-info">
       <p v-html="detail_text"></p>
       <div class="img-box">
-        <img v-if="sku.desc_imgs.length>0"
-          v-for="(item,index) in sku.desc_imgs"
-          :key="index"
-          :src="item"
-          alt=""
-          srcset="">
+        <template v-if="sku.desc_imgs.length>0">
+          <img v-for="(item,index) in sku.desc_imgs"
+            :key="index"
+            :src="item"
+            alt=""
+            srcset="">
+        </template>
       </div>
     </ul>
   </div>
@@ -36,7 +37,7 @@ export default {
 .page {
   padding: 20px 20px 30px 20px;
   font-size: 14px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 10px solid #f8f8f8;
 }
 .title-box {
   display: flex;

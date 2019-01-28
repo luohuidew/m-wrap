@@ -1,32 +1,55 @@
 <template>
-  <div class='goods-card'>
+  <div class='goods-card'
+    @click="to_detail(card_data.sku_id)">
     <div class="goods-img">
       <img :src="card_data.cover_img"
         alt=""
         srcset="">
+      <div class="mask-info"
+        v-for="(mask_info,index) in card_data.show_tag"
+        :key="index">
+        <div class="mask-icon"
+          v-if="mask_info.mask_type===3"
+          :style="{'background':'url('+mask_info.mask_bg_image+') no-repeat center center','background-size':'auto 100%'}">
+        </div>
+      </div>
     </div>
-    <div class="goods-des"
-      @click="to_detail(card_data.sku_id)">
+    <div class="goods-des">
       <p class="goods-title">{{card_data.title}}</p>
+      <div class="icon-box">
+        <template v-for="(mask_info,index) in card_data.show_tag">
+          <img :src="mask_info.mask_bg_image"
+            alt=""
+            srcset=""
+            v-if="mask_info.mask_type!==3"
+            :key="index">
+        </template>
+      </div>
       <div class="price-box">
         <p class="pay-price">
           <span class="current">
             ${{card_data.alone_price}}
           </span>
         </p>
-        <p class="goods-getter">
+        <div class="buyer-box"
+          v-if="card_data_img.length">
           <img v-for="(item,index) in card_data_img"
             :key="index"
-            :src="item.photo">
-          <img src="/static/img/icon/团购人点点点.png">
-        </p>
+            :src="item.photo"
+            :style="{right:(index+1)*12+'px',zIndex:10-index}">
+          <img src="/static/img/icon/团购人点点点.png"
+            v-if="card_data_img.length">
+          <!-- <p class="goods-getter">
+          </p> -->
+
+        </div>
       </div>
-      <p class="light-height-btn">
+      <!-- <p class="light-height-btn">
         <a class="link-btn"
           href="javascript:;">Get Now <i><img src="/static/img/icon/get now大.png"
               alt=""
               srcset=""></i></a>
-      </p>
+      </p> -->
     </div>
   </div>
 </template>
@@ -41,7 +64,7 @@ export default {
       introduce: ""
     };
   },
-  props: ["cardData"],
+  props: ["cardData", "groupId"],
   components: {},
   methods: {
     to_detail(sku_id) {
@@ -53,14 +76,32 @@ export default {
       };
       let temp = this.$CM.weget_device_link(href_params);
       if (temp === "h5") {
-        this.$router.push({
+        let params = {
           path: "/detail",
           query: {
             sku_id: sku_id
           }
-        });
+        };
+        if (this.groupId) {
+          params.query.status = 1;
+          params.query.group_id = this.groupId;
+          this.$router.push(params);
+          // params.query.status = 1;
+          // params.query.group_id = this.groupId;
+          // window.location.href =
+          //   window.location.origin +
+          //   "/detail?sku_id=" +
+          //   sku_id +
+          //   "&status=1&group_id=" +
+          //   this.groupId;
+        } else {
+          this.$router.push(params);
+          // window.location.href =
+          //   window.location.origin + "/detail?sku_id=" + sku_id;
+        }
+        // this.$router.push(params);
       }
-      this.$emit("stop", "stop");
+      // this.$emit("stop", "stop");
     }
   }
 };
@@ -69,71 +110,131 @@ export default {
 <style lang='scss' scoped>
 .goods-card {
   display: flex;
-  // width: 172px;
+  width: 150px;
+  padding: 10px;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   background-color: #fff;
-  // margin-right: 10px;
   overflow: hidden;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: 1px solid #eeeeee;
 }
 .price-box {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  // .goods-getter {
+  //   font-size: 0;
+  //   position: relative;
+  // }
+  img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
 }
 .goods-img {
-  width: 100%;
-  // max-height: 172px;
-  overflow: hidden;
+  position: relative;
+  width: 130px;
+  height: 130px;
+  font-size: 0;
+  .mask-info {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: 38px;
+    height: 38px;
+    z-index: 10;
+    // border-radius: 50%;
+    // overflow: hidden;
+    .mask-icon {
+      height: 100%;
+      width: 100%;
+      // background: url('') no-repeat center center;
+      background-size: auto 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      font-size: 12px;
+      line-height: 13px;
+      color: #fff;
+      text-align: center;
+      .hot {
+        margin: 22px auto;
+      }
+      .new {
+        margin: 15px auto;
+      }
+      .off {
+        margin: 8px auto;
+      }
+      .mask-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
   img {
+    height: 100%;
     width: 100%;
-    // max-height: 172px;
-    object-fit: cover;
+    // border: 1px solid #eeeeee;
+    border-radius: 8px;
   }
 }
 .goods-des {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   width: 100%;
   height: 50%;
-  padding: 10px;
+  padding: 10px 0;
   .goods-title {
+    height: 30px;
+    font-size: 14px;
+    line-height: 16px;
     overflow: hidden;
-    width: 152px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    white-space: normal;
+    -webkit-box-orient: vertical;
     text-overflow: ellipsis;
-    font-size: 12px;
-    min-height: 28px;
-    font-family: "AvertaStd-Semibold";
-    text-overflow: ellipsis;
-    // font-weight: 700;
-    color: #000;
+    color: #4a4a4a;
+    margin-bottom: 10px;
   }
-  .goods-getter {
+  .icon-box {
     font-size: 0;
-    //   padding-top:10px;
+    cursor: pointer;
+    height: 16px;
+    margin-bottom: 10px;
+    overflow: hidden;
     img {
-      vertical-align: middle;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
+      margin-right: 10px;
+      height: 16px;
+      width: auto;
     }
   }
+
   .pay-number {
     padding-top: 10px;
     font-size: 12px;
     color: #9b9b9b;
   }
   .pay-price {
-    // padding-top: 11px;
     font-size: 18px;
+    color: #000;
     span {
       font-weight: bold;
     }
     .current {
-      color: #d80c18;
-      font-size: 18px;
+      // font-size: 14px;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
     }
     .old {
       font-size: 14px;

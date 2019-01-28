@@ -5,7 +5,7 @@ export default {
   detail(data = {}) {
     data.token = token;
     return request({
-      url: 'product/detail',
+      url: 'product/detail?loading=yes',
       method: 'post',
       data: JSON.stringify(data),
     })

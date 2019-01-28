@@ -264,7 +264,7 @@ export default {
     }
     p {
       padding-left: 30px;
-      font-size: 14px;
+      font-size: 12px;
       line-height: 30px;
       background: #efefef url("/static/img/icon/user_order_shipped_icon@2x.png")
         no-repeat center left;

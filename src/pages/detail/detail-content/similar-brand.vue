@@ -48,7 +48,7 @@ export default {
 .page {
   padding: 20px 0 10px 20px;
   font-size: 14px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 10px solid #f8f8f8;
 }
 .title-box {
   padding-right:20px;

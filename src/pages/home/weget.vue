@@ -2,6 +2,11 @@
   <div id="weget"
     v-scroll="get_more_data">
     <!-- <home-header></home-header> -->
+    <div class="fee-per"
+      @click.stop="to_fee">
+      <p>ONE TIME shipping fee PER day</p>
+      <i></i>
+    </div>
     <banner :banner-data="nav_data.banner"></banner>
     <activity :activity-data="nav_data.activity"></activity>
     <!-- <show></show> -->
@@ -53,6 +58,9 @@ export default {
       // console.log(this.$children);
       console.log(data);
     },
+    to_fee() {
+      this.$router.push({ path: "/nopostal" });
+    },
     init_data(){
       api.homeData().then(res=>{
         this.nav_data = res.data
@@ -91,4 +99,28 @@ export default {
   font-size: 14px;
   line-height: 20px;
 }
+.fee-per {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;    
+    width: 100%;
+    height: 30px;
+    background-color: #efefef;    
+    font-size: 12px;
+    i {
+      width: 50px;
+      height: 100%;
+      background: #efefef url("/static/img/icon/返回 小右.png") no-repeat center
+        right;
+      background-size: 14px auto;
+    }
+    p {
+      padding-left: 30px;
+      font-size: 12px;
+      line-height: 30px;
+      background: #efefef url("/static/img/icon/user_order_shipped_icon@2x.png")
+        no-repeat center left;
+      background-size: 18px auto;
+    }
+  }
 </style>
