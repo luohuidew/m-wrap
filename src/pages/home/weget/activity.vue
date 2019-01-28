@@ -51,8 +51,7 @@ export default {
   padding: 10px 0;
   ul {
     display: flex;
-    width: 100%;
-    height:270px;
+    width: 100%;   
     justify-content: space-between;
     flex-wrap: nowrap;
     font-size: 0;
@@ -63,9 +62,12 @@ export default {
       }
     }
     .two-block {
-      // img {
-        
-      // }
+      img {
+        height: 50%;
+        &:nth-child(1){
+          margin-bottom: 10px;
+        }
+      }
     }
     li {
       display: flex;
