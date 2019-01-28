@@ -1,12 +1,13 @@
 <template>
- <div class='page'>
+ <div class='page' v-if="skuData">
       <div class="title-box">
          <p class="tips">Shipping & Returns</p>
-         <p class="more"></p>
+         <!-- <p class="more"></p> -->
      </div>
      <ul class="des-info">
-         <li>Free STANDARD SHIPPING over US$49.00</li>
-         <li>Return or exchange within 30 days.</li>
+       <li>{{sku_data.ship_desc}}</li>
+         <!-- <li>Free STANDARD SHIPPING over US$49.00</li>
+         <li>Return or exchange within 30 days.</li> -->
      </ul>
  </div>
 </template>
@@ -15,7 +16,15 @@
 export default {
   name: "",
   data() {
-    return {};
+    return {
+      sku_data:this.skuData
+    };
+  },
+  props:{
+    skuData:{
+      type:Object,
+      default:undefined
+    }
   },
   components: {}
 };
@@ -25,7 +34,7 @@ export default {
 .page {
   padding: 20px 20px 30px 20px;
   font-size: 14px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 10px solid #f8f8f8;
 }
 .title-box {
   display: flex;
@@ -46,9 +55,9 @@ export default {
 }
 .des-info {
   font-size: 14px;
-  padding-left: 20px;
-  li {
-    list-style-type: square;
-  }
+  // padding:0 20px;
+  // li {
+  //   list-style-type: square;
+  // }
 }
 </style>

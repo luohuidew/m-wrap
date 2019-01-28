@@ -107,14 +107,14 @@
         <detail-store :item="store_info"></detail-store>
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
-        <!-- <shipping></shipping> -->
+        <shipping :sku-data="sku"></shipping>
         <review v-if="review"
           :review="review"></review>
         <!-- <detail-welog></detail-welog> -->
-        <similar-cate v-if="same_category.data"
-          :data-list="same_category.data"></similar-cate>
         <similar-brand v-if="same_brand.data"
           :data-list="same_brand.data"></similar-brand>
+        <similar-cate v-if="same_category.data"
+          :data-list="same_category.data"></similar-cate>
       </div>
     </div>
     <detail-pay-btn v-if="cur_goods"
@@ -139,7 +139,7 @@ import shareApp from "@/components/dialog/share-app";
 // import group from "./group.vue";
 import detailMore from "./detail-more.vue";
 import detailStore from "./detail-store";
-// import shipping from "./shipping.vue";
+import shipping from "./shipping.vue";
 import review from "./review.vue";
 // import detailWelog from "./detail-welog.vue";
 import similarBrand from "./similar-brand";
@@ -313,7 +313,7 @@ export default {
     // group,
     detailMore,
     detailStore,
-    // shipping,
+    shipping,
     review,
     // detailWelog,
     similarBrand,
@@ -442,6 +442,7 @@ export default {
   }
   .img-box {
     position: relative;
+    padding: 0;
     .mask-info {
       position: absolute;
       right: 10px;

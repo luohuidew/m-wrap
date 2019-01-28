@@ -2,7 +2,7 @@
   <div class="order-detail"
     v-if="order_form">
     <div class="shiping item-box">
-      <div class="tips-for-group">
+      <div class="tips-for-group" v-if="$route.query.purchase_type!=='1'">
         <p>Complete groups receive products; incomplete receive full refunds.</p>
       </div>
       <h3>SHIPPING</h3>
@@ -130,10 +130,10 @@
             <span>Tax</span>
             <span>{{order_form.money_unit}}{{order_form.tax}}</span>
           </p>
-          <p>
+          <!-- <p>
             <span>Order Total</span>
             <span class="font-big"> {{order_form.money_unit}}{{order_form.order_total}}</span>
-          </p>
+          </p> -->
         </li>
         <li class="total-num">
           <p>
@@ -262,6 +262,9 @@ export default {
       };
       code.checkCode(params).then(res => {
         this.code_tips = res.data.message;
+        setTimeout(()=>{
+          this.code_tips = '';
+        },5000)
         if (res.data.type === 1) {
           this.right_code = this.cur_code;
           this.coupon = undefined;
@@ -532,6 +535,7 @@ $linecolor: #e9e9e9;
   // height: 40px;
   background-color: #f3f3f3;
   color: #d70e19;
+  transition: all 0.8s;
 }
 #promocoded {
   ul {

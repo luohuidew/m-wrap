@@ -21,10 +21,10 @@
         @click="to_about">
         About Us
       </span>
-      <span class="to-search"
+      <!-- <span class="to-search"
         @click="to_search">
         <img src="/static/img/icon/search@2x.png" alt="" srcset="">
-      </span>
+      </span> -->
     </p>
   </div>
 </template>
@@ -135,14 +135,15 @@ export default {
 .to-user {
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 14px;
   padding: 0 10px 0 20px;
   // border-right: 1px solid #000;
   img {
-    height: 30px;
-    width: 30px;
+    height: 28px;
+    width: 28px;
     object-fit: contain;
     margin: 0 10px;
+    border-radius: 50%;
   }
 }
 .to-about {

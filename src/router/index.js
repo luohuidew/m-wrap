@@ -191,7 +191,7 @@ export default new Router({
             import('@/pages/home/weget.vue'),
           meta: {
             title: 'Weget',
-            keepAlive: false,
+            keepAlive: true,
             type: 'list'
           }
         },

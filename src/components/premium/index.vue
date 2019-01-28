@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import goodsCardColumn from "@/components/goodsCard-column.vue";
+import goodsCardColumn from "@/components/card-column-auto.vue";
 export default {
   name: "",
   data() {
@@ -72,6 +72,7 @@ export default {
       display: inline-block;
       vertical-align: middle;
       padding-left: 10px;
+      width: 150px;
       &:nth-child(1) {
         padding-left: 0;
       }

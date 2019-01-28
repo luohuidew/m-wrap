@@ -110,7 +110,7 @@ export default {
 <style lang='scss' scoped>
 .goods-card {
   display: flex;
-  width: 150px;
+  // width: 150px;
   padding: 10px;
   flex-direction: column;
   justify-content: space-between;
@@ -143,8 +143,8 @@ export default {
 }
 .goods-img {
   position: relative;
-  width: 130px;
-  height: 130px;
+  width: auto;
+  height: auto;
   font-size: 0;
   .mask-info {
     position: absolute;

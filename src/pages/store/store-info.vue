@@ -21,16 +21,18 @@
     <div class="store-description">
       <span class="desc-min">{{store_info.desc}}</span>
     </div>
-    <ul class="store-account">
-      <li>
-        <span>{{store_info.comment_rate}}</span>
-        <span>Positive Feedback</span>
-      </li>
-      <li>
-        <span>{{store_info.bought_count}}</span>
-        <span>Bought</span>
-      </li>
-    </ul>
+    <div class="total-box">
+      <ul class="store-account">
+        <li>
+          <span>{{store_info.comment_rate}}</span>
+          <span>Positive Feedback</span>
+        </li>
+        <li>
+          <span>{{store_info.bought_count}}</span>
+          <span>Bought</span>
+        </li>
+      </ul>
+    </div>
     <div class="store-banner"
       v-if="store_info.store_banner_list.length">
       <banner :banner-data="store_info.store_banner_list"></banner>
@@ -76,13 +78,12 @@ export default {
 <style lang='scss' scoped>
 .store-box {
   padding: 0;
-  padding-bottom: 20px;
   // border-top: 10px solid #f8f8f8;
   // border-bottom: 10px solid #f8f8f8;
   .store-title {
     display: flex;
     padding-bottom: 10px;
-    padding-top: 118px;
+    padding-top: 126px;
     background: #ffffff url("") no-repeat left top;
     background-size: 100% 150px;
     .logo-box {
@@ -103,13 +104,15 @@ export default {
     .store-desc {
       flex: 1;
       flex-direction: column;
-      align-items: flex-start!important;
+      align-items: flex-start !important;
       justify-content: flex-end;
       font-size: 18px;
       font-weight: bold;
       padding: 0 40px 4px 10px;
       .creat-time {
         font-size: 10px;
+        padding-top: 2px;
+        font-weight: normal;
         color: #9b9b9b;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -133,22 +136,27 @@ export default {
     }
   }
   .store-description {
-    margin: 0 28px;
-    border-top: 1px solid #f3f3f3;
+    padding: 0px 28px 20px 28px;
     .desc-min {
       // height: 26px;
       // display: -webkit-box;
       font-size: 10px;
+      line-height: 16px;
       padding-top: 10px;
       color: #4a4a4a;
       overflow: hidden;
       text-overflow: ellipsis;
     }
   }
+  .total-box {
+    padding: 0 28px;
+  }
   .store-account {
-    padding-top: 38px;
+    // padding-top: 18px;
+    border-top: 1px solid #f3f3f3;
     display: flex;
     justify-content: center;
+    padding: 18px 0;
     li {
       flex: 1;
       display: flex;

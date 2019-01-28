@@ -225,6 +225,7 @@ export default {
 .share-page {
   display: flex;
   flex-direction: column;
+  height: 100%;
   .share-page-content {
     height: 100%;
     width: 100%;

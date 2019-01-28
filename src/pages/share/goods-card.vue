@@ -16,7 +16,7 @@
       </p>
 
       <p class="price">
-        <span class="red-price">${{order.group_price}}</span>
+        <span class="bold-price">${{order.group_price}}</span>
         <span class="no-price">${{order.alone_price}}</span>
       </p>
       <p class="detail-btn">
@@ -96,9 +96,9 @@ export default {
     font-size: 12px;
     padding: 10px 0 10px 0;
   }
-  .red-price {
+  .bold-price {
     font-size: 18px;
-    color: #d80c18;
+    color: #000000;
     font-weight: bold;
   }
   .no-price {

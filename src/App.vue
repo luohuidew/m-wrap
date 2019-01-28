@@ -6,8 +6,15 @@
     <div class="page-body"
       :class="{'in-app':no_head}">
       <transition :name="transitionName">
-        <router-view class="child-view"
-          :key="new Date().getTime()"></router-view>
+        <template v-if="$route.meta.keepAlive">
+          <keep-alive>
+            <router-view class="child-view"></router-view>
+          </keep-alive>
+        </template>
+        <template v-else>
+          <router-view class="child-view"
+            :key="new Date().getTime()"></router-view>
+        </template>
         <!-- <router-view></router-view> -->
       </transition>
 

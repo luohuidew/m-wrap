@@ -62,7 +62,7 @@
 
 <script>
 import shareApp from "@/components/dialog/share-app";
-import card from "@/components/goodsCard-column";
+import card from "@/components/card-column-auto";
 import api from "@/api/order";
 export default {
   name: "callback",

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import goodsCardColumn from "@/components/goodsCard-column.vue";
+import goodsCardColumn from "@/components/card-column-auto.vue";
 export default {
   name: "",
   data() {
