@@ -128,16 +128,19 @@ export default {
   //   font-size: 0;
   //   position: relative;
   // }
-  img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 10;
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin-right: 5px;
+  .buyer-box {
+    img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 10;
+      vertical-align: middle;
+      width: 20px;
+      height: 20px;
+      border: 1px solid #eeeeee;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
   }
 }
 .goods-img {

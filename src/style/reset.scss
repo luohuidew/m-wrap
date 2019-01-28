@@ -4,7 +4,7 @@
     list-style: none;
     text-decoration: none;
     box-sizing: border-box;
-    -webkit-overflow-scrolling : touch;
+    -webkit-overflow-scrolling: touch;
 }
 
 html,
@@ -13,7 +13,7 @@ body,
     font-size: 16px;
     height: 100%;
     width: 100%;
-    font-family: 'PingFangSC-Semibold','AvertaStd-Bold', Arial, Helvetica, sans-serif;
+    font-family: 'PingFangSC-Semibold', 'AvertaStd-Bold', Arial, Helvetica, sans-serif;
     background-color: #fff;
 }
 
@@ -25,6 +25,56 @@ h5 {
     font-size: 16px;
     font-weight: bold;
 }
+
+input::input-placeholder {
+    color: #b8c4ce !important;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: #b8c4ce !important;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+    color: #b8c4ce !important;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+    color: #b8c4ce !important;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    color: #b8c4ce !important;
+}
+
+/* Prevents img without src to appear */
+img:not([src]) {
+    visibility: hidden;
+}
+
+::-webkit-scrollbar {
+    display: none;
+    -webkit-appearance: none;
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(57, 57, 57, .2);
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: rgba(156, 156, 156, .9);
+}
+
+a {
+    text-decoration: none;
+}
+
 
 .page {
     overflow: auto;

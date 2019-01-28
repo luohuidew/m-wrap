@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import saleList from "@/components/goodsCard-column-scroll";
+import saleList from "@/components/card-column-scroll";
 // import api from "@/api/product";
 export default {
   name: "",

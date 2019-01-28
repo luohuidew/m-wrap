@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import goodsCardColumn from "@/components/goodsCard-column-scroll.vue";
+import goodsCardColumn from "@/components/card-column-scroll.vue";
 export default {
   name: "",
   data() {

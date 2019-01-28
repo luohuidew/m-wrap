@@ -139,6 +139,7 @@ export default {
     height: 20px;
     border-radius: 50%;
     margin-right: 5px;
+    border: 1px solid #ffffff;
   }
 }
 .goods-img {
