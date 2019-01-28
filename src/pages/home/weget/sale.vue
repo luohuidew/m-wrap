@@ -1,8 +1,7 @@
 <template>
   <div class='sale'>
     <div class="weget-title">
-      <p class="main-title">Exclusive Beauty Deals</p>
-      <!-- <p class="min-title">Exclusive Beauty Deals</p> -->
+      <p class="main-title">Today's Picks</p>
     </div>
     <div class="list-box">
       <template v-for="(item,index) in sku_lists">
@@ -51,5 +50,6 @@ export default {
 }
 .main-title {
   font-size: 22px;
+  font-weight: bold;
 }
 </style>
