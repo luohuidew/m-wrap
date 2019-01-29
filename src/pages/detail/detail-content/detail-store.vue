@@ -7,12 +7,12 @@
           alt="">
       </p>
       <p class="store-desc">
-        <span>{{item.name}}</span>
+        <span class="store-name">{{item.name}}</span>
         <span class="desc-min">{{item.desc}}</span>
       </p>
       <p class="store-btn">
         <a href="javascript:;"
-          @click="to_store(item.store_id)">STORE</a>
+          @click="to_store(item.store_id)">GO TO STORE</a>
       </p>
     </div>
     <ul class="store-account">
@@ -86,18 +86,25 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
       }
+      .store-name {
+        padding-right: 30px;
+        font-size: 18px;
+        background: url('/static/img/icon/Group 34 Copy@2x.png') no-repeat right center;
+        background-size: auto 20px;
+      }
     }
     .store-btn {
-      width: 60px;
+     
       display: flex;
       a {
         width: 100%;
         font-size: 12px;
-        border: 1px solid #f3f3f3;
-        color: #9b9b9b;
+        color: #ffffff;
         text-align: center;
-        height: 30px;
-        line-height: 30px;
+        height: 26px;
+        padding: 0 14px;
+        line-height: 26px;
+        background-color: #D70E19;
         // padding: 8px 0;
         border-radius: 13px;
       }
