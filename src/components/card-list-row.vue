@@ -1,6 +1,6 @@
 <template>
   <div class='goods-card'
-    @click="to_detail(sku.sku_id)">
+    @click="to_detail(sku.sku_id)" v-if="sku">
     <div class="goods-img">
       <img :src="sku.cover_img"
         alt=""
@@ -37,13 +37,14 @@
         <p class="pay-number">
           {{sku.bought_num}} bought
         </p>
-        <p class="goods-getter">
-          <img v-for="(item,index) in bought_user"
+        <p class="goods-getter" v-if="sku.bought_user">
+          <img v-for="(item,index) in sku.bought_user"
+          v-show="index<4"
             :key="index"
             :src="item.photo"
             :style="{right:(index+1)*12+'px',zIndex:10-index}">
           <img src="/static/img/icon/团购人点点点.png"
-            v-if="bought_user.length">
+            v-if="sku.bought_user.length">
         </p>
 
       </div>
@@ -63,11 +64,16 @@ export default {
   name: "",
   data() {
     return {
-      bought_user: this.sku.bought_user.slice(0, 4),
+      // bought_user: this.sku.bought_user.slice(0, 4),
       discount_text: this.sku.mask_info.mask_title.split(/\n|\r\n/g)
     };
   },
-  props: ["sku"],
+  props: {
+    sku:{
+      type:Object,
+      default:undefined
+    }
+  },
   components: {},
   methods: {
     to_detail(sku_id) {

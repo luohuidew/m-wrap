@@ -32,13 +32,14 @@
           </span>
         </p>
         <div class="buyer-box"
-          v-if="card_data_img.length">
-          <img v-for="(item,index) in card_data_img"
+          v-if="cardData.bought_user">
+          <img v-for="(item,index) in cardData.bought_user"
             :key="index"
+            v-show="index<2"
             :src="item.photo"
             :style="{right:(index+1)*12+'px',zIndex:10-index}">
           <img src="/static/img/icon/团购人点点点.png"
-            v-if="card_data_img.length">
+            v-if="cardData.bought_user.length">
           <!-- <p class="goods-getter">
           </p> -->
 
@@ -60,7 +61,7 @@ export default {
   data() {
     return {
       card_data: this.cardData,
-      card_data_img: this.cardData.bought_user.slice(0, 2),
+      // cardData.bought_user: this.cardData.bought_user.slice(0, 2),
       introduce: ""
     };
   },

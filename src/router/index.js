@@ -4,8 +4,7 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   linkActiveClass: 'active-route',
-  routes: [  
-    {
+  routes: [{
       path: '/test',
       name: 'test',
       component: () =>
@@ -22,8 +21,41 @@ export default new Router({
         import('@/pages/search'),
       meta: {
         title: 'search',
-        keepAlive: false
-      }
+        keepAlive: false,
+        fullscreen:true
+      },
+      redirect: '/search/search-home',
+      children: [{
+        path: 'search-home',
+        name: 'search-home',
+        component: () =>
+          import('@/pages/search/search-home'),
+        meta: {
+          title: 'search home',
+          keepAlive: false,
+          fullscreen:true
+        },
+      }, {
+        path: 'search-query',
+        name: 'search-query',
+        component: () =>
+          import('@/pages/search/search-query'),
+        meta: {
+          title: 'search query',
+          keepAlive: false,
+          fullscreen:true
+        },
+      }, {
+        path: 'search-result',
+        name: 'search-result',
+        component: () =>
+          import('@/pages/search/search-result'),
+        meta: {
+          title: 'search result',
+          keepAlive: false,
+          fullscreen:false
+        },
+      }],
     },
     {
       path: '/hot',
@@ -62,7 +94,8 @@ export default new Router({
         import('@/pages/login'),
       meta: {
         title: 'login',
-        keepAlive: false
+        keepAlive: false,
+        fullscreen:true
       }
     },
     {
@@ -108,64 +141,64 @@ export default new Router({
         keepAlive: false
       },
       children: [{
-        path: 'ac-1',
-        name: 'ac-1',
-        component: () =>
-          import('@/pages/article/ac-1'),
-        meta: {
-          title: '',
-          keepAlive: false
+          path: 'ac-1',
+          name: 'ac-1',
+          component: () =>
+            import('@/pages/article/ac-1'),
+          meta: {
+            title: '',
+            keepAlive: false
+          }
+        }, {
+          path: 'ac-2',
+          name: 'ac-2',
+          component: () =>
+            import('@/pages/article/ac-2'),
+          meta: {
+            title: '',
+            keepAlive: false
+          }
+        }, {
+          path: 'ac-3',
+          name: 'ac-3',
+          component: () =>
+            import('@/pages/article/ac-3'),
+          meta: {
+            title: '',
+            keepAlive: false
+          }
+        },
+        {
+          path: 'ac-4',
+          name: 'ac-4',
+          component: () =>
+            import('@/pages/article/ac-4'),
+          meta: {
+            title: '',
+            keepAlive: false
+          }
+        },
+        {
+          path: 'ac-5',
+          name: 'ac-5',
+          component: () =>
+            import('@/pages/article/ac-5'),
+          meta: {
+            title: '',
+            keepAlive: false
+          }
+        },
+        {
+          path: 'ac-6',
+          name: 'ac-6',
+          component: () =>
+            import('@/pages/article/ac-6'),
+          meta: {
+            title: '',
+            keepAlive: false
+          }
         }
-      }, {
-        path: 'ac-2',
-        name: 'ac-2',
-        component: () =>
-          import('@/pages/article/ac-2'),
-        meta: {
-          title: '',
-          keepAlive: false
-        }
-      }, {
-        path: 'ac-3',
-        name: 'ac-3',
-        component: () =>
-          import('@/pages/article/ac-3'),
-        meta: {
-          title: '',
-          keepAlive: false
-        }
-      },
-      {
-        path: 'ac-4',
-        name: 'ac-4',
-        component: () =>
-          import('@/pages/article/ac-4'),
-        meta: {
-          title: '',
-          keepAlive: false
-        }
-      },
-      {
-        path: 'ac-5',
-        name: 'ac-5',
-        component: () =>
-          import('@/pages/article/ac-5'),
-        meta: {
-          title: '',
-          keepAlive: false
-        }
-      },
-      {
-        path: 'ac-6',
-        name: 'ac-6',
-        component: () =>
-          import('@/pages/article/ac-6'),
-        meta: {
-          title: '',
-          keepAlive: false
-        }
-      }
-    ]
+      ]
     },
 
     {
@@ -260,7 +293,7 @@ export default new Router({
                 title: 'Goods Lists',
                 keepAlive: false
               }
-            },           
+            },
             {
               path: 'christmas',
               name: 'christmas',
@@ -270,7 +303,7 @@ export default new Router({
                 title: 'christmas home',
                 keepAlive: true
               }
-            },            
+            },
             {
               path: 'christmas-lists',
               name: 'christmas-lists',
@@ -319,7 +352,7 @@ export default new Router({
                 title: 'christmas-during',
                 keepAlive: false
               }
-            },{
+            }, {
               path: 'christmas-detail',
               name: 'christmas-detail',
               component: () =>
@@ -328,7 +361,7 @@ export default new Router({
                 title: 'christmas-detail',
                 keepAlive: false
               }
-            },{
+            }, {
               path: 'christmas-gift',
               name: 'christmas-gift',
               component: () =>
@@ -348,8 +381,7 @@ export default new Router({
                 title: 'popballoons home',
                 keepAlive: true
               },
-              children:[
-                {
+              children: [{
                   path: 'popballoons-home',
                   name: 'popballoons-home',
                   component: () =>
@@ -407,7 +439,7 @@ export default new Router({
                     title: 'popballoons-during',
                     keepAlive: false
                   }
-                },{
+                }, {
                   path: 'popballoons-detail',
                   name: 'popballoons-detail',
                   component: () =>
@@ -416,7 +448,7 @@ export default new Router({
                     title: 'popballoons-detail',
                     keepAlive: false
                   }
-                },{
+                }, {
                   path: 'popballoons-gift',
                   name: 'popballoons-gift',
                   component: () =>
@@ -427,7 +459,7 @@ export default new Router({
                   }
                 },
               ]
-            },                       
+            },
           ]
         },
         {
@@ -463,7 +495,8 @@ export default new Router({
         import('@/pages/pay/accept'),
       meta: {
         title: 'Payment',
-        keepAlive: false
+        keepAlive: false,
+        fullscreen:true
       }
     }, {
       path: '/address',

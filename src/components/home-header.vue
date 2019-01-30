@@ -1,6 +1,5 @@
 <template>
-  <div class="home-header"
-    v-if="show_header">
+  <div class="home-header">
     <img class="home-logo"
       @click="to_home"
       src="/static/img/icon/big-logo.png"
@@ -23,7 +22,9 @@
       </span>
       <!-- <span class="to-search"
         @click="to_search">
-        <img src="/static/img/icon/search@2x.png" alt="" srcset="">
+        <img src="/static/img/icon/search@2x.png"
+          alt=""
+          srcset="">
       </span> -->
     </p>
   </div>
@@ -38,11 +39,9 @@ export default {
       user_info: {}
     };
   },
-  watch:{
-    $route:{
-      handler(){
-        
-      }
+  watch: {
+    $route: {
+      handler() {}
     }
   },
   created() {
@@ -59,8 +58,7 @@ export default {
     hove_token() {
       console.log(this.$store.state.token);
       return this.$store.state.token;
-    },
-    
+    }
   },
   methods: {
     to_about() {
@@ -81,13 +79,13 @@ export default {
     },
     to_search() {
       this.$router.push({
-        path: "/search"
+        path: "/search/search-query"
       });
     },
     init_user() {
       if (this.hove_token) {
         api.PersonalCenter({}).then(res => {
-          console.log(res);
+          // console.log(res);
           this.$store.state.user = res.data.user_info;
           this.user_info = res.data.user_info;
           // setToken(res.data.token);
@@ -121,7 +119,7 @@ export default {
   // background: url("/static/img/icon/big-logo.png") no-repeat 30px center;
   // background-size: auto 70%;
   font-size: 14px;
-  box-shadow: 2px 0px 2px #ccc;
+  box-shadow: 0px 2px 6px 0px #d0d0d0;
 }
 .to-login {
   padding: 0 10px 0 20px;

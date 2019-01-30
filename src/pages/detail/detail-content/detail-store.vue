@@ -12,7 +12,7 @@
       </p>
       <p class="store-btn">
         <a href="javascript:;"
-          @click="to_store(item.store_id)">GO TO STORE</a>
+          @click="to_store(item.store_id)">STORE</a>
       </p>
     </div>
     <ul class="store-account">
@@ -71,6 +71,7 @@ export default {
     }
     .store-desc {
       flex: 1;
+      overflow: hidden;
       flex-direction: column;
       align-items: flex-start;
       justify-content: center;

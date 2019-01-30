@@ -1,54 +1,30 @@
 <template>
- <div class="search-home">
-   <div class="aside-bar"></div>
-   <div class="lists-box"></div>
- </div>
+  <div class="search-page">
+    
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import api from "@/api/search"
- export default {
-   name:'',
-   data () {
-     return {
-       aside_data:undefined,
-     }
-   },
-   created(){
-     this.init_data();
-   },
-   mounted () {
-   },
-   computed: {
-   },
-   methods: {
-     init_data(){
-       api.getFirstCategory().then(res=>{
-
-       })
-     }
-   },
-   components: {
-
-   }
- }
+export default {
+  name: "",
+  data() {
+    return {
+      search_text: ""
+    };
+  },
+  mounted() {},
+  computed: {},
+  methods: {
+    
+  },
+  components: {}
+};
 </script>
 
 <style lang='scss' scoped>
-.search-home {
-  display: flex;
+.search-page {
   height: 100%;
-  & > div {
-    height: 100%;
-    overflow: auto;
-    overflow-x: hidden;
-  }
-  .aside-bar {
-    width: 90px;
-  }
-  .lists-box {
-    flex:1;
-  }
 }
- 
+
 </style>

@@ -41,9 +41,9 @@ export default {
       return this.$store.state.share_token;
     },
     no_head() {
-      let temp = this.$route.path;
+      let temp = this.$route.meta.fullscreen;
       if (
-        temp === "/accept" ||
+        temp ||
         (localStorage.getItem("device") === "ios" ||
           localStorage.getItem("device") === "android")
       ) {
