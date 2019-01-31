@@ -115,7 +115,7 @@
               <span class="line"></span>
             </p>
             <a class="open"
-              href="javascript:;">START MY GROUP</a>
+              href="javascript:;" @click="close_tips(2)">START MY GROUP</a>
           </div>
         </div>
       </template>
