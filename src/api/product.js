@@ -10,6 +10,14 @@ export default {
       data: JSON.stringify(data),
     })
   },
+  getRandGroup(data = {}) {
+    data.token = token;
+    return request({
+      url: 'product/getRandGroup?loading=yes',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
   get_similar(data = {}) {
     data.token = token;
     return request({

@@ -36,7 +36,6 @@
         @click="close_tips(2)">
         <div class="group-info">
           <span class="user-info">OPEN A GROUP <span class="status-price">{{data_price.money_unit}}{{data_price.group_price}}</span> </span>
-
         </div>
       </a>
     </template>
@@ -53,13 +52,16 @@
     <template v-else>
       <a class="direct-buy buy-btn"
         href="javascript:;"
-        @click="alone_buy">
+        @click="alone_buy()">
         <span class="price">{{data_price.money_unit}}{{data_price.alone_price}}</span>
         <span class="price-des">ORIGINAL PRICE</span>
       </a>
       <a class="group-buy buy-btn"
         href="javascript:;"
-        @click="close_tips(2)">
+        @click="group_buy()">
+        <!-- <a class="group-buy buy-btn"
+        href="javascript:;"
+        @click="close_tips(2)"> -->
         <span class="price">{{data_price.money_unit}}{{data_price.group_price}}</span>
         <span class="price-des">START GROUP</span>
       </a>
@@ -77,10 +79,44 @@
           <h3>Group buy Save <span>{{data_price.money_unit}}{{Number((data_price.alone_price-data_price.group_price)*100/100).toFixed(2)}}</span></h3>
           <p class="buy">
             <span class="buy-alone"
-              @click.stop="close_tips(1)">Buy it now</span>
+              @click.stop="close_tips(1)">BUY IT NOW</span>
             <span class="buy-group"
-              @click.stop="close_tips(2)">Open a group</span>
+              @click.stop="group_buy()">OPEN A GROUP</span>
+            <!-- <span class="buy-group"
+              @click.stop="close_tips(2)">OPEN A GROUP</span> -->
           </p>
+        </div>
+      </template>
+    </temp-dialog>
+    <temp-dialog v-if="show_dialog_tips_group"
+      @close="close_tips(0)">
+      <template slot="tips">
+        <div class="open-group-box">
+          <p class="close-icon">
+            <img src="/static/img/icon/关闭@2x.png"
+              alt=""
+              srcset="">
+          </p>
+          <h3>Join {{recommend_group.username}}' group</h3>
+          <p class="need-persion">{{recommend_group.left_num}} Person Needed Time Left {{recommend_group.left_time|timeDiff}}</p>
+          <div class="group-info">
+            <img :src="recommend_group.photo"
+              alt="">
+            <img src="/static/img/icon/emity.png"
+              alt="">
+          </div>
+          <div class="btn-box">
+            <a class="group"
+              href="javascript:;"
+              @click="close_tips(2,recommend_group.group_id)">JOIN GROUP</a>
+            <p>
+              <span class="line"></span>
+              <span class="or">OR</span>
+              <span class="line"></span>
+            </p>
+            <a class="open"
+              href="javascript:;">START MY GROUP</a>
+          </div>
         </div>
       </template>
     </temp-dialog>
@@ -99,13 +135,16 @@ export default {
       // data_price:this.goods
       show_dialog: false,
       show_dialog_tips: false,
+      show_dialog_tips_group: false,
       cur_type: 1,
       cur_group_id: undefined,
       cur_goods_id: undefined,
       cur_paynumber: 0,
       is_like: this.sku.is_like,
       is_group: false,
-      c_query: this.$route.query
+      c_query: this.$route.query,
+      /* 开团提示的弹框的额内容 */
+      recommend_group: undefined
     };
   },
   computed: {
@@ -154,7 +193,6 @@ export default {
       if (this.$route.query.group_id) {
         this.is_group = true;
         this.cur_group_id = this.$route.query.group_id;
-        // this.close_tips(2,this.$route.query.group_id);
       }
     },
     to_fee() {
@@ -194,10 +232,32 @@ export default {
     close_emity() {
       this.show_dialog = false;
     },
-    group_buy() {},
+    group_buy() {
+      let params = {
+        sku_id: this.$route.query.sku_id
+      };
+      this.show_dialog_tips = false;
+      api.getRandGroup(params).then(res => {
+        if (res.data.total === 0) {
+          this.close_tips(2);
+        } else {
+          this.recommend_group = res.data.group;
+          this.show_dialog_tips_group = true;
+          window.group_timer = setInterval(() => {
+            // console.log(this.cur_index);
+            this.recommend_group.left_time -= 1;
+            if (this.recommend_group.left_time < 0) {
+              this.recommend_group.left_time = 0;
+            }
+            console.log(this.recommend_group.left_time);
+          }, 1000);
+        }
+      });
+    },
     alone_buy() {
       this.show_dialog_tips = true;
     },
+    /* 关闭弹窗，并决定是否是团购 */
     close_tips(type, group_id) {
       console.log(type, group_id);
       // if (type === 1) {
@@ -205,6 +265,9 @@ export default {
       // } else if (type === 2) {
       // }
       if (type !== 0) {
+        this.$set(this,'cur_type',type);
+        this.$set(this,'cur_group_id',group_id);
+        // this.cur_group_id = group_id;
         if (!getToken()) {
           let redirect_params = {
             path: "/login",
@@ -217,9 +280,10 @@ export default {
           this.show_dialog = true;
         }
       }
+
       this.show_dialog_tips = false;
-      this.cur_type = type;
-      this.cur_group_id = group_id;
+      this.show_dialog_tips_group = false;
+      window.clearInterval(group_timer);
     },
     like_heart(cur_like) {
       console.log(666);
@@ -368,7 +432,7 @@ export default {
   width: 294px;
   height: 200px;
   background: rgba(255, 255, 255, 1);
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 50px 15px 26px 15px;
   display: flex;
   flex-direction: column;
@@ -395,10 +459,83 @@ export default {
       color: #fff;
       line-height: 40px;
       text-align: center;
-      font-size: 16px;
+      font-size: 14px;
     }
     .buy-group {
       background-color: #d70e19;
+    }
+  }
+}
+.open-group-box {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 4px;
+  text-align: center;
+  padding: 20px 20px 40px 20px;
+  .close-icon {
+    text-align: right;
+    img {
+      height: 10px;
+    }
+  }
+  h3 {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+    padding: 10px 0 6px 0;
+  }
+  .need-persion {
+    font-size: 12px;
+    line-height: 15px;
+    color: #898989;
+  }
+  .group-info {
+    padding: 20px 0 30px 0;
+    img {
+      width: 60px;
+      width: 60px;
+      border-radius: 50%;
+      // border:1px solid #C9CACA;
+      margin: 0 10px;
+    }
+  }
+  .btn-box {
+    p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 0;
+      .line {
+        width: 65px;
+        height: 1px;
+        background-color: #c9caca;
+      }
+      .or {
+        width: auto;
+        font-size: 12px;
+        line-height: 16px;
+        padding: 0 10px;
+      }
+    }
+    a {
+      display: inline-block;
+      height: 40px;
+      width: 255px;
+      border-radius: 20px;
+      text-align: center;
+      color: #ffffff;
+      font-size: 16px;
+      line-height: 40px;
+    }
+    .group {
+      background-color: #d70e19;
+    }
+    .open {
+      background-color: #c9caca;
     }
   }
 }

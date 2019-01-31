@@ -74,36 +74,7 @@
               </div>
             </li>
           </ul>
-        </div>
-        <!-- <group v-if="group"
-          :group="group"
-          :goods="cur_goods"></group> -->
-        <!-- <div class="store-box" v-if="store_info.store_id">
-          <div class="store-title">
-            <p>
-              <img :src="store_info.logo"
-                alt="">
-            </p>
-            <p class="store-desc">
-              <span>{{store_info.name}}</span>
-              <span class="desc-min">{{store_info.desc}}</span>
-            </p>
-            <p class="store-btn">
-              <a href="javascript:;"
-                @click="to_store(store_info.store_id)">STORE</a>
-            </p>
-          </div>
-          <ul class="store-account">
-            <li>
-              <span>{{store_info.comment_rate}}</span>
-              <span>Positive Feedback</span>
-            </li>
-            <li>
-              <span>{{store_info.bought_count}}</span>
-              <span>Bought</span>
-            </li>
-          </ul>
-        </div> -->
+        </div>        
         <detail-store :item="store_info"></detail-store>
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
