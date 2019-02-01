@@ -43,7 +43,7 @@
     <p class="cor-btn">
       <a href="javascript:;"
         @click="group_buy()">
-        START GROUP
+        GROUP BUY
       </a>
     </p>
   </div>

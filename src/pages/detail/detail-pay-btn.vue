@@ -35,7 +35,7 @@
         href="javascript:;"
         @click="close_tips(2)">
         <div class="group-info">
-          <span class="user-info">OPEN A GROUP <span class="status-price">{{data_price.money_unit}}{{data_price.group_price}}</span> </span>
+          <span class="user-info">GROUP BUY <span class="status-price">{{data_price.money_unit}}{{data_price.group_price}}</span> </span>
         </div>
       </a>
     </template>
@@ -63,7 +63,7 @@
         href="javascript:;"
         @click="close_tips(2)"> -->
         <span class="price">{{data_price.money_unit}}{{data_price.group_price}}</span>
-        <span class="price-des">START GROUP</span>
+        <span class="price-des">GROUP BUY</span>
       </a>
     </template>
     <attr-dialog v-if="show_dialog"
@@ -81,9 +81,7 @@
             <span class="buy-alone"
               @click.stop="close_tips(1)">BUY IT NOW</span>
             <span class="buy-group"
-              @click.stop="group_buy()">OPEN A GROUP</span>
-            <!-- <span class="buy-group"
-              @click.stop="close_tips(2)">OPEN A GROUP</span> -->
+              @click.stop="group_buy()">GROUP BUY</span>
           </p>
         </div>
       </template>
@@ -115,7 +113,8 @@
               <span class="line"></span>
             </p>
             <a class="open"
-              href="javascript:;" @click="close_tips(2)">START MY GROUP</a>
+              href="javascript:;"
+              @click="close_tips(2)">START MY GROUP</a>
           </div>
         </div>
       </template>
@@ -265,8 +264,8 @@ export default {
       // } else if (type === 2) {
       // }
       if (type !== 0) {
-        this.$set(this,'cur_type',type);
-        this.$set(this,'cur_group_id',group_id);
+        this.$set(this, "cur_type", type);
+        this.$set(this, "cur_group_id", group_id);
         // this.cur_group_id = group_id;
         if (!getToken()) {
           let redirect_params = {

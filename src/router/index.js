@@ -197,6 +197,35 @@ export default new Router({
             title: '',
             keepAlive: false
           }
+        },
+        {
+          path: 'ac-7',
+          name: 'ac-7',
+          component: () =>
+            import('@/pages/article/ac-7'),
+          meta: {
+            title: '',
+            keepAlive: false
+          }
+        },
+        {
+          path: 'ac-8',
+          name: 'ac-8',
+          component: () =>
+            import('@/pages/article/ac-8'),
+          meta: {
+            title: '',
+            keepAlive: false
+          }
+        },{
+          path: 'ac-9',
+          name: 'ac-9',
+          component: () =>
+            import('@/pages/article/ac-9'),
+          meta: {
+            title: '',
+            keepAlive: false
+          }
         }
       ]
     },

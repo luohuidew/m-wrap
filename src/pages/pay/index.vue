@@ -375,10 +375,10 @@ $linecolor: #e9e9e9;
 }
 .tips-for-group {
   padding: 15px 30px;
-  background-color: #d70e19;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
   p {
-    background: url("/static/img/icon/weget_order_notice_icon@2x.png") no-repeat
+    background: url("/static/img/icon/mine_notifi_nav_icon@2x.png") no-repeat
       left center;
     background-size: auto 28px;
     padding-left: 38px;
