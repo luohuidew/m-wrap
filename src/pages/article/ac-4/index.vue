@@ -1,35 +1,19 @@
 <template>
   <div class="article-detail">
     <ul>
-      <li v-for="(item,index) in item_data"
-        :key="index">
-        <div class="img-box"
-          v-if="item.type==='desc'">
-          <img :src="item.url"
-            alt
-            srcset>
+      <li v-for="(item,index) in item_data" :key="index">
+        <div class="img-box" v-if="item.type==='desc'">
+          <img :src="item.url" alt srcset>
         </div>
-        <div class="img-box"
-          v-else-if="item.type==='goods'"
-          :class="{'two-img':item.url.length===2}">
-          <img v-for="(goods,index) in item.url"
+        <div class="img-box" v-if="item.type==='goods'" :class="{'two-img':item.url.length===2}">
+          <img
+            v-for="(goods,index) in item.url"
             :key="index"
             :src="goods.img_url"
             @click="to_detail(goods.sku_id)"
             alt
-            srcset>
-        </div>
-        <div class="img-box"
-          v-else-if="item.type==='store'"
-          :class="{'two-img':item.url.length===2}">
-          <img v-for="(goods,index) in item.url"
-            :key="index"
-            :src="goods.img_url"
-            @click="to_store(goods.store_id)"
-            alt
-            srcset>
-        </div>
-        <div v-else>
+            srcset
+          >
         </div>
       </li>
     </ul>
@@ -52,8 +36,7 @@
         </p>
       </div>
       <div class="about_row2">
-        <img class="bgimg"
-          src="/static/img/about/底部@2x.png">
+        <img class="bgimg" src="/static/img/about/底部@2x.png">
       </div>
     </footer>
   </div>
@@ -73,42 +56,20 @@ export default {
   methods: {
     to_detail(sku_id) {
       if (sku_id) {
-        let href_params = {
-          type: 106,
-          data: {
-            route: "wemall://public/route?type=6&id=" + sku_id + ""
-          }
-        };
-        let temp = this.$CM.weget_device_link(href_params);
-        if (temp === "h5") {
-          this.$router.push({
-            path: "/detail",
-            query: {
-              sku_id: sku_id
+        if (window.weget_mobile_type === "iOS") {
+          let params = {
+            type: 106,
+            data: {
+              route: "wemall://public/route?type=6&id=" + sku_id + ""
             }
-          });
+          };
+          window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
+          // alert('to login');
+        } else {
+          this.$router.push({ path: "/detail", query: { sku_id: sku_id } });
         }
       }
-    },
-    to_store(store_id) {
-      if (store_id) {
-        let href_params = {
-          type: 106,
-          data: {
-            route: "wemall://public/route?type=11&id=" + store_id + ""
-          }
-        };
-        let temp = this.$CM.weget_device_link(href_params);
-        if (temp === "h5") {
-          this.$router.push({
-            path: "/store",
-            query: {
-              store_id: store_id
-            }
-          });
-        }
-      }
-    },
+    }
   },
   components: {}
 };
