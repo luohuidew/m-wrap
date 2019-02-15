@@ -28,21 +28,21 @@ const data = [{
   type: 'desc',
   url: '/static/img/activity-img/ac-9/app情人节-专题页-切图_06.jpg'
 },
-{
-  type: 'goods',
-  url: [{
-    sku_id: '4528894984212609',
-    img_url: '/static/img/activity-img/ac-9/4528894984212609.jpg'
-  }, {
-    sku_id: '4537792587226649',
-    img_url: '/static/img/activity-img/ac-9/4537792587226649.jpg'
-  }, ]
-},
+// {
+//   type: 'goods',
+//   url: [{
+//     sku_id: '4528894984212609',
+//     img_url: '/static/img/activity-img/ac-9/4528894984212609.jpg'
+//   }, {
+//     sku_id: '4537792587226649',
+//     img_url: '/static/img/activity-img/ac-9/4537792587226649.jpg'
+//   }, ]
+// },
 /* 3 */
-{
-  type: 'desc',
-  url: '/static/img/activity-img/ac-9/web底妆_10.jpg'
-},
+// {
+//   type: 'desc',
+//   url: '/static/img/activity-img/ac-9/web底妆_10.jpg'
+// },
 {
   type: 'store',
   url: [{

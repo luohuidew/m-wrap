@@ -3,7 +3,7 @@
     v-if="order_form">
     <div class="shiping item-box">
       <div class="tips-for-group" v-if="$route.query.purchase_type!=='1'">
-        <p>Complete groups receive products; incomplete receive full refunds.</p>
+        <p>A complete group recieves products, an incomplete group recieves full refunds.</p>
       </div>
       <h3>SHIPPING</h3>
       <ul>
