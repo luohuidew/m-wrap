@@ -87,7 +87,6 @@ export default {
     text-overflow: ellipsis;
     font-size: 12px;
     min-height: 28px;
-    font-family: AvertaStd-Semibold;
     text-overflow: ellipsis;
     // font-weight: 700;
     color: #000;

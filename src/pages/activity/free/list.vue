@@ -67,8 +67,7 @@ export default {
 <style lang="scss" scoped>
 .page {
   width: 100%;
-  background: #f3f3f3;
-  font-family: AvertaStd-Light;
+  background: #f3f3f3;  
   .list {
     width: 100%;
     margin-bottom: 10px;
@@ -122,8 +121,7 @@ export default {
       padding: 10px 0;
       font-size: 14px;
       line-height: 20px;
-      .win {
-        font-family: AvertaStd-Semibold;
+      .win {        
         font-weight: 600;
       }
     }

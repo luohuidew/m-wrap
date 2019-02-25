@@ -439,7 +439,6 @@ export default {
   align-items: center;
   h3 {
     font-size: 20px;
-    font-family: "PingFangSC-Semibold";
     font-weight: 600;
     span {
       color: #d70e19;

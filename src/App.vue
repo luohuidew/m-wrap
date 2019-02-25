@@ -113,7 +113,6 @@ export default {
   /* display: flex; */
   /* height: 100%; */
   flex-direction: column;
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
   /* margin-top:50px; */
 }
 .page-head {

@@ -90,8 +90,7 @@ export default {
   .text {
     width: 100%;
     text-align: left;
-    font-size: 16px;
-    font-family: PingFangSC-Semibold;
+    font-size: 16px;    
     font-weight: 600;
     color: rgba(0, 0, 0, 1);
     margin-bottom: 20px;
@@ -107,8 +106,7 @@ export default {
     background: #d70e19;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
-    font-size: 16px;
-    font-family: PingFangSC-Semibold;
+    font-size: 16px;    
     font-weight: 600;
     color: rgba(255, 255, 255, 1);
   }
@@ -122,8 +120,7 @@ export default {
     background: #000;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
-    font-size: 16px;
-    font-family: PingFangSC-Semibold;
+    font-size: 16px;    
     font-weight: 600;
     color: rgba(255, 255, 255, 1);
   }

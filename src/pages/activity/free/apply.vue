@@ -89,7 +89,6 @@ export default {
 .content {
   padding: 20px;
   font-size: 16px;
-  font-family: AvertaStd-Semibold;
   font-weight: 600;
   color: #000;
   line-height: 25px;
@@ -119,7 +118,6 @@ export default {
     border-radius: 16px;
     border: 0;
     font-size: 14px;
-    font-family: AvertaStd-Bold;
     font-weight: bold;
     color: #fff;
     line-height: 32px;

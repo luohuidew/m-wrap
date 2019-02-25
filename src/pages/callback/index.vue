@@ -209,7 +209,6 @@ export default {
 .buy-alone {
   text-align: center;
   font-size: 20px;
-  font-family: "PingFangSC-Semibold";
   font-weight: 600;
   padding-bottom: 12px;
 }

@@ -157,7 +157,6 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  font-family: AvertaStd-Semibold;
   .all-content {
     flex: 1;
     overflow: auto;
@@ -174,14 +173,12 @@ export default {
       .color {
         width: 32px;
         height: 18px;
-        font-size: 26px;
-        font-family: AvertaStd-Bold;
+        font-size: 26px;        
         font-weight: bold;
         color: rgba(216, 12, 24, 1);
       }
       .market {
-        font-size: 14px;
-        font-family: Helvetica;
+        font-size: 14px;        
         color: rgba(137, 137, 137, 1);
         margin-left: 13px;
       }
@@ -190,8 +187,7 @@ export default {
       width: 194px;
       height: 50px;
       background: #d70e19;
-      font-size: 16px;
-      font-family: AvertaStd-Bold;
+      font-size: 16px;      
       font-weight: bold;
       color: rgba(255, 255, 255, 1);
       line-height: 50px;
@@ -244,8 +240,7 @@ export default {
       width: 33.3%;
       .text {
         padding-bottom: 12px;
-        font-size: 14px;
-        font-family: AvertaStd-Light;
+        font-size: 14px;        
         font-weight: 300;
         color: rgba(201, 202, 202, 1);
         line-height: 16px;
@@ -265,16 +260,14 @@ export default {
     padding: 20px;
     border-bottom: 1px solid rgba(233, 233, 233, 1);
     h2 {
-      font-size: 24px;
-      font-family: AvertaStd-Bold;
+      font-size: 24px;      
       font-weight: bold;
       color: rgba(0, 0, 0, 1);
       line-height: 30px;
       margin-bottom: 10px;
     }
     p {
-      font-size: 12px;
-      font-family: AvertaStd-Light;
+      font-size: 12px;      
       font-weight: 300;
       color: rgba(0, 0, 0, 1);
       line-height: 16px;
@@ -298,8 +291,7 @@ export default {
         // list-style-position: inside;
         // list-style-type: decimal;
         padding: 0 10px;
-        font-size: 14px;
-        font-family: AvertaStd-Light;
+        font-size: 14px;        
         font-weight: 300;
         color: rgba(0, 0, 0, 1);
         line-height: 20px;

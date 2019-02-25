@@ -126,7 +126,6 @@ export default {
   .goods-title {
     width: 162px;
     font-size: 14px;
-    font-family: AvertaStd-Semibold;
     text-overflow: ellipsis;
     font-weight: 700;
     color: #000;

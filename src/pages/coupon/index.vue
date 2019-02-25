@@ -100,7 +100,6 @@ export default {
 .coupon-list {
   flex: 1;
   overflow: auto;
-  font-family: "AvertaStd-Bold";
   padding: 0 10px;
   .coupon-title {
     font-size: 24px;
