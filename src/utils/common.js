@@ -49,7 +49,7 @@ const CM = {
     return (cur_device === 'android' || cur_device === 'ios');
   },
   weget_device_link(params) {
-    console.log('device_type_params', params);
+    // console.log('device_type_params', params);
     // alert(JSON.stringify(params));
     let cur_device = localStorage.getItem('device');
     if (cur_device === 'android') {

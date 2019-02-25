@@ -13,7 +13,7 @@ export default {
   getRandGroup(data = {}) {
     data.token = token;
     return request({
-      url: 'product/getRandGroup?loading=yes',
+      url: 'product/getRandGroup',
       method: 'post',
       data: JSON.stringify(data),
     })

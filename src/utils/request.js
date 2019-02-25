@@ -18,8 +18,8 @@ import {
 } from 'js-sha256';
 let BASE_API;
 // let CUR_ORIDIN = window.location.origin;
-BASE_API = 'https://app.weget.com/wap/';
-// BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
+// BASE_API = 'https://app.weget.com/wap/';
+BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
 // if (process.env.NODE_ENV === 'development') {
 //   // dev
 //   BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
@@ -49,7 +49,9 @@ const service = axios.create({
 window.nativeToJavaScript_sendToken = function (res) {
   // alert(JSON.stringify(res));
   let token = res.token;
+  alert(token);
   if (token) {
+    removeToken();
     setToken(token);
     if (getToken()) {
       window.location.reload();
@@ -65,7 +67,8 @@ service.interceptors.request.use(
       http_load = Toast.loading({
         mask: true,
         loadingType: "spinner",
-        message: 'Loading'
+        message: 'Loading',
+        duration:0
       });
     }
     // Do something before request is sent
@@ -105,7 +108,13 @@ service.interceptors.response.use(
       // console.log(config);
       /* 处于weget的app下不显示弹框 */
       if (!localStorage.getItem('device')) {
-        Toast(res.message);
+        // Toast(res.message
+        let toast_config = {
+          message:res.message,
+          mask:true,
+          duration:5000
+        };
+        Toast(toast_config)
       }
 
       let show_tips = false;
@@ -125,7 +134,7 @@ service.interceptors.response.use(
         let params;
         if (getToken()) {
           params = {
-            type: 104,
+            type: 103,
             data: {}
           };
           removeToken();
@@ -145,8 +154,8 @@ service.interceptors.response.use(
         } else if (localStorage.getItem('device') === 'android') {
           /* android环境的判断 */
           let temp_params = JSON.stringify(params);
-          window.weget_mobile_type.nativeToJavaScript(temp_params);
           let and_token = window.weget_mobile_type.nativeToJavaScript_sendToken();
+          alert(and_token);
           if (and_token) {
             setToken(and_token);           
           }
@@ -198,7 +207,7 @@ service.interceptors.response.use(
     //   type: 'error',
     //   duration: 5 * 1000
     // })
-    alert(JSON.parse(error));
+    // alert(JSON.parse(error));
     return Promise.reject(error)
   }
 )

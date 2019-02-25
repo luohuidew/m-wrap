@@ -2,7 +2,8 @@
   <div class="order-detail"
     v-if="order_form">
     <div class="shiping item-box">
-      <div class="tips-for-group" v-if="$route.query.purchase_type!=='1'">
+      <div class="tips-for-group"
+        v-if="$route.query.purchase_type!=='1'">
         <p>A complete group recieves products, an incomplete group recieves full refunds.</p>
       </div>
       <h3>SHIPPING</h3>
@@ -40,16 +41,28 @@
     <div class="payment item-box">
       <h3>PAYMENT METHOD</h3>
       <ul>
-        <li>
-          <p>
+        <li :class="{'active':is_select_pay===1}"
+          @click="is_select_pay=1">
+          <p class="pay-type">
             <span>Credit/Debit Card</span>
+            <img src="/static/img/icon/pay/Visa-light.png"
+              alt="">
+            <img src="/static/img/icon/pay/MasterCard-light.png"
+              alt="">
+            <img src="/static/img/icon/pay/Maestro-light.png"
+              alt="">
+            <img src="/static/img/icon/pay/AmericanExpress-light.png"
+              alt="">
           </p>
         </li>
-        <!-- <li class="standard">
-          <p>
+        <li :class="{'active':is_select_pay===2}"
+          @click="is_select_pay=2">
+          <p class="pay-type">
             <span>PayPal</span>
+            <img src="/static/img/icon/pay/Group 14.png"
+              alt="">
           </p>
-        </li> -->
+        </li>
       </ul>
     </div>
     <div class="coupon-box item-box"
@@ -143,24 +156,30 @@
       </ul>
     </div>
     <div class="pay-now">
-      <a v-if="is_click"
+      <!-- <a v-if="is_click"
         class="waiting"
-        href="javascript:;">Waiting</a>
-      <a v-else
-        href="javascript:;"
+        href="javascript:;">Waiting</a> -->
+      <a href="javascript:;"
         @click="to_accept">Checkout</a>
     </div>
+    <van-popup v-model="show_pay_methods"
+      position="bottom"
+      :overlay="true">
+      <payment-dialog :order-data="res_create_data"
+        :submit-data="submit_form" @close="show_pay_methods=false"></payment-dialog>
+    </van-popup>
   </div>
 </template>
 
 <script>
-import accept from "./accept.vue";
 import api from "@/api/pay";
 import code from "@/api/code";
+import paymentDialog from "./payment-dialog";
 export default {
   name: "",
   data() {
     return {
+      show_pay_methods: false,
       is_selected_address: undefined,
       shipping_mothods_index: undefined,
       coupon: undefined,
@@ -172,7 +191,9 @@ export default {
       can_select_coupon: true,
       code_tips: "",
       cur_code: "",
-      right_code: undefined
+      right_code: undefined,
+      res_create_data: null,
+      is_select_pay: 1
     };
   },
   computed: {
@@ -191,7 +212,8 @@ export default {
           : undefined,
         user_coupon_id: this.coupon ? this.coupon.id : undefined,
         address_change: this.address_change,
-        code_number: this.right_code
+        code_number: this.right_code,
+        pay_type:this.is_select_pay
       };
     }
   },
@@ -262,9 +284,9 @@ export default {
       };
       code.checkCode(params).then(res => {
         this.code_tips = res.data.message;
-        setTimeout(()=>{
-          this.code_tips = '';
-        },5000)
+        setTimeout(() => {
+          this.code_tips = "";
+        }, 5000);
         if (res.data.type === 1) {
           this.right_code = this.cur_code;
           this.coupon = undefined;
@@ -337,6 +359,7 @@ export default {
         // };
         // debugger;
         //  this.is_click = true;
+        this.res_create_data = res.data;
         if (res.data.free === 1) {
           this.$router.replace({
             path: "/callback",
@@ -345,24 +368,27 @@ export default {
             }
           });
         } else {
-          let accpet_params = {
-            path: "/accept",
-            query: {
-              goods_id: this.$route.query.goods_id,
-              num: this.$route.query.num,
-              purchase_type: this.$route.query.purchase_type,
-              order_no: res.data.order_no,
-              total: res.data.total_fee
-              // total: this.order_form.order_total
-            }
-          };
-          this.$router.replace(accpet_params);
+          // let accpet_params = {
+          //   path: "/accept",
+          //   query: {
+          //     goods_id: this.$route.query.goods_id,
+          //     num: this.$route.query.num,
+          //     purchase_type: this.$route.query.purchase_type,
+          //     order_no: res.data.order_no,
+          //     total: res.data.total_fee
+          //     // total: this.order_form.order_total
+          //   }
+          // };
+          // this.$router.replace(accpet_params);
+          this.show_pay_methods = true;
         }
         // this.$router.replace({path:'/accept',query:{order_no:res.data.order_no,total:this.order_form.order_total}});
       });
     }
   },
-  components: {}
+  components: {
+    paymentDialog
+  }
 };
 </script>
 
@@ -435,9 +461,25 @@ $linecolor: #e9e9e9;
   .payment {
     li {
       p {
-        background: url("/static/img/icon/havechecked.png") no-repeat right
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        background: url("/static/img/icon/选择 灰@2x.png") no-repeat right
           center;
         background-size: 15px;
+      }
+      span {
+        margin-right: 20px;
+      }
+      img {
+        height: 20px;
+        width: 34px;        
+      }
+    }
+    .active {
+      p {
+        background: url("/static/img/icon/选择红@2x.png") no-repeat right center;
+        background-size: 15px 15px;
       }
     }
   }

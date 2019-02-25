@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div class="page-head">
-      <home-header v-if="!no_head"></home-header>
+      <keep-alive>
+        <home-header v-if="!no_head"></home-header>
+      </keep-alive>
     </div>
     <div class="page-body"
       :class="{'in-app':no_head}">
