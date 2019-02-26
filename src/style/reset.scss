@@ -6,6 +6,20 @@
     box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
 }
+@font-face {
+    font-family: 'Muli';
+    /*字体名称*/
+    src: url('/static/font/Muli/Muli-Regular.ttf');
+    /*字体源文件*/
+}
+
+@font-face {
+    font-family: 'Muli';
+    font-weight: bold;
+    /*字体名称*/
+    src: url('/static/font/Muli/Muli-Bold.ttf');
+    /*字体源文件*/
+}
 
 html,
 body,
@@ -13,7 +27,7 @@ body,
     font-size: 16px;
     height: 100%;
     width: 100%;
-    font-family: 'PingFangSC-Semibold', 'AvertaStd-Bold', Arial, Helvetica, sans-serif;
+    font-family: 'Muli', sans-serif;
     background-color: #fff;
 }
 
