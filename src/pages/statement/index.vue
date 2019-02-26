@@ -124,6 +124,7 @@ export default {
 .statement {
   font-size: 16px;
   padding: 20px;
+  font-weight: normal;
   h1,
   h2,
   h3 {
