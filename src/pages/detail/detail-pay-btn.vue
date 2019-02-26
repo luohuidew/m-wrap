@@ -7,13 +7,13 @@
       <p>ONE TIME shipping fee PER day</p>
       <i></i>
     </div>
-    <a class="like-btn"
+    <a class="store-btn"
       href="javascript:;"
-      @click="like_heart(sku.is_like)">
+      @click="to_store(sku.store_id)">
       <span class="heart"
         :class="is_like===2?'active':''">
       </span>
-      <span>LIKE</span>
+      <span>STORE</span>
       <!-- <span>{{sku.like_num}}LIKE</span> -->
     </a>
     <template v-if="detail_status.status==1">
@@ -284,19 +284,23 @@ export default {
       this.show_dialog_tips_group = false;
       window.clearInterval(group_timer);
     },
-    like_heart(cur_like) {
-      console.log(666);
+    to_store(cur_store) {
+      // console.log(666);
       let params = {
-        sku_id: this.$route.query.sku_id
-      };
-      api.like(params).then(res => {
-        this.is_like = res.data;
-        if (this.is_like === 1) {
-          this.sku.like_num += -1;
-        } else {
-          this.sku.like_num += 1;
+        path: "/store",
+        query: {
+          store_id: cur_store
         }
-      });
+      };
+      this.$router.push(params);
+      // api.like(params).then(res => {
+      //   this.is_like = res.data;
+      //   if (this.is_like === 1) {
+      //     this.sku.like_num += -1;
+      //   } else {
+      //     this.sku.like_num += 1;
+      //   }
+      // });
     }
   }
 };
@@ -393,7 +397,7 @@ export default {
       border-radius: 50%;
     }
   }
-  .like-btn {
+  .store-btn {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -405,15 +409,16 @@ export default {
     .heart {
       width: 40px;
       height: 40px;
-      background: url("/static/img/icon/收藏前.png") no-repeat center center;
+      background: url("/static/img/icon/Group 34@2x.png") no-repeat center
+        center;
       background-size: auto 70%;
     }
-    .heart.active {
-      width: 40px;
-      height: 40px;
-      background: url("/static/img/icon/收藏后.png") no-repeat center center;
-      background-size: auto 70%;
-    }
+    // .heart.active {
+    //   width: 40px;
+    //   height: 40px;
+    //   background: url("/static/img/icon/收藏后.png") no-repeat center center;
+    //   background-size: auto 70%;
+    // }
   }
   .direct-buy {
     background-color: #000;

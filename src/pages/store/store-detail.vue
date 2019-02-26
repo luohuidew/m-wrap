@@ -46,8 +46,4 @@ export default {
     padding-top: 30px;
   }
 }
-.list-box {
-  display: flex;
-  flex-wrap: wrap;
-}
 </style>
