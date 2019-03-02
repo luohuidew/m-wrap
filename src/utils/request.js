@@ -153,7 +153,7 @@ service.interceptors.response.use(
           window.webkit.messageHandlers.javaScriptToNative.postMessage(temp_params);
         } else if (localStorage.getItem('device') === 'android') {
           /* android环境的判断 */
-          let temp_params = JSON.stringify(params);
+          // let temp_params = JSON.stringify(params);
           let and_token = window.weget_mobile_type.nativeToJavaScript_sendToken();
           alert(and_token);
           if (and_token) {
