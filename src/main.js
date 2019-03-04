@@ -8,6 +8,8 @@ import '@/style/reset.scss'
 import '@/style/layout.scss'
 import Vant from 'vant';
 Vue.use(Vant);
+import Mint from 'mint-ui';
+Vue.use(Mint);
 import VueClipboard from 'vue-clipboard2';
 Vue.use(VueClipboard);
 import '@/utils/request.js'
