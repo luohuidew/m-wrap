@@ -1,33 +1,44 @@
 <template>
-  <div class="home-header">
-    <img class="home-logo"
-      @click="to_home"
-      src="/static/img/icon/big-logo.png"
-      alt="">
-    <p class="weget-header-title">
-      <span class="to-login"
-        @click="to_login"
-        v-if="!hove_token">
-        Login
-      </span>
-      <span class="to-user"
-        v-else>
-        <img :src="user_info.photo"
-          alt=""
-          srcset="">{{user_info.user_name}}
-      </span>
-      <span class="to-about"
-        @click="to_about">
-        About Us
-      </span>
-      <!-- <span class="to-search"
-        @click="to_search">
-        <img src="/static/img/icon/search@2x.png"
+
+  <ul class="weget-header">
+    <li class="about">
+      <router-link to="/about">
+        <img src="/static/images/icon/header/H5-关于我们@3x.png"
           alt=""
           srcset="">
-      </span> -->
-    </p>
-  </div>
+        <p>About Us</p>
+      </router-link>
+    </li>
+    <li class="weget">
+      <router-link to="/">
+        <img src="/static/images/icon/header/big-logo.png">
+      </router-link>
+    </li>
+    <li class="cart">
+      <template v-if="user_info">
+        <router-link to="">
+          <img v-if="user_info"
+            :src="user_info.photo"
+            alt="">
+          <p>{{user_info.user_name}}</p>
+        </router-link>
+      </template>
+      <template v-else>
+        <router-link to="/login">
+          <img src="/static/images/icon/header/H5-登录@3x.png"
+            alt=""
+            srcset="">
+          <p>Login</p>
+        </router-link>
+      </template>
+      <router-link to="/cart">
+        <img src="/static/images/icon/header/H5-购物车@3x.png"
+          alt=""
+          srcset="">
+        <p>Cart</p>
+      </router-link>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -36,58 +47,25 @@ export default {
   name: "",
   data() {
     return {
-      user_info: {}
+      user_info: null
     };
-  },
-  watch: {
-    $route: {
-      handler() {}
-    }
   },
   created() {
     this.init_user();
   },
   mounted() {},
   computed: {
-    show_header() {
-      return !(
-        localStorage.getItem("device") === "ios" ||
-        localStorage.getItem("device") === "android"
-      );
-    },
     hove_token() {
       console.log(this.$store.state.token);
       return this.$store.state.token;
     }
   },
   methods: {
-    to_about() {
-      this.$router.push({
-        path: "/about"
-      });
-    },
-    to_login() {
-      this.$router.push({
-        path: "/login",
-        query: {}
-      });
-    },
-    to_home() {
-      this.$router.push({
-        path: "/"
-      });
-    },
-    to_search() {
-      this.$router.push({
-        path: "/search/search-query"
-      });
-    },
     init_user() {
       if (this.hove_token) {
-        api.PersonalCenter({}).then(res => {
+        api.getUserHeaderInfo().then(res => {
           // console.log(res);
-          this.$store.state.user = res.data.user_info;
-          this.user_info = res.data.user_info;
+          this.user_info = res.data;
           // setToken(res.data.token);
         });
       }
@@ -98,65 +76,37 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.home-header {
+.weget-header {
+  display: flex;
+  justify-content: space-between;
+  height: 55px;
+  padding: 10px 10px;
   position: relative;
-  background-color: #fff;
-  .home-logo {
-    position: absolute;
-    left: 20px;
-    top: 10px;
-    height: 70%;
-    // img {
-    //   height: 70%;
-    // }
-  }
-}
-.weget-header-title {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 50px;
-  // background: url("/static/img/icon/big-logo.png") no-repeat 30px center;
-  // background-size: auto 70%;
-  font-size: 14px;
   box-shadow: 0px 2px 6px 0px #d0d0d0;
-}
-.to-login {
-  padding: 0 10px 0 20px;
-  // border-radius: 8px;
-  // background-color: #d80c18;
-  // color: #fff;
-  background: url("/static/img/icon/me_b.png") no-repeat left center;
-  background-size: auto 100%;
-  // border-right: 1px solid #000;
-}
-.to-user {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  padding: 0 10px 0 20px;
-  // border-right: 1px solid #000;
-  img {
-    height: 28px;
-    width: 28px;
-    object-fit: contain;
-    margin: 0 10px;
-    border-radius: 50%;
+  li {
+    font-size: 0;
+    text-align: center;
+    & /deep/ a {
+      margin: 0 8px;
+    }
   }
 }
-.to-about {
-  padding: 0 10px;
-  border-left: 1px solid #000;
-  // text-decoration: underline;
+img {
+  width: 20px;
+  height: 20px;
 }
-.to-search {
-  padding: 0 20px 0 10px;
-  border-left: 1px solid #000;
-  font-size: 0;
+p {
+  font-size: 10px;
+  font-weight: bold;
+}
+.weget {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
   img {
-    width: 18px;
-    height: 18px;
+    width: auto;
+    height: 36px;
   }
-  // text-decoration: underline;
 }
 </style>

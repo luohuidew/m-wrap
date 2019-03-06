@@ -3,7 +3,7 @@ import store from '@/store';
 let token = store.state.token;
 export default {
   /* 主页面的获取用户信息 */
-  getUserInfo(data={}) {
+  Header(data={}) {
     data.token = token;
     return request({
       url: '/user/getInfoByToken',
@@ -47,6 +47,14 @@ export default {
     data.token = token;
     return request({
       url: 'user/changePassword',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+  getUserHeaderInfo(data={}) {
+    data.token = token;
+    return request({
+      url: 'user/getUserInfo',
       method: 'post',
       data: JSON.stringify(data),
     })

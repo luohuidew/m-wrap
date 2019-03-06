@@ -3,7 +3,7 @@ export default {
   name: 'home',
   component: () =>
     import('@/pages/home'),
-  redirect: '/home/weget',
+  redirect: '/home/index',
   children: [{
       path: 'weget',
       name: 'weget',

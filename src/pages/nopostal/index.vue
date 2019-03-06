@@ -26,6 +26,8 @@ export default {
 
 <style lang='scss' scoped>
 .nopostal_page {
+  height: 100%;
+  overflow: auto;
   border-top: 1px solid #e9e9e9;
   h3 {
     font-size: 17px;

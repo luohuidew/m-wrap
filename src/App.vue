@@ -43,7 +43,7 @@ export default {
       return this.$store.state.share_token;
     },
     no_head() {
-      let temp = this.$route.meta.fullscreen;
+      let temp = this.$route.meta.fullScreen;
       if (
         temp ||
         (localStorage.getItem("device") === "ios" ||
@@ -86,7 +86,7 @@ export default {
       //   : "Weget";
     },
     init_transtion(to, from) {
-      if (to.path == "/home/weget") {
+      if (to.path == "/") {
         this.transitionName = "slide-right";
       } else {
         this.transitionName = "slide-left";
@@ -121,7 +121,7 @@ export default {
 }
 .page-body {
   /* flex:1; */
-  height: calc(100% - 50px);
+  height: calc(100% - 55px);
 }
 .in-app {
   height: 100%;

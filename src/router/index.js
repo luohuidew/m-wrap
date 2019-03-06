@@ -2,11 +2,26 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import THEM from "./modules/them"
 import HOME from "./modules/home"
+import CART from "./modules/cart"
 Vue.use(Router)
 export default new Router({
   mode: 'history',
   linkActiveClass: 'active-route',
-  routes: [{
+  routes: [
+    HOME,
+    THEM,
+    CART,
+    {
+      path: '/home/index',
+      name: 'home',
+      component: () =>
+        import('@/pages/new/home/index'),
+      meta: {
+        title: 'HOME',
+        keepAlive: false,
+        type:'list'
+      }
+    }, {
       path: '/test',
       name: 'test',
       component: () =>
@@ -24,7 +39,7 @@ export default new Router({
       meta: {
         title: 'search',
         keepAlive: false,
-        fullscreen: true
+        fullScreen: true
       },
       redirect: '/search/search-home',
       children: [{
@@ -35,7 +50,7 @@ export default new Router({
         meta: {
           title: 'search home',
           keepAlive: false,
-          fullscreen: true
+          fullScreen: true
         },
       }, {
         path: 'search-query',
@@ -45,7 +60,7 @@ export default new Router({
         meta: {
           title: 'search query',
           keepAlive: false,
-          fullscreen: true
+          fullScreen: true
         },
       }, {
         path: 'search-result',
@@ -55,7 +70,7 @@ export default new Router({
         meta: {
           title: 'search result',
           keepAlive: false,
-          fullscreen: false
+          fullScreen: false
         },
       }],
     },
@@ -97,7 +112,7 @@ export default new Router({
       meta: {
         title: 'login',
         keepAlive: false,
-        fullscreen: true
+        fullScreen: true
       }
     },
     {
@@ -132,7 +147,7 @@ export default new Router({
         keepAlive: false
       }
     },
-    THEM,
+
     {
       path: '/nopostal',
       name: 'nopostal',
@@ -143,7 +158,7 @@ export default new Router({
         keepAlive: false
       }
     },
-    HOME, {
+    {
       path: '/detail',
       name: 'detail',
       component: () =>
@@ -170,7 +185,7 @@ export default new Router({
       meta: {
         title: 'Payment',
         keepAlive: false,
-        fullscreen: true
+        fullScreen: true
       }
     }, {
       path: '/address',
@@ -231,7 +246,7 @@ export default new Router({
       redirect: '/'
     }, {
       path: '/',
-      redirect: '/home'
+      redirect: '/home/index'
     },
   ]
 })

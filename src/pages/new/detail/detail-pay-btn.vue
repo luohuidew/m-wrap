@@ -2,11 +2,11 @@
 
 <template>
   <div class="detail-pay-btn">
-    <!-- <div class="fee-per"
+    <div class="fee-per"
       @click.stop="to_fee">
       <p>ONE TIME shipping fee PER day</p>
       <i></i>
-    </div> -->
+    </div>
     <a class="store-btn"
       href="javascript:;"
       @click="to_store(sku.store_id)">
@@ -242,14 +242,14 @@ export default {
         } else {
           this.recommend_group = res.data.group;
           this.show_dialog_tips_group = true;
-          // window.group_timer = setInterval(() => {
-          //   // console.log(this.cur_index);
-          //   this.recommend_group.left_time -= 1;
-          //   if (this.recommend_group.left_time < 0) {
-          //     this.recommend_group.left_time = 0;
-          //   }
-          //   console.log(this.recommend_group.left_time);
-          // }, 1000);
+          window.group_timer = setInterval(() => {
+            // console.log(this.cur_index);
+            this.recommend_group.left_time -= 1;
+            if (this.recommend_group.left_time < 0) {
+              this.recommend_group.left_time = 0;
+            }
+            console.log(this.recommend_group.left_time);
+          }, 1000);
         }
       });
     },
@@ -282,7 +282,7 @@ export default {
 
       this.show_dialog_tips = false;
       this.show_dialog_tips_group = false;
-      // window.clearInterval(group_timer);
+      window.clearInterval(group_timer);
     },
     to_store(cur_store) {
       // console.log(666);

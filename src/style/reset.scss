@@ -6,6 +6,7 @@
     box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
 }
+
 @font-face {
     font-family: 'Muli';
     /*字体名称*/
@@ -29,6 +30,12 @@ body,
     width: 100%;
     font-family: 'Muli', sans-serif;
     background-color: #fff;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    color: #000000;
 }
 
 h1,

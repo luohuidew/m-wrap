@@ -45,8 +45,7 @@
             {{sku.title}}
           </div>
         </div>
-        <detail-group :group-data="group"
-          @change="join_group"></detail-group>
+        <detail-group :group-data="group"></detail-group>
         <detail-store :item="store_info"></detail-store>
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
@@ -153,9 +152,9 @@ export default {
       };
       return params;
     },
-    // no_join() {
-    //   return this.act_type || this.router_group_id;
-    // }
+    no_join() {
+      return this.act_type || this.router_group_id;
+    }
   },
   methods: {
     init_data() {
@@ -237,11 +236,12 @@ export default {
         this.$router.push(params);
       }
     },
-    join_group(cgroup) {
-      console.log(cgroup)
-      this.cur_group_id = cgroup;
-      this.$refs["change_btn"].close_tips(2, cgroup);
-    },
+    // group_buy(cgroup) {
+    //   // console.log(cgroup);
+    //   this.cur_group_id = cgroup;
+    //   // console.log(this.$refs['change_btn']);
+    //   this.$refs["change_btn"].close_tips(2, cgroup);
+    // },
     get_cur_goods(data) {
       this.cur_goods = data;
     },
