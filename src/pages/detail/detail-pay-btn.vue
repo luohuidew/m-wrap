@@ -16,6 +16,11 @@
       <span>STORE</span>
       <!-- <span>{{sku.like_num}}LIKE</span> -->
     </a>
+    <!-- 1:团购参团
+          2：开团
+          act_type：act_type:免费兑换
+          3:支持团购的商品
+     -->
     <template v-if="detail_status.status==1">
       <a class="group-status-buy"
         href="javascript:;"
@@ -45,11 +50,10 @@
         @click="close_tips(1)">
         <div class="group-info">
           <span class="user-info">APPLY THE GIFT FOR FREE</span>
-
         </div>
       </a>
     </template>
-    <template v-else>
+    <template v-else-if="detail_status.status==3">
       <a class="direct-buy buy-btn"
         href="javascript:;"
         @click="alone_buy()">
@@ -64,6 +68,15 @@
         @click="close_tips(2)"> -->
         <span class="price">{{data_price.money_unit}}{{data_price.group_price}}</span>
         <span class="price-des">GROUP BUY</span>
+      </a>
+    </template>
+    <template v-else>
+      <a class="cart-status-buy"
+        href="javascript:;"
+        @click="close_tips(1)">
+        <div class="">
+          <span class="">Add To Cart</span>
+        </div>
       </a>
     </template>
     <attr-dialog v-if="show_dialog"
@@ -396,6 +409,16 @@ export default {
       vertical-align: middle;
       border-radius: 50%;
     }
+  }
+  .cart-status-buy {
+    display: flex;
+    flex: 1;
+    // justify-content: space-between;
+    align-items: center;
+    padding: 6px 16px;
+    background-color: #d70e19;
+    color: #fff;
+    justify-content: center;
   }
   .store-btn {
     display: flex;

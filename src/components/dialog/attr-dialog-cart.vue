@@ -100,7 +100,7 @@
 
 <script>
 import api from "@/api/product";
-import CART from "@/api/cart";
+import CART from "@/api/cart"
 import tempDialog from "@/components/dialog/temp-dialog";
 export default {
   name: "",
@@ -130,12 +130,8 @@ export default {
       return {
         goods_id: this.new_cur_goods.goods_id,
         num: this.pay_number,
-        group_id: this.$parent.submit_data
-          ? this.$parent.submit_data.group_id
-          : undefined,
-        purchase_type: this.$parent.submit_data
-          ? this.$parent.submit_data.purchase_type
-          : undefined
+        group_id: this.$parent.submit_data.group_id,
+        purchase_type: this.$parent.submit_data.purchase_type
       };
     }
   },
@@ -220,19 +216,14 @@ export default {
       if (params.query.coupon_id) {
         cur_url += "&coupon_id=" + params.query.coupon_id;
       }
-      // console.log(cur_url);
+      console.log(cur_url);
       window.location.href = cur_url;
-      window.event.returnValue = false;
+      window.event.returnValue = false;    
     },
-    add_to_cart() {
-      let to_catr_params = {
-        goods_id: this.submit_form.goods_id,
-        store_id: this.sku.store_id,
-        count: this.pay_number
-      };
-      CART.addToCart(to_catr_params).then(res => {
-        this.$emit("close", null);
-      });
+    add_to_cart(){
+      CART.addToCart().then(res=>{
+        
+      })
     },
     account(num) {
       let temp_number = parseInt(this.pay_number);

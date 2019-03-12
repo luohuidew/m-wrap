@@ -1,29 +1,30 @@
 <template>
-  <div class="cart-item">
+  <div class="cart-item"
+    v-if="cur_lists.length">
     <van-checkbox-group v-model="checked_all">
       <ul>
         <li class="cart-card"
-          v-for="n in 3"
-          :key="n">
-          <van-checkbox :key="n"
-            :name="n"
+          v-for="(item,index) in cur_lists"
+          :key="index">
+          <van-checkbox :key="item.goods_id"
+            :name="item.goods_id"
             checked-color="#D70E19">
           </van-checkbox>
           <div class="card-item">
             <div class="cover-img-box">
-              <img src="/static/demo.png"
+              <img :src="item.goods_img"
                 alt=""
                 srcset="">
             </div>
             <div class="title-box">
               <p class="goods-title text-line-clamp-1">
-                SPACE F Space F PinkSPACE F Space F PinkSPACE F Space F PinkSPACE F Space F Pink
+                {{item.goods_title}}
               </p>
               <div class="attr-select">
-                <span> Black , L</span>
+                <span> {{item.attr_str}}</span>
               </div>
               <div class="card-count">
-                <span class="price">$40.00</span>
+                <span class="price">${{item.goods_price}}</span>
                 <span class="account-change">
                   <i>-</i>
                   <span>1</span>
@@ -43,8 +44,15 @@ export default {
   name: "",
   data() {
     return {
-      checked_all: []
+      checked_all: [],
+      cur_lists: this.listsData
     };
+  },
+  props: {
+    listsData: {
+      type: Array,
+      default: []
+    }
   },
   mounted() {},
   computed: {},
@@ -90,8 +98,8 @@ export default {
     font-size: 14px;
     span {
       padding-right: 30px;
-      background: url("/static/images/icon/cart/分类 copy 2.png") no-repeat center
-        right;
+      background: url("/static/images/icon/cart/分类 copy 2.png") no-repeat
+        center right;
       background-size: 18px auto;
     }
   }
@@ -106,13 +114,12 @@ export default {
       display: flex;
       align-items: center;
       i {
-        
       }
       span {
         height: 24px;
         width: 60px;
         text-align: center;
-        border: 1px solid #C9CACA;
+        border: 1px solid #c9caca;
       }
     }
   }

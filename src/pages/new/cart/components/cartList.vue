@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-list">
+  <div class="cart-list" v-if="goodsData.length">
     <div class="total-cart-box">
       <h2>Cart (9)</h2>
       <van-checkbox v-model="checked_all"
@@ -10,19 +10,19 @@
       </van-checkbox>
     </div>
     <van-checkbox-group v-model="checked_store">
-      <ul v-for="n in 3"
-        :key="n"
+      <ul v-for="(item,index) in goodsData"
+        :key="index"
         class="cart-lists">
         <li class="cart-lists-item">
           <div class="cart-lists-store">
-            <van-checkbox :key="n"
-              :name="n"
+            <van-checkbox :key="item.store_id"
+              :name="item.store_id"
               checked-color="#D70E19">
               <p class="total-store">
                 <img src="/static/images/icon/cart/store@3x.png"
                   alt=""
                   srcset="">
-                <span>MEMORY</span>
+                <span>{{item.store_name}}</span>
               </p>
             </van-checkbox>
             <p class="to-store">
@@ -30,7 +30,7 @@
                 alt="">
             </p>
           </div>
-         <cart-item></cart-item>
+         <cart-item :lists-data="item.goods_list"></cart-item>
         </li>
       </ul>
     </van-checkbox-group>
@@ -46,6 +46,12 @@ export default {
       checked_all: false,
       checked_store: []
     };
+  },
+  props:{
+    goodsData:{
+      type:Array,
+      default:[]
+    }
   },
   mounted() {},
   computed: {},

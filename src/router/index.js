@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import THEM from "./modules/them"
 import HOME from "./modules/home"
 import CART from "./modules/cart"
+import CHECKOUT from "./modules/checkout"
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -11,6 +12,7 @@ export default new Router({
     HOME,
     THEM,
     CART,
+    CHECKOUT,
     {
       path: '/home/index',
       name: 'home',
@@ -19,7 +21,7 @@ export default new Router({
       meta: {
         title: 'HOME',
         keepAlive: false,
-        type:'list'
+        type: 'list'
       }
     }, {
       path: '/test',
@@ -175,7 +177,8 @@ export default new Router({
         import('@/pages/pay'),
       meta: {
         title: 'Create order',
-        keepAlive: false
+        keepAlive: false,
+        fullScreen: true
       }
     }, {
       path: '/accept',

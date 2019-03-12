@@ -284,9 +284,6 @@ export default {
   }
 }
 
-.btn-detail {
-  margin-top: 30px;
-}
 
 .goods-des {
   background-color: #fff;

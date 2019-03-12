@@ -1,7 +1,14 @@
 <template>
   <div class="store-box"
     v-if="item.store_id">
-    <div class="store-title" @click.stop="to_store(item.store_id)">
+    <div class="top-cir-border">
+      <ul>
+        <li v-for="n in 14"
+          :key="n"></li>
+      </ul>
+    </div>
+    <div class="store-title"
+      @click.stop="to_store(item.store_id)">
       <p>
         <img :src="item.logo"
           alt="">
@@ -54,11 +61,34 @@ export default {
 
 <style lang='scss' scoped>
 .store-box {
-  padding: 20px;
-  border-top: 10px solid #f8f8f8;
+  padding-bottom: 20px;
+  // border-top: 10px solid #f8f8f8;
   border-bottom: 10px solid #f8f8f8;
+  /* tuan */
+  .top-cir-border {
+    padding-bottom: 20px;
+    ul {
+      height: 24px;
+      overflow: hidden;
+      width: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+    }
+    li {
+      // height:
+      height: 30px;
+      width: 30px;
+      background-color: #e9e9e9;
+      border-radius: 50%;
+      transform: translateY(-7px);
+      &:nth-child(2n-1) {
+        background-color: #f3f3f3;
+      }
+    }
+  }
   .store-title {
     display: flex;
+    padding: 0 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #f3f3f3;
     & > p {
@@ -90,12 +120,12 @@ export default {
       .store-name {
         padding-right: 30px;
         font-size: 18px;
-        background: url('/static/img/icon/Group 34 Copy@2x.png') no-repeat right center;
+        background: url("/static/img/icon/Group 34 Copy@2x.png") no-repeat right
+          center;
         background-size: auto 20px;
       }
     }
     .store-btn {
-     
       display: flex;
       a {
         width: 100%;
@@ -105,13 +135,14 @@ export default {
         height: 26px;
         padding: 0 14px;
         line-height: 26px;
-        background-color: #D70E19;
+        background-color: #d70e19;
         // padding: 8px 0;
         border-radius: 13px;
       }
     }
   }
   .store-account {
+    padding: 0 20px;
     padding-top: 18px;
     display: flex;
     justify-content: center;

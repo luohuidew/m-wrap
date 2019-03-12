@@ -1,53 +1,44 @@
 <template>
-  <div class="cart-layout">
+  <div class="checkout-layout">
     <div class="scroll-lists">
-      <template v-if="req_data">
-        <cart-list :goods-data="req_data.goods"></cart-list>
-        <cart-expired></cart-expired>
-      </template>
-      <template v-else>
-
-      </template>
-      <cart-guide></cart-guide>
-    </div>
-    <div class="footer-buy">
-      <ul>
-        <li class="get-coupon"
-          @click="show_coupon_dialog=true">
-          <div class="content">
-            <img src="/static/images/icon/cart/搜索 copy 2@3x.png"
-              alt="">
-            <span>Get Weget Coupon</span>
-          </div>
+      <h2>Checkout</h2>
+      <ul class="content-lists">
+        <li>
+          <user-address></user-address>
         </li>
-        <li class="to-buy">
-          <div class="total-box">
-            <p class="total-desc">Total</p>
-            <p class="total-price">$75.00</p>
-          </div>
-          <div class="buy-btn"
-            @click="to_buy">
-            Buy (3)
-          </div>
+        <li>
+          <payment></payment>
+        </li>
+        <li>
+          <order-review></order-review>
+        </li>
+        <li>
+          <order-summary></order-summary>
         </li>
       </ul>
     </div>
-    <div class="hidden-box">
-      <van-popup v-model="show_coupon_dialog"
-        position="bottom"
-        :overlay="true">
-        <detail-coupon-dialog @close="show_coupon_dialog=false"></detail-coupon-dialog>
-      </van-popup>
-    </div>
+    <div class="footer-buy">
+      <ul>
+        <li class="to-buy">
+          <div class="total-box">
+            <p class="total-desc">All Total</p>
+            <p class="total-price">$75.00</p>
+          </div>
+          <div class="buy-btn"
+            @click="to_pay">
+            Checkout
+          </div>
+        </li>
+      </ul>
+    </div>   
   </div>
 </template>
 
 <script>
-import CART from "@/api/cart";
-import cartList from "./components/cartList";
-import cartGuide from "./components/cartGuide";
-import cartExpired from "./components/cartExpired";
-import detailCouponDialog from "@/pages/detail/detail-content/detailCoupon/components/detailCouponDialog";
+import userAddress from "./components/userAddress";
+import payment from "./components/payment";
+import orderReview from "./components/orderReview";
+import orderSummary from "./components/orderSummary";
 export default {
   name: "",
   data() {
@@ -62,40 +53,48 @@ export default {
   mounted() {},
   computed: {},
   methods: {
-    init_data() {
-      CART.shopCartList().then(res => {
-        this.req_data = res.data;
-      });
-    },
+    init_data() {},
     /* buy some goods */
-    to_buy() {
+    to_pay() {
       let router_params = {
-        path: "/checkout",
+        path: "/pay",
         query: {}
       };
       this.$router.push(router_params);
     }
   },
   components: {
-    cartList,
-    cartGuide,
-    cartExpired,
-    detailCouponDialog
+    userAddress,
+    payment,
+    orderReview,
+    orderSummary
   }
 };
 </script>
 
 <style lang='scss' scoped>
-.cart-layout {
+.checkout-layout {
   height: 100%;
 }
 .scroll-lists {
-  height: calc(100% - 90px);
+  height: calc(100% - 50px);
   overflow: auto;
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 30px 20px;
+  }
+  .content-lists {
+    li {
+      border-bottom: 10px solid #f3f3f3;
+      padding: 0 20px;
+    }
+  }
 }
 /* 优惠券领取入口 */
 .footer-buy {
-  height: 90px;
+  height: 50px;
+  border-top: 1px solid #e9e9e9;
   .get-coupon {
     height: 40px;
     border-top: 1px solid #e9e9e9;
