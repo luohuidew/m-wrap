@@ -28,17 +28,17 @@ export default {
   data() {
     return {
       address_item: {},
-      address_item: {
-        zipcode: "1",
-        first_name: "1",
-        last_name: "1",
-        address1: "1",
-        city: "1",
-        state: "1",
-        zipcode: "1",
-        zipcode: "1",
-        tel: "1"
-      }
+      // address_item: {
+      //   zipcode: "1",
+      //   first_name: "1",
+      //   last_name: "1",
+      //   address1: "1",
+      //   city: "1",
+      //   state: "1",
+      //   zipcode: "1",
+      //   zipcode: "1",
+      //   tel: "1"
+      // }
     };
   },
   computed: {},

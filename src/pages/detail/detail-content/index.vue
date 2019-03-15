@@ -22,8 +22,8 @@
         <shipping :sku-data="sku"></shipping>
         <review v-if="review"
           :review="review"></review>
-        <similar-brand v-if="same_brand.data"
-          :data-list="same_brand.data"></similar-brand>
+        <!-- <similar-brand v-if="same_brand.data"
+          :data-list="same_brand.data"></similar-brand> -->
         <similar-cate v-if="same_category.data"
           :data-list="same_category.data"></similar-cate>
       </div>

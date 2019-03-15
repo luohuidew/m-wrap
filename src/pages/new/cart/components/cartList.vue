@@ -1,5 +1,6 @@
 <template>
-  <div class="cart-list" v-if="goodsData.length">
+  <div class="cart-list"
+    v-if="goodsData.length">
     <div class="total-cart-box">
       <h2>Cart (9)</h2>
       <van-checkbox v-model="checked_all"
@@ -30,7 +31,7 @@
                 alt="">
             </p>
           </div>
-         <cart-item :lists-data="item.goods_list"></cart-item>
+          <cart-item :lists-data="item.goods_list"></cart-item>
         </li>
       </ul>
     </van-checkbox-group>
@@ -38,7 +39,7 @@
 </template>
 
 <script>
-import cartItem from "./cartItem"
+import cartItem from "./cartItem";
 export default {
   name: "",
   data() {
@@ -47,10 +48,10 @@ export default {
       checked_store: []
     };
   },
-  props:{
-    goodsData:{
-      type:Array,
-      default:[]
+  props: {
+    goodsData: {
+      type: Array,
+      default: []
     }
   },
   mounted() {},
