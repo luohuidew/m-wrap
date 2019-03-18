@@ -8,10 +8,10 @@
           @click="close_dialog">
         <p>Payment Confirmation</p>
       </li>
-      <li class="order-box">
-        <p class="font-weight-bold">Order ID</p>
-        <p class="order-no">{{orderData.order_no}}</p>
-      </li>
+      <!--<li class="order-box">-->
+        <!--<p class="font-weight-bold">Order ID</p>-->
+        <!--<p class="order-no">{{orderData.order_no}}</p>-->
+      <!--</li>-->
       <li class="payment-choice-list">
         <p class="choice-list-title font-weight-bold">Payment Method</p>
         <ul>
@@ -48,7 +48,7 @@
           Order Total
         </span>
         <span class="total-price">
-          {{orderData.money_unit}}{{orderData.total_fee}}
+          {{orderData.real_total_price}}
         </span>
       </li>
     </ul>
@@ -88,7 +88,7 @@ export default {
   name: "",
   data() {
     return {
-      is_select_pay: this.submitData.pay_type,
+      // is_select_pay: this.submitData.pay_type,
       environment: "sandbox",
       token: "sandbox_4pnsrcb4_psz4rkjwr3r3kqpp",
       // token: null,
@@ -98,12 +98,18 @@ export default {
   props: {
     orderData: {
       type: Object,
-      default: null
+      default: function () {
+        return {}
+      }
     },
-    submitData: {
-      type: Object,
-      default: null
+    is_select_pay: {
+      type: Number,
+      default: 1
     }
+    // submitData: {
+    //   type: Object,
+    //   default: null
+    // }
   },
   created() {
     this.init_data();
@@ -136,9 +142,9 @@ export default {
 
       }
     },
-    create_order(type) {
-      console.log(type.pay_type);
-    },
+    // create_order(type) {
+    //   console.log(type.pay_type);
+    // },
     onAuthorize(nonce) {
       console.log(nonce);
       let params = {

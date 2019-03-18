@@ -12,7 +12,8 @@
           <p>
             <!-- <span> Add shipping Address</span> -->
             <template v-if="address_item.zipcode">
-              <span style="fontWeight:bold;">{{address_item.first_name}}</span>&nbsp;<span style="fontWeight:bold;">{{address_item.last_name}}</span><br />
+              <span style="fontWeight:bold;">{{address_item.first_name}}</span>&nbsp;
+              <span style="fontWeight:bold;">{{address_item.last_name}}</span><br />
               <span> {{address_item.address1}} </span>
               <span> {{address_item.city}} </span>
               <span> {{address_item.state}} </span>

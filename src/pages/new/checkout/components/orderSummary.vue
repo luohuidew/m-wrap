@@ -1,11 +1,12 @@
 <template>
   <div class="order-summary-box">
-    <h2>Order Summary (3 items)</h2>
-    <div class="select-coupon">
+    <h2>Order Summary ({{total_summary.good_nums}} items)</h2>
+    <div class="select-coupon" @click="to_coupon">
       <img src="/static/images/icon/cart/搜索 copy 2@3x.png"
         alt=""
         srcset="">
-      <span>Save $4.00 优惠券的名字</span>
+      <span v-if="coupon.name">{{coupon.name}}</span>
+      <span v-else class="no-select">Select Coupon</span>
     </div>
     <ul class="all-total-lists">
       <li>
@@ -13,15 +14,15 @@
           Total:
         </span>
         <span>
-          $121.99
+          {{total_summary.total}}
         </span>
       </li>
-      <li>
+      <li v-if="total_summary.coupon_discount !== '$0.00'">
         <span>
           Weget Coupon:
         </span>
         <span class="color-red">
-          $-4.00
+          -{{total_summary.coupon_discount}}
         </span>
       </li>
       <li>
@@ -29,7 +30,7 @@
           Total Before Tax:
         </span>
         <span>
-          $0 $0
+          {{total_summary.total_before_tax}}
         </span>
       </li>
       <li>
@@ -37,7 +38,7 @@
           Tax:
         </span>
         <span>
-          $0
+          {{total_summary.tax_total}}
         </span>
       </li>
       <li>
@@ -45,7 +46,7 @@
           Tax All Total:
         </span>
         <span>
-          $121.99
+          {{total_summary.all_total}}
         </span>
       </li>
     </ul>
@@ -55,13 +56,31 @@
 <script>
 export default {
   name: "",
-  props: {},
+  props: {
+    total_summary: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    }
+  },
   data() {
-    return {};
+    return {
+      coupon: {}
+    };
   },
   computed: {},
-  created() {},
-  methods: {},
+  created() {
+    this.coupon = this.$store.state.order_detail.coupon;
+  },
+  methods: {
+    to_coupon() {
+      let params = {
+        path: "/coupon"
+      };
+      this.$router.push(params);
+    },
+  },
   components: {}
 };
 </script>
@@ -70,6 +89,10 @@ export default {
 .order-summary-box {
   h2 {
     padding: 20px 0;
+  }
+  .no-select {
+    color: #d70e19;
+    float:right;
   }
 }
 .select-coupon {

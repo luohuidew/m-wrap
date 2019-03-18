@@ -81,37 +81,33 @@ export default {
     init_address() {
       this.data_edit = this.$route.query.index;
       address.address_list().then(res => {
-        console.log(res);
+        this.is_selected = this.$store.state.order_detail.is_selected_address;
         this.address_lists = res.data;
         this.address_lists.forEach((item, index) => {
-          // if (item.is_default === 2) {
-          //   this.is_selected = index;
-          // }
+
         });
-        //  this.selected_card(this.address_lists[0].id,0)
       });
     },
     save_address() {
       let params = this.address;
       address.address_save(params).then(res => {
-        console.log(res);
         this.is_editor = !this.is_editor;
         this.init_address();
       });
     },
     to_pay(index) {
       let cur_address = this.address_lists[index];
-      if (cur_address) {
-        if (this.$store.state.order_detail.address) {
-          if (cur_address.id !== this.$store.state.order_detail.address.id) {
-            this.$store.state.order_detail.change_address = true;
-          }
-        }else {
-            this.$store.state.order_detail.change_address = true;
-        }
-      }
+      // if (cur_address) {
+      //   if (this.$store.state.order_detail.address) {
+      //     if (cur_address.id !== this.$store.state.order_detail.address.id) {
+      //       this.$store.state.order_detail.change_address = true;
+      //     }
+      //   }else {
+      //       this.$store.state.order_detail.change_address = true;
+      //   }
+      // }
       this.$store.state.order_detail.address = cur_address;
-      // console.log(this.$store);
+      this.$store.state.order_detail.is_selected_address = index;
       this.$router.go(-1);
     },
     to_address_edit(index) {

@@ -1,37 +1,39 @@
 <template>
   <ul class="coupon-code-box">
-    <li class="select-shipping">
+    <li class="select-shipping" @click="to_shipping()">
       <div>
-        <p class="shipping-title">Free Shipping</p>
+        <p class="shipping-title">{{dain_ship_method.key_name}}</p>
         <p>
-          <span>Estimated Delivery On</span><span>23days</span>
+          <span>{{dain_ship_method.desc}}</span>
+          <span>{{dain_ship_method.price_show}}</span>
         </p>
       </div>
     </li>
     <li class="select-code">
       <div>
         <input type="text"
-          v-model="code"
+          v-model="codes"
           placeholder="Enter Promo Code">
-        <button>Apply</button>
+        <button @click="applyCode(codes)">Apply</button>
       </div>
     </li>
     <li class="code-tips-box">
-      <p>Oops, this code is invalid</p>
+      <p v-if="store_updata_price.store_code_info.type === 2">{{store_updata_price.store_code_info.error_msg}}</p>
+      <p v-if="store_updata_price.store_code_info.type === 1">{{store_updata_price.store_code_info.price_desc}}</p>
     </li>
     <li class="checkout-summary">
       <ul>
         <li>
           <span>Subtotal: </span>
-          <span>$40.00</span>
+          <span>{{defaulttotalPrice.sub_total}}</span>
         </li>
         <li>
           <span>Shipping: </span>
-          <span>$6.99</span>
+          <span>{{defaulttotalPrice.ship}}</span>
         </li>
         <li>
           <span>Total: </span>
-          <span class="all-total">$46.00</span>
+          <span class="all-total">{{defaulttotalPrice.total}}</span>
         </li>
       </ul>
     </li>
@@ -41,15 +43,85 @@
 <script>
 export default {
   name: "",
-  props: {},
+  props: {
+    totalPrice: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    },
+    store_updata_price: {
+      type: Object,
+      default:function () {
+        return {
+          store_code_info: {}
+        }
+      }
+    }
+  },
   data() {
     return {
-      code: ""
+      defaulttotalPrice: this.totalPrice,
+      codes: "",
+      dain_ship_method: {}
     };
   },
   computed: {},
-  created() {},
-  methods: {},
+  watch: {
+    store_updata_price: {
+      handler: function(cur) {
+        this.codes = cur.store_code_info.code_number;
+        this.defaulttotalPrice.sub_total = cur.sub_total;
+        this.defaulttotalPrice.ship = cur.ship;
+        this.defaulttotalPrice.total = cur.total;
+      },
+      deep: true
+    },
+  },
+  created() {
+    let default_key  = this.defaulttotalPrice.ship_method.default;
+    let list = this.defaulttotalPrice.ship_method.list;
+    if (list.length === 0) return;
+    let defult_select = list.filter((item) => {
+      return item.key === default_key
+    })
+    this.dain_ship_method = defult_select[0];  // 默认的快递方式
+    let delivery = this.$store.state.order_detail.delivery;
+    delivery.forEach((item) => {
+      if (item.store_id === this.defaulttotalPrice.store_id) {
+        this.dain_ship_method = item.item;
+      }
+    })
+
+  },
+  methods: {
+    applyCode(val) {
+      if(val === '') return;
+      let clock = true;
+      let applyCode = this.$store.state.order_detail.applyCode;
+      applyCode.forEach((item) => {
+        if (item.store_id === this.defaulttotalPrice.store_id) {
+          item.code_number = val;
+          clock = false;
+        }
+      })
+      if(clock) {
+        applyCode.push({
+          store_id: this.defaulttotalPrice.store_id,
+          code_number: val
+        })
+      }
+      this.$emit('applyCode');
+    },
+    to_shipping() {
+      this.$store.state.info_lists.lists = this.defaulttotalPrice.ship_method.list;
+      this.$store.state.info_lists.store_id = this.defaulttotalPrice.store_id;
+      let params = {
+        path: "/delivery"
+      };
+      this.$router.push(params);
+    },
+  },
   components: {}
 };
 </script>

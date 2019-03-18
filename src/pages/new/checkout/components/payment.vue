@@ -3,7 +3,7 @@
     <h3>Payment Method</h3>
     <ul>
       <li :class="{'active':is_select_pay===1}"
-        @click="is_select_pay=1">
+        @click="is_select_method(1)">
         <p class="pay-type">
           <span>Credit/Debit Card</span>
           <img src="/static/img/icon/pay/Visa-light.png"
@@ -17,7 +17,7 @@
         </p>
       </li>
       <li :class="{'active':is_select_pay===2}"
-        @click="is_select_pay=2">
+        @click="is_select_method(2)">
         <p class="pay-type">
           <span>PayPal</span>
           <img src="/static/img/icon/pay/Group 14.png"
@@ -39,7 +39,12 @@ export default {
   },
   computed: {},
   created() {},
-  methods: {},
+  methods: {
+    is_select_method(val) {
+      this.is_select_pay = val;
+      this.$emit('changeSelectPay', val);
+    }
+  },
   components: {}
 };
 </script>

@@ -8,10 +8,11 @@
     <ul class="coupon-list">
       <template v-if="coupon_list.length">
 
-        <li :class="index===is_checked?'active':''"
+        <li
           class="coupon-item"
           v-for="(item,index) in coupon_list"
           :key="index"
+          :class="item.id===is_checked?'active':''"
           @click="choice_cur(index,item)">
           <p class="coupon-title"> {{item.name}}</p>
           <p class="coupon-desc">{{item.desc}}</p>
@@ -44,17 +45,20 @@ export default {
   computed: {},
   methods: {
     go_back(item) {
-      this.$store.state.order_detail.coupon = item;
-      console.log(this.$store);
+      if(item) {
+        this.$store.state.order_detail.coupon = item;
+        this.$store.state.order_detail.is_selected_couponid = item.id;
+      }
       this.$router.go(-1);
     },
     init_data() {
       coupon.coupon({ status: 2 }).then(res => {
         this.coupon_list = res.data;
+        this.is_checked = this.$store.state.order_detail.is_selected_couponid;
       });
     },
     choice_cur(index, item) {
-      this.is_checked = index;
+      this.is_checked = item.id;
       this.cur_coupon = item;
     }
   },

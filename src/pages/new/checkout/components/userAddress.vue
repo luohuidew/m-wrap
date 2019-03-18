@@ -24,10 +24,17 @@
 <script>
 export default {
   name: "",
-  props: {},
+  props: {
+    address_item : {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    },
+  },
   data() {
     return {
-      address_item: {},
+      // address_item: {},
       // address_item: {
       //   zipcode: "1",
       //   first_name: "1",

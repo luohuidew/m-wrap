@@ -5,7 +5,7 @@
       <li class="card"
         v-for="(item,index) in delivery_lists"
         :key="index"
-        :class="is_selected_shipping===index?'active':''"
+        :class="is_selected===index?'active':''"
         @click="selected_shipping(item,index)">
 
         <div class="shipping-item">
@@ -41,23 +41,61 @@ export default {
   data() {
     return {
       delivery_lists: undefined,
-      is_selected_shipping: -1
+      is_selected: -1
     };
   },
   mounted() {
+  },
+  created() {
     this.init_data();
   },
   computed: {},
   methods: {
     init_data() {
-      let lists = this.$store.state.info_lists;
-      console.log(this.$store.state);
+      let lists = this.$store.state.info_lists.lists;
+      let is_selected_shipping = this.$store.state.order_detail.is_selected_shipping;
       this.delivery_lists = lists;
+      // 获取到上传选择的邮费方式
+      let islecteArray = is_selected_shipping.filter((item) => {
+        return item.store_id === this.$store.state.info_lists.store_id
+      })
+      if(islecteArray.length>0){
+        this.is_selected = islecteArray[0].index;
+      }
       // debugger;
     },
     selected_shipping(citem, index) {
-      this.is_selected_shipping = index;
-      this.$store.state.order_detail.delivery = citem;
+      let order_detail = this.$store.state.order_detail;
+      let store_id = this.$store.state.info_lists.store_id;
+      let is_selected_shipping = order_detail.is_selected_shipping;
+
+      let lockselect = false;
+      is_selected_shipping.forEach((item) => {
+        if(item.store_id === store_id) {
+          item.index = index;
+          lockselect = true;
+        }
+      })
+      if (!lockselect) {
+        is_selected_shipping.push({
+          store_id: store_id,
+          index: index
+        })
+      }
+      this.is_selected =  index;  // 选勾
+      let lock = false;
+      order_detail.delivery.forEach((item) => {
+        if (item.store_id === store_id) {
+          item.item = citem;
+          lock = true;
+        }
+      })
+      if (!lock) {
+        order_detail.delivery.push({
+          item: citem,
+          store_id: this.$store.state.info_lists.store_id
+        })
+      }
     },
     go_back() {
       this.$router.go(-1);

@@ -44,11 +44,7 @@ export default {
     },
     no_head() {
       let temp = this.$route.meta.fullScreen;
-      if (
-        temp ||
-        (localStorage.getItem("device") === "ios" ||
-          localStorage.getItem("device") === "android")
-      ) {
+      if (temp || (localStorage.getItem("device") === "ios" || localStorage.getItem("device") === "android")) {
         return true;
       } else {
         return false;
@@ -116,8 +112,8 @@ export default {
   /* margin-top:50px; */
 }
 .page-head {
-  /* height: 50px; */
-  /* background-color: #f3f3f3; */
+   /*height: 50px;*/
+   /*background-color: #f3f3f3;*/
 }
 .page-body {
   /* flex:1; */

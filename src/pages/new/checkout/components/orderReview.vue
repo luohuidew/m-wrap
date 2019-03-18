@@ -3,17 +3,17 @@
     <h2>Order Review</h2>
     <ul class="checkout-lists-box">
       <li class="checkout-lists"
-        v-for="(item) in 3"
-        :key="item">
+        v-for="(item, index) in store_goods"
+        :key="index">
         <p class="total-store">
           <img src="/static/images/icon/cart/store@3x.png"
             alt=""
             srcset="">
-          <span>w shop</span>
+          <span>{{item.store_name}}</span>
           <!-- <span>{{item.store_name}}</span> -->
         </p>
-        <order-review-item></order-review-item>
-        <order-review-total></order-review-total>
+        <order-review-item :goods_data = 'item.goods_data'></order-review-item>
+        <order-review-total :totalPrice = 'item'  v-on="$listeners" :store_updata_price =' store_total_price[index]'></order-review-total>
       </li>
     </ul>
   </div>
@@ -24,12 +24,27 @@ import orderReviewItem from "./orderReviewItem";
 import orderReviewTotal from "./orderReviewTotal";
 export default {
   name: "",
-  props: {},
+  props: {
+    store_goods: {
+      type: Array,
+      default: function () {
+        return []
+      },
+    },
+    store_total_price: {
+      type: Array,
+      default:function () {
+        return []
+      }
+    }
+  },
   data() {
     return {};
   },
   computed: {},
-  created() {},
+  created() {
+    console.log(77733, this.store_goods)
+  },
   methods: {},
   components: {
     orderReviewItem,
