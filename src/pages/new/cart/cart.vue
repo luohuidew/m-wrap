@@ -39,11 +39,7 @@ export default {
     this.init_data();
   },
   mounted() {},
-  computed: {
-    cartListData(){
-      console.log(this.$children);
-      return '';
-    }
+  computed: {    
   },
   methods: {
     init_data() {
