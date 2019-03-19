@@ -56,16 +56,19 @@ export default {
         // console.log(com_params);
 
         api.pay_accept(com_params).then(res => {
-          window.location.href = window.location.origin + "/callback?order_no=" + res.data.order_no;
+          alert('成功')
+          // window.location.href = window.location.origin + "/callback?order_no=" + res.data.order_no;
         }).catch((err)=>{
+          alert('失败')
           console.log(err)
-          window.location.href = window.location.origin + "/callback?error=" + '支付失败';
+          // window.location.href = window.location.origin + "/callback?error=" + '支付失败';
         });
         // debugger;
         if (response.messages.resultCode === "Error") {
           // console.log();
           console.log(response);
-          window.location.href = window.location.origin + "/callback?error=" + '支付失败';
+          alert('失败222')
+          // window.location.href = window.location.origin + "/callback?error=" + '支付失败';
         } else {
           // this.paymentFormUpdate(response.opaqueData);
         }

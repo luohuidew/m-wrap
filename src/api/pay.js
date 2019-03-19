@@ -37,7 +37,7 @@ export default {
   pay_accept(data={}) {
     // data.token = token;
     return request({
-      url: 'pay/pay?loading=yes',
+      url: 'cartpay/pay?loading=yes',
       method: 'post',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
