@@ -40,7 +40,7 @@ export default {
       url: 'cartpay/pay?loading=yes',
       method: 'post',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
       },
       data: data,
     })

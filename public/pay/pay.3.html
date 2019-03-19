@@ -66,12 +66,13 @@
     /* 发送支付的信息返回 */
     function send_message(params) {
       if (GetQueryString('device_type') == 'android') {
-
-
         window.weget_mobile_type.nativeToJavaScript_pay(JSON.stringify(params));
         // alert(JSON.stringify(params));
       } else if (GetQueryString('device_type') == 'ios') {
         window.webkit.messageHandlers.javaScriptToNative.postMessage(params);
+      } else if (GetQueryString('device_type') == 'h5') {
+        let url= location.origin + "/callback?pay_id=" + params.data.pay_id;
+        location.replace(url)
       } else {
         top.close(params);
       }

@@ -36,7 +36,7 @@ export default {
     this.init_data();
     this.create_order();
   },
-  props: ["order", "orderBtn", "order_summary_id"],
+  props: ["order", "orderBtn", "orderSummaryId"],
   computed: {},
   methods: {
     init_data() {
@@ -54,8 +54,12 @@ export default {
         com_params.append("dataValue", response.opaqueData.dataValue);
         that.btn_type = 1;
         // console.log(com_params);
-
-        api.pay_accept(com_params).then(res => {
+        let obj = {
+          pay_id: this.orderSummaryId,
+          dataDescriptor: response.opaqueData.dataDescriptor,
+          dataValue: response.opaqueData.dataValue
+        }
+        api.pay_accept(obj).then(res => {
           alert('成功')
           // window.location.href = window.location.origin + "/callback?order_no=" + res.data.order_no;
         }).catch((err)=>{
@@ -75,7 +79,7 @@ export default {
       });
     },
     create_order() {
-      com_params.append("pay_id", this.order_summary_id);
+      com_params.append("pay_id", this.orderSummaryId);
     },
     paymentFormUpdate(opaqueData) {
       document.getElementById("dataDescriptor").value =

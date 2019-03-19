@@ -54,8 +54,10 @@
     </ul>
     <div class="payment-button">
       <template v-if="is_https">
-        <accept v-show="is_select_pay===1"
-          :order="orderData.order_summary_id"></accept>
+        <!--<accept v-show="is_select_pay===1"-->
+          <!--:order="orderData.order_summary_id"></accept>-->
+        <p @click="acceptMethod" v-show="is_select_pay===1" class="accept_but">PAYMENT</p>
+
         <paypal v-show="is_select_pay===2"
           :token="token"
           env="production"
@@ -64,9 +66,10 @@
           v-on:canceled="onCancel"></paypal>
       </template>
       <template v-else>
-        <accept-test v-show="is_select_pay===1"
-          :order_summary_id="orderData.order_summary_id"
-          @pay="pay_callback"></accept-test>
+        <!--<accept-test v-show="is_select_pay===1"-->
+          <!--:orderSummaryId="orderData.order_summary_id"-->
+          <!--@pay="pay_callback"></accept-test>-->
+        <p @click="acceptTestMethod" v-show="is_select_pay===1" class="accept_but">PAYMENT TEST</p>
         <paypal-test v-show="is_select_pay===2"
           :token="token"
           env="sandbox"
@@ -121,6 +124,14 @@ export default {
     }
   },
   methods: {
+    acceptTestMethod() {
+      let url= location.origin + process.env.BASE_URL + "pay/pay.3.html?pay_id=" + this.orderData.order_summary_id + "&total=" + this.orderData.real_total_price.substring(1) + "&device_type=h5"
+      location.replace(url)
+    },
+    acceptMethod() {
+      let url= location.origin + process.env.BASE_URL + "pay/pay_new.html?pay_id=" + this.orderData.order_summary_id + "&total=" + this.orderData.real_total_price.substring(1) + "&device_type=h5"
+      location.replace(url)
+    },
     init_data() {
       api.pay_key().then(res => {
         this.token = res.data;
@@ -174,6 +185,17 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+  .accept_but {
+    display: block;
+    width: 250px;
+    height: 39px;
+    line-height: 39px;
+    text-align: center;
+    border-radius: 30px;
+    background: #d80c18;
+    color: #fff;
+    cursor: pointer;
+  }
 .payment-dialog {
   padding: 16px 0px 40px 0px;
   font-size: 14px;
