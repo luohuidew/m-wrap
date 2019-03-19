@@ -3,9 +3,22 @@
     v-if="goodsData.length">
     <div class="total-cart-box">
       <h2>Cart (9)</h2>
-      <p class="total-select">
-        Select All Available Items (9)
-      </p>
+      <div class="head-select">
+        <div class="icon-box"
+          @click="toggle_checked_all(all_store_is_select)">
+          <img v-if="all_store_is_select"
+            src="/static/images/icon/cart/多选 选中@3x.png"
+            alt=""
+            srcset="">
+          <img v-else
+            src="/static/images/icon/cart/多选 未选中@3x.png"
+            alt=""
+            srcset="">
+        </div>
+        <p class="total-select">
+          Select All Available Items (9)
+        </p>
+      </div>
     </div>
     <ul v-for="(item,index) in goodsData"
       :key="index"
@@ -43,15 +56,18 @@ export default {
   watch: {},
   mounted() {},
   computed: {
-    // to_parent_data() {
-    //   // let temp = {
-    //   //   cart_lists_item: this.cart_lists_item,
-    //   //   total_data: this.total_data
-    //   // };
-    //   // debugger;
-    //   // this.$emit("change", temp);
-    //   // return temp;
-    // }
+    all_store_is_select() {
+      let temp_boolean = false;
+      let equal =
+        this.cart_lists_item.length === this.goodsData.length &&
+        this.cart_lists_item.length > 0;
+      if (equal) {
+        temp_boolean = this.cart_lists_item.every(item => {
+          return item.checked_store === true;
+        });
+      }
+      return temp_boolean;
+    }
   },
   methods: {
     init_data() {},
@@ -64,6 +80,11 @@ export default {
       };
       // debugger;
       this.$emit("change", temp);
+    },
+    toggle_checked_all(){
+      this.$children.forEach(item=>{
+        item.toggle_checked();
+      })
     }
   },
   components: {
@@ -82,6 +103,10 @@ export default {
   .total-select {
     font-size: 14px;
   }
+}
+/*  */
+.head-select {
+  display: flex;
 }
 .cart-lists {
   padding: 5px 20px;
