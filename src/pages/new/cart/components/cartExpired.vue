@@ -5,7 +5,7 @@
       <span class="remove-btn">remove </span>
     </div>
     <ul class="expired-sku-lists">
-      <li class="expired-sku-item" v-for="n in 13" :key="n">
+      <li class="expired-sku-item" v-for="n in 2" :key="n">
         <div class="cover-img-box">
           <img src="/static/demo.png"
             alt=""

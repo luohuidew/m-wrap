@@ -2,7 +2,7 @@
   <div class="cart-layout">
     <div class="scroll-lists">
       <template v-if="req_data">
-        <cart-list :goods-data="req_data.goods"></cart-list>
+        <cart-list @change="get_list_data" :goods-data="req_data.goods"></cart-list>
         <cart-expired></cart-expired>
       </template>
       <template v-else>
@@ -10,35 +10,9 @@
       </template>
       <cart-guide></cart-guide>
     </div>
-    <div class="footer-buy">
-      <ul>
-        <li class="get-coupon"
-          @click="show_coupon_dialog=true">
-          <div class="content">
-            <img src="/static/images/icon/cart/搜索 copy 2@3x.png"
-              alt="">
-            <span>Get Weget Coupon</span>
-          </div>
-        </li>
-        <li class="to-buy">
-          <div class="total-box">
-            <p class="total-desc">Total</p>
-            <p class="total-price">$75.00</p>
-          </div>
-          <div class="buy-btn"
-            @click="to_buy">
-            Buy (3)
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="hidden-box">
-      <van-popup v-model="show_coupon_dialog"
-        position="bottom"
-        :overlay="true">
-        <detail-coupon-dialog @close="show_coupon_dialog=false"></detail-coupon-dialog>
-      </van-popup>
-    </div>
+    <cart-footer v-if="req_data" :total-price="footer_data.total_data"
+      :goods-data="req_data.goods"
+      :total-data="footer_data.cart_lists_item"></cart-footer>
   </div>
 </template>
 
@@ -47,25 +21,38 @@ import CART from "@/api/cart";
 import cartList from "./components/cartList";
 import cartGuide from "./components/cartGuide";
 import cartExpired from "./components/cartExpired";
+import cartFooter from "./components/cartFooter";
 import detailCouponDialog from "@/pages/detail/detail-content/detailCoupon/components/detailCouponDialog";
 export default {
   name: "",
   data() {
     return {
       req_data: null,
-      show_coupon_dialog: false
+      show_coupon_dialog: false,
+      footer_data:{
+        cart_lists_item:[],
+        total_data:{}
+      }
     };
   },
   created() {
     this.init_data();
   },
   mounted() {},
-  computed: {},
+  computed: {
+    cartListData(){
+      console.log(this.$children);
+      return '';
+    }
+  },
   methods: {
     init_data() {
       CART.shopCartList().then(res => {
         this.req_data = res.data;
       });
+    },
+    get_list_data(data){
+      this.footer_data = data;
     },
     /* buy some goods */
     to_buy() {
@@ -80,7 +67,8 @@ export default {
     cartList,
     cartGuide,
     cartExpired,
-    detailCouponDialog
+    detailCouponDialog,
+    cartFooter
   }
 };
 </script>

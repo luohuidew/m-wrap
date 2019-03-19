@@ -17,10 +17,20 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
+<style lang='scss'>
 .cart {
   height: 100%;
   overflow: auto;
+  .icon-box {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    min-width: 30px;
+    img {
+      height: 20px;
+      width: 20px;
+      margin-right: 10px;
+    }
+  }
 }
- 
 </style>
