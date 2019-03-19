@@ -82,18 +82,18 @@ export default {
     }
   },
   computed: {
-    all_store_is_select() {
-      let temp_boolean = false;
-      let equal =
-        this.totalData.length === this.goodsData.length &&
-        this.totalData.length > 0;
-      if (equal) {
-        temp_boolean = this.totalData.every(item => {
-          return item.checked_store === true;
-        });
-      }
-      return temp_boolean;
-    }
+    // all_store_is_select() {
+    //   let temp_boolean = false;
+    //   let equal =
+    //     this.totalData.length === this.goodsData.length &&
+    //     this.totalData.length > 0;
+    //   if (equal) {
+    //     temp_boolean = this.totalData.every(item => {
+    //       return item.checked_store === true;
+    //     });
+    //   }
+    //   return temp_boolean;
+    // }
   },
   created() {},
   methods: {

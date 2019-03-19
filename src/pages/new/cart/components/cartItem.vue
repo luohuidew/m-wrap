@@ -14,13 +14,13 @@
             alt=""
             srcset="">
         </div>
+        <p class="total-store">
+          <img src="/static/images/icon/cart/store@3x.png"
+            alt=""
+            srcset="">
+          <span>{{all_data.store_name}}</span>
+        </p>
       </div>
-      <p class="total-store">
-        <img src="/static/images/icon/cart/store@3x.png"
-          alt=""
-          srcset="">
-        <span>{{all_data.store_name}}</span>
-      </p>
       <p class="to-store">
         <img src="/static/images/icon/cart/分类 copy@3x.png"
           alt="">
@@ -179,11 +179,13 @@ export default {
       this.$parent.total_data.cart_ids.pop(item.only);
       // debugger
     },
-    toggle_checked(cur_checked) {
+    toggle_checked(cur_checked=this.checked_store) {
       let temp_lists = this.cur_lists;
       temp_lists.forEach(item => {
         if (!cur_checked) {
-          this.check_only(item);
+          if (this.checked_all_only.indexOf(item.only) == -1) {
+            this.check_only(item);
+          }
         } else {
           this.no_check_only(item);
         }
@@ -201,6 +203,9 @@ export default {
   padding-bottom: 20px;
 }
 /*  */
+.store-box {
+  display: flex;
+}
 .cart-lists-store {
   padding: 15px 0;
   display: flex;
@@ -232,7 +237,7 @@ export default {
   flex: 1;
   display: flex;
   padding-top: 17px;
-  padding-left: 10px;
+  // padding-left: 10px;
 }
 .cover-img-box {
   height: 80px;
