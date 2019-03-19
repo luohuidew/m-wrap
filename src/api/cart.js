@@ -1,22 +1,38 @@
 import request from '@/utils/request'
 import store from '@/store'
-let token  = store.state.token;
+let token = store.state.token;
 export default {
-  addToCart(data={}) {
+  addToCart(data = {}) {
     data.token = token;
     return request({
       url: 'shopcart/addToCart',
       method: 'post',
       data: JSON.stringify(data),
     })
-  },  
-  shopCartList(data={}) {
+  },
+  shopCartList(data = {}) {
     data.token = token;
     return request({
       url: 'shopcart/shopCartList',
       method: 'post',
       data: JSON.stringify(data),
     })
-  },  
-  
+  },
+  delShopCartGood(data = {}) {
+    data.token = token;
+    return request({
+      url: 'shopcart/delShopCartGood ',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+  updateCount(data = {}) {
+    data.token = token;
+    return request({
+      url: 'shopcart/updateCount ',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+
 }
