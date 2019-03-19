@@ -55,7 +55,7 @@
     <div class="payment-button">
       <template v-if="is_https">
         <accept v-show="is_select_pay===1"
-          :order="orderData.order_no"></accept>
+          :order="orderData.order_summary_id"></accept>
         <paypal v-show="is_select_pay===2"
           :token="token"
           env="production"

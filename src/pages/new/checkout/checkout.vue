@@ -35,7 +35,7 @@
                position="bottom"
                :overlay="true">
       <payment-dialog :order-data = "res_create_data" :is_select_pay = change_select_pay
-                      @close="show_pay_methods = false" ></payment-dialog>
+                      @close="payClose" ></payment-dialog>
     </van-popup>
   </div>
 </template>
@@ -54,7 +54,6 @@ export default {
      return {
        change_select_pay: 1,
        res_create_data: {},
-       overlay: false,
        show_pay_methods: false,
         req_data: null,
         shipping_mothods_index: '',  //选的运费
@@ -87,6 +86,17 @@ export default {
     next();
   },
   methods: {
+    payClose() {
+      this.show_pay_methods = false;
+      this.$router.replace({
+        path: "/callback",
+        query: {
+          error: 'Payment cancellation',
+          pay_id: this.res_create_data.order_summary_id
+        }
+      });
+
+    },
     changeSelectPay(val) {
       this.change_select_pay = val;
     },
@@ -220,12 +230,11 @@ export default {
           this.$router.replace({
             path: "/callback",
             query: {
-              // order_no: res.data.order_no
+              pay_id: res.data.order_summary_id
             }
           });
         } else {
           this.show_pay_methods = true;
-          this.overlay = true;
         }
       });
       // let router_params = {

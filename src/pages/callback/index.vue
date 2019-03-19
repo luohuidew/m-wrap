@@ -1,19 +1,11 @@
 <template>
   <div class="callback-detail">
-    <div v-if="$route.query.error">
-      <div
-           class="success-btn gray">
-        <p class="error">{{$route.query.error}}</p>
-        <a href="javascript:;"
-           @click="go_home">GO HOME</a>
-      </div>
-    </div>
-    <template v-else>
+    <template>
       <div class="group-box" >
         <div class="type-success">
           <p class="buy-alone"
              v-if="order_info">{{order_info.title}}</p>
-          <div v-if="type===1"
+          <div
                class="success-btn gray">
             <a href="javascript:;"
                @click="go_home">GO HOME</a>
@@ -36,18 +28,18 @@
                  srcset="">
           </span>
           </p>
-          <div class="share-btn"
-               v-if="type!== 1 && type != 2">
-            <a href="javascript:;"
-               @click="go_share">
-            <span v-if="no_auto_back">
-              Back to group invitation
-            </span>
-              <span v-else>
-              Back to group invitation in {{left_time}} seconds
-            </span>
-            </a>
-          </div>
+          <!--<div class="share-btn"-->
+               <!--v-if="type!== 1 && type != 2">-->
+            <!--<a href="javascript:;"-->
+               <!--@click="go_share">-->
+            <!--<span v-if="no_auto_back">-->
+              <!--Back to group invitation-->
+            <!--</span>-->
+              <!--<span v-else>-->
+              <!--Back to group invitation in {{left_time}} seconds-->
+            <!--</span>-->
+            <!--</a>-->
+          <!--</div>-->
         </div>
 
         <!-- <div class="success-btn gray">
@@ -103,7 +95,7 @@ export default {
   methods: {
     init_data() {
       let params = {
-        order_no: this.$route.query.order_no
+        pay_id: this.$route.query.pay_id
       };
       api.getRelateProduct(params).then(res => {
         this.goods_info = res.data.product;

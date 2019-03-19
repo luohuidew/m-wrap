@@ -65,12 +65,12 @@ export default {
           // this.$router.push({path:'/user/orders/list'});
         }).catch((err)=>{
           console.log(err)
-          window.location.href = window.location.origin + "/callback?error=" + '支付失败';
+          window.location.href = window.location.origin + "/callback?error=" + 'Payment failed';
         });
         // debugger;
         if (response.messages.resultCode === "Error") {
           // console.log();
-          window.location.href = window.location.origin + "/callback?error=" + '支付失败';
+          window.location.href = window.location.origin + "/callback?error=" + 'Payment failed';
           // var i = 0;
           // while (i < response.messages.message.length) {
           //   console.log(
