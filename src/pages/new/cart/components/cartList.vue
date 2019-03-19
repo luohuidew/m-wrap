@@ -11,7 +11,8 @@
       :key="index"
       class="cart-lists">
       <li class="cart-lists-item">
-        <cart-item @checkout="get_item_checkout(index,$event)" :lists-data="item"></cart-item>
+        <cart-item @checkout="get_item_checkout(index,$event)"
+          :lists-data="item"></cart-item>
       </li>
     </ul>
   </div>
@@ -42,23 +43,31 @@ export default {
   watch: {},
   mounted() {},
   computed: {
-    to_parent_data(){
-      let temp = {
-        cart_lists_item:this.cart_lists_item,
-        total_data:this.total_data
-      }
-      this.$emit('change',temp);
-      return temp;
-    }
+    // to_parent_data() {
+    //   // let temp = {
+    //   //   cart_lists_item: this.cart_lists_item,
+    //   //   total_data: this.total_data
+    //   // };
+    //   // debugger;
+    //   // this.$emit("change", temp);
+    //   // return temp;
+    // }
   },
   methods: {
     init_data() {},
     get_item_checkout(index, data) {
+      // debugger
       this.$set(this.cart_lists_item, index, data);
+      let temp = {
+        cart_lists_item: this.cart_lists_item,
+        total_data: this.total_data
+      };
+      // debugger;
+      this.$emit("change", temp);
     }
   },
   components: {
-    cartItem,    
+    cartItem
   }
 };
 </script>
