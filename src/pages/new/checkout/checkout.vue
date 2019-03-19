@@ -88,8 +88,12 @@ export default {
       this.change_select_pay = val;
     },
     init_data() {
+        // let obj = {
+        //   cart_ids: ['24694873236595142052', '95564537746833116239', '95564546260833361230']
+        // }
+        let cart_ids = this.$route.query.cart_ids.split(',');
         let obj = {
-          cart_ids: ['24694873236595142052', '95564537746833116239', '95564546260833361230']
+          cart_ids: cart_ids
         }
         api.confirm_order(obj).then(res => {
             let data = res.data;
