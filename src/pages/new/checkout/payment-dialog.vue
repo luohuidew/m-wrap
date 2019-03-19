@@ -65,7 +65,7 @@
       </template>
       <template v-else>
         <accept-test v-show="is_select_pay===1"
-          :order="orderData.order_no"
+          :order_summary_id="orderData.order_summary_id"
           @pay="pay_callback"></accept-test>
         <paypal-test v-show="is_select_pay===2"
           :token="token"

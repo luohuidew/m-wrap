@@ -33,6 +33,7 @@
     "@vue/cli-service": "^3.1.4",
     "babel-plugin-import": "^1.8.0",
     "node-sass": "^4.10.0",
+    "postcss-pxtorem": "^4.0.1",
     "sass-loader": "^7.1.0",
     "uglify-js": "^3.4.9",
     "vue-template-compiler": "^2.5.17"
@@ -53,7 +54,11 @@
   },
   "postcss": {
     "plugins": {
-      "autoprefixer": {}
+      "autoprefixer": {},
+      "postcss-pxtorem": {
+        "rootValue": 37.5,
+        "propList": ["*"]
+      }
     }
   },
   "browserslist": [

@@ -55,7 +55,7 @@ export default {
        change_select_pay: 1,
        res_create_data: {},
        overlay: false,
-       show_pay_methods: true,
+       show_pay_methods: false,
         req_data: null,
         shipping_mothods_index: '',  //选的运费
         coupon: '',

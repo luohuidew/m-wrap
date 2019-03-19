@@ -33,20 +33,13 @@ export default {
   },
   mounted() {
     this.init_data();
+    this.create_order();
   },
-  props: ["order", "orderBtn", "orderNo"],
+  props: ["order", "orderBtn", "order_summary_id"],
   computed: {},
   methods: {
     create_order() {
-      let order_params = this.order;
-      if (order_params) {
-        api.create_order(order_params).then(res => {
-          console.log(res);
-          com_params.append("order_no", res.data.order_no);
-        });
-      } else {
-        com_params.append("order_no", this.orderNo);
-      }
+      com_params.append("pay_id", this.order_summary_id);
     },
     init_data() {
       let window = window;
@@ -68,14 +61,16 @@ export default {
           //   query: { order_no: res.data.order_no}
           // };
           // this.$router.push(params);
-          window.location.href =
-            window.location.origin + "/callback?order_no=" + res.data.order_no;
+          window.location.href = window.location.origin + "/callback?order_no=" + res.data.order_no;
           // this.$router.push({path:'/user/orders/list'});
+        }).catch((err)=>{
+          console.log(err)
+          window.location.href = window.location.origin + "/callback?error=" + '支付失败';
         });
         // debugger;
         if (response.messages.resultCode === "Error") {
           // console.log();
-          console.log(response);
+          window.location.href = window.location.origin + "/callback?error=" + '支付失败';
           // var i = 0;
           // while (i < response.messages.message.length) {
           //   console.log(

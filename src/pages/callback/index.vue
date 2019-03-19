@@ -1,61 +1,72 @@
 <template>
   <div class="callback-detail">
-    <div class="group-box">
-      <div class="type-success">
-        <p class="buy-alone"
-          v-if="order_info">{{order_info.title}}</p>
-        <div v-if="type===1"
-          class="success-btn gray">
-          <a href="javascript:;"
-            @click="go_home">GO HOME</a>
-        </div>
-        <template v-if="type===3">
-          <p class="buy-wait-group"><span> </span>{{order_info.sub_title}}</p>
-          <!-- <div class="share-btn">
+    <div v-if="$route.query.error">
+      <div
+           class="success-btn gray">
+        <p class="error">{{$route.query.error}}</p>
+        <a href="javascript:;"
+           @click="go_home">GO HOME</a>
+      </div>
+    </div>
+    <template v-else>
+      <div class="group-box" >
+        <div class="type-success">
+          <p class="buy-alone"
+             v-if="order_info">{{order_info.title}}</p>
+          <div v-if="type===1"
+               class="success-btn gray">
             <a href="javascript:;"
-              @click="go_share">SHARE</a>
-          </div> -->
-        </template>
+               @click="go_home">GO HOME</a>
+          </div>
+          <template v-if="type===3">
+            <p class="buy-wait-group"><span> </span>{{order_info.sub_title}}</p>
+            <!-- <div class="share-btn">
+              <a href="javascript:;"
+                @click="go_share">SHARE</a>
+            </div> -->
+          </template>
 
-        <!-- <p>{{order_info.title}}</p> -->
-        <p class="buy-cuccess"
-          v-if="type===4">
+          <!-- <p>{{order_info.title}}</p> -->
+          <p class="buy-cuccess"
+             v-if="type===4">
           <span v-for="(item,index) in group_info"
-            :key="index">
+                :key="index">
             <img :src="item"
-              alt=""
-              srcset="">
+                 alt=""
+                 srcset="">
           </span>
-        </p>
-        <div class="share-btn"
-          v-if="type!== 1 && type != 2">
-          <a href="javascript:;"
-            @click="go_share">
+          </p>
+          <div class="share-btn"
+               v-if="type!== 1 && type != 2">
+            <a href="javascript:;"
+               @click="go_share">
             <span v-if="no_auto_back">
               Back to group invitation
             </span>
-            <span v-else>
+              <span v-else>
               Back to group invitation in {{left_time}} seconds
             </span>
-          </a>
+            </a>
+          </div>
         </div>
+
+        <!-- <div class="success-btn gray">
+          <a href="javascript:;">OPEN IN APP</a>
+        </div> -->
+
       </div>
+      <div class="sale-list-tips">
+        You may also like
+      </div>
+      <div class="sku-box">
+        <card class="sku-item"
+              v-for="(item,index) in goods_info"
+              :key="index"
+              :card-data="item"
+              @stop="stop_time"></card>
+      </div>
+    </template >
 
-      <!-- <div class="success-btn gray">
-        <a href="javascript:;">OPEN IN APP</a>
-      </div> -->
-
-    </div>
-    <div class="sale-list-tips">
-      You may also like
-    </div>
-    <div class="sku-box">
-      <card class="sku-item"
-        v-for="(item,index) in goods_info"
-        :key="index"
-        :card-data="item"
-        @stop="stop_time"></card>
-    </div>
     <!-- <share-app></share-app> -->
   </div>
 </template>
@@ -230,6 +241,7 @@ export default {
     // width: 250px;
     padding: 0 14px;
     height: 40px;
+    margin-bottom: 20px;
     background: rgba(215, 14, 25, 1);
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
@@ -255,5 +267,8 @@ export default {
   a {
     // background-color: #000;
   }
+}
+.error{
+  margin-bottom: 50px;
 }
 </style>

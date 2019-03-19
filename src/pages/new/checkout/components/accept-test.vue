@@ -34,8 +34,9 @@ export default {
   },
   mounted() {
     this.init_data();
+    this.create_order();
   },
-  props: ["order", "orderBtn", "orderNo"],
+  props: ["order", "orderBtn", "order_summary_id"],
   computed: {},
   methods: {
     init_data() {
@@ -51,48 +52,28 @@ export default {
         // console.log(response);
         com_params.append("dataDescriptor", response.opaqueData.dataDescriptor);
         com_params.append("dataValue", response.opaqueData.dataValue);
-        com_params.append("order_no", that.order);
         that.btn_type = 1;
         // console.log(com_params);
 
         api.pay_accept(com_params).then(res => {
-          // console.log(res);
-          // com_params = new FormData();
-          // let params = {
-          //   path: "/callback",
-          //   query: { order_no: res.data.order_no}
-          // };
-          // this.$router.push(params);
-          that.$emit('pay',res);
-          // window.location.href =
-          //   window.location.origin + "/callback?order_no=" + res.data.order_no;
-          // this.$router.push({path:'/user/orders/list'});
+          window.location.href = window.location.origin + "/callback?order_no=" + res.data.order_no;
         }).catch((err)=>{
-          that.$emit('pay',err);
-          // this.$emit();
+          console.log(err)
+          window.location.href = window.location.origin + "/callback?error=" + '支付失败';
         });
         // debugger;
         if (response.messages.resultCode === "Error") {
           // console.log();
           console.log(response);
-          // var i = 0;
-          // while (i < response.messages.message.length) {
-          //   console.log(
-          //     response.messages.message[i].code +
-          //       ": " +
-          //       response.messages.message[i].text
-          //   );
-          //   i = i + 1;
-          // }
+          window.location.href = window.location.origin + "/callback?error=" + '支付失败';
         } else {
           // this.paymentFormUpdate(response.opaqueData);
         }
       });
     },
-    // create_order() {
-    //   debugger;
-    //   this.$emit("create", { pay_type: 1 });
-    // },
+    create_order() {
+      com_params.append("pay_id", this.order_summary_id);
+    },
     paymentFormUpdate(opaqueData) {
       document.getElementById("dataDescriptor").value =
         opaqueData.dataDescriptor;
