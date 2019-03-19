@@ -2,7 +2,8 @@
   <div class="cart-layout">
     <div class="scroll-lists">
       <template v-if="req_data">
-        <cart-list @change="get_list_data" :goods-data="req_data.goods"></cart-list>
+        <cart-list @change="get_list_data"
+          :goods-data="req_data.goods"></cart-list>
         <cart-expired></cart-expired>
       </template>
       <template v-else>
@@ -10,7 +11,8 @@
       </template>
       <cart-guide></cart-guide>
     </div>
-    <cart-footer v-if="req_data" :total-price="footer_data.total_data"
+    <cart-footer v-if="req_data"
+      :total-price="footer_data.total_data"
       :goods-data="req_data.goods"
       :total-data="footer_data.cart_lists_item"></cart-footer>
   </div>
@@ -29,9 +31,9 @@ export default {
     return {
       req_data: null,
       show_coupon_dialog: false,
-      footer_data:{
-        cart_lists_item:[],
-        total_data:{}
+      footer_data: {
+        cart_lists_item: [],
+        total_data: {}
       }
     };
   },
@@ -39,20 +41,16 @@ export default {
     this.init_data();
   },
   mounted() {},
-  computed: {
-    cartListData(){
-      console.log(this.$children);
-      return '';
-    }
-  },
+  computed: {},
   methods: {
     init_data() {
       CART.shopCartList().then(res => {
         this.req_data = res.data;
       });
     },
-    get_list_data(data){
-      this.footer_data = data;
+    get_list_data(data) {
+      this.$set(this.footer_data, "cart_lists_item", data.cart_lists_item);
+      this.$set(this.footer_data, "total_data", data.total_data);
     },
     /* buy some goods */
     to_buy() {

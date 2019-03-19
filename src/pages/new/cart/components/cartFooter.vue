@@ -138,7 +138,9 @@ export default {
       });
     }
   },
-  components: {}
+  components: {
+    detailCouponDialog
+  }
 };
 </script>
 
