@@ -68,7 +68,10 @@ export default {
      };
   },
   created() {
+    this.cart_ids = this.$route.query.cart_ids.split(',');
+
     this.init_data();
+
     this.fristRender = true;
   },
   mounted() {
@@ -88,8 +91,11 @@ export default {
       this.change_select_pay = val;
     },
     init_data() {
+        // let obj = {
+        //   cart_ids: ['24694873236595142052', '95564537746833116239', '95564546260833361230']
+        // }
         let obj = {
-          cart_ids: ['24694873236595142052', '95564537746833116239', '95564546260833361230']
+          cart_ids: this.cart_ids
         }
         api.confirm_order(obj).then(res => {
             let data = res.data;
@@ -158,7 +164,7 @@ export default {
            store_code = order_detail.applyCode
        }
        let param = {
-           cart_ids: ['24694873236595142052', '95564537746833116239', '95564546260833361230'],
+           cart_ids: this.cart_ids,
            store_code : store_code,
            store_ship_method: store_ship_method,
            address_id: address_id,
