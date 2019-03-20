@@ -6,11 +6,11 @@
         alt="">
       <span>Store Promo Code & Weget Coupon</span>
     </div>
-    <van-popup v-model="show_coupon"
+    <!-- <van-popup v-model="show_coupon"
       position="bottom"
       :overlay="true">
       <detail-coupon-dialog @close="show_coupon=false"></detail-coupon-dialog>
-    </van-popup>
+    </van-popup> -->
   </div>
 </template>
 
@@ -28,6 +28,7 @@ export default {
   created() {},
   methods: {
     show_get_coupon_page() {
+      this.$emit('toggle',true);
       this.show_coupon = true;
     }
   },

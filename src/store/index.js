@@ -3,9 +3,13 @@ import Vuex from 'vuex'
 import {
   getToken
 } from '@/utils/auth'
+import cart from "./modules/cart"
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
+  modules:{
+    cart
+  },
   state: {
     token: getToken(),
     user: {},

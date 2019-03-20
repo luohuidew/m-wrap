@@ -59,12 +59,12 @@
         </li>
         <li class="done-btn">
           <template v-if="have_goods">
-            <a v-if="only_cart"
+            <span v-if="only_cart"
               href="javacript:;"
-              @click="add_to_cart">Add To Cart</a>
-            <a href="javacript:;"
+              @click="add_to_cart">Add To Cart</span>
+            <span href="javacript:;"
               v-else
-              @click="create_order">Done</a>
+              @click="create_order">Done</span>
           </template>
           <template v-else>
             <a href="javacript:;"
@@ -232,7 +232,10 @@ export default {
       };
       CART.addToCart(to_catr_params).then(res => {
         this.$emit("close", null);
-      });
+         this.$store.dispatch('addAction',this.pay_number);
+      }, 0);
+      // setTimeout(()=>{
+      // })
     },
     account(num) {
       let temp_number = parseInt(this.pay_number);
@@ -366,7 +369,7 @@ export default {
   padding: 10px 0 30px 0;
   background-color: #fff;
   text-align: center;
-  a {
+  span {
     display: inline-block;
     width: 250px;
     height: 40px;

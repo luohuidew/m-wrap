@@ -5,7 +5,7 @@
         {{itemData.title}}
       </h2>
       <p>{{itemData.desc}}</p>
-      <p>Expires On {{itemData.expire_date | dateServerEnglishDMY}}</p>
+      <p>Expires On {{itemData.expire_date | dateServerEnglishYMD}}</p>
     </div>
     <div class="coupon-control-box">
       <a v-if="itemData.is_received===2"
