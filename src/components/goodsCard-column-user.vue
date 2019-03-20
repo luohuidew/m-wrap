@@ -8,11 +8,11 @@
     <div class="goods-des">
       <p class="goods-title">{{card_data.title}}</p>
       <p class="goods-getter">
-        <img v-for="(item,index) in card_data.bought_user"
+        <!-- <img v-for="(item,index) in card_data.bought_user"
           :key="index"
           :src="item.photo"
           alt=""
-          srcset="">
+          srcset=""> -->
       </p>
       <p class="pay-number">
         {{card_data.bought_num}}get this

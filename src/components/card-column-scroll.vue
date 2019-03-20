@@ -31,7 +31,7 @@
             ${{card_data.alone_price}}
           </span>
         </p>
-        <div class="buyer-box"
+        <!-- <div class="buyer-box"
           v-if="cardData.bought_user">
           <img v-for="(item,index) in cardData.bought_user"
             :key="index"
@@ -40,10 +40,9 @@
             :style="{right:(index+1)*12+'px',zIndex:10-index}">
           <img src="/static/img/icon/团购人点点点.png"
             v-if="cardData.bought_user.length">
-          <!-- <p class="goods-getter">
-          </p> -->
+        
 
-        </div>
+        </div> -->
       </div>
       <!-- <p class="light-height-btn">
         <a class="link-btn"

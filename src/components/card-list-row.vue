@@ -37,7 +37,7 @@
         <p class="pay-number">
           {{sku.bought_num}} bought
         </p>
-        <p class="goods-getter" v-if="sku.bought_user">
+        <!-- <p class="goods-getter" v-if="sku.bought_user">
           <img v-for="(item,index) in sku.bought_user"
           v-show="index<4"
             :key="index"
@@ -45,7 +45,7 @@
             :style="{right:(index+1)*12+'px',zIndex:10-index}">
           <img src="/static/img/icon/团购人点点点.png"
             v-if="sku.bought_user.length">
-        </p>
+        </p> -->
 
       </div>
       <!-- <p class="light-height-btn">
