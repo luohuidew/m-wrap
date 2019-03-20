@@ -148,6 +148,7 @@ export default {
   width: 130px;
   height: 130px;
   font-size: 0;
+  object-fit: cover;
   .mask-info {
     position: absolute;
     left: 5px;
@@ -188,6 +189,7 @@ export default {
   img {
     height: 100%;
     width: 100%;
+    object-fit: cover;
     // border: 1px solid #eeeeee;
     border-radius: 8px;
   }

@@ -14,7 +14,7 @@
             alt=""
             srcset="">
         </div>
-        <p class="total-store">
+        <p class="total-store" @click="to_store">
           <img src="/static/images/icon/cart/store@3x.png"
             alt=""
             srcset="">
@@ -45,7 +45,7 @@
                 srcset="">
             </div>
           </div>
-          <div class="cover-img-box">
+          <div class="cover-img-box" @click="to_detail(item.sku_id)">
             <img :src="item.goods_img"
               alt=""
               srcset="">
@@ -198,7 +198,25 @@ export default {
           this.no_check_only(item);
         }
       });
-    }
+    },
+     to_store(store_id) {
+      let params = {
+        path: "/store",
+        query: {
+          store_id: store_id
+        }
+      };
+      this.$router.push(params);
+    },
+    to_detail(sku_id) {
+      let params = {
+        path: "/detail",
+        query: {
+          sku_id: sku_id
+        }
+      };
+      this.$router.push(params);
+    },
   },
   components: {}
 };

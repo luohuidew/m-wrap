@@ -138,6 +138,7 @@ export default {
     width: 100%;
     border: 1px solid #eeeeee;
     border-radius: 8px;
+    object-fit: cover;
   }
 }
 .goods-des {
