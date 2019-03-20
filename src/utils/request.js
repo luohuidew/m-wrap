@@ -18,8 +18,8 @@ import {
 } from 'js-sha256';
 let BASE_API;
 // let CUR_ORIDIN = window.location.origin;
-BASE_API = 'https://app.weget.com/wap/';
-// BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
+// BASE_API = 'https://app.weget.com/wap/';
+BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
 // if (process.env.NODE_ENV === 'development') {
 //   // dev
 //   BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
