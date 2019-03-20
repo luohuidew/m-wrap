@@ -9,7 +9,7 @@
           @change="join_group"></detail-group> -->
         <section class="select-box">
           <detail-coupon></detail-coupon>
-          <detail-shipping></detail-shipping>
+          <detail-shipping :all-data="all_data"></detail-shipping>
           <detail-attr v-if="cur_goods"
             :sku="sku"
             :goods="goods"
@@ -89,6 +89,7 @@ export default {
   },
   data() {
     return {
+      all_data: undefined,
       goods: undefined,
       group: undefined,
       review: undefined,
@@ -179,6 +180,7 @@ export default {
         console.log(res);
         document.title = res.data.sku.title;
         let temp_data = res.data;
+        this.all_data = res.data;
         for (let key in temp_data) {
           this[key] = temp_data[key];
         }

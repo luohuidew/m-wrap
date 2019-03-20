@@ -49,7 +49,7 @@
         <detail-store :item="store_info"></detail-store>
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
-        <shipping :sku-data="sku"></shipping>
+        <shipping :all-data="all_data"></shipping>
         <review v-if="review"
           :review="review"></review>
         <!-- <detail-welog></detail-welog> -->
@@ -105,7 +105,7 @@ export default {
     };
   },
   data() {
-    return {
+    return {      
       goods: undefined,
       group: undefined,
       review: undefined,
@@ -196,6 +196,7 @@ export default {
         console.log(res);
         document.title = res.data.sku.title;
         let temp_data = res.data;
+        this.all_data=res.data;
         for (let key in temp_data) {
           this[key] = temp_data[key];
         }
@@ -283,7 +284,6 @@ export default {
     background-color: #fff;
   }
 }
-
 
 .goods-des {
   background-color: #fff;

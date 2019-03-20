@@ -160,7 +160,7 @@ export default {
       console.log(nonce);
       let params = {
         nonce: nonce,
-        order_no: this.orderData.order_no
+        pay_id: this.orderData.order_summary_id
       };
       api.pay_paypal(params).then(res => {
        this.pay_callback(res);

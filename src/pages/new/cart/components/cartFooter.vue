@@ -19,7 +19,7 @@
           </div>
           <div class="buy-btn"
             @click="to_pay">
-            Buy (3)
+            Buy ({{update_count.length}})
           </div>
         </li>
       </ul>

@@ -2,34 +2,54 @@
   <div class="coupon-item">
     <div class="coupon-desc">
       <h2>
-        Save $6.00
+        {{itemData.title}}
       </h2>
-      <p>Off Your Purcse Of $20 Or More</p>
-      <p>Expires On 01/09/2019</p>
+      <p>{{itemData.desc}}</p>
+      <p>Expires On {{itemData.expire_date | dateServerEnglishDMY}}</p>
     </div>
     <div class="coupon-control-box">
-      <a href="javascript:;"
-        class="disable-get">
-        Coupon Added
-      </a>
-      <a href="javascript:;"
-        class="pending-get">
+      <a v-if="itemData.is_received===2"
+        href="javascript:;"
+        class="pending-get" @click="get_coupon(itemData.id)">
         Get It Now
+      </a>
+      <a v-else
+        href="javascript:;"
+        class="disable-get" >
+        Coupon Added
       </a>
     </div>
   </div>
 </template>
 
 <script>
+import COUPON from "@/api/coupon";
 export default {
   name: "",
-  props: {},
+  props: {
+    itemData: {
+      type: Object,
+      default: []
+    }
+  },
   data() {
     return {};
   },
   computed: {},
   created() {},
-  methods: {},
+  methods: {
+    get_coupon(coupon_id) {
+      let coupon_params = {
+        coupon_id: coupon_id
+      };
+      COUPON.receive(coupon_params)
+        .then(res => {
+          this.$parent.init_data();
+        })
+        .finally(() => {})
+        .catch(res => {});
+    }
+  },
   components: {}
 };
 </script>
@@ -41,11 +61,12 @@ export default {
   align-items: center;
   padding: 15px;
   margin-top: 15px;
-  border: 1px solid #D8D8D8;
+  border: 1px solid #d8d8d8;
   border-radius: 8px;
-  &::before,&::after {
+  &::before,
+  &::after {
     position: absolute;
-    content: '';
+    content: "";
     display: block;
     height: 10px;
     background-color: #fff;
@@ -56,31 +77,30 @@ export default {
     // left: -5px;
     top: 50%;
     transform: translateY(-50%);
-  };
-  &::before{
+  }
+  &::before {
     border-right: 1px solid #d8d8d8;
     left: -5px;
   }
-  &::after{
+  &::after {
     border-left: 1px solid #d8d8d8;
     right: -5px;
   }
 }
 /* desc */
 .coupon-desc {
-  flex:1;
+  flex: 1;
   padding-right: 15px;
   h2 {
-    color: #D70E19;
-    font-weight: bold;  
-    padding-bottom: 5px;  
+    color: #d70e19;
+    font-weight: bold;
+    padding-bottom: 5px;
   }
   p {
-    color: #9B9B9B;
+    color: #9b9b9b;
     font-size: 10px;
     line-height: 15px;
   }
-
 }
 /* anniuzu */
 .coupon-control-box {

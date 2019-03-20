@@ -2,7 +2,7 @@
   <div class="cart-list"
     v-if="goodsData.length">
     <div class="total-cart-box">
-      <h2>Cart (9)</h2>
+      <h2>Cart ({{all_data_length}})</h2>
       <div class="head-select">
         <div class="icon-box"
           @click="toggle_checked_all(all_store_is_select)">
@@ -16,7 +16,7 @@
             srcset="">
         </div>
         <p class="total-select">
-          Select All Available Items (9)
+          Select All Available Items <span>({{all_data_length}})</span>
         </p>
       </div>
     </div>
@@ -67,6 +67,15 @@ export default {
         });
       }
       return temp_boolean;
+    },
+    all_data_length(){
+      let count = 0;
+      this.goodsData.forEach(item=>{
+        item.goods_list.forEach(item_min=>{
+          count+=1;
+        })
+      })
+      return count;
     }
   },
   methods: {

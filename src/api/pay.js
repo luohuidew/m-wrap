@@ -48,7 +48,7 @@ export default {
   pay_paypal(data={}) {
     data.token = token;
     return request({
-      url: 'pay/paypal?loading=yes',
+      url: 'cartpay/paypal?loading=yes',
       method: 'post',
       data: JSON.stringify(data),
     })

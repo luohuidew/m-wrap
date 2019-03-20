@@ -15,13 +15,13 @@
             :key="index"
             class="shipping-lists-item">
             <div class="shipping-desc">
-              <p>{{item.label}}</p>
+              <p>{{item.key_name}}</p>
               <p class="remark">{{item.desc}}</p>
             </div>
             <div class="shipping-price">
-              <span v-if="index===0"
-                class="color-red">{{item.price}}</span>
-              <span v-else>{{item.price}}</span>
+              <!-- <span v-if="index===0"
+                class="color-red">{{item.price}}</span> -->
+              <span>{{item.price_show}}</span>
             </div>
           </li>
         </ul>
@@ -37,31 +37,15 @@
 <script>
 export default {
   name: "",
-  props: {},
+  props: {
+    shippingData:{
+      type:Array,
+      default:[]
+    }
+  },
   data() {
     return {
-      shipping_lists: [
-        {
-          label: "Standard",
-          price: "Free Shipping Until April 23",
-          desc: "Estimated Delivery On 3-6 days"
-        },
-        {
-          label: "Standard",
-          price: "$6.99",
-          desc: "Estimated Delivery On 3-6 days"
-        },
-        {
-          label: "Premium",
-          price: "$10.00",
-          desc: "Estimated Delivery On 3-6 days"
-        },
-        {
-          label: "Express",
-          price: "$20.00",
-          desc: "Estimated Delivery On 1-2 days"
-        }
-      ]
+      shipping_lists: this.shippingData
     };
   },
   computed: {},

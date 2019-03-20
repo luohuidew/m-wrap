@@ -8,7 +8,7 @@
     <van-popup v-model="show_dialog"
       position="bottom"
       :overlay="true">
-      <shipping-dialog @close="show_dialog=false"></shipping-dialog>
+      <shipping-dialog :shipping-data="allData.shipment" @close="show_dialog=false"></shipping-dialog>
     </van-popup>
   </div>
 </template>
@@ -17,7 +17,12 @@
 import shippingDialog from "./components/shippingDialog";
 export default {
   name: "",
-  props: {},
+  props: {
+    allData:{
+      type:Object,
+
+    }
+  },
   data() {
     return {
       show_dialog: false

@@ -3,7 +3,8 @@
     <ul>
       <li class="close-coupon-get">
         <img src="/static/images/icon/normal/huise-close (2).png"
-          alt="" @click="close_dialog">
+          alt=""
+          @click="close_dialog">
       </li>
       <li class="coupon-page-title">
         <p>Enter Promo Code On Checkout Page To Save Money On Your Purchase</p>
@@ -14,8 +15,9 @@
           <span>Weget Coupon</span>
         </h2>
         <ul>
-          <li v-for="n in 5" :key="n">
-            <coupon-item></coupon-item>
+          <li v-for="(item) in lists_data"
+            :key="item.id">
+            <coupon-item :item-data="item"></coupon-item>
           </li>
         </ul>
       </li>
@@ -27,18 +29,40 @@
 </template>
 
 <script>
+import COUPON from "@/api/coupon";
 import couponItem from "./couponItem";
 export default {
   name: "",
   props: {},
   data() {
-    return {};
+    return {
+      lists_data: null,
+      show_coupon_select: false
+    };
   },
   computed: {},
-  created() {},
+  created() {
+    this.init_data();
+  },
   methods: {
-    close_dialog(){
-      this.$emit('close',null);
+    init_data() {
+      COUPON.getCouponList().then(res => {
+        this.lists_data = res.data;
+      });
+    },
+    get_coupon(coupon_id) {
+      let coupon_params = {
+        coupon_id: coupon_id
+      };
+      COUPON.receive(coupon_params)
+        .then(res => {
+          this.init_data();
+        })
+        .finally(() => {})
+        .catch(res => {});
+    },
+    close_dialog() {
+      this.$emit("close", null);
     }
   },
   components: {
