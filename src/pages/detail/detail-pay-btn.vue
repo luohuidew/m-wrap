@@ -18,18 +18,19 @@
       </span>
       <span>STORE</span>
     </a>
-    <a class="store-btn"
-      :class="{'cart-icon':goods_number}"
+    <!-- :class="{'cart-icon':this.$store.state.cart.goods_num}" -->
+    <!-- :class="{'animeted bounceIn':$store.state.cart.is_static}" src="/static/images/icon/header/H5-购物车@3x.png" -->
+    <!-- <a class="store-btn"
       href="javascript:;"
       @click="to_store(sku.store_id)">
       <span class="heart"
         :class="is_like===2?'active':''">
-        <img :class="{'animeted bounceIn':!goods_state}" src="/static/images/icon/header/H5-购物车@3x.png"
-          alt=""
+        <img alt=""
+          src="/static/images/icon/header/H5-购物车@3x.png"
           srcset="">
       </span>
       <span>CART</span>
-    </a>
+    </a> -->
     <!-- 1:团购参团
           2：开团
           act_type：act_type:免费兑换
@@ -165,7 +166,7 @@ export default {
       is_group: false,
       c_query: this.$route.query,
       /* 开团提示的弹框的额内容 */
-      recommend_group: undefined,
+      recommend_group: undefined
     };
   },
   computed: {

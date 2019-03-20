@@ -4,12 +4,12 @@
       <template v-if="req_data">
         <cart-list @change="get_list_data"
           :goods-data="req_data.goods"></cart-list>
-        <cart-expired></cart-expired>
+        <!-- <cart-expired></cart-expired> -->
       </template>
       <template v-else>
 
       </template>
-      <cart-guide></cart-guide>
+      <cart-guide v-if="req_data" :gui-data="req_data.like.data"></cart-guide>
     </div>
     <cart-footer v-if="req_data"
       :total-price="footer_data.total_data"
