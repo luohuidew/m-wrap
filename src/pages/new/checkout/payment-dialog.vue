@@ -55,7 +55,7 @@
     <div class="payment-button">
       <template v-if="is_https">
         <!--<accept v-show="is_select_pay===1"-->
-          <!--:order="orderData.order_summary_id"></accept>-->
+          <!--:order="orderData.pay_id"></accept>-->
         <p @click="acceptMethod" v-show="is_select_pay===1" class="accept_but">PAYMENT</p>
 
         <paypal v-show="is_select_pay===2"
@@ -67,7 +67,7 @@
       </template>
       <template v-else>
         <!--<accept-test v-show="is_select_pay===1"-->
-          <!--:orderSummaryId="orderData.order_summary_id"-->
+          <!--:orderSummaryId="orderData.pay_id"-->
           <!--@pay="pay_callback"></accept-test>-->
         <p @click="acceptTestMethod" v-show="is_select_pay===1" class="accept_but">PAYMENT TEST</p>
         <paypal-test v-show="is_select_pay===2"
@@ -91,7 +91,7 @@ export default {
   name: "",
   data() {
     return {
-      // is_select_pay: this.submitData.pay_type,
+      is_select_pay: this.isSelectPay,
       environment: "sandbox",
       token: "sandbox_4pnsrcb4_psz4rkjwr3r3kqpp",
       // token: null,
@@ -105,7 +105,7 @@ export default {
         return {}
       }
     },
-    is_select_pay: {
+    isSelectPay: {
       type: Number,
       default: 1
     }
@@ -125,11 +125,11 @@ export default {
   },
   methods: {
     acceptTestMethod() {
-      let url= location.origin + process.env.BASE_URL + "pay/pay.3.html?pay_id=" + this.orderData.order_summary_id + "&total=" + this.orderData.real_total_price.substring(1) + "&device_type=h5"
+      let url= location.origin + process.env.BASE_URL + "pay/pay.3.html?pay_id=" + this.orderData.pay_id + "&total=" + this.orderData.real_total_price.substring(1) + "&device_type=h5"
       location.replace(url)
     },
     acceptMethod() {
-      let url= location.origin + process.env.BASE_URL + "pay/pay_new.html?pay_id=" + this.orderData.order_summary_id + "&total=" + this.orderData.real_total_price.substring(1) + "&device_type=h5"
+      let url= location.origin + process.env.BASE_URL + "pay/pay_new.html?pay_id=" + this.orderData.pay_id + "&total=" + this.orderData.real_total_price.substring(1) + "&device_type=h5"
       location.replace(url)
     },
     init_data() {
@@ -159,7 +159,7 @@ export default {
       console.log(nonce);
       let params = {
         nonce: nonce,
-        pay_id: this.orderData.order_summary_id
+        pay_id: this.orderData.pay_id
       };
       api.pay_paypal(params).then(res => {
        this.pay_callback(res);
