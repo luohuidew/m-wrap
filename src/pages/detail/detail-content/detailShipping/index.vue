@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="detail-shipping"
-      @click="show_dialog=true">
-      <p>Free Shipping Until April 23</p>
-      <p class="remark">Estimated Delivery On 5-7days</p>
+      @click="show_detail_shipping">
+      <p>{{default_data.key_name}}</p>
+      <p class="remark">{{default_data.desc}}</p>
     </div>
-    <van-popup v-model="show_dialog"
+    <!-- <van-popup v-model="show_dialog"
       position="bottom"
       :overlay="true">
       <shipping-dialog :shipping-data="allData.shipment" @close="show_dialog=false"></shipping-dialog>
-    </van-popup>
+    </van-popup> -->
   </div>
 </template>
 
@@ -25,12 +25,17 @@ export default {
   },
   data() {
     return {
-      show_dialog: false
+      show_dialog: false,
+      default_data:this.allData.shipment[0]
     };
   },
   computed: {},
   created() {},
-  methods: {},
+  methods: {
+    show_detail_shipping(){
+      this.$emit('toggle',true);
+    }
+  },
   components: {
     shippingDialog
   }

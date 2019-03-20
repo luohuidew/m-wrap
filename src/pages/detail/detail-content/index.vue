@@ -8,8 +8,8 @@
         <!-- <detail-group :group-data="group"
           @change="join_group"></detail-group> -->
         <section class="select-box">
-          <detail-coupon></detail-coupon>
-          <detail-shipping :all-data="all_data"></detail-shipping>
+          <detail-coupon @toggle="show_coupon=true"></detail-coupon>
+          <detail-shipping  @toggle="show_shipping=true" :all-data="all_data"></detail-shipping>
           <detail-attr v-if="cur_goods"
             :sku="sku"
             :goods="goods"
@@ -57,6 +57,16 @@
     <share-app :token="share_token"
       v-if="share_token"></share-app>
     <!-- <share-app v-else></share-app> -->
+     <van-popup v-model="show_coupon"
+      position="bottom"
+      :overlay="true">
+      <detail-coupon-dialog @close="show_coupon=false"></detail-coupon-dialog>
+    </van-popup>
+     <van-popup v-model="show_shipping"
+      position="bottom"
+      :overlay="true">
+      <shipping-dialog v-if="all_data" :shipping-data="all_data.shipment" @close="show_shipping=false"></shipping-dialog>
+    </van-popup>
   </div>
 </template>
 
@@ -76,6 +86,8 @@ import shipping from "./shipping.vue";
 import review from "./review.vue";
 /* jianjiagouweuche de zujian  */
 import attrDialog from "@/components/dialog/attr-dialog";
+import detailCouponDialog from "./detailCoupon/components/detailCouponDialog";
+import shippingDialog from "./detailShipping/components/shippingDialog";
 // import detailWelog from "./detail-welog.vue";
 import similarBrand from "./similar-brand";
 import similarCate from "./similar-cate";
@@ -99,6 +111,8 @@ export default {
   data() {
     return {
       show_dialog: false,
+      show_shipping:false,
+      show_coupon:false,
       all_data: undefined,
       goods: undefined,
       group: undefined,
@@ -265,6 +279,8 @@ export default {
     similarCate,
     detailPayBtn,
     attrDialog,
+    detailCouponDialog,
+    shippingDialog,
     shareApp
   }
 };

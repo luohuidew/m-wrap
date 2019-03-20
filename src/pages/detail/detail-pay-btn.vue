@@ -12,9 +12,23 @@
       @click="to_store(sku.store_id)">
       <span class="heart"
         :class="is_like===2?'active':''">
+        <img src="/static/img/icon/Group 34@2x.png"
+          alt=""
+          srcset="">
       </span>
       <span>STORE</span>
-      <!-- <span>{{sku.like_num}}LIKE</span> -->
+    </a>
+    <a class="store-btn"
+      :class="{'cart-icon':goods_number}"
+      href="javascript:;"
+      @click="to_store(sku.store_id)">
+      <span class="heart"
+        :class="is_like===2?'active':''">
+        <img :class="{'animeted bounceIn':!goods_state}" src="/static/images/icon/header/H5-购物车@3x.png"
+          alt=""
+          srcset="">
+      </span>
+      <span>CART</span>
     </a>
     <!-- 1:团购参团
           2：开团
@@ -151,7 +165,7 @@ export default {
       is_group: false,
       c_query: this.$route.query,
       /* 开团提示的弹框的额内容 */
-      recommend_group: undefined
+      recommend_group: undefined,
     };
   },
   computed: {
@@ -177,6 +191,12 @@ export default {
           ? this.$route.query.group_id
           : undefined
       };
+    },
+    goods_number() {
+      return this.$store.state.cart.goods_num;
+    },
+    goods_state() {
+      return this.$store.state.cart.is_static;
     }
   },
   props: ["goods", "sku", "attrList", "curGoods", "groupMainUser"],
@@ -285,7 +305,7 @@ export default {
           this.$router.push(redirect_params);
         } else {
           // this.show_dialog = true;
-          this.$emit('show_dialog_show');
+          this.$emit("show_dialog_show");
         }
       }
 
@@ -320,6 +340,9 @@ export default {
   position: relative;
   font-size: 18px;
   display: flex;
+  z-index: 0;
+  height: 50px;
+  border-top: 1px solid #f3f3f3;
   .fee-per {
     display: flex;
     justify-content: space-between;
@@ -422,15 +445,23 @@ export default {
     align-items: center;
     justify-content: center;
     height: 50px;
-    width: 120px;
+    width: 70px;
     color: #000;
     font-size: 14px;
+    // padding: 6px 0;
+    font-size: 12px;
     .heart {
-      width: 40px;
-      height: 40px;
-      background: url("/static/img/icon/Group 34@2x.png") no-repeat center
-        center;
-      background-size: auto 70%;
+      // width: 40px;
+      // height: 40px;
+      img {
+        height: 20px;
+        width: 20px;
+        object-fit: contain;
+        // width: auto;
+      }
+      // background: url("/static/img/icon/Group 34@2x.png") no-repeat center
+      //   center;
+      // background-size: auto 80%;
     }
     // .heart.active {
     //   width: 40px;
@@ -438,6 +469,23 @@ export default {
     //   background: url("/static/img/icon/收藏后.png") no-repeat center center;
     //   background-size: auto 70%;
     // }
+  }
+  /*  */
+  .cart-icon {
+    position: relative;
+    &::before {
+      display: block;
+      content: "";
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background-color: #d70e19;
+      position: absolute;
+      right: -4px;
+      top: 0%;
+      color: #d70e19;
+      font-weight: bold;
+    }
   }
   .direct-buy {
     background-color: #000;
