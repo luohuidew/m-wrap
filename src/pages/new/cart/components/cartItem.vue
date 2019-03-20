@@ -58,11 +58,19 @@
               <span> {{item.attr_str}}</span>
             </div>
             <div class="card-count">
-              <span class="price">${{(item.goods_price * (item.count-0)).toFixed(2)}}</span>
+              <span class="price">${{item.goods_price}}</span>
               <span class="account-change">
-                <i @click="account(-1,index)">-</i>
+                <i @click="account(-1,index)">
+                  <img src="/static/images/icon/cart/减@3x.png"
+                    alt=""
+                    srcset="">
+                </i>
                 <span>{{item.count}}</span>
-                <i @click="account(1,index)">+</i>
+                <i @click="account(1,index)">
+                  <img src="/static/images/icon/cart/加好@3x.png"
+                    alt=""
+                    srcset="">
+                </i>
               </span>
             </div>
           </div>
@@ -179,7 +187,7 @@ export default {
       this.$parent.total_data.cart_ids.pop(item.only);
       // debugger
     },
-    toggle_checked(cur_checked=this.checked_store) {
+    toggle_checked(cur_checked = this.checked_store) {
       let temp_lists = this.cur_lists;
       temp_lists.forEach(item => {
         if (!cur_checked) {
@@ -280,6 +288,11 @@ export default {
       display: flex;
       align-items: center;
       i {
+      }
+      img {
+        height: 10px;
+        width: 10px;
+        margin: 0 8px;
       }
       span {
         height: 24px;
