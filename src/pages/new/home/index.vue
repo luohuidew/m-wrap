@@ -7,6 +7,8 @@
       <p>ONE TIME shipping fee PER day</p>
       <i></i>
     </div>
+    <!--<img src="@/../static/img/log2.png">-->
+    <!--<img src="/static/img/icon/Artboard%202.png">-->
     <banner :banner-data="nav_data.banner"></banner>
     <category :category-data="nav_data.categoryList"></category>
     <hot :hot-data="nav_data.newLeftRightData"></hot>
