@@ -272,9 +272,9 @@ export default {
     font-size: 14px;
     span {
       padding-right: 30px;
-      background: url("/static/images/icon/cart/分类 copy 2.png") no-repeat
-        center right;
-      background-size: 18px auto;
+      // background: url("/static/images/icon/cart/分类 copy 2.png") no-repeat
+      //   center right;
+      // background-size: 18px auto;
     }
   }
   .card-count {
