@@ -34,7 +34,7 @@
     <van-popup v-model="show_pay_methods"
                position="bottom"
                :overlay="true">
-      <payment-dialog :order-data = "res_create_data" :is_select_pay = change_select_pay
+      <payment-dialog :order-data = "res_create_data" :isSelectPay = change_select_pay
                       @close="payClose" ></payment-dialog>
     </van-popup>
   </div>
@@ -91,7 +91,7 @@ export default {
         path: "/callback",
         query: {
           error: 'Payment cancellation',
-          pay_id: this.res_create_data.order_summary_id
+          pay_id: this.res_create_data.pay_id
         }
       });
 
@@ -229,7 +229,7 @@ export default {
           this.$router.replace({
             path: "/callback",
             query: {
-              pay_id: res.data.order_summary_id
+              pay_id: res.data.pay_id
             }
           });
         } else {
