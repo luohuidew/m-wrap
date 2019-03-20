@@ -79,12 +79,7 @@
         </div>
       </a>
     </template>
-    <attr-dialog v-if="show_dialog"
-      @close="close_emity"
-      :sku="sku"
-      :goods="goods"
-      :attr-list="attrList"
-      :cur-goods="curGoods"></attr-dialog>
+
     <temp-dialog v-if="show_dialog_tips"
       @close="close_tips(0)">
       <template slot="tips">
@@ -289,7 +284,8 @@ export default {
           };
           this.$router.push(redirect_params);
         } else {
-          this.show_dialog = true;
+          // this.show_dialog = true;
+          this.$emit('show_dialog_show');
         }
       }
 

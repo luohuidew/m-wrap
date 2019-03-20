@@ -118,6 +118,8 @@ export default {
 .page-body {
   /* flex:1; */
   height: calc(100% - 55px);
+  /*overflow-y: scroll;*/
+  /*overflow-scrolling: touch;*/
 }
 .in-app {
   height: 100%;

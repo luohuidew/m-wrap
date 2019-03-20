@@ -1,15 +1,15 @@
 <template>
   <div class="detail-attr">
     <div class="content"
-      @click="show_dialog=true">
+      @click="$emit('show_dialog_show')">
       <p>Color,Size</p>
     </div>
-    <attr-dialog v-if="show_dialog"
-      @close="show_dialog = false"
-      :sku="sku"
-      :goods="goods"
-      :attr-list="attrList"
-      :cur-goods="curGoods"></attr-dialog>
+    <!--<attr-dialog v-if="show_dialog"-->
+      <!--@close="show_dialog = false"-->
+      <!--:sku="sku"-->
+      <!--:goods="goods"-->
+      <!--:attr-list="attrList"-->
+      <!--:cur-goods="curGoods"></attr-dialog>-->
   </div>
 </template>
 

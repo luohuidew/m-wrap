@@ -141,16 +141,15 @@ export default {
       this.$emit("close", null);
     },
     pay_callback(res){
+      sessionStorage.checkoutScroll = 0;
       if(res.code===1000){
         let url_params={
           path:'/callback',
           query:{
-            order_no:res.data.order_no
+            pay_id:res.data.pay_id
           }
         };
         this.$router.replace(url_params);
-      }else {
-
       }
     },
     // create_order(type) {

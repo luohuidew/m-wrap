@@ -13,6 +13,7 @@
           <detail-attr v-if="cur_goods"
             :sku="sku"
             :goods="goods"
+            v-on:show_dialog_show = 'show_dialog = true'
             :cur-goods="cur_goods"
             :attr-list="attr_list"></detail-attr>
         </section>
@@ -38,7 +39,15 @@
       :attr-list="attr_list"
       :cur_group_id="cur_group_id"
       ref="change_btn"
+       v-on:show_dialog_show = 'show_dialog = true'
       class="btn-detail"></detail-pay-btn>
+    <attr-dialog v-if="show_dialog"
+                 @close="close_emity"
+                 :sku="sku"
+                 :goods="goods"
+                 :attr-list="attr_list"
+                 :cur-goods="cur_goods">
+    </attr-dialog>
     <!-- <attr-dialog v-if="show_dialog"
       @close="close_emity"
       :sku="sku"
@@ -89,6 +98,7 @@ export default {
   },
   data() {
     return {
+      show_dialog: false,
       all_data: undefined,
       goods: undefined,
       group: undefined,
@@ -141,6 +151,9 @@ export default {
     // }
   },
   methods: {
+    close_emity() {
+      this.show_dialog = false;
+    },
     init_data() {
       /* you hsare-tomken进这里 */
       let share_token = this.$route.query.share_token;
