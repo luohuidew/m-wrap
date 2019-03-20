@@ -24,12 +24,12 @@
     <div class="total-box">
       <ul class="store-account">
         <li>
-          <span>{{store_info.comment_rate}}</span>
-          <span>Positive Feedback</span>
+          <span>{{store_info.weekend_num}}</span>
+          <span>New Arrived This Wee</span>
         </li>
         <li>
-          <span>{{store_info.bought_count}}</span>
-          <span>Bought</span>
+          <span>{{store_info.total_num}}</span>
+          <span>Products</span>
         </li>
       </ul>
     </div>

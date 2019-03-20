@@ -24,12 +24,12 @@
     </div>
     <ul class="store-account">
       <li>
-        <span>{{item.comment_rate}}</span>
-        <span>Positive Feedback</span>
+        <span>{{item.weekend_num}}</span>
+        <span>New Arrived This Wee</span>
       </li>
       <li>
-        <span>{{item.bought_count}}</span>
-        <span>Bought</span>
+        <span>{{item.total_num}}</span>
+        <span>Products</span>
       </li>
     </ul>
   </div>

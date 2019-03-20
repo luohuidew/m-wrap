@@ -2,11 +2,11 @@
   <div id="weget"
     v-scroll="get_more_data">
     <!-- <home-header></home-header> -->
-    <div class="fee-per"
-      @click.stop="to_fee">
-      <p>ONE TIME shipping fee PER day</p>
-      <i></i>
-    </div>
+    <!--<div class="fee-per"-->
+      <!--@click.stop="to_fee">-->
+      <!--<p>ONE TIME shipping fee PER day</p>-->
+      <!--<i></i>-->
+    <!--</div>-->
     <!--<img src="@/../static/img/log2.png">-->
     <!--<img src="/static/img/icon/Artboard%202.png">-->
     <banner :banner-data="nav_data.banner"></banner>
