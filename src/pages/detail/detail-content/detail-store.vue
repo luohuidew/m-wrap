@@ -19,7 +19,7 @@
       </p>
       <p class="store-btn">
         <a href="javascript:;"
-          @click="to_store(item.store_id)">STORE</a>
+          @click="to_store(item.store_id)">Visit Store</a>
       </p>
     </div>
     <ul class="store-account">

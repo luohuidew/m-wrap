@@ -4,19 +4,27 @@
     <div class="total-cart-box">
       <h2>Cart ({{all_data_length}})</h2>
       <div class="head-select">
-        <div class="icon-box"
-          @click="toggle_checked_all(all_store_is_select)">
-          <img v-if="all_store_is_select"
-            src="/static/images/icon/cart/多选 选中@3x.png"
-            alt=""
-            srcset="">
-          <img v-else
-            src="/static/images/icon/cart/多选 未选中@3x.png"
-            alt=""
-            srcset="">
+        <div class="select-box">
+          <div class="icon-box"
+            @click="toggle_checked_all(all_store_is_select)">
+            <img v-if="all_store_is_select"
+              src="/static/images/icon/cart/多选 选中@3x.png"
+              alt=""
+              srcset="">
+            <img v-else
+              src="/static/images/icon/cart/多选 未选中@3x.png"
+              alt=""
+              srcset="">
+          </div>
+          <p class="total-select">
+            Select All Available Items <span>({{all_data_length}})</span>
+          </p>
         </div>
-        <p class="total-select">
-          Select All Available Items <span>({{all_data_length}})</span>
+        <p class="remove"
+          @click="remove_cart_items(total_data.cart_ids)">
+          <img src="/static/images/icon/cart/H5 删除 grey@3x.png"
+            alt=""
+            srcset="">
         </p>
       </div>
     </div>
@@ -33,6 +41,7 @@
 
 <script>
 import cartItem from "./cartItem";
+import CART from "@/api/cart";
 export default {
   name: "",
   data() {
@@ -68,13 +77,13 @@ export default {
       }
       return temp_boolean;
     },
-    all_data_length(){
+    all_data_length() {
       let count = 0;
-      this.goodsData.forEach(item=>{
-        item.goods_list.forEach(item_min=>{
-          count+=1;
-        })
-      })
+      this.goodsData.forEach(item => {
+        item.goods_list.forEach(item_min => {
+          count += 1;
+        });
+      });
       return count;
     }
   },
@@ -90,10 +99,24 @@ export default {
       // debugger;
       this.$emit("change", temp);
     },
-    toggle_checked_all(){
-      this.$children.forEach(item=>{
+    toggle_checked_all() {
+      this.$children.forEach(item => {
         item.toggle_checked();
-      })
+      });
+    },
+    remove_cart_items(cartIds = []) {
+      let params = {
+        only: cartIds
+      };
+      CART.delShopCartGood(params)
+        .then(res => {
+          window.location.reload();
+        })
+        .then(res => {
+          CART.shopCartList().then(res => {
+            this.$store.commit("SET_CATR", res.data.goods.length);
+          });
+        });
     }
   },
   components: {
@@ -116,6 +139,17 @@ export default {
 /*  */
 .head-select {
   display: flex;
+  justify-content: space-between;
+  .select-box {
+    display: flex;
+  }
+  .remove {
+    align-self: flex-end;
+    img {
+      height: 18px;
+      width: 18px;
+    }
+  }
 }
 .cart-lists {
   padding: 5px 20px;

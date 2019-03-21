@@ -14,7 +14,7 @@ export default {
       component: () =>
         import('@/pages/new/cart/cart'),
       meta: {
-        title: '',
+        title: 'cart',
         keepAlive: false,
         fullScreen:true
       }

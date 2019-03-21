@@ -110,7 +110,7 @@ export default {
               cart_ids: this.totalPrice.cart_ids.toString()
             }
           };
-          if (path_params.query.cart_ids) {
+          if (this.totalPrice.cart_ids.toString()) {
             // this.$router.push(path_params);
             window.location.href = `${window.location.origin}/checkout?cart_ids=${path_params.query.cart_ids}`;
           }

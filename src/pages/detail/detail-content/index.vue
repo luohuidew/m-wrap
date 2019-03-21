@@ -22,7 +22,7 @@
         <detail-store :item="store_info"></detail-store>
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
-        <shipping :sku-data="sku"></shipping>
+        <!-- <shipping :sku-data="sku"></shipping> -->
         <review v-if="review"
           :review="review"></review>
         <!-- <similar-brand v-if="same_brand.data"

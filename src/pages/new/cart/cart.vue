@@ -1,15 +1,21 @@
 <template>
   <div class="cart-layout">
     <div class="scroll-lists">
-      <template v-if="req_data">
+      <template v-if="req_data.goods.length">
         <cart-list @change="get_list_data"
           :goods-data="req_data.goods"></cart-list>
         <!-- <cart-expired></cart-expired> -->
       </template>
       <template v-else>
-        
+        <div class="no-cart-item">
+          <img src="/static/images/icon/cart/cart-gray@3x.png"
+            alt=""
+            srcset="">
+          <p>Your Cart Is Empty</p>
+        </div>
       </template>
-      <cart-guide v-if="req_data" :gui-data="req_data.like.data"></cart-guide>
+      <cart-guide v-if="req_data"
+        :gui-data="req_data.like.data"></cart-guide>
     </div>
     <cart-footer v-if="req_data"
       :total-price="footer_data.total_data"
@@ -44,7 +50,9 @@ export default {
   computed: {},
   methods: {
     init_data() {
+      // debugger
       CART.shopCartList().then(res => {
+        // this.req_data = null;
         this.req_data = res.data;
       });
     },
@@ -79,6 +87,25 @@ export default {
   height: calc(100% - 90px);
   overflow: auto;
 }
+/*  */
+.no-cart-item {
+  background: #f3f3f3;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 90px;
+    height: auto;
+  }
+  p {
+    padding-top: 20px;
+    font-size: 16px;
+    color: #9b9b9b;
+  }
+}
+
 /* 优惠券领取入口 */
 .footer-buy {
   height: 90px;

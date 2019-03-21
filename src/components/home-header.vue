@@ -32,10 +32,13 @@
         </router-link>
       </template>
       <router-link to="/cart">
-        <img src="/static/images/icon/header/H5-购物车@3x.png"
-          alt=""
-          srcset="">
-        <p>Cart</p>
+        <div class="cart-box"
+          :class="{'have-goods':storeCart.goods_num}">
+          <img :class="{'animated bounceIn':!isStatic}" src="/static/images/icon/header/H5-购物车@3x.png"
+            alt=""
+            srcset="">
+          <p>Cart</p>
+        </div>
       </router-link>
     </li>
   </ul>
@@ -43,21 +46,35 @@
 
 <script>
 import api from "@/api/user";
+import CART from "@/api/cart";
 export default {
   name: "",
   data() {
     return {
-      user_info: null
+      user_info: null,
+      isStatic:true
     };
   },
   created() {
     this.init_user();
+    this.init_cart();
   },
   mounted() {},
+  watch:{
+    storeCart(){
+      this.isStatic = false;
+      setTimeout(()=>{
+        this.isStatic = true;
+      },1000)
+    }
+  },
   computed: {
     hove_token() {
       console.log(this.$store.state.token);
       return this.$store.state.token;
+    },
+    storeCart() {
+      return this.$store.state.cart;
     }
   },
   methods: {
@@ -69,6 +86,11 @@ export default {
           // setToken(res.data.token);
         });
       }
+    },
+    init_cart() {
+      CART.shopCartList().then(res => {
+        this.$store.commit("SET_CATR", res.data.goods.length);
+      });
     }
   },
   components: {}
@@ -107,6 +129,20 @@ p {
   img {
     width: auto;
     height: 36px;
+  }
+}
+/*  */
+.have-goods {
+  &::before{
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #D70E19;
   }
 }
 </style>

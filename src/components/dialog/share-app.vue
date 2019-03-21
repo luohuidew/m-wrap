@@ -48,7 +48,10 @@ export default {
           this.to_app =
             "https://itunes.apple.com/us/app/weget-mall/id1439887303?mt=8";
         }
-      } else {
+      } else if(isAndroid){
+         this.to_app =
+            "https://play.google.com/store/apps/details?id=com.weget.www";
+      }else {
         this.to_app = "/";
       }
     }
