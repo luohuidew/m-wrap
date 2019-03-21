@@ -7,9 +7,7 @@
     </div> -->
     <ul class="coupon-list">
       <template v-if="coupon_list.length">
-
-        <li
-          class="coupon-item"
+        <li class="coupon-item"
           v-for="(item,index) in coupon_list"
           :key="index"
           :class="item.id===is_checked?'active':''"
@@ -18,6 +16,14 @@
           <p class="coupon-desc">{{item.desc}}</p>
           <p class="coupon-time">Expires on {{item.end_time | dateServer}} </p>
         </li>
+      </template>
+      <template v-else>
+        <div class="no-coupon">
+          <img src="/static/images/icon/normal/wemall_noData_coupon_icon@3x.png"
+            alt=""
+            srcset="">
+          <p>It is empty here ...</p>
+        </div>
       </template>
     </ul>
     <div class="done-btn">
@@ -45,7 +51,7 @@ export default {
   computed: {},
   methods: {
     go_back(item) {
-      if(item) {
+      if (item) {
         this.$store.state.order_detail.coupon = item;
         this.$store.state.order_detail.is_selected_couponid = item.id;
       }
@@ -125,6 +131,23 @@ export default {
     font-weight: 300;
     color: rgba(137, 137, 137, 1);
     line-height: 12px;
+  }
+  .no-coupon {
+    background: #f3f3f3;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 90px;
+      height: auto;
+    }
+    p {
+      padding-top: 20px;
+      font-size: 16px;
+      color: #9b9b9b;
+    }
   }
 }
 .coupon-item {

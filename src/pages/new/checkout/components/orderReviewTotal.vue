@@ -1,6 +1,7 @@
 <template>
   <ul class="coupon-code-box">
-    <li class="select-shipping" @click="to_shipping()">
+    <li class="select-shipping"
+      @click="to_shipping()">
       <div>
         <p class="shipping-title">{{dain_ship_method.key_name}}</p>
         <p>
@@ -14,7 +15,8 @@
         <input type="text"
           v-model="codes"
           placeholder="Enter Promo Code">
-        <button @click="applyCode(codes)">Apply</button>
+        <button :class="{'no-select':!codes}"
+          @click="applyCode(codes)">Apply</button>
       </div>
     </li>
     <li class="code-tips-box">
@@ -46,16 +48,16 @@ export default {
   props: {
     totalPrice: {
       type: Object,
-      default: function () {
-        return {}
+      default: function() {
+        return {};
       }
     },
     store_updata_price: {
       type: Object,
-      default:function () {
+      default: function() {
         return {
           store_code_info: {}
-        }
+        };
       }
     }
   },
@@ -76,42 +78,41 @@ export default {
         this.defaulttotalPrice.total = cur.total;
       },
       deep: true
-    },
+    }
   },
   created() {
-    let default_key  = this.defaulttotalPrice.ship_method.default;
+    let default_key = this.defaulttotalPrice.ship_method.default;
     let list = this.defaulttotalPrice.ship_method.list;
     if (list.length === 0) return;
-    let defult_select = list.filter((item) => {
-      return item.key === default_key
-    })
-    this.dain_ship_method = defult_select[0];  // 默认的快递方式
+    let defult_select = list.filter(item => {
+      return item.key === default_key;
+    });
+    this.dain_ship_method = defult_select[0]; // 默认的快递方式
     let delivery = this.$store.state.order_detail.delivery;
-    delivery.forEach((item) => {
+    delivery.forEach(item => {
       if (item.store_id === this.defaulttotalPrice.store_id) {
         this.dain_ship_method = item.item;
       }
-    })
-
+    });
   },
   methods: {
     applyCode(val) {
-      if(val === '') return;
+      if (val === "") return;
       let clock = true;
       let applyCode = this.$store.state.order_detail.applyCode;
-      applyCode.forEach((item) => {
+      applyCode.forEach(item => {
         if (item.store_id === this.defaulttotalPrice.store_id) {
           item.code_number = val;
           clock = false;
         }
-      })
-      if(clock) {
+      });
+      if (clock) {
         applyCode.push({
           store_id: this.defaulttotalPrice.store_id,
           code_number: val
-        })
+        });
       }
-      this.$emit('applyCode');
+      this.$emit("applyCode");
     },
     to_shipping() {
       this.$store.state.info_lists.lists = this.defaulttotalPrice.ship_method.list;
@@ -120,7 +121,7 @@ export default {
         path: "/delivery"
       };
       this.$router.push(params);
-    },
+    }
   },
   components: {}
 };
@@ -158,6 +159,10 @@ $border_1px: 1px solid #f3f3f3;
       border: 0;
       color: #fff;
       border-radius: 12px;
+    }
+    .no-select {
+       background: #f3f3f3;
+       color: #9b9b9b;
     }
   }
 }
