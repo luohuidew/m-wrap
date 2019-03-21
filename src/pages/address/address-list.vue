@@ -8,9 +8,9 @@
     <ul class="address-content">
       <li v-for="(item,index) in address_lists"
         :key="index"
-        @click="is_selected = index">
+        @click="address_change(item)">
         <div class="address_radio">
-          <img v-if="is_selected===index"
+          <img v-if="is_selected=== item.id"
             src="/static/img/icon/选择红.png">
           <img v-else
             src="/static/img/icon/选择 灰.png">
@@ -39,13 +39,13 @@
     </ul>
     <div class="add-btn">
       <a href="javascript:;"
-        @click="to_pay(is_selected)">DONE</a>
+        @click="to_pay()">DONE</a>
     </div>
   </div>
 </template>
 
 <script>
-import address from "@/api/address";
+import addressApi from "@/api/address";
 import address_edit from "./address_edit";
 export default {
   name: "",
@@ -54,6 +54,7 @@ export default {
       is_selected: -1,
       is_editor: false,
       address: {
+        cur_address: {},
         first_name: "",
         last_name: "",
         address1: "",
@@ -73,45 +74,29 @@ export default {
   mounted() {},
   computed: {},
   methods: {
-    selected_card(add_id, index) {
-      this.is_selected = index;
-      let data = add_id;
-      this.$emit("change", data);
-    },
     init_address() {
-      this.data_edit = this.$route.query.index;
-      address.address_list().then(res => {
-        this.is_selected = this.$store.state.order_detail.is_selected_address;
+      addressApi.address_list().then(res => {
+        this.is_selected = this.$route.query.id;
         this.address_lists = res.data;
-        this.address_lists.forEach((item, index) => {
-
-        });
       });
     },
     save_address() {
       let params = this.address;
-      address.address_save(params).then(res => {
+      addressApi.address_save(params).then(res => {
         this.is_editor = !this.is_editor;
         this.init_address();
       });
     },
-    to_pay(index) {
-      let cur_address = this.address_lists[index];
-      // if (cur_address) {
-      //   if (this.$store.state.order_detail.address) {
-      //     if (cur_address.id !== this.$store.state.order_detail.address.id) {
-      //       this.$store.state.order_detail.change_address = true;
-      //     }
-      //   }else {
-      //       this.$store.state.order_detail.change_address = true;
-      //   }
-      // }
-      this.$store.state.order_detail.address = cur_address;
-      this.$store.state.order_detail.is_selected_address = index;
+    to_pay() {
+      this.$store.state.order_detail.address = this.cur_address;
+      // this.$store.state.order_detail.is_selected_address = index;
       this.$router.go(-1);
     },
+    address_change(item) {
+      this.cur_address = item;
+      this.is_selected = item.id;
+    },
     to_address_edit(index) {
-      console.log(index);
       this.$router.push({
         path: "/add_address",
         query: {

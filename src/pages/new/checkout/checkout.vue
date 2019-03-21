@@ -134,8 +134,6 @@ export default {
     init_select_info() {
       /* 通过store获取的数据在下，优先级别高 */
       let order_detail = this.$store.state.order_detail;
-      // console.log(order_detail);
-        console.log(this.$store.state.order_detail, 323232);
       if (order_detail.address.id) {
         this.address_item = order_detail.address;
       }
@@ -216,7 +214,8 @@ export default {
    },
     to_address() {
       let params = {
-        path: "/address"
+        path: "/address",
+        query: {id: this.address_item.id}
       };
       this.$router.push(params);
     },
