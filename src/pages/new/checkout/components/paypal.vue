@@ -20,7 +20,7 @@ export default {
     },
     // https://developers.braintreepayments.com/guides/paypal/vault/javascript/v3
     token: {
-      default: null,
+      default: '',
       type: String
     },
     // https://developer.paypal.com/docs/checkout/how-to/customize-button/#supported-locales
@@ -43,8 +43,8 @@ export default {
     }
   },
   watch: {
-    token(cur, old) {
-      // this.initButton(cur);
+    token(cur) {
+      this.initButton(cur);
     }
   },
   mounted() {

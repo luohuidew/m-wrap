@@ -43,8 +43,8 @@ export default {
     }
   },
   watch: {
-    token(cur, old) {
-      // this.initButton(cur);
+    token(cur) {
+      this.initButton(cur);
     }
   },
   mounted() {

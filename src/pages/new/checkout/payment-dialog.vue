@@ -54,10 +54,7 @@
     </ul>
     <div class="payment-button">
       <template v-if="is_https">
-        <!--<accept v-show="is_select_pay===1"-->
-          <!--:order="orderData.pay_id"></accept>-->
         <p @click="acceptMethod" v-show="is_select_pay===1" class="accept_but">PAYMENT</p>
-
         <paypal v-show="is_select_pay===2"
           :token="token"
           env="production"
@@ -66,9 +63,6 @@
           v-on:canceled="onCancel"></paypal>
       </template>
       <template v-else>
-        <!--<accept-test v-show="is_select_pay===1"-->
-          <!--:orderSummaryId="orderData.pay_id"-->
-          <!--@pay="pay_callback"></accept-test>-->
         <p @click="acceptTestMethod" v-show="is_select_pay===1" class="accept_but">PAYMENT TEST</p>
         <paypal-test v-show="is_select_pay===2"
           :token="token"
@@ -93,8 +87,7 @@ export default {
     return {
       is_select_pay: this.isSelectPay,
       environment: "sandbox",
-      token: "sandbox_4pnsrcb4_psz4rkjwr3r3kqpp",
-      // token: null,
+      token: 'undefined',
       locale: "en_US"
     };
   },
