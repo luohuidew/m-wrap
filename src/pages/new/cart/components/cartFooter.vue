@@ -111,8 +111,8 @@ export default {
             }
           };
           if (this.totalPrice.cart_ids.toString()) {
-            // this.$router.push(path_params);
-            window.location.href = `${window.location.origin}/checkout?cart_ids=${path_params.query.cart_ids}`;
+            this.$router.push(path_params);
+            // window.location.href = `${window.location.origin}/checkout?cart_ids=${path_params.query.cart_ids}`;
           }
         })
         .catch(res => {
