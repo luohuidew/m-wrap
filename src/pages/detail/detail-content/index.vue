@@ -8,12 +8,14 @@
         <!-- <detail-group :group-data="group"
           @change="join_group"></detail-group> -->
         <section class="select-box">
-          <detail-coupon @toggle="show_coupon=true"></detail-coupon>
-          <detail-shipping  @toggle="show_shipping=true" :all-data="all_data"></detail-shipping>
+          <detail-coupon v-if="all_data.is_show_coupon===1"
+            @toggle="show_coupon=true"></detail-coupon>
+          <detail-shipping @toggle="show_shipping=true"
+            :all-data="all_data"></detail-shipping>
           <detail-attr v-if="cur_goods"
             :sku="sku"
             :goods="goods"
-            v-on:show_dialog_show = 'show_dialog = true'
+            v-on:show_dialog_show='show_dialog = true'
             :cur-goods="cur_goods"
             :attr-list="attr_list"></detail-attr>
         </section>
@@ -39,14 +41,14 @@
       :attr-list="attr_list"
       :cur_group_id="cur_group_id"
       ref="change_btn"
-       v-on:show_dialog_show = 'show_dialog = true'
+      v-on:show_dialog_show='show_dialog = true'
       class="btn-detail"></detail-pay-btn>
     <attr-dialog v-if="show_dialog"
-                 @close="close_emity"
-                 :sku="sku"
-                 :goods="goods"
-                 :attr-list="attr_list"
-                 :cur-goods="cur_goods">
+      @close="close_emity"
+      :sku="sku"
+      :goods="goods"
+      :attr-list="attr_list"
+      :cur-goods="cur_goods">
     </attr-dialog>
     <!-- <attr-dialog v-if="show_dialog"
       @close="close_emity"
@@ -57,15 +59,17 @@
     <share-app :token="share_token"
       v-if="share_token"></share-app>
     <!-- <share-app v-else></share-app> -->
-     <van-popup v-model="show_coupon"
+    <van-popup v-model="show_coupon"
       position="bottom"
       :overlay="true">
       <detail-coupon-dialog @close="show_coupon=false"></detail-coupon-dialog>
     </van-popup>
-     <van-popup v-model="show_shipping"
+    <van-popup v-model="show_shipping"
       position="bottom"
       :overlay="true">
-      <shipping-dialog v-if="all_data" :shipping-data="all_data.shipment" @close="show_shipping=false"></shipping-dialog>
+      <shipping-dialog v-if="all_data"
+        :shipping-data="all_data.shipment"
+        @close="show_shipping=false"></shipping-dialog>
     </van-popup>
   </div>
 </template>
@@ -111,8 +115,8 @@ export default {
   data() {
     return {
       show_dialog: false,
-      show_shipping:false,
-      show_coupon:false,
+      show_shipping: false,
+      show_coupon: false,
       all_data: undefined,
       goods: undefined,
       group: undefined,
