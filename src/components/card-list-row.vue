@@ -27,7 +27,7 @@
       </div>
       <p class="pay-price">
         <span class="current">
-          ${{sku.group_price}}
+          ${{sku.alone_price}}
         </span>
         <!-- <span class="old">
           ${{sku.market_price}}

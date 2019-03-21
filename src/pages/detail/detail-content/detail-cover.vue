@@ -24,7 +24,7 @@
       <div class="price-box">
         <p class="price"
           v-if="cur_goods">
-          <span class="cur-price">${{cur_goods.group_price}}</span>
+          <span class="cur-price">${{cur_goods.alone_price}}</span>
           <span class="old-price" v-if="cur_goods.crossed_price">${{cur_goods.crossed_price}}</span>
         </p>
         <p class="like-number">
