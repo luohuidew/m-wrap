@@ -1,6 +1,6 @@
 <template>
   <div class="cart-layout">
-    <div class="scroll-lists">
+    <div class="scroll-lists"  v-if="req_data">
       <template v-if="req_data.goods.length">
         <cart-list @change="get_list_data"
           :goods-data="req_data.goods"></cart-list>

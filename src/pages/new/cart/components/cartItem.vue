@@ -14,14 +14,14 @@
             alt=""
             srcset="">
         </div>
-        <p class="total-store" @click="to_store">
+        <p class="total-store" @click="to_store(all_data.store_id)">
           <img src="/static/images/icon/cart/store@3x.png"
             alt=""
             srcset="">
           <span>{{all_data.store_name}}</span>
         </p>
       </div>
-      <p class="to-store">
+      <p class="to-store" @click="to_store(all_data.store_id)">
         <img src="/static/images/icon/cart/分类 copy@3x.png"
           alt="">
       </p>

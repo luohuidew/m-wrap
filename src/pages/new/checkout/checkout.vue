@@ -90,7 +90,7 @@ export default {
       this.$router.replace({
         path: "/callback",
         query: {
-          error: 'Payment cancellation',
+          // error: 'Paymentcancellation',
           pay_id: this.res_create_data.pay_id
         }
       });
