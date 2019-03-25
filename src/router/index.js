@@ -16,6 +16,16 @@ export default new Router({
     CHECKOUT,
     TEST,
     {
+      path: '/category',
+      name: 'category',
+      component: () => import('@/pages/category'),
+      meta: {
+        title: 'category',
+        keepAlive: false,
+        fullScreen: true
+      }
+    },
+    {
       path: '/home/index',
       name: 'home',
       component: () =>
