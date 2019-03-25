@@ -4,6 +4,7 @@ import THEM from "./modules/them"
 import HOME from "./modules/home"
 import CART from "./modules/cart"
 import CHECKOUT from "./modules/checkout"
+import TEST from "./modules/test"
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -13,6 +14,7 @@ export default new Router({
     THEM,
     CART,
     CHECKOUT,
+    TEST,
     {
       path: '/home/index',
       name: 'home',
@@ -22,15 +24,6 @@ export default new Router({
         title: 'HOME',
         keepAlive: false,
         type: 'list'
-      }
-    }, {
-      path: '/test',
-      name: 'test',
-      component: () =>
-        import('@/pages/test'),
-      meta: {
-        title: 'test',
-        keepAlive: false
       }
     },
     {

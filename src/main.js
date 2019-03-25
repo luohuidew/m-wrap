@@ -1,19 +1,18 @@
 import Vue from 'vue'
 import App from './App'
+// import './cube-ui.js'
 require('es6-promise').polyfill();
 require('es6-promise/auto');
 import router from './router'
 import store from './store'
-
+// import BScroll from 'better-scroll'
 // 引入计算页面根元素font-size的大小
 import 'amfe-flexible';
-
+import Cube from 'cube-ui'
+Vue.use(Cube)
 import Vant from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Vant);
-
-import Mint from 'mint-ui';
-Vue.use(Mint);
 
 import VueClipboard from 'vue-clipboard2';
 Vue.use(VueClipboard);
