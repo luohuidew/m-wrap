@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import THEM from "./modules/them"
 import HOME from "./modules/home"
 import CART from "./modules/cart"
+import LAYOUT from "./modules/layout"
 import CHECKOUT from "./modules/checkout"
 import TEST from "./modules/test"
 Vue.use(Router)
@@ -15,21 +16,12 @@ export default new Router({
     CART,
     CHECKOUT,
     TEST,
-    {
-      path: '/category',
-      name: 'category',
-      component: () => import('@/pages/category'),
-      meta: {
-        title: 'category',
-        keepAlive: false,
-        fullScreen: true
-      }
-    },
+    LAYOUT,    
     {
       path: '/home/index',
       name: 'home',
       component: () =>
-        import('@/pages/new/home/index'),
+        import('@/views/home/index'),
       meta: {
         title: 'HOME',
         keepAlive: false,

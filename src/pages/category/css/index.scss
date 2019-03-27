@@ -1,30 +1,43 @@
 .wrap {
   height: 100%;
 }
+
 header {
   height: 44px;
   display: flex;
   line-height: 44px;
-  padding: 0px 20px;box-shadow: 0px 1px 2px #ccc;
+  padding: 0px 20px;
+  box-shadow: 0px 1px 2px #ccc;
+
   .back {
     width: 100px;
     display: flex;
     align-items: center;
+
     img {
       display: inline-block;
     }
   }
-  .menu{
+
+  .menu {
     flex: 1;
+
     ul {
       width: 100%;
       display: flex;
     }
-    li{
+
+    li {
       flex: 1;
       text-align: center;
+
       &.active {
         border-bottom: 2px solid #000000;
+        transition: all 0.1s;
+        -webkit-transition: all 0.1s;
+        -moz-transition: all 0.1s;
+        -ms-transition: all 0.1s;
+        -o-transition: all 0.1s;
       }
     }
   }

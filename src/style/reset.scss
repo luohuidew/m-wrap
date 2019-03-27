@@ -76,6 +76,10 @@ img:not([src]) {
     visibility: hidden;
 }
 
+img {
+    object-fit: cover;
+}
+
 ::-webkit-scrollbar {
     display: none;
     -webkit-appearance: none;
@@ -96,10 +100,6 @@ a {
     text-decoration: none;
 }
 
-
-.page {
-    overflow: auto;
-}
 
 .clearfix:before,
 .clearfix:after {
