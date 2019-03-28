@@ -8,8 +8,8 @@ import store from './store'
 // import BScroll from 'better-scroll'
 // 引入计算页面根元素font-size的大小
 import 'amfe-flexible';
-import Cube from 'cube-ui'
-Vue.use(Cube)
+// import Cube from 'cube-ui'
+// Vue.use(Cube)
 import Vant from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Vant);

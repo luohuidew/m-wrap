@@ -1,0 +1,77 @@
+export default {
+  path: '/user',
+  name: 'userInfo',
+  component: () =>
+    import('@/views/user'),
+  redirect: '/user/index',
+  meta: {
+    title: 'userInfo',
+    keepAlive: false
+  },
+  children: [{
+      path: 'index',
+      name: 'me',
+      component: () =>
+        import('@/views/user/me'),
+      meta: {
+        title: 'userInfo',
+        keepAlive: false
+      }
+    },
+    {
+      path: 'profile',
+      name: 'profile',
+      component: () =>
+        import('@/views/user/profile'),
+      meta: {
+        title: 'Profile',
+        keepAlive: false,
+        fullScreen: true,
+      }
+    },
+    {
+      path: 'orders',
+      name: 'orders',
+      component: () =>
+        import('@/views/user/order'),
+      meta: {
+        title: 'My Orders',
+        keepAlive: false,
+        fullScreen: true,
+      }
+    },
+    {
+      path: 'orders/detail',
+      name: 'order-detail',
+      component: () =>
+        import('@/views/user/orderDetail'),
+      meta: {
+        title: 'My Orders',
+        keepAlive: false,
+        fullScreen: true,
+      }
+    },
+    {
+      path: 'setting',
+      name: 'setting',
+      component: () =>
+        import('@/views/user/setting'),
+      meta: {
+        title: 'Settings',
+        keepAlive: false,
+        fullScreen: true,
+      }
+    },
+    {
+      path: 'coupon',
+      name: 'user-coupon',
+      component: () =>
+        import('@/views/user/coupon'),
+      meta: {
+        title: 'My Coupons',
+        keepAlive: false,
+        fullScreen: true,
+      }
+    }
+  ]
+}

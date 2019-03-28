@@ -5,6 +5,7 @@ import HOME from "./modules/home"
 import CART from "./modules/cart"
 import LAYOUT from "./modules/layout"
 import CHECKOUT from "./modules/checkout"
+import USER from "./modules/user"
 import TEST from "./modules/test"
 Vue.use(Router)
 export default new Router({
@@ -16,7 +17,8 @@ export default new Router({
     CART,
     CHECKOUT,
     TEST,
-    LAYOUT,    
+    LAYOUT,
+    USER,
     {
       path: '/home/index',
       name: 'home',
@@ -109,7 +111,8 @@ export default new Router({
       meta: {
         title: 'login',
         keepAlive: false,
-        fullScreen: true
+        fullScreen: true,
+        noHeader: true
       }
     },
     {
@@ -131,7 +134,9 @@ export default new Router({
         import('@/pages/statement'),
       meta: {
         title: 'Statement',
-        keepAlive: false
+        keepAlive: false,
+        fullScreen: true,
+        noHeader: true
       }
     },
     {
@@ -141,7 +146,9 @@ export default new Router({
         import('@/pages/about'),
       meta: {
         title: 'About US',
-        keepAlive: false
+        keepAlive: false,
+        fullScreen: true,
+        noHeader: true
       }
     },
 
@@ -161,8 +168,10 @@ export default new Router({
       component: () =>
         import('@/pages/detail'),
       meta: {
-        title: 'Goods details',
-        keepAlive: false
+        title: 'Details',
+        keepAlive: false,
+        fullScreen: true,
+        noHeader: true,
       }
       //    redirect: '/detail/',
     }, {
@@ -190,16 +199,19 @@ export default new Router({
       name: 'address',
       component: () =>
         import('@/pages/address/address-list'),
+      meta: {
+        title: 'address',
+        fullScreen: true
+      }
     }, {
       path: '/add_address',
       name: 'add_address',
       component: () =>
         import('@/pages/address/add-address'),
-    }, {
-      path: '/address_edit',
-      name: 'address_edit',
-      component: () =>
-        import('@/pages/address/address_edit'),
+      meta: {
+        title: 'address',
+        fullScreen: true
+      }
     }, {
       path: '/delivery',
       name: 'delivery',
@@ -210,11 +222,6 @@ export default new Router({
       name: 'coupon',
       component: () =>
         import('@/pages/coupon'),
-    }, {
-      path: '/order',
-      name: 'order',
-      component: () =>
-        import('@/pages/order'),
     }, {
       path: '/share',
       name: 'share',

@@ -1,13 +1,6 @@
 <template>
   <div class="category">
-    <div class="header-title">
-      <img src="/static/images/icon/normal/返回 大@2x.png"
-        alt=""
-        srcset="" @click="go_back">
-      <span>
-        Category
-      </span>
-    </div>
+    
   </div>
 </template>
 

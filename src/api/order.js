@@ -11,7 +11,7 @@ export default {
       data: JSON.stringify(data),
     })
   },
-  order_detail(data={}) {
+  read(data={}) {
     data.token = token;
     return request({
       url: 'order/read',

@@ -62,7 +62,7 @@ export default {
       let params = {
         store_id: this.$route.query.store_id
       };
-      debugger;
+      // debugger;
       api.store_info(params).then(res => {
         this.store_info = res.data.store_info;
       });

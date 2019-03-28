@@ -4,14 +4,14 @@
       :key="index">
       <router-link :to="{path:item.path}">
         <div class="default-link">
-          <img src=""
+          <img :src="item.defaultIcon"
             alt="">
-          <span>{{}}</span>
+          <span>{{item.title}}</span>
         </div>
         <div class="active-link">
-          <img src=""
+          <img :src="item.activeIcon"
             alt="">
-          <span>{{}}</span>
+          <span>{{item.title}}</span>
 
         </div>
       </router-link>
@@ -27,8 +27,8 @@ export default {
     return {
       routerLists: [
         {
-          defaultIcon: "/static/images/cicon/footer/weget-black@3x.png",
-          activeIcon: "",
+          defaultIcon: "/static/images/icon/footer/weget-black@3x.png",
+          activeIcon: "/static/images/icon/footer/weget-red@3x.png",
           title: "WEGET",
           path: "/home/index"
         },
@@ -38,16 +38,16 @@ export default {
         //   title:'WELOG'
         // },
         {
-          defaultIcon: "",
-          activeIcon: "",
+          defaultIcon: "/static/images/icon/footer/cart-black@3x.png",
+          activeIcon: "/static/images/icon/footer/cart-red@3x.png",
           title: "CART",
-          path: "/cart"
+          path: "/cart/index"
         },
         {
-          defaultIcon: "",
-          activeIcon: "",
+          defaultIcon: "/static/images/icon/footer/me-black@3x.png",
+          activeIcon: "/static/images/icon/footer/me-red@3x.png",
           title: "ME",
-          path: "/me"
+          path: "/user/index"
         }
       ]
     };
@@ -61,20 +61,42 @@ export default {
 
 <style lang='scss' scoped>
 .router-lists-box {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  border-top: 1px solid #f3f3f3;
   a {
     .default-link {
-      display: block;
+      display: flex;
     }
     .active-link {
       display: none;
+    }
+    & > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    img {
+      height: 24px;
+      width: 24px;
+    }
+    span {
+      font-size: 10px;
+      line-height: 1.5;
     }
   }
   .active-route {
-     .default-link {
+    .default-link {
       display: none;
     }
     .active-link {
-      display: block;
+      display: flex;
+    }
+    span {
+      color: #d70e19;
     }
   }
 }

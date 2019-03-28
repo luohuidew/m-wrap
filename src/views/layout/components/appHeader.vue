@@ -7,10 +7,8 @@
           srcset=""
           @click="contractionShow=!contractionShow">
       </li>
-      <li class="search-box _bgf3">
-        <input type="text"
-          @keyup.enter="to_search(searchContent)"
-          v-model="searchContent">
+      <li class="search-box _bgf3" @click="to_search">
+        <span></span>        
       </li>
       <li class="get-more-box"
         @click="to_category">
@@ -22,7 +20,7 @@
     <van-popup v-model="contractionShow"
       position="left"
       :overlay="true">
-      <options-box />
+      <options-box @close="close_href" />
     </van-popup>
   </div>
 </template>
@@ -51,14 +49,24 @@ export default {
   computed: {},
   created() {},
   methods: {
-    to_search(val) {
-      alert(val);
+    to_search() {
+      let href_params = {
+        path:'/search/search-query'
+      }
+      this.$router.push(href_params);
     },
     to_category() {
       let path_params = {
         path: "/category"
       };
       this.$router.push(path_params);
+    },
+    close_href(data) {
+      let hef_parmas = {
+        path: data
+      };
+      this.contractionShow = false;
+      this.$router.push(hef_parmas);
     }
   },
   components: {
@@ -69,7 +77,6 @@ export default {
 
 <style lang='scss' scoped>
 .app-header {
-  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   & > ul {
     height: 55px;
@@ -94,6 +101,11 @@ export default {
       center;
     background-size: 18px;
     padding-left: 40px;
+    span {
+      height: 100%;
+      width: 100%;
+      background-color: transparent;
+    }
     input {
       height: 100%;
       width: 100%;

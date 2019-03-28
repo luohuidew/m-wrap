@@ -3,7 +3,7 @@ import store from '@/store';
 let token = store.state.token;
 export default {
   /* 主页面的获取用户信息 */
-  Header(data={}) {
+  getInfoByToken(data={}) {
     data.token = token;
     return request({
       url: '/user/getInfoByToken',

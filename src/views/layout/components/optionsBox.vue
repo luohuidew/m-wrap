@@ -7,14 +7,14 @@
     </div>
     <div class="scroll-lists">
       <ul class="scroll-lists-items">
-        <li v-for="(item,index) in asideLists"
-          :key="index">
-          <router-link :to={path:item.path}
-            class="app-router-link">
+        <li class="app-router-link" v-for="(item,index) in asideLists"
+          :key="index" @click="to_options_path(item.path)">
+          <!-- <router-link @click="to_options_path(item.path)"
+            class="app-router-link"> -->
             <img :src="item.icon"
               alt="">
             <span> {{item.title}}</span>
-          </router-link>
+          <!-- </router-link> -->
         </li>
       </ul>
     </div>
@@ -35,20 +35,34 @@ export default {
         },
         {
           icon: "/static/images/icon/normal/导航-account@2x.png",
-          title: "HOME",
-          path: "/"
+          title: "Orders",
+          path: "/user/orders"
         },
         {
           icon: "/static/images/icon/normal/导航-account@2x.png",
-          title: "HOME",
-          path: "/"
-        }
+          title: "Coupons",
+          path: "/user/coupon"
+        },
+        {
+          icon: "/static/images/icon/normal/导航-account@2x.png",
+          title: "Account",
+          path: "/user/index"
+        },
+        {
+          icon: "/static/images/icon/normal/导航-account@2x.png",
+          title: "Settings",
+          path: "/user/setting"
+        },
       ]
     };
   },
   computed: {},
   created() {},
-  methods: {},
+  methods: {
+    to_options_path(path){
+      this.$emit('close',path);
+    }
+  },
   components: {}
 };
 </script>

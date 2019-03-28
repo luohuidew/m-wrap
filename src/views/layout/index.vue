@@ -1,13 +1,19 @@
 <template>
   <div id="layout">
-    <div class="page-head"
-      v-if="!no_head">
-      <keep-alive>
-        <home-header></home-header>
-      </keep-alive>
-    </div>
+    <template v-if="!no_header">
+      <div class="page-head"
+        v-show="!full_screen">
+        <keep-alive>
+          <home-header></home-header>
+        </keep-alive>
+      </div>
+      <div class="page-head"
+        v-show="full_screen">
+        <home-title />
+      </div>
+    </template>
     <div class="page-body"
-      :class="{'in-app':no_head}">
+      :class="{'in-app':full_screen,'no-header':no_header}">
       <transition :name="transitionName">
         <template v-if="$route.meta.keepAlive">
           <keep-alive>
@@ -22,8 +28,9 @@
       </transition>
 
     </div>
-    <div class="home-footer">
-      <home-footer/>
+    <div class="home-footer"
+      v-show="!full_screen">
+      <home-footer />
     </div>
     <!-- <div class="auto-login"> -->
     <!-- <login-auto></login-auto> -->
@@ -35,20 +42,20 @@
 import shareApp from "./components/appShare";
 import loginAuto from "@/pages/login/auth/facebook.vue";
 import homeHeader from "./components/appHeader";
+import homeTitle from "./components/appTitle";
 import homeFooter from "./components/appFooter";
 export default {
   name: "layout",
   data() {
     return {
-      transitionName: "slide-left",
-     
+      transitionName: "slide-left"
     };
   },
   computed: {
     share_token() {
       return this.$store.state.share_token;
     },
-    no_head() {
+    full_screen() {
       let temp = this.$route.meta.fullScreen;
       if (
         temp ||
@@ -59,6 +66,10 @@ export default {
       } else {
         return false;
       }
+    },
+    no_header() {
+      let temp = this.$route.meta.noHeader;
+      return temp;
     }
   },
   watch: {
@@ -112,6 +123,7 @@ export default {
     loginAuto,
     shareApp,
     homeHeader,
+    homeTitle,
     homeFooter
   }
 };
@@ -126,6 +138,7 @@ export default {
   /* margin-top:50px; */
 }
 .page-head {
+  height: 55px;
   /*background-color: #f3f3f3;*/
 }
 .page-body {
@@ -135,6 +148,9 @@ export default {
   /*overflow-y: scroll;*/
   /*overflow-scrolling: touch;*/
   &.in-app {
+    height: calc(100% - 55px);
+  }
+  &.no-header {
     height: 100%;
   }
 }
@@ -150,9 +166,10 @@ export default {
   /* left: 0; */
   /* top: 0; */
   width: 100%;
-
+  height: 100%;
+  overflow: auto;
   /* height: 100%; */
-  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  // transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
 // .slide-left-enter,
 // .slide-right-leave-active {

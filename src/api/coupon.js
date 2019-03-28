@@ -20,6 +20,9 @@ export default {
   },
   coupon(data={}) {
     data.token = token;
+    /* 
+      status2-已領取;3-已使用-4-过期
+    */
     return request({
       url: 'coupon/index',
       method: 'post',

@@ -20,9 +20,9 @@
     </a>
     <!-- :class="{'cart-icon':this.$store.state.cart.goods_num}" -->
     <!-- :class="{'animeted bounceIn':$store.state.cart.is_static}" src="/static/images/icon/header/H5-购物车@3x.png" -->
-    <!-- <a class="store-btn"
+    <a class="store-btn"
       href="javascript:;"
-      @click="to_store(sku.store_id)">
+      @click="to_cart">
       <span class="heart"
         :class="is_like===2?'active':''">
         <img alt=""
@@ -30,7 +30,7 @@
           srcset="">
       </span>
       <span>CART</span>
-    </a> -->
+    </a>
     <!-- 1:团购参团
           2：开团
           act_type：act_type:免费兑换
@@ -323,14 +323,12 @@ export default {
         }
       };
       this.$router.push(params);
-      // api.like(params).then(res => {
-      //   this.is_like = res.data;
-      //   if (this.is_like === 1) {
-      //     this.sku.like_num += -1;
-      //   } else {
-      //     this.sku.like_num += 1;
-      //   }
-      // });
+    },
+    to_cart() {
+      let params = {
+        path: "/cart"
+      };
+      this.$router.push(params);
     }
   }
 };

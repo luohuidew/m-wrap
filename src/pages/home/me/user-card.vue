@@ -132,7 +132,7 @@ export default {
     },
     to_order(cid) {
       let params = {
-        path: "/order",
+        path: "/orders",
         query: {
           label: cid
         }

@@ -249,11 +249,11 @@ export default {
         },
       ]
     },
-    {
-      path: 'me',
-      name: 'me',
-      component: () =>
-        import('@/pages/home/me.vue'),
-    },
+    // {
+    //   path: 'me',
+    //   name: 'me',
+    //   component: () =>
+    //     import('@/pages/home/me.vue'),
+    // },
   ]
 }

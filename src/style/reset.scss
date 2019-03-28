@@ -78,6 +78,7 @@ img:not([src]) {
 
 img {
     object-fit: cover;
+    vertical-align: middle;
 }
 
 ::-webkit-scrollbar {
@@ -100,6 +101,12 @@ a {
     text-decoration: none;
 }
 
+input,
+button {
+    border: none;
+    outline: none;
+    background: none;
+}
 
 .clearfix:before,
 .clearfix:after {

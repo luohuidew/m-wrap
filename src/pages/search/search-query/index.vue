@@ -47,7 +47,7 @@ export default {
   name: "",
   data() {
     return {
-      show_page:false,
+      show_page:true,
       req_data: undefined,
       history_lists: [1, 2, 3],
       recommend_lists: []
