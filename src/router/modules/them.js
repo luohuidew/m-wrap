@@ -6,7 +6,8 @@ export default {
   redirect: '/article/ac-1',
   meta: {
     title: 'article',
-    keepAlive: false
+    keepAlive: false,
+    fullScreen: true
   },
   children: [{
       path: 'ac-1',
@@ -15,7 +16,8 @@ export default {
         import('@/pages/article/ac-1'),
       meta: {
         title: '',
-        keepAlive: false
+        keepAlive: false,
+        fullScreen: true
       }
     }, {
       path: 'ac-2',
@@ -24,7 +26,8 @@ export default {
         import('@/pages/article/ac-2'),
       meta: {
         title: '',
-        keepAlive: false
+        keepAlive: false,
+        fullScreen: true
       }
     }, {
       path: 'ac-3',
@@ -33,7 +36,8 @@ export default {
         import('@/pages/article/ac-3'),
       meta: {
         title: '',
-        keepAlive: false
+        keepAlive: false,
+        fullScreen: true
       }
     },
     {
@@ -43,7 +47,8 @@ export default {
         import('@/pages/article/ac-4'),
       meta: {
         title: '',
-        keepAlive: false
+        keepAlive: false,
+        fullScreen: true
       }
     },
     {
@@ -53,7 +58,8 @@ export default {
         import('@/pages/article/ac-5'),
       meta: {
         title: '',
-        keepAlive: false
+        keepAlive: false,
+        fullScreen: true
       }
     },
     {
@@ -63,7 +69,8 @@ export default {
         import('@/pages/article/ac-6'),
       meta: {
         title: '',
-        keepAlive: false
+        keepAlive: false,
+        fullScreen: true
       }
     },
     {
@@ -73,7 +80,8 @@ export default {
         import('@/pages/article/ac-7'),
       meta: {
         title: '',
-        keepAlive: false
+        keepAlive: false,
+        fullScreen: true
       }
     },
     {
@@ -83,7 +91,8 @@ export default {
         import('@/pages/article/ac-8'),
       meta: {
         title: '',
-        keepAlive: false
+        keepAlive: false,
+        fullScreen: true
       }
     }, {
       path: 'ac-9',
@@ -92,7 +101,18 @@ export default {
         import('@/pages/article/ac-9'),
       meta: {
         title: '',
-        keepAlive: false
+        keepAlive: false,
+        fullScreen: true
+      }
+    }, {
+      path: 'ac-10',
+      name: 'ac-10',
+      component: () =>
+        import('@/pages/article/ac-10'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: true
       }
     }
   ]
