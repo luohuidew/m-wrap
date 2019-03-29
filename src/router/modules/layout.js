@@ -5,8 +5,7 @@ export default {
     import('@/views/category'),
   meta: {
     title: 'category',
-    keepAlive: true,
-    fullScreen: true
+    keepAlive: true,    
   }
   // redirect: '/checkout/index',
   // children: [{

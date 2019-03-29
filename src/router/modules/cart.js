@@ -15,8 +15,7 @@ export default {
         import('@/pages/new/cart/cart'),
       meta: {
         title: 'cart',
-        keepAlive: false,
-        fullScreen:true
+        keepAlive: false,        
       }
     }
   ]

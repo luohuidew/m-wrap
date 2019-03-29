@@ -11,8 +11,7 @@ export default {
       import('@/pages/new/checkout/checkout'),
     meta: {
       title: 'checkout',
-      // keepAlive: true,
-      fullScreen: true
+      // keepAlive: true,      
     }
   }, ]
 }

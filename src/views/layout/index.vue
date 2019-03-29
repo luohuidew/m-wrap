@@ -1,19 +1,19 @@
 <template>
   <div id="layout">
-    <template v-if="!no_header">
+    <template v-if="!full_screen">
       <div class="page-head"
-        v-show="!full_screen">
+        v-show="home_page">
         <keep-alive>
           <home-header></home-header>
         </keep-alive>
       </div>
       <div class="page-head"
-        v-show="full_screen">
+        v-show="!home_page">
         <home-title />
       </div>
     </template>
     <div class="page-body"
-      :class="{'in-app':full_screen,'no-header':no_header}">
+      :class="{'in-app':full_screen,'home-page':home_page}">
       <transition :name="transitionName">
         <template v-if="$route.meta.keepAlive">
           <keep-alive>
@@ -22,14 +22,14 @@
         </template>
         <template v-else>
           <router-view class="child-view"
-            :key="new Date().getTime()"></router-view>
+            :key="$route.fullPath"></router-view>
         </template>
         <!-- <router-view></router-view> -->
       </transition>
 
     </div>
     <div class="home-footer"
-      v-show="!full_screen">
+      v-show="home_page">
       <home-footer />
     </div>
     <!-- <div class="auto-login"> -->
@@ -70,6 +70,10 @@ export default {
     no_header() {
       let temp = this.$route.meta.noHeader;
       return temp;
+    },
+    home_page() {
+      let home_page_lists = ["/home/index", "/user/index"];
+      return home_page_lists.indexOf(this.$route.path) !== -1;
     }
   },
   watch: {
@@ -144,14 +148,14 @@ export default {
 .page-body {
   /* flex:1; */
   /* 计算高度 */
-  height: calc(100% - 100px);
+  height: calc(100% - 55px);
   /*overflow-y: scroll;*/
   /*overflow-scrolling: touch;*/
   &.in-app {
-    height: calc(100% - 55px);
-  }
-  &.no-header {
     height: 100%;
+  }
+  &.home-page {
+    height: calc(100% - 100px);
   }
 }
 /*  */

@@ -37,8 +37,7 @@ export default new Router({
         import('@/pages/search'),
       meta: {
         title: 'search',
-        keepAlive: false,
-        fullScreen: true
+        keepAlive: false,        
       },
       redirect: '/search/search-home',
       children: [{
@@ -48,8 +47,7 @@ export default new Router({
           import('@/pages/search/search-home'),
         meta: {
           title: 'search home',
-          keepAlive: false,
-          fullScreen: true
+          keepAlive: false,          
         },
       }, {
         path: 'search-query',
@@ -58,8 +56,7 @@ export default new Router({
           import('@/pages/search/search-query'),
         meta: {
           title: 'search query',
-          keepAlive: false,
-          fullScreen: true
+          keepAlive: false,          
         },
       }, {
         path: 'search-result',
@@ -68,8 +65,7 @@ export default new Router({
           import('@/pages/search/search-result'),
         meta: {
           title: 'search result',
-          keepAlive: false,
-          fullScreen: false
+          keepAlive: false,          
         },
       }],
     },
@@ -110,9 +106,7 @@ export default new Router({
         import('@/pages/login'),
       meta: {
         title: 'login',
-        keepAlive: false,
-        fullScreen: true,
-        noHeader: true
+        keepAlive: false,        
       }
     },
     {
@@ -134,9 +128,7 @@ export default new Router({
         import('@/pages/statement'),
       meta: {
         title: 'Statement',
-        keepAlive: false,
-        fullScreen: true,
-        noHeader: true
+        keepAlive: false,        
       }
     },
     {
@@ -146,9 +138,7 @@ export default new Router({
         import('@/pages/about'),
       meta: {
         title: 'About US',
-        keepAlive: false,
-        fullScreen: true,
-        noHeader: true
+        keepAlive: false,        
       }
     },
 
@@ -169,9 +159,7 @@ export default new Router({
         import('@/pages/detail'),
       meta: {
         title: 'Details',
-        keepAlive: false,
-        fullScreen: true,
-        noHeader: true,
+        keepAlive: false,        
       }
       //    redirect: '/detail/',
     }, {
@@ -181,8 +169,7 @@ export default new Router({
         import('@/pages/pay'),
       meta: {
         title: 'Create order',
-        keepAlive: false,
-        fullScreen: true
+        keepAlive: false,        
       }
     }, {
       path: '/accept',
@@ -191,8 +178,7 @@ export default new Router({
         import('@/pages/pay/accept'),
       meta: {
         title: 'Payment',
-        keepAlive: false,
-        fullScreen: true
+        keepAlive: false,        
       }
     }, {
       path: '/address',
@@ -200,8 +186,7 @@ export default new Router({
       component: () =>
         import('@/pages/address/address-list'),
       meta: {
-        title: 'address',
-        fullScreen: true
+        title: 'address',        
       }
     }, {
       path: '/add_address',
@@ -209,8 +194,7 @@ export default new Router({
       component: () =>
         import('@/pages/address/add-address'),
       meta: {
-        title: 'address',
-        fullScreen: true
+        title: 'address',        
       }
     }, {
       path: '/delivery',

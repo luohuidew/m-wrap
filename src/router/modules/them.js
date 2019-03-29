@@ -6,8 +6,7 @@ export default {
   redirect: '/article/ac-1',
   meta: {
     title: 'article',
-    keepAlive: false,
-    noHeader: true,
+    keepAlive: false,    
     fullScreen: true
 
   },
@@ -18,8 +17,7 @@ export default {
         import('@/pages/article/ac-1'),
       meta: {
         title: '',
-        keepAlive: false,
-        noHeader: true,
+        keepAlive: false,        
         fullScreen: true
       }
     }, {
@@ -29,8 +27,7 @@ export default {
         import('@/pages/article/ac-2'),
       meta: {
         title: '',
-        keepAlive: false,
-        noHeader: true,
+        keepAlive: false,        
         fullScreen: true
       }
     }, {
@@ -40,8 +37,7 @@ export default {
         import('@/pages/article/ac-3'),
       meta: {
         title: '',
-        keepAlive: false,
-        noHeader: true,
+        keepAlive: false,        
         fullScreen: true
       }
     },
@@ -52,8 +48,7 @@ export default {
         import('@/pages/article/ac-4'),
       meta: {
         title: '',
-        keepAlive: false,
-        noHeader: true,
+        keepAlive: false,        
         fullScreen: true
       }
     },
@@ -64,8 +59,7 @@ export default {
         import('@/pages/article/ac-5'),
       meta: {
         title: '',
-        keepAlive: false,
-        noHeader: true,
+        keepAlive: false,        
         fullScreen: true
       }
     },
@@ -76,8 +70,7 @@ export default {
         import('@/pages/article/ac-6'),
       meta: {
         title: '',
-        keepAlive: false,
-        noHeader: true,
+        keepAlive: false,        
         fullScreen: true
       }
     },
@@ -88,8 +81,7 @@ export default {
         import('@/pages/article/ac-7'),
       meta: {
         title: '',
-        keepAlive: false,
-        noHeader: true,
+        keepAlive: false,        
         fullScreen: true
       }
     },
@@ -100,8 +92,7 @@ export default {
         import('@/pages/article/ac-8'),
       meta: {
         title: '',
-        keepAlive: false,
-        noHeader: true,
+        keepAlive: false,        
         fullScreen: true
       }
     }, {
@@ -111,8 +102,7 @@ export default {
         import('@/pages/article/ac-9'),
       meta: {
         title: '',
-        keepAlive: false,
-        noHeader: true,
+        keepAlive: false,        
         fullScreen: true
       }
     },
@@ -123,8 +113,7 @@ export default {
         import('@/pages/article/ac-10'),
       meta: {
         title: '',
-        keepAlive: false,
-        noHeader: true,
+        keepAlive: false,        
         fullScreen: true
       }
     }

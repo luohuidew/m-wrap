@@ -25,8 +25,7 @@ export default {
         import('@/views/user/profile'),
       meta: {
         title: 'Profile',
-        keepAlive: false,
-        fullScreen: true,
+        keepAlive: false,        
       }
     },
     {
@@ -36,8 +35,7 @@ export default {
         import('@/views/user/order'),
       meta: {
         title: 'My Orders',
-        keepAlive: false,
-        fullScreen: true,
+        keepAlive: false,        
       }
     },
     {
@@ -47,8 +45,7 @@ export default {
         import('@/views/user/orderDetail'),
       meta: {
         title: 'My Orders',
-        keepAlive: false,
-        fullScreen: true,
+        keepAlive: false,        
       }
     },
     {
@@ -58,8 +55,7 @@ export default {
         import('@/views/user/setting'),
       meta: {
         title: 'Settings',
-        keepAlive: false,
-        fullScreen: true,
+        keepAlive: false,        
       }
     },
     {
@@ -69,8 +65,7 @@ export default {
         import('@/views/user/coupon'),
       meta: {
         title: 'My Coupons',
-        keepAlive: false,
-        fullScreen: true,
+        keepAlive: false,        
       }
     }
   ]
