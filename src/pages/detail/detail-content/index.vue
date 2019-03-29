@@ -210,6 +210,7 @@ export default {
       api.detail(params).then(res => {
         console.log(res);
         document.title = res.data.sku.title;
+        // this.$route.query.page_label = res.data.sku.title;
         let temp_data = res.data;
         this.all_data = res.data;
         for (let key in temp_data) {

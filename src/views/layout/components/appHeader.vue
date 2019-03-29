@@ -57,7 +57,7 @@ export default {
     },
     to_category() {
       let path_params = {
-        path: "/category"
+        path: "/search/search-home"
       };
       this.$router.push(path_params);
     },

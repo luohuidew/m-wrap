@@ -6,6 +6,7 @@ import CART from "./modules/cart"
 import LAYOUT from "./modules/layout"
 import CHECKOUT from "./modules/checkout"
 import USER from "./modules/user"
+import SEARCH from "./modules/search"
 import TEST from "./modules/test"
 Vue.use(Router)
 export default new Router({
@@ -19,6 +20,7 @@ export default new Router({
     TEST,
     LAYOUT,
     USER,
+    SEARCH,
     {
       path: '/home/index',
       name: 'home',
@@ -30,45 +32,7 @@ export default new Router({
         type: 'list'
       }
     },
-    {
-      path: '/search',
-      name: 'search',
-      component: () =>
-        import('@/pages/search'),
-      meta: {
-        title: 'search',
-        keepAlive: false,        
-      },
-      redirect: '/search/search-home',
-      children: [{
-        path: 'search-home',
-        name: 'search-home',
-        component: () =>
-          import('@/pages/search/search-home'),
-        meta: {
-          title: 'search home',
-          keepAlive: false,          
-        },
-      }, {
-        path: 'search-query',
-        name: 'search-query',
-        component: () =>
-          import('@/pages/search/search-query'),
-        meta: {
-          title: 'search query',
-          keepAlive: false,          
-        },
-      }, {
-        path: 'search-result',
-        name: 'search-result',
-        component: () =>
-          import('@/pages/search/search-result'),
-        meta: {
-          title: 'search result',
-          keepAlive: false,          
-        },
-      }],
-    },
+
     {
       path: '/hot',
       name: 'hot',
@@ -81,11 +45,11 @@ export default new Router({
     },
     {
       path: '/query',
-      name: 'query',
+      name: 'similar-query',
       component: () =>
         import('@/pages/query'),
       meta: {
-        title: 'query',
+        title: 'similar query',
         keepAlive: false
       }
     },
@@ -106,7 +70,8 @@ export default new Router({
         import('@/pages/login'),
       meta: {
         title: 'login',
-        keepAlive: false,        
+        keepAlive: false,
+        fullScreen:true
       }
     },
     {
@@ -128,7 +93,7 @@ export default new Router({
         import('@/pages/statement'),
       meta: {
         title: 'Statement',
-        keepAlive: false,        
+        keepAlive: false,
       }
     },
     {
@@ -138,7 +103,7 @@ export default new Router({
         import('@/pages/about'),
       meta: {
         title: 'About US',
-        keepAlive: false,        
+        keepAlive: false,
       }
     },
 
@@ -159,7 +124,7 @@ export default new Router({
         import('@/pages/detail'),
       meta: {
         title: 'Details',
-        keepAlive: false,        
+        keepAlive: false,
       }
       //    redirect: '/detail/',
     }, {
@@ -169,7 +134,7 @@ export default new Router({
         import('@/pages/pay'),
       meta: {
         title: 'Create order',
-        keepAlive: false,        
+        keepAlive: false,
       }
     }, {
       path: '/accept',
@@ -178,7 +143,7 @@ export default new Router({
         import('@/pages/pay/accept'),
       meta: {
         title: 'Payment',
-        keepAlive: false,        
+        keepAlive: false,
       }
     }, {
       path: '/address',
@@ -186,7 +151,7 @@ export default new Router({
       component: () =>
         import('@/pages/address/address-list'),
       meta: {
-        title: 'address',        
+        title: 'address',
       }
     }, {
       path: '/add_address',
@@ -194,7 +159,7 @@ export default new Router({
       component: () =>
         import('@/pages/address/add-address'),
       meta: {
-        title: 'address',        
+        title: 'address',
       }
     }, {
       path: '/delivery',

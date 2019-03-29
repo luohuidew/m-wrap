@@ -5,7 +5,7 @@
       srcset=""
       @click="go_back">
     <span>
-      {{$route.meta.title}}
+      {{pageTitle}}
     </span>
   </div>
 </template>
@@ -15,11 +15,24 @@ export default {
   name: "",
   props: {},
   data() {
-    return {};
+    return {
+      // pageTitle: ""
+    };
   },
-  computed: {},
-  created() {},
+  computed: {
+    pageTitle() {
+      let cur_route = this.$route;
+      // debugger
+      return cur_route.query.page_label
+        ? cur_route.query.page_label
+        : cur_route.meta.title;
+    }
+  },
+  created() {
+    this.init_data();
+  },
   methods: {
+    init_data() {},
     go_back() {
       this.$router.go(-1);
     }

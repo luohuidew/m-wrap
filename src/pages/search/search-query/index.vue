@@ -1,10 +1,12 @@
 <template>
-  <div class="search-query" v-if="show_page">
+  <div class="search-query"
+    v-if="show_page">
     <div class="search-input">
-      <!-- <div class="go-back">
+      <div class="go-back"
+        @click="go_back">
         <img src="/static/img/icon/返回 大@2x.png"
           alt="">
-      </div> -->
+      </div>
       <div class="input-box">
         <input type="text"
           v-focus
@@ -47,7 +49,7 @@ export default {
   name: "",
   data() {
     return {
-      show_page:true,
+      show_page: true,
       req_data: undefined,
       history_lists: [1, 2, 3],
       recommend_lists: []
@@ -60,9 +62,10 @@ export default {
       if (val) {
         this.search_text = "";
         let params = {
-          path: "/search/search-result",
+          path: "/search/search-lists",
           query: {
-            title: val
+            title: val,
+            page_label: val
           }
         };
         this.$router.push(params);
@@ -70,6 +73,9 @@ export default {
     },
     clear_history() {
       this.history_lists = [];
+    },
+    go_back() {
+      this.$router.go(-1);
     }
   },
   components: {}
@@ -87,7 +93,7 @@ export default {
   padding: 0 10px;
   box-shadow: 0px 2px 6px 0px #d0d0d0;
   .go-back {
-    padding: 0 0px 0 10px;
+    padding: 0 10px 0 0px;
     img {
       height: 22px;
     }
@@ -95,9 +101,9 @@ export default {
   .input-box {
     height: 34px;
     border-radius: 17px;
-    padding-left: 48px;
+    padding-left: 40px;
     flex: 1;
-    background: #f1f1f2 url("/static/img/icon/search3.png") no-repeat 20px
+    background: #f1f1f2 url("/static/img/icon/search3.png") no-repeat 10px
       center;
     background-size: 22px 22px;
     input {

@@ -1,6 +1,5 @@
 <template>
-  <div class="search-page">
-    
+  <div class="search-page">    
     <router-view></router-view>
   </div>
 </template>
@@ -9,8 +8,7 @@
 export default {
   name: "",
   data() {
-    return {
-      search_text: ""
+    return {      
     };
   },
   mounted() {},
