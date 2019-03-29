@@ -64,7 +64,7 @@ const data = [{
 /* 3 */
 {
   type: 'desc',
-  url: 'https://we-get.s3.us-west-1.amazonaws.com/10023286585c9c7fe95eb84.jpg?width=1242&height=634'
+  url: 'https://we-get.s3.us-west-1.amazonaws.com/6576359955c9dc3804881e.jpg?width=1242&height=634'
 },
 // {
 //   type: 'store',
@@ -192,7 +192,7 @@ const data = [{
 /* 7 */
 {
   type: 'desc',
-  url: 'https://we-get.s3.us-west-1.amazonaws.com/7794047225c9c80db14a05.jpg?width=1242&height=671'
+  url: 'https://we-get.s3.us-west-1.amazonaws.com/15230328455c9dc3b89a170.jpg?width=1242&height=671'
 },
 // {
 //   type: 'store',
