@@ -48,7 +48,7 @@ export default {
   methods: {
     to_detail(order_no) {
       let path_params = {
-        path: "/user/detail",
+        path: "/user/orders/detail",
         query: {
           order_no: order_no
         }

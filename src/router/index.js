@@ -57,7 +57,7 @@ export default new Router({
       path: '/store',
       name: 'store',
       component: () =>
-        import('@/pages/store'),
+        import('@/views/store'),
       meta: {
         title: 'store',
         keepAlive: false
@@ -94,6 +94,7 @@ export default new Router({
       meta: {
         title: 'Statement',
         keepAlive: false,
+        fullScreen:true
       }
     },
     {
@@ -104,6 +105,7 @@ export default new Router({
       meta: {
         title: 'About US',
         keepAlive: false,
+        fullScreen:true
       }
     },
 
@@ -125,6 +127,7 @@ export default new Router({
       meta: {
         title: 'Details',
         keepAlive: false,
+        fullScreen:true
       }
       //    redirect: '/detail/',
     }, {

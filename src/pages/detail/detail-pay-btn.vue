@@ -7,19 +7,20 @@
       <p>ONE TIME shipping fee PER day</p>
       <i></i>
     </div> -->
+
+    <!-- :class="{'cart-icon':this.$store.state.cart.goods_num}" -->
+    <!-- :class="{'animeted bounceIn':$store.state.cart.is_static}" src="/static/images/icon/header/H5-购物车@3x.png" -->
     <a class="store-btn"
       href="javascript:;"
       @click="to_store(sku.store_id)">
       <span class="heart"
         :class="is_like===2?'active':''">
-        <img src="/static/img/icon/Group 34@2x.png"
-          alt=""
+        <img alt=""
+          src="/static/images/icon/normal/Group 34@3x.png"
           srcset="">
       </span>
-      <span>STORE</span>
+      <span>Store</span>
     </a>
-    <!-- :class="{'cart-icon':this.$store.state.cart.goods_num}" -->
-    <!-- :class="{'animeted bounceIn':$store.state.cart.is_static}" src="/static/images/icon/header/H5-购物车@3x.png" -->
     <a class="store-btn"
       href="javascript:;"
       @click="to_cart">
@@ -29,7 +30,23 @@
           src="/static/images/icon/header/H5-购物车@3x.png"
           srcset="">
       </span>
-      <span>CART</span>
+      <span>Cart</span>
+    </a>
+    <a class="store-btn"
+      href="javascript:;"
+      @click="like_goods">
+      <span class="heart">
+        <img v-if="is_like===1"
+          alt=""
+          src="/static/images/icon/normal/收藏前@2x.png"
+          srcset="">
+        <img v-else
+          alt=""
+          src="/static/images/icon/normal/收藏后@2x.png"
+          srcset="">
+         
+      </span>
+      <span>Like</span>
     </a>
     <!-- 1:团购参团
           2：开团
@@ -236,14 +253,7 @@ export default {
       let params = {
         sku_id: this.$route.query.sku_id
       };
-      // api.like(params).then(res => {
-      //   this.is_like = res.data;
-      //   if (this.is_like === 1) {
-      //     this.sku.like_num += -1;
-      //   } else {
-      //     this.sku.like_num += 1;
-      //   }
-      // });
+
       // api
       //   .confirm_order(data)
       //   .then(res => {
@@ -329,6 +339,19 @@ export default {
         path: "/cart"
       };
       this.$router.push(params);
+    },
+    like_goods() {
+      let params = {
+        is_like: 1
+      };
+      api.like(params).then(res => {
+        this.is_like = res.data;
+        if (this.is_like === 1) {
+          this.sku.like_num += -1;
+        } else {
+          this.sku.like_num += 1;
+        }
+      });
     }
   }
 };
@@ -458,15 +481,21 @@ export default {
         object-fit: contain;
         // width: auto;
       }
-      // background: url("/static/img/icon/Group 34@2x.png") no-repeat center
-      //   center;
-      // background-size: auto 80%;
+    }
+    .like-heart {
+      height: 20px;
+      width: 20px;
+      background: url("/static/img/icon/icon/收藏前.png") no-repeat center
+        center;
+      background-size: auto 80%;
+      &.active {
+        background: url("/static/img/icon/收藏后.png") no-repeat center center;
+        background-size: auto 70%;
+      }
     }
     // .heart.active {
     //   width: 40px;
     //   height: 40px;
-    //   background: url("/static/img/icon/收藏后.png") no-repeat center center;
-    //   background-size: auto 70%;
     // }
   }
   /*  */

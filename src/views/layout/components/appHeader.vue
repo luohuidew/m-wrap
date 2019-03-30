@@ -7,15 +7,35 @@
           srcset=""
           @click="contractionShow=!contractionShow">
       </li>
-      <li class="search-box _bgf3" @click="to_search">
-        <span></span>        
-      </li>
-      <li class="get-more-box"
-        @click="to_category">
-        <img src="/static/images/icon/header/home-right-icon@3x.png"
-          alt=""
-          srcset="">
-      </li>
+      <template v-if="appHome">
+        <li class="search-box _bgf3"
+          @click="to_search">
+          <span></span>
+        </li>
+        <li class="get-more-box"
+          @click="to_category">
+          <img src="/static/images/icon/header/home-right-icon@3x.png"
+            alt=""
+            srcset="">
+        </li>
+      </template>
+      <template v-if="appUser">
+        <li class="me">
+          <span>Me</span>
+        </li>
+        <li class="setting-icon">
+          <router-link :to="{path:'/'}" :class="{'active':haveMessages}">
+            <img class="messages"
+              src="/static/images/icon/user/mine_notifi_nav_icon@3x.png"
+              alt="">
+          </router-link>
+          <router-link :to="{path:'/user/setting'}">
+            <img src="/static/images/icon/user/mine_setting_nav_icon@3x.png"
+              alt="">
+          </router-link>
+        </li>
+      </template>
+
     </ul>
     <van-popup v-model="contractionShow"
       position="left"
@@ -33,7 +53,8 @@ export default {
   data() {
     return {
       contractionShow: false,
-      searchContent: ""
+      searchContent: "",
+      haveMessages: true
     };
   },
   watch: {
@@ -46,13 +67,20 @@ export default {
       }
     }
   },
-  computed: {},
+  computed: {
+    appUser() {
+      return this.$route.path === "/user/index";
+    },
+    appHome() {
+      return this.$route.path === "/home/index";
+    }
+  },
   created() {},
   methods: {
     to_search() {
       let href_params = {
-        path:'/search/search-query'
-      }
+        path: "/search/search-query"
+      };
       this.$router.push(href_params);
     },
     to_category() {
@@ -114,6 +142,31 @@ export default {
   }
   /*  */
   .contraction-box {
+  }
+  /*  */
+  .me {
+    flex: 1;
+    text-align: center;
+    padding-left: 50px;
+  }
+  .setting-icon {
+    img {
+      margin-left: 10px;
+    }
+    .active {
+      position: relative;
+      &::after {
+        display: block;
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #d70e19;
+      }
+    }
   }
 }
 </style>

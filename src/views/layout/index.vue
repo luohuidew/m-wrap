@@ -1,6 +1,7 @@
 <template>
   <div id="layout">
-    <template v-if="!full_screen">
+    <div id="app-header-top"
+      v-if="!full_screen">
       <div class="page-head"
         v-show="home_page">
         <keep-alive>
@@ -11,7 +12,7 @@
         v-show="!home_page">
         <home-title />
       </div>
-    </template>
+    </div>
     <div class="page-body"
       :class="{'in-app':full_screen,'home-page':home_page}">
       <transition :name="transitionName">
