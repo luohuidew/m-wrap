@@ -16,4 +16,12 @@ export default {
       data: JSON.stringify(data),
     })
   },  
+  getStoreCateList(data={}) {
+    // data.token  = store.state.token;
+    return request({
+      url: 'store/getStoreCateList',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },  
 }

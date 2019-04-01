@@ -2,14 +2,19 @@
   <div class="detail-attr">
     <div class="content"
       @click="$emit('show_dialog_show')">
+      <div class="icon-box">
+        <img src="/static/images/icon/detail/详情 尺码@3x.png"
+          alt=""
+          srcset="">
+      </div>
       <p>Color,Size</p>
     </div>
     <!--<attr-dialog v-if="show_dialog"-->
-      <!--@close="show_dialog = false"-->
-      <!--:sku="sku"-->
-      <!--:goods="goods"-->
-      <!--:attr-list="attrList"-->
-      <!--:cur-goods="curGoods"></attr-dialog>-->
+    <!--@close="show_dialog = false"-->
+    <!--:sku="sku"-->
+    <!--:goods="goods"-->
+    <!--:attr-list="attrList"-->
+    <!--:cur-goods="curGoods"></attr-dialog>-->
   </div>
 </template>
 
@@ -42,12 +47,18 @@ export default {
   background-size: auto 18px;
   // border-bottom: 1px solid #e9e9e9;
   .content {
+    display: flex;
+    align-items: center;
     padding: 20px 0;
+    .icon-box {
+      padding-right: 10px;
+      img {
+        height: 20px;
+        width: auto;
+      }
+    }
   }
-  img {
-    height: 18px;
-    width: auto;
-  }
+
   p {
     font-size: 14px;
   }

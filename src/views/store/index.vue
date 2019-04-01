@@ -1,34 +1,24 @@
 <template>
-  <div class="store-page">
-    <Swiper :datas='bannerData'>
-      <template slot="default"
-        slot-scope="{item}">
-        <div style="width:280px;height:307px">         
-          <div class="img-box">
-            <img src="" alt="" srcset="">
-          </div>
-        </div>
-      </template>
-    </Swiper>
+  <div class="store">
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-import Swiper from "@/components/Swiper";
 export default {
-  name: "",
+  name: "store-app",
   props: {},
   data() {
     return {
-      bannerData: []
+      store_info:undefined
     };
   },
   computed: {},
   created() {},
   methods: {},
-  components: {
-    Swiper
-  }
+  components: {}
 };
 </script>
 

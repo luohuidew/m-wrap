@@ -3,6 +3,8 @@
     v-if="listData">
     <van-tabs v-model="active"
       sticky
+      ellipsis
+      :background="'#000000'"
       :line-height="0"
       :offset-top="offsetTop"
       @scroll="get_scroll_num"

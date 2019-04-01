@@ -12,18 +12,16 @@
         </router-link>
         <div class="scroll-row-box">
           <ul>
-            <template v-for="item in 4">
-              <li v-for="(item,index) in store.product"
-                :key="index">
-                <router-link class="box-item"
-                  :to="{path:item.route}">
-                  <img :src="item.cover_img"
-                    alt=""
-                    srcset="">
-                  <p>{{item.money_unit}}{{item.alone_price}}</p>
-                </router-link>
-              </li>
-            </template>
+            <li v-for="(item,index) in store.product"
+              :key="index">
+              <router-link class="box-item"
+                :to="{path:item.route}">
+                <img :src="item.cover_img"
+                  alt=""
+                  srcset="">
+                <p>{{item.money_unit}}{{item.alone_price}}</p>
+              </router-link>
+            </li>
           </ul>
         </div>
       </li>
@@ -46,14 +44,14 @@ export default {
     };
   },
   computed: {
-    headHeight(){
-      return document.querySelectorAll('.page-head')[0].offsetHeight;
+    headHeight() {
+      return document.querySelectorAll(".page-head")[0].offsetHeight;
     }
   },
   created() {},
   methods: {
-    get_more_data(data){
-      console.log(data)
+    get_more_data(data) {
+      console.log(data);
     }
   },
   components: {}
@@ -89,7 +87,7 @@ export default {
       width: 100px;
       height: 100px;
       border-radius: 6px;
-      border:1px solid #f3f3f3;
+      border: 1px solid #f3f3f3;
     }
     p {
       font-size: 12px;

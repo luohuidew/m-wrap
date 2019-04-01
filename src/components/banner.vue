@@ -40,7 +40,6 @@ export default {
 
 <style lang="scss" scoped>
 #banner {
-  height: 190px;
   img {
     width: 100%;
     height: 100%;

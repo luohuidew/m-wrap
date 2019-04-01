@@ -467,7 +467,7 @@ export default {
     align-items: center;
     justify-content: center;
     height: 50px;
-    width: 70px;
+    width: 50px;
     color: #000;
     font-size: 14px;
     // padding: 6px 0;

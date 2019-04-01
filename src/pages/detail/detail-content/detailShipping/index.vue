@@ -1,8 +1,13 @@
 <template>
-  <div>
+  <div class="shipping-box">
+    <div class="icon-box">
+      <img src="/static/images/icon/detail/详情 满减@3x.png"
+        alt=""
+        srcset="">
+    </div>
     <div class="detail-shipping"
       @click="show_detail_shipping">
-      <p>{{default_data.key_name}}</p>
+      <p class="font-weight-bold">{{default_data.key_name}}</p>
       <p class="remark">{{default_data.desc}}</p>
     </div>
     <!-- <van-popup v-model="show_dialog"
@@ -18,22 +23,21 @@ import shippingDialog from "./components/shippingDialog";
 export default {
   name: "",
   props: {
-    allData:{
-      type:Object,
-
+    allData: {
+      type: Object
     }
   },
   data() {
     return {
       show_dialog: false,
-      default_data:this.allData.shipment[0]
+      default_data: this.allData.shipment[0]
     };
   },
   computed: {},
   created() {},
   methods: {
-    show_detail_shipping(){
-      this.$emit('toggle',true);
+    show_detail_shipping() {
+      this.$emit("toggle", true);
     }
   },
   components: {
@@ -43,7 +47,19 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.shipping-box {
+  display: flex;
+  align-items: center;
+  .icon-box {
+    padding-right: 10px;
+    img {
+      height: 20px;
+      width: auto;
+    }
+  }
+}
 .detail-shipping {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;

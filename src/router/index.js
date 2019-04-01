@@ -7,6 +7,7 @@ import LAYOUT from "./modules/layout"
 import CHECKOUT from "./modules/checkout"
 import USER from "./modules/user"
 import SEARCH from "./modules/search"
+import STORE from "./modules/store"
 import TEST from "./modules/test"
 Vue.use(Router)
 export default new Router({
@@ -21,7 +22,7 @@ export default new Router({
     LAYOUT,
     USER,
     SEARCH,
-    {
+    STORE, {
       path: '/home/index',
       name: 'home',
       component: () =>
@@ -53,16 +54,7 @@ export default new Router({
         keepAlive: false
       }
     },
-    {
-      path: '/store',
-      name: 'store',
-      component: () =>
-        import('@/views/store'),
-      meta: {
-        title: 'store',
-        keepAlive: false
-      }
-    },
+
     {
       path: '/login',
       name: 'login',
@@ -71,7 +63,7 @@ export default new Router({
       meta: {
         title: 'login',
         keepAlive: false,
-        fullScreen:true
+        fullScreen: true
       }
     },
     {
@@ -94,7 +86,7 @@ export default new Router({
       meta: {
         title: 'Statement',
         keepAlive: false,
-        fullScreen:true
+        fullScreen: true
       }
     },
     {
@@ -105,7 +97,7 @@ export default new Router({
       meta: {
         title: 'About US',
         keepAlive: false,
-        fullScreen:true
+        fullScreen: true
       }
     },
 
@@ -127,10 +119,11 @@ export default new Router({
       meta: {
         title: 'Details',
         keepAlive: false,
-        fullScreen:true
+        fullScreen: true
       }
       //    redirect: '/detail/',
-    }, {
+    },
+    {
       path: '/pay',
       name: 'pay',
       component: () =>
@@ -139,7 +132,8 @@ export default new Router({
         title: 'Create order',
         keepAlive: false,
       }
-    }, {
+    },
+    {
       path: '/accept',
       name: 'accept',
       component: () =>
@@ -148,7 +142,8 @@ export default new Router({
         title: 'Payment',
         keepAlive: false,
       }
-    }, {
+    },
+    {
       path: '/address',
       name: 'address',
       component: () =>
@@ -156,7 +151,8 @@ export default new Router({
       meta: {
         title: 'address',
       }
-    }, {
+    },
+    {
       path: '/add_address',
       name: 'add_address',
       component: () =>
@@ -164,17 +160,20 @@ export default new Router({
       meta: {
         title: 'address',
       }
-    }, {
+    },
+    {
       path: '/delivery',
       name: 'delivery',
       component: () =>
         import('@/pages/delivery'),
-    }, {
+    },
+    {
       path: '/coupon',
       name: 'coupon',
       component: () =>
         import('@/pages/coupon'),
-    }, {
+    },
+    {
       path: '/share',
       name: 'share',
       component: () =>
@@ -201,7 +200,8 @@ export default new Router({
     {
       path: '*',
       redirect: '/'
-    }, {
+    },
+    {
       path: '/',
       redirect: '/home/index'
     },
