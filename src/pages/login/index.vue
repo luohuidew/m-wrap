@@ -244,7 +244,7 @@ export default {
 .facebook-login-box {
   position: relative;
   height: 100%;
-  background: #fff url("/static/img/elements/user_login_bg1.jpg") no-repeat top
+  background: #fff url("/static/images/elements/login_bg.jpg") no-repeat top
     left;
   background-size: 100% auto;
   overflow: auto;
