@@ -38,15 +38,22 @@
       </template>
       <template v-if="appTheme">
         <li class="me">
-          <span>{{$route.meta.title}}</span>
+          <span>Me</span>
         </li>
-        <li class="setting-icon">         
-          <router-link :to="{path:'/search/search-query'}">
-            <img src="/static/images/icon/normal/search@2x.png"
+        <li class="setting-icon">
+          <router-link :to="{path:'/'}"
+            :class="{'active':haveMessages}">
+            <img class="messages"
+              src="/static/images/icon/user/mine_notifi_nav_icon@3x.png"
+              alt="">
+          </router-link>
+          <router-link :to="{path:'/user/setting'}">
+            <img src="/static/images/icon/user/mine_setting_nav_icon@3x.png"
               alt="">
           </router-link>
         </li>
       </template>
+
     </ul>
     <van-popup v-model="contractionShow"
       position="left"

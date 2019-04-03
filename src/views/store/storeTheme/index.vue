@@ -1,33 +1,46 @@
 <template>
-  <div class="store-page">
-    <Swiper :datas='bannerData'>
-      <template slot="default"
-        slot-scope="{item}">
-        <div style="width:280px;height:307px">         
-          <div class="img-box">
-            <img src="" alt="" srcset="">
-          </div>
-        </div>
-      </template>
-    </Swiper>
+  <div class="store-page"
+    v-if="homeData">
+
+    <div class="theme-content">
+      <themeHeader :bannerData="homeData.storeBanners" />
+      <themeCate :cateData="homeData.categoryList" />
+      <themeHot :hotData="homeData.hotSkuList" />
+      <scrollCate :listData="homeData.categoryList" />
+    </div>
   </div>
 </template>
 
 <script>
-import Swiper from "@/components/Swiper";
+import api from "@/api/store";
+import themeHeader from "./components/themeHeader";
+import themeCate from "./components/themeCate";
+import themeHot from "./components/themeHot";
+import scrollCate from "@/views/home/components/scrollCate"
 export default {
   name: "",
   props: {},
   data() {
     return {
-      bannerData: []
+      homeData: undefined
     };
   },
   computed: {},
-  created() {},
-  methods: {},
+  created() {
+    this.init_data();
+  },
+  methods: {
+    init_data() {
+      api.getThemeStoreInfo().then(res => {
+        this.homeData = res.data;
+      });
+    }
+  },
   components: {
-    Swiper
+    themeHeader,
+    themeCate,
+    themeHot,
+    scrollCate
   }
 };
 </script>

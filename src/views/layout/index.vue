@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="page-body"
-      :class="{'in-app':full_screen,'home-page':home_page}">
+      :class="{'in-app':full_screen,'home-page':home_page,'home-page-no-footer':home_page_no_footer}">
       <transition :name="transitionName">
         <template v-if="$route.meta.keepAlive">
           <keep-alive>
@@ -30,7 +30,7 @@
 
     </div>
     <div class="home-footer"
-      v-show="home_page">
+      v-show="home_page && !home_page_no_footer">
       <home-footer />
     </div>
     <!-- <div class="auto-login"> -->
@@ -67,13 +67,21 @@ export default {
       } else {
         return false;
       }
-    },
-    no_header() {
-      let temp = this.$route.meta.noHeader;
-      return temp;
-    },
+    },   
     home_page() {
-      let home_page_lists = ["/home/index", "/user/index"];
+      let home_page_lists = [
+        "/home/index",
+        "/user/index",
+        "/store/theme",
+        "/home/theme"
+      ];
+      return home_page_lists.indexOf(this.$route.path) !== -1;
+    },
+    home_page_no_footer() {
+      let home_page_lists = [       
+        "/store/theme",
+        "/home/theme"
+      ];
       return home_page_lists.indexOf(this.$route.path) !== -1;
     }
   },
@@ -157,6 +165,9 @@ export default {
   }
   &.home-page {
     height: calc(100% - 100px);
+  }
+  &.home-page-no-footer {
+    height: calc(100% - 55px);
   }
 }
 /*  */

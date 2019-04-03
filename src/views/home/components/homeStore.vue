@@ -6,10 +6,10 @@
         Selected Stores
       </span>
       <span class="right-arrow">
-        <span>View All </span>
+        <!-- <span>View All </span>
         <img src="/static/images/icon/user/user_right_gary_arrow@3x.png"
           alt=""
-          srcset="">
+          srcset=""> -->
       </span>
     </div>
     <div class="card-swiper">

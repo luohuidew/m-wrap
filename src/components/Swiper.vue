@@ -70,6 +70,9 @@
     background: #fff;
     width: 100%;
     text-align: center;
+    border-radius: 6px;
+    overflow: hidden;
+    // transition: all 0.5s;
   }
 
 }

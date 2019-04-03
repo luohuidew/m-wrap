@@ -6,7 +6,7 @@ export default {
     import('@/views/store/index'),
   meta: {
     title: '',
-    keepAlive: false,
+    keepAlive: true,
     fullScreen: true
   },
   children: [{
@@ -37,6 +37,26 @@ export default {
       title: 'Store cate',
       keepAlive: false,
       fullScreen:true     
+    },
+  },{
+    path: 'list',
+    name: 'store-list',
+    component: () =>
+      import('@/views/store/storeList'),
+    meta: {
+      title: 'Store list',
+      keepAlive: false,
+      fullScreen:true     
+    },
+  },{
+    path: 'theme',
+    name: 'store-theme',
+    component: () =>
+      import('@/views/store/storeTheme'),
+    meta: {
+      title: 'Store theme',
+      keepAlive: true,
+      fullScreen:false     
     },
   }]
 }

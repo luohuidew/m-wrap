@@ -33,7 +33,16 @@ export default new Router({
         type: 'list'
       }
     },
-
+    {
+      path: '/home/theme',
+      name: 'theme',
+      component: () =>
+        import('@/views/home/homeTheme'),
+      meta: {
+        title: 'HOME THEME',
+        keepAlive: false,
+      }
+    },
     {
       path: '/hot',
       name: 'hot',

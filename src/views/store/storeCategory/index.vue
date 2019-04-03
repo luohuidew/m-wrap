@@ -17,7 +17,8 @@
           <ul>
             <li class="seconed-cate"
               v-for="(item) in cate_first.children"
-              :key="item.id">{{item.cat_name}}</li>
+              :key="item.id"
+              @click="to_store_list(item.id)">{{item.cat_name}}</li>
           </ul>
         </van-collapse-item>
       </van-collapse>
@@ -54,6 +55,16 @@ export default {
     },
     get_first_cate(data) {
       console.log(data);
+    },
+    to_store_list(cate_id) {
+      let query_params = {
+        path: "/store/list",
+        query: {
+          cate_id: cate_id,
+          store_id: this.$route.query.store_id
+        }
+      };
+      this.$router.push(query_params);
     }
   },
   components: {

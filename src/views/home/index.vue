@@ -2,7 +2,6 @@
   <div id="weget"
     v-if="homeData">
     <banner :bannerData="homeData.home_banner"></banner>
-
     <category :listsData="homeData.recommend_category"></category>
     <store :bannerData="homeData.store_banner"
       :listsData="homeData.recommend_store"></store>

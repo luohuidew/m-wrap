@@ -1,5 +1,5 @@
 <template>
-  <div class="scroll-cate"
+  <div id="scroll-cate"
     v-if="listData">
     <van-tabs v-model="active"
       sticky
@@ -7,33 +7,25 @@
       :background="'#000000'"
       :line-height="0"
       :offset-top="offsetTop"
-      @scroll="get_scroll_num"
-      @change="toggle_data">
-      <van-tab v-for="(item,index) in listData"
+      @scroll="get_scroll_num">
+      <van-tab class="scroll-tab"
+        v-for="(item,index) in listData"
         :key="item.cat_id"
         :title="item.cat_id">
         <span :class="{'scroll-title':true,'active':active===index}"
           slot="title">
           <img :src="item.img_url"
             alt="">
-          <p>{{item.name}}</p>
+          <p class="icon-text text-line-clamp-1">{{item.name}}</p>
         </span>
-        <ul class="pick-lists"
-          slot="default"
-          v-show="index===active">
-          <li v-for="(item,index) in goodsListsData"
-            :key="index">
-            <autoCard :cardData="item"></autoCard>
-          </li>
-        </ul>
+        <scrollCateItem :curCateId="item.cat_id"></scrollCateItem>
       </van-tab>
     </van-tabs>
   </div>
 </template>
 
 <script>
-import autoCard from "@/components/card-column-auto";
-import GOODS from "@/api/goods";
+import scrollCateItem from "./scrollCateItem";
 export default {
   name: "",
   props: {
@@ -46,8 +38,8 @@ export default {
     return {
       active: 0,
       offsetTop: 0,
-      goodsListsData: [],
-      selectId: 0
+
+      curCateId: this.listData[0].cat_id
     };
   },
   computed: {},
@@ -62,18 +54,14 @@ export default {
     init_data(params) {
       GOODS.get_lists(params).then(res => {
         this.goodsListsData = res.data.data;
+        this.selectId = res.data.extend.selectId;
       });
       // GOODS.get_lists();
     },
-    get_more_data(params) {
-      GOODS.get_lists(params).then(res => {
-        res.data.data.forEach(item => {
-          this.goodsListsData.push(item);
-        });
-      });
-    },
+
     toggle_data(index, title) {
       // console.log(index, title);
+      this.curCateId = title;
       let params = {
         cat_id: title
       };
@@ -82,36 +70,38 @@ export default {
     get_scroll_num(data) {}
   },
   components: {
-    autoCard
+    scrollCateItem
   }
 };
 </script>
 
 <style lang='scss' scoped>
+#scroll-cate {
+  & /deep/ .van-tabs--line {
+    padding-top: 48px;
+  }
+  & /deep/ .van-tabs--line .van-tabs__wrap {
+    height: 48px;
+  }
+  & /deep/ .van-tab {
+    background-color: #000000;
+  }
+  .icon-text {
+    color: #ffffff;
+    font-size: 12px;
+  }
+}
 .scroll-title {
   background-color: #000000;
   color: #ffffff;
+  display: flex;
+    height: 48px;
   img {
     height: 20px;
     width: auto;
   }
   &.active {
     background-color: #d70e19;
-  }
-}
-/*  */
-.pick-lists {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  & > li {
-    width: calc(50% - 5px);
-    margin-bottom: 10px;
-    &:nth-child(2n-1) {
-      // margin-right: 5px;
-    }
-    &:nth-child(2n) {
-    }
   }
 }
 </style>

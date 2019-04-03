@@ -1,8 +1,6 @@
 <template>
   <div class="store">
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -12,7 +10,7 @@ export default {
   props: {},
   data() {
     return {
-      store_info:undefined
+      store_info: undefined
     };
   },
   computed: {},

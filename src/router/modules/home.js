@@ -16,6 +16,17 @@ export default {
       }
     },
     {
+      path: 'weget',
+      name: 'weget',
+      component: () =>
+        import('@/pages/home/weget.vue'),
+      meta: {
+        title: 'Weget',
+        keepAlive: true,
+        type: 'list'
+      }
+    },
+    {
       path: '/activity',
       name: 'activity',
       component: () =>
@@ -248,12 +259,6 @@ export default {
           ]
         },
       ]
-    },
-    // {
-    //   path: 'me',
-    //   name: 'me',
-    //   component: () =>
-    //     import('@/pages/home/me.vue'),
-    // },
+    },   
   ]
 }

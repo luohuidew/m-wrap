@@ -43,7 +43,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     & > li {
-      width: 25%;
+      width: 20%;
     }
   }
 }
