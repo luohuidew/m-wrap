@@ -44,7 +44,7 @@
           alt=""
           src="/static/images/icon/normal/收藏后@2x.png"
           srcset="">
-         
+
       </span>
       <span>Like</span>
     </a>
@@ -342,15 +342,15 @@ export default {
     },
     like_goods() {
       let params = {
-        is_like: 1
+        sku_id: this.$route.query.sku_id
       };
       api.like(params).then(res => {
         this.is_like = res.data;
-        if (this.is_like === 1) {
-          this.sku.like_num += -1;
-        } else {
-          this.sku.like_num += 1;
-        }
+        // if (this.is_like === 1) {
+        //   this.sku.like_num += -1;
+        // } else {
+        //   this.sku.like_num += 1;
+        // }
       });
     }
   }

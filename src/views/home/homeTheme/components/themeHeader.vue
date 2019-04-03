@@ -13,18 +13,18 @@
           <div class="store-box">
             <div class="store-header">
               <div class="store-info">
-                <img :src="item.store_info.logo"
+                <img :src="item.image_url"
                   alt=""
                   srcset="">
-                <span>{{item.store_info.name}}</span>
+                <span>{{item.name}}</span>
               </div>
-              <div class="visit-btn"
-                @click="to_store(item.store_info.store_id)">
+              <router-link class="visit-btn"
+                :to="item.route">
                 Visit Store
-              </div>
+              </router-link>
             </div>
             <ul class="sku-lists">
-              <li v-for="(goods) in item.store_sku"
+              <li v-for="(goods) in item.product"
                 :key="goods.sku_id"
                 @click="to_sku_detail(goods.sku_id)">
                 <img :src="goods.cover_img"

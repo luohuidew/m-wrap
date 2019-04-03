@@ -5,7 +5,7 @@
       <li v-for="(item,index) in listsData"
         :key="index">
         <router-link class="remo-box"
-          :to="{path:item.path}">
+          :to="{path:item.route}">
           <img :src="item.image_url"
             alt="">
           <span>{{item.title}}</span>

@@ -29,27 +29,27 @@ export default {
     return {
       asideLists: [
         {
-          icon: "/static/images/icon/normal/导航-account@2x.png",
+          icon: "/static/images/icon/options/导航-home@3x.png",
           title: "HOME",
           path: "/"
         },
         {
-          icon: "/static/images/icon/normal/导航-account@2x.png",
+          icon: "/static/images/icon/options/导航-orders@3x.png",
           title: "Orders",
           path: "/user/orders"
         },
         {
-          icon: "/static/images/icon/normal/导航-account@2x.png",
+          icon: "/static/images/icon/options/导航-coupons@3x.png",
           title: "Coupons",
           path: "/user/coupon"
         },
         {
-          icon: "/static/images/icon/normal/导航-account@2x.png",
+          icon: "/static/images/icon/options/导航-account@3x.png",
           title: "Account",
           path: "/user/index"
         },
         {
-          icon: "/static/images/icon/normal/导航-account@2x.png",
+          icon: "/static/images/icon/options/导航-settings@3x.png",
           title: "Settings",
           path: "/user/setting"
         },

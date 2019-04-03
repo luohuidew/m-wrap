@@ -16,4 +16,11 @@ export default {
       data: JSON.stringify(data),
     })
   },  
+  homeTopic(data={}) {
+    return request({
+      url: 'topic/homeTopic',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },  
 }

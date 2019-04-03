@@ -67,7 +67,7 @@ export default {
       } else {
         return false;
       }
-    },   
+    },
     home_page() {
       let home_page_lists = [
         "/home/index",
@@ -78,10 +78,7 @@ export default {
       return home_page_lists.indexOf(this.$route.path) !== -1;
     },
     home_page_no_footer() {
-      let home_page_lists = [       
-        "/store/theme",
-        "/home/theme"
-      ];
+      let home_page_lists = ["/store/theme", "/home/theme"];
       return home_page_lists.indexOf(this.$route.path) !== -1;
     }
   },
@@ -150,8 +147,12 @@ export default {
   // flex-direction: column;
   /* margin-top:50px; */
 }
+#app-header-top {
+  box-shadow: 0px 2px 6px 0px #d0d0d0;
+}
 .page-head {
   height: 55px;
+
   /*background-color: #f3f3f3;*/
 }
 .page-body {
@@ -165,9 +166,11 @@ export default {
   }
   &.home-page {
     height: calc(100% - 100px);
+    padding-top: 5px;
   }
   &.home-page-no-footer {
     height: calc(100% - 55px);
+    padding-top: 5px;
   }
 }
 /*  */
@@ -181,6 +184,7 @@ export default {
   /* position: absolute; */
   /* left: 0; */
   /* top: 0; */
+
   width: 100%;
   height: 100%;
   overflow: auto;

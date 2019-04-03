@@ -87,15 +87,22 @@ export default {
     background-color: #000000;
   }
   .icon-text {
+    text-align: center;
     color: #ffffff;
-    font-size: 12px;
+    font-size: 10px;
+    padding: 0 5px;
+    height: 12px;
+    line-height: 12px;
   }
 }
 .scroll-title {
   background-color: #000000;
   color: #ffffff;
   display: flex;
-    height: 48px;
+  flex-direction: column;
+  justify-content: center;
+  height: 48px;
+  align-items: center;
   img {
     height: 20px;
     width: auto;

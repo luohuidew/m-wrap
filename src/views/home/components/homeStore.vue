@@ -16,10 +16,11 @@
       <van-swipe :autoplay="3000">
         <van-swipe-item v-for="(item,index) in bannerData"
           :key="index">
-          <img :src="item.image_url"
-            alt=""
-            srcset=""
-            @click="to_path(item.route)">
+          <router-link :to="item.route">
+            <img :src="item.image_url"
+              alt=""
+              srcset="">
+          </router-link>
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -27,8 +28,8 @@
       <ul>
         <li v-for="(store,index) in storeData"
           :key="index"
-          class="store-item">
-          <div class="store-title">
+          class="store-item" >
+          <div class="store-title" @click="to_path(store.route)">
             <div class="img-box">
               <img :src="store.image_url"
                 alt=""
@@ -39,7 +40,9 @@
                 {{store.name}}
               </div>
               <div class="store-tag">
-                {{store.tag}}
+                <img :src="store.tag.tag_url"
+                  alt=""
+                  srcset="">
               </div>
             </div>
             <!-- <div class="more">
@@ -87,7 +90,13 @@ export default {
   },
   computed: {},
   created() {},
-  methods: {},
+  methods: {
+    to_path(path){
+      this.$router.push({
+        path:path
+      });
+    }
+  },
   components: {}
 };
 </script>
@@ -104,6 +113,11 @@ export default {
   height: 130px;
   overflow: hidden;
   border-radius: 6px;
+  a {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
   img {
     width: 100%;
     height: 100%;
@@ -143,7 +157,7 @@ export default {
         border-right: 1px solid #f3f3f3;
       }
       &:nth-child(2n) {
-        padding-left: 10px;       
+        padding-left: 10px;
       }
     }
   }
@@ -158,13 +172,17 @@ export default {
         no-repeat right center;
       background-size: 12px;
       .store-tag {
-        -webkit-background-clip: text; /*必需加前缀 -webkit- 才支持这个text值 */
-        -webkit-text-fill-color: transparent; /*text-fill-color会覆盖color所定义的字体颜色： */
-        background-image: linear-gradient(
-          42deg,
-          rgba(114, 135, 241, 1) 0%,
-          rgba(223, 96, 185, 1) 100%
-        );
+        // -webkit-background-clip: text; /*必需加前缀 -webkit- 才支持这个text值 */
+        // -webkit-text-fill-color: transparent; /*text-fill-color会覆盖color所定义的字体颜色： */
+        // background-image: linear-gradient(
+        //   42deg,
+        //   rgba(114, 135, 241, 1) 0%,
+        //   rgba(223, 96, 185, 1) 100%
+        // );
+        img {
+          height: 7px;
+          width: auto;
+        }
       }
     }
     .img-box {

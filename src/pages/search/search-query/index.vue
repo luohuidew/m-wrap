@@ -34,10 +34,8 @@
       <li class="recommend-block">
         <h3>{{'Discover More'.toUpperCase()}}</h3>
         <ul>
-          <li>naer</li>
-          <li>naer</li>
-          <li>naer</li>
-          <li>naervvvvvvvvvvvvvvvvvvvvvvvv</li>
+          <li v-for="(item,index) in hotData"
+            :key="index" @click="to_cate_search(item.cat_id,item.name)">{{item.name}}</li>
         </ul>
       </li>
     </ul>
@@ -45,19 +43,30 @@
 </template>
 
 <script>
+import SEARCH from "@/api/search";
 export default {
   name: "",
   data() {
     return {
       show_page: true,
       req_data: undefined,
-      history_lists: [1, 2, 3],
-      recommend_lists: []
+      history_lists: [],
+      hotData: [],
+      recommend_lists: [],
+      search_text: ""
     };
   },
-  mounted() {},
+  mounted() {
+    this.init_data();
+  },
   computed: {},
   methods: {
+    init_data() {
+      SEARCH.searchrecord().then(res => {
+        this.history_lists = res.data.history;
+        this.hotData = res.data.hot;
+      });
+    },
     to_search(val) {
       if (val) {
         this.search_text = "";
@@ -71,8 +80,22 @@ export default {
         this.$router.push(params);
       }
     },
+    to_cate_search(cat_id,cat_name) {
+      if (cat_id) {       
+        let params = {
+          path: "/search/search-lists",
+          query: {
+            cat_id: cat_id,
+            page_label: cat_name
+          }
+        };
+        this.$router.push(params);
+      }
+    },
     clear_history() {
-      this.history_lists = [];
+      SEARCH.delRecord().then(res => {
+        this.history_lists = [];
+      });
     },
     go_back() {
       this.$router.go(-1);
