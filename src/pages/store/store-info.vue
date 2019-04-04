@@ -9,7 +9,7 @@
         </p>
         <p class="store-desc">
           <span>{{store_info.name}}</span>
-          <span class="creat-time" v-show="store_info.open_time"> {{store_info.open_time}}</span>
+          <span class="creat-time" v-if="store_info.open_time"> {{store_info.open_time}}</span>
         </p>
 
       </div>

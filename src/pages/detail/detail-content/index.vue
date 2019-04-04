@@ -3,7 +3,7 @@
     <div class="detail-content"
       v-if="sku">
       <div class="content">
-        <detail-cover :sku-data="sku"
+        <detail-cover :storeData="store_info" :sku-data="sku"
           :goods-data="cur_goods"></detail-cover>
         <!-- <detail-group :group-data="group"
           @change="join_group"></detail-group> -->

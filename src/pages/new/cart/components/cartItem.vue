@@ -14,14 +14,16 @@
             alt=""
             srcset="">
         </div>
-        <p class="total-store" @click="to_store(all_data.store_id)">
+        <p class="total-store"
+          @click="to_store(all_data.store_id)">
           <img src="/static/images/icon/cart/store@3x.png"
             alt=""
             srcset="">
           <span>{{all_data.store_name}}</span>
         </p>
       </div>
-      <p class="to-store" @click="to_store(all_data.store_id)">
+      <p class="to-store"
+        @click="to_store(all_data.store_id)">
         <img src="/static/images/icon/cart/分类 copy@3x.png"
           alt="">
       </p>
@@ -45,7 +47,8 @@
                 srcset="">
             </div>
           </div>
-          <div class="cover-img-box" @click="to_detail(item.sku_id)">
+          <div class="cover-img-box"
+            @click="to_detail(item.sku_id)">
             <img :src="item.goods_img"
               alt=""
               srcset="">
@@ -108,9 +111,7 @@ export default {
       return this.cur_lists.length === this.checked_all_only.length;
     }
   },
-  mounted() {
-    console.log(this.$store);
-  },
+  mounted() {},
   watch: {
     checked_all_item: {
       handler(cur, old) {
@@ -145,7 +146,6 @@ export default {
       let params = {
         only: [only_id]
       };
-      console.log(this.$store);
 
       CART.delShopCartGood(params).then(res => {
         this.cur_lists.splice(index, 1);
@@ -199,7 +199,7 @@ export default {
         }
       });
     },
-     to_store(store_id) {
+    to_store(store_id) {
       let params = {
         path: "/store",
         query: {
@@ -216,7 +216,7 @@ export default {
         }
       };
       this.$router.push(params);
-    },
+    }
   },
   components: {}
 };

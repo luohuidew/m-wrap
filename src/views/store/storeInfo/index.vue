@@ -9,11 +9,11 @@
       </div>
       <div class="store-desc">
         <p class="font-weight-bold">{{headerData.name}}</p>
-        <p>{{headerData.open_time}}</p>
+        <p v-if="headerData.open_time">{{headerData.open_time}}</p>
       </div>
       <follow :headerData="headerData" />
     </div>
-    <div class="tag-box">
+    <div class="tag-box" v-if="headerData.list_store_tag.length">
       <span v-for="(item,index) in headerData.list_store_tag"
         :key="index">
         <img :src="item.tag_url"
@@ -27,9 +27,8 @@
           alt="">
         <span>Products: {{headerData.total_num}}</span>
       </p>
-      <p>
-        <img v-if="headerData.location"
-          src="/static/images/icon/store/店铺 地点@3x.png"
+      <p v-if="headerData.location">
+        <img src="/static/images/icon/store/店铺 地点@3x.png"
           alt="">
         <span>{{headerData.location}}</span>
       </p>
@@ -100,6 +99,7 @@ export default {
     p {
       font-size: 12px;
       line-height: 18px;
+      padding: 4px;
       &:nth-child(1) {
         font-size: 14px;
       }

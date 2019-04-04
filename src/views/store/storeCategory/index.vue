@@ -3,18 +3,18 @@
     v-if="storeData">
     <div class="header-top">
       <topHeader>
-        <span slot>hello</span>
+        <span slot>{{decodeURIComponent($route.query.page_label)}}</span>
       </topHeader>
     </div>
     <div class="cate-lists">
 
       <van-collapse @change="get_first_cate"
-        v-model="activeNames">
+        v-model="activeNames" accordion>
         <van-collapse-item v-for="(cate_first) in  storeData"
           :title="cate_first.cat_name"
           :name="cate_first.id"
           :key="cate_first.id">
-          <ul>
+          <ul v-if="cate_first.children.length">
             <li class="seconed-cate"
               v-for="(item) in cate_first.children"
               :key="item.id"
@@ -54,6 +54,13 @@ export default {
       });
     },
     get_first_cate(data) {
+      let temp_flag_lists = this.storeData.filter(item=>{
+        return item.id == data;
+      })
+      // debugger
+      if(!temp_flag_lists[0].children.length){
+        this.to_store_list(data);
+      }
       console.log(data);
     },
     to_store_list(cate_id) {

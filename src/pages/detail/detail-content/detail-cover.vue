@@ -25,10 +25,8 @@
         <p class="price"
           v-if="cur_goods">
           <span class="cur-price">${{cur_goods.alone_price}}</span>
-          <span class="old-price" v-if="cur_goods.crossed_price">${{cur_goods.crossed_price}}</span>
-        </p>
-        <p class="like-number">
-          {{sku.bought_num}} bought
+          <span class="old-price"
+            v-if="cur_goods.crossed_price">${{cur_goods.crossed_price}}</span>
         </p>
       </div>
       <div class="icon-box">
@@ -43,6 +41,15 @@
       <div class="goods-info">
         {{sku.title}}
       </div>
+      <p class="like-number">
+        <span>
+          {{sku.bought_num}} bought
+        </span>
+        <span>
+          {{storeData.location}}
+        </span>
+        
+      </p>
     </div>
   </div>
 </template>
@@ -58,6 +65,10 @@ export default {
     goodsData: {
       type: Object,
       default: null
+    },
+    storeData:{
+      type:Object,
+      default:undefined
     }
   },
   data() {
@@ -149,9 +160,15 @@ export default {
     text-decoration-line: line-through;
     padding-left: 16px;
   }
-  .like-number {
-    font-size: 14px;
-    color: #9b9b9b;
+}
+.like-number {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px 0 20px;
+  align-items: center;
+  font-size: 14px;
+  color: #9b9b9b;
+  span {
   }
 }
 .icon-box {

@@ -16,7 +16,7 @@
       <li v-for="(item) in orderData"
         :key="item.id">
         <orderCard :data="item"
-          v-if="active===0||item.status===active" />
+          v-if="!active||item.status===active" />
       </li>
     </ul>
     <!-- <div v-if="orderData.some()"

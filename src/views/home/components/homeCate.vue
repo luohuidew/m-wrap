@@ -8,7 +8,7 @@
           :to="{path:item.route}">
           <img :src="item.image_url"
             alt="">
-          <span>{{item.title}}</span>
+          <span class="text-line-clamp-1">{{item.title}}</span>
         </router-link>
       </li>
     </ul>
@@ -53,11 +53,13 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  text-align: center;
   img {
     height: 57px;
     width: 57px;
   }
   span {
+    width: 100%;
     font-size: 10px;
   }
 }

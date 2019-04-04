@@ -2,7 +2,7 @@
   <div class="store-all-product-page">
     <van-list v-model="loading"
       :finished="finished"
-      finished-text="No More data"
+      finished-text=""
       loading-text="Loading..."
       :offset="150"
       @load="get_more_data">

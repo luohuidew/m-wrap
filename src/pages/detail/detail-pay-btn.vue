@@ -23,10 +23,13 @@
     </a>
     <a class="store-btn"
       href="javascript:;"
-      @click="to_cart">
+      @click="to_cart"
+      :class="{'have-goods':storeCart.goods_num}">
+      <span class="cart-mun-icon" v-if="storeCart.goods_num">{{storeCart.goods_num}}</span>
       <span class="heart"
         :class="is_like===2?'active':''">
-        <img alt=""
+        <img :class="{'animated bounceIn':!isStatic}"
+          alt=""
           src="/static/images/icon/header/H5-购物车@3x.png"
           srcset="">
       </span>
@@ -183,7 +186,8 @@ export default {
       is_group: false,
       c_query: this.$route.query,
       /* 开团提示的弹框的额内容 */
-      recommend_group: undefined
+      recommend_group: undefined,
+      isStatic: true
     };
   },
   computed: {
@@ -215,6 +219,9 @@ export default {
     },
     goods_state() {
       return this.$store.state.cart.is_static;
+    },
+    storeCart() {
+      return this.$store.state.cart;
     }
   },
   props: ["goods", "sku", "attrList", "curGoods", "groupMainUser"],
@@ -228,7 +235,13 @@ export default {
     //     this.close_tips(2,cur);
     //   },
     //   deep:true
-    // }
+    // },
+    storeCart() {
+      this.isStatic = false;
+      setTimeout(() => {
+        this.isStatic = true;
+      }, 1000);
+    }
   },
   mounted() {
     this.init_data();
@@ -472,6 +485,22 @@ export default {
     font-size: 14px;
     // padding: 6px 0;
     font-size: 12px;
+    &.have-goods {
+      position: relative;
+      .cart-mun-icon {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        display: block;
+        width: 14px;
+        font-size: 10px;
+        text-align: center;
+        color: #ffffff;
+        height: 14px;
+        border-radius: 50%;
+        background-color: #d70e19;
+      }
+    }
     .heart {
       // width: 40px;
       // height: 40px;

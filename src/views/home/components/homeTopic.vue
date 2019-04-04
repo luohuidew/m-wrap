@@ -22,11 +22,11 @@
                 <p>{{item.money_unit}}{{item.alone_price}}</p>
               </router-link>
             </li>
-            <li class="">
+            <!-- <li class="">
               <router-link class="box-item" :to="{path:'/hot'}">
                 <img src="/static/images/icon/home/home_more_data.png" alt="" srcset="">
               </router-link>
-            </li>
+            </li> -->
           </ul>
         </div>
       </li>

@@ -59,7 +59,7 @@ export default new Router({
       component: () =>
         import('@/pages/query'),
       meta: {
-        title: 'similar query',
+        title: 'similar',
         keepAlive: false
       }
     },
@@ -181,6 +181,11 @@ export default new Router({
       name: 'coupon',
       component: () =>
         import('@/pages/coupon'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: true
+      }
     },
     {
       path: '/share',

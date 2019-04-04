@@ -15,7 +15,7 @@
         </div>
       </template>
       <cart-guide v-if="req_data"
-        :gui-data="req_data.like.data"></cart-guide>
+        :gui-data="req_data.like"></cart-guide>
     </div>
     <cart-footer v-if="req_data"
       :total-price="footer_data.total_data"

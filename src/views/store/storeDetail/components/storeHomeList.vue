@@ -1,7 +1,7 @@
 <template>
   <section class="home-tab-page"
     v-if="homeData">
-    <div class="banner-scroll">
+    <div class="banner-scroll" v-if="homeData.store_info.store_banner_list.length">
       <banner :bannerData="homeData.store_info.store_banner_list"
         class="banner" />
     </div>

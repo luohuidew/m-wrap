@@ -14,8 +14,13 @@
           alt="">
       </p>
       <p class="store-desc">
-        <span class="store-name">{{item.name}}</span>
-        <span class="desc-min">{{item.desc}}</span>
+        <span class="store-name text-line-clamp-1">{{item.name}}</span>
+        <span class="desc-min"
+          v-if="item.list_store_tag[0]">
+          <img :src="item.list_store_tag[0].tag_url"
+            alt="">
+        </span>
+        <!-- <span class="desc-min">{{item.desc}}</span> -->
       </p>
       <p class="store-btn">
         <a href="javascript:;"
@@ -116,12 +121,16 @@ export default {
         color: #9b9b9b;
         overflow: hidden;
         text-overflow: ellipsis;
+        img {
+          height: 10px;
+          width: auto;
+        }
       }
       .store-name {
-        padding-right: 30px;
+        padding-left: 30px;
         font-size: 18px;
-        background: url("/static/img/icon/Group 34 Copy@2x.png") no-repeat right
-          center;
+        background: url("/static/images/icon/store/详情 店铺@3x.png") no-repeat
+          left center;
         background-size: auto 20px;
       }
     }

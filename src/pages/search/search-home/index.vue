@@ -99,6 +99,7 @@ export default {
   }
   .lists-box {
     flex: 1;
+    padding-top: 10px;
     overflow: auto;
     ul {
       display: flex;

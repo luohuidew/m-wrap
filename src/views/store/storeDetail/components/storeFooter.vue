@@ -1,5 +1,6 @@
 <template>
-  <div class="store-footer" v-if="footerData">
+  <div class="store-footer"
+    v-if="footerData">
     <ul>
       <li @click="to_category">
         <img src="/static/images/icon/store/店铺导航1@3x.png"
@@ -44,7 +45,8 @@ export default {
       let path_params = {
         path: "/store/category",
         query: {
-          store_id: this.$route.query.store_id
+          store_id: this.$route.query.store_id,
+          page_label: this.footerData.store_info.name
         }
       };
       this.$router.push(path_params);

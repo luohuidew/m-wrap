@@ -1,7 +1,8 @@
 <template>
   <ul class="router-lists-box">
     <li v-for="(item,index) in routerLists"
-      :key="index">
+      :key="index"
+      :class="{'have-goods':storeCart.goods_num && item.title=='CART'}">
       <router-link :to="{path:item.path}">
         <div class="default-link">
           <img :src="item.defaultIcon"
@@ -12,7 +13,6 @@
           <img :src="item.activeIcon"
             alt="">
           <span>{{item.title}}</span>
-
         </div>
       </router-link>
     </li>
@@ -20,11 +20,13 @@
 </template>
 
 <script>
+import CART from "@/api/cart";
 export default {
   name: "",
   props: {},
   data() {
     return {
+      isStatic: true,
       routerLists: [
         {
           defaultIcon: "/static/images/icon/footer/weget-black@3x.png",
@@ -52,9 +54,27 @@ export default {
       ]
     };
   },
-  computed: {},
-  created() {},
-  methods: {},
+  watch: {},
+  computed: {
+    storeCart() {
+      console.log(this.$store.state);
+      return this.$store.state.cart;
+    }
+  },
+  created() {
+    this.init_cart();
+  },
+  methods: {
+    init_cart() {
+      CART.shopCartList().then(res => {
+        let temp_num = 0;
+        res.data.goods.forEach(item => {
+          temp_num += item.goods_list.length;
+        });
+        this.$store.commit("SET_CATR", temp_num);
+      });
+    }
+  },
   components: {}
 };
 </script>
@@ -97,6 +117,21 @@ export default {
     }
     span {
       color: #d70e19;
+    }
+  }
+  /*  */
+  .have-goods {
+    position: relative;
+    &::before {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      content: "";
+      display: block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #d70e19;
     }
   }
 }

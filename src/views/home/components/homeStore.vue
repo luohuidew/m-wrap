@@ -28,18 +28,20 @@
       <ul>
         <li v-for="(store,index) in storeData"
           :key="index"
-          class="store-item" >
-          <div class="store-title" @click="to_path(store.route)">
+          class="store-item">
+          <div class="store-title"
+            @click="to_path(store.route)">
             <div class="img-box">
               <img :src="store.image_url"
                 alt=""
                 srcset="">
             </div>
-            <div class="store-name-tag">
+            <div class="store-name-tag ">
               <div class="store-name">
                 {{store.name}}
               </div>
-              <div class="store-tag">
+              <div class="store-tag"
+                v-if="store.tag.tag_url">
                 <img :src="store.tag.tag_url"
                   alt=""
                   srcset="">
@@ -91,9 +93,9 @@ export default {
   computed: {},
   created() {},
   methods: {
-    to_path(path){
+    to_path(path) {
       this.$router.push({
-        path:path
+        path: path
       });
     }
   },
@@ -166,11 +168,24 @@ export default {
     // justify-content: space-between;
     font-size: 10px;
     padding: 10px 0;
+    padding-right: 10px;
     .store-name-tag {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       flex: 1;
       background: url("/static/images/icon/user/user_right_gary_arrow@3x.png")
         no-repeat right center;
       background-size: 12px;
+      .store-name {
+        height: 12px;
+        width: 80px;
+        font-size: 10px;
+        font-weight: bold;
+        overflow: hidden;
+        /* width: 100%; */
+        text-overflow: ellipsis;
+      }
       .store-tag {
         // -webkit-background-clip: text; /*必需加前缀 -webkit- 才支持这个text值 */
         // -webkit-text-fill-color: transparent; /*text-fill-color会覆盖color所定义的字体颜色： */

@@ -2,7 +2,7 @@ import request from '@/utils/request'
 import store from '@/store';
 export default {
   goods_lists(data = {}) {
-    // data.token  = store.state.token;
+    data.token = store.state.token;
     return request({
       url: '/store/getStoreRecommendList',
       method: 'post',
@@ -10,7 +10,7 @@ export default {
     })
   },
   store_info(data = {}) {
-    // data.token  = store.state.token;
+    data.token = store.state.token;
     return request({
       url: '/store/info',
       method: 'post',
@@ -18,7 +18,7 @@ export default {
     })
   },
   getStoreCateList(data = {}) {
-    // data.token  = store.state.token;
+    data.token = store.state.token;
     return request({
       url: 'store/getStoreCateList',
       method: 'post',
@@ -26,7 +26,7 @@ export default {
     })
   },
   getSkuListByCateId(data = {}) {
-    // data.token  = store.state.token;
+    data.token = store.state.token;
     return request({
       url: 'store/getSkuListByCateId',
       method: 'post',
@@ -34,7 +34,7 @@ export default {
     })
   },
   getThemeStoreInfo(data = {}) {
-    // data.token  = store.state.token;
+    data.token = store.state.token;
     return request({
       url: 'store/getThemeStoreInfo',
       method: 'post',

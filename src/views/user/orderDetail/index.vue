@@ -11,7 +11,8 @@
           <div class="package-box">
             Package {{index+1}}
           </div>
-          <div class="tracking-no">
+          <div v-if="item.tracking_no"
+            class="tracking-no">
             Tracking Number: {{item.name}}{{item.tracking_no}}
           </div>
           <div class="cover-img-lists">
@@ -125,6 +126,28 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.order-detail {
+  .cover-img-lists {
+    img {
+      height: 40px;
+      width: 40px;
+      margin-right: 10px;
+      border-radius: 4px;
+    }
+  }
+}
+.order-packge {
+  padding: 20px;
+  .tracking-no {
+    font-size: 12px;
+  }
+  .package-box {
+    font-weight: bold;
+  }
+  & > div {
+    margin-bottom: 5px;
+  }
+}
 .detail-header {
   font-size: 14px;
 }

@@ -5,7 +5,7 @@
         Influencer’s Pick
       </span>
       <span class="right-arrow">
-        <router-link :to="{path:'/hot'}">View All </router-link>
+        <router-link :to="{path:'/hot?list_type=12&page_label=Influencer’s Pick'}">View All </router-link>
         <img src="/static/images/icon/user/user_right_gary_arrow@3x.png"
           alt=""
           srcset="">

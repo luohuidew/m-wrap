@@ -21,7 +21,7 @@
       </template>
       <template v-if="appUser">
         <li class="me">
-          <span>Me</span>
+          <span>ME</span>
         </li>
         <li class="setting-icon">
           <!-- <router-link :to="{path:'/'}"
@@ -38,7 +38,7 @@
       </template>
       <template v-if="appTheme">
         <li class="me">
-          <span>{{$route.meta.title}}</span>
+          <span>{{$route.meta.title.toUpperCase()}}</span>
         </li>
         <li class="setting-icon">
           <router-link :to="{path:'/search/search-query'}">

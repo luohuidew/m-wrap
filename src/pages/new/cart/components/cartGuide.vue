@@ -1,34 +1,62 @@
 <template>
-  <div class="cart-guide">
+  <div class="cart-guide"
+    v-if="guiData">
     <h2>You May Also Like</h2>
-    <ul>
-      <li v-for="(item,index) in req_data"
-        :key="index">
-        <sale-list :card-data="item"
-          class="sku-item"></sale-list>
-      </li>
-    </ul>
+    <van-list v-model="loading"
+      :finished="finished"
+      finished-text=""
+      @load="get_more_data"
+      :offset="220">
+      <ul>
+        <li v-for="(item,index) in listData"
+          :key="index">
+          <sale-list :card-data="item"
+            class="sku-item"></sale-list>
+        </li>
+      </ul>
+    </van-list>
+
   </div>
 </template>
 
 <script>
 import saleList from "@/components/card-column-auto";
+import CART from "@/api/cart";
 export default {
   name: "",
   props: {
     guiData: {
-      type: Array,
-      default: []
+      type: Object,
+      default: undefined
     }
   },
   data() {
     return {
-      req_data: this.guiData
+      listData: this.guiData.data,
+      loading: false,
+      finished: false,
+      selectId: this.guiData.extend.select_id
     };
   },
   mounted() {},
   computed: {},
-  methods: {},
+  methods: {
+    get_more_data() {
+      let query_params = {
+        select_id: this.selectId
+      };
+      CART.likeList(query_params).then(res => {
+        this.loading = false;
+        if (!res.data.length) {
+          this.finished = true;
+        }
+        res.data.data.forEach(item => {
+          this.listData.push(item);
+        });
+        this.selectId = res.data.selectId;
+      });
+    }
+  },
   components: {
     saleList
   }

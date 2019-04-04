@@ -1,7 +1,8 @@
 <template>
   <div class="pay-box"
     v-if="orderData.status===1">
-    <button class="cancel">
+    <button @click="order_cancel"
+      class="cancel">
       Cancel
     </button>
     <button @click="show_pay_methods=true"
@@ -18,6 +19,7 @@
 </template>
 
 <script>
+import ORDER from "@/api/order";
 import paymentDialog from "@/pages/new/checkout/payment-dialog";
 export default {
   name: "",
@@ -34,19 +36,27 @@ export default {
   },
   computed: {},
   created() {
-    if(!this.orderData.real_total_price){
+    if (!this.orderData.real_total_price) {
       this.orderData.real_total_price = this.orderData.all_total;
     }
   },
   methods: {
     payClose() {
       this.show_pay_methods = false;
-      this.$router.replace({
-        path: "/callback",
-        query: {
-          // error: 'Paymentcancellation',
-          pay_id: this.orderData.pay_id
-        }
+      // this.$router.replace({
+      //   path: "/callback",
+      //   query: {
+      //     // error: 'Paymentcancellation',
+      //     pay_id: this.orderData.pay_id
+      //   }
+      // });
+    },
+    order_cancel() {
+      let query_params = {
+        order_no: this.orderData.order_no
+      };
+      ORDER.order_cancel(query_params).then(res => {
+        window.location.reload();
       });
     }
   },

@@ -91,8 +91,11 @@ export default {
     color: #ffffff;
     font-size: 10px;
     padding: 0 5px;
-    height: 12px;
-    line-height: 12px;
+    height: 10px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 10px;
   }
 }
 .scroll-title {
@@ -100,11 +103,12 @@ export default {
   color: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 4px 0;
   height: 48px;
   align-items: center;
   img {
-    height: 20px;
+    height: 26px;
     width: auto;
   }
   &.active {

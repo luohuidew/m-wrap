@@ -34,5 +34,21 @@ export default {
       data: JSON.stringify(data),
     })
   },
+  likeList(data = {}) {
+    data.token = token;
+    return request({
+      url: 'shopcart/likeList ',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+  getCartNum(data = {}) {
+    data.token = token;
+    return request({
+      url: 'shopcart/getCartNum ',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
 
 }

@@ -232,10 +232,19 @@ export default {
       };
       CART.addToCart(to_catr_params).then(res => {
         this.$emit("close", null);
-         this.$store.dispatch('addAction',this.pay_number);
+        this.init_cart();
       }, 0);
       // setTimeout(()=>{
       // })
+    },
+    init_cart() {
+      CART.shopCartList().then(res => {
+        let temp_num = 0;
+        res.data.goods.forEach(item => {
+          temp_num += item.goods_list.length;
+        });
+        this.$store.commit("SET_CATR", temp_num);
+      });
     },
     account(num) {
       let temp_number = parseInt(this.pay_number);

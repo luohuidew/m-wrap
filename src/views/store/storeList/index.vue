@@ -3,7 +3,7 @@
     v-if="listData">
     <van-list v-model="loading"
       :finished="finished"
-      finished-text="No More Data"
+      finished-text=""
       @load="get_more_data">
       <listCard :sku="item"
         v-for="(item) in listData"

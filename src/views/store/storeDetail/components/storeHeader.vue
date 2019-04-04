@@ -10,7 +10,7 @@
       </div>
       <div class="store-desc">
         <p class="font-weight-bold">{{headerData.name}}</p>
-        <p>{{headerData.open_time}}</p>
+        <p v-if="headerData.open_time">{{headerData.open_time}}</p>
       </div>
       <follow :headerData="headerData" />
       <!-- <div v-if="headerData.is_follow===1"
@@ -31,16 +31,16 @@
     </div>
     <div class="other-info">
       <div class="procuct-position">
-        <p>
+        <p class="text-line-clamp-1">
           <img src="/static/images/icon/store/店铺产品@3x.png"
             alt="">
           <span>Products: {{headerData.total_num}}</span>
         </p>
         <p class="text-line-clamp-1">
-          <img v-if="headerData.location"
+          <img v-if="headerData.state"
             src="/static/images/icon/store/店铺 地点@3x.png"
             alt="">
-          <span>{{headerData.location}}</span>
+          <span>{{headerData.state}}</span>
         </p>
       </div>
       <div class="store-style">

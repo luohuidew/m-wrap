@@ -114,7 +114,11 @@ export default {
         })
         .then(res => {
           CART.shopCartList().then(res => {
-            this.$store.commit("SET_CATR", res.data.goods.length);
+            let temp_num = 0;
+            res.data.goods.forEach(item => {
+              temp_num += item.goods_list.length;
+            });
+            this.$store.commit("SET_CATR", temp_num);
           });
         });
     }

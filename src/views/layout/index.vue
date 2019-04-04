@@ -149,6 +149,7 @@ export default {
 }
 #app-header-top {
   box-shadow: 0px 2px 6px 0px #d0d0d0;
+  // border-bottom: 2px solid #f8f8f8;
 }
 .page-head {
   height: 55px;
@@ -166,11 +167,11 @@ export default {
   }
   &.home-page {
     height: calc(100% - 100px);
-    padding-top: 5px;
+    // padding-top: 5px;
   }
   &.home-page-no-footer {
     height: calc(100% - 55px);
-    padding-top: 5px;
+    // padding-top: 5px;
   }
 }
 /*  */

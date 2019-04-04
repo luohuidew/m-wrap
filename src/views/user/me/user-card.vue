@@ -34,7 +34,7 @@
               <p class="des">Follow</p>
             </li>
             <li>
-              <p class="number">$ {{user_info.coupons}}</p>
+              <p class="number">{{user_info.coupons}}</p>
               <p class="des">Coupons</p>
             </li>
           </ul>
@@ -84,7 +84,7 @@ export default {
         },
         {
           id: 1,
-          label: "pending"
+          label: "Pending"
         },
         {
           id: 2,

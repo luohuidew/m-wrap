@@ -1,11 +1,11 @@
 <template>
-  <div class="header-title">
+  <div class="header-title" v-if="pageTitle">
     <img src="/static/images/icon/normal/返回 大@2x.png"
       alt=""
       srcset=""
       @click="go_back">
     <span>
-      {{pageTitle}}
+      {{pageTitle.toUpperCase()}}
     </span>
   </div>
 </template>
