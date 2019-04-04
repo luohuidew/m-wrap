@@ -24,18 +24,18 @@
     <div class="other-info">
       <div class="procuct-position">
         <p>
-          <img src="/static/demo.png"
+          <img src="/static/images/icon/store/店铺产品@3x.png"
             alt="">
           <span>Products: {{headerData.total_num}}</span>
         </p>
         <p>
-          <img src="/static/demo.png"
+          <img v-if="headerData.location" src="/static/images/icon/store/店铺 地点@3x.png"
             alt="">
           <span>{{headerData.location}}</span>
         </p>
       </div>
       <div class="store-style">
-        <img src="/static/demo.png"
+        <img src="/static/images/icon/store/店铺信息@3x.png"
           alt="">
         <span>{{headerData.desc}}</span>
       </div>

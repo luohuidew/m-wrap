@@ -110,6 +110,7 @@ export default {
   display: flex;
   // width: 150px;
   padding: 10px;
+  padding-bottom: 0;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;

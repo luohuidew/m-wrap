@@ -1,23 +1,25 @@
 <template>
-  <div class="store-footer">
+  <div class="store-footer" v-if="footerData">
     <ul>
       <li @click="to_category">
-        <img src="/static/demo.png"
+        <img src="/static/images/icon/store/店铺导航1@3x.png"
           alt=""
           srcset="">
         <p>Product Category</p>
       </li>
       <li @click="to_info">
-        <img src="/static/demo.png"
+        <img src="/static/images/icon/store/店铺导航2@3x.png"
           alt=""
           srcset="">
         <p>Store Info</p>
       </li>
       <li>
-        <img src="/static/demo.png"
-          alt=""
-          srcset="">
-        <p>Contact Store</p>
+        <a :href="`mailto:${footerData.store_info.email}`">
+          <img src="/static/images/icon/store/店铺导航3@3x.png"
+            alt=""
+            srcset="">
+          <p>Contact Store</p>
+        </a>
       </li>
     </ul>
   </div>
@@ -68,14 +70,20 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 12px;
     li {
+      width: 100px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
+      a {
+        text-align: center;
+      }
       img {
         height: 30px;
         width: 30px;
+        margin-bottom: 4px;
       }
       p {
         font-size: 10px;
