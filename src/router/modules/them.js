@@ -114,6 +114,16 @@ export default {
         keepAlive: false,
         fullScreen: true
       }
+    }, {
+      path: 'ac-11',
+      name: 'ac-11',
+      component: () =>
+        import('@/pages/article/ac-11'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: true
+      }
     }
   ]
 }
