@@ -1,289 +1,196 @@
 const data = [{
-  type: 'desc',
-  url: 'https://we-get.s3.us-west-1.amazonaws.com/11520851115c9c94f7e5ece.jpg?width=1242&height=2739'
-},
-// {
-//   type: 'store',
-//   url: [{
-//     store_id: '9712',
-//     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_03.jpg'
-//   }]
-// },
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5229703348125688',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/5683256075c9c7f7fb73c1.jpg?width=621&height=770'
+    type: 'desc',
+    url: 'https://we-get.s3.us-west-1.amazonaws.com/6888408955ca57490ea47a.jpg?width=1242&height=881'
   }, {
-    sku_id: '5176991359271701',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/19721341505c9c7f89b1f11.jpg?width=621&height=770'
-  }]
-},
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5271552416622581',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/9041956115c9c7f93b3ec5.jpg?width=621&height=786'
-  }, {
-    sku_id: '5271539309863113',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/12502064735c9c7fa66cdbc.jpg?width=621&height=786'
-  }]
-},
-/* ----------2----------- */
-{
-  type: 'desc',
-  url: 'https://we-get.s3.us-west-1.amazonaws.com/10764115205c9c7fb0255ec.jpg?width=1242&height=697'
-},
-// {
-//   type: 'store',
-//   url: [{
-//     store_id: '9712',
-//     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
-//   }]
-// },
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5237919618266992',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/13489533275c9c7fb9a1e66.jpg?width=621&height=777'
-  }, {
-    sku_id: '5333270855301713',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/3715029845c9c7fc2f2768.jpg?width=621&height=777'
-  }, ]
-},
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5237737091267448',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/9630926555c9c7fd3efcfa.jpg?width=621&height=788'
-  }, {
-    sku_id: '5061896510595832',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/7881282885c9c7fdf8b64a.jpg?width=621&height=788'
-  }, ]
-},
-/* 3 */
-{
-  type: 'desc',
-  url: 'https://we-get.s3.us-west-1.amazonaws.com/6576359955c9dc3804881e.jpg?width=1242&height=634'
-},
-// {
-//   type: 'store',
-//   url: [{
-//     store_id: '9712',
-//     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
-//   }]
-// },
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5107596976178575',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/17769836935c9c7ff374beb.jpg?width=621&height=778'
-  }, {
-    sku_id: '5185492391395904',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/18016693105c9c8003ca53b.jpg?width=621&height=778'
-  }, ]
-},
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5350336038813003',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/1377430105c9c800c89584.jpg?width=621&height=785'
-  }, {
-    sku_id: '5350577712416669',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/5299491825c9c80153b128.jpg?width=621&height=785'
-  }, ]
-},
-/* 4 */
-{
-  type: 'desc',
-  url: 'https://we-get.s3.us-west-1.amazonaws.com/10931437465c9c802136700.jpg?width=1242&height=649'
-},
-// {
-//   type: 'store',
-//   url: [{
-//     store_id: '9712',
-//     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
-//   }]
-// },
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5080580965528790',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/17026450125c9c802a4ec20.jpg?width=621&height=767'
-  }, {
-    sku_id: '5237797201401805',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/13736695155c9c80330160a.jpg?width=621&height=767'
-  }, ]
-},
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5228832167399704',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/19622837705c9c803c967aa.jpg?width=621&height=776'
-  }, {
-    sku_id: '5177876644213660',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/12336535295c9c804a03741.jpg?width=621&height=776'
-  }, ]
-},
-/* 5 */
-{
-  type: 'desc',
-  url: 'https://we-get.s3.us-west-1.amazonaws.com/12063841995c9c80583cdc2.jpg?width=1242&height=675'
-},
-// {
-//   type: 'store',
-//   url: [{
-//     store_id: '9712',
-//     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
-//   }]
-// },
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5185261541225841',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/846224175c9c80644a941.jpg?width=621&height=776'
-  }, {
-    sku_id: '5177972119898186',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/1566545955c9c806f89b2f.jpg?width=621&height=776'
-  }, ]
-},
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5229049951438674',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/4088202235c9c8079cfe08.jpg?width=621&height=782'
-  }, {
-    sku_id: '5333419020657713',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/21357798115c9c8083af493.jpg?width=621&height=782'
-  }, ]
-},
-/* 6 */
-{
-  type: 'desc',
-  url: 'https://we-get.s3.us-west-1.amazonaws.com/15777487715c9c809689f27.jpg?width=1242&height=664'
-},
-// {
-//   type: 'store',
-//   url: [{
-//     store_id: '9712',
-//     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
-//   }]
-// },
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5177098270628796',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/5939424265c9c80a213b67.jpg?width=621&height=763'
-  }, {
-    sku_id: '5091514692176953',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/5726958775c9c80b475b8f.jpg?width=621&height=763'
-  }, ]
-},
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5168714621043583',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/8978765485c9c80bebf96f.jpg?width=621&height=783'
-  }, {
-    sku_id: '5168829941112543',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/19801652015c9c80cddca66.jpg?width=621&height=783'
-  }, ]
-},
-/* 7 */
-{
-  type: 'desc',
-  url: 'https://we-get.s3.us-west-1.amazonaws.com/15230328455c9dc3b89a170.jpg?width=1242&height=671'
-},
-// {
-//   type: 'store',
-//   url: [{
-//     store_id: '9712',
-//     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
-//   }]
-// },
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5272152382395596',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/15433238515c9c9c223d60b.jpg?width=621&height=780'
-  }, {
-    sku_id: '5271958871673204',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/3619076345c9c9bf734af2.jpg?width=621&height=779'
-  }, ]
-},
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5271732016347778',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/15433238515c9c9c223d60b.jpg?width=621&height=780'
-  }, {
-    sku_id: '5271283496143584',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/8010441015c9c9c359469a.jpg?width=621&height=780'
-  }, ]
-},
-/* 8 */
-{
-  type: 'desc',
-  url: 'https://we-get.s3.us-west-1.amazonaws.com/3525517305c9c9c504a18e.jpg?width=1242&height=842'
-},
-// {
-//   type: 'store',
-//   url: [{
-//     store_id: '9712',
-//     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
-//   }]
-// },
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5350504219924379',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/15566760505c9c9c635a2a0.jpg?width=621&height=792'
-  }, {
-    sku_id: '5350737291671273',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/8889120465c9c9c836c2b0.jpg?width=621&height=792'
-  }, ]
-},
-// {
-//   type: 'goods',
-//   url: [{
-//     sku_id: '5271732016347778',
-//     img_url: 'https://we-get.s3.us-west-1.amazonaws.com/19685621415c9b5925c107f.jpg?width=1138&height=782'
-//   }, {
-//     sku_id: '5271283496143584',
-//     img_url: 'https://we-get.s3.us-west-1.amazonaws.com/7101433605c9b59340d07e.jpg?width=1138&height=782'
-//   }, ]
-// },
-/* 9 */
-{
-  type: 'desc',
-  url: 'https://we-get.s3.us-west-1.amazonaws.com/3772205325c9c9d5edaa74.jpg?width=1242&height=632'
-},
-// {
-//   type: 'store',
-//   url: [{
-//     store_id: '9712',
-//     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
-//   }]
-// },
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5134243413062446',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/20174113845c9c9d7554971.jpg?width=621&height=759'
-  }, {
-    sku_id: '5134662464667555',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/12428654345c9c9d7554241.jpg?width=621&height=759'
-  }, ]
-},
-{
-  type: 'goods',
-  url: [{
-    sku_id: '5348709198098906',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/3718859495c9c9d75022e9.jpg?width=621&height=873'
-  }, {
-    sku_id: '5132749348032603',
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/21456650885c9c9d75a11a3.jpg?width=621&height=873'
-  }, ]
-},
+    type: 'desc',
+    url: 'https://we-get.s3.us-west-1.amazonaws.com/19616849055ca574a6cb22d.jpg?width=1242&height=319'
+  },
+  // {
+  //   type: 'store',
+  //   url: [{
+  //     store_id: '9712',
+  //     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_03.jpg'
+  //   }]
+  // },
+  {
+    type: 'goods',
+    url: [{
+      sku_id: '5071807523677926',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/16855916295ca574bd02d8e.jpg?width=621&height=757'
+    }, {
+      sku_id: '5071555900616363',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/6124926055ca574d1d3747.jpg?width=621&height=757'
+    }]
+  },
+  {
+    type: 'goods',
+    url: [{
+      sku_id: '5065857860225671',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/16753069165ca575239e4ef.jpg?width=621&height=775'
+    }, {
+      sku_id: '5383093224459676',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/18379682595ca57530d9b6e.jpg?width=621&height=775'
+    }]
+  },
+  /* ----------2----------- */
+  {
+    type: 'desc',
+    url: 'https://we-get.s3.us-west-1.amazonaws.com/20442723535ca5753d556ec.jpg?width=1242&height=515'
+  },
+  // {
+  //   type: 'store',
+  //   url: [{
+  //     store_id: '9712',
+  //     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
+  //   }]
+  // },
+  {
+    type: 'goods',
+    url: [{
+      sku_id: '5375894324689724',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/14644197295ca575473a799.jpg?width=621&height=767'
+    }, {
+      sku_id: '5083451173154971',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/1773287615ca5755216713.jpg?width=621&height=767'
+    }, ]
+  },
+  {
+    type: 'goods',
+    url: [{
+      sku_id: '5126095234323220',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/12946869605ca5755c852f2.jpg?width=621&height=769'
+    }, {
+      sku_id: '5169169943002533',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/10203026075ca575657aed9.jpg?width=621&height=769'
+    }, ]
+  },
+  /* 3 */
+  {
+    type: 'desc',
+    url: 'https://we-get.s3.us-west-1.amazonaws.com/16205760615ca57570ab352.jpg?width=1242&height=441'
+  },
+  // {
+  //   type: 'store',
+  //   url: [{
+  //     store_id: '9712',
+  //     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
+  //   }]
+  // },
+  {
+    type: 'goods',
+    url: [{
+      sku_id: '5357331731289543',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/17444824345ca5757d9f46d.jpg?width=621&height=776'
+    }, {
+      sku_id: '5350849039788783',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/3191391075ca5758a066a6.jpg?width=621&height=776'
+    }, ]
+  },
+  {
+    type: 'goods',
+    url: [{
+      sku_id: '4866012463345993',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/8953008605ca57592d76d0.jpg?width=621&height=760'
+    }, {
+      sku_id: '5115505892361819',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/8939717005ca5759b8a54a.jpg?width=621&height=760'
+    }, ]
+  },
+  /* 4 */
+  {
+    type: 'desc',
+    url: 'https://we-get.s3.us-west-1.amazonaws.com/15738123535ca575a593c79.jpg?width=1242&height=546'
+  },
+  // {
+  //   type: 'store',
+  //   url: [{
+  //     store_id: '9712',
+  //     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
+  //   }]
+  // },
+  {
+    type: 'goods',
+    url: [{
+      sku_id: '5367068540703927',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/14522246525ca575afec53b.jpg?width=621&height=766'
+    }, {
+      sku_id: '5367111280829169',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/6566688955ca575ba37beb.jpg?width=621&height=766'
+    }, ]
+  },
+  {
+    type: 'goods',
+    url: [{
+      sku_id: '5366979071586435',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/16774944595ca575c5853b5.jpg?width=621&height=777'
+    }, {
+      sku_id: '5256046512982632',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/13273871805ca575cf78141.jpg?width=621&height=777'
+    }, ]
+  },
+  /* 5 */
+  {
+    type: 'desc',
+    url: 'https://we-get.s3.us-west-1.amazonaws.com/2588042955ca575d8e22a8.jpg?width=1242&height=500'
+  },
+  // {
+  //   type: 'store',
+  //   url: [{
+  //     store_id: '9712',
+  //     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
+  //   }]
+  // },
+  {
+    type: 'goods',
+    url: [{
+      sku_id: '5376326757401599',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/3828732525ca575e1074a4.jpg?width=621&height=775'
+    }, {
+      sku_id: '5376694278717836',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/17677441675ca575ec2d3d4.jpg?width=621&height=775'
+    }, ]
+  },
+  {
+    type: 'goods',
+    url: [{
+      sku_id: '5376013448043205',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/14545030785ca575f534da3.jpg?width=621&height=767'
+    }, {
+      sku_id: '5375992749057699',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/4057394815ca575fe9c4df.jpg?width=621&height=767'
+    }, ]
+  },
+  /* 6 */
+  {
+    type: 'desc',
+    url: 'https://we-get.s3.us-west-1.amazonaws.com/19855194035ca57607a85f1.jpg?width=1242&height=459'
+  },
+  // {
+  //   type: 'store',
+  //   url: [{
+  //     store_id: '9712',
+  //     img_url: '/static/images/act/ac-9/web情人节-专题页-切图_07.jpg'
+  //   }]
+  // },
+  {
+    type: 'goods',
+    url: [{
+      sku_id: '5256113818132259',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/19816030125ca5761133a12.jpg?width=621&height=775'
+    }, {
+      sku_id: '5002483775112538',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/18596665415ca5761b766c8.jpg?width=621&height=775'
+    }, ]
+  },
+  {
+    type: 'goods',
+    url: [{
+      sku_id: '5255748147756444',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/18320868735ca576267d29e.jpg?width=621&height=885'
+    }, {
+      sku_id: '5256082592992706',
+      img_url: 'https://we-get.s3.us-west-1.amazonaws.com/15693025765ca57632b48d4.jpg?width=621&height=885'
+    }, ]
+  },
 ];
 export default data;
