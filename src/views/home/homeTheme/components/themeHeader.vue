@@ -26,7 +26,7 @@
             <ul class="sku-lists">
               <li v-for="(goods) in item.product"
                 :key="goods.sku_id"
-                @click="to_sku_detail(goods.sku_id)">
+                @click.stop="to_sku_detail(goods.sku_id)">
                 <img :src="goods.cover_img"
                   alt=""
                   srcset="">

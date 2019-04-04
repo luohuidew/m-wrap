@@ -17,18 +17,12 @@
     <div class="total-box">
       Total {{orderData.real_total_price}} for {{orderData.store_items.length}} items
     </div>
-    <div class="pay-box">
-      <button class="cancel">
-        Cancel
-      </button>
-      <button class="pay-now">
-        Pay Now
-      </button>
-    </div>
+    <btnGroup :orderData="orderData"/>
   </section>
 </template>
 
 <script>
+import btnGroup from "@/views/user/components/orderStatusBtn"
 import orderGoodsLists from "@/views/user/components/orderGoodsLists";
 export default {
   name: "",
@@ -57,7 +51,8 @@ export default {
     }
   },
   components: {
-    orderGoodsLists
+    orderGoodsLists,
+    btnGroup
   }
 };
 </script>
@@ -137,25 +132,5 @@ $base_color: #d70e19;
   border-bottom: 1px solid #f3f3f3;
 }
 /*  */
-.pay-box {
-  font-size: 12px;
-  text-align: right;
-  padding: 12px 0;
-  button {
-    width: 90px;
-    height: 28px;
-    line-height: 28px;
-    border-radius: 14px;
-    margin-left: 15px;
-  }
-  .cancel {
-    border: 1px solid $base_color;
-    color: $base_color;
-  }
-  .pay-now {
-    color: #ffffff;
-    background-color: $base_color;
-    border: 1px solid $base_color;
-  }
-}
+
 </style>

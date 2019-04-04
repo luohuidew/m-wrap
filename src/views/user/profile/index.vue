@@ -49,7 +49,7 @@
             srcset="">
         </span>
       </li>
-      <li class="gender">
+      <!-- <li class="gender">
         <span class="label">Gender</span>
         <span class="right-arrow">
           <span>{{profileData.gender}}</span>
@@ -57,8 +57,8 @@
             alt=""
             srcset="">
         </span>
-      </li>
-      <li class="password">
+      </li> -->
+      <!-- <li class="password">
         <span class="label">Password</span>
         <span class="right-arrow">
           <span>{{profileData.gender}}</span>
@@ -66,9 +66,9 @@
             alt=""
             srcset="">
         </span>
-      </li>
+      </li> -->
     </ul>
-    <ul class="mall-info-box">
+    <!-- <ul class="mall-info-box">
       <li class="address">
         <span class="label">Password</span>
         <span class="right-arrow">
@@ -78,7 +78,7 @@
             srcset="">
         </span>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
@@ -131,6 +131,7 @@ export default {
         color: #898989;
       }
       img {
+        display: none;
         height: 16px;
         width: auto;
         margin-left: 6px;

@@ -19,7 +19,7 @@
                 <span>{{item.store_info.name}}</span>
               </div>
               <div class="visit-btn"
-                @click="to_store(item.store_info.store_id)">
+                @click.stop="to_store(item.store_info.store_id)">
                 Visit Store
               </div>
             </div>

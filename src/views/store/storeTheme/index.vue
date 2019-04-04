@@ -4,7 +4,7 @@
 
     <div class="theme-content">
       <themeHeader :bannerData="homeData.storeBanners" />
-      <themeCate :cateData="homeData.categoryList" />
+      <themeCate :cateData="homeData.recommendCateStores" />
       <themeHot :hotData="homeData.hotSkuList" />
       <scrollCate :listData="homeData.categoryList" />
     </div>

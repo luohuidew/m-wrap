@@ -11,14 +11,7 @@
         <p class="font-weight-bold">{{headerData.name}}</p>
         <p>{{headerData.open_time}}</p>
       </div>
-      <div class="follow-box bgc-red">
-        <span>
-          +
-        </span>
-        <span>
-          Follow
-        </span>
-      </div>
+      <follow :headerData="headerData" />
     </div>
     <div class="tag-box">
       <span v-for="(item,index) in headerData.list_store_tag"
@@ -30,17 +23,18 @@
     </div>
     <div class="other-info">
       <p>
-        <img src="/static/demo.png"
+        <img src="/static/images/icon/store/店铺产品@3x.png"
           alt="">
         <span>Products: {{headerData.total_num}}</span>
       </p>
       <p>
-        <img src="/static/demo.png"
+        <img v-if="headerData.location"
+          src="/static/images/icon/store/店铺 地点@3x.png"
           alt="">
         <span>{{headerData.location}}</span>
       </p>
       <p class="store-style">
-        <img src="/static/demo.png"
+        <img src="/static/images/icon/store/店铺信息@3x.png"
           alt="">
         <span>{{headerData.desc}}</span>
       </p>
@@ -49,6 +43,7 @@
 </template>
 
 <script>
+import follow from "@/views/store/components/follow";
 import api from "@/api/store";
 export default {
   name: "",
@@ -73,7 +68,9 @@ export default {
       });
     }
   },
-  components: {}
+  components: {
+    follow
+  }
 };
 </script>
 

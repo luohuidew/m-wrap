@@ -12,7 +12,9 @@
         <p class="font-weight-bold">{{headerData.name}}</p>
         <p>{{headerData.open_time}}</p>
       </div>
-      <div class="follow-box bgc-red">
+      <follow :headerData="headerData" />
+      <!-- <div v-if="headerData.is_follow===1"
+        class="follow-box bgc-red">
         <span>
           +
         </span>
@@ -20,6 +22,12 @@
           Follow
         </span>
       </div>
+      <div v-else
+        class="follow-box following">
+        <span>
+          Following
+        </span>
+      </div> -->
     </div>
     <div class="other-info">
       <div class="procuct-position">
@@ -28,8 +36,9 @@
             alt="">
           <span>Products: {{headerData.total_num}}</span>
         </p>
-        <p>
-          <img v-if="headerData.location" src="/static/images/icon/store/店铺 地点@3x.png"
+        <p class="text-line-clamp-1">
+          <img v-if="headerData.location"
+            src="/static/images/icon/store/店铺 地点@3x.png"
             alt="">
           <span>{{headerData.location}}</span>
         </p>
@@ -44,6 +53,7 @@
 </template>
 
 <script>
+import follow from "@/views/store/components/follow"
 export default {
   name: "",
   props: {
@@ -58,7 +68,9 @@ export default {
   computed: {},
   created() {},
   methods: {},
-  components: {}
+  components: {
+    follow
+  }
 };
 </script>
 
@@ -95,16 +107,7 @@ export default {
       }
     }
   }
-  .follow-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 78px;
-    height: 24px;
-    font-size: 12px;
-    color: #ffffff;
-    border-radius: 12px;
-  }
+  
 }
 /*  */
 .other-info {

@@ -43,7 +43,7 @@ export default {
           label: 0
         },
         {
-          title: "Pay",
+          title: "Pending",
           label: 1
         },
         {
@@ -66,6 +66,7 @@ export default {
     init_data(params = {}) {
       ORDER.order_query().then(res => {
         // console.log(res);
+        this.active = Number(this.$route.query.label);
         this.orderData = res.data;
         // if (this.order_lists.length === 0) {
         //   setTimeout(()=>{

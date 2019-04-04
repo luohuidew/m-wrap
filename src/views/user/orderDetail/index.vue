@@ -86,12 +86,14 @@
           :key="index"><span>{{item.name}}: </span><span>{{item.time | dateServerEnglishYMD}}</span></li>
       </ul>
     </div>
+    <btnGroup :orderData="orderData" />
   </section>
 </template>
 
 <script>
 import ORDER from "@/api/order";
 import orderGoodsLists from "@/views/user/components/orderGoodsLists";
+import btnGroup from "@/views/user/components/orderStatusBtn";
 
 export default {
   name: "",
@@ -116,7 +118,8 @@ export default {
     }
   },
   components: {
-    orderGoodsLists
+    orderGoodsLists,
+    btnGroup
   }
 };
 </script>

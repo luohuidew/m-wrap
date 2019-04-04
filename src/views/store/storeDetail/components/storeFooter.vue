@@ -65,6 +65,7 @@ export default {
 
 <style lang='scss' scoped>
 .store-footer {
+  border-top: 1px solid #f8f8f8;
   ul {
     height: 100%;
     display: flex;

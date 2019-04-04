@@ -16,12 +16,13 @@
       </ul>
     </div>
     <div class="sing-out-box">
-      <button>SING OUT</button>
+      <button @click="logout">SING OUT</button>
     </div>
   </div>
 </template>
 
 <script>
+import { getToken, removeToken } from "@/utils/auth";
 export default {
   name: "",
   props: {},
@@ -48,7 +49,14 @@ export default {
   },
   computed: {},
   created() {},
-  methods: {},
+  methods: {
+    logout(){
+      if(getToken()){
+        removeToken();
+        window.location.replace('/login');
+      }
+    }
+  },
   components: {}
 };
 </script>

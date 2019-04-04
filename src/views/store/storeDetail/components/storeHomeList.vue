@@ -5,7 +5,7 @@
       <banner :bannerData="homeData.store_info.store_banner_list"
         class="banner" />
     </div>
-    <p class="title">pop Product</p>
+    <p class="title">Trending</p>
     <div class="show-list">
       <ul>
         <li v-for="(item,index) in homeData.hot_sku"
@@ -53,7 +53,7 @@ export default {
 
 <style lang='scss' scoped>
 .home-tab-page {
-  background-color: #f3f3f3;
+  // background-color: #f3f3f3;
    .title{
      font-size: 18px;
      font-weight: bold;

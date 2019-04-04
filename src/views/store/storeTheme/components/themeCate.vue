@@ -3,14 +3,14 @@
     v-if="cateData">
     <li v-for="(item,index) in cateData"
       :key="index"
-      @click="to_query_list(item.cat_id,item.name)">
-      <img src="/static/demo.png"
+      @click="to_query_list(item.cat_id,item.title)">
+      <img :src="item.image_url"
         alt=""
         srcset="">
       <!-- <img :src="item.img_url"
         alt=""
         srcset=""> -->
-      <p class="text-line-clamp-1">{{item.name}}</p>
+      <p class="text-line-clamp-1">{{item.title}}</p>
     </li>
   </ul>
 </template>

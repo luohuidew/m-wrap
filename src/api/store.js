@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import store from '@/store';
 export default {
   goods_lists(data = {}) {
     // data.token  = store.state.token;
@@ -36,6 +37,14 @@ export default {
     // data.token  = store.state.token;
     return request({
       url: 'store/getThemeStoreInfo',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+  follow(data = {}) {
+    data.token = store.state.token;
+    return request({
+      url: 'store/follow',
       method: 'post',
       data: JSON.stringify(data),
     })

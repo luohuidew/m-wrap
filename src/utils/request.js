@@ -52,7 +52,7 @@ const service = axios.create({
 window.nativeToJavaScript_sendToken = function (res) {
   // alert(JSON.stringify(res));
   let token = res.token;
-  alert(token);
+  // alert(token);
   if (token) {
     removeToken();
     setToken(token);

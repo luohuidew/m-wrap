@@ -24,12 +24,12 @@
           <span>Me</span>
         </li>
         <li class="setting-icon">
-          <router-link :to="{path:'/'}"
+          <!-- <router-link :to="{path:'/'}"
             :class="{'active':haveMessages}">
             <img class="messages"
               src="/static/images/icon/user/mine_notifi_nav_icon@3x.png"
               alt="">
-          </router-link>
+          </router-link> -->
           <router-link :to="{path:'/user/setting'}">
             <img src="/static/images/icon/user/mine_setting_nav_icon@3x.png"
               alt="">
@@ -40,7 +40,7 @@
         <li class="me">
           <span>{{$route.meta.title}}</span>
         </li>
-        <li class="setting-icon">         
+        <li class="setting-icon">
           <router-link :to="{path:'/search/search-query'}">
             <img src="/static/images/icon/normal/search@2x.png"
               alt="">
@@ -162,7 +162,8 @@ export default {
   .me {
     flex: 1;
     text-align: center;
-    padding-left: 50px;
+    font-weight: bold;
+    // padding-left: 50px;
   }
   .setting-icon {
     img {

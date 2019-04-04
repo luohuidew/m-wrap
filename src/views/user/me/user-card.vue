@@ -1,7 +1,7 @@
 <template>
   <div class="user-card">
     <div class="my-nickname-box"
-      :style="{ backgroundImage : `url(${user_info.photo})`} ">
+      :style="{ backgroundImage : `url()`} ">
       <div class="nickname">
         <div class="nickname-info">
           <div class="img-box">
@@ -26,16 +26,16 @@
         <div class="nickname-des">
           <ul>
             <li>
-              <p class="number">{{user_info.coupons}}</p>
+              <p class="number">{{user_info.like_num}}</p>
+              <p class="des">Like</p>
+            </li>
+            <li>
+              <p class="number">{{user_info.follow_num}}</p>
+              <p class="des">Follow</p>
+            </li>
+            <li>
+              <p class="number">$ {{user_info.coupons}}</p>
               <p class="des">Coupons</p>
-            </li>
-            <li>
-              <p class="number">{{user_info.points}}</p>
-              <p class="des">Points</p>
-            </li>
-            <li>
-              <p class="number">$ {{user_info.walle}}</p>
-              <p class="des">Wallet</p>
             </li>
           </ul>
         </div>
@@ -44,8 +44,8 @@
     <div class="my-order-box">
       <div class="title-box">
         <p class="tips">My Orders</p>
-        <p class="more"
-          @click="to_order(0)">All</p>
+        <!-- <p class="more"
+          @click="to_order(0)">All</p> -->
       </div>
       <div class="check-list">
         <ul>
@@ -53,7 +53,10 @@
             :key="item.id"
             @click="to_order(item.id)"
             class="list-item">
-            {{item.label}}
+            <span>
+              {{item.label}}
+            </span>
+            <span class="more"></span>
           </li>
         </ul>
       </div>
@@ -76,24 +79,20 @@ export default {
       },
       menu_list: [
         {
+          id: 0,
+          label: "All Orders"
+        },
+        {
           id: 1,
-          label: "Pending"
+          label: "pending"
         },
         {
           id: 2,
-          label: "Share"
+          label: "Processing"
         },
         {
           id: 3,
-          label: "Proceed"
-        },
-        {
-          id: 4,
           label: "Shipped"
-        },
-        {
-          id: 5,
-          label: "Reivew"
         }
       ]
     };
@@ -149,7 +148,7 @@ export default {
   width: 100%;
   height: 211px;
   position: relative;
-  background: url("/static/img/log1.png") no-repeat center center;
+  background: #f3f3f3 url("/static/img/log1.png") no-repeat center center;
   background-size: 100% auto;
   padding: 20px;
   box-sizing: border-box;
@@ -239,17 +238,23 @@ export default {
 .check-list {
   ul {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    // justify-content: space-between;
     font-size: 0;
-    text-align: center;
+    // text-align: center;
     padding: 0 20px 27px 20px;
   }
   li {
     // display: inline-block;
     // width: 33.33%;
-    font-size: 12px;
-    padding-top: 30px;
-    background: url() no-repeat center top;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    align-items: center;
+    padding-left: 50px;
+    background: url() no-repeat left center;
+    border-top: 1px solid #f3f3f3;
     &:nth-child(1) {
       background-image: url(../../../assets/img/icon/pending.png);
     }
@@ -278,10 +283,11 @@ export default {
     font-size: 20px;
     font-weight: bold;
   }
-  .more {
-    padding-right: 18px;
-    background: url(../../../assets/img/icon/right_icon.png) no-repeat right
-      center;
-  }
+}
+.more {
+  height: 20px;
+  width: 20px;
+  background: url(../../../assets/img/icon/right_icon.png) no-repeat right
+    center;
 }
 </style>

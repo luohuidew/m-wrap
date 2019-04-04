@@ -9,10 +9,10 @@
     <van-swipe :autoplay="3000">
       <van-swipe-item v-for="(item,index) in bannerData"
         :key="index">
-        <img :src="item.image_url"
+        <img :src="item.image_url?item.image_url:item.mobile_image_url"
           alt=""
           srcset=""
-          @click="to_path(item.route)">
+          @click="to_path(item.route||item.wap_route)">
       </van-swipe-item>
     </van-swipe>
   </div>
