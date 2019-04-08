@@ -28,6 +28,7 @@ if (process.env.NODE_ENV === 'development') {
   BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
 } else{
   // build
+  // BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
   BASE_API = 'https://app.weget.com/wap/';
 }
 /* 全局检测获取APP的登录状态 */

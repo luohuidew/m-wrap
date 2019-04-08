@@ -5,6 +5,7 @@
     <van-list v-model="loading"
       :finished="finished"
       finished-text=""
+      :loading-text="'Loading...'"
       @load="get_more_data"
       :offset="220">
       <ul>
