@@ -106,5 +106,8 @@ export default {
   .store-detail-footer {
     height: 55px;
   }
+  .content-lists {
+    background-color: #f3f3f3;
+  }
 }
 </style>

@@ -133,7 +133,7 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     let title =
-      "Weget.com | Beauty & fashion at group discount prices everyday";
+      "Weget.com | stylish online fashion marketplace";
     document.title = title;
     next();
   },

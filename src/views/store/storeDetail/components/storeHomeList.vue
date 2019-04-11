@@ -1,20 +1,23 @@
 <template>
   <section class="home-tab-page"
     v-if="homeData">
-    <div class="banner-scroll" v-if="homeData.store_info.store_banner_list.length">
+    <div class="banner-scroll"
+      v-if="homeData.store_info.store_banner_list.length">
       <banner :bannerData="homeData.store_info.store_banner_list"
         class="banner" />
     </div>
-    <p class="title">Trending</p>
-    <div class="show-list">
-      <ul>
-        <li v-for="(item,index) in homeData.hot_sku"
-          :key="index">
-          <sale-list :card-data="item"
-            class="sku-item"></sale-list>
-        </li>
-      </ul>
-    </div>
+    <template v-if="homeData.hot_sku.length">
+      <p class="title">Trending</p>
+      <div class="show-list">
+        <ul>
+          <li v-for="(item,index) in homeData.hot_sku"
+            :key="index">
+            <sale-list :card-data="item"
+              class="sku-item"></sale-list>
+          </li>
+        </ul>
+      </div>
+    </template>
     <p class="title">Daily WOW</p>
     <ul class="pick-lists">
       <li v-for="(item,index) in homeData.daily_wow"
@@ -54,11 +57,12 @@ export default {
 <style lang='scss' scoped>
 .home-tab-page {
   // background-color: #f3f3f3;
-   .title{
-     font-size: 18px;
-     font-weight: bold;
-     padding: 20px;
-   }
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 20px;
+    padding-bottom: 0;
+  }
 }
 .banner-scroll {
   .banner {

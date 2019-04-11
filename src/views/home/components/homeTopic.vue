@@ -81,6 +81,7 @@ export default {
 /*  */
 .scroll-row-box {
   overflow: auto;
+  overflow-y: hidden;
   background-color: #fff;
   ul {
     display: flex;

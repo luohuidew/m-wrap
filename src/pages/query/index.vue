@@ -37,7 +37,7 @@ export default {
     },
     get_more_data(data) {
       let params = {
-        id: this.cur_lists.select_id,
+        last_id: this.cur_lists.select_id,
         limit: 4,
         sku_id: this.$route.query.sku_id,
         type: 5
