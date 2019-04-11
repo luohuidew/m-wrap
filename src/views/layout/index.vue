@@ -72,8 +72,10 @@ export default {
       let home_page_lists = [
         "/home/index",
         "/user/index",
+        "/welog/index",
+        "/cart/index",
         "/store/theme",
-        "/home/theme"
+        "/home/theme",
       ];
       return home_page_lists.indexOf(this.$route.path) !== -1;
     },

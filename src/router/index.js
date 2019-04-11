@@ -9,12 +9,14 @@ import USER from "./modules/user"
 import SEARCH from "./modules/search"
 import STORE from "./modules/store"
 import TEST from "./modules/test"
+import WELOG from "./modules/welog"
 Vue.use(Router)
 export default new Router({
   mode: 'history',
   linkActiveClass: 'active-route',
   routes: [
     HOME,
+    WELOG,
     THEM,
     CART,
     CHECKOUT,

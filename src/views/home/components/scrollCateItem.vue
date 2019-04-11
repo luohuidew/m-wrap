@@ -70,6 +70,8 @@ export default {
   justify-content: space-between;
   padding: 0 15px;
   padding-top: 10px;
+  /* 保留高度 */
+  min-height:100vh;
   & > li {
     width: calc(50% - 5px);
     margin-bottom: 10px;

@@ -26,5 +26,5 @@ if(cur_device==='android'){
 }else {
   cur_api = h5_api;
 }
-console.log(cur_api);
+// console.log(cur_api);
 export default cur_api;

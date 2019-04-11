@@ -74,23 +74,23 @@ export default {
   computed: {},
   methods: {
     to_detail(sku_id) {
-      // if (sku_id) {
-      //   let href_params = {
-      //     type: 106,
-      //     data: {
-      //       route: "wemall://public/route?type=6&id=" + sku_id + ""
-      //     }
-      //   };
-      //   let temp = this.$CM.weget_device_link(href_params);
-      //   if (temp === "h5") {
-      //     }
-      // }
-      this.$router.push({
-        path: "/detail",
-        query: {
-          sku_id: sku_id
+      if (sku_id) {
+        let href_params = {
+          type: 106,
+          data: {
+            route: "wemall://public/route?type=6&id=" + sku_id + ""
+          }
+        };
+        let temp = this.$CM.weget_device_link(href_params);
+        if (temp === "h5") {
+          this.$router.push({
+            path: "/detail",
+            query: {
+              sku_id: sku_id
+            }
+          });
         }
-      });
+      }
     },
     to_store(store_id) {
       // if (store_id) {
