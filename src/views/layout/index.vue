@@ -151,7 +151,7 @@ export default {
 }
 #app-header-top {
   position: relative;
-  z-index: 0;
+  z-index: 1000;
   box-shadow: 0px 2px 4px 0px #d0d0d0;
   // border-bottom: 2px solid #f8f8f8;
 }
