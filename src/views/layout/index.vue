@@ -75,7 +75,7 @@ export default {
         "/welog/index",
         "/cart/index",
         "/store/theme",
-        "/home/theme",
+        "/home/theme"
       ];
       return home_page_lists.indexOf(this.$route.path) !== -1;
     },
@@ -150,7 +150,9 @@ export default {
   /* margin-top:50px; */
 }
 #app-header-top {
-  box-shadow: 0px 2px 6px 0px #d0d0d0;
+  position: relative;
+  z-index: 0;
+  box-shadow: 0px 2px 4px 0px #d0d0d0;
   // border-bottom: 2px solid #f8f8f8;
 }
 .page-head {

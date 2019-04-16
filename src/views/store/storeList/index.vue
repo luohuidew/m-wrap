@@ -54,7 +54,7 @@ export default {
         this.loading = false;
         if (!res.data.length) {
           this.finished = true;
-        };
+        }
         res.data.data.forEach(item => {
           this.listData.push(item);
         });

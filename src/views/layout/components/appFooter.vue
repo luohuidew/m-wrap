@@ -35,10 +35,10 @@ export default {
           path: "/home/index"
         },
         {
-          defaultIcon:'/static/images/icon/footer/welog-black@3x.png',
-          activeIcon:'/static/images/icon/footer/welog-red@3x.png',
-          title:'WELOG',
-          path:'/welog/index',
+          defaultIcon: "/static/images/icon/footer/welog-black@3x.png",
+          activeIcon: "/static/images/icon/footer/welog-red@3x.png",
+          title: "WELOG",
+          path: "/welog/index"
         },
         {
           defaultIcon: "/static/images/icon/footer/cart-black@3x.png",

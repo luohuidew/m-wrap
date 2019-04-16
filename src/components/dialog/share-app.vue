@@ -41,7 +41,6 @@ export default {
       // debugger;
       if (isiOS) {
         // debugger;
-        console.log(this.token);
         if (this.token) {
           this.to_app = "https://www.weget.com/route?share_token=" + this.token;
         } else {

@@ -9,7 +9,7 @@
         slot="default">
         <li v-for="(item,index) in goodsListsData"
           :key="index">
-          <autoCard :cardData="item"></autoCard>
+          <autoCard :datas="item"></autoCard>
         </li>
       </ul>
     </van-list>
@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import autoCard from "@/components/card-column-auto";
-import GOODS from "@/api/goods";
+import autoCard from "@/views/welog/components/welog-card";
+import api from "@/api/welog";
 export default {
   name: "",
   props: {
-    curCateId: {
-      type: Number | String,
+    listData: {
+      type: Object,
       default: undefined
     }
   },
@@ -31,8 +31,8 @@ export default {
     return {
       loading: false,
       finished: false,
-      selectId: undefined,
-      goodsListsData: []
+      selectId: this.listData.extend.selectId,
+      goodsListsData: this.listData.data
     };
   },
   computed: {},
@@ -40,10 +40,10 @@ export default {
   methods: {
     get_more_data() {
       let params = {
-        cat_id: this.curCateId,
+        // cat_id: this.curCateId,
         id: this.selectId
       };
-      GOODS.get_lists(params).then(res => {
+      api.welogIndex(params).then(res => {
         if (!res.data.data.length) {
           this.finished = true;
           this.loading = false;
@@ -71,7 +71,7 @@ export default {
   padding: 0 15px;
   padding-top: 10px;
   /* 保留高度 */
-  min-height:50vh;
+  // min-height:50vh;
   & > li {
     width: calc(50% - 5px);
     margin-bottom: 10px;

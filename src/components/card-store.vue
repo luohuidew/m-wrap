@@ -107,8 +107,6 @@ export default {
 
 <style lang='scss' scoped>
 .goods-card {
-  position: relative;
-  z-index: 0;
   display: flex;
   // width: 150px;
   padding: 10px;
@@ -144,7 +142,7 @@ export default {
   }
 }
 .goods-img {
-  // position: relative;
+  position: relative;
   width: auto;
   height: auto;
   font-size: 0;

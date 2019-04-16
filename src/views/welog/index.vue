@@ -1,5 +1,6 @@
 <template>
   <div class="welog-page">
+    <!-- 路由的嵌套 -->
     <router-view></router-view>
   </div>
 </template>

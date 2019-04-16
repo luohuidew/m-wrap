@@ -67,6 +67,26 @@ export default {
         title: 'My Coupons',
         keepAlive: false,        
       }
-    }
+    },
+    {
+      path: 'like',
+      name: 'user-like',
+      component: () =>
+        import('@/views/user/like'),
+      meta: {
+        title: 'like',
+        keepAlive: false,        
+      }
+    },
+    {
+      path: 'follow',
+      name: 'user-follow',
+      component: () =>
+        import('@/views/user/follow'),
+      meta: {
+        title: 'following',
+        keepAlive: false,        
+      }
+    },
   ]
 }

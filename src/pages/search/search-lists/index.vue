@@ -1,21 +1,38 @@
 <template>
-  <div class="query-lists"
-    v-scroll="get_more_data"
+  <div class="query-lists"   
     v-if="sku_lists.length">
-    <template v-for="(item,index) in sku_lists">
+    <!-- <template v-for="(item,index) in sku_lists">
       <goods-card :key="index"
-        :sku="item"></goods-card>
-    </template>
+        :cardData="item"></goods-card>
+    </template> -->
+    <van-list v-model="loading"
+      :finished="finished"
+      :finished-text="''"
+      :loading-text="'Loading...'"
+      @load="get_more_data">
+      <ul class="pick-lists"
+        slot="default">
+        <li v-for="(item,index) in sku_lists"
+          :key="index">
+           <goods-card :key="index"
+        :cardData="item"></goods-card>
+        </li>
+      </ul>
+    </van-list>
   </div>
 </template>
 
 <script>
 import api from "@/api/goods";
-import goodsCard from "@/components/card-list-row";
+import goodsCard from "@/components/card-column-auto";
 export default {
   name: "",
   data() {
     return {
+      loading: false,
+      finished: false,
+      selectId: undefined,
+      goodsListsData: [],
       sku_lists: [],
       cur_lists_data: undefined
     };
@@ -34,9 +51,16 @@ export default {
       //    this.$route.meta.title = route_path;
       // }
       params.label = undefined;
+      params.id = this.selectId;
       api.get_lists(params).then(res => {
         this.cur_lists_data = res.data.extend;
+        if (!res.data.data.length) {
+          this.finished = true;
+          this.loading = false;
+        }
         res.data.data.forEach(item => {
+          this.selectId = res.data.extend.selectId;
+          this.loading = false;
           this.sku_lists.push(item);
         });
       });
@@ -59,5 +83,23 @@ export default {
   height: 100%;
   overflow: auto;
   padding: 10px 0;
+}
+.pick-lists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 15px;
+  padding-top: 10px;
+  /* 保留高度 */
+  // min-height:50vh;
+  & > li {
+    width: calc(50% - 5px);
+    margin-bottom: 10px;
+    &:nth-child(2n-1) {
+      // margin-right: 5px;
+    }
+    &:nth-child(2n) {
+    }
+  }
 }
 </style>

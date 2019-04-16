@@ -18,7 +18,7 @@
       </div>
     </div>
     <ul class="search-recommended">
-      <li class="history-block">
+      <li class="history-block" v-if="history_lists.length">
         <h3>
           <span>{{'Recent Search'.toUpperCase()}}
           </span> <img src="/static/img/icon/delete3.png"
