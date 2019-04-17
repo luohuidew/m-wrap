@@ -2,9 +2,14 @@
   <div class='goods-card'
     @click="to_detail(sku.sku_id)" v-if="sku">
     <div class="goods-img">
-      <img :src="sku.cover_img"
+      <img
         alt=""
+        :src="sku.cover_img"
         srcset="">
+      <!--<img-->
+              <!--alt=""-->
+              <!--v-lazyload="{src: sku.cover_img, parent: parent}"-->
+              <!--srcset="">-->
       <div class="mask-info"
         v-for="(mask_info,index) in sku.show_tag"
         :key="index">
@@ -71,6 +76,9 @@ export default {
   props: {
     sku:{
       type:Object,
+      default:undefined
+    },
+    parent:{
       default:undefined
     }
   },

@@ -21,6 +21,9 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 import 'swiper/dist/css/swiper.css';
 Vue.use(VueAwesomeSwiper, /* { default global options } */);
 
+// import LazyLoad from '@/utils/imgLazy.js'
+// Vue.use(LazyLoad);
+
 import '@/style/reset.scss'
 import '@/style/layout.scss'
 
