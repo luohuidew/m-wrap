@@ -1,3 +1,6 @@
+import store from '@/store'
+import Router from 'vue-router'
+let token  = store.state.token;
 export default {
   path: '/user',
   name: 'userInfo',
@@ -16,7 +19,14 @@ export default {
       meta: {
         title: 'userInfo',
         keepAlive: false
-      }
+      },
+      beforeEnter: (to, from, next) => {
+        if(token){
+          next();
+        }else {
+          window.location.href="/login"
+        }
+      },
     },
     {
       path: 'profile',

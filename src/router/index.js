@@ -9,6 +9,7 @@ import USER from "./modules/user"
 import SEARCH from "./modules/search"
 import STORE from "./modules/store"
 import TEST from "./modules/test"
+import LOGIN from "./modules/login"
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -22,6 +23,7 @@ export default new Router({
     LAYOUT,
     USER,
     SEARCH,
+    LOGIN,
     STORE, {
       path: '/home/index',
       name: 'home',
@@ -64,17 +66,17 @@ export default new Router({
       }
     },
 
-    {
-      path: '/login',
-      name: 'login',
-      component: () =>
-        import('@/pages/login'),
-      meta: {
-        title: 'login',
-        keepAlive: false,
-        fullScreen: true
-      }
-    },
+    // {
+    //   path: '/login',
+    //   name: 'login',
+    //   component: () =>
+    //     import('@/pages/login'),
+    //   meta: {
+    //     title: 'login',
+    //     keepAlive: false,
+    //     fullScreen: true
+    //   }
+    // },
     {
       path: '/logout',
       name: 'logout',
@@ -86,6 +88,11 @@ export default new Router({
       name: 'reset-pass',
       component: () =>
         import('@/pages/reset-pass'),
+        meta: {
+          title: 'reset',
+          keepAlive: false,
+          fullScreen: true
+        }
     },
     {
       path: '/statement',

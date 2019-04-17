@@ -59,5 +59,21 @@ export default {
       data: JSON.stringify(data),
     })
   },
+  forgetPassword(data={}) {
+    // data.token = token;
+    return request({
+      url: '/user/forgetPassword',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+  updateForgetPassword(data={}) {
+    // data.token = token;
+    return request({
+      url: '/user/updateForgetPassword',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
 
 }
