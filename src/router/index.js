@@ -63,7 +63,16 @@ export default new Router({
         keepAlive: false
       }
     },
-
+    {
+      path: '/queryActive',
+      name: 'similar-queryActive',
+      component: () =>
+          import('@/pages/query/index-active'),
+      meta: {
+        title: 'similar',
+        keepAlive: false
+      }
+    },
     {
       path: '/login',
       name: 'login',
@@ -127,6 +136,18 @@ export default new Router({
         import('@/pages/detail'),
       meta: {
         title: 'Details',
+        keepAlive: false,
+        fullScreen: true
+      }
+      //    redirect: '/detail/',
+    },
+    {
+      path: '/detailAcive',
+      name: 'detailAcive',
+      component: () =>
+          import('@/pages/detail/index_active'),
+      meta: {
+        title: 'detailAcive',
         keepAlive: false,
         fullScreen: true
       }
