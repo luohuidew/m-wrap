@@ -1,12 +1,12 @@
 <template>
   <div class="article-detail">
     <section>
-      <p @click="goPageActive('5489039218577277')"><img src="@/assets/img/418active/LOOK_01.jpg"/></p>
-      <p @click="goPageActive('5489039218577277')"><img src="@/assets/img/418active/LOOK_02.jpg"/></p>
-      <p @click="goPageActive('5489039218577277')"><img src="@/assets/img/418active/LOOK_03.jpg"/></p>
-      <p @click="goPageActive('5489039218577277')"><img src="@/assets/img/418active/LOOK_04.jpg"/></p>
-      <p @click="goPageActive('5489039218577277')"><img src="@/assets/img/418active/LOOK_05.jpg"/></p>
-      <p @click="goPageActive('5489039218577277')"><img src="@/assets/img/418active/LOOK_06.jpg"/></p>
+      <p @click="goPageActive('5488474410374191')"><img src="@/assets/img/418active/LOOK_01.jpg"/></p>
+      <p @click="goPageActive('5488474410374191')"><img src="@/assets/img/418active/LOOK_02.jpg"/></p>
+      <p @click="goPageActive('5488474410374191')"><img src="@/assets/img/418active/LOOK_03.jpg"/></p>
+      <p @click="goPageActive('5488474410374191')"><img src="@/assets/img/418active/LOOK_04.jpg"/></p>
+      <p @click="goPageActive('5488474410374191')"><img src="@/assets/img/418active/LOOK_05.jpg"/></p>
+      <p @click="goPageActive('5488474410374191')"><img src="@/assets/img/418active/LOOK_06.jpg"/></p>
     </section>
     <div class="footer">
       <div class="about_row1">
@@ -47,7 +47,8 @@ export default {
       this.$router.push({
         name: "detailAcive",
         query: {
-          sku_id: sku_id
+          sku_id: sku_id,
+          activeList: 1
         }
       });
     },

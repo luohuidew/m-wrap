@@ -69,7 +69,7 @@ export default new Router({
       component: () =>
           import('@/pages/query/index-active'),
       meta: {
-        title: 'similar',
+        title: 'Recommend',
         keepAlive: false
       }
     },

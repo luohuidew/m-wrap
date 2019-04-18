@@ -77,7 +77,7 @@ export default {
   components: {},
   methods: {
     to_detail(sku_id) {
-      this.$router.push({ name: "detailAcive", query: { sku_id: sku_id } });
+      this.$router.push({ name: "detailAcive", query: { sku_id: sku_id, activeList: 1} });
     }
   }
 };

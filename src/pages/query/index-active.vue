@@ -1,20 +1,27 @@
 <template>
   <div class="query-lists" v-if="sku_lists.length">
-    <ul>
-      <sale-list v-for="(item,index) in sku_lists"
+    <ul v-if="activeList == '1'" >
+      <saleListActive v-for="(item,index) in sku_lists"
+                      :sku="item"
+                      :key="index"></saleListActive>
+    </ul>
+    <ul v-else>
+      <saleList v-for="(item,index) in sku_lists"
                  :sku="item"
-                 :key="index"></sale-list>
+                 :key="index"></saleList>
     </ul>
   </div>
 </template>
 
 <script>
+import saleListActive from "@/components/card-list-row-active";
 import saleList from "@/components/card-list-row";
 
 export default {
   name: "",
   data() {
     return {
+      activeList: this.$route.query.activeList,
       sku_lists: [],
       cur_lists: undefined
     };
@@ -33,7 +40,8 @@ export default {
 
   },
   components: {
-    saleList
+    saleList,
+    saleListActive
   }
 };
 </script>

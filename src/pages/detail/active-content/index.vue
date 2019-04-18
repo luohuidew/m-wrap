@@ -20,8 +20,8 @@
             :attr-list="attr_list"></detail-attr>
         </section>
         <detail-store :item="store_info"></detail-store>
-        <similar-cate v-if="same_category.data" :data-list="same_category.data" ></similar-cate>
-        <similar-cate v-if="same_category.data" :data-list="same_category.data" ></similar-cate>
+        <similar-cate v-if="same_category.data"  :data-list="likeData" title = "You might also like" :activeList = 'activeList'></similar-cate>
+        <similar-cate v-if="same_category.data"  :data-list="lookData" title = "Complete the look" ></similar-cate>
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
         <!-- <shipping :sku-data="sku"></shipping> -->
@@ -113,6 +113,9 @@ export default {
   },
   data() {
     return {
+      activeList: this.$route.query.activeList,
+      lookData:[],
+      likeData:[],
       show_dialog: false,
       show_shipping: false,
       show_coupon: false,
@@ -193,7 +196,37 @@ export default {
           group_id: this.router_group_id
         };
         this.get_all_detail(params);
+        this.getLikeLook(this.$route.query.sku_id);
       }
+    },
+    getLikeLook(id) {
+      const param = {
+        store_sku_id: '5488474410374191',
+      }
+      if (this.activeList == '1') {
+        param.type = 2 // 只要look
+      }
+      const custom = [
+        {
+          alone_price: "24.00",
+          cover_img: "https://we-get.s3.us-west-1.amazonaws.com/9447871225c3d9e228bc55.jpg",
+          show_tag: [
+            {
+              mask_bg_image: "https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
+            }
+          ],
+          title: "Fenty Beauty By Rihanna Stunna Lip Paint Longwear Fluid Lip Color"
+        },
+      ]
+      api.getLikeLook(param).then((res) => {
+        if (this.activeList == '1') {
+          this.lookData = res.data.look
+          this.likeData = custom
+        } else {
+          this.likeData = res.data.like
+          this.lookData = res.data.look
+        }
+      })
     },
     // to_store(cid) {
     //   let params = {
@@ -207,7 +240,6 @@ export default {
     get_all_detail(params) {
       let share_params;
       api.detail(params).then(res => {
-        console.log(res);
         document.title = res.data.sku.title;
         // this.$route.query.page_label = res.data.sku.title;
         let temp_data = res.data;
@@ -226,7 +258,6 @@ export default {
           let share_token = res.data.share_token;
           // this.$store.state.share_token = share_token;
           this.$store.commit("set_share_token", share_token);
-          console.log(this.$store.state.share_token);
           this.share_token = share_token;
           for (var key in res.data) {
             // debugger;
@@ -253,7 +284,6 @@ export default {
       }
     },
     join_group(cgroup) {
-      console.log(cgroup);
       this.cur_group_id = cgroup;
       this.$refs["change_btn"].close_tips(2, cgroup);
     },

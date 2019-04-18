@@ -2,14 +2,14 @@
   <div class='page'>
     <div class="title-box"
       @click="to_similar">
-      <p class="tips">Similar Items</p>
+      <p class="tips">{{title}}</p>
       <p class="more"></p>
     </div>
     <div class="show-list">
       <ul>
         <li v-for="(item,index) in dataList"
           :key="index">
-          <goods-card-column :card-data="item"
+          <goods-card-column :card-data="item" :activeList = 'activeList'
             class="sku-item"></goods-card-column>
         </li>
       </ul>
@@ -29,9 +29,16 @@ export default {
   props: {
     dataList: {
       default: []
+    },
+    activeList: {
+      default: '0'
+    },
+    title: {
+      type: String
     }
   },
   created() {
+    // alert(this.activeList)
   },
   mounted() {
     if(this.dataList.length > 0) {
@@ -41,10 +48,11 @@ export default {
   methods: {
     to_similar() {
       let params = {
-        path: "/queryActive",
+        path: "/queryActive", // 跳到列表
         query: {
           sku_id: this.$route.query.sku_id,
-          type: 5
+          type: 5,
+          activeList: this.activeList
         }
       };
       this.$router.push(params);
