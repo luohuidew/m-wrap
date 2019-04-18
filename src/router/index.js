@@ -65,7 +65,26 @@ export default new Router({
         keepAlive: false
       }
     },
-
+    {
+      path: '/likeQueryActive',
+      name: 'likeQueryActive',
+      component: () =>
+          import('@/pages/query/index-active'),
+      meta: {
+        title: 'You might also like',
+        keepAlive: false
+      }
+    },
+      {
+          path: '/queryActive',
+          name: 'queryActive',
+          component: () =>
+              import('@/pages/query/index-active'),
+          meta: {
+              title: 'Complete the look',
+              keepAlive: false
+          }
+      },
     // {
     //   path: '/login',
     //   name: 'login',
@@ -136,6 +155,18 @@ export default new Router({
         title: 'Details',
         keepAlive: false,
         fullScreen: false
+      }
+      //    redirect: '/detail/',
+    },
+    {
+      path: '/detailAcive',
+      name: 'detailAcive',
+      component: () =>
+          import('@/pages/detail/index_active'),
+      meta: {
+        title: 'detailAcive',
+        keepAlive: false,
+        fullScreen: true
       }
       //    redirect: '/detail/',
     },

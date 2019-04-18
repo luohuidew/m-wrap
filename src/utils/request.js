@@ -42,7 +42,7 @@ const service = axios.create({
   // baseURL: 'http://app.wks.wegetcn.com:8088/index.php/admin/',
   baseURL: BASE_API,
   // request timeout
-  // timeout: 5000, 
+  // timeout: 5000,
   headers: {
     // 'Content-Type': 'application/json'
     // 'Content-Type': 'text/html; charset=UTF-8'
@@ -93,7 +93,7 @@ service.interceptors.request.use(
     // Do something with request error
     // alert('请求报错');
     // debugger;
-    
+
     Promise.reject(error)
   }
 )
@@ -137,7 +137,7 @@ service.interceptors.response.use(
       // console.log(JSON.stringify(res.message));
       if (res.code === 1207 || res.code === 1209) {
         /* 清空旧的token */
-        
+
         let params;
         if (getToken()) {
           params = {
@@ -155,7 +155,7 @@ service.interceptors.response.use(
         /* window.weget_mobile_type   用来检测是否处于 */
         // alert(window.weget_mobile_type)
         /* 判断登录，选择不同的登录方式 */
-        if (localStorage.getItem('device') === 'ios') {      
+        if (localStorage.getItem('device') === 'ios') {
           let temp_params = params
           window.webkit.messageHandlers.javaScriptToNative.postMessage(temp_params);
         } else if (localStorage.getItem('device') === 'android') {
@@ -164,7 +164,7 @@ service.interceptors.response.use(
           let and_token = window.weget_mobile_type.nativeToJavaScript_sendToken();
           alert(and_token);
           if (and_token) {
-            setToken(and_token);           
+            setToken(and_token);
           }
         } else {
           // alert($CM.is_ins());
