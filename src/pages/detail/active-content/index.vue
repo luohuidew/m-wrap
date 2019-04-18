@@ -56,8 +56,8 @@
       :goods="goods"
       :attr-list="attrList"
       :cur-goods="curGoods"></attr-dialog> -->
-    <!--<share-app :token="share_token"-->
-      <!--v-if="share_token"></share-app>-->
+    <share-app :token="share_token"
+      v-if="share_token"></share-app>
     <van-popup v-model="show_coupon"
       position="bottom"
       :overlay="true">
