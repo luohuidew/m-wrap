@@ -157,6 +157,9 @@ export default {
       left: 50%;
       top: 50%;
       transform: translate(-50%,-50%);
+      a {
+        display: block;
+      }
       img {
         height: 40px;
         width: auto;

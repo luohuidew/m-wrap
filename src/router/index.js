@@ -135,7 +135,7 @@ export default new Router({
       meta: {
         title: 'Details',
         keepAlive: false,
-        fullScreen: true
+        fullScreen: false
       }
       //    redirect: '/detail/',
     },

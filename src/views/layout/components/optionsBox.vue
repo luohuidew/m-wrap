@@ -13,7 +13,7 @@
             class="app-router-link"> -->
             <img :src="item.icon"
               alt="">
-            <span> {{item.title}}</span>
+            <span> {{item.title.toUpperCase()}}</span>
           <!-- </router-link> -->
         </li>
       </ul>
