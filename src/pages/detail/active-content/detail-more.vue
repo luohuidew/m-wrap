@@ -74,7 +74,7 @@ export default {
       display: block;
       line-height: 20px;
       h1 {
-        font-size: 16px;
+        font-size: 18px;
         margin-top: 10px;
       }
       h2 {

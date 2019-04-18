@@ -20,8 +20,8 @@
             :attr-list="attr_list"></detail-attr>
         </section>
         <detail-store :item="store_info"></detail-store>
-        <similar-cate v-if="likeData.length>0" :titlelike="true" :data-list="likeData" title = "You might also like" :activeList = 'activeList'></similar-cate>
-        <similarCateLook v-if="lookData.length>0"  :data-list="lookData" title = "Complete the look" ></similarCateLook>
+        <similar-cate  :titlelike="true" :data-list="likeData" title = "You might also like" :activeList = 'activeList'></similar-cate>
+        <similarCateLook   :data-list="lookData" title = "Complete the look" ></similarCateLook>
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
         <!-- <shipping :sku-data="sku"></shipping> -->
