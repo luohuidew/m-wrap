@@ -35,6 +35,9 @@ export default {
     },
     title: {
       type: String
+    },
+    titlelike: {
+      default: false
     }
   },
   created() {
@@ -55,6 +58,9 @@ export default {
           activeList: this.activeList
         }
       };
+      if (this.titlelike) {
+        params.path = '/likeQueryActive'
+      }
       this.$router.push(params);
     }
   },

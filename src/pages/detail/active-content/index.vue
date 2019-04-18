@@ -20,8 +20,8 @@
             :attr-list="attr_list"></detail-attr>
         </section>
         <detail-store :item="store_info"></detail-store>
-        <similar-cate v-if="same_category.data"  :data-list="likeData" title = "You might also like" :activeList = 'activeList'></similar-cate>
-        <similar-cate v-if="same_category.data"  :data-list="lookData" title = "Complete the look" ></similar-cate>
+        <similar-cate v-if="likeData.length>0" :titlelike="true" :data-list="likeData" title = "You might also like" :activeList = 'activeList'></similar-cate>
+        <similar-cate v-if="likeData.length>0"  :data-list="lookData" title = "Complete the look" ></similar-cate>
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
         <!-- <shipping :sku-data="sku"></shipping> -->
@@ -199,29 +199,59 @@ export default {
         this.getLikeLook(this.$route.query.sku_id);
       }
     },
-    getLikeLook(id) {
+    getLikeLook(skuId) { // todo
       const param = {
-        store_sku_id: '5488474410374191',
+        store_sku_id: skuId,
       }
       if (this.activeList == '1') {
         param.type = 2 // 只要look
       }
       const custom = [
         {
-          alone_price: "24.00",
-          cover_img: "https://we-get.s3.us-west-1.amazonaws.com/9447871225c3d9e228bc55.jpg",
+          alone_price: "29.90",
+          cover_img: "https://we-get.s3.us-west-1.amazonaws.com/193954985cb8220993f8c.jpg?width=800&height=800",
           show_tag: [
-            {
-              mask_bg_image: "https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
-            }
+            // {
+            //   mask_bg_image: "https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
+            // }
           ],
-          title: "Fenty Beauty By Rihanna Stunna Lip Paint Longwear Fluid Lip Color"
+          title: "Stretch Short Cami & High Rise Distressed Denim Shorts",
+          sku_id: '5557148210008098'
+        },
+        {
+          alone_price: "32.90",
+          cover_img: "https://we-get.s3.us-west-1.amazonaws.com/13186751435cb82c2ed0c0f.jpg?width=712&height=712",
+          show_tag: [
+            // {
+            //   mask_bg_image: "https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
+            // }
+          ],
+          title: "Vacation Two Piece & Holiday Women Bag",
+          sku_id: '5557435769542243'
+        },
+        {
+          alone_price: "44.90",
+          cover_img: "https://we-get.s3.us-west-1.amazonaws.com/13619589195cb82400c5f80.jpg?width=800&height=800",
+          show_tag: [
+          ],
+          title: "Dot Pleat Dress & Lace Up High Hills Sandals",
+          sku_id: '5557207069013871'
+        },
+        {
+          alone_price: "52.90",
+          cover_img: "https://we-get.s3.us-west-1.amazonaws.com/19171080955cb828352659e.jpg?width=800&height=800",
+          show_tag: [
+          ],
+          title: "General Cutout Knit Summer Cami & Spring Hot Classic Jeans",
+          sku_id: '5557314087792880'
         },
       ]
       api.getLikeLook(param).then((res) => {
         if (this.activeList == '1') {
           this.lookData = res.data.look
-          this.likeData = custom
+          this.likeData = custom.filter((items) => {
+            items.sku_id !== skuId
+          })
         } else {
           this.likeData = res.data.like
           this.lookData = res.data.look

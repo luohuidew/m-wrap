@@ -1,12 +1,12 @@
 <template>
   <div class="article-detail">
     <section>
-      <p @click="goPageActive('5488474410374191')"><img src="@/assets/img/418active/LOOK_01.jpg"/></p>
-      <p @click="goPageActive('5488474410374191')"><img src="@/assets/img/418active/LOOK_02.jpg"/></p>
-      <p @click="goPageActive('5488474410374191')"><img src="@/assets/img/418active/LOOK_03.jpg"/></p>
-      <p @click="goPageActive('5488474410374191')"><img src="@/assets/img/418active/LOOK_04.jpg"/></p>
-      <p @click="goPageActive('5488474410374191')"><img src="@/assets/img/418active/LOOK_05.jpg"/></p>
-      <p @click="goPageActive('5488474410374191')"><img src="@/assets/img/418active/LOOK_06.jpg"/></p>
+      <p><img src="@/assets/img/418active/LOOK_01.jpg"/></p>
+      <p @click="goPageActive('5557148210008098')"><img src="@/assets/img/418active/LOOK_02.jpg"/></p>
+      <p @click="goPageActive('5557435769542243')"><img src="@/assets/img/418active/LOOK_03.jpg"/></p>
+      <p @click="goPageActive('5557207069013871')"><img src="@/assets/img/418active/LOOK_04.jpg"/></p>
+      <p @click="goPageActive('5557314087792880')"><img src="@/assets/img/418active/LOOK_05.jpg"/></p>
+      <p><img src="@/assets/img/418active/LOOK_06.jpg"/></p>
     </section>
     <div class="footer">
       <div class="about_row1">
