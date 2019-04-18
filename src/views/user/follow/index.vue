@@ -1,57 +1,83 @@
 <template>
-  <div class="query-lists"
-    v-scroll="get_more_data"
-    v-if="sku_lists.length">
-    <template v-for="(item,index) in sku_lists">
-      <goods-card :key="index"
-        :sku="item"></goods-card>
-    </template>
+  <div class="fixed-content">
+    <van-list v-model="loading"
+      :finished="finished"
+      :finished-text="''"
+      :loading-text="'Loading...'"
+      @load="get_more_data()">
+      <ul class="pick-lists"
+        slot="default">
+        <li v-for="(item,index) in storeListsData"
+          :key="index">
+          <storeCard :datas="item"></storeCard>
+        </li>
+      </ul>
+    </van-list>
   </div>
 </template>
 
 <script>
-import api from "@/api/goods";
-import goodsCard from "@/components/card-list-row";
+import storeCard from "@/components/card-store";
+import api from "@/api/store";
 export default {
   name: "",
+  props: {},
   data() {
     return {
-      sku_lists: [],
-      cur_lists_data: undefined
+      loading: false,
+      finished: false,
+      selectId: undefined,
+      storeListsData: []
     };
   },
-  created() {
-    this.init_data();
-  },
-  mounted() {},
   computed: {},
+  created() {},
   methods: {
-    init_data(params = this.$route.query) {
-      // let params = this.$route.query;
-      api.get_lists(params).then(res => {
-        this.cur_lists_data = res.data.extend;
+    get_more_data() {
+      let params = {
+        // cat_id: this.curCateId,
+        id: this.selectId
+      };
+      api.followList(params).then(res => {
+        if (!res.data.data.length) {
+          this.finished = true;
+          this.loading = false;
+        }
         res.data.data.forEach(item => {
-          this.sku_lists.push(item);
+          this.selectId = res.data.extend.selectId;
+          this.loading = false;
+          this.storeListsData.push(item);
         });
       });
-    },
-    get_more_data(data) {
-      console.log('hot caroll');
-      let params =  this.$route.query;
-      params.id = this.cur_lists_data.selectId;     
-      this.init_data(params);
     }
   },
   components: {
-    goodsCard
+    storeCard
   }
 };
 </script>
 
 <style lang='scss' scoped>
-.query-lists {
-  height: 100%;
-  overflow: auto;
-  padding: 10px 0;
+/*  */
+.fixed-content {
+  background-color: #f3f3f3;
+}
+.pick-lists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 15px;
+  padding-top: 10px;  
+  /* 保留高度 */
+  // min-height:50vh;
+  // & > li {
+  //   width: calc(50% - 5px);
+  //   margin-bottom: 10px;
+  //   &:nth-child(2n-1) {
+  //     // margin-right: 5px;
+  //   }
+  //   &:nth-child(2n) {
+  //   }
+  // }
 }
 </style>
