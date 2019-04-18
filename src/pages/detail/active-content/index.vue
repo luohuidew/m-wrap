@@ -21,7 +21,7 @@
         </section>
         <detail-store :item="store_info"></detail-store>
         <similar-cate v-if="likeData.length>0" :titlelike="true" :data-list="likeData" title = "You might also like" :activeList = 'activeList'></similar-cate>
-        <similar-cate v-if="likeData.length>0"  :data-list="lookData" title = "Complete the look" ></similar-cate>
+        <similarCateLook v-if="lookData.length>0"  :data-list="lookData" title = "Complete the look" ></similarCateLook>
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
         <!-- <shipping :sku-data="sku"></shipping> -->
@@ -94,6 +94,7 @@ import shippingDialog from "./detailShipping/components/shippingDialog";
 // import detailWelog from "./detail-welog.vue";
 import similarBrand from "./similar-brand";
 import similarCate from "./similar-cate";
+import similarCateLook from "./similar-cate-look";
 import detailPayBtn from "../detail-pay-btn.vue";
 import api from "@/api/product";
 import share from "@/api/share";
@@ -250,7 +251,7 @@ export default {
         if (this.activeList == '1') {
           this.lookData = res.data.look
           this.likeData = custom.filter((items) => {
-            items.sku_id !== skuId
+            return items.sku_id !== skuId
           })
         } else {
           this.likeData = res.data.like
@@ -341,6 +342,7 @@ export default {
     // detailWelog,
     similarBrand,
     similarCate,
+    similarCateLook,
     detailPayBtn,
     attrDialog,
     detailCouponDialog,

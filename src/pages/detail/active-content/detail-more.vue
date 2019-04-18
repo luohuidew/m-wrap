@@ -5,7 +5,9 @@
       <!-- <p class="more"></p> -->
     </div>
     <ul class="des-info">
-      <p v-html="detail_text"></p>
+      <div class="active-title">
+        <p v-html="detail_text"></p>
+      </div>
       <div class="img-box">
         <template v-if="sku.desc_imgs.length>0">
           <img v-for="(item,index) in sku.desc_imgs"
@@ -24,8 +26,9 @@ export default {
   name: "",
   data() {
     return {
-      detail_text:
-        "<p>" + this.sku.desc.toString().replace(/\n|\r\n/g, "<br/>") + "</p>"
+      detail_text:this.sku.activity_sku_desc.toString(),
+
+      // detail_texts: "<h1>Tops</h1><h2>Size</h2><h3>SML(see the laset)</h3>"
     };
   },
   props: ["sku"],
@@ -65,6 +68,24 @@ export default {
   img {
     width: 100%;
     height: auto;
+  }
+  .active-title {
+    p /deep/ {
+      display: block;
+      line-height: 20px;
+      h1 {
+        font-size: 16px;
+        margin-top: 10px;
+      }
+      h2 {
+        font-size: 14px;
+        margin-top: 5px;
+      }
+      h3 {
+        font-weight: 300;
+        font-size: 12px;
+      }
+    }
   }
   //   padding-left: 20px;
 }
