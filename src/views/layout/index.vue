@@ -1,16 +1,23 @@
 <template>
-  <div class="app-content" ref="app_content" >
-    <div id="banner-box" v-show="show_banner">
-      <router-link :to="{path:'/about'}" class="about-us">
+  <div class="app-content"
+    ref="app_content">
+    <div id="banner-box"
+      v-show="show_banner">
+      <router-link :to="{path:'/about'}"
+        class="about-us">
         <img src="/static/images/elements/home/H5@3x.jpg"
           alt=""
           srcset="">
       </router-link>
-      <span class="close-banner" @click="keep_banner=!keep_banner">
-        <img src="/static/images/icon/header/close-white.png" alt="" srcset="">
+      <span class="close-banner"
+        @click="keep_banner=!keep_banner">
+        <img src="/static/images/icon/header/close-white.png"
+          alt=""
+          srcset="">
       </span>
     </div>
-    <div id="layout" :class="{'no-banner':!show_banner}">
+    <div id="layout"
+      :class="{'no-banner':!show_banner}">
       <div id="app-header-top"
         v-if="!full_screen">
         <div class="page-head">
@@ -23,7 +30,7 @@
         <homeTitleOptions />
       </div> -->
       </div>
-      <div class="page-body" @scroll="get_scroll_event"
+      <div class="page-body"
         :class="{'in-app':full_screen,'home-page':home_page,'home-page-no-footer':home_page_no_footer}">
         <transition :name="transitionName">
           <template v-if="$route.meta.keepAlive">
@@ -61,12 +68,12 @@ export default {
   name: "layout",
   data() {
     return {
-      transitionName: "slide-left",      
-      keep_banner:true
+      transitionName: "slide-left",
+      keep_banner: true
     };
   },
   computed: {
-    show_banner(){
+    show_banner() {
       return this.keep_banner && !this.full_screen;
     },
     share_token() {
@@ -128,8 +135,8 @@ export default {
       //   ? this.$route.meta.title
       //   : "Weget";
     },
-    get_scroll_event(data){
-      console.log(this.$refs['app_content']);
+    get_scroll_event(data) {
+      // console.log(this.$refs['app_content']);
     },
     init_transtion(to, from) {
       /* 设置动画的类名 */
@@ -197,7 +204,7 @@ export default {
 #layout {
   // flex: 1;
   height: calc(100% - 65px);
-  
+
   &.no-banner {
     height: 100%;
   }
