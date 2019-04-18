@@ -30,10 +30,12 @@
         <img src="/static/images/elements/about/about-us_06.jpg"
           alt=""
           srcset="">
-      </li>
+      </li>      
       <li>
-        <img src="@/assets/img/418active/LOOK_06.jpg" />
-      </li>
+        <img src="/static/images/elements/about/about-us_07.jpg"
+          alt=""
+          srcset="">
+      </li>      
     </ul>
     <div class="footer">
       <div class="about_row1">
@@ -74,6 +76,7 @@ export default {
 
 <style lang='scss' scoped>
 .about-us-page {
+  font-size: 0;
   img {
     width: 100%;
   }
