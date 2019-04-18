@@ -10,8 +10,8 @@
         <section class="select-box">
           <!--<detail-coupon v-if="all_data.is_show_coupon===1"-->
             <!--@toggle="show_coupon=true"></detail-coupon>-->
-          <!--<detail-shipping @toggle="show_shipping=true"-->
-            <!--:all-data="all_data"></detail-shipping>-->
+          <detail-shipping @toggle="show_shipping=true"
+            :all-data="all_data" :active="true"></detail-shipping>
           <detail-attr v-if="cur_goods"
             :sku="sku"
             :goods="goods"

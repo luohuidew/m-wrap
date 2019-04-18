@@ -35,7 +35,7 @@
       </p>
       <div class="buyer-box">
         <p class="pay-number">
-          {{sku.bought_num}} bought
+          <!--{{sku.bought_num}} bought-->
         </p>
         <!-- <p class="goods-getter" v-if="sku.bought_user">
           <img v-for="(item,index) in sku.bought_user"
