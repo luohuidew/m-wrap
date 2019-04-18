@@ -1,15 +1,56 @@
 <template>
   <div class="facebook-login-box">
     <div class="facebook-box">
-      <fb @login="getUser"></fb>
+      <!-- <google @login="getUserGoogle"></google> -->
+      <template v-if="!ua.no_facebook">
+        <fb @login="getUser"></fb>
+        <p class="chang-other">— OR USE YOUR EMAIL —</p>
+      </template>
+      <div class="login-server-btn"
+        @click="show_box_login">
+        <img src="../../../static/img/icon/login_email.png"
+          class="face_login">
+      </div>
     </div>
-   
+    <temp-dialog v-if="show_dialog"
+      @close="show_dialog=false">
+      <div slot="tips"
+        class="email-box"
+        @click.stop="show_dialog=true">
+        <!-- <bind-mail></bind-mail> -->
+        <div class="logo-box">
+          <img src="/static/img/icon/logo 白大.png"
+            alt="">
+        </div>
+        <div class="form-content">
+          <p class="tips-title">Link with email address. <br />Get coupons and more.</p>
+          <p>
+            <input type="text"
+              v-model="other_form.email"
+              placeholder="Email Address">
+          </p>
+          <p class="link-btn">
+            <a href="javascript:;"
+              @click="link_email(other_form.email)">Link Email Address</a>
+          </p>
+        </div>
+      </div>
+    </temp-dialog>
+    <temp-dialog v-if="login_pass"
+      @close="login_pass=false">
+      <div class="pass-box"
+        slot="tips">
+        <login-server @submit-form="to_home"
+          @open="login_pass=true"></login-server>
+      </div>
+    </temp-dialog>
   </div>
 </template>
 
 <script>
 // import tempdialog from '@/components/dialog/temp-dialog';
 import fb from "./auth/facebook";
+import google from "./auth/google.vue";
 import loginServer from "./login-server";
 import tempdialog from "@/components/dialog/temp-dialog";
 // import "./css/base.scss";
@@ -23,35 +64,85 @@ export default {
       show_dialog: false,
       login_pass: false,
       bind_email: "",
-      other_form: {}
+      other_form: {},
+      ua: {
+        no_facebook: this.$CM.is_ins() || this.$CM.is_weixin() || this.$CM.is_snapchat()
+      }
     };
+  },
+  created() {
+    this.login_pass = this.$route.query.autoshow == "1" ? true : false;
   },
   mounted() {
     // this.init_data();
   },
   computed: {},
   methods: {
-    init_data() {
-      let temp_href = sessionStorage.getItem("history_href");
-      let token = sessionStorage.getItem("token");
-      if (token) {
-        // this.show_dialog = true;
-        api.checkUser({ token: token }).then(res => {
-          if (temp_href) {
-            if (temp_href.indexOf("login") != -1) {
-              // window.location.replace(location.origin);
-              window.location.href = window.location.origin;
-            } else {
-              window.location.href = temp_href;
-            }
+    // init_data() {
+    //   let temp_href = sessionStorage.getItem("history_href");
+    //   let token = sessionStorage.getItem("token");
+    //   if (token) {
+    //     // this.show_dialog = true;
+    //     api.checkUser({ token: token }).then(res => {
+    //       if (temp_href) {
+    //         if (temp_href.indexOf("login") != -1) {
+    //           // window.location.replace(location.origin);
+    //           window.location.href = window.location.origin;
+    //         } else {
+    //           window.location.href = temp_href;
+    //         }
+    //       }
+    //     });
+    //   }
+    // },
+    check_pre_login(per_params, params) {
+      let that = this;
+      // alert(JSON.stringify(per_params));
+      api
+        .preLogin(per_params)
+        .then(res => {
+          console.log(res);
+          return res;
+        })
+        .then(res => {
+          if (res.data.is_signUp == 1) {
+            this.show_dialog = true;
+            this.$set(this.other_form, "referer", this.$route.query.redirect);
+          } else {
+            api.thirdLogin(params).then(res => {
+              let data = res.data;
+              that.set_token(data.token);
+            });
           }
+          // console.log(res, "第二个res");
         });
+    },
+    getUserGoogle(data) {
+      console.log(data);
+      let params = {
+        user_name: data.getName,
+        last_name: data.getFamilyName,
+        first_name: data.getGivenName,
+        email: data.getEmail,
+        // tel: user.phoneNumber ? user.phoneNumber : undefined,
+        bind_id: data.getId,
+        type: 1,
+        photo: data.getImageUrl
+      };
+      // this.bind_email = data.email;
+      for (let key in params) {
+        this.other_form[key] = params[key];
       }
+      // if (!getToken()) {
+      // alert(JSON.stringify(params));
+      let per_params = {
+        bind_id: params.bind_id,
+        type: params.type
+      };
+      this.bind_email = params.email;
+      this.check_pre_login(per_params, params);
     },
-    getUser(){
-
-    },
-    __getUser(data) {
+    getUser(data) {
       let params = {
         user_name: data.name,
         last_name: data.last_name,
@@ -83,6 +174,7 @@ export default {
         .then(res => {
           if (res.data.is_signUp == 1) {
             this.show_dialog = true;
+            this.$set(this.other_form, "referer", this.$route.query.redirect);
           } else {
             api.thirdLogin(params).then(res => {
               let data = res.data;
@@ -93,12 +185,12 @@ export default {
         });
     },
     link_email(email) {
-      if(email){
+      if (email) {
         let params = this.other_form;
         api.thirdLogin(params).then(res => {
           let data = res.data;
           this.set_token(data.token);
-        });      
+        });
       }
     },
     to_home(data) {
@@ -108,7 +200,8 @@ export default {
           email: data.res.email,
           password: sha256(data.res.password),
           first_name: data.res.first_name,
-          last_name: data.res.last_name
+          last_name: data.res.last_name,
+          referer: this.$route.query.redirect
         };
         api.sign_up(params).then(res => {
           console.log(res);
@@ -127,31 +220,20 @@ export default {
       }
     },
     set_token(token) {
-      // alert(token);
-      this.$store.state.token = token;
-      // console.log(this.$store.state.token);
-      // sessionStorage.setItem("token", token);
       setToken(token);
-      // console.log(getToken());
-      // window.location.href = this.$route.query.redirect;
-      // if (
-      //   sessionStorage.getItem("token") &&
-      //   sessionStorage.getItem("history_href")
-      // ) {
-      //   setTimeout(() => {
-      //     window.location.href = sessionStorage.getItem("history_href");
-      //     // location.reload();
-      //   }, 300);
-        // this.go_home(token);
-        // debugger
-       window.location.href = this.$route.query.redirect;
+      if (this.$route.query.redirect) {
+        window.location.replace(this.$route.query.redirect);
+      } else {
+        window.location.replace(window.origin + "/home");
+      }
     },
     show_box_login() {
       this.login_pass = true;
-    },
+    }
   },
   components: {
     fb,
+    google,
     loginServer,
     "temp-dialog": tempdialog
   }
@@ -162,25 +244,21 @@ export default {
 .facebook-login-box {
   position: relative;
   height: 100%;
-  background: #fff url("/static/img/elements/user_login_bg1.jpg") no-repeat top
+  background: #fff url("/static/images/elements/login_bg.jpg") no-repeat top
     left;
   background-size: 100% auto;
   overflow: auto;
 }
 .facebook-box {
   // padding: 10px;
+  width: 75%;
+  height: auto;
 
   position: absolute;
   left: 50%;
-  top: 457px;
+  bottom: 10%;
   transform: translateX(-50%);
   button {
-    width: 284px;
-    height: 54px;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-    background-color: #3b55a0;
-    border-radius: 27px;
-    background-image: none !important;
     .spinner {
       box-sizing: border-box;
       width: 40px;
@@ -188,35 +266,32 @@ export default {
       left: 18px;
       top: 8px;
     }
-    img {
-      top: 10px !important;
-      left: 16px;
-    }
   }
 }
-
+.pass-box {
+  position: relative;
+  height: 100%;
+  overflow: auto;
+}
 .chang-other {
-  font-size: 11px;
+  font-size: 15px;
   color: rgba(0, 0, 0, 1);
-  line-height: 14px;
-  padding: 20px 0 10px 0;
+  padding: 20px 0;
   text-align: center;
 }
 .login-server-btn {
-  height: 54px;
+  width: 100%;
+  height: auto;
   border-radius: 27px;
-  border: 1px solid;
-  text-align: center;
-  line-height: 54px;
   font-size: 14px;
   font-weight: bold;
+  .face_login {
+    width: 100%;
+  }
 }
 .logo-box {
   padding: 36px 0 20px 0;
   text-align: center;
-  img {
-    // height:
-  }
 }
 .email-box {
   position: absolute;

@@ -127,6 +127,17 @@ export default {
         keepAlive: false,        
         fullScreen: true
       }
+    },
+    {
+      path: 'ac-12',
+      name: 'ac-12',
+      component: () =>
+        import('@/pages/article/ac-12'),
+      meta: {
+        title: '',
+        keepAlive: false,        
+        fullScreen: true
+      }
     }
   ]
 }
