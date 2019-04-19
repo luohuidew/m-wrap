@@ -17,4 +17,13 @@ export default {
       data: JSON.stringify(data),
     })
   },
+  address_state(data={}) {
+    data.token  = store.state.token;
+    return request({
+      url: 'address/state',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+
 }
