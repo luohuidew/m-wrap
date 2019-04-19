@@ -202,20 +202,21 @@ export default {
 
       if (data.type === "signup") {
         if (data.res.password.length < 8) {
-          this.$toast("password format is incorrect");
+          this.$toast("password format is incorrect.");
           return false;
+        }else {
+          let params = {
+            email: data.res.email,
+            password: sha256(data.res.password),
+            first_name: data.res.first_name,
+            last_name: data.res.last_name,
+            referer: this.$route.query.redirect
+          };
+          api.sign_up(params).then(res => {
+            console.log(res);
+            this.set_token(res.data.token);
+          });
         }
-        let params = {
-          email: data.res.email,
-          password: sha256(data.res.password),
-          first_name: data.res.first_name,
-          last_name: data.res.last_name,
-          referer: this.$route.query.redirect
-        };
-        api.sign_up(params).then(res => {
-          console.log(res);
-          this.set_token(res.data.token);
-        });
       } else {
         let params = {
           email: data.res.email,

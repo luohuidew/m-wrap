@@ -15,32 +15,12 @@
         @click="to_detail(sku.sku_id)">
       </li>
     </ul>
-    <!-- <div class="footer">
-      <div class="about_row1">
-        <p>
-          <a href="javascript:;">
-            <img src="/static/img/about/底部logo@2x.png">
-          </a>
-          <a href="https://www.facebook.com/wegetofficial">
-            <img src="/static/img/about/iconF@2x.png">
-          </a>
-          <a href="https://www.instagram.com/shopweget">
-            <img src="/static/img/about/iconO@2x.png">
-          </a>
-          <a href="https://www.youtube.com/channel/UCJ2SmCasimMk8TCHxloaMtA">
-            <img src="/static/img/about/iconA@2x.png">
-          </a>
-        </p>
-      </div>
-      <div class="about_row2">
-        <img class="bgimg"
-          src="/static/img/about/底部@2x.png">
-      </div>
-    </div> -->
+    <footerAbout />
   </div>
 </template>
 
 <script>
+import footerAbout from "../components/footer-about"
 import data from "./config";
 export default {
   name: "ac-12",
@@ -91,7 +71,9 @@ export default {
       });
     }
   },
-  components: {}
+  components: {
+    footerAbout
+  }
 };
 </script>
 

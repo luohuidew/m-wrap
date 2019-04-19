@@ -33,16 +33,16 @@ import api from "@/api/user";
 export default {
   name: "",
   data() {
-    return {     
+    return {
       pass1: "",
-      pass2: "",
+      pass2: ""
     };
   },
   mounted() {},
   computed: {
     form_data() {
       // debugger
-      if ((this.pass1 == this.pass2)) {        
+      if (this.pass1 == this.pass2) {
         return {
           email: this.$route.query.email,
           password: this.pass2
@@ -57,16 +57,21 @@ export default {
     //   });
     // },
     reset_pass() {
-      let params = {
-        email: this.form_data.email,     
-        password: sha256(this.form_data.password)
-      };
-      api.updateForgetPassword(params).then(res => {
-        console.log(res);
-        this.$router.push({
-          path: "/login"
+      if (this.form_data.password < 8) {
+        this.$toast("password format is incorrect.");
+        return false;
+      } else {
+        let params = {
+          email: this.form_data.email,
+          password: sha256(this.form_data.password)
+        };
+        api.updateForgetPassword(params).then(res => {
+          console.log(res);
+          this.$router.push({
+            path: "/login"
+          });
         });
-      });
+      }
     }
   },
   components: {}

@@ -52,7 +52,7 @@ const data = [{
       },
       {
         sku_id: 5417774145753140,
-      },     
+      },
 
     ]
   },
@@ -78,7 +78,7 @@ const data = [{
       },
       {
         sku_id: 5505003119776885,
-      },     
+      },
 
     ]
   },
@@ -104,9 +104,13 @@ const data = [{
       },
       {
         sku_id: 5393847339386639,
-      },     
+      },
 
     ]
-  }
+  },
+  {
+    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/21002803715cb57a280a714.jpg?width=1242&height=522',
+    sku_lists: []
+  },
 ];
 export default data;
