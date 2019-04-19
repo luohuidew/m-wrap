@@ -100,7 +100,7 @@ export default {
       address.address_list().then(res => {
         console.log(res);
         this.address_lists = res.data;
-        if (this.$route.query.cur_index) {
+        if (this.$route.query.cur_index !== undefined) {
           let cur_index = this.$route.query.cur_index;
           for (let key in this.address) {
             this.address[key] = this.address_lists[cur_index][key];
@@ -194,7 +194,7 @@ $linecolor: #e9e9e9;
       flex: 1;
       color: #000;
       span {
-      font-size: 14px;
+        font-size: 14px;
         font-weight: bold;
       }
       img {

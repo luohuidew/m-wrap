@@ -77,6 +77,11 @@ export default {
       addressApi.address_list().then(res => {
         this.is_selected = this.$route.query.id;
         this.address_lists = res.data;
+        let temp_address = this.address_lists.filter(item=>{
+          return item.id == this.is_selected;
+        })
+        // debugger;
+        this.address_change(temp_address[0]);
       });
     },
     save_address() {
