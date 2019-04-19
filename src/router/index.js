@@ -209,6 +209,16 @@ export default new Router({
       }
     },
     {
+      path: '/state-list',
+      name: 'state-list',
+      component: () =>
+        import('@/pages/address/address-state'),
+      meta: {
+        title: 'state',
+        fullScreen:false
+      }
+    },
+    {
       path: '/delivery',
       name: 'delivery',
       component: () =>

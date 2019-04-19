@@ -17,7 +17,11 @@
               <span class="color-red">${{total_price.toFixed(2)}}</span>
             </p>
           </div>
-          <div class="buy-btn"
+          <div v-show="is_loading" class="buy-btn"
+           >
+            <van-button loading type="default" loading-text="Loading..."></van-button>
+          </div>
+          <div v-show="!is_loading" class="buy-btn"
             @click="to_pay">
             Buy ({{update_count.length}})
           </div>
@@ -59,7 +63,8 @@ export default {
     return {
       show_coupon_dialog:false,
       update_count: [],
-      total_price: 0
+      total_price: 0,
+      is_loading:false
     };
   },
   watch: {
@@ -98,6 +103,7 @@ export default {
   created() {},
   methods: {
     to_pay() {
+      this.is_loading = true;
       let params = {
         data: this.update_count
       };
@@ -116,6 +122,7 @@ export default {
           }
         })
         .catch(res => {
+           this.is_loading = false;
           // debugger;
         });
     },
@@ -199,6 +206,12 @@ export default {
     background-color: #d70e19;
     line-height: 50px;
     text-align: center;
+    .van-button {
+      width: 100%;
+      height: 100%;
+      background-color: transparent;
+      color: #ffffff;
+    }
   }
 }
 </style>

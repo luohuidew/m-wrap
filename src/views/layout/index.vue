@@ -32,18 +32,18 @@
       </div>
       <div class="page-body"
         :class="{'in-app':full_screen,'home-page':home_page,'home-page-no-footer':home_page_no_footer}">
-        <transition :name="transitionName">
-          <template v-if="$route.meta.keepAlive">
-            <keep-alive>
+        <!-- <transition :name="transitionName"> -->
+          <!-- <template v-if="$route.meta.keepAlive"> -->
+            <!-- <keep-alive>
               <router-view class="child-view"></router-view>
             </keep-alive>
-          </template>
-          <template v-else>
+          </template> -->
+          <template>
             <router-view class="child-view"
               :key="$route.fullPath"></router-view>
           </template>
           <!-- <router-view></router-view> -->
-        </transition>
+        <!-- </transition> -->
 
       </div>
       <div class="home-footer"
@@ -254,7 +254,7 @@ export default {
   /* top: 0; */
 
   width: 100%;
-  // max-height: 100%;
+  height: 100%;
   overflow: auto;
   /* height: 100%; */
   // transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);

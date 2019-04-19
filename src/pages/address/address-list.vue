@@ -10,7 +10,7 @@
         :key="index"
         @click="address_change(item)">
         <div class="address_radio">
-          <img v-if="is_selected=== item.id"
+          <img v-if="is_selected== item.id"
             src="/static/img/icon/选择红.png">
           <img v-else
             src="/static/img/icon/选择 灰.png">
