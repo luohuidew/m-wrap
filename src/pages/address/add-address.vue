@@ -20,11 +20,22 @@
       </li>
       <li>
         <p><span>City</span><input type="text"
-            v-model="address.city"></p>
+            v-model="address.city">
+        </p>
       </li>
-      <li>
+      <!-- <li>
         <p><span>State</span><input type="text"
             v-model="address.state"></p>
+      </li> -->
+      <li @click="goSelectState()">
+        <p><span>State</span>
+          <span class="state-selecet">
+            <span>{{address.state?address.state:''}}</span>
+            <img src="/static/images/icon/address/返回 小右@2x.png"
+              alt=""
+              srcset="">
+          </span>
+        </p>
       </li>
       <li>
         <p><span>Zip Code</span><input type="text"
@@ -38,7 +49,7 @@
         <p>
           <span>Set as default address</span>
           <van-switch active-color="#D70E19"
-            v-model="address.is_default" />
+            v-model="is_default" />
         </p>
       </li>
     </ul>
@@ -59,7 +70,7 @@ export default {
       is_selected: 0,
       is_editor: false,
       address: {
-        id:'',
+        id: "",
         first_name: "",
         last_name: "",
         address1: "",
@@ -68,8 +79,9 @@ export default {
         state: "",
         zipcode: "",
         tel: "",
-        is_default: false
+        is_default: 1
       },
+      is_default: false,
       address_lists: []
     };
   },
@@ -88,12 +100,15 @@ export default {
       address.address_list().then(res => {
         console.log(res);
         this.address_lists = res.data;
-        if (this.$route.query) {
+        if (this.$route.query.cur_index !== undefined) {
           let cur_index = this.$route.query.cur_index;
           for (let key in this.address) {
             this.address[key] = this.address_lists[cur_index][key];
           }
-          this.address.is_default = this.address.is_default===1?false:true
+          this.is_default = this.address.is_default === 1 ? false : true;
+        }
+        if (this.$route.query.state) {
+          this.address.state = this.$route.query.state;
         }
         // this.selected_card(this.address_lists[0].id, 0);
       });
@@ -106,17 +121,29 @@ export default {
     //     this.init_address();
     //   });
     // },
+    goSelectState() {
+      let href_params = {
+        path: "/state-list",
+        query: {
+          cur_index: this.$route.query.cur_index
+        }
+      };
+      this.$router.replace(href_params);
+    },
     go_back() {
       let params = this.address;
-      if (this.address.is_default === false) {
+      if (this.is_default === false) {
         params.is_default = 1;
       } else {
         params.is_default = 2;
       }
       address.address_save(params).then(res => {
-        console.log(res);
+        // console.log(res);
         // this.is_editor = !this.is_editor;
         // this.init_address();
+        let href_params = {
+          path: "/"
+        };
         this.$router.go(-1);
       });
     }
@@ -159,6 +186,20 @@ $linecolor: #e9e9e9;
       font-size: 13px;
       padding: 0 20px 0 10px;
       color: #747474;
+    }
+    .state-selecet {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+      color: #000;
+      span {
+        font-size: 14px;
+        font-weight: bold;
+      }
+      img {
+        height: 14px;
+      }
     }
     input {
       flex: 1;

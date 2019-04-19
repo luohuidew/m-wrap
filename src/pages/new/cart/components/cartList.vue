@@ -108,9 +108,13 @@ export default {
       let params = {
         only: cartIds
       };
+      if(!cartIds.length){
+        return false;
+      }
       CART.delShopCartGood(params)
         .then(res => {
           window.location.reload();
+          // this.$parent.init_data();
         })
         .then(res => {
           CART.shopCartList().then(res => {

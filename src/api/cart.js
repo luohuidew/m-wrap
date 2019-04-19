@@ -21,7 +21,7 @@ export default {
   delShopCartGood(data = {}) {
     data.token = token;
     return request({
-      url: 'shopcart/delShopCartGood ',
+      url: 'shopcart/delShopCartGood?loading=yes ',
       method: 'post',
       data: JSON.stringify(data),
     })
