@@ -47,11 +47,6 @@ export default {
     // this.init_data();
   },
   mounted() {
-<<<<<<< HEAD
-    let top_number = document.querySelector("#app-header-top").offsetHeight;
-    console.log(top_number);
-    this.offsetTop = top_number;
-=======
     let app_header = document.querySelector("#app-header-top");
     let app_banner = document.querySelector("#banner-box");
     let top_number = app_header.offsetHeight;
@@ -66,7 +61,6 @@ export default {
         // banner_number = app_banner.offsetHeight;
         that.offsetTop = top_number;
       });
->>>>>>> clonedev
   },
   methods: {
     init_data(params) {
