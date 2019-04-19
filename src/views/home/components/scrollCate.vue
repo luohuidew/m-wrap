@@ -48,6 +48,7 @@ export default {
   },
   mounted() {
     let top_number = document.querySelector("#app-header-top").offsetHeight;
+    console.log(top_number);
     this.offsetTop = top_number;
   },
   methods: {
