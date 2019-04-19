@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       // bought_user: this.sku.bought_user.slice(0, 4),
-      discount_text: this.sku.mask_info.mask_title.split(/\n|\r\n/g)
+      // discount_text: this.sku.mask_info.mask_title.split(/\n|\r\n/g)
     };
   },
   props: {
@@ -77,7 +77,7 @@ export default {
   components: {},
   methods: {
     to_detail(sku_id) {
-      this.$router.push({ path: "/detail", query: { sku_id: sku_id } });
+      this.$router.push({ name: "detailAcive", query: { sku_id: sku_id, activeList: 1} });
     }
   }
 };

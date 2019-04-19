@@ -199,11 +199,12 @@ export default {
     },
     to_home(data) {
       console.log(data);
-      if(data.res.password.length<8){
-        this.$toast('password format is incorrect');
-        return false;
-      }
+
       if (data.type === "signup") {
+        if (data.res.password.length < 8) {
+          this.$toast("password format is incorrect");
+          return false;
+        }
         let params = {
           email: data.res.email,
           password: sha256(data.res.password),

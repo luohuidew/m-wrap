@@ -11,11 +11,11 @@
     <!-- :class="{'cart-icon':this.$store.state.cart.goods_num}" -->
     <!-- :class="{'animeted bounceIn':$store.state.cart.is_static}" src="/static/images/icon/header/H5-购物车@3x.png" -->
     <div class="go-home-box">
-      <router-link :to="{path:'/'}">
+      <!-- <router-link :to="{path:'/'}">
         <img src="/static/images/icon/detail/go-home.png"
           alt=""
           srcset="">
-      </router-link>
+      </router-link> -->
     </div>
     <a class="store-btn"
       href="javascript:;"

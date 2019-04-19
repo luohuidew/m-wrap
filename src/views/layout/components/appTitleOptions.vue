@@ -37,18 +37,6 @@
           </router-link>
         </li>
       </template>
-      <template v-if="appWelog">
-        <li class="me">
-          <span>WELOG</span>
-        </li>
-        <li class="emity-block"></li>
-      </template>
-      <template v-if="appCart">
-        <li class="me">
-          <span>CART</span>
-        </li>
-        <li class="emity-block"></li>
-      </template>
       <template v-if="appUser">
         <!-- <li class="me">
           <span>ME</span>
@@ -115,12 +103,6 @@ export default {
     appHome() {
       return this.$route.path === "/home/index";
     },
-    appWelog() {
-      return this.$route.path === "/welog/index";
-    },
-    appCart() {
-      return this.$route.path === "/cart/index";
-    },
     appTheme() {
       let configs = ["/store/theme", "/home/theme"];
       return configs.indexOf(this.$route.path) !== -1;
@@ -175,14 +157,14 @@ export default {
       left: 50%;
       top: 50%;
       transform: translate(-50%,-50%);
+      a {
+        display: block;
+      }
       img {
         height: 40px;
         width: auto;
       }
     }
-  }
-  .emity-block {
-    width: 24px;
   }
   .aside-btn-box {
   }
