@@ -168,7 +168,7 @@ export default {
     }
   },
   created() {
-    this.init_data();
+    this.init_data();    
   },
   methods: {
     init_data() {
@@ -177,6 +177,7 @@ export default {
       this.new_attrList = JSON.parse(JSON.stringify(this.attrList));
       this.send_cur_goos();
     },
+   
     zoom_img(cur) {
       this.show_big_img = true;
       console.log(cur);
@@ -230,10 +231,33 @@ export default {
         store_id: this.sku.store_id,
         count: this.pay_number
       };
-      CART.addToCart(to_catr_params).then(res => {
-        this.$emit("close", null);
-        this.init_cart();
-      }, 0);
+      CART.addToCart(to_catr_params)
+        .then(res => {
+          this.$emit("close", null);
+          this.init_cart();
+        }, 0)
+        .catch((err) => {          
+          console.log(err)
+          if(err.code===(1207 || 1209)){
+            let re_path = `${window.location.origin}${
+              this.$route.fullPath
+            }&type=keep&goods_id=${this.submit_form.goods_id}&store_id=${
+              this.sku.store_id
+            }&count=${this.pay_number}`;
+            // debugger;
+            window.location.href = window.location.origin + "/login?redirect=" + encodeURIComponent(re_path);
+            // debugger;
+            // this.$router.push({
+            //   path:'/login',
+            //   query:{
+            //     redirect:re_path
+            //   }
+            // })
+            // window.location.href = re_path;
+          }
+          
+          
+        });
       // setTimeout(()=>{
       // })
     },

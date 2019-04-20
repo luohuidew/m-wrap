@@ -5,7 +5,7 @@ export default {
   addToCart(data = {}) {
     data.token = token;
     return request({
-      url: 'shopcart/addToCart',
+      url: 'shopcart/addToCart?loading=yes',
       method: 'post',
       data: JSON.stringify(data),
     })

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import CART from "@/api/cart";
 import detailContent from "./detail-content";
 export default {
   // beforeRouteEnter(to, from, next) {
@@ -28,6 +29,50 @@ export default {
   //   console.log('likai',to,from);
   //   next();
   // },
+  created() {    
+    if (this.$route.query.type === "keep") {
+      // debugger;
+      if (this.$store.state.token) {
+        this.autoAddCart();
+      } else {
+        this.clearParams();
+      }
+    }
+  },
+  methods: {
+    autoAddCart() {
+      let auto_params = {
+        goods_id: this.$route.query.goods_id,
+        store_id: this.$route.query.store_id,
+        count: this.$route.query.count
+      };
+      CART.addToCart(auto_params).then(res => {
+        // this.$emit("close", null);
+        // this.init_cart();
+        this.init_cart();
+      }, 0);
+    },
+    init_cart() {
+      CART.shopCartList().then(res => {
+        let temp_num = 0;
+        res.data.goods.forEach(item => {
+          temp_num += item.goods_list.length;
+        });
+        this.$store.commit("SET_CATR", temp_num);
+        // debugger;
+        this.clearParams();
+      });
+    },
+    clearParams() {
+      let sku_id = this.$route.query.sku_id;
+      this.$router.push({
+        path: "/detail",
+        query: {
+          sku_id: sku_id
+        }
+      });
+    }
+  },
   components: {
     detailContent
   }

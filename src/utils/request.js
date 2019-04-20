@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'development') {
 } else if (process.env.VUE_APP_TITLE === 'testing') {
   // testing
   BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
-} else{
+} else {
   // build
   BASE_API = 'https://app.weget.com/wap/';
 }
@@ -65,14 +65,14 @@ window.nativeToJavaScript_sendToken = function (res) {
 // request interceptor
 service.interceptors.request.use(
   config => {
-    axios_num += 1;
     // console.log(config);
     if (config.url.indexOf('loading=yes') !== -1) {
+      axios_num += 1;
       http_load = Toast.loading({
         mask: true,
         loadingType: "spinner",
         message: 'Loading',
-        duration:0
+        duration: 2000
       });
     }
     // Do something before request is sent
@@ -109,16 +109,16 @@ service.interceptors.response.use(
   response => {
     const res = response.data;
     const config = response.config;
-    // console.log(response);
+    // console.warn(response);
     if (res.code !== 1000) {
       // console.log(config);
       /* 处于weget的app下不显示弹框 */
       if (!localStorage.getItem('device')) {
         // Toast(res.message
         let toast_config = {
-          message:res.message,
-          mask:true,
-          duration:5000
+          message: res.message,
+          mask: true,
+          duration: 3000
         };
         Toast(toast_config)
       }
@@ -194,14 +194,20 @@ service.interceptors.response.use(
       // return response.data;
     } else {
       // console.log('走过拦截相应');
-      axios_num += -1;
+      if (response.config.url.indexOf('loading=yes') !== -1) {
+        axios_num += -1;
+      }
       if (axios_num === 0) {
         if (http_load) {
-          setTimeout(() => {
-            http_load.clear();
-          }, 300)
+          http_load.clear();
+          setTimeout(()=>{
+            http_load.clear();          
+         },6000)
+          // setTimeout(() => {
+          // }, 300)
         }
       }
+      console.log(axios_num);
       return response.data;
     }
   },

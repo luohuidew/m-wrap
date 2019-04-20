@@ -16,7 +16,7 @@
       </ul>
     </div>
     <div class="sing-out-box">
-      <button @click="logout">SING OUT</button>
+      <button @click="logout">SIGN OUT</button>
     </div>
   </div>
 </template>

@@ -78,6 +78,10 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.article-detail {
+  width: 100%;
+  overflow: hidden;
+}
 .theme-page-block {
   position: relative;
   font-size: 0;
@@ -88,9 +92,10 @@ export default {
   .sku-box {
     position: absolute;
     width: 76px;
-    height: 16px;
+    height: 76px;
+    transform: translateY(-60px);
   }
-  .sku-5247149551417195 {
+  .sku-5495497352614205 {
     left: 313px;
     top: 168px;
   }
@@ -186,16 +191,16 @@ export default {
     top: 387px;
   }
   .sku-5446435530893409 {
-    height: 25px;
-    width: 46px;
+    // height: 25px;
+    // width: 46px;
     left: 317px;
-    top: 181px;
+    top: 188px;
   }
   .sku-5393847339386639 {
-    width: 49px;
-    height: 26px;
+    // width: 49px;
+    // height: 26px;
     left: 324px;
-    top: 308px;
+    top: 315px;
   }
 }
 </style>
