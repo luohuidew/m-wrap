@@ -151,11 +151,12 @@ export default new Router({
       name: 'detail',
       component: () =>
         import('@/pages/detail'),
+      
       meta: {
         title: 'Details',
         keepAlive: false,
         fullScreen: false
-      }
+      },
       //    redirect: '/detail/',
     },
     {

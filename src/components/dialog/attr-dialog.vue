@@ -168,7 +168,7 @@ export default {
     }
   },
   created() {
-    this.init_data();    
+    this.init_data();
   },
   methods: {
     init_data() {
@@ -177,7 +177,7 @@ export default {
       this.new_attrList = JSON.parse(JSON.stringify(this.attrList));
       this.send_cur_goos();
     },
-   
+
     zoom_img(cur) {
       this.show_big_img = true;
       console.log(cur);
@@ -226,40 +226,31 @@ export default {
       window.event.returnValue = false;
     },
     add_to_cart() {
-      let to_catr_params = {
-        goods_id: this.submit_form.goods_id,
-        store_id: this.sku.store_id,
-        count: this.pay_number
-      };
-      CART.addToCart(to_catr_params)
-        .then(res => {
+      if (!this.$store.state.token) {
+        this.checkedLogin();
+      } else {
+        let to_catr_params = {
+          goods_id: this.submit_form.goods_id,
+          store_id: this.sku.store_id,
+          count: this.pay_number
+        };
+        CART.addToCart(to_catr_params).then(res => {
           this.$emit("close", null);
           this.init_cart();
-        }, 0)
-        .catch((err) => {          
-          console.log(err)
-          if(err.code===(1207 || 1209)){
-            let re_path = `${window.location.origin}${
-              this.$route.fullPath
-            }&type=keep&goods_id=${this.submit_form.goods_id}&store_id=${
-              this.sku.store_id
-            }&count=${this.pay_number}`;
-            // debugger;
-            window.location.href = window.location.origin + "/login?redirect=" + encodeURIComponent(re_path);
-            // debugger;
-            // this.$router.push({
-            //   path:'/login',
-            //   query:{
-            //     redirect:re_path
-            //   }
-            // })
-            // window.location.href = re_path;
-          }
-          
-          
-        });
-      // setTimeout(()=>{
-      // })
+        }, 0);
+      }
+    },
+    checkedLogin() {
+      let re_path = `${window.location.origin}${
+        this.$route.fullPath
+      }&type=keep&goods_id=${this.submit_form.goods_id}&store_id=${
+        this.sku.store_id
+      }&count=${this.pay_number}`;
+      // debugger;
+      window.location.href =
+        window.location.origin +
+        "/login?redirect=" +
+        encodeURIComponent(re_path);
     },
     init_cart() {
       CART.shopCartList().then(res => {
@@ -349,6 +340,9 @@ export default {
   }
   .img-box {
     background-color: transparent;
+    img {
+      background-color: #ffffff;
+    }
   }
   // background-color: #fff;
 }

@@ -70,9 +70,10 @@ service.interceptors.request.use(
       axios_num += 1;
       http_load = Toast.loading({
         mask: true,
+        forbidClick:true,
         loadingType: "spinner",
         message: 'Loading',
-        duration: 2000
+        // duration: 3000
       });
     }
     // Do something before request is sent

@@ -23,12 +23,15 @@ export default {
   //   console.log('fuyong',to,from);
   //   next();
   // },
-  // beforeRouteLeave(to, from, next) {
-  //   // 导航离开该组件的对应路由时调用
-  //   // 可以访问组件实例 `this`
-  //   console.log('likai',to,from);
-  //   next();
-  // },
+  beforeRouteLeave(to, from, next) {
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 `this`
+    // debugger;
+     document.title = " Weget.com | stylish online fashion marketplace ";
+    setTimeout(()=>{      
+      next();
+    },0)    
+  },
   created() {    
     if (this.$route.query.type === "keep") {
       // debugger;
