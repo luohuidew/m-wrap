@@ -39,7 +39,7 @@
             :src="item.photo"
             :style="{right:(index+1)*12+'px',zIndex:10-index}">
           <img src="/static/img/icon/团购人点点点.png"
-            v-if="cardData.bought_user.length">         
+            v-if="cardData.bought_user.length">
 
         </div> -->
       </div>
@@ -58,46 +58,56 @@ export default {
   name: "",
   data() {
     return {
-      card_data: this.cardData,      
+      card_data: this.cardData,
       introduce: ""
     };
   },
-  props: ["cardData", "groupId"],
+  props: ["cardData", "groupId", "activeFixed"],
   components: {},
   methods: {
     to_detail(sku_id) {
-      let href_params = {
-        type: 106,
-        data: {
-          route: "wemall://public/route?type=6&id=" + sku_id + ""
-        }
-      };
-      let temp = this.$CM.weget_device_link(href_params);
-      if (temp === "h5") {
+      if (this.activeFixed) {
         let params = {
-          path: "/detail",
+          path: "/detailAcive",
           query: {
             sku_id: sku_id
           }
         };
-        if (this.groupId) {
-          params.query.status = 1;
-          params.query.group_id = this.groupId;
-          this.$router.push(params);
-          // params.query.status = 1;
-          // params.query.group_id = this.groupId;
-          // window.location.href =
-          //   window.location.origin +
-          //   "/detail?sku_id=" +
-          //   sku_id +
-          //   "&status=1&group_id=" +
-          //   this.groupId;
-        } else {
-          this.$router.push(params);
-          // window.location.href =
-          //   window.location.origin + "/detail?sku_id=" + sku_id;
+        this.$router.push(params);
+      } else {
+        let href_params = {
+          type: 106,
+          data: {
+            route: "wemall://public/route?type=6&id=" + sku_id + ""
+          }
+        };
+        let temp = this.$CM.weget_device_link(href_params);
+        if (temp === "h5") {
+          let params = {
+            path: "/detail",
+            query: {
+              sku_id: sku_id
+            }
+          };
+          if (this.groupId) {
+            params.query.status = 1;
+            params.query.group_id = this.groupId;
+            this.$router.push(params);
+            // params.query.status = 1;
+            // params.query.group_id = this.groupId;
+            // window.location.href =
+            //   window.location.origin +
+            //   "/detail?sku_id=" +
+            //   sku_id +
+            //   "&status=1&group_id=" +
+            //   this.groupId;
+          } else {
+            this.$router.push(params);
+            // window.location.href =
+            //   window.location.origin + "/detail?sku_id=" + sku_id;
+          }
+          // this.$router.push(params);
         }
-        // this.$router.push(params);
       }
       // this.$emit("stop", "stop");
     }

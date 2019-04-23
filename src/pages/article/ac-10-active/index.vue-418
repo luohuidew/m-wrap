@@ -1,19 +1,43 @@
 <template>
   <div class="article-detail">
-    <section class="wrap">
-      <Item v-for="item in itemDdata" :cardData = "item" :activeFixed="true"></Item>
+    <section>
+      <p><img src="@/assets/img/418active/LOOK_01.jpg"/></p>
+      <p @click="goPageActive('5557148210008098')"><img src="@/assets/img/418active/LOOK_02.jpg"/></p>
+      <p @click="goPageActive('5557435769542243')"><img src="@/assets/img/418active/LOOK_03.jpg"/></p>
+      <p @click="goPageActive('5557207069013871')"><img src="@/assets/img/418active/LOOK_04.jpg"/></p>
+      <p @click="goPageActive('5557314087792880')"><img src="@/assets/img/418active/LOOK_05.jpg"/></p>
+      <p><img src="@/assets/img/418active/LOOK_06.jpg"/></p>
     </section>
+    <div class="footer">
+      <div class="about_row1">
+        <!-- <img class="bgimg" src="/static/img/about/icon bg@2x.png"> -->
+        <p>
+          <a href="https://www.facebook.com/wegetofficial">
+            <img src="/static/img/about/iconF@2x.png">
+          </a>
+          <a href="https://www.instagram.com/shopweget">
+            <img src="/static/img/about/iconO@2x.png">
+          </a>
+          <a href="https://www.youtube.com/channel/UCJ2SmCasimMk8TCHxloaMtA">
+            <img src="/static/img/about/iconA@2x.png">
+          </a>
+        </p>
+      </div>
+      <!--<div class="about_row2">-->
+        <!--<img class="bgimg"-->
+          <!--src="/static/img/about/底部@2x.png">-->
+      <!--</div>-->
+    </div>
   </div>
 </template>
 
 <script>
 import data from "./config";
-import Item from "@/components/card-column-auto";
 export default {
   name: "",
   data() {
     return {
-      itemDdata: data
+      item_data: data
     };
   },
   mounted() {},
@@ -48,20 +72,27 @@ export default {
       });
     }
   },
-  components: {
-    Item
-  }
+  components: {}
 };
 </script>
 
 <style lang='scss' scoped>
 .article-detail {
-
+  // max-width: 1440px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  font-size: 0;
+  li {
+    margin: 0 auto;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
   section {
-    padding: 10px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 15px
+    p>img {
+      width: 100%;
+    }
   }
 }
 .header {

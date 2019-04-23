@@ -223,9 +223,9 @@ export default {
           alone_price: "32.90",
           cover_img: "https://we-get.s3.us-west-1.amazonaws.com/13186751435cb82c2ed0c0f.jpg?width=712&height=712",
           show_tag: [
-            // {
-            //   mask_bg_image: "https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
-            // }
+            {
+              mask_bg_image: "https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
+            }
           ],
           title: "Vacation Two Piece & Holiday Women Bag",
           sku_id: '5557435769542243'
