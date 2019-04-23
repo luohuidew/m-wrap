@@ -202,6 +202,7 @@ export default {
     link_email(email) {
       if (email) {
         let params = this.other_form;
+        params.share_user_id = this.$route.query.share_user_id
         api.thirdLogin(params).then(res => {
           let data = res.data;
           this.set_token(data.token);
@@ -220,11 +221,13 @@ export default {
             password: sha256(data.res.password),
             first_name: data.res.first_name,
             last_name: data.res.last_name,
-            referer: this.$route.query.redirect
+            referer: this.$route.query.redirect,
+            share_user_id:this.$route.query.share_user_id
           };
           api.sign_up(params).then(res => {
             console.log(res);
             this.set_token(res.data.token);
+            // debugger;
           });
         }
       } else {
