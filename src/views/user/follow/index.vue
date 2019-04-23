@@ -44,7 +44,7 @@ export default {
           this.loading = false;
         }
         res.data.data.forEach(item => {
-          this.selectId = res.data.extend.selectId;
+          this.selectId = res.data.extend.select_id;
           this.loading = false;
           this.storeListsData.push(item);
         });
@@ -60,14 +60,15 @@ export default {
 <style lang='scss' scoped>
 /*  */
 .fixed-content {
+  height: 100%;
   background-color: #f3f3f3;
 }
 .pick-lists {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 0 15px;
-  padding-top: 10px;  
+  // display: flex;
+  // flex-wrap: wrap;
+  // justify-content: space-between;
+  // padding: 0 15px;
+  // padding-top: 10px;  
   /* 保留高度 */
   // min-height:50vh;
   // & > li {

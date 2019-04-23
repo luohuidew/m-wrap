@@ -78,7 +78,7 @@
           <li @click="to_welog"
             class="list-item">
             <span>
-              My welog
+              Posts
             </span>
             <span class="more"></span>
           </li>
@@ -283,6 +283,7 @@ export default {
     padding-left: 50px;
     background: url() no-repeat left center;
     border-top: 1px solid #f3f3f3;
+    background-size: 24px auto;
     &:nth-child(1) {
       background-image: url(../../../assets/img/icon/pending.png);
     }
@@ -324,7 +325,7 @@ export default {
   border-top: 10px solid #f3f3f3;
   .check-list {
     li {
-      background-image: url(../../../assets/img/icon/review.png);
+      background-image: url(../../../assets/img/icon/user_mywelog_icon@3x.png);
     }
   }
 }

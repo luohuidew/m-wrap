@@ -38,8 +38,7 @@
           </p>
         </video>
       </div>
-      <!-- v-if="coverData.show_type===2" -->
-      <div v-if="coverData.sku_info"
+      <div v-if="coverData.sku_info.sku_id"
         class="sku-tips"
         :class="{'active':is_active}">
         <p @click="to_detail(coverData.sku_info.sku_id)">{{coverData.sku_info.title}}</p>
@@ -101,6 +100,15 @@ export default {
           console.log("onPlayerReady", this);
         }
       );
+    },
+    to_detail(sku_id) {
+      let parmas = {
+        path: "/detail",
+        query: {
+          sku_id: sku_id
+        }
+      };
+      this.$router.push(parmas);
     }
   },
   components: {}
