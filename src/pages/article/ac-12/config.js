@@ -7,7 +7,7 @@ const data = [{
     sku_lists: [
 
       {
-        sku_id: 5247149551417195,
+        sku_id: 5495497352614205,
       },
       {
         sku_id: 5471171920733542,
@@ -52,7 +52,7 @@ const data = [{
       },
       {
         sku_id: 5417774145753140,
-      },     
+      },
 
     ]
   },
@@ -78,13 +78,13 @@ const data = [{
       },
       {
         sku_id: 5505003119776885,
-      },     
+      },
 
     ]
   },
   /* 4 */
   {
-    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/13024909445cb57a1937820.jpg?width=1242&height=1928',
+    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/14892087905cbad558f3350.jpg?width=1242&height=1928',
     sku_lists: [
 
       {
@@ -104,9 +104,13 @@ const data = [{
       },
       {
         sku_id: 5393847339386639,
-      },     
+      },
 
     ]
-  }
+  },
+  {
+    img_url: 'https://we-get.s3.us-west-1.amazonaws.com/21002803715cb57a280a714.jpg?width=1242&height=522',
+    sku_lists: []
+  },
 ];
 export default data;

@@ -17,11 +17,11 @@
               <span class="color-red">${{total_price.toFixed(2)}}</span>
             </p>
           </div>
-          <div v-show="is_loading" class="buy-btn"
+          <!-- <div v-show="is_loading" class="buy-btn"
            >
             <van-button loading type="default" loading-text="Loading..."></van-button>
-          </div>
-          <div v-show="!is_loading" class="buy-btn"
+          </div> -->
+          <div class="buy-btn"
             @click="to_pay">
             Buy ({{update_count.length}})
           </div>
@@ -107,6 +107,9 @@ export default {
       let params = {
         data: this.update_count
       };
+      if(!this.update_count.length){
+        return ;
+      }
       // let params = JSON.parse(JSON.stringify(this.update_count));
       CART.updateCount(params)
         .then(res => {

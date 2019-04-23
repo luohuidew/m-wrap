@@ -9,11 +9,11 @@
         class="email-box"
         @click.stop="show_dialog=true">
         <!-- <bind-mail></bind-mail> -->
-        <div class="logo-box">
+        <!-- <div class="logo-box">
           <img src="/static/img/icon/logo 白大.png"
             alt="">
-        </div>
-        <div class="form-content">
+        </div> -->
+        <div class="bind-email-box">
           <p class="tips-title">Link with email address. <br />Get coupons and more.</p>
           <p>
             <input type="text"
@@ -40,9 +40,10 @@
           <p class="chang-other">— OR CREAT ACCOUNT —</p>
           <div class="fg-box">
             <fb class="other-btn"
-              @login="getUser"></fb>
+              @login="getUserFb"></fb>
             <google class="other-btn"
               @login="getUserGoogle"></google>
+            <instagram @login="getUserIns" class="other-btn"></instagram>
           </div>
         </div>
       </template>
@@ -54,6 +55,7 @@
 // import tempdialog from '@/components/dialog/temp-dialog';
 import fb from "./components/facebook";
 import google from "./components/google";
+import instagram from "./components/instagram";
 import loginServe from "./components/loginServe";
 import tempdialog from "@/components/dialog/temp-dialog";
 // import "./css/base.scss";
@@ -82,26 +84,8 @@ export default {
   },
   computed: {},
   methods: {
-    // init_data() {
-    //   let temp_href = sessionStorage.getItem("history_href");
-    //   let token = sessionStorage.getItem("token");
-    //   if (token) {
-    //     // this.show_dialog = true;
-    //     api.checkUser({ token: token }).then(res => {
-    //       if (temp_href) {
-    //         if (temp_href.indexOf("login") != -1) {
-    //           // window.location.replace(location.origin);
-    //           window.location.href = window.location.origin;
-    //         } else {
-    //           window.location.href = temp_href;
-    //         }
-    //       }
-    //     });
-    //   }
-    // },
     check_pre_login(per_params, params) {
       let that = this;
-      // alert(JSON.stringify(per_params));
       api
         .preLogin(per_params)
         .then(res => {
@@ -110,14 +94,14 @@ export default {
         })
         .then(res => {
           if (res.data.is_signUp == 1) {
-            // this.show_dialog = true;
+            this.show_dialog = true;
             this.$set(this.other_form, "referer", this.$route.query.redirect);
           } else {
+            api.thirdLogin(params).then(res => {
+              let data = res.data;
+              that.set_token(data.token);
+            });
           }
-          api.thirdLogin(params).then(res => {
-            let data = res.data;
-            that.set_token(data.token);
-          });
           // console.log(res, "第二个res");
         });
     },
@@ -146,7 +130,34 @@ export default {
       this.bind_email = params.email;
       this.check_pre_login(per_params, params);
     },
-    getUser(data) {
+    getUserIns(data) {
+      // console.log(data);
+      // debugger
+      let full_name = data.full_name.split(" ");
+      let params = {
+        user_name: data.username,
+        last_name: full_name[full_name.length-1],
+        first_name: full_name[0],
+        email: data.email,
+        // tel: user.phoneNumber ? user.phoneNumber : undefined,
+        bind_id: data.id,
+        type: 3,
+        photo: data.profile_picture
+      };
+      // this.bind_email = data.email;
+      for (let key in params) {
+        this.other_form[key] = params[key];
+      }
+      // if (!getToken()) {
+      // alert(JSON.stringify(params));
+      let per_params = {
+        bind_id: params.bind_id,
+        type: params.type
+      };
+      this.bind_email = params.email;
+      this.check_pre_login(per_params, params);
+    },
+    getUserFb(data) {
       let params = {
         user_name: data.name,
         last_name: data.last_name,
@@ -167,26 +178,26 @@ export default {
         bind_id: params.bind_id,
         type: params.type
       };
-      let that = this;
-      // alert(JSON.stringify(per_params));
-      api
-        .preLogin(per_params)
-        .then(res => {
-          console.log(res);
-          return res;
-        })
-        .then(res => {
-          if (res.data.is_signUp == 1) {
-            // this.show_dialog = true;
-            this.$set(this.other_form, "referer", this.$route.query.redirect);
-          } else {
-          }
-          api.thirdLogin(params).then(res => {
-            let data = res.data;
-            that.set_token(data.token);
-          });
-          // console.log(res, "第二个res");
-        });
+      this.check_pre_login(per_params, params);
+      // let that = this;      
+      // api
+      //   .preLogin(per_params)
+      //   .then(res => {
+      //     console.log(res);
+      //     return res;
+      //   })
+      //   .then(res => {
+      //     if (res.data.is_signUp == 1) {
+      //       // this.show_dialog = true;
+      //       this.$set(this.other_form, "referer", this.$route.query.redirect);
+      //     } else {
+      //     }
+      //     api.thirdLogin(params).then(res => {
+      //       let data = res.data;
+      //       that.set_token(data.token);
+      //     });
+      //     // console.log(res, "第二个res");
+      //   });
     },
     link_email(email) {
       if (email) {
@@ -199,23 +210,23 @@ export default {
     },
     to_home(data) {
       console.log(data);
-
       if (data.type === "signup") {
-        if (data.res.password.length < 8) {
-          this.$toast("password format is incorrect");
+        if (data.res.password.trim().length < 8) {
+          this.$toast("password format is incorrect.");
           return false;
+        } else {
+          let params = {
+            email: data.res.email,
+            password: sha256(data.res.password),
+            first_name: data.res.first_name,
+            last_name: data.res.last_name,
+            referer: this.$route.query.redirect
+          };
+          api.sign_up(params).then(res => {
+            console.log(res);
+            this.set_token(res.data.token);
+          });
         }
-        let params = {
-          email: data.res.email,
-          password: sha256(data.res.password),
-          first_name: data.res.first_name,
-          last_name: data.res.last_name,
-          referer: this.$route.query.redirect
-        };
-        api.sign_up(params).then(res => {
-          console.log(res);
-          this.set_token(res.data.token);
-        });
       } else {
         let params = {
           email: data.res.email,
@@ -242,6 +253,7 @@ export default {
   },
   components: {
     fb,
+    instagram,
     google,
     loginServe,
     "temp-dialog": tempdialog
@@ -314,54 +326,57 @@ export default {
   left: 50%;
   top: 40%;
   transform: translate(-50%, -50%);
+  background-color: #fff;
 }
-// .form-content {
-//   width: 300px;
-//   margin: 0 auto;
-//   padding: 25px 20px 22px 20px;
-//   background-color: #fff;
-//   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-//   border-radius: 7px;
-//   transform: rotateY(0);
-//   transition: all 0.8s;
-//   p {
-//     width: 100%;
-//     padding-top: 9px;
-//     input {
-//       height: 36px;
-//       width: 100%;
-//       background-color: #efefef;
-//       border: none;
-//       outline: none;
-//       padding-left: 10px;
-//       font-size: 13px;
-//     }
-//   }
-//   .tips-title {
-//     font-size: 18px;
-//     font-weight: normal;
-//     padding: 30px 10px;
-//     color: rgba(155, 155, 155, 1);
-//     line-height: 30px;
-//   }
-//   .link-btn {
-//     height: 36px;
-//     background: rgba(215, 14, 25, 1);
-//     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-//     border-radius: 18px;
-//     &:hover {
-//       opacity: 0.8;
-//     }
-//     a {
-//       display: block;
-//       height: 100%;
-//       font-size: 14px;
-//       font-weight: bold;
-//       color: rgba(255, 255, 255, 1);
-//       // line-height: 18px;
-//       text-align: center;
-//     }
-//   }
-// }
+.bind-email-box {
+  width: 300px;
+  margin: 0 auto;
+  padding: 25px 20px 22px 20px;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 7px;
+  transform: rotateY(0);
+  transition: all 0.8s;
+  p {
+    width: 100%;
+    // padding-top: 9px;
+    input {
+      height: 36px;
+      width: 100%;
+      background-color: #efefef;
+      border: none;
+      outline: none;
+      padding-left: 10px;
+      font-size: 13px;
+    }
+  }
+  .tips-title {
+    font-size: 18px;
+    font-weight: normal;
+    padding: 30px 10px;
+    color: rgba(155, 155, 155, 1);
+    line-height: 30px;
+  }
+  .link-btn {
+    height: 36px;
+    background: rgba(215, 14, 25, 1);
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 18px;
+    margin-top: 20px;
+    &:hover {
+      opacity: 0.8;
+    }
+    a {
+      display: block;
+      height: 100%;
+      font-size: 14px;
+      line-height: 36px;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 1);
+      // line-height: 18px;
+      text-align: center;
+    }
+  }
+}
 </style>
 

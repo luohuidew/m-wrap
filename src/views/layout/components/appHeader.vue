@@ -1,19 +1,29 @@
 <template>
   <div class="app-header">
     <ul>
-      <li class="aside-btn-box">
-        <img src="/static/images/icon/header/home-left-icon@3x.png"
-          alt=""
-          srcset=""
-          @click="contractionShow=!contractionShow">
-      </li>
+      <template v-if="appHome ||appUser || appTheme || appCart">
+        <li class="aside-btn-box">
+          <img src="/static/images/icon/header/home-left-icon@3x.png"
+            alt=""
+            srcset=""
+            @click="contractionShow=!contractionShow">
+        </li>
+      </template>
+      <template v-else>
+        <li class="aside-btn-box">
+          <img src="/static/images/icon/normal/返回 大@2x.png"
+            alt=""
+            srcset=""
+            @click="go_back">
+        </li>
+      </template>
       <li class="weget-logo">
         <router-link to="/">
           <img src="/static/images/icon/header/big-logo.png"
             alt=""
             srcset="">
         </router-link>
-        </li>
+      </li>
       <template v-if="appHome">
         <!-- <li class="search-box _bgf3"
           @click="to_search">
@@ -25,7 +35,7 @@
             alt=""
             srcset="">
         </li> -->
-        
+
         <li class="setting-icon">
           <router-link :to="{path:'/search/search-query'}">
             <img src="/static/images/icon/normal/search@2x.png"
@@ -112,6 +122,9 @@ export default {
     appUser() {
       return this.$route.path === "/user/index";
     },
+    appCart() {
+      return this.$route.path === "/cart/index";
+    },
     appHome() {
       return this.$route.path === "/home/index";
     },
@@ -146,6 +159,9 @@ export default {
       };
       this.contractionShow = false;
       this.$router.push(hef_parmas);
+    },
+    go_back(){
+      this.$router.go(-1);
     }
   },
   components: {
@@ -174,7 +190,7 @@ export default {
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%,-50%);
+      transform: translate(-50%, -50%);
       img {
         height: 40px;
         width: auto;

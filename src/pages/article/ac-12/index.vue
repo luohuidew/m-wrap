@@ -15,32 +15,12 @@
         @click="to_detail(sku.sku_id)">
       </li>
     </ul>
-    <!-- <div class="footer">
-      <div class="about_row1">
-        <p>
-          <a href="javascript:;">
-            <img src="/static/img/about/底部logo@2x.png">
-          </a>
-          <a href="https://www.facebook.com/wegetofficial">
-            <img src="/static/img/about/iconF@2x.png">
-          </a>
-          <a href="https://www.instagram.com/shopweget">
-            <img src="/static/img/about/iconO@2x.png">
-          </a>
-          <a href="https://www.youtube.com/channel/UCJ2SmCasimMk8TCHxloaMtA">
-            <img src="/static/img/about/iconA@2x.png">
-          </a>
-        </p>
-      </div>
-      <div class="about_row2">
-        <img class="bgimg"
-          src="/static/img/about/底部@2x.png">
-      </div>
-    </div> -->
+    <footerAbout />
   </div>
 </template>
 
 <script>
+import footerAbout from "../components/footer-about"
 import data from "./config";
 export default {
   name: "ac-12",
@@ -91,11 +71,17 @@ export default {
       });
     }
   },
-  components: {}
+  components: {
+    footerAbout
+  }
 };
 </script>
 
 <style lang='scss' scoped>
+.article-detail {
+  width: 100%;
+  overflow: hidden;
+}
 .theme-page-block {
   position: relative;
   font-size: 0;
@@ -106,9 +92,10 @@ export default {
   .sku-box {
     position: absolute;
     width: 76px;
-    height: 16px;
+    height: 76px;
+    transform: translateY(-60px);
   }
-  .sku-5247149551417195 {
+  .sku-5495497352614205 {
     left: 313px;
     top: 168px;
   }
@@ -204,16 +191,16 @@ export default {
     top: 387px;
   }
   .sku-5446435530893409 {
-    height: 25px;
-    width: 46px;
+    // height: 25px;
+    // width: 46px;
     left: 317px;
-    top: 181px;
+    top: 188px;
   }
   .sku-5393847339386639 {
-    width: 49px;
-    height: 26px;
+    // width: 49px;
+    // height: 26px;
     left: 324px;
-    top: 308px;
+    top: 315px;
   }
 }
 </style>

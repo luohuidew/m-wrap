@@ -9,7 +9,7 @@
         slot="default">
         <li v-for="(item,index) in storeListsData"
           :key="index">
-          <storeCard :datas="item"></storeCard>
+          <storeCard :storeData="item"></storeCard>
         </li>
       </ul>
     </van-list>

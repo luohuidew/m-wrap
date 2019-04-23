@@ -123,7 +123,7 @@ export default new Router({
       meta: {
         title: 'Statement',
         keepAlive: false,
-        fullScreen: true
+        fullScreen: false
       }
     },
     {
@@ -134,7 +134,7 @@ export default new Router({
       meta: {
         title: 'About US',
         keepAlive: false,
-        fullScreen: true
+        fullScreen: false
       }
     },
 
@@ -153,11 +153,12 @@ export default new Router({
       name: 'detail',
       component: () =>
         import('@/pages/detail'),
+      
       meta: {
         title: 'Details',
         keepAlive: false,
         fullScreen: false
-      }
+      },
       //    redirect: '/detail/',
     },
     {
@@ -259,7 +260,7 @@ export default new Router({
       path: '/callback',
       name: 'callback',
       component: () =>
-        import('@/pages/callback'),
+        import('@/pages/callback'),        
     },
     {
       path: '*',
