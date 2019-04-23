@@ -9,6 +9,7 @@ export default {
       data: JSON.stringify(data),
     })
   },
+  /* 地址编辑 */
   address_save(data={}) {
     data.token  = store.state.token;
     return request({
