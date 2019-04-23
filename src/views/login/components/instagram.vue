@@ -33,7 +33,6 @@ export default {
       // debugger;
       window.location.href = open_url;
     },
-    haseChange() {},
     initIns() {
       let hash_str = window.location.hash;
       if (hash_str) {
