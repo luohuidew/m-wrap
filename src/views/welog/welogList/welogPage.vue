@@ -43,7 +43,7 @@ export default {
         // cat_id: this.curCateId,
         id: this.selectId
       };
-      api.welogIndex(params).then(res => {
+      api.welogIndexMore(params).then(res => {
         if (!res.data.data.length) {
           this.finished = true;
           this.loading = false;

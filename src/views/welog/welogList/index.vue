@@ -9,16 +9,16 @@
       </li>
       <li class="scroll-box">
         <ul>
-          <li v-for="(item,index) in 2">
-            <a href="javascript:;">
-              <img src="/static/demo.png"
+          <li v-for="(item,index) in homeData.topic" :key="index">
+            <router-link :to="item.route">
+              <img :src="item.image_url"
                 alt="">
-            </a>
+            </router-link>            
           </li>
         </ul>
       </li>
       <li class="list-box" v-if="homeData">
-        <welogPage :listData="homeData"/>
+        <welogPage :listData="homeData.list"/>
       </li>
     </ul>
   </div>

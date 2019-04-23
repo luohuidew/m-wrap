@@ -9,7 +9,7 @@
         <span v-if="datas.show_type===1" class="fixed-icon"></span>
     </div>
     <p class="cover-desc text-line-clamp-2">
-      5 things you shound be doing now to gei reaing hello you may
+      {{datas.content}}
     </p>
     <div class="user-box ">
       <img :src="datas.user_photo"

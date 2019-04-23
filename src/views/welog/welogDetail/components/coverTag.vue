@@ -38,10 +38,11 @@
           </p>
         </video>
       </div>
-      <div v-if="coverData.show_type===2"
+      <!-- v-if="coverData.show_type===2" -->
+      <div v-if="coverData.sku_info"
         class="sku-tips"
         :class="{'active':is_active}">
-        <p>hello aklsjdjddddddddddddd</p>
+        <p @click="to_detail(coverData.sku_info.sku_id)">{{coverData.sku_info.title}}</p>
       </div>
     </div>
     <!-- tag标签盒子 -->
