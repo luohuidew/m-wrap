@@ -132,7 +132,7 @@ export default {
     },
     getUserIns(data) {
       // console.log(data);
-      debugger
+      // debugger
       let full_name = data.full_name.split(" ");
       let params = {
         user_name: data.username,
@@ -210,9 +210,8 @@ export default {
     },
     to_home(data) {
       console.log(data);
-
       if (data.type === "signup") {
-        if (data.res.password.length < 8) {
+        if (data.res.password.trim().length < 8) {
           this.$toast("password format is incorrect.");
           return false;
         } else {

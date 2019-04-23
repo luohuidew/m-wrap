@@ -45,7 +45,7 @@ export default {
       if (this.pass1 == this.pass2) {
         return {
           email: this.$route.query.email,
-          password: this.pass2
+          password: this.pass2.trim()
         };
       }
     }
@@ -57,20 +57,23 @@ export default {
     //   });
     // },
     reset_pass() {
-      if (this.form_data.password < 8) {
-        this.$toast("password format is incorrect.");
-        return false;
-      } else {
-        let params = {
-          email: this.form_data.email,
-          password: sha256(this.form_data.password)
-        };
-        api.updateForgetPassword(params).then(res => {
-          console.log(res);
-          this.$router.push({
-            path: "/login"
+      // debugger;
+      if (this.form_data) {
+        if (this.form_data.password.length < 8) {
+          this.$toast("password format is incorrect.");
+          return false;
+        } else {
+          let params = {
+            email: this.form_data.email,
+            password: sha256(this.form_data.password)
+          };
+          api.updateForgetPassword(params).then(res => {
+            console.log(res);
+            this.$router.push({
+              path: "/login"
+            });
           });
-        });
+        }
       }
     }
   },

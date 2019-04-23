@@ -14,9 +14,9 @@ export default {
     return {
       base_url: "https://api.instagram.com/oauth/authorize/",
       client_id: "466859d97e514d1881b535b69338bd94",
-      redirect_uri:
-        "https://m.weget.com/login/index?redirect=https%3A%2F%2Fm.weget.com%2Fdetail%3Fsku_id%3D5582860556791138%26type%3Dkeep%26goods_id%3D5582860016774841%26store_id%3D8666%26count%3D1"
-      // redirect_uri: window.location.href
+      // redirect_uri:
+      //   "https://m.weget.com/login/index?redirect=https%3A%2F%2Fm.weget.com%2Fdetail%3Fsku_id%3D5582860556791138%26type%3Dkeep%26goods_id%3D5582860016774841%26store_id%3D8666%26count%3D1"
+      redirect_uri: window.location.href
     };
   },
   computed: {},
