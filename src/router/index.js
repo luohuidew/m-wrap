@@ -10,6 +10,8 @@ import SEARCH from "./modules/search"
 import STORE from "./modules/store"
 import TEST from "./modules/test"
 import LOGIN from "./modules/login"
+import POPULARIZE from "./modules/popularize"
+
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -24,6 +26,7 @@ export default new Router({
     USER,
     SEARCH,
     LOGIN,
+    POPULARIZE,
     STORE, {
       path: '/home/index',
       name: 'home',
@@ -151,7 +154,7 @@ export default new Router({
       name: 'detail',
       component: () =>
         import('@/pages/detail'),
-      
+
       meta: {
         title: 'Details',
         keepAlive: false,
@@ -258,7 +261,7 @@ export default new Router({
       path: '/callback',
       name: 'callback',
       component: () =>
-        import('@/pages/callback'),        
+        import('@/pages/callback'),
     },
     {
       path: '*',

@@ -8,6 +8,9 @@
     <pick :listsData="homeData.influence_pick"></pick>
     <topic :listsData="homeData.topic_data"></topic>
     <scrollCate :listData="homeData.category_row"></scrollCate>
+    <van-popup v-model="show">
+      <div></div>
+    </van-popup>
   </div>
 </template>
 
@@ -24,8 +27,9 @@ export default {
   props: {},
   data() {
     return {
+      show: false,
       homeData: undefined,
-     
+
     };
   },
   computed: {},
@@ -37,7 +41,7 @@ export default {
       api.homeData().then(res => {
         this.homeData = res.data;
       });
-    },   
+    },
   },
   components: {
     banner,
