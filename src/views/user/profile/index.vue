@@ -43,7 +43,7 @@
       <li class="birthday">
         <span class="label">Birthday</span>
         <span class="right-arrow">
-          <span>{{profileData.birthday}}</span>
+          <span>{{profileData.birthday | dateServerEnglishYMD}}</span>
           <img src="/static/images/icon/user/user_right_gary_arrow@3x.png"
             alt=""
             srcset="">

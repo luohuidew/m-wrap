@@ -44,11 +44,21 @@ export default {
   },
   getCartNum(data = {}) {
     data.token = token;
-    return request({
-      url: 'shopcart/getCartNum ',
-      method: 'post',
-      data: JSON.stringify(data),
-    })
+    if (!token) {
+      return new Promise((resolve,reject)=>{
+        resolve({
+          data:{
+            num:0
+          }
+        })
+      })
+    } else {
+      return request({
+        url: 'shopcart/getCartNum ',
+        method: 'post',
+        data: JSON.stringify(data),
+      })
+    }
   },
 
 }

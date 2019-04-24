@@ -57,4 +57,12 @@ export default {
       data: JSON.stringify(data),
     })
   },
+  search(data = {}) {
+    data.token = store.state.token;
+    return request({
+      url: 'store/search',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
 }

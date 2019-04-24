@@ -237,7 +237,7 @@ export default {
         CART.addToCart(to_catr_params).then(res => {
           this.$emit("close", null);
           this.init_cart();
-        }, 0);
+        });
       }
     },
     checkedLogin() {
@@ -253,12 +253,8 @@ export default {
         encodeURIComponent(re_path);
     },
     init_cart() {
-      CART.shopCartList().then(res => {
-        let temp_num = 0;
-        res.data.goods.forEach(item => {
-          temp_num += item.goods_list.length;
-        });
-        this.$store.commit("SET_CATR", temp_num);
+      CART.getCartNum().then(res => {                    
+        this.$store.commit("SET_CATR", res.data.num);
       });
     },
     account(num) {

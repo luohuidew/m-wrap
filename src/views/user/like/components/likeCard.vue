@@ -14,6 +14,7 @@
 
 <script>
 import goodsCard from "@/components/card-list-row";
+import api from "@/api/product"
 export default {
   name: "",
   props: {
@@ -42,7 +43,13 @@ export default {
     onSelect(item) {
       // 点击选项时默认不会关闭菜单，可以手动关闭
       this.show = false;
-      console.log(item);
+      // console.log(item);
+      let params = {
+        sku_id:item.sku_id
+      }
+      api.like(params).then(res=>{
+        this.$emit('updata',null)
+      })
     }
   },
   components: {
@@ -61,7 +68,7 @@ export default {
     width: 30px;
     height: 30px;
     font-size: 30px;
-    line-height: 30px;
+    line-height: 10px;
     color: #9b9b9b;
     border-radius: 50%;
   }

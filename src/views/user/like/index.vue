@@ -1,44 +1,58 @@
 <template>
-  <div class="query-lists"
-    v-scroll="get_more_data"
-    v-if="sku_lists.length">
-    <template v-for="(item,index) in sku_lists">
-      <likeCard :skuData="item" :key="index"></likeCard>
-    </template>
+  <div class="fixed-content">
+    <van-list v-model="loading"
+      :finished="finished"
+      :finished-text="''"
+      :loading-text="'Loading...'"
+      @load="get_more_data()">
+      <ul class="pick-lists"
+        slot="default">
+        <li v-for="(item,index) in likeListsData"
+          :key="index">
+          <likeCard @updata="deleteCurGoods(index,$event)"
+            :skuData="item"></likeCard>
+        </li>
+      </ul>
+    </van-list>
   </div>
 </template>
 
 <script>
-import likeCard from "./components/likeCard"
-import api from "@/api/goods";
+import likeCard from "./components/likeCard";
+import api from "@/api/product";
 export default {
   name: "",
   data() {
     return {
-      sku_lists: [],
-      cur_lists_data: undefined
+      loading: false,
+      finished: false,
+      selectId: undefined,
+      likeListsData: []
     };
   },
-  created() {
-    this.init_data();
-  },
+  created() {},
   mounted() {},
   computed: {},
   methods: {
-    init_data(params = this.$route.query) {
-      // let params = this.$route.query;
-      api.get_lists(params).then(res => {
-        this.cur_lists_data = res.data.extend;
+    get_more_data() {
+      let params = {
+        // cat_id: this.curCateId,
+        id: this.selectId
+      };
+      api.getLikeList(params).then(res => {
+        if (!res.data.data.length) {
+          this.finished = true;
+          this.loading = false;
+        }
         res.data.data.forEach(item => {
-          this.sku_lists.push(item);
+          this.selectId = res.data.extend.select_id;
+          this.loading = false;
+          this.likeListsData.push(item);
         });
       });
     },
-    get_more_data(data) {
-      console.log('hot caroll');
-      let params =  this.$route.query;
-      params.id = this.cur_lists_data.selectId;     
-      this.init_data(params);
+    deleteCurGoods(index) {
+      this.likeListsData.splice(index, 1);
     }
   },
   components: {

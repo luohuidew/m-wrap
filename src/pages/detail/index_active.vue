@@ -27,12 +27,12 @@ export default {
     // 导航离开该组件的对应路由时调用
     // 可以访问组件实例 `this`
     // debugger;
-     document.title = " Weget.com | stylish online fashion marketplace ";
-    setTimeout(()=>{      
+    document.title = " Weget.com | stylish online fashion marketplace ";
+    setTimeout(() => {
       next();
-    },0)    
+    }, 0);
   },
-  created() {    
+  created() {
     if (this.$route.query.type === "keep") {
       // debugger;
       if (this.$store.state.token) {
@@ -56,15 +56,10 @@ export default {
       }, 0);
     },
     init_cart() {
-      CART.shopCartList().then(res => {
-        let temp_num = 0;
-        res.data.goods.forEach(item => {
-          temp_num += item.goods_list.length;
-        });
-        this.$store.commit("SET_CATR", temp_num);
-        // debugger;
-        this.clearParams();
+      CART.getCartNum().then(res => {
+        this.$store.commit("SET_CATR", res.data.num);
       });
+        this.clearParams();
     },
     clearParams() {
       let sku_id = this.$route.query.sku_id;

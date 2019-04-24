@@ -23,7 +23,7 @@ let BASE_API;
 if (process.env.NODE_ENV === 'development') {
   // dev
   BASE_API = 'https://app.weget.com/wap/';
-  BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
+  // BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
 } else if (process.env.VUE_APP_TITLE === 'testing') {
   // testing
   BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
@@ -190,7 +190,7 @@ service.interceptors.response.use(
         //     location.reload() // 为了重新实例化vue-router对象 避免bug
         //   })
         // }
-      }
+      }      
       return Promise.reject(response.data);
       // return response.data;
     } else {

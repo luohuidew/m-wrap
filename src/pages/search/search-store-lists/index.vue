@@ -35,10 +35,10 @@ export default {
   methods: {
     get_more_data() {
       let params = {
-        // cat_id: this.curCateId,
+        store_name: this.$route.query.title,
         id: this.selectId
       };
-      api.followList(params).then(res => {
+      api.search(params).then(res => {
         if (!res.data.data.length) {
           this.finished = true;
           this.loading = false;

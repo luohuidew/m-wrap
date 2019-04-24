@@ -50,6 +50,14 @@ export default {
       data: JSON.stringify(data),
     })
   },
+  getLikeList(data = {}) {
+    data.token = token;
+    return request({
+      url: 'product/getLikeList',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
   query_lists(data = {}) {
     data.token = token;
     return request({

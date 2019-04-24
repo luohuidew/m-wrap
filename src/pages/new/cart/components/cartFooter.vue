@@ -23,7 +23,7 @@
           </div> -->
           <div class="buy-btn"
             @click="to_pay">
-            Buy ({{update_count.length}})
+            Buy ({{$store.state.cart.goods_num}})
           </div>
         </li>
       </ul>
