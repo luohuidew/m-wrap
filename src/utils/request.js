@@ -208,7 +208,7 @@ service.interceptors.response.use(
           // }, 300)
         }
       }
-      console.log(axios_num);
+      // console.log(axios_num);
       return response.data;
     }
   },

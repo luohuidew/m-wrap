@@ -1,5 +1,8 @@
 <template>
   <div class="fixed-content">
+    <noData v-if="finished">
+      <span>It is empty here ...</span>
+    </noData>
     <van-list v-model="loading"
       :finished="finished"
       :finished-text="''"
@@ -19,6 +22,7 @@
 <script>
 import storeCard from "@/components/card-store";
 import api from "@/api/store";
+import noData from "@/components/noData"
 export default {
   name: "",
   props: {},
@@ -27,6 +31,7 @@ export default {
       loading: false,
       finished: false,
       selectId: undefined,
+      showTips:false,
       storeListsData: []
     };
   },
@@ -52,7 +57,8 @@ export default {
     }
   },
   components: {
-    storeCard
+    storeCard,
+    noData
   }
 };
 </script>
@@ -62,10 +68,11 @@ export default {
 .fixed-content {
   height: 100%;
   background-color: #ffffff;
-  padding: 20px;
+ 
   // padding-top: 0;
 }
 .pick-lists {
+   padding: 10px 15px;
   // display: flex;
   // flex-wrap: wrap;
   // justify-content: space-between;

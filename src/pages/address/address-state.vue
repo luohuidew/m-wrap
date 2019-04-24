@@ -37,15 +37,16 @@ export default {
       });
     },
     go_back(citem) {
-      let href_params = {
-        path: "/add_address",
-        query: {
-          cur_index: this.$route.query.cur_index,
-          state_title: citem.state_title,
-          state: citem.state
-        }
-      };
-      this.$router.replace(href_params);
+      // let href_params = {
+      //   path: "/add_address",
+      //   query: {
+      //     cur_index: this.$route.query.cur_index,
+      //     state_title: citem.state_title,
+      //     state: citem.state
+      //   }
+      // };
+      // this.$router.replace(href_params);
+      this.$emit('select',citem.state)
     }
   },
   components: {}

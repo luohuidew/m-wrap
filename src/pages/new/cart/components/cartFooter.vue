@@ -23,7 +23,7 @@
           </div> -->
           <div class="buy-btn"
             @click="to_pay">
-            Buy ({{$store.state.cart.goods_num}})
+            Buy ({{buy_num}})
           </div>
         </li>
       </ul>
@@ -64,7 +64,8 @@ export default {
       show_coupon_dialog:false,
       update_count: [],
       total_price: 0,
-      is_loading:false
+      is_loading:false,
+      buy_num:0
     };
   },
   watch: {
@@ -72,15 +73,17 @@ export default {
       handler(cur, old) {
         let init_number = 0;
         this.update_count = [];
+        this.buy_num = 0;
         cur.forEach(item => {
           item.checked_all_item.forEach(item1 => {
             this.update_count.push({
               only: item1.only,
               count: item1.count
             });
+            this.buy_num += Number(item1.count);
             init_number += Number(item1.count) * Number(item1.goods_price);
           });
-        });
+        });        
         this.total_price = init_number;
       },
       deep: true

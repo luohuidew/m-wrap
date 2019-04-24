@@ -57,18 +57,25 @@
       <a href="javascript:;"
         @click="go_back">DONE</a>
     </div>
+    <van-popup class="state-box" v-model="showState"
+      position="right"
+      :overlay="false">
+      <addressState @select="changeState" />
+    </van-popup>
   </div>
 </template>
 
 <script>
 import { Switch } from "vant";
 import address from "@/api/address";
+import addressState from "./address-state";
 export default {
   name: "",
   data() {
     return {
       is_selected: 0,
       is_editor: false,
+      showState: false,
       address: {
         id: "",
         first_name: "",
@@ -91,6 +98,10 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+    changeState(data) {
+      this.address.state = data;
+      this.showState = false;
+    },
     selected_card(add_id, index) {
       this.is_selected = index;
       let data = add_id;
@@ -107,9 +118,9 @@ export default {
           }
           this.is_default = this.address.is_default === 1 ? false : true;
         }
-        if (this.$route.query.state) {
-          this.address.state = this.$route.query.state;
-        }
+        // if (this.$route.query.state) {
+        //   this.address.state = this.$route.query.state;
+        // }
         // this.selected_card(this.address_lists[0].id, 0);
       });
     },
@@ -122,13 +133,14 @@ export default {
     //   });
     // },
     goSelectState() {
-      let href_params = {
-        path: "/state-list",
-        query: {
-          cur_index: this.$route.query.cur_index
-        }
-      };
-      this.$router.replace(href_params);
+      // let href_params = {
+      //   path: "/state-list",
+      //   query: {
+      //     cur_index: this.$route.query.cur_index
+      //   }
+      // };
+      // this.$router.replace(href_params);
+      this.showState = true;
     },
     go_back() {
       let params = this.address;
@@ -148,7 +160,9 @@ export default {
       });
     }
   },
-  components: {}
+  components: {
+    addressState
+  }
 };
 </script>
 
@@ -156,6 +170,10 @@ export default {
 $color1: #d70e19;
 $bgcolor: #f3f3f3;
 $linecolor: #e9e9e9;
+.state-box {
+  width:100%;
+  height: 100%;
+}
 .my-address {
   display: flex;
   flex-direction: column;
