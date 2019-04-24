@@ -1,5 +1,8 @@
 <template>
   <div class="fixed-content">
+    <div class="emity-box" v-if="goodsListsData.length==0">
+      <img src="/static/images/icon/normal/no_video.png" alt="" srcset="">
+    </div>
     <van-list v-model="loading"
       :finished="finished"
       :finished-text="''"
@@ -33,18 +36,14 @@ import api from "@/api/welog";
 import vueWaterfallEasy from "vue-waterfall-easy";
 export default {
   name: "",
-  props: {
-    listData: {
-      type: Object,
-      default: undefined
-    }
+  props: {   
   },
   data() {
     return {
       loading: false,
       finished: false,
-      selectId: this.listData.extend.selectId,
-      goodsListsData: this.listData.data,
+      selectId: undefined,
+      goodsListsData: [],
       welogList1: {
         height: 0,
         data: []
@@ -127,9 +126,22 @@ export default {
 
 <style lang='scss' scoped>
 /*  */
+.fixed-content {
+  height:100%;
+}
+.emity-box {
+  height: 100%;
+  background-color: #f3f3f3;
+  text-align: center;
+  img {
+    width: 90px;
+    height: auto;
+    margin-top: 30%;
+  }
+}
 .waterfall-box {
   display: flex;
-  padding: 0 5px;
+  padding: 10px 5px;
   // height: 100%;
 }
 .pick-lists {
