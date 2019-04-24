@@ -47,9 +47,7 @@ export default {
   },
   methods: {
     to_similar() {
-      if(this.dataList.length > 0) {
-        window.sessionStorage.activeData = JSON.stringify(this.dataList)
-      }
+      window.sessionStorage.activeData = JSON.stringify(this.dataList)
       let params = {
         path: "/queryActive", // 跳到列表
         query: {

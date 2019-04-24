@@ -8,8 +8,8 @@
         <!-- <detail-group :group-data="group"
           @change="join_group"></detail-group> -->
         <section class="select-box">
-          <detail-coupon v-if="all_data.is_show_coupon===1"
-            @toggle="show_coupon=true"></detail-coupon>
+          <!--<detail-coupon v-if="all_data.is_show_coupon===1"-->
+            <!--@toggle="show_coupon=true"></detail-coupon>-->
           <detail-shipping @toggle="show_shipping=true"
             :all-data="all_data" :active="true"></detail-shipping>
           <detail-attr v-if="cur_goods"
@@ -21,7 +21,7 @@
         </section>
         <detail-store :item="store_info"></detail-store>
         <similar-cate  :titlelike="true" :data-list="likeData" title = "You might also like" :activeList = 'activeList'></similar-cate>
-        <!--<similarCateLook   :data-list="lookData" title = "Complete the look" ></similarCateLook>-->
+        <similarCateLook   :data-list="lookData" title = "Complete the look" ></similarCateLook>
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
         <!-- <shipping :sku-data="sku"></shipping> -->
@@ -94,13 +94,11 @@ import shippingDialog from "./detailShipping/components/shippingDialog";
 // import detailWelog from "./detail-welog.vue";
 import similarBrand from "./similar-brand";
 import similarCate from "./similar-cate";
-// import similarCateLook from "./similar-cate-look";
+import similarCateLook from "./similar-cate-look";
 import detailPayBtn from "../detail-pay-btn.vue";
 import api from "@/api/product";
 import share from "@/api/share";
 import pay from "@/api/pay";
-import activeData from "@/utils/active";
-
 export default {
   name: "detail",
   metaInfo() {
@@ -199,22 +197,77 @@ export default {
           group_id: this.router_group_id
         };
         this.get_all_detail(params);
+        this.getLikeLook(this.$route.query.sku_id);
       }
     },
     getLikeLook(skuId) { // todo
-
-      if (this.activeList == '1') {
-        this.likeData = activeData.randomData()
-      } else {
-        const param = {
-          store_sku_id: skuId,
-          type: 1 // 2 lookDate // 1 likeData
-        }
-        api.getLikeLook(param).then((res) => {
-          this.likeData = res.data.like
-        })
+      const param = {
+        store_sku_id: skuId,
       }
+      if (this.activeList == '1') {
+        param.type = 2 // 只要look
+      }
+      const custom = [
+        {
+          alone_price: "29.90",
+          cover_img: "https://we-get.s3.us-west-1.amazonaws.com/193954985cb8220993f8c.jpg?width=800&height=800",
+          show_tag: [
+            // {
+            //   mask_bg_image: "https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
+            // }
+          ],
+          title: "Stretch Short Cami & High Rise Distressed Denim Shorts",
+          sku_id: '5557148210008098'
+        },
+        {
+          alone_price: "32.90",
+          cover_img: "https://we-get.s3.us-west-1.amazonaws.com/13186751435cb82c2ed0c0f.jpg?width=712&height=712",
+          show_tag: [
+            {
+              mask_bg_image: "https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
+            }
+          ],
+          title: "Vacation Two Piece & Holiday Women Bag",
+          sku_id: '5557435769542243'
+        },
+        {
+          alone_price: "44.90",
+          cover_img: "https://we-get.s3.us-west-1.amazonaws.com/13619589195cb82400c5f80.jpg?width=800&height=800",
+          show_tag: [
+          ],
+          title: "Dot Pleat Dress & Lace Up High Hills Sandals",
+          sku_id: '5557207069013871'
+        },
+        {
+          alone_price: "52.90",
+          cover_img: "https://we-get.s3.us-west-1.amazonaws.com/19171080955cb828352659e.jpg?width=800&height=800",
+          show_tag: [
+          ],
+          title: "General Cutout Knit Summer Cami & Spring Hot Classic Jeans",
+          sku_id: '5557314087792880'
+        },
+      ]
+      api.getLikeLook(param).then((res) => {
+        if (this.activeList == '1') {
+          this.lookData = res.data.look
+          this.likeData = custom.filter((items) => {
+            return items.sku_id !== skuId
+          })
+        } else {
+          this.likeData = res.data.like
+          this.lookData = res.data.look
+        }
+      })
     },
+    // to_store(cid) {
+    //   let params = {
+    //     path: "/store",
+    //     query: {
+    //       store_id: cid
+    //     }
+    //   };
+    //   this.$router.push(params);
+    // },
     get_all_detail(params) {
       let share_params;
       api.detail(params).then(res => {
@@ -231,7 +284,7 @@ export default {
           share_type: 2
         };
         let that = this;
-        this.getLikeLook(this.$route.query.sku_id);
+
         share.getShareInfo(share_params).then(res => {
           let share_token = res.data.share_token;
           // this.$store.state.share_token = share_token;
@@ -289,6 +342,7 @@ export default {
     // detailWelog,
     similarBrand,
     similarCate,
+    similarCateLook,
     detailPayBtn,
     attrDialog,
     detailCouponDialog,
