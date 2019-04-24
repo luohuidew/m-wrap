@@ -31,14 +31,11 @@ export default {
       default: []
     },
     activeList: {
-      default: '0'
+      default: '0' // 1的话是跳转到新详情
     },
     title: {
       type: String
     },
-    titlelike: {
-      default: false
-    }
   },
   created() {
     // alert(this.activeList)
@@ -58,9 +55,6 @@ export default {
           activeList: this.activeList
         }
       };
-      if (this.titlelike) {
-        params.path = '/likeQueryActive'
-      }
       this.$router.push(params);
     }
   },
