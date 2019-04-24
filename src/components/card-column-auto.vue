@@ -70,7 +70,8 @@ export default {
         let params = {
           path: "/detailAcive",
           query: {
-            sku_id: sku_id
+            sku_id: sku_id,
+            activeList: 1
           }
         };
         this.$router.push(params);

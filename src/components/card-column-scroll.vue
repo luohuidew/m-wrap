@@ -67,7 +67,6 @@ export default {
   props: ["cardData", "groupId", "activeList"],
   components: {},
   created() {
-    console.log(this.activeList ,55555555)
   },
   methods: {
     to_detail(sku_id) {
@@ -85,7 +84,6 @@ export default {
             sku_id: sku_id
           }
         };
-        console.log(this.activeList, this.activeList == '1','dongxi')
         if (this.activeList == '1' ) {
           params = {
             path: "/detailAcive",

@@ -3,22 +3,52 @@
     <section class="wrap">
       <Item v-for="item in itemDdata" :cardData = "item" :activeFixed="true"></Item>
     </section>
+    <van-popup v-model="show" class="popup-warp">
+      <img class="close" @click="closePopup" src="@/assets/img/conponActive/X.png"/>
+      <div class="main">
+        <img class="bg" src="@/assets/img/conponActive/bg.png" />
+        <img  v-if="isLogin" class="btn" @click="goConpon" src="@/assets/img/conponActive/use@2x.png" />
+        <img  v-if="!isLogin"  class="btn" @click="goLogin" src="@/assets/img/conponActive/Signup@2x.png" />
+        <p v-if="isLogin">Congratulations! Now you have $30 in your account. Use it NOW! </p>
+        <p v-if="!isLogin">Hello new friend,we have 30 for you,sign up and get it now!</p>
+      </div>
+    </van-popup>
   </div>
 </template>
 
 <script>
-import data from "./config";
+import data from "@/utils/active";
 import Item from "@/components/card-column-auto";
+import { getToken } from "@/utils/auth";
 export default {
   name: "",
   data() {
     return {
-      itemDdata: data
+      isLogin: getToken(),
+      show: true,
+      itemDdata: data.listData
     };
+  },
+  created() {
+    if (sessionStorage.getItem('conpon-first')) {
+      this.show = false; // 只有第一次展示
+    }
   },
   mounted() {},
   computed: {},
   methods: {
+    goConpon() {
+      this.show = false
+      sessionStorage.setItem('conpon-first', true)
+    },
+    goLogin() {
+      this.$router.push({
+        path: "/login",
+        query: {
+          redirect: this.$route.fullPath
+        }
+      });
+    },
     goPageActive(sku_id) {
       this.$router.push({
         name: "detailAcive",
@@ -28,24 +58,8 @@ export default {
         }
       });
     },
-    to_store(store_id) {
-      // if (store_id) {
-      //   let href_params = {
-      //     type: 106,
-      //     data: {
-      //       route: "wemall://public/route?type=11&id=" + store_id + ""
-      //     }
-      //   };
-      //   let temp = this.$CM.weget_device_link(href_params);
-      //   if (temp === "h5") {
-      //     }
-      // }
-      this.$router.push({
-        path: "/store",
-        query: {
-          store_id: store_id
-        }
-      });
+    closePopup() {
+      this.show = false
     }
   },
   components: {
@@ -56,77 +70,50 @@ export default {
 
 <style lang='scss' scoped>
 .article-detail {
-
   section {
     padding: 10px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 15px
   }
-}
-.header {
-}
-.two-img {
-  img {
-    font-size: 0;
-    width: 50%;
-    height: auto;
-  }
-}
-.img-box {
-  margin: 0 auto;
-  font-size: 0;
-}
-.desc {
-  img {
-    width: 100%;
-  }
-}
-.store {
-  margin: 0 auto;
-  cursor: pointer;
-  img {
-    width: 100%;
-  }
-}
-.goods {
-  margin: 0 auto;
-  cursor: pointer;
-}
-.footer {
-  background: #1f1f1f;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  .bgimg {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  div.about_row1 {
-    width: 100%;
-    height: 60px;
-    background: rgb(33, 33, 33);
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-    p {
-      position: absolute;
-      width: 80%;
-      height: 22px;
-      top: 50%;
-      left: 10px;
-      transform: translate(0%, -50%);
-      text-align: center;
-      a {
-        float: left;
-        margin: 0 15px;
-        img {
-          height: 20px;
-        }
+  .popup-warp {
+    background-color: rgba(1,1,1,0);
+    width: 60%;
+    img.close{
+      width: 20px;
+      display: block;
+      margin: 0px auto;
+    }
+    .main {
+      position: relative;
+      width: 100%;
+      img.bg {
+        width: 100%;
+        margin-top: 10px;
+      }
+      img.btn{
+        position: absolute;
+        bottom: 50px;
+        width: 100px;
+        left: 50%;
+        height: auto;
+        z-index: 20;
+        transform: translateX(-50%);
+      }
+      p{
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        top: 80px;
+        text-align: center;
+        line-height: 30px;
+        font-weight: bold;
+        bottom: 10px;
       }
     }
+
   }
 }
+
+
 </style>
