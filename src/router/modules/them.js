@@ -125,7 +125,7 @@ export default {
       meta: {
         title: '',
         keepAlive: false,
-        fullScreen: true
+        fullScreen: false
       }
     },
     {
@@ -146,7 +146,7 @@ export default {
         import('@/pages/article/ac-12'),
       meta: {
         title: '',
-        keepAlive: false,        
+        keepAlive: false,
         fullScreen: true
       }
     }
