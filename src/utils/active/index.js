@@ -156,7 +156,7 @@ let listData = [
     "sku_id": "5594726483303100"
   },
   {
-    "alone_price": "19.90",
+    "alone_price": "14.99",
     "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/16646732115cb17b2dd0b90.jpg?width=800&height=800",
     "show_tag": [
     ],
@@ -164,7 +164,7 @@ let listData = [
     "sku_id": "5513539515122651"
   },
   {
-    "alone_price": "19.90",
+    "alone_price": "14.99",
     "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/9724006045cbeb290c6e03.jpg?width=800&height=800",
     "show_tag": [
     ],
