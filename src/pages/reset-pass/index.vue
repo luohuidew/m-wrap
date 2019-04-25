@@ -1,72 +1,81 @@
 <template>
   <div class="reset-pass-page">
-    <div class="write-foem">
-      <h3>Reset Password</h3>
-      <p>To reset password, enter your email. We will send the verification code.</p>
-      <div class="form-input">
-        <ul class="uer-info">
-          <li>
-            <input type="text"
-              class="email-input"
-              v-model="form_data.email"
-              placeholder="Registered email"><span class="send-btn" @click="send_email(form_data.email)">SEND</span>
-          </li>
-          <li>
-            <input type="text"
-              class="email-input"
-              v-model="form_data.code"
-              placeholder="Code">
-          </li>
-          <li>
-            <input type="password"
-              class="email-input"
-              v-model="form_data.password"
-              placeholder="New password">
-          </li>
+    <form class="reset-box">
+      <label for="pass1">New password</label>
+      <input id="pass1"
+        type="text"
+        v-model="pass1"
+        placeholder="new passwords">
+      <div class="lists-desc">
+        <span>Your Password must contain </span>
+        <ul>
+          <li>· 8 characters minimum </li>
+          <!-- <li>· At least one letter</li>
+          <li>· At least one number</li> -->
         </ul>
       </div>
-    </div>
+      <label for="pass2">Confirm new password</label>
+      <input id="pass2"
+        type="text"
+        v-model="pass2"
+        placeholder="checked passwords">
+    </form>
     <div class="done-btn">
-      <a href="javascript:;" @click="reset_pass">Done</a>
+      <a href="javascript:;"
+        @click="reset_pass">Done</a>
     </div>
   </div>
 </template>
 
 <script>
 import { sha256 } from "js-sha256";
-import api from '@/api/user'
+import api from "@/api/user";
 export default {
   name: "",
   data() {
     return {
-      form_data: {
-        email: "",
-        code: "",
-        password: '',
-      }
+      pass1: "",
+      pass2: ""
     };
   },
   mounted() {},
-  computed: {},
+  computed: {
+    form_data() {
+      // debugger
+      if (this.pass1 == this.pass2) {
+        return {
+          email: this.$route.query.email,
+          password: this.pass2.trim()
+        };
+      }
+    }
+  },
   methods: {
-    send_email(email){
-      api.send_email({email:email}).then(res=>{
-        console.log(res);
-      })
-    },
-    reset_pass(){
-      let params = {
-        email:this.form_data.email,
-        email_code:this.form_data.code,
-        password:sha256(this.form_data.password)
-      };
-      api.reset_pass(params).then(res=>{
-        console.log(res);
-        this.$router.push({
-          path:'/login?autoshow=1'
-        })
-      })
-    },
+    // send_email(email) {
+    //   api.send_email({ email: email }).then(res => {
+    //     console.log(res);
+    //   });
+    // },
+    reset_pass() {
+      // debugger;
+      if (this.form_data) {
+        if (this.form_data.password.length < 8) {
+          this.$toast("password format is incorrect.");
+          return false;
+        } else {
+          let params = {
+            email: this.form_data.email,
+            password: sha256(this.form_data.password)
+          };
+          api.updateForgetPassword(params).then(res => {
+            console.log(res);
+            this.$router.push({
+              path: "/login"
+            });
+          });
+        }
+      }
+    }
   },
   components: {}
 };
@@ -77,48 +86,33 @@ export default {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: #f3f3f3;
   padding: 16px 0;
   color: #040404;
-  h3 {
-    padding: 10px 20px;
+}
+/*  */
+.reset-box {
+  padding: 80px 25px 20px 25px;
+  label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 0;
+    padding-left: 10px;
   }
-  p {
-    font-size: 14px;
-    padding: 0 20px;
-  }
-  .write-foem {
-    flex: 1;
+  input {
+    width: 300px;
+    height: 40px;
+    padding-left: 10px;
+    background-color: #efefef;
   }
 }
-.uer-info {
-  background-color: #fff;
-  margin-top: 20px;
-  padding: 0 20px;
-  li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ccc;
-    &:nth-last-child(1) {
-      border-bottom: none;
-    }
-    input {
-      flex: 1;
-      border: none;
-      outline: none;
-      height: 60px;
-      font-size: 14px;
-    }
-    .send-btn {
-      background-color: #d70e19;
-      color: #fff;
-      height: 30px;
-      border-radius: 15px;
-      padding: 6px 10px;
-    }
-  }
+/*  */
+.lists-desc {
+  font-size: 12px;
+  color: #9b9b9b;
+  padding: 10px 0;
 }
+/*  */
 .done-btn {
   padding: 10px 0 10px 0;
   // background-color: #fff;

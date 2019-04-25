@@ -7,7 +7,7 @@ export default {
   meta: {
     title: '',
     keepAlive: true,
-    fullScreen: true
+    fullScreen: false
   },
   children: [{
     path: 'detail',
@@ -17,7 +17,7 @@ export default {
     meta: {
       title: 'store',
       keepAlive: false,
-      fullScreen: true
+      fullScreen: false
     },
   },{
     path: 'info',
@@ -36,7 +36,7 @@ export default {
     meta: {
       title: 'Store cate',
       keepAlive: false,
-      fullScreen:true     
+      fullScreen:false     
     },
   },{
     path: 'list',
@@ -46,7 +46,7 @@ export default {
     meta: {
       title: 'Store list',
       keepAlive: false,
-      fullScreen:true     
+      fullScreen:false     
     },
   },{
     path: 'theme',

@@ -10,6 +10,14 @@ export default {
       data: JSON.stringify(data),
     })
   },
+  getLikeLook(data = {}) {
+    data.token = token;
+    return request({
+      url: 'product/getLikeLook',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
   getRandGroup(data = {}) {
     data.token = token;
     return request({
@@ -38,6 +46,14 @@ export default {
     data.token = token;
     return request({
       url: 'product/like?loading=no',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+  getLikeList(data = {}) {
+    data.token = token;
+    return request({
+      url: 'product/getLikeList',
       method: 'post',
       data: JSON.stringify(data),
     })

@@ -194,11 +194,7 @@ export default {
     }
   }
 }
-.pass-box {
-  position: relative;
-  height: 100%;
-  overflow: auto;
-}
+
 .chang-other {
   font-size: 11px;
   color: rgba(0, 0, 0, 1);

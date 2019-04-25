@@ -26,6 +26,50 @@
     }();
   </script>
   <!-- Facebook Pixel Code -->
+  <!-- <script>
+    ! function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ?
+          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '823451308028734');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=823451308028734&ev=PageView&noscript=1" /></noscript> -->
+  <!-- End Facebook Pixel Code -->
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <!-- 网站名 -->
+  <meta property="fb:app_id" content="884670545062683" />
+  <meta property="og:site_name" content="https://m.weget.com" />
+  <meta property="og:type" content="%type%" />
+  <meta property="og:title" content="%title%" />
+  <meta property="og:description" content="%description%" />
+  <meta property="og:url" content="%url%" />
+  <meta property="og:image" content="%image%" />
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but weget-mall doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- <script src="/static/vconsole.js"></script> -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script>
     ! function (f, b, e, v, n, t, s) {
       if (f.fbq) return;
@@ -50,26 +94,6 @@
   </script>
   <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=823451308028734&ev=PageView&noscript=1" /></noscript>
-  <!-- End Facebook Pixel Code -->
-  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-  <!-- 网站名 -->
-  <meta property="fb:app_id" content="884670545062683" />
-  <meta property="og:site_name" content="https://m.weget.com" />
-  <meta property="og:type" content="%type%" />
-  <meta property="og:title" content="%title%" />
-  <meta property="og:description" content="%description%" />
-  <meta property="og:url" content="%url%" />
-  <meta property="og:image" content="%image%" />
-</head>
-
-<body>
-  <noscript>
-    <strong>We're sorry but web-mall doesn't work properly without JavaScript enabled. Please enable it to
-      continue.</strong>
-  </noscript>
-  <div id="app"></div>
-  <!-- <script src="/static/vconsole.js"></script> -->
-
 </body>
 
 </html>

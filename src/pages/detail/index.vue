@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import CART from "@/api/cart";
 import detailContent from "./detail-content";
 export default {
   // beforeRouteEnter(to, from, next) {
@@ -22,12 +23,55 @@ export default {
   //   console.log('fuyong',to,from);
   //   next();
   // },
-  // beforeRouteLeave(to, from, next) {
-  //   // 导航离开该组件的对应路由时调用
-  //   // 可以访问组件实例 `this`
-  //   console.log('likai',to,from);
-  //   next();
-  // },
+  beforeRouteLeave(to, from, next) {
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 `this`
+    // debugger;
+     document.title = " Weget.com | stylish online fashion marketplace ";
+    setTimeout(()=>{      
+      next();
+    },0)    
+  },
+  created() {    
+    if (this.$route.query.type === "keep") {
+      // debugger;
+      if (this.$store.state.token) {
+        this.autoAddCart();
+      } else {
+        this.clearParams();
+      }
+    }
+  },
+  methods: {
+    autoAddCart() {
+      let auto_params = {
+        goods_id: this.$route.query.goods_id,
+        store_id: this.$route.query.store_id,
+        count: this.$route.query.count
+      };
+      CART.addToCart(auto_params).then(res => {
+        // this.$emit("close", null);
+        // this.init_cart();
+        this.init_cart();
+      }, 0);
+    },
+    init_cart() {
+       CART.getCartNum().then(res => {                    
+        this.$store.commit("SET_CATR", res.data.num);
+      });
+        this.clearParams();
+      
+    },
+    clearParams() {
+      let sku_id = this.$route.query.sku_id;
+      this.$router.push({
+        path: "/detail",
+        query: {
+          sku_id: sku_id
+        }
+      });
+    }
+  },
   components: {
     detailContent
   }

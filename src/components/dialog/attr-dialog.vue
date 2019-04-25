@@ -177,6 +177,7 @@ export default {
       this.new_attrList = JSON.parse(JSON.stringify(this.attrList));
       this.send_cur_goos();
     },
+
     zoom_img(cur) {
       this.show_big_img = true;
       console.log(cur);
@@ -225,25 +226,35 @@ export default {
       window.event.returnValue = false;
     },
     add_to_cart() {
-      let to_catr_params = {
-        goods_id: this.submit_form.goods_id,
-        store_id: this.sku.store_id,
-        count: this.pay_number
-      };
-      CART.addToCart(to_catr_params).then(res => {
-        this.$emit("close", null);
-        this.init_cart();
-      }, 0);
-      // setTimeout(()=>{
-      // })
+      if (!this.$store.state.token) {
+        this.checkedLogin();
+      } else {
+        let to_catr_params = {
+          goods_id: this.submit_form.goods_id,
+          store_id: this.sku.store_id,
+          count: this.pay_number
+        };
+        CART.addToCart(to_catr_params).then(res => {
+          this.$emit("close", null);
+          this.init_cart();
+        });
+      }
+    },
+    checkedLogin() {
+      let re_path = `${window.location.origin}${
+        this.$route.fullPath
+      }&type=keep&goods_id=${this.submit_form.goods_id}&store_id=${
+        this.sku.store_id
+      }&count=${this.pay_number}`;
+      // debugger;
+      window.location.href =
+        window.location.origin +
+        "/login?redirect=" +
+        encodeURIComponent(re_path);
     },
     init_cart() {
-      CART.shopCartList().then(res => {
-        let temp_num = 0;
-        res.data.goods.forEach(item => {
-          temp_num += item.goods_list.length;
-        });
-        this.$store.commit("SET_CATR", temp_num);
+      CART.getCartNum().then(res => {                    
+        this.$store.commit("SET_CATR", res.data.num);
       });
     },
     account(num) {
@@ -325,6 +336,9 @@ export default {
   }
   .img-box {
     background-color: transparent;
+    img {
+      background-color: #ffffff;
+    }
   }
   // background-color: #fff;
 }

@@ -1,41 +1,59 @@
 <template>
-  <div id="layout">
-    <div id="app-header-top"
-      v-if="!full_screen">
-      <div class="page-head"
-        v-show="home_page">
-        <keep-alive>
-          <home-header></home-header>
-        </keep-alive>
-      </div>
-      <div class="page-head"
-        v-show="!home_page">
-        <home-title />
-      </div>
+  <div class="app-content"
+    ref="app_content">
+    <div id="banner-box"
+      v-show="show_banner">
+      <router-link :to="{path:'/about'}"
+        class="about-us">
+        <img src="/static/images/elements/home/H5@3x.jpg"
+          alt=""
+          srcset="">
+      </router-link>
+      <span class="close-banner"
+        @click="keep_banner=!keep_banner">
+        <img src="/static/images/icon/header/close-white.png"
+          alt=""
+          srcset="">
+      </span>
     </div>
-    <div class="page-body"
-      :class="{'in-app':full_screen,'home-page':home_page,'home-page-no-footer':home_page_no_footer}">
-      <transition :name="transitionName">
-        <template v-if="$route.meta.keepAlive">
+    <div id="layout"
+      :class="{'no-banner':!show_banner}">
+      <div id="app-header-top"
+        v-if="!full_screen">
+        <div class="page-head">
           <keep-alive>
-            <router-view class="child-view"></router-view>
+            <home-header></home-header>
           </keep-alive>
-        </template>
-        <template v-else>
-          <router-view class="child-view"
-            :key="$route.fullPath"></router-view>
-        </template>
-        <!-- <router-view></router-view> -->
-      </transition>
+        </div>
+        <!-- <div class="page-head"
+        v-show="!home_page">
+        <homeTitleOptions />
+      </div> -->
+      </div>
+      <div class="page-body"
+        :class="{'in-app':full_screen,'home-page':home_page,'home-page-no-footer':home_page_no_footer}">
+        <!-- <transition :name="transitionName"> -->
+          <!-- <template v-if="$route.meta.keepAlive"> -->
+            <!-- <keep-alive>
+              <router-view class="child-view"></router-view>
+            </keep-alive>
+          </template> -->
+          <template>
+            <router-view class="child-view"
+              :key="$route.fullPath"></router-view>
+          </template>
+          <!-- <router-view></router-view> -->
+        <!-- </transition> -->
 
+      </div>
+      <div class="home-footer"
+        v-show="home_page && !home_page_no_footer">
+        <home-footer />
+      </div>
+      <!-- <div class="auto-login"> -->
+      <!-- <login-auto></login-auto> -->
+      <!-- </div> -->
     </div>
-    <div class="home-footer"
-      v-show="home_page && !home_page_no_footer">
-      <home-footer />
-    </div>
-    <!-- <div class="auto-login"> -->
-    <!-- <login-auto></login-auto> -->
-    <!-- </div> -->
   </div>
 </template>
 
@@ -43,16 +61,21 @@
 import shareApp from "./components/appShare";
 import loginAuto from "@/pages/login/auth/facebook.vue";
 import homeHeader from "./components/appHeader";
+import homeTitleOptions from "./components/appTitleOptions";
 import homeTitle from "./components/appTitle";
 import homeFooter from "./components/appFooter";
 export default {
   name: "layout",
   data() {
     return {
-      transitionName: "slide-left"
+      transitionName: "slide-left",
+      keep_banner: true
     };
   },
   computed: {
+    show_banner() {
+      return this.keep_banner && !this.full_screen;
+    },
     share_token() {
       return this.$store.state.share_token;
     },
@@ -72,6 +95,8 @@ export default {
       let home_page_lists = [
         "/home/index",
         "/user/index",
+        "/welog/index",
+        "/cart/index",
         "/store/theme",
         "/home/theme"
       ];
@@ -112,6 +137,9 @@ export default {
       //   ? this.$route.meta.title
       //   : "Weget";
     },
+    get_scroll_event(data) {
+      // console.log(this.$refs['app_content']);
+    },
     init_transtion(to, from) {
       /* 设置动画的类名 */
       if (to.path == "/") {
@@ -134,21 +162,63 @@ export default {
     shareApp,
     homeHeader,
     homeTitle,
+    homeTitleOptions,
     homeFooter
   }
 };
 </script>
 
 <style lang="scss">
-#layout {
+.app-content {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+}
+#banner-box {
+  position: relative;
+  height: 65px;
+  transition: all 0.5s;
+  // overflow: hidden;
+  .close-banner {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    width: 20px;
+    height: 20px;
+    // background-color: #ffffff;
+    border-radius: 50%;
+    opacity: 0.8;
+    text-align: center;
+    img {
+      height: 14px;
+      vertical-align: center;
+    }
+  }
+  .about-us {
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      // max-height: 60px;
+    }
+  }
+}
+#layout {
+  // flex: 1;
+  height: calc(100% - 65px);
+
+  &.no-banner {
+    height: 100%;
+  }
   /* display: flex; */
   /* height: 100%; */
   // flex-direction: column;
   /* margin-top:50px; */
 }
 #app-header-top {
-  box-shadow: 0px 2px 6px 0px #d0d0d0;
+  position: relative;
+  z-index: 1000;
+  box-shadow: 0px 2px 4px 0px #d0d0d0;
   // border-bottom: 2px solid #f8f8f8;
 }
 .page-head {
@@ -160,6 +230,7 @@ export default {
   /* flex:1; */
   /* 计算高度 */
   height: calc(100% - 55px);
+  overflow: auto;
   /*overflow-y: scroll;*/
   /*overflow-scrolling: touch;*/
   &.in-app {

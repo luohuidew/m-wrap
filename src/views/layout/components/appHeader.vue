@@ -1,14 +1,31 @@
 <template>
   <div class="app-header">
     <ul>
-      <li class="aside-btn-box">
-        <img src="/static/images/icon/header/home-left-icon@3x.png"
-          alt=""
-          srcset=""
-          @click="contractionShow=!contractionShow">
+      <template v-if="appHome ||appUser || appTheme || appCart">
+        <li class="aside-btn-box">
+          <img src="/static/images/icon/header/home-left-icon@3x.png"
+            alt=""
+            srcset=""
+            @click="contractionShow=!contractionShow">
+        </li>
+      </template>
+      <template v-else>
+        <li class="aside-btn-box">
+          <img src="/static/images/icon/normal/返回 大@2x.png"
+            alt=""
+            srcset=""
+            @click="go_back">
+        </li>
+      </template>
+      <li class="weget-logo">
+        <router-link to="/">
+          <img src="/static/images/icon/header/big-logo.png"
+            alt=""
+            srcset="">
+        </router-link>
       </li>
       <template v-if="appHome">
-        <li class="search-box _bgf3"
+        <!-- <li class="search-box _bgf3"
           @click="to_search">
           <span></span>
         </li>
@@ -17,12 +34,35 @@
           <img src="/static/images/icon/header/home-right-icon@3x.png"
             alt=""
             srcset="">
+        </li> -->
+
+        <li class="setting-icon">
+          <router-link :to="{path:'/search/search-query'}">
+            <img src="/static/images/icon/normal/search@2x.png"
+              alt="">
+          </router-link>
+          <router-link :to="{path:'/search/search-home'}">
+            <img src="/static/images/icon/header/home-right-icon@3x.png"
+              alt="">
+          </router-link>
         </li>
       </template>
+      <template v-if="appWelog">
+        <!-- <li class="me">
+          <span>WELOG</span>
+        </li> -->
+        <li class="emity-block"></li>
+      </template>
+      <template v-if="appCart">
+        <!-- <li class="me">
+          <span>CART</span>
+        </li> -->
+        <li class="emity-block"></li>
+      </template>
       <template v-if="appUser">
-        <li class="me">
+        <!-- <li class="me">
           <span>ME</span>
-        </li>
+        </li> -->
         <li class="setting-icon">
           <!-- <router-link :to="{path:'/'}"
             :class="{'active':haveMessages}">
@@ -37,9 +77,9 @@
         </li>
       </template>
       <template v-if="appTheme">
-        <li class="me">
+        <!-- <li class="me">
           <span>{{$route.meta.title.toUpperCase()}}</span>
-        </li>
+        </li> -->
         <li class="setting-icon">
           <router-link :to="{path:'/search/search-query'}">
             <img src="/static/images/icon/normal/search@2x.png"
@@ -82,8 +122,17 @@ export default {
     appUser() {
       return this.$route.path === "/user/index";
     },
+    appCart() {
+      return this.$route.path === "/cart/index";
+    },
     appHome() {
       return this.$route.path === "/home/index";
+    },
+    appWelog() {
+      return this.$route.path === "/welog/index";
+    },
+    appCart() {
+      return this.$route.path === "/cart/index";
     },
     appTheme() {
       let configs = ["/store/theme", "/home/theme"];
@@ -110,6 +159,9 @@ export default {
       };
       this.contractionShow = false;
       this.$router.push(hef_parmas);
+    },
+    go_back(){
+      this.$router.go(-1);
     }
   },
   components: {
@@ -122,6 +174,7 @@ export default {
 .app-header {
   overflow: hidden;
   & > ul {
+    position: relative;
     height: 55px;
     display: flex;
     justify-content: space-between;
@@ -133,6 +186,19 @@ export default {
         width: 24px;
       }
     }
+    .weget-logo {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      img {
+        height: 40px;
+        width: auto;
+      }
+    }
+  }
+  .emity-block {
+    width: 24px;
   }
   .aside-btn-box {
   }

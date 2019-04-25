@@ -18,17 +18,17 @@ import {
 } from 'js-sha256';
 let BASE_API;
 // let CUR_ORIDIN = window.location.origin;
+// BASE_API = 'https://app.weget.com/wap/';
 // BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
 if (process.env.NODE_ENV === 'development') {
   // dev
   BASE_API = 'https://app.weget.com/wap/';
   // BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
-} else if (process.env.NODE_ENV === 'testing') {
+} else if (process.env.VUE_APP_TITLE === 'testing') {
   // testing
   BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
-} else{
+} else {
   // build
-  // BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
   BASE_API = 'https://app.weget.com/wap/';
 }
 /* 全局检测获取APP的登录状态 */
@@ -41,7 +41,7 @@ const service = axios.create({
   // baseURL: 'http://app.wks.wegetcn.com:8088/index.php/admin/',
   baseURL: BASE_API,
   // request timeout
-  // timeout: 5000, 
+  // timeout: 5000,
   headers: {
     // 'Content-Type': 'application/json'
     // 'Content-Type': 'text/html; charset=UTF-8'
@@ -65,14 +65,15 @@ window.nativeToJavaScript_sendToken = function (res) {
 // request interceptor
 service.interceptors.request.use(
   config => {
-    axios_num += 1;
     // console.log(config);
     if (config.url.indexOf('loading=yes') !== -1) {
+      axios_num += 1;
       http_load = Toast.loading({
         mask: true,
+        forbidClick:true,
         loadingType: "spinner",
         message: 'Loading',
-        duration:0
+        // duration: 3000
       });
     }
     // Do something before request is sent
@@ -91,6 +92,8 @@ service.interceptors.request.use(
   error => {
     // Do something with request error
     // alert('请求报错');
+    // debugger;
+
     Promise.reject(error)
   }
 )
@@ -107,16 +110,16 @@ service.interceptors.response.use(
   response => {
     const res = response.data;
     const config = response.config;
-    // console.log(response);
+    // console.warn(response);
     if (res.code !== 1000) {
       // console.log(config);
       /* 处于weget的app下不显示弹框 */
       if (!localStorage.getItem('device')) {
         // Toast(res.message
         let toast_config = {
-          message:res.message,
-          mask:true,
-          duration:5000
+          message: res.message,
+          mask: true,
+          duration: 3000
         };
         Toast(toast_config)
       }
@@ -134,7 +137,7 @@ service.interceptors.response.use(
       // console.log(JSON.stringify(res.message));
       if (res.code === 1207 || res.code === 1209) {
         /* 清空旧的token */
-        
+
         let params;
         if (getToken()) {
           params = {
@@ -152,7 +155,7 @@ service.interceptors.response.use(
         /* window.weget_mobile_type   用来检测是否处于 */
         // alert(window.weget_mobile_type)
         /* 判断登录，选择不同的登录方式 */
-        if (localStorage.getItem('device') === 'ios') {      
+        if (localStorage.getItem('device') === 'ios') {
           let temp_params = params
           window.webkit.messageHandlers.javaScriptToNative.postMessage(temp_params);
         } else if (localStorage.getItem('device') === 'android') {
@@ -161,7 +164,7 @@ service.interceptors.response.use(
           let and_token = window.weget_mobile_type.nativeToJavaScript_sendToken();
           alert(and_token);
           if (and_token) {
-            setToken(and_token);           
+            setToken(and_token);
           }
         } else {
           // alert($CM.is_ins());
@@ -187,19 +190,25 @@ service.interceptors.response.use(
         //     location.reload() // 为了重新实例化vue-router对象 避免bug
         //   })
         // }
-      }
+      }      
       return Promise.reject(response.data);
       // return response.data;
     } else {
       // console.log('走过拦截相应');
-      axios_num += -1;
+      if (response.config.url.indexOf('loading=yes') !== -1) {
+        axios_num += -1;
+      }
       if (axios_num === 0) {
         if (http_load) {
-          setTimeout(() => {
-            http_load.clear();
-          }, 300)
+          http_load.clear();
+          setTimeout(()=>{
+            http_load.clear();          
+         },6000)
+          // setTimeout(() => {
+          // }, 300)
         }
       }
+      // console.log(axios_num);
       return response.data;
     }
   },

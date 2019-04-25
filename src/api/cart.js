@@ -5,7 +5,7 @@ export default {
   addToCart(data = {}) {
     data.token = token;
     return request({
-      url: 'shopcart/addToCart',
+      url: 'shopcart/addToCart?loading=yes',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -21,7 +21,7 @@ export default {
   delShopCartGood(data = {}) {
     data.token = token;
     return request({
-      url: 'shopcart/delShopCartGood ',
+      url: 'shopcart/delShopCartGood?loading=yes ',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -29,7 +29,7 @@ export default {
   updateCount(data = {}) {
     data.token = token;
     return request({
-      url: 'shopcart/updateCount ',
+      url: 'shopcart/updateCount?loading=yes',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -44,11 +44,21 @@ export default {
   },
   getCartNum(data = {}) {
     data.token = token;
-    return request({
-      url: 'shopcart/getCartNum ',
-      method: 'post',
-      data: JSON.stringify(data),
-    })
+    if (!token) {
+      return new Promise((resolve,reject)=>{
+        resolve({
+          data:{
+            num:0
+          }
+        })
+      })
+    } else {
+      return request({
+        url: 'shopcart/getCartNum ',
+        method: 'post',
+        data: JSON.stringify(data),
+      })
+    }
   },
 
 }

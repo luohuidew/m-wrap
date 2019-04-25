@@ -10,6 +10,13 @@
 
     <!-- :class="{'cart-icon':this.$store.state.cart.goods_num}" -->
     <!-- :class="{'animeted bounceIn':$store.state.cart.is_static}" src="/static/images/icon/header/H5-购物车@3x.png" -->
+    <div class="go-home-box">
+      <!-- <router-link :to="{path:'/'}">
+        <img src="/static/images/icon/detail/go-home.png"
+          alt=""
+          srcset="">
+      </router-link> -->
+    </div>
     <a class="store-btn"
       href="javascript:;"
       @click="to_store(sku.store_id)">
@@ -25,7 +32,8 @@
       href="javascript:;"
       @click="to_cart"
       :class="{'have-goods':storeCart.goods_num}">
-      <span class="cart-mun-icon" v-if="storeCart.goods_num">{{storeCart.goods_num}}</span>
+      <span class="cart-mun-icon"
+        v-if="storeCart.goods_num">{{storeCart.goods_num}}</span>
       <span class="heart"
         :class="is_like===2?'active':''">
         <img :class="{'animated bounceIn':!isStatic}"
@@ -319,18 +327,18 @@ export default {
         this.$set(this, "cur_type", type);
         this.$set(this, "cur_group_id", group_id);
         // this.cur_group_id = group_id;
-        if (!getToken()) {
-          let redirect_params = {
-            path: "/login",
-            query: {
-              redirect: window.location.href
-            }
-          };
-          this.$router.push(redirect_params);
-        } else {
-          // this.show_dialog = true;
-          this.$emit("show_dialog_show");
-        }
+        // if (!getToken()) {
+        //   let redirect_params = {
+        //     path: "/login",
+        //     query: {
+        //       redirect: window.location.href
+        //     }
+        //   };
+        //   this.$router.push(redirect_params);
+        // } else {
+        //   // this.show_dialog = true;
+        // }
+        this.$emit("show_dialog_show");
       }
 
       this.show_dialog_tips = false;
@@ -378,6 +386,16 @@ export default {
   z-index: 0;
   height: 50px;
   border-top: 1px solid #f3f3f3;
+  .go-home-box {
+    position: absolute;
+    right: 10px;
+    top: -10px;
+    transform: translateY(-100%);
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
   .fee-per {
     display: flex;
     justify-content: space-between;

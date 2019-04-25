@@ -26,16 +26,22 @@
         <div class="nickname-des">
           <ul>
             <li>
+              <router-link to="/user/like">
               <p class="number">{{user_info.like_num}}</p>
               <p class="des">Like</p>
+              </router-link>
             </li>
             <li>
-              <p class="number">{{user_info.follow_num}}</p>
-              <p class="des">Follow</p>
+              <router-link to="/user/follow">
+                <p class="number">{{user_info.follow_num}}</p>
+                <p class="des">Follow</p>
+              </router-link>
             </li>
             <li>
+              <router-link to="/user/coupon">
               <p class="number">{{user_info.coupons}}</p>
               <p class="des">Coupons</p>
+              </router-link>
             </li>
           </ul>
         </div>
@@ -55,6 +61,24 @@
             class="list-item">
             <span>
               {{item.label}}
+            </span>
+            <span class="more"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="my-other-box">
+      <div class="title-box">
+        <p class="tips">Welog</p>
+        <!-- <p class="more"
+          @click="to_order(0)">All</p> -->
+      </div>
+      <div class="check-list">
+        <ul>
+          <li @click="to_welog"
+            class="list-item">
+            <span>
+              Posts
             </span>
             <span class="more"></span>
           </li>
@@ -135,6 +159,12 @@ export default {
         query: {
           label: cid
         }
+      };
+      this.$router.push(params);
+    },
+    to_welog() {
+      let params = {
+        path: "/welog/me"
       };
       this.$router.push(params);
     }
@@ -233,8 +263,6 @@ export default {
     }
   }
 }
-.my-order-box {
-}
 .check-list {
   ul {
     display: flex;
@@ -255,6 +283,7 @@ export default {
     padding-left: 50px;
     background: url() no-repeat left center;
     border-top: 1px solid #f3f3f3;
+    background-size: 24px auto;
     &:nth-child(1) {
       background-image: url(../../../assets/img/icon/pending.png);
     }
@@ -289,5 +318,15 @@ export default {
   width: 20px;
   background: url(../../../assets/img/icon/right_icon.png) no-repeat right
     center;
+}
+.my-order-box {
+}
+.my-other-box {
+  border-top: 10px solid #f3f3f3;
+  .check-list {
+    li {
+      background-image: url(../../../assets/img/icon/user_mywelog_icon@3x.png);
+    }
+  }
 }
 </style>

@@ -40,7 +40,7 @@
             :style="{right:(index+1)*12+'px',zIndex:10-index}">
           <img src="/static/img/icon/团购人点点点.png"
             v-if="cardData.bought_user.length">
-        
+
 
         </div> -->
       </div>
@@ -64,8 +64,10 @@ export default {
       introduce: ""
     };
   },
-  props: ["cardData", "groupId"],
+  props: ["cardData", "groupId", "activeList"],
   components: {},
+  created() {
+  },
   methods: {
     to_detail(sku_id) {
       let href_params = {
@@ -82,6 +84,15 @@ export default {
             sku_id: sku_id
           }
         };
+        if (this.activeList == '1' ) {
+          params = {
+            path: "/detailAcive",
+            query: {
+              sku_id: sku_id,
+              activeList: 1
+            }
+          };
+        }
         if (this.groupId) {
           params.query.status = 1;
           params.query.group_id = this.groupId;

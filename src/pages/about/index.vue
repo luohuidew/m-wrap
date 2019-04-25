@@ -1,24 +1,46 @@
 <template>
-  <div class="about_page">
-    <header class="about_head">
-      <img src="/static/img/about/关于我们4切图_02.jpg">
-    </header>
-    <section>
-      <img src="/static/img/about/关于我们4切图_06.jpg">
-    </section>
-    <section>
-      <img src="/static/img/about/关于我们4切图_08.jpg">
-    </section>
-    <section>
-      <img src="/static/img/about/关于我们4切图_10.jpg">
-    </section>
-    <footer>
+  <div class="about-us-page">
+    <ul>
+      <li>
+        <img src="/static/images/elements/about/about-us_01.jpg"
+          alt=""
+          srcset="">
+      </li>
+      <li>
+        <img src="/static/images/elements/about/about-us_02.jpg"
+          alt=""
+          srcset="">
+      </li>
+      <li class="gif">
+        <img src="/static/images/elements/about/about-us_03.gif"
+          alt=""
+          srcset="">
+      </li>
+      <li>
+        <img src="/static/images/elements/about/about-us_04.jpg"
+          alt=""
+          srcset="">
+      </li>
+      <li class="gif">
+        <img src="/static/images/elements/about/about-us_05.gif"
+          alt=""
+          srcset="">
+      </li>
+      <li>
+        <img src="/static/images/elements/about/about-us_06.jpg"
+          alt=""
+          srcset="">
+      </li>      
+      <li>
+        <img src="/static/images/elements/about/about-us_07.jpg"
+          alt=""
+          srcset="">
+      </li>      
+    </ul>
+    <div class="footer">
       <div class="about_row1">
         <!-- <img class="bgimg" src="/static/img/about/icon bg@2x.png"> -->
         <p>
-          <a href="javascript:;">
-            <img src="/static/img/about/底部logo@2x.png">
-          </a>
           <a href="https://www.facebook.com/wegetofficial">
             <img src="/static/img/about/iconF@2x.png">
           </a>
@@ -30,38 +52,39 @@
           </a>
         </p>
       </div>
-      <div class="about_row2">
-        <img class="bgimg" src="/static/img/about/底部@2x.png">
-      </div>
-    </footer>
+      <!--<div class="about_row2">-->
+      <!--<img class="bgimg"-->
+      <!--src="/static/img/about/底部@2x.png">-->
+      <!--</div>-->
+    </div>
   </div>
 </template>
+
 <script>
-export default {};
+export default {
+  name: "",
+  props: {},
+  data() {
+    return {};
+  },
+  computed: {},
+  created() {},
+  methods: {},
+  components: {}
+};
 </script>
-<style lang="scss" scoped>
-.about_page {
-  height: auto;
-  width: 100%;
-  overflow: hidden;
-  min-width: 100%;
-  .about_head {
+
+<style lang='scss' scoped>
+.about-us-page {
+  font-size: 0;
+  img {
     width: 100%;
-    padding: 20px 0;
-    margin: 0 auto;
-    img {
-      width: 100%;
-      height: auto;
-    }
   }
-  section {
-    padding-bottom: 20px;
-    img {
-      width: 100%;
-    }
+  .gif {
+    padding: 0 28px;
   }
-  footer {
-    background: #000;
+  .footer {
+    background: #1f1f1f;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -72,7 +95,7 @@ export default {};
     }
     div.about_row1 {
       width: 100%;
-      height: 80px;
+      height: 60px;
       background: rgb(33, 33, 33);
       margin: 0;
       padding: 0;
@@ -83,23 +106,19 @@ export default {};
         width: 80%;
         height: 22px;
         top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        left: 10px;
+        transform: translate(0%, -50%);
         text-align: center;
         a {
+          float: left;
           margin: 0 15px;
           img {
-            height: 22px;
+            width: auto;
+            height: 20px;
           }
         }
       }
     }
-    // div.about_row2{
-    //   height: 50px;
-    //   background: #000;
-    //   color: rgb(124, 124, 124);
-    // }
   }
 }
 </style>
-

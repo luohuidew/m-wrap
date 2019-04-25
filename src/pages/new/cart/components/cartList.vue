@@ -2,7 +2,7 @@
   <div class="cart-list"
     v-if="goodsData.length">
     <div class="total-cart-box">
-      <h2>Cart ({{all_data_length}})</h2>
+      <!-- <h2>Cart ({{all_data_length}})</h2> -->
       <div class="head-select">
         <div class="select-box">
           <div class="icon-box"
@@ -17,7 +17,7 @@
               srcset="">
           </div>
           <p class="total-select">
-            Select All Available Items <span>({{all_data_length}})</span>
+            Select All Available Items <span>({{$store.state.cart.goods_num}})</span>
           </p>
         </div>
         <p class="remove"
@@ -108,17 +108,17 @@ export default {
       let params = {
         only: cartIds
       };
+      if (!cartIds.length) {
+        return false;
+      }
       CART.delShopCartGood(params)
         .then(res => {
           window.location.reload();
+          // this.$parent.init_data();
         })
-        .then(res => {
-          CART.shopCartList().then(res => {
-            let temp_num = 0;
-            res.data.goods.forEach(item => {
-              temp_num += item.goods_list.length;
-            });
-            this.$store.commit("SET_CATR", temp_num);
+        .then(() => {
+          CART.getCartNum().then(res => {
+            this.$store.commit("SET_CATR", res.data.num);
           });
         });
     }
@@ -131,7 +131,7 @@ export default {
 
 <style lang='scss' scoped>
 .total-cart-box {
-  padding: 30px 20px 13px 20px;
+  padding: 20px 20px 13px 20px;
   h2 {
     font-size: 26px;
     padding-bottom: 28px;

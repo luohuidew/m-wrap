@@ -10,7 +10,7 @@
         :key="index"
         @click="address_change(item)">
         <div class="address_radio">
-          <img v-if="is_selected=== item.id"
+          <img v-if="is_selected== item.id"
             src="/static/img/icon/选择红.png">
           <img v-else
             src="/static/img/icon/选择 灰.png">
@@ -77,6 +77,11 @@ export default {
       addressApi.address_list().then(res => {
         this.is_selected = this.$route.query.id;
         this.address_lists = res.data;
+        let temp_address = this.address_lists.filter(item=>{
+          return item.id == this.is_selected;
+        })
+        // debugger;
+        this.address_change(temp_address[0]);
       });
     },
     save_address() {

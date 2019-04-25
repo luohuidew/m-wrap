@@ -88,14 +88,10 @@ export default {
       }
     },
     init_cart() {
-      CART.shopCartList().then(res => {
-        let temp_num = 0;
-        res.data.goods.forEach(item => {
-          temp_num += item.goods_list.length;
-        });
-        this.$store.commit("SET_CATR", temp_num);
+      CART.getCartNum().then(res => {                    
+        this.$store.commit("SET_CATR", res.data.num);
       });
-    }
+    },
   },
   components: {}
 };

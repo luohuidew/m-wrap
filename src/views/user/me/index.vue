@@ -1,12 +1,14 @@
 <template>
   <div class="user-info">
     <user-card></user-card>
-    <div  v-if="activitie_info" class="banner-sale">
-      <a :href="activitie_info.act_url"></a>
-      <img :src="activitie_info.img_url"
+    <!-- <div  v-if="activitie_info" class="banner-sale">
+      <a :href="activitie_info.route_url">
+           <img :src="activitie_info.img_url"
         alt=""
-        srcset="">
-    </div>   
+        srcset=""> 
+      </a>
+     
+    </div>    -->
     <premium v-if="goods_info.length" :goods_info=goods_info></premium>
   </div>
 </template>

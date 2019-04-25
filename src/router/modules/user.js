@@ -1,3 +1,6 @@
+import store from '@/store'
+import Router from 'vue-router'
+let token  = store.state.token;
 export default {
   path: '/user',
   name: 'userInfo',
@@ -16,7 +19,14 @@ export default {
       meta: {
         title: 'userInfo',
         keepAlive: false
-      }
+      },
+      beforeEnter: (to, from, next) => {
+        if(token){
+          next();
+        }else {
+          window.location.href="/login"
+        }
+      },
     },
     {
       path: 'profile',
@@ -67,6 +77,26 @@ export default {
         title: 'My Coupons',
         keepAlive: false,        
       }
-    }
+    },
+    {
+      path: 'like',
+      name: 'user-like',
+      component: () =>
+        import('@/views/user/like'),
+      meta: {
+        title: 'like',
+        keepAlive: false,        
+      }
+    },
+    {
+      path: 'follow',
+      name: 'user-follow',
+      component: () =>
+        import('@/views/user/follow'),
+      meta: {
+        title: 'following',
+        keepAlive: false,        
+      }
+    },
   ]
 }

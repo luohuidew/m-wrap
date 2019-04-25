@@ -40,7 +40,7 @@
       </p>
       <div class="buyer-box">
         <p class="pay-number">
-          {{sku.bought_num}} bought
+          <!--{{sku.bought_num}} bought-->
         </p>
         <!-- <p class="goods-getter" v-if="sku.bought_user">
           <img v-for="(item,index) in sku.bought_user"
@@ -85,7 +85,7 @@ export default {
   components: {},
   methods: {
     to_detail(sku_id) {
-      this.$router.push({ name: "detail", query: { sku_id: sku_id } });
+      this.$router.push({ path: "/detail", query: { sku_id: sku_id } });
     }
   }
 };

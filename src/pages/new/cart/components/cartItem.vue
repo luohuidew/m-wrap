@@ -19,7 +19,7 @@
           <img src="/static/images/icon/cart/store@3x.png"
             alt=""
             srcset="">
-          <span>{{all_data.store_name}}</span>
+          <span class="text-line-clamp-1">{{all_data.store_name}}</span>
         </p>
       </div>
       <p class="to-store"
@@ -238,6 +238,8 @@ export default {
   justify-content: space-between;
   border-bottom: 1px solid #f3f3f3;
   .total-store {
+    display: flex;
+    align-items: center;
     img {
       width: 18px;
       height: 18px;
@@ -245,7 +247,9 @@ export default {
       vertical-align: middle;
     }
     span {
+      display: inline-block;
       font-size: 14px;
+      width: 180px;
       padding-left: 5px;
     }
   }

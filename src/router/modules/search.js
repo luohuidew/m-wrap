@@ -45,5 +45,14 @@ export default {
       title: 'Query Lists',
       keepAlive: false,
     },
+  },{
+    path: 'search-store-lists',
+    name: 'search-store-lists',
+    component: () =>
+      import('@/pages/search/search-store-lists'),
+    meta: {
+      title: 'Query Lists',
+      keepAlive: false,
+    },
   }],
 }
