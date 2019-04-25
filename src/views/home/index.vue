@@ -8,6 +8,12 @@
     <pick :listsData="homeData.influence_pick"></pick>
     <topic :listsData="homeData.topic_data"></topic>
     <scrollCate :listData="homeData.category_row"></scrollCate>
+    <van-popup v-model="show" class="popu">
+      <div class="wrap">
+        <van-icon name="close" @click="closePopu" class="icons"/>
+        <img :src="popupObj.image_url" @click="goPage(popupObj.route)" alt="">
+      </div>
+    </van-popup>
   </div>
 </template>
 
@@ -24,8 +30,9 @@ export default {
   props: {},
   data() {
     return {
+      show: true,
       homeData: undefined,
-     
+      popupObj: {}
     };
   },
   computed: {},
@@ -33,11 +40,25 @@ export default {
     this.init_data();
   },
   methods: {
+    goPage(url) {
+      this.$router.push({path: url})
+    },
     init_data() {
       api.homeData().then(res => {
         this.homeData = res.data;
       });
-    },   
+      if(sessionStorage.getItem('home-pop-first')){
+        this.show = false
+      } else {
+        api.fetActive().then(res => {
+          this.popupObj = res.data;
+        });
+      }
+    },
+    closePopu() {
+      sessionStorage.setItem('home-pop-first', true)
+      this.show = false
+    }
   },
   components: {
     banner,
@@ -52,6 +73,31 @@ export default {
 
 <style lang='scss' scoped>
 #weget {
+  position: relative;
+  & /deep/ .van-popup{
+    position: absolute;
+    height: 300px;
+    border-radius: 5px;
+    width: 60%;
+    .wrap {
+      position: relative;
+      img {
+        width: 100%;
+      }
+      .icons {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 25px;
+      }
+    }
+  }
   background-color: #f3f3f3;
 }
+h1{
+  margin: 50px;
+}
+
 </style>
