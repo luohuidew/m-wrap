@@ -15,12 +15,19 @@ export default {
       method: 'post',
       data: JSON.stringify(data),
     })
-  },  
+  },
   homeTopic(data={}) {
     return request({
       url: 'topic/homeTopic',
       method: 'post',
       data: JSON.stringify(data),
     })
-  },  
+  },
+  fetActive(data={}) {
+    return request({
+      url: 'weget/popup',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
 }

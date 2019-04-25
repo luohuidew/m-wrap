@@ -54,9 +54,9 @@ export default {
   },
   created() {
       this.getUserId()
-      // if (window.location.origin.indexOf("https") === -1) {
-      //     this.link = "m.weget.com/login/index";
-      // }
+      if (window.location.origin.indexOf("https") === -1) {
+          this.link = "wap.middleware.weget.com/login/index?share_user_id=";
+      }
   },
   mounted() {
   },

@@ -22,8 +22,8 @@ let BASE_API;
 // BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
 if (process.env.NODE_ENV === 'development') {
   // dev
-  BASE_API = 'https://app.weget.com/wap/';
-  // BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
+  // BASE_API = 'https://app.weget.com/wap/';
+  BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
 } else if (process.env.VUE_APP_TITLE === 'testing') {
   // testing
   BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
@@ -202,7 +202,7 @@ service.interceptors.response.use(
         if (http_load) {
           http_load.clear();
           setTimeout(()=>{
-            http_load.clear();          
+            http_load.clear();
          },6000)
           // setTimeout(() => {
           // }, 300)

@@ -3,17 +3,9 @@
       <div class="title">Registration</div>
       <section>
           <ul v-if="dataList.length > 0">
-              <li v-for="(tiem,index) in 70">
-                  <p>{{index}}、stacy.sun@weget.com</p>
-                  <p>4/13/19 &nbsp; 17:30:35</p>
-              </li>
-              <li>
-                  <p>1、stacy.sun@weget.com</p>
-                  <p>4/13/19  17:30:35</p>
-              </li>
-              <li>
-                  <p>1、stacy.sun@weget.com</p>
-                  <p>4/13/19  17:30:35</p>
+              <li v-for="(item,index) in dataList" :key="item.id">
+                  <p>{{index + 1}}、{{item.email}}</p>
+                  <p>{{item.invite_time | timeForml}} &nbsp; {{item.invite_time | hoursForml}}</p>
               </li>
           </ul>
           <div v-else class="noData">
@@ -21,25 +13,51 @@
               <p>No sign up yet</p>
           </div>
       </section>
-      <footer>
+      <footer v-if="dataList.length > 0">
           Don’t forget to say thank you!
       </footer>
   </div>
 </template>
 
 <script>
+    import popularize from "@/api/popularize";
 
 export default {
   data() {
     return {
-        dataList: []
+        dataList:[]
     };
   },
   created() {
-
+      popularize.shareState().then((res)=> {
+          this.dataList = res.data
+      })
   },
   mounted() {
   },
+    filters: {
+        timeForml(val) {
+            function addStr (str) {
+                return str.toString().length === 1 ? '0' + str : str
+            }
+            let date = new Date(val)
+            const year = date.getFullYear().toString().slice(-12);
+            const month = addStr(date.getMonth() + 1)
+            const day = addStr(date.getDate())
+            return `${day}/${month}/${year}`
+        },
+        hoursForml(val) {
+            let date = new Date(val)
+            function addStr (str) {
+               return str.toString().length === 1 ? '0' + str : str
+            }
+            let h = addStr(date.getHours());
+            let m = addStr(date.getMinutes())
+            let s = addStr(date.getSeconds())
+
+            return `${h}:${m}:${s}`
+        }
+    },
   computed: {},
   methods: {}
 };
