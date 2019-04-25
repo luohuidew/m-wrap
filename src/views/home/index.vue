@@ -9,7 +9,9 @@
     <topic :listsData="homeData.topic_data"></topic>
     <scrollCate :listData="homeData.category_row"></scrollCate>
     <van-popup v-model="show">
-      <div></div>
+      <div><h1>2222</h1><h1>2222</h1><h1>2222</h1>
+        <h1>2222</h1><h1>2222</h1><h1>2222</h1><h1>2222</h1><h1>2222</h1><h1>2222</h1><h1>2222</h1><h1>2222</h1><h1>2222</h1><h1>2222</h1><h1>2222</h1><h1>2222</h1>
+      </div>
     </van-popup>
   </div>
 </template>
@@ -27,7 +29,7 @@ export default {
   props: {},
   data() {
     return {
-      show: false,
+      show: true,
       homeData: undefined,
 
     };
@@ -56,6 +58,16 @@ export default {
 
 <style lang='scss' scoped>
 #weget {
+  position: relative;
+  & /deep/ .van-popup{
+    position: absolute;
+    height: 300px;
+    border: 1px solid red;
+  }
   background-color: #f3f3f3;
 }
+h1{
+  margin: 50px;
+}
+
 </style>

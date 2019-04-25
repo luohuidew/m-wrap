@@ -39,6 +39,7 @@ import ShareFb from "@/components/share-fb-other"
 import data from "./config";
 import clipboard from 'clipboard';
 import {getToken} from '@/utils/auth';
+import api from "@/api/trial";
 
 
 export default {
@@ -48,18 +49,27 @@ export default {
       copyBtn: null,
       showShareBox: false,
       item_data: data,
-      link: 'https://m.weget.com/login/index'
+      link: 'https://m.weget.com/login/index?share_user_id='
     };
   },
   created() {
-      if (window.location.origin.indexOf("https") === -1) {
-          this.link = "wap.middleware.weget.com/login/index";
-      }
+      this.getUserId()
+      // if (window.location.origin.indexOf("https") === -1) {
+      //     this.link = "m.weget.com/login/index";
+      // }
   },
   mounted() {
   },
   computed: {},
   methods: {
+    getUserId() {
+      if (getToken()){
+          api.getUserInfo().then(res => {
+             this.link +=  res.data.id
+          });
+      }
+
+    },
     copyLink() {
           let coyd = new clipboard('.copy');
           coyd.on('success', ()=> {
@@ -77,7 +87,6 @@ export default {
             if (getToken()){
                 this.showShareBox = true;
             } else {
-                console.log(this.$route)
                 this.$router.push({path:'/login', query:{redirect: this.$route.fullPath}})
             }
 
