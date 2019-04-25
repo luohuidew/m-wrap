@@ -26,14 +26,14 @@ export default {
   name: "",
   data() {
     return {
-      detail_text:this.sku.activity_sku_desc.toString(),
-
+      detail_text:this.sku.activity_sku_desc && this.sku.activity_sku_desc.toString()
       // detail_texts: "<h1>Tops</h1><h2>Size</h2><h3>SML(see the laset)</h3>"
     };
   },
   props: ["sku"],
-  components: {}
+  components: {},
 };
+
 </script>
 
 <style lang='scss' scoped>

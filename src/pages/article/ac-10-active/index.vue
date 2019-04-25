@@ -3,16 +3,16 @@
     <section class="wrap">
       <Item v-for="item in itemDdata" :cardData = "item" :activeFixed="true"></Item>
     </section>
-    <van-popup v-model="show" class="popup-warp">
-      <img class="close" @click="closePopup" src="@/assets/img/conponActive/X.png"/>
-      <div class="main">
-        <img class="bg" src="@/assets/img/conponActive/bg.png" />
-        <img  v-if="isLogin" class="btn" @click="goConpon" src="@/assets/img/conponActive/use@2x.png" />
-        <img  v-if="!isLogin"  class="btn" @click="goLogin" src="@/assets/img/conponActive/Signup@2x.png" />
-        <p v-if="isLogin">Congratulations! Now you have $30 in your account. Use it NOW! </p>
-        <p v-if="!isLogin">Hello new friend,we have 30 for you,sign up and get it now!</p>
-      </div>
-    </van-popup>
+    <!--<van-popup v-model="show" class="popup-warp">-->
+      <!--<img class="close" @click="closePopup" src="@/assets/img/conponActive/X.png"/>-->
+      <!--<div class="main">-->
+        <!--<img class="bg" src="@/assets/img/conponActive/bg.png" />-->
+        <!--<img  v-if="isLogin" class="btn" @click="goConpon" src="@/assets/img/conponActive/use@2x.png" />-->
+        <!--<img  v-if="!isLogin"  class="btn" @click="goLogin" src="@/assets/img/conponActive/Signup@2x.png" />-->
+        <!--<p v-if="isLogin">Congratulations! Now you have $30 in your account. Use it NOW! </p>-->
+        <!--<p v-if="!isLogin">Hello new friend,we have 30 for you,sign up and get it now!</p>-->
+      <!--</div>-->
+    <!--</van-popup>-->
   </div>
 </template>
 
