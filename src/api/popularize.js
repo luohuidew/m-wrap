@@ -5,7 +5,7 @@ export default {
   shareState(data={}) {
     data.token = token;
     return request({
-      url: 'ActivityRegisteUser/shareInfo',
+      url: 'ActivityRegisteUser/shareInfo?loading=yes',
       method: 'post',
       data: JSON.stringify(data),
     })

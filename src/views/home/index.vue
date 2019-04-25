@@ -52,6 +52,12 @@ export default {
       } else {
         api.fetActive().then(res => {
           this.popupObj = res.data;
+          // const _this = this
+          // var newImg = new Image()
+          // newImg.src = res.data.image_url
+          // newImg.onload = function () {
+          //   _this.popupObj = res.data;
+          // };
         });
       }
     },
@@ -73,12 +79,10 @@ export default {
 
 <style lang='scss' scoped>
 #weget {
-  position: relative;
   & /deep/ .van-popup{
-    position: absolute;
-    height: 300px;
     border-radius: 5px;
     width: 60%;
+    min-height: 40px;
     .wrap {
       position: relative;
       img {
@@ -88,7 +92,7 @@ export default {
         position: absolute;
         right: 10px;
         top: 10px;
-        color: #fff;
+        color: #333;
         cursor: pointer;
         font-size: 25px;
       }

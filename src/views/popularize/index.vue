@@ -25,6 +25,9 @@
 </script>
 
 <style lang='scss' scoped>
+.article {
+    height: 101%;
+    background-color:  #f0f4f9;
+}
 
- 
 </style>

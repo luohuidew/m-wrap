@@ -1,11 +1,12 @@
 <template>
   <div class="article-detail">
+      <img src="./img/share.gif" alt="">
     <div class="btn-wrap">
       <p class="button" @click="toShare">SHARE</p>
       <p class="button check" @click="checkStatus">CHECK STATUS</p>
     </div>
       <div class="over-btn">
-          <router-link :to="{path: '/about'}" class="btn">PRODUCT LIST</router-link>
+          <router-link :to="{path: '/hot?list_type=13'}" class="btn">PRODUCT LIST</router-link>
           <router-link :to="{path: '/'}" class="btn">HOME PAGET</router-link>
       </div>
     <van-popup v-model="showShareBox">
@@ -106,19 +107,21 @@ export default {
 
 <style lang='scss' scoped>
 .article-detail {
-  width: 100%;
+  width: 375px;
+  height:646px;
+    overflow: auto;
   position: relative;
-  overflow: hidden;
-  height: 100%;
-  background: url("./img/share.gif") no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: center top;
+    img {
+        width: 100%;
+    }
     .succee-input {
         display: none;
     }
     .over-btn {
-       position: absolute;
-        top: 20px;
+       position: fixed;
+        top: 150px;
         right: 0px;
         .btn{
             height: 26px;
@@ -138,7 +141,7 @@ export default {
     }
   .btn-wrap {
     position: absolute;
-    bottom: 50px ;
+    bottom: 80px ;
     width: 100%;
     text-align: center;
     .button {

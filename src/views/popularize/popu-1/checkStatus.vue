@@ -8,9 +8,10 @@
                   <p>{{item.invite_time | timeForml}} &nbsp; {{item.invite_time | hoursForml}}</p>
               </li>
           </ul>
-          <div v-else class="noData">
+          <div v-show="showNoData" class="noData">
               <img src="./img/face.png" />
               <p>No sign up yet</p>
+              <p class="login" v-if="!isLogin" @click="goPageLogin">Log In</p>
           </div>
       </section>
       <footer v-if="dataList.length > 0">
@@ -21,17 +22,25 @@
 
 <script>
     import popularize from "@/api/popularize";
+    import {getToken} from '@/utils/auth';
 
 export default {
   data() {
     return {
+        showNoData: false,
+        isLogin: getToken(),
         dataList:[]
     };
   },
   created() {
-      popularize.shareState().then((res)=> {
-          this.dataList = res.data
-      })
+      if(getToken()) {
+          popularize.shareState().then((res)=> {
+              this.dataList = res.data
+              if( res.data.length ===0 ) {
+                  this.showNoData = true
+              }
+          })
+      }
   },
   mounted() {
   },
@@ -40,14 +49,14 @@ export default {
             function addStr (str) {
                 return str.toString().length === 1 ? '0' + str : str
             }
-            let date = new Date(val)
+            let date = new Date(val*1000)
             const year = date.getFullYear().toString().slice(-12);
             const month = addStr(date.getMonth() + 1)
             const day = addStr(date.getDate())
             return `${day}/${month}/${year}`
         },
         hoursForml(val) {
-            let date = new Date(val)
+            let date = new Date(val*1000)
             function addStr (str) {
                return str.toString().length === 1 ? '0' + str : str
             }
@@ -59,7 +68,11 @@ export default {
         }
     },
   computed: {},
-  methods: {}
+  methods: {
+      goPageLogin() {
+          this.$router.replace({path:'/login', query:{redirect: this.$route.fullPath}})
+      }
+  }
 };
 </script>
 
@@ -76,6 +89,14 @@ export default {
            border-bottom: 3px solid rgba(247,247,247,1);
             font-size:15px;
             font-weight:bold;
+        }
+        .login {
+            padding: 10px;
+            border-radius: 3px;
+            border: 1px solid #888888;
+            margin-top: 30px;
+            width: 100px;
+            margin: 30px auto;
         }
         section{
             display: block;

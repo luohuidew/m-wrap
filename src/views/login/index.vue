@@ -31,7 +31,7 @@ export default {
   methods: {
     go_origin(url) {
       if (url) {
-        window.location.href = url;
+        this.$router.replace({path:url}) ;
       } else {
         window.location.href = "/";
       }
