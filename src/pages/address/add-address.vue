@@ -1,67 +1,71 @@
 <template>
   <div class="my-address">
-    <h3>Add Shipping Address</h3>
-    <ul class="address-content">
-      <li>
-        <p><span>First Name</span><input type="text"
-            v-model="address.first_name"></p>
-      </li>
-      <li>
-        <p><span>Last Name</span><input type="text"
-            v-model="address.last_name"></p>
-      </li>
-      <li>
-        <p><span>Address</span><input type="text"
-            v-model="address.address1"></p>
-      </li>
-      <li>
-        <p><span>Address Line 2</span><input type="text"
-            v-model="address.address2"></p>
-      </li>
-      <li>
-        <p><span>City</span><input type="text"
-            v-model="address.city">
-        </p>
-      </li>
-      <!-- <li>
+    <div class="form-content" v-show="!showState">
+      <h3>Add Shipping Address</h3>
+      <ul class="address-content">
+        <li>
+          <p><span>First Name</span><input type="text"
+              v-model="address.first_name"></p>
+        </li>
+        <li>
+          <p><span>Last Name</span><input type="text"
+              v-model="address.last_name"></p>
+        </li>
+        <li>
+          <p><span>Address</span><input type="text"
+              v-model="address.address1"></p>
+        </li>
+        <li>
+          <p><span>Address Line 2</span><input type="text"
+              v-model="address.address2"></p>
+        </li>
+        <li>
+          <p><span>City</span><input type="text"
+              v-model="address.city">
+          </p>
+        </li>
+        <!-- <li>
         <p><span>State</span><input type="text"
             v-model="address.state"></p>
       </li> -->
-      <li @click="goSelectState()">
-        <p><span>State</span>
-          <span class="state-selecet">
-            <span>{{address.state?address.state:''}}</span>
-            <img src="/static/images/icon/address/返回 小右@2x.png"
-              alt=""
-              srcset="">
-          </span>
-        </p>
-      </li>
-      <li>
-        <p><span>Zip Code</span><input type="text"
-            v-model="address.zipcode"></p>
-      </li>
-      <li>
-        <p><span>Phone Number</span><input type="text"
-            v-model="address.tel"></p>
-      </li>
-      <li class="switch-btn">
-        <p>
-          <span>Set as default address</span>
-          <van-switch active-color="#D70E19"
-            v-model="is_default" />
-        </p>
-      </li>
-    </ul>
-    <div class="add-btn">
-      <a href="javascript:;"
-        @click="go_back">DONE</a>
+        <li @click="goSelectState()">
+          <p><span>State</span>
+            <span class="state-selecet">
+              <span>{{address.state?address.state:''}}</span>
+              <img src="/static/images/icon/address/返回 小右@2x.png"
+                alt=""
+                srcset="">
+            </span>
+          </p>
+        </li>
+        <li>
+          <p><span>Zip Code</span><input type="text"
+              v-model="address.zipcode"></p>
+        </li>
+        <li>
+          <p><span>Phone Number</span><input type="text"
+              v-model="address.tel"></p>
+        </li>
+        <li class="switch-btn">
+          <p>
+            <span>Set as default address</span>
+            <van-switch active-color="#D70E19"
+              v-model="is_default" />
+          </p>
+        </li>
+      </ul>
+      <div class="add-btn">
+        <a href="javascript:;"
+          @click="go_back">DONE</a>
+      </div>
     </div>
-    <van-popup class="state-box" v-model="showState"
+    <!-- <van-popup 
       position="right"
       :overlay="false">
-      <addressState @select="changeState" />
-    </van-popup>
+    </van-popup> -->
+    <addressState class="state-box"
+      v-show="showState"
+      @select="changeState" />
   </div>
 </template>
 
@@ -171,16 +175,32 @@ $color1: #d70e19;
 $bgcolor: #f3f3f3;
 $linecolor: #e9e9e9;
 .state-box {
-  width:100%;
+  width: 100%;
   height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #ffffff;
+  overflow: auto;
+  z-index: 1000;
 }
 .my-address {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
   background-color: $bgcolor;
   // padding-bottom: 120px;
-  overflow: auto;
+  // overflow: auto;
+  .van-popup {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    transform: translate(0, 0);
+  }
   h3 {
     padding: 30px 0 10px 20px;
   }
