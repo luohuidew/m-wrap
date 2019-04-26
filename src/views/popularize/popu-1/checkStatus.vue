@@ -38,8 +38,12 @@ export default {
               this.dataList = res.data
               if( res.data.length ===0 ) {
                   this.showNoData = true
+              } else {
+                  this.showNoData = false
               }
           })
+      } else {
+          this.showNoData = true
       }
   },
   mounted() {

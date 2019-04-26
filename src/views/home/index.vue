@@ -8,12 +8,12 @@
     <pick :listsData="homeData.influence_pick"></pick>
     <topic :listsData="homeData.topic_data"></topic>
     <scrollCate :listData="homeData.category_row"></scrollCate>
-    <van-popup v-model="show" class="popu">
-      <div class="wrap">
-        <van-icon name="close" @click="closePopu" class="icons"/>
-        <img :src="popupObj.image_url" @click="goPage(popupObj.route)" alt="">
-      </div>
-    </van-popup>
+    <!--<van-popup v-model="show" class="popu">-->
+      <!--<div class="wrap">-->
+        <!--<van-icon name="close" @click="closePopu" class="icons"/>-->
+        <!--<img :src="popupObj.image_url" @click="goPage(popupObj.route)" alt="">-->
+      <!--</div>-->
+    <!--</van-popup>-->
   </div>
 </template>
 

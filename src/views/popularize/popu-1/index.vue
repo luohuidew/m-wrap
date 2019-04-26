@@ -41,6 +41,7 @@ import data from "./config";
 import clipboard from 'clipboard';
 import {getToken} from '@/utils/auth';
 import api from "@/api/trial";
+import share from "@/api/share";
 
 
 export default {
@@ -67,10 +68,22 @@ export default {
       if (getToken()){
           api.getUserInfo().then(res => {
              this.link +=  res.data.id
+              this.shareinfo(res.data.id)
           });
       }
 
     },
+      shareinfo(userid) {
+        let share_params = {
+            share_type: "8",
+            share_user_id:  userid,
+        }
+          share.getShareInfo(share_params).then(res => {
+              this.sharDatas = res.data
+              // this.$store.state.share_token = share_token;
+          });
+
+      },
     copyLink() {
           let coyd = new clipboard('.copy');
           coyd.on('success', ()=> {
@@ -79,19 +92,20 @@ export default {
           });
       },
     toShare() {
-        let href_params = {
-            type: 102,
-            data: {}
-        };
-        let temp = this.$CM.weget_device_link(href_params);
-        if (temp === "h5") {
-            if (getToken()){
+        if (getToken()){
+            let href_params = {
+                type: 102,
+                data: this.sharDatas
+            };
+            let temp = this.$CM.weget_device_link(href_params);
+            if (temp === "h5") {
                 this.showShareBox = true;
-            } else {
-                this.$router.push({path:'/login', query:{redirect: this.$route.fullPath}})
             }
-
+        } else {
+            this.$router.push({path:'/login', query:{redirect: this.$route.fullPath}})
         }
+
+
     },
     checkStatus() {
         this.$router.push({
