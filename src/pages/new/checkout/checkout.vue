@@ -13,10 +13,11 @@
         <li>
           <order-review :store_goods=store_goods
             @applyCode='total_price'
+            :address_item = 'address_item'
             :store_total_price=store_total_price></order-review>
         </li>
         <li>
-          <order-summary :total_summary=total_summary></order-summary>
+          <order-summary :total_summary=total_summary :address_item = 'address_item'></order-summary>
         </li>
       </ul>
     </div>
@@ -168,7 +169,7 @@ export default {
         coupon_id = order_detail.coupon.id;
       }
 
-      let store_code = undefined;
+      let store_code = [];
       if (order_detail.applyCode.length > 0) {
         store_code = order_detail.applyCode;
       }
@@ -179,6 +180,10 @@ export default {
         address_id: address_id,
         user_coupon_id: coupon_id
       };
+      const ee = param.store_code.filter((item) => {
+        return item.code_number !== undefined
+      })
+      param.store_code = ee
       this.totalPrice = param; //存起来复用
       api.total_price(param).then(res => {
         let data = res.data;
@@ -212,6 +217,8 @@ export default {
               sessionStorage.checkoutScroll || 0;
           });
         }
+      }).catch((err) => {
+        console.log(err)
       });
     },
     to_address() {
@@ -242,6 +249,9 @@ export default {
       //   query: {}
       // };
       // this.$router.push(router_params);
+    },
+    transFormObj(obj) {
+
     }
   },
   components: {

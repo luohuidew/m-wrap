@@ -13,7 +13,7 @@
           <!-- <span>{{item.store_name}}</span> -->
         </p>
         <order-review-item :goods_data = 'item.goods_data'></order-review-item>
-        <order-review-total :totalPrice = 'item'  v-on="$listeners" :store_updata_price =' store_total_price[index]'></order-review-total>
+        <order-review-total :address_item = 'address_item' :totalPrice = 'item'  v-on="$listeners" :store_updata_price =' store_total_price[index]'></order-review-total>
       </li>
     </ul>
   </div>
@@ -36,6 +36,9 @@ export default {
       default:function () {
         return []
       }
+    },
+    address_item: {
+      type: Object,
     }
   },
   data() {

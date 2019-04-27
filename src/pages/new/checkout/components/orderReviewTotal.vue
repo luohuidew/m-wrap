@@ -14,9 +14,9 @@
       <div>
         <input type="text"
           v-model="codes"
+          @change="applyCode"
           placeholder="Enter Promo Code">
-        <button :class="{'no-select':!codes}"
-          @click="applyCode(codes)">Apply</button>
+        <button :class="{'no-select':!codes}">Apply</button>
       </div>
     </li>
     <li class="code-tips-box">
@@ -46,6 +46,9 @@
 export default {
   name: "",
   props: {
+    address_item: {
+      type: Object,
+    },
     totalPrice: {
       type: Object,
       default: function() {
@@ -96,13 +99,21 @@ export default {
     });
   },
   methods: {
-    applyCode(val) {
-      if (val === "") return;
+    applyCode() {
+      let num = Object.keys(this.address_item).length
+      if (num === 0) {
+        this.$toast('Please add shipping address');
+        return
+      }
+      let val = this.codes
+      if (!val) {
+        val = undefined
+      }
       let clock = true;
       let applyCode = this.$store.state.order_detail.applyCode;
       applyCode.forEach(item => {
         if (item.store_id === this.defaulttotalPrice.store_id) {
-          item.code_number = val;
+          item.code_number = val
           clock = false;
         }
       });

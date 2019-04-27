@@ -113,8 +113,8 @@ service.interceptors.response.use(
     // console.warn(response);
     if (res.code !== 1000) {
       // console.log(config);
-      /* 处于weget的app下不显示弹框 */
-      if (!localStorage.getItem('device')) {
+      /* 处于weget的app下不显示弹框 或者在checkout页面不单出*/
+      if (!localStorage.getItem('device') && !config.url.includes('checkout/totalPrice')) {
         // Toast(res.message
         let toast_config = {
           message: res.message,
@@ -162,7 +162,6 @@ service.interceptors.response.use(
           /* android环境的判断 */
           // let temp_params = JSON.stringify(params);
           let and_token = window.weget_mobile_type.nativeToJavaScript_sendToken();
-          alert(and_token);
           if (and_token) {
             setToken(and_token);
           }
@@ -190,7 +189,7 @@ service.interceptors.response.use(
         //     location.reload() // 为了重新实例化vue-router对象 避免bug
         //   })
         // }
-      }      
+      }
       return Promise.reject(response.data);
       // return response.data;
     } else {

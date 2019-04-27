@@ -62,6 +62,9 @@ export default {
       default: function () {
         return {}
       }
+    },
+    address_item: {
+      type: Object
     }
   },
   data() {
@@ -75,6 +78,11 @@ export default {
   },
   methods: {
     to_coupon() {
+      let num = Object.keys(this.address_item).length
+      if (num === 0) {
+        this.$toast('Please add shipping address');
+        return
+      }
       let params = {
         path: "/coupon"
       };
