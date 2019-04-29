@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules:{
-    cart
+    cart,
   },
   state: {
     token: getToken(),
@@ -70,6 +70,11 @@ const store = new Vuex.Store({
       // 变更状态
       Vue.set(state, 'popballoons_share_params', data);
       // state.popballoons_share_info = data;
+    },
+  },
+  actions: {
+    SetToken({ commit }, val) {
+      commit('set_token', val)
     },
   }
 })

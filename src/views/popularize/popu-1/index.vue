@@ -20,26 +20,55 @@
                 {{link}}
             </div>
             <div class="icon-box">
-                <ShareFb :changeUrl="link">
+                <ShareFb :changeUrl="link" class="marginLeft">
                     <div class="icon" slot="icon">
                         <img src="./img/facebook.png" alt="">
                         <p>Facebook</p>
                     </div>
                 </ShareFb>
-
-                <div class="icon"></div>
+                <ShareMes :changeUrl="link">
+                    <div class="icon" slot="icon">
+                        <img src="./img/messenger.png" alt="">
+                        <p>Messenger</p>
+                    </div>
+                </ShareMes>
             </div>
         </div>
     </van-popup>
+    <van-popup v-model="UserBox">
+          <div class="share-box">
+              <h4 class="title">
+                  You are already a Weget member! Share this or go shopping.
+              </h4>
+              <div class="icon-box">
+                    <div class="btn" @click="toShare">SHARE</div>
+                    <div class="btn buy" @click="goBuy">BUY</div>
+              </div>
+          </div>
+    </van-popup>
+    <van-popup v-model="NewUserBox">
+          <div class="share-box">
+              <h4 class="title">
+                  Congrats! You have been registered! Share this or go shopping.
+              </h4>
+              <div class="icon-box">
+                  <div class="btn" @click="toShare">SHARE</div>
+                  <div class="btn buy" @click="goBuy">BUY</div>
+              </div>
+          </div>
+      </van-popup>
+
+
   </div>
 </template>
 
 <script>
 // import footerAbout from "../components/footer-about"
 import ShareFb from "@/components/share-fb-other"
+import ShareMes from "@/components/share-messager-other"
 import data from "./config";
 import clipboard from 'clipboard';
-import {getToken} from '@/utils/auth';
+import {getToken, setUserShareId} from '@/utils/auth';
 import api from "@/api/trial";
 import share from "@/api/share";
 
@@ -50,12 +79,15 @@ export default {
     return {
       copyBtn: null,
       showShareBox: false,
+       UserBox: false,
+      NewUserBox: false,
       item_data: data,
       link: 'https://m.weget.com/login/index?share_user_id='
     };
   },
   created() {
       this.getUserId()
+      this.initDialog()
       if (window.location.origin.indexOf("https") === -1) {
           this.link = "wap.middleware.weget.com/login/index?share_user_id=";
       }
@@ -64,11 +96,26 @@ export default {
   },
   computed: {},
   methods: {
+      goBuy() {
+          this.$router.push({path: '/'})
+      },
+      initDialog() {
+          const selefUser = this.$route.query.selefUser
+          const UserIsNew = this.$route.query.UserIsNew
+          const UserIsOld = this.$route.query.UserIsOld
+          if (UserIsNew) {
+              this.NewUserBox = true
+          }
+          if (UserIsOld) {
+              this.UserBox = true
+          }
+      },
     getUserId() {
       if (getToken()){
           api.getUserInfo().then(res => {
              this.link +=  res.data.id
-              this.shareinfo(res.data.id)
+              setUserShareId(res.data.id)
+              this.shareinfo(res.data.id) // 获取分享数据
           });
       }
 
@@ -92,6 +139,7 @@ export default {
           });
       },
     toShare() {
+
         if (getToken()){
             let href_params = {
                 type: 102,
@@ -99,6 +147,8 @@ export default {
             };
             let temp = this.$CM.weget_device_link(href_params);
             if (temp === "h5") {
+                this.UserBox = false
+                this.NewUserBox = false
                 this.showShareBox = true;
             }
         } else {
@@ -114,7 +164,8 @@ export default {
     },
   },
   components: {
-    ShareFb
+    ShareFb,
+      ShareMes
   }
 };
 </script>
@@ -188,6 +239,12 @@ export default {
             font-size:15px;
             font-weight:bold;
         }
+       h4.title {
+           font-size:16px;
+           font-weight:bold;
+           line-height: 25px;
+           margin-bottom: 20px;
+       }
         .copy {
             cursor: pointer;
             width: 191px;
@@ -205,6 +262,23 @@ export default {
         }
         .icon-box {
             text-align: center;
+            .btn {
+                display: inline-block;
+                width: 40%;
+                margin-left: 5%;
+                margin-right: 5%;
+                font-size:15px;
+                font-weight:bold;
+                background:rgba(0,0,0,1);
+                border-radius: 5px;
+                height: 40px;
+                line-height: 40px;
+                color:rgba(255,255,255,1);
+                &.buy {
+                    background:rgba(199,84,109,1);
+
+                }
+            }
             .icon {
                 display: inline-block;
                 img {
@@ -214,6 +288,9 @@ export default {
                     margin-top: 10px;
                     font-size: 12px;
                 }
+            }
+            .marginLeft {
+                margin-right: 20px;
             }
         }
     }

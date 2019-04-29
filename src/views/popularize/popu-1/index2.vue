@@ -111,15 +111,15 @@ export default {
         }
     },
       toShare2() {
-
           var link = "https://m.weget.com/login/index"
-          const url = 'fb-messenger://share?link=' + encodeURIComponent(link) + '&app_id=' + encodeURIComponent(2372409919453080)
-          this.openApp(url, (val) => {
-              if(val === 0) { // 没有检测到App
-                  // 打开网页版faceBook
-                  this.toShare4()
-              }
-          })
+          const url = 'fb-messenger://share?link=' + encodeURIComponent(link) + '&app_id=' + encodeURIComponent(884670545062683)
+          // this.openApp(url, (val) => {
+          //     if(val === 0) { // 没有检测到App
+          //         // 打开网页版faceBook
+          //         this.toShare4()
+          //     }
+          // })
+          location.href= url
       },
       toShare4() {
           var link = "https://m.weget.com/login/index"

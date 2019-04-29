@@ -1,6 +1,8 @@
 // import Vue from 'vue';
 import axios from 'axios'
 import $CM from '@/utils/common'
+import store from '@/store';
+
 // import Vuex from 'vuex'
 // import store from '@/store'
 import {
@@ -22,8 +24,8 @@ let BASE_API;
 // BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
 if (process.env.NODE_ENV === 'development') {
   // dev
-  // BASE_API = 'https://app.weget.com/wap/';
-  BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
+  BASE_API = 'https://app.weget.com/wap/';
+  // BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
 } else if (process.env.VUE_APP_TITLE === 'testing') {
   // testing
   BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
@@ -85,7 +87,12 @@ service.interceptors.request.use(
     // config.data.token = localStorage.getItem('token');
     // debugger;
     delete_emity_params(config.params);
-    config.headers['Encrypt-Sign'] = set_header(config.data);
+    let obj = JSON.parse(config.data)
+    // if (config.method !== 'get') {
+    //   obj.token = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+    // }
+    config.headers['Encrypt-Sign'] = set_header(obj);
+    config.data = JSON.stringify(obj)
     // console.log(set_header(config.data),config.data);
     return config;
   },

@@ -60,12 +60,15 @@ import loginServe from "./components/loginServe";
 import tempdialog from "@/components/dialog/temp-dialog";
 // import "./css/base.scss";
 import api from "@/api/login";
-import { setToken, getToken } from "@/utils/auth";
+import getShareUserApi from "@/api/trial";
+import { setToken, getToken, setUserShareId, getUserShareId } from "@/utils/auth";
 import { sha256 } from "js-sha256";
 export default {
   name: "login",
   data() {
     return {
+      userNew: false,
+      share_user_id: this.$route.query.share_user_id,
       show_dialog: false,
       login_pass: false,
       bind_email: "",
@@ -77,6 +80,7 @@ export default {
     };
   },
   created() {
+    this.shareReturn()
     this.login_pass = this.$route.query.autoshow == "1" ? true : false;
   },
   mounted() {
@@ -84,6 +88,83 @@ export default {
   },
   computed: {},
   methods: {
+    shareReturn() {
+      if (getToken()) {
+        if (this.share_user_id) { // 判断是否是分享的页面
+          if(!getUserShareId()) {
+            getShareUserApi.getUserInfo().then(res => { // 获取UserShareId
+              const id = res.data.id
+              setUserShareId(id)
+              if (id === this.share_user_id) {
+                  // 已登录同一个用户
+                // const param = {
+                //   path:'/popularize/popu-1',
+                //   jquery: {
+                //     selefUser: true
+                //   }
+                // }
+                // this.$router.push(param)
+                const urls = window.origin + '/popularize/popu-1?selefUser=true'
+                window.location.replace(urls);
+              }else {
+                // 已登录不是同一个用户 老用户
+                // const param = {
+                //   path:'/popularize/popu-1',
+                //   jquery: {
+                //     selefUser: false
+                //   }
+                // }
+                // this.$router.push(param)
+                const urls = window.origin + '/popularize/popu-1?UserIsOld=true'
+                window.location.replace(urls);
+              }
+            });
+          } else{
+            if(getUserShareId() === this.share_user_id) {
+              // 已登录同一个用户
+              // const param = {
+              //   path:'/popularize/popu-1',
+              //   jquery: {
+              //     selefUser: true
+              //   }
+              // }
+              // this.$router.push(param)
+              const urls = window.origin + '/popularize/popu-1?selefUser=true'
+              window.location.replace(urls);
+            } else { // 已登录不是同一个用户
+              if(this.userNew) { // 新用户
+                // const param = {
+                //   path:'/popularize/popu-1',
+                //   jquery: {
+                //     selefUser: false,
+                //     UserIsNew: true
+                //   }
+                // }
+                // this.$router.push(param)
+                const urls = window.origin + '/popularize/popu-1?UserIsNew=true'
+                window.location.replace(urls);
+              } else { // 老用户
+                // const param = {
+                //   path:'/popularize/popu-1',
+                //   jquery: {
+                //     selefUser: false
+                //   }
+                // }
+                // this.$router.push(param)
+                const urls = window.origin +  '/popularize/popu-1?UserIsOld=true'
+                window.location.replace(urls);
+              }
+            }
+          }
+        } else { // 普通登陆页面跳转
+          if (this.$route.query.redirect) {
+            window.location.replace(this.$route.query.redirect);
+          } else {
+            window.location.replace(window.origin + "/home");
+          }
+        }
+      }
+    },
     check_pre_login(per_params, params) {
       let that = this;
       api
@@ -179,7 +260,7 @@ export default {
         type: params.type
       };
       this.check_pre_login(per_params, params);
-      // let that = this;      
+      // let that = this;
       // api
       //   .preLogin(per_params)
       //   .then(res => {
@@ -202,16 +283,17 @@ export default {
     link_email(email) {
       if (email) {
         let params = this.other_form;
-        params.share_user_id = this.$route.query.share_user_id
+        params.share_user_id = this.share_user_id
         api.thirdLogin(params).then(res => {
           let data = res.data;
+          this.userNew = true;
           this.set_token(data.token);
         });
       }
     },
     to_home(data) {
       console.log(data);
-      if (data.type === "signup") {
+      if (data.type === "signup") { // 注册
         if (data.res.password.trim().length < 8) {
           this.$toast("password format is incorrect.");
           return false;
@@ -222,15 +304,16 @@ export default {
             first_name: data.res.first_name,
             last_name: data.res.last_name,
             referer: this.$route.query.redirect,
-            share_user_id:this.$route.query.share_user_id
+            share_user_id:this.share_user_id
           };
           api.sign_up(params).then(res => {
             console.log(res);
+            this.userNew = true;
             this.set_token(res.data.token);
             // debugger;
           });
         }
-      } else {
+      } else { // 登陆
         let params = {
           email: data.res.email,
           password: sha256(data.res.password)
@@ -242,13 +325,16 @@ export default {
         });
       }
     },
-    set_token(token) {
+    set_token(token) { // 登陆注册第三方登录成功后调用方法
       setToken(token);
-      if (this.$route.query.redirect) {
-        window.location.replace(this.$route.query.redirect);
-      } else {
-        window.location.replace(window.origin + "/home");
-      }
+      this.$store.dispatch('SetToken', token)
+      this.setShareUId()
+    },
+    setShareUId() {
+      getShareUserApi.getUserInfo().then(res => { // 获取UserShareId
+        setUserShareId(res.data.id)
+        this.shareReturn()
+      });
     },
     show_box_login() {
       this.login_pass = true;

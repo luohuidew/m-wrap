@@ -52,6 +52,7 @@ export default {
 
 <style lang='scss' scoped>
 .fb-share-button {
+    display: inline-block;
   a {
     color: #2c2c2c;
   }

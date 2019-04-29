@@ -1,23 +1,35 @@
 import Cookies from 'js-cookie'
 
 const TokenKey = 'token'
+const UserShareId = 'UserShareId'
+
+let month = new Date().getMonth();
+let day = new Date().getDate();
 
 export function getToken() {
   return Cookies.get(TokenKey)
 }
 
 export function setToken(token) {
-  let month = new Date().getMonth();
-  let day = new Date().getDate();
-  return Cookies.set(TokenKey, token, {
+   Cookies.set(TokenKey, token, {
     expires: new Date(2019, month + 1, day)
   })
 }
 
 export function removeToken() {
-  return Cookies.remove(TokenKey)
+   Cookies.remove(TokenKey)
 }
-
+export function setUserShareId(token) {
+   Cookies.set(UserShareId, token, {
+    expires: new Date(2019, month + 1, day)
+  })
+}
+export function removeUserShareId() {
+   Cookies.remove(UserShareId)
+}
+export function getUserShareId() {
+  return Cookies.get(UserShareId)
+}
 export function getRect(el) {
   if (el instanceof window.SVGElement) {
     let rect = el.getBoundingClientRect()

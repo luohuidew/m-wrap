@@ -3,7 +3,7 @@ import store from '@/store';
 let token = store.state.token;
 export default {
   getUserInfo(data = {}) {
-    data.token = token;
+    data.token = store.state.token;
     return request({
       url: '/user/getInfoByToken',
       method: 'post',
