@@ -5,7 +5,7 @@ export default {
   getUserInfo(data = {}) {
     data.token = store.state.token;
     return request({
-      url: '/user/getInfoByToken',
+      url: '/user/getInfoByToken?loading=yes',
       method: 'post',
       data: JSON.stringify(data),
     })

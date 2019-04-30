@@ -9,16 +9,16 @@
           <!--<router-link :to="{path: '/hot?list_type=13'}" class="btn">PRODUCT LIST</router-link>-->
           <a class="btn" @click="homePage" v-if="!isInApp">HOME PAGE </a>
       </div>
-    <van-popup v-model="showShareBox">
-        <div class="share-box">
-            <h3 class="title">SHARE YOUR LINK</h3>
-            <input type="text" id="successinput" class="succee-input" readonly="readonly" v-model="link"/>
-            <div class="copy" @click="copyLink"
-                 data-clipboard-target="#successinput"
-                 :data-clipboard-text="link"
-            >
-                {{link}}
-            </div>
+    <!--<van-popup v-model="showShareBox" :close-on-click-overlay="false">-->
+        <!--<div class="share-box">-->
+            <!--<h3 class="title">SHARE YOUR LINK</h3>-->
+            <!--<input type="text" id="successinput" class="succee-input" readonly="readonly" v-model="link"/>-->
+            <!--<div class="copy" @click="copyLink"-->
+                 <!--data-clipboard-target="#successinput"-->
+                 <!--:data-clipboard-text="link"-->
+            <!--&gt;-->
+                <!--{{link}}-->
+            <!--</div>-->
             <!--<div class="icon-box">-->
                 <!--<ShareFb :changeUrl="link" class="marginLeft">-->
                     <!--<div class="icon" slot="icon">-->
@@ -33,31 +33,31 @@
                     <!--</div>-->
                 <!--</ShareMes>-->
             <!--</div>-->
-        </div>
-    </van-popup>
-    <van-popup v-model="UserBox">
+        <!--</div>-->
+    <!--</van-popup>-->
+    <van-popup v-model="UserBox" :close-on-click-overlay="false">
         <van-icon name="close" />
           <div class="share-box">
-              <van-icon name="cross" @click="closeUop" style = "right:10px;top:30px;position: absolute"/>
+              <van-icon name="cross" @click="goBuy" style = "right:10px;top:30px;position: absolute"/>
               <h4 class="title">
-                  You’re already a member of WeGet. Share this or go shopping.
+                  You’re already a member of WeGet.
               </h4>
               <div class="icon-box">
-                    <div class="btn" @click="toShare">SHARE</div>
-                    <div class="btn buy" @click="goBuy">SHOP</div>
+                    <!--<div class="btn" @click="toShare">SHARE</div>-->
+                    <div class="btn buy" @click="goBuy">SHOP NOW</div>
               </div>
           </div>
     </van-popup>
-    <van-popup v-model="NewUserBox">
+    <van-popup v-model="NewUserBox" :close-on-click-overlay="false">
           <div class="share-box">
-              <van-icon name="cross" @click="closeUop" style = "right:10px;top:10px;position: absolute"/>
+              <van-icon name="cross" @click="goBuy" style = "right:10px;top:10px;position: absolute"/>
 
               <h4 class="title">
-                  Congrats! You have been registered! Share this or go shopping.
+                  Thank you for signing up with WeGet! Enjoy $30 worth of coupons on us!
               </h4>
               <div class="icon-box">
-                  <div class="btn" @click="toShare">SHARE</div>
-                  <div class="btn buy" @click="goBuy">SHOP</div>
+                  <!--<div class="btn" @click="toShare">SHARE</div>-->
+                  <div class="btn buy" @click="goBuy">SHOP NOW</div>
               </div>
           </div>
       </van-popup>
@@ -72,7 +72,7 @@ import ShareFb from "@/components/share-fb-other"
 import ShareMes from "@/components/share-messager-other"
 import data from "./config";
 import clipboard from 'clipboard';
-import {getToken, setUserShareId} from '@/utils/auth';
+import {getToken, setToken, setUserShareId} from '@/utils/auth';
 import api from "@/api/trial";
 import share from "@/api/share";
 
@@ -92,7 +92,6 @@ export default {
   },
   created() {
       this.isInApp = this.$CM.is_weget()
-      this.getUserId()
       this.initDialog()
       if (window.location.origin.indexOf("https") === -1) {
           this.link = "http://wap.middleware.weget.com/popularize/login/index?share_user_id=";
@@ -137,7 +136,8 @@ export default {
               const sharelink = this.link +=  res.data.id
              this.link = str + sharelink
               setUserShareId(res.data.id)
-              this.shareinfo(res.data.id) // 获取分享数据
+              this.$router.push({path:'/popularize/popu-1/share', query:{url: this.link}})
+              // this.shareinfo(res.data.id) // 获取分享数据
           });
       }
 
@@ -162,12 +162,40 @@ export default {
       },
     toShare() {
         if (getToken()){
-            // this.UserBox = false
-            // this.NewUserBox = false
-            // this.showShareBox = true;
-            this.$router.push({path:'/popularize/popu-1/share', query:{url: this.link}})
+            this.getUserId()
+            // this.$router.push({path:'/popularize/popu-1/share', query:{url: this.link}})
         } else {
-            this.$router.push({path:'/login', query:{redirect: this.$route.fullPath}})
+            const _this = this
+            if (this.$CM.is_weget()) {
+                let params = {
+                    type: 103,
+                    data: {}
+                };
+                /* 判断登录，选择不同的登录方式 */
+                if (localStorage.getItem('device') === 'ios') {
+                    let temp_params = params
+                    window.webkit.messageHandlers.javaScriptToNative.postMessage(temp_params);
+                    /* ios触发登录页面传递给h5 */
+                    window.nativeToJavaScript_sendToken = function (res) {
+                        let token = res.token;
+                        if (token) {
+                            setToken(token);
+                            _this.getUserId()
+                        }
+                    };
+                } else if (localStorage.getItem('device') === 'android') {
+                    /* android环境的判断 */
+                    // let temp_params = JSON.stringify(params);
+                    let and_token = window.weget_mobile_type.nativeToJavaScript_sendToken();
+                    if (and_token) {
+                        setToken(and_token);
+                        this.getUserId()
+                    }
+                }
+            } else {
+                this.$router.push({path:'/login', query:{redirect: this.$route.fullPath}})
+            }
+
         }
     },
       closeUop() {
@@ -181,7 +209,27 @@ export default {
                 path: "/popularize/popu-1/check",
             });
         } else {
-            this.$router.push({path:'/login', query:{redirect: this.$route.fullPath}})
+            if ( this.$CM.is_weget) {
+                let params = {
+                    type: 103,
+                    data: {}
+                };
+                /* 判断登录，选择不同的登录方式 */
+                if (localStorage.getItem('device') === 'ios') {
+                    let temp_params = params
+                    window.webkit.messageHandlers.javaScriptToNative.postMessage(temp_params);
+                } else if (localStorage.getItem('device') === 'android') {
+                    /* android环境的判断 */
+                    // let temp_params = JSON.stringify(params);
+                    let and_token = window.weget_mobile_type.nativeToJavaScript_sendToken();
+                    if (and_token) {
+                        setToken(and_token);
+                        window.location.reload();
+                    }
+                }
+            } else {
+                this.$router.push({path:'/login', query:{redirect: this.$route.fullPath}})
+            }
         }
 
     },
@@ -287,7 +335,7 @@ export default {
             text-align: center;
             .btn {
                 display: inline-block;
-                width: 40%;
+                width: 60%;
                 margin-left: 5%;
                 margin-right: 5%;
                 font-size:15px;

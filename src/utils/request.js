@@ -51,19 +51,7 @@ const service = axios.create({
     // 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
   },
 });
-/* ios触发登录页面传递给h5 */
-window.nativeToJavaScript_sendToken = function (res) {
-  // alert(JSON.stringify(res));
-  let token = res.token;
-  // alert(token);
-  if (token) {
-    removeToken();
-    setToken(token);
-    if (getToken()) {
-      window.location.reload();
-    }
-  }
-};
+
 // request interceptor
 service.interceptors.request.use(
   config => {
@@ -165,6 +153,19 @@ service.interceptors.response.use(
         if (localStorage.getItem('device') === 'ios') {
           let temp_params = params
           window.webkit.messageHandlers.javaScriptToNative.postMessage(temp_params);
+          /* ios触发登录页面传递给h5 */
+          window.nativeToJavaScript_sendToken = function (res) {
+            // alert(JSON.stringify(res));
+            let token = res.token;
+            // alert(token);
+            if (token) {
+              removeToken();
+              setToken(token);
+              if (getToken()) {
+                window.location.reload();
+              }
+            }
+          };
         } else if (localStorage.getItem('device') === 'android') {
           /* android环境的判断 */
           // let temp_params = JSON.stringify(params);
