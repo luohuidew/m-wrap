@@ -10,7 +10,7 @@
         </li>
       </template>
       <template v-else>
-        <li class="aside-btn-box">
+        <li class="aside-btn-box" v-show="!noBack">
           <img src="/static/images/icon/normal/返回 大@2x.png"
             alt=""
             srcset=""
@@ -119,6 +119,9 @@ export default {
     }
   },
   computed: {
+    noBack() {
+      return this.$route.meta.noBack
+    },
     appUser() {
       return this.$route.path === "/user/index";
     },

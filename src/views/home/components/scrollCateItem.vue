@@ -2,7 +2,8 @@
   <div class="fixed-content" ref="fixed_content" >
     <van-list v-model="loading"
       :finished="finished"
-      :finished-text="''"
+      finished-text="No more data"
+       :immediate-check="false"
       :loading-text="'Loading...'"
       @load="get_more_data()">
       <ul class="pick-lists"
@@ -37,6 +38,7 @@ export default {
   },
   computed: {},
   created() {
+    this.get_more_data()
   },
   mounted() {
   },

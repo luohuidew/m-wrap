@@ -36,6 +36,48 @@ export default {
         keepAlive: false,
         fullScreen: false
       }
-    }
+    },
+    {
+      path: 'login',
+      name: 'login-index',
+      redirect: '/popularize/login/index',
+      component: () =>
+          import('@/views/popularize/login/index'),
+      children: [{
+        path: 'index',
+        name: 'login-signup',
+        component: () =>
+            import('@/views/popularize/login/login'),
+        meta: {
+          title: 'login',
+          keepAlive: false,
+          fullScreen: false,
+          noBack: true
+        },
+      },
+        {
+          path: 'reset-email',
+          name: 'lreset-email',
+          component: () =>
+              import('@/views/popularize/login/resetEmail'),
+          meta: {
+            title: 'resetEmail',
+            keepAlive: false,
+            fullScreen: true
+          },
+        },
+        {
+          path: 'reset-success',
+          name: 'reset-success',
+          component: () =>
+              import('@/views/popularize/login/resetSuccess'),
+          meta: {
+            title: 'resetSuccess',
+            keepAlive: false,
+            fullScreen: true
+          },
+        },
+      ]
+    },
   ]
 }

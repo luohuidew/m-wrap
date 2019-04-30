@@ -38,11 +38,11 @@
     <van-popup v-model="UserBox">
           <div class="share-box">
               <h4 class="title">
-                  You are already a Weget member! Share this or go shopping.
+                  You’re already a member of WeGet. Share this or go shopping.
               </h4>
               <div class="icon-box">
                     <div class="btn" @click="toShare">SHARE</div>
-                    <div class="btn buy" @click="goBuy">BUY</div>
+                    <div class="btn buy" @click="goBuy">SHOP</div>
               </div>
           </div>
     </van-popup>
@@ -53,7 +53,7 @@
               </h4>
               <div class="icon-box">
                   <div class="btn" @click="toShare">SHARE</div>
-                  <div class="btn buy" @click="goBuy">BUY</div>
+                  <div class="btn buy" @click="goBuy">SHOP</div>
               </div>
           </div>
       </van-popup>
@@ -83,7 +83,7 @@ export default {
        UserBox: false,
       NewUserBox: false,
       item_data: data,
-      link: 'https://m.weget.com/login/index?share_user_id='
+      link: 'https://m.weget.com/popularize/login/index?share_user_id='
     };
   },
   created() {
@@ -91,7 +91,7 @@ export default {
       this.getUserId()
       this.initDialog()
       if (window.location.origin.indexOf("https") === -1) {
-          this.link = "wap.middleware.weget.com/login/index?share_user_id=";
+          this.link = "http://wap.middleware.weget.com/popularize/login/index?share_user_id=";
       }
   },
   mounted() {
@@ -125,7 +125,9 @@ export default {
     getUserId() {
       if (getToken()){
           api.getUserInfo().then(res => {
-             this.link +=  res.data.id
+              const str = "Shop this summer at WeGet, a stylish online fashion marketplace. Get Mystery Coupons when you Sign up with this link "
+              const sharelink = this.link +=  res.data.id
+             this.link = str + sharelink
               setUserShareId(res.data.id)
               this.shareinfo(res.data.id) // 获取分享数据
           });
@@ -151,18 +153,10 @@ export default {
           });
       },
     toShare() {
-
         if (getToken()){
-            let href_params = {
-                type: 102,
-                data: this.sharDatas
-            };
-            let temp = this.$CM.weget_device_link(href_params);
-            if (temp === "h5") {
-                this.UserBox = false
-                this.NewUserBox = false
-                this.showShareBox = true;
-            }
+            this.UserBox = false
+            this.NewUserBox = false
+            this.showShareBox = true;
         } else {
             this.$router.push({path:'/login', query:{redirect: this.$route.fullPath}})
         }
