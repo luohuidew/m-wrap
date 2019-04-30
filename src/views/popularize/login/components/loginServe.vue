@@ -1,14 +1,13 @@
 <template>
   <div class="login-server"
     @click.stop="keep_open">
-    <div class="form-content"
-      :class="{'change':is_selected===1}">
-      <ul class="tab-btn">
-        <li v-for="(item,index) in tab_title"
-          @click="toggle_form(index)"
-          :class="{'active':index===is_selected}"
-          :key="index">{{item}}</li>
-      </ul>
+    <div class="form-content" :class="{'change':is_selected===1}">
+      <!--<ul class="tab-btn">-->
+        <!--<li v-for="(item,index) in tab_title"-->
+          <!--@click="toggle_form(index)"-->
+          <!--:class="{'active':index===is_selected}"-->
+          <!--:key="index">{{item}}</li>-->
+      <!--</ul>-->
       <ul class="form-box">
         <li v-if="is_selected===0">
           <p class="email"><input type="text"
@@ -87,7 +86,7 @@ export default {
   name: "",
   data() {
     return {
-      is_selected: 0,
+      is_selected: 1,
       is_checked: true,
       tab_title: ["SIGN IN", "SIGN UP"],
       login_data: {
@@ -142,6 +141,18 @@ export default {
 <style lang='scss' scoped>
 $basecolor: #d70e19;
 
+input {
+  outline-color: invert;
+  outline-style: none;
+  outline-width: 0px;
+  border: none;
+  border-style: none;
+  text-shadow: none;
+  -webkit-appearance: none;
+  -webkit-user-select: text;
+  outline-color: transparent;
+  box-shadow: none;
+}
 .form-content {
   width:100%;
   margin: 0 auto;

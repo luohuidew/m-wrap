@@ -38,6 +38,17 @@ export default {
       }
     },
     {
+      path: 'popu-1/share',
+      name: 'popu-1-share',
+      component: () =>
+          import('@/views/popularize/popu-1/share'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: false
+      }
+    },
+    {
       path: 'login',
       name: 'login-index',
       redirect: '/popularize/login/index',

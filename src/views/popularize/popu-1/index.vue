@@ -36,7 +36,9 @@
         </div>
     </van-popup>
     <van-popup v-model="UserBox">
+        <van-icon name="close" />
           <div class="share-box">
+              <van-icon name="cross" @click="closeUop" style = "right:10px;top:30px;position: absolute"/>
               <h4 class="title">
                   You’re already a member of WeGet. Share this or go shopping.
               </h4>
@@ -48,6 +50,8 @@
     </van-popup>
     <van-popup v-model="NewUserBox">
           <div class="share-box">
+              <van-icon name="cross" @click="closeUop" style = "right:10px;top:10px;position: absolute"/>
+
               <h4 class="title">
                   Congrats! You have been registered! Share this or go shopping.
               </h4>
@@ -121,6 +125,10 @@ export default {
           if (UserIsOld) {
               this.UserBox = true
           }
+          if (sessionStorage.ShareBoxPopularize) {
+              this.NewUserBox = false
+              this.UserBox = false
+          }
       },
     getUserId() {
       if (getToken()){
@@ -154,15 +162,19 @@ export default {
       },
     toShare() {
         if (getToken()){
-            this.UserBox = false
-            this.NewUserBox = false
-            this.showShareBox = true;
+            // this.UserBox = false
+            // this.NewUserBox = false
+            // this.showShareBox = true;
+            this.$router.push({path:'/popularize/popu-1/share', query:{url: this.link}})
         } else {
             this.$router.push({path:'/login', query:{redirect: this.$route.fullPath}})
         }
-
-
     },
+      closeUop() {
+          this.UserBox = false
+          this.NewUserBox = false
+          sessionStorage.ShareBoxPopularize=true
+      },
     checkStatus() {
         if (getToken()){
             this.$router.push({
