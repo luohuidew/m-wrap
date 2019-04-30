@@ -51,18 +51,10 @@
               <li>· At least one number</li> -->
             </ul>
             <div class="terms-box">
-              <span class="checked-icon"
-                @click="is_checked=!is_checked">
-                <img v-if="is_checked"
-                  src="/static/images/icon/login/选择红@2x.png"
-                  alt="">
-                <img v-else
-                  src="/static/images/icon/login/选择 灰@2x.png"
-                  alt="">
-              </span>
               <div class="agree-text">
-                <span>I agree to the</span>
-                <router-link to="/statement">Privacy Policy
+                <span> By clicking Sign up, Continue with Facebook, or Continue with Google, you agree to our </span>
+                <router-link to="/statement">
+                  Privacy Policy & Terms of Use
                 </router-link>
               </div>
             </div>
@@ -179,8 +171,9 @@ input {
       }
     }
     .agree-text {
-      display: flex;
+
       a {
+        display: inline-block;
         font-size: 10px;
         color: #444444;
         text-decoration-line: underline;

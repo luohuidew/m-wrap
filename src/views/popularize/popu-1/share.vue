@@ -10,7 +10,7 @@
              data-clipboard-target="#successinput"
              :data-clipboard-text="link"
         >
-            {{link}}
+           &nbsp; https://m.weget.com
         </div>
     </div>
 </template>
