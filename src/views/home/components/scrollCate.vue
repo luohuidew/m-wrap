@@ -18,7 +18,7 @@
             alt="">
           <p class="icon-text text-line-clamp-1">{{item.name}}</p>
         </span>
-        <scrollCateItem :curCateId="item.cat_id"></scrollCateItem>
+        <scrollCateItem :style="tabHeight"  :curCateId="item.cat_id" ></scrollCateItem>
       </van-tab>
     </van-tabs>
   </div>
@@ -36,11 +36,19 @@ export default {
   },
   data() {
     return {
+      tabHeight: {
+        overflow: 'scroll'
+      },
       active: 0,
       offsetTop: 0,
 
       curCateId: this.listData[0].cat_id
     };
+  },
+  watch: {
+    active() {
+      this.tabHeight.height = this.vanTablesHieght+'px'
+    },
   },
   computed: {},
   created() {
@@ -61,6 +69,13 @@ export default {
         // banner_number = app_banner.offsetHeight;
         that.offsetTop = top_number;
       });
+
+    let home_footer = document.querySelector(".home-footer");
+    let van_tabs = document.querySelector("#scroll-cate .van-tabs__wrap");
+    let footer_number = home_footer.offsetHeight;
+    let van_tabs_number = van_tabs.offsetHeight;
+    let bannerHeight = top_number + banner_number + van_tabs_number + footer_number;
+    this.vanTablesHieght = window.innerHeight - bannerHeight
   },
   methods: {
     init_data(params) {
@@ -79,7 +94,8 @@ export default {
       };
       this.init_data(params);
     },
-    get_scroll_num(data) {}
+    get_scroll_num(data) {
+    }
   },
   components: {
     scrollCateItem

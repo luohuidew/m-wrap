@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed-content">
+  <div class="fixed-content" ref="fixed_content" >
     <van-list v-model="loading"
       :finished="finished"
       :finished-text="''"
@@ -36,10 +36,12 @@ export default {
     };
   },
   computed: {},
-  created() {},
+  created() {
+  },
+  mounted() {
+  },
   methods: {
     get_more_data() {
-      
       let params = {
         cat_id: this.curCateId,
         id: this.selectId
@@ -65,6 +67,7 @@ export default {
 
 <style lang='scss' scoped>
 /*  */
+
 .pick-lists {
   display: flex;
   flex-wrap: wrap;

@@ -83,6 +83,46 @@ export default {
     this.shareReturn()
     this.login_pass = this.$route.query.autoshow == "1" ? true : false;
   },
+  beforeRouteEnter (to, from, next) {
+    if (getToken()) {
+      const share_user_id = to.query.share_user_id;
+      if (share_user_id) { // 判断是否是分享的页面
+        if(!getUserShareId()) {
+          getShareUserApi.getUserInfo().then(res => { // 获取UserShareId
+            const id = res.data.id
+            setUserShareId(id)
+            if (id === share_user_id) {
+              // 已登录同一个用户
+              const urls = window.origin + '/popularize/popu-1?selefUser=true'
+              window.location.replace(urls);
+            }else {
+              // 已登录不是同一个用户 老用户
+              const urls = window.origin + '/popularize/popu-1?UserIsOld=true'
+              window.location.replace(urls);
+            }
+          });
+        } else{
+          if(getUserShareId() === share_user_id) {
+            // 已登录同一个用户
+            const urls = window.origin + '/popularize/popu-1?selefUser=true'
+            window.location.replace(urls);
+          } else { // 已登录不是同一个用户
+            const urls = window.origin +  '/popularize/popu-1?UserIsOld=true'
+            window.location.replace(urls);
+          }
+        }
+      } else { // 普通登陆页面跳转
+        if (to.query.redirect) {
+          window.location.replace(to.query.redirect);
+        } else {
+          window.location.replace(window.origin + "/home");
+        }
+      }
+    } else {
+      next()
+    }
+
+  },
   mounted() {
     // this.init_data();
   },

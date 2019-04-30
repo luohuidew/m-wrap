@@ -6,8 +6,8 @@
       <p class="button check" @click="checkStatus">CHECK STATUS</p>
     </div>
       <div class="over-btn">
-          <router-link :to="{path: '/hot?list_type=13'}" class="btn">PRODUCT LIST</router-link>
-          <router-link :to="{path: '/'}" class="btn">HOME PAGET</router-link>
+          <!--<router-link :to="{path: '/hot?list_type=13'}" class="btn">PRODUCT LIST</router-link>-->
+          <a class="btn" @click="homePage" v-if="!isInApp">HOME PAGE </a>
       </div>
     <van-popup v-model="showShareBox">
         <div class="share-box">
@@ -19,20 +19,20 @@
             >
                 {{link}}
             </div>
-            <div class="icon-box">
-                <ShareFb :changeUrl="link" class="marginLeft">
-                    <div class="icon" slot="icon">
-                        <img src="./img/facebook.png" alt="">
-                        <p>Facebook</p>
-                    </div>
-                </ShareFb>
-                <ShareMes :changeUrl="link">
-                    <div class="icon" slot="icon">
-                        <img src="./img/messenger.png" alt="">
-                        <p>Messenger</p>
-                    </div>
-                </ShareMes>
-            </div>
+            <!--<div class="icon-box">-->
+                <!--<ShareFb :changeUrl="link" class="marginLeft">-->
+                    <!--<div class="icon" slot="icon">-->
+                        <!--<img src="./img/facebook.png" alt="">-->
+                        <!--<p>Facebook</p>-->
+                    <!--</div>-->
+                <!--</ShareFb>-->
+                <!--<ShareMes :changeUrl="link">-->
+                    <!--<div class="icon" slot="icon">-->
+                        <!--<img src="./img/messenger.png" alt="">-->
+                        <!--<p>Messenger</p>-->
+                    <!--</div>-->
+                <!--</ShareMes>-->
+            <!--</div>-->
         </div>
     </van-popup>
     <van-popup v-model="UserBox">
@@ -77,6 +77,7 @@ export default {
   name: "ac-13",
   data() {
     return {
+      isInApp: true,
       copyBtn: null,
       showShareBox: false,
        UserBox: false,
@@ -86,6 +87,7 @@ export default {
     };
   },
   created() {
+      this.isInApp = this.$CM.is_weget()
       this.getUserId()
       this.initDialog()
       if (window.location.origin.indexOf("https") === -1) {
@@ -96,6 +98,16 @@ export default {
   },
   computed: {},
   methods: {
+      homePage() {
+          let href_params = {
+              type: 105,
+              data: {}
+          };
+          let temp = this.$CM.weget_device_link(href_params);
+          if (temp === "h5") {
+              this.$router.push({path: '/'})
+          }
+      },
       goBuy() {
           this.$router.push({path: '/'})
       },
@@ -158,9 +170,14 @@ export default {
 
     },
     checkStatus() {
-        this.$router.push({
-            path: "/popularize/popu-1/check",
-        });
+        if (getToken()){
+            this.$router.push({
+                path: "/popularize/popu-1/check",
+            });
+        } else {
+            this.$router.push({path:'/login', query:{redirect: this.$route.fullPath}})
+        }
+
     },
   },
   components: {

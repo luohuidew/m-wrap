@@ -2,55 +2,40 @@
   <div class="about-us-page">
     <ul>
       <li>
-        <img src="./img/about-us_01.jpg"
+        <img src="/static/images/elements/about/about-us_01.jpg"
           alt=""
           srcset="">
       </li>
       <li>
-        <img src="./img/about-us_02.jpg"
-          alt=""
-          srcset="">
-      </li>
-      <li class="gif">
-        <img src="./img/about-us_03.gif"
-          alt=""
-          srcset="">
-      </li>
-      <li>
-        <img src="./img/about-us_04.jpg"
+        <img src="/static/images/elements/about/about-us_02.jpg"
           alt=""
           srcset="">
       </li>
       <li class="gif">
-        <img src="./img/about-us_05.gif"
+        <img src="/static/images/elements/about/about-us_03.gif"
           alt=""
           srcset="">
       </li>
       <li>
-        <img src="./img/about-us_06.jpg"
+        <img src="/static/images/elements/about/about-us_04.jpg"
+          alt=""
+          srcset="">
+      </li>
+      <li class="gif">
+        <img src="/static/images/elements/about/about-us_05.gif"
           alt=""
           srcset="">
       </li>
       <li>
-        <img src="./img/about-us_07.jpg"
+        <img src="/static/images/elements/about/about-us_06.jpg"
           alt=""
           srcset="">
-      </li>
+      </li>      
       <li>
-        <img src="./img/about-us_08.jpg"
-             alt=""
-             srcset="">
-      </li>
-      <li>
-        <img src="./img/about-us_09.jpg"
-             alt=""
-             srcset="">
-      </li>
-      <li>
-        <img src="./img/about-us_10.jpg"
-             alt=""
-             srcset="">
-      </li>
+        <img src="/static/images/elements/about/about-us_07.jpg"
+          alt=""
+          srcset="">
+      </li>      
     </ul>
     <div class="footer">
       <div class="about_row1">

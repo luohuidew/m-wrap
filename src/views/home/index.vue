@@ -8,12 +8,12 @@
     <pick :listsData="homeData.influence_pick"></pick>
     <topic :listsData="homeData.topic_data"></topic>
     <scrollCate :listData="homeData.category_row"></scrollCate>
-    <!--<van-popup v-model="show" class="popu">-->
-      <!--<div class="wrap">-->
-        <!--<van-icon name="close" @click="closePopu" class="icons"/>-->
-        <!--<img :src="popupObj.image_url" @click="goPage(popupObj.route)" alt="">-->
-      <!--</div>-->
-    <!--</van-popup>-->
+    <van-popup v-model="show" class="popu">
+      <div class="wrap">
+        <van-icon name="close" @click="closePopu" class="icons"/>
+        <img :src="popupObj.image_url" @click="goPage(popupObj.route)" alt="">
+      </div>
+    </van-popup>
   </div>
 </template>
 
@@ -30,7 +30,7 @@ export default {
   props: {},
   data() {
     return {
-      show: true,
+      show: false,
       homeData: undefined,
       popupObj: {}
     };
@@ -52,6 +52,9 @@ export default {
       } else {
         api.fetActive().then(res => {
           this.popupObj = res.data;
+          if(this.popupObj.image_url) {
+            this.show = true
+          }
           // const _this = this
           // var newImg = new Image()
           // newImg.src = res.data.image_url
