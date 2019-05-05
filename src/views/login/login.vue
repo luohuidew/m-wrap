@@ -60,6 +60,7 @@ import loginServe from "./components/loginServe";
 import tempdialog from "@/components/dialog/temp-dialog";
 // import "./css/base.scss";
 import api from "@/api/login";
+import apiBase from "@/api/base";
 import getShareUserApi from "@/api/trial";
 import { setToken, getToken, setUserShareId, getUserShareId } from "@/utils/auth";
 import { sha256 } from "js-sha256";
@@ -332,7 +333,6 @@ export default {
       }
     },
     to_home(data) {
-      console.log(data);
       if (data.type === "signup") { // 注册
         if (data.res.password.trim().length < 8) {
           this.$toast("password format is incorrect.");
@@ -350,8 +350,10 @@ export default {
             console.log(res);
             this.userNew = true;
             this.set_token(res.data.token);
+            apiBase.visitSaveLog({eventName: 'signupSuccess'}).then(()=>{})
             // debugger;
           });
+          apiBase.visitSaveLog({eventName: 'signup'}).then(()=>{})
         }
       } else { // 登陆
         let params = {
@@ -362,7 +364,9 @@ export default {
           // console.log(res);
           console.log(res.data.token);
           this.set_token(res.data.token);
+          apiBase.visitSaveLog({eventName: 'signinSuccess'}).then(()=>{})
         });
+        apiBase.visitSaveLog({eventName: 'signin'}).then(()=>{})
       }
     },
     set_token(token) { // 登陆注册第三方登录成功后调用方法

@@ -64,6 +64,7 @@ import homeHeader from "./components/appHeader";
 import homeTitleOptions from "./components/appTitleOptions";
 import homeTitle from "./components/appTitle";
 import homeFooter from "./components/appFooter";
+import apiBase from "@/api/base";
 export default {
   name: "layout",
   data() {
@@ -111,6 +112,7 @@ export default {
     $route: {
       handler(to, from) {
         this.init_meta();
+        this.visitSaveLog();
         this.init_transtion(to, from);
         // debugger;
         this.init_device();
@@ -132,6 +134,9 @@ export default {
     // alert(ua);
   },
   methods: {
+    visitSaveLog() {
+      apiBase.visitSaveLog().then(()=>{})
+    },
     init_meta() {
       // document.title = this.$route.meta.title
       //   ? this.$route.meta.title

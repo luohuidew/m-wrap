@@ -18,7 +18,7 @@ let custom = {
     minute = minute < 10 ? ('0' + minute) : minute;
     second = second < 10 ? ('0' + second) : second;
     return m + '-' + d + ' ' + h + ':' + minute;
-    // return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;  
+    // return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
   },
   dateServerEnglish(timestamp) {
     function add0(m) {
@@ -66,7 +66,7 @@ let custom = {
   timeDiff(diff) {
     // var date1 = '2015/05/01 00:00:00'; //开始时间
     // var date2 = new Date(); //结束时间
-    // var date3 = date2.getTime() - new Date(date1).getTime(); //时间差的毫秒数      
+    // var date3 = date2.getTime() - new Date(date1).getTime(); //时间差的毫秒数
     if (diff < 0) {
       return '0:0:0'
     }
@@ -94,7 +94,7 @@ let custom = {
   timeAgo(diff) {
     // var date1 = '2015/05/01 00:00:00'; //开始时间
     // var date2 = new Date(); //结束时间
-    // var date3 = date2.getTime() - new Date(date1).getTime(); //时间差的毫秒数      
+    // var date3 = date2.getTime() - new Date(date1).getTime(); //时间差的毫秒数
     if (diff < 0) {
       return '0 s'
     }
@@ -163,6 +163,32 @@ let custom = {
     settime();
   }
 }
+Date.prototype.Format = function (fmt) {
+  /**
+   * 对Date的扩展，将 Date 转化为指定格式的String
+   * 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+   * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+   * 例子：
+   * (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+   * (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+   * */
+  var o = {
+    "M+": this.getMonth() + 1,                 //月份
+    "d+": this.getDate(),                    //日
+    "h+": this.getHours(),                   //小时
+    "m+": this.getMinutes(),                 //分
+    "s+": this.getSeconds(),                 //秒
+    "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+    "S": this.getMilliseconds()             //毫秒
+  };
+  if (/(y+)/.test(fmt))
+    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+  for (var k in o)
+    if (new RegExp("(" + k + ")").test(fmt))
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+  return fmt;
+};
+
 Object.keys(custom).forEach(key => {
   Vue.filter(key, custom[key])
 });

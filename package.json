@@ -19,6 +19,7 @@
     "js-cookie": "^2.2.0",
     "js-sha256": "^0.9.0",
     "npm": "^6.9.0",
+    "paypal-braintree-hosted-fields-component": "^1.0.20",
     "paypal-checkout": "^4.0.257",
     "sass": "^1.15.0",
     "sass-loader": "^7.1.0",

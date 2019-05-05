@@ -52,6 +52,7 @@ import payment from "./components/payment";
 import orderReview from "./components/orderReview";
 import orderSummary from "./components/orderSummary";
 import paymentDialog from "./payment-dialog";
+import apiBase from "@/api/base";
 
 export default {
   name: "",
@@ -232,6 +233,7 @@ export default {
     to_pay() {
       let params = this.totalPrice;
       api.create_order(params).then(res => {
+        apiBase.visitSaveLog({eventName: 'checkout'}).then(()=>{})
         this.res_create_data = res.data;
         if (res.data.free === 1) {
           this.$router.replace({

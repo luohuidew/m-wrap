@@ -102,6 +102,8 @@
 import api from "@/api/product";
 import CART from "@/api/cart";
 import tempDialog from "@/components/dialog/temp-dialog";
+import apiBase from "@/api/base";
+
 export default {
   name: "",
   data() {
@@ -236,6 +238,7 @@ export default {
         };
         CART.addToCart(to_catr_params).then(res => {
           this.$emit("close", null);
+          apiBase.visitSaveLog({eventName: 'addCart'}).then(()=>{})
           this.init_cart();
         });
       }
@@ -253,7 +256,7 @@ export default {
         encodeURIComponent(re_path);
     },
     init_cart() {
-      CART.getCartNum().then(res => {                    
+      CART.getCartNum().then(res => {
         this.$store.commit("SET_CATR", res.data.num);
       });
     },

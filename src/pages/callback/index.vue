@@ -67,6 +67,8 @@
 import shareApp from "@/components/dialog/share-app";
 import card from "@/components/card-column-auto";
 import api from "@/api/order";
+import apiBase from "@/api/base";
+
 export default {
   name: "callback",
   data() {
@@ -105,11 +107,12 @@ export default {
         if (!this.no_auto_back) {
           this.run_time();
         }
-        if (res.data.order.type === 3) {
-          sessionStorage.setItem("success_back", true);
-        } else {
-          sessionStorage.setItem("success_back", false);
+        if (res.data.order.status === 1) { // 支付失败
+          apiBase.visitSaveLog({eventName: 'pay'}).then(()=>{})
+        } else { // 支付成功
+          apiBase.visitSaveLog({eventName: 'paySuccess'}).then(()=>{})
         }
+
       });
     },
     run_time() {
@@ -190,7 +193,7 @@ export default {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  
+
 }
 .sku-item {
   // flex:1;
