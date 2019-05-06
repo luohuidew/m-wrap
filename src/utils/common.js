@@ -44,6 +44,13 @@ const CM = {
       return false;
     }
   },
+  is_messenger() {
+    if (ua.indexOf('messenger') !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   is_weget() {
     let cur_device = localStorage.getItem('device');
     return (cur_device === 'android' || cur_device === 'ios');

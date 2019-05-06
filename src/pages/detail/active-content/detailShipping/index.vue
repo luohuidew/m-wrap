@@ -5,15 +5,15 @@
         alt=""
         srcset="">
     </div>
-    <div class="detail-shipping">
+    <div class="detail-shipping" @click="show_detail_shipping">
       <p class="font-weight-bold">{{default_data.key_name}}</p>
       <p class="remark">Free shipping </p>
     </div>
-    <!-- <van-popup v-model="show_dialog"
-      position="bottom"
-      :overlay="true">
-      <shipping-dialog :shipping-data="allData.shipment" @close="show_dialog=false"></shipping-dialog>
-    </van-popup> -->
+    <!--<van-popup v-model="show_dialog"-->
+      <!--position="bottom"-->
+      <!--:overlay="true">-->
+      <!--<shipping-dialog :shipping-data="allData.shipment" @close="show_dialog=false"></shipping-dialog>-->
+    <!--</van-popup>-->
   </div>
 </template>
 
@@ -62,8 +62,8 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /*background: url("/static/images/icon/cart/分类 copy@3x.png") no-repeat right*/
-    /*center;*/
+  background: url("/static/images/icon/cart/分类 copy@3x.png") no-repeat right
+    center;
   background-size: auto 18px;
   border-bottom: 1px solid #e9e9e9;
   padding: 20px 0;

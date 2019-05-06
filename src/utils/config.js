@@ -9,6 +9,6 @@ if (process.env.NODE_ENV === 'development') {
     yide = 'http://dev-api.middleware.weget.com/';
 } else {
     // build
-    yide = 'https://app.weget.com/wap/';
+    yide = 'https://app.weget.com/';
 }
 export let GO_LANG = yide;
