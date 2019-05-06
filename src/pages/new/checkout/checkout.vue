@@ -243,7 +243,13 @@ export default {
             }
           });
         } else {
-          this.show_pay_methods = true;
+          // this.show_pay_methods = true;
+          this.$router.replace({
+            path: '/checkout/pay',
+            query: {
+              pay_id: res.data.pay_id
+            }
+          })
         }
       });
       // let router_params = {

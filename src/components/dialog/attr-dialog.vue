@@ -244,16 +244,23 @@ export default {
       }
     },
     checkedLogin() {
-      let re_path = `${window.location.origin}${
-        this.$route.fullPath
-      }&type=keep&goods_id=${this.submit_form.goods_id}&store_id=${
-        this.sku.store_id
-      }&count=${this.pay_number}`;
-      // debugger;
-      window.location.href =
-        window.location.origin +
-        "/login?redirect=" +
-        encodeURIComponent(re_path);
+      // let re_path = `${window.location.origin}${
+      //   this.$route.fullPath
+      // }&type=keep&goods_id=${this.submit_form.goods_id}&store_id=${
+      //   this.sku.store_id
+      // }&count=${this.pay_number}`;
+      debugger;
+      // window.location.href =
+      //   window.location.origin +
+      //   "/login?redirect=" +
+      //   encodeURIComponent(re_path);
+      const param = {
+        path: '/login',
+        query: {
+          redirect: this.$route.fullPath
+        }
+      }
+      this.$router.push(param)
     },
     init_cart() {
       CART.getCartNum().then(res => {

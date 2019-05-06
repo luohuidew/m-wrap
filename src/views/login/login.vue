@@ -138,70 +138,75 @@ export default {
               setUserShareId(id)
               if (id === this.share_user_id) {
                   // 已登录同一个用户
-                // const param = {
-                //   path:'/popularize/popu-1',
-                //   jquery: {
-                //     selefUser: true
-                //   }
-                // }
-                // this.$router.push(param)
-                const urls = window.origin + '/popularize/popu-1?selefUser=true'
-                window.location.replace(urls);
+                const param = {
+                  path:'/popularize/popu-1',
+                  jquery: {
+                    selefUser: true
+                  }
+                }
+                this.$router.replace(param)
+                // const urls = window.origin + '/popularize/popu-1?selefUser=true'
+                // window.location.replace(urls);
               }else {
                 // 已登录不是同一个用户 老用户
-                // const param = {
-                //   path:'/popularize/popu-1',
-                //   jquery: {
-                //     selefUser: false
-                //   }
-                // }
-                // this.$router.push(param)
-                const urls = window.origin + '/popularize/popu-1?UserIsOld=true'
-                window.location.replace(urls);
+                const param = {
+                  path:'/popularize/popu-1',
+                  jquery: {
+                    UserIsOld: true
+                  }
+                }
+                this.$router.replace(param)
+                // const urls = window.origin + '/popularize/popu-1?UserIsOld=true'
+                // window.location.replace(urls);
               }
             });
           } else{
             if(getUserShareId() === this.share_user_id) {
               // 已登录同一个用户
-              // const param = {
-              //   path:'/popularize/popu-1',
-              //   jquery: {
-              //     selefUser: true
-              //   }
-              // }
-              // this.$router.push(param)
-              const urls = window.origin + '/popularize/popu-1?selefUser=true'
-              window.location.replace(urls);
+              const param = {
+                path:'/popularize/popu-1',
+                jquery: {
+                  selefUser: true
+                }
+              }
+              this.$router.replace(param)
+              // const urls = window.origin + '/popularize/popu-1?selefUser=true'
+              // window.location.replace(urls);
             } else { // 已登录不是同一个用户
               if(this.userNew) { // 新用户
-                // const param = {
-                //   path:'/popularize/popu-1',
-                //   jquery: {
-                //     selefUser: false,
-                //     UserIsNew: true
-                //   }
-                // }
-                // this.$router.push(param)
-                const urls = window.origin + '/popularize/popu-1?UserIsNew=true'
-                window.location.replace(urls);
+                const param = {
+                  path:'/popularize/popu-1',
+                  jquery: {
+                    UserIsNew: true
+                  }
+                }
+                this.$router.replace(param)
+                // const urls = window.origin + '/popularize/popu-1?UserIsNew=true'
+                // window.location.replace(urls);
               } else { // 老用户
-                // const param = {
-                //   path:'/popularize/popu-1',
-                //   jquery: {
-                //     selefUser: false
-                //   }
-                // }
-                // this.$router.push(param)
-                const urls = window.origin +  '/popularize/popu-1?UserIsOld=true'
-                window.location.replace(urls);
+                const param = {
+                  path:'/popularize/popu-1',
+                  jquery: {
+                    UserIsOld: true
+                  }
+                }
+                this.$router.replace(param)
+                // const urls = window.origin +  '/popularize/popu-1?UserIsOld=true'
+                // window.location.replace(urls);
               }
             }
           }
         } else { // 普通登陆页面跳转
           if (this.$route.query.redirect) {
-            window.location.replace(this.$route.query.redirect);
+            const param = {
+              path: this.$route.query.redirect,
+            }
+            this.$router.replace(param)
           } else {
-            window.location.replace(window.origin + "/home");
+            const param = {
+              path: '/home'
+            }
+            this.$router.replace(param)
           }
         }
       }
@@ -211,7 +216,6 @@ export default {
       api
         .preLogin(per_params)
         .then(res => {
-          console.log(res);
           return res;
         })
         .then(res => {

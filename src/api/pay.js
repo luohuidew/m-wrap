@@ -9,7 +9,7 @@ export default {
       method: 'post',
       data: JSON.stringify(data),
     })
-  }, 
+  },
   total_price(data={}) {
     data.token = token;
     return request({
@@ -17,7 +17,7 @@ export default {
       method: 'post',
       data: JSON.stringify(data),
     })
-  }, 
+  },
   create_order(data={}) {
     data.token = token;
     return request({
@@ -25,15 +25,15 @@ export default {
       method: 'post',
       data: JSON.stringify(data),
     })
-  }, 
+  },
   pay_key(data={}) {
     data.token = token;
     return request({
-      url: 'pay/getTokenizationkey?loading=yes',
+      url: 'Cartpay/getCustomClientToken',
       method: 'post',
       data: JSON.stringify(data),
     })
-  }, 
+  },
   pay_accept(data={}) {
     // data.token = token;
     return request({
@@ -44,7 +44,7 @@ export default {
       },
       data: data,
     })
-  }, 
+  },
   pay_paypal(data={}) {
     data.token = token;
     return request({
@@ -52,6 +52,6 @@ export default {
       method: 'post',
       data: JSON.stringify(data),
     })
-  }, 
-  
+  },
+
 }
