@@ -16,11 +16,30 @@
       <!--<cart-guide v-if="req_data"-->
         <!--:gui-data="req_data.like"></cart-guide>-->
     </div>
-    <cart-footer v-if="req_data"
-      :total-price="footer_data.total_data"
-      :goods-data="req_data.goods"
-      :total-data="footer_data.cart_lists_item">
-    </cart-footer>
+    <footer>
+      <div class="price">
+        <van-checkbox v-model="selectAll">
+          Select items(3)
+          <img
+                  slot="icon"
+                  slot-scope="props"
+                  :src="props.checked ? icon.active : icon.normal"
+          >
+        </van-checkbox>
+        <div class="pr">
+          All Total: <span>$122.99</span>
+        </div>
+      </div>
+      <div class="pay">
+        <div class="paypal">paypal</div>
+        <div class="paypal checkout">Secure checkout</div>
+      </div>
+    </footer>
+    <!--<cart-footer v-if="req_data"-->
+      <!--:total-price="totalPrice"-->
+      <!--:selectAll = 'selectAll'-->
+      <!--&gt;-->
+    <!--</cart-footer>-->
   </div>
 </template>
 
@@ -36,10 +55,11 @@ export default {
   data() {
     return {
       req_data: null,
-      show_coupon_dialog: false,
-      footer_data: {
-        cart_lists_item: [],
-        total_data: {}
+      totalPrice: 0,
+      selectAll: false,
+      icon: {
+        normal: '//img.yzcdn.cn/icon-normal.png',
+        active: '//img.yzcdn.cn/icon-active.png'
       }
     };
   },
@@ -87,9 +107,43 @@ export default {
 <style lang='scss' scoped>
 .cart-layout {
   height: 100%;
+  footer {
+    position: relative;
+    z-index: 1000;
+    height: 100px;
+    font-size:14px;
+    font-weight:400;
+    color:rgba(0,0,0,1);
+    .price {
+      box-shadow: 0px -1px 2px #c1c1c1;
+      padding: 0px 15px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      span {
+        font-weight: bold;
+        font-size:18px;
+      }
+    }
+    .pay {
+      height: 46px;
+      .paypal {
+        width: 50%;
+        background:rgba(255,196,56,1);
+        display: inline-block;
+        text-align: center;
+        line-height: 46px;
+        &.checkout {
+          color: #fff;
+          background:rgba(0,0,0,1);
+        }
+      }
+    }
+  }
 }
 .scroll-lists {
-  height: calc(100% - 90px);
+  height: calc(100% - 100px);
   overflow: auto;
 }
 /*  */

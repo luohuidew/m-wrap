@@ -70,10 +70,10 @@ export default {
   methods: {
     get_item_checkout(obj) {
       let clock = false
-      this.selectStoreGoods.forEach((item) => {
+      this.selectStoreGoods.forEach((item,index) => {
         if (item.store_id === obj.store_id) {
           clock = true
-          item = obj
+          this.selectStoreGoods[index] = obj
         }
       })
       if (!clock) {
@@ -83,6 +83,7 @@ export default {
       this.findAllSelectStore()
     },
     findAllSelectStore() {
+      console.log(this.selectStoreGoods, 5)
      const selectedStore =  this.selectStoreGoods.filter(item=> {
         return item.checkted_store === true
       })
