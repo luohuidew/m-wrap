@@ -26,7 +26,7 @@ export default {
     return {
       isLogin: getToken(),
       show: true,
-      itemDdata: data.listData
+      itemDdata: data.listData2[0]
     };
   },
   created() {
