@@ -54,12 +54,12 @@ export default {
 <style lang='scss' scoped>
 .ins-login-box {
   display: inline-block;
-  height: 30px;
-  width: 30px;
+  width: 100%;
+  height: 50px;
   border-radius: 3px;
-  background: #fff url("/static/images/icon/login/Instagram@3x.png") no-repeat
+  background: #fff url("../img/insBut.png") no-repeat
     center center;
-  background-size: 30px 30px;
+  background-size: cover;
   cursor: pointer;
 }
 </style>

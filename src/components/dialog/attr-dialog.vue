@@ -249,7 +249,7 @@ export default {
       // }&type=keep&goods_id=${this.submit_form.goods_id}&store_id=${
       //   this.sku.store_id
       // }&count=${this.pay_number}`;
-      debugger;
+      // debugger;
       // window.location.href =
       //   window.location.origin +
       //   "/login?redirect=" +

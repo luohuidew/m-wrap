@@ -4,7 +4,6 @@
       <template v-if="req_data.goods.length">
         <cart-list @change="get_list_data"
           :goods-data="req_data.goods"></cart-list>
-        <!-- <cart-expired></cart-expired> -->
       </template>
       <template v-else>
         <div class="no-cart-item">
@@ -14,13 +13,14 @@
           <p>Your Cart Is Empty</p>
         </div>
       </template>
-      <cart-guide v-if="req_data"
-        :gui-data="req_data.like"></cart-guide>
+      <!--<cart-guide v-if="req_data"-->
+        <!--:gui-data="req_data.like"></cart-guide>-->
     </div>
     <cart-footer v-if="req_data"
       :total-price="footer_data.total_data"
       :goods-data="req_data.goods"
-      :total-data="footer_data.cart_lists_item"></cart-footer>
+      :total-data="footer_data.cart_lists_item">
+    </cart-footer>
   </div>
 </template>
 
@@ -50,15 +50,20 @@ export default {
   computed: {},
   methods: {
     init_data() {
-      // debugger
       CART.shopCartList().then(res => {
-        // this.req_data = null;
-        this.req_data = res.data;
+        const data = res.data;
+        data.goods.forEach(good=> {
+          good.goods_list.forEach(item => {
+            item.checkted = false
+          })
+        })
+        this.req_data = data
+
       });
     },
     get_list_data(data) {
-      this.$set(this.footer_data, "cart_lists_item", data.cart_lists_item);
-      this.$set(this.footer_data, "total_data", data.total_data);
+      // this.$set(this.footer_data, "cart_lists_item", data.cart_lists_item);
+      // this.$set(this.footer_data, "total_data", data.total_data);
     },
     /* buy some goods */
     to_buy() {

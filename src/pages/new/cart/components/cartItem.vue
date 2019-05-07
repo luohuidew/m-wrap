@@ -35,16 +35,17 @@
         <div class="card-item">
           <div class="store-box">
             <div class="icon-box">
-              <img v-if="checked_all_only.indexOf(item.only)===-1"
-                @click="check_only(item)"
-                src="/static/images/icon/cart/多选 未选中@3x.png"
-                alt=""
-                srcset="">
-              <img v-else
+
+              <img v-if="item.checkted"
                 @click="no_check_only(item)"
                 src="/static/images/icon/cart/多选 选中@3x.png"
                 alt=""
                 srcset="">
+              <img v-else
+                   @click="check_only(item)"
+                   src="/static/images/icon/cart/多选 未选中@3x.png"
+                   alt=""
+                   srcset="">
             </div>
           </div>
           <div class="cover-img-box"
@@ -85,15 +86,13 @@
 </template>
 
 <script>
-import CART from "@/api/cart";
 export default {
   name: "",
   data() {
     return {
       all_data: this.listsData,
       cur_lists: this.listsData.goods_list,
-      checked_all_only: [],
-      checked_all_item: []
+      checked_store: false,
     };
   },
   props: {
@@ -101,56 +100,16 @@ export default {
       type: Object,
       default: []
     },
-    checkoutData: {
-      type: Boolean,
-      default: false
-    }
   },
   computed: {
-    checked_store() {
-      return this.cur_lists.length === this.checked_all_only.length;
-    }
+
   },
-  mounted() {},
+  mounted() {
+
+  },
   watch: {
-    checked_all_item: {
-      handler(cur, old) {
-        // if(cur.length){
-        //   }
-        let temp_emit = {
-          checked_store: this.checked_store,
-          checked_all_only: this.checked_all_only,
-          checked_all_item: this.checked_all_item,
-          cur_lists: this.cur_lists
-        };
-        this.$emit("checkout", temp_emit);
-      },
-      deep: true
-    },
-    parent_checkout: {
-      handler(cur, old) {
-        console.log(cur, old);
-        if (cur !== old) {
-          if (cur) {
-          } else {
-            // this.checked_all_only = [];
-            // this.checked_all_item = [];
-          }
-        }
-      },
-      deep: true
-    }
   },
   methods: {
-    del_cur_cart_item(only_id, index) {
-      let params = {
-        only: [only_id]
-      };
-
-      CART.delShopCartGood(params).then(res => {
-        this.cur_lists.splice(index, 1);
-      });
-    },
     account(num, index) {
       // debugger
       let cur_item = this.cur_lists[index];
@@ -164,40 +123,51 @@ export default {
       }
       cur_item.count = temp_number;
     },
+    findSelectAll() {
+      const selctArray = this.cur_lists.filter(item => {
+        return item.checkted
+      })
+      this.checked_store = selctArray.length === this.cur_lists.length
+    },
+    emitPrant() {
+      const goods = []
+      this.cur_lists.forEach(item=> {
+        if (item.checkted) {
+          goods.push({
+            only: item.only,
+            count: item.count,
+            checkted: item.checkted
+          })
+        }
+      })
+        const obj = {
+          checkted_store: this.checked_store,
+          store_id: this.all_data.store_id,
+          goods: goods
+        }
+        console.log(obj)
+      this.$emit("checkout", obj);
+    },
     check_only(item) {
-      /* jubu */
-      this.checked_all_only.push(item.only);
-      /* quanju */
-      this.checked_all_item.push(item);
-      let cur_total = Number(
-        (Number(item.goods_price) * (item.count - 0)).toFixed(2)
-      );
-      // this.$parent.total_data.total += cur_total;
-      this.$parent.total_data.cart_ids.push(item.only);
+      item.checkted = true
+      this.findSelectAll()
+      this.emitPrant()
     },
     no_check_only(item) {
-      let index = this.checked_all_only.indexOf(item.only);
-      this.checked_all_only.splice(index, 1);
-      this.checked_all_item.splice(index, 1);
-      let cur_total = Number(
-        (Number(item.goods_price) * (item.count - 0)).toFixed(2)
-      );
-      // debugger;
-      // this.$parent.total_data.total  -=  cur_total;
-      this.$parent.total_data.cart_ids.pop(item.only);
-      // debugger
+      item.checkted = false
+      this.findSelectAll()
+      this.emitPrant()
     },
     toggle_checked(cur_checked = this.checked_store) {
-      let temp_lists = this.cur_lists;
-      temp_lists.forEach(item => {
+      this.cur_lists.forEach(item => {
         if (!cur_checked) {
-          if (this.checked_all_only.indexOf(item.only) == -1) {
-            this.check_only(item);
-          }
+          item.checkted = true
         } else {
-          this.no_check_only(item);
+          item.checkted = false
         }
       });
+      this.findSelectAll()
+      this.emitPrant()
     },
     to_store(store_id) {
       let params = {

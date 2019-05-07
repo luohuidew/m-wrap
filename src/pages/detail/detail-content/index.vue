@@ -5,8 +5,6 @@
       <div class="content">
         <detail-cover :storeData="store_info" :sku-data="sku"
           :goods-data="cur_goods"></detail-cover>
-        <!-- <detail-group :group-data="group"
-          @change="join_group"></detail-group> -->
         <section class="select-box">
           <detail-coupon v-if="all_data.is_show_coupon===1"
             @toggle="show_coupon=true"></detail-coupon>
@@ -22,11 +20,8 @@
         <detail-store :item="store_info"></detail-store>
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
-        <!-- <shipping :sku-data="sku"></shipping> -->
         <review v-if="review"
           :review="review"></review>
-        <!-- <similar-brand v-if="same_brand.data"
-          :data-list="same_brand.data"></similar-brand> -->
         <similar-cate v-if="same_category.data"
           :data-list="same_category.data"></similar-cate>
       </div>
@@ -50,15 +45,8 @@
       :attr-list="attr_list"
       :cur-goods="cur_goods">
     </attr-dialog>
-    <!-- <attr-dialog v-if="show_dialog"
-      @close="close_emity"
-      :sku="sku"
-      :goods="goods"
-      :attr-list="attrList"
-      :cur-goods="curGoods"></attr-dialog> -->
     <share-app :token="share_token"
       v-if="share_token"></share-app>
-    <!-- <share-app v-else></share-app> -->
     <van-popup v-model="show_coupon"
       position="bottom"
       :overlay="true">
@@ -75,25 +63,19 @@
 </template>
 
 <script>
-// import { vantSwipe, vantSwipeItem } from "vant";
 import shareApp from "@/components/dialog/share-app";
-// import goodsDes from "./goods-des.vue";
-// import group from "./group.vue";
 import detailAttr from "./detailAttr";
 import detailCoupon from "./detailCoupon";
 import detailShipping from "./detailShipping";
-import detailGroup from "./detail-group";
 import detailCover from "./detail-cover";
 import detailMore from "./detail-more.vue";
 import detailStore from "./detail-store";
-import shipping from "./shipping.vue";
 import review from "./review.vue";
 /* jianjiagouweuche de zujian  */
 import attrDialog from "@/components/dialog/attr-dialog";
 import detailCouponDialog from "./detailCoupon/components/detailCouponDialog";
 import shippingDialog from "./detailShipping/components/shippingDialog";
 // import detailWelog from "./detail-welog.vue";
-import similarBrand from "./similar-brand";
 import similarCate from "./similar-cate";
 import detailPayBtn from "../detail-pay-btn.vue";
 import api from "@/api/product";
@@ -101,17 +83,17 @@ import share from "@/api/share";
 import pay from "@/api/pay";
 export default {
   name: "detail",
-  metaInfo() {
-    return {
-      meta: [
-        { property: "og:title", content: "weget" },
-        { property: "og:title", content: this.meta_info.title },
-        { property: "og:description", content: this.meta_info.description },
-        { property: "og:url", content: this.meta_info.share_url },
-        { property: "og:image", content: this.meta_info.image_url }
-      ]
-    };
-  },
+  // metaInfo() {
+  //   return {
+  //     meta: [
+  //       { property: "og:title", content: "weget" },
+  //       { property: "og:title", content: this.meta_info.title },
+  //       { property: "og:description", content: this.meta_info.description },
+  //       { property: "og:url", content: this.meta_info.share_url },
+  //       { property: "og:image", content: this.meta_info.image_url }
+  //     ]
+  //   };
+  // },
   data() {
     return {
       show_dialog: false,
@@ -143,8 +125,7 @@ export default {
     };
   },
   beforeRouteLeave(to, from, next) {
-    let title =
-      "Weget.com | stylish online fashion marketplace";
+    let title = "Weget.com | stylish online fashion marketplace";
     document.title = title;
     next();
   },
@@ -276,11 +257,8 @@ export default {
     detailShipping,
     detailMore,
     detailStore,
-    detailGroup,
-    shipping,
     review,
     // detailWelog,
-    similarBrand,
     similarCate,
     detailPayBtn,
     attrDialog,

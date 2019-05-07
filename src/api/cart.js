@@ -43,22 +43,11 @@ export default {
     })
   },
   getCartNum(data = {}) {
-    data.token = token;
-    if (!token) {
-      return new Promise((resolve,reject)=>{
-        resolve({
-          data:{
-            num:0
-          }
-        })
-      })
-    } else {
-      return request({
-        url: 'shopcart/getCartNum ',
-        method: 'post',
-        data: JSON.stringify(data),
-      })
-    }
+    return request({
+      url: 'shopcart/getCartNum ',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
   },
 
 }

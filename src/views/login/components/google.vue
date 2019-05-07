@@ -65,11 +65,11 @@ export default {
 .g-signin-button {
   /* This is where you control how the button looks. Be creative! */
   display: inline-block;
-  height: 30px;
-  width: 30px;
+  width: 100%;
+  height: 50px;
   border-radius: 3px;
-  background: #fff url("/static/img/icon/gamil@2x.png") no-repeat center center;
-  background-size: 30px 30px;
+  background: #fff url("../img/googelBtn.png") no-repeat center center;
+  background-size: cover;
   cursor: pointer;
 }
 </style>

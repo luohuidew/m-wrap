@@ -3,10 +3,10 @@
     <button class="facebook-btn"
       @click="buttonClicked"
       :style="fb_style" >
-      <img src="/static/images/icon/login/facebook@2x.png" 
+      <img src="../../img/faceBtn.png"
       :class="{'active':showFacebook}" @click="showFacebook = !showFacebook"
       class="face_login">
-      <!-- <img src="/static/img/icon/login_facebook.png" 
+      <!-- <img src="/static/img/icon/login_facebook.png"
       v-show="showFacebook" @click="showFacebook = !showFacebook"
       class="face_login"> -->
     </button>
@@ -146,11 +146,11 @@ button {
   border: 0;
   /* background:rgb(64,103,185);
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 27px; */ 
+  border-radius: 27px; */
 }
 .face_login{
-  width: 30px;
-  height: 30px;
+  width: 100%;
+  height: 50px;
   /* width: 100%; */
 }
 .face_login.active {

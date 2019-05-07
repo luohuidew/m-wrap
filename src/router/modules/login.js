@@ -1,7 +1,7 @@
 export default {
   path: '/login',
   name: 'login-index',
-  redirect: '/login/index', 
+  redirect: '/login/index',
   component: () =>
   import('@/views/login'),
   children: [{
@@ -12,7 +12,6 @@ export default {
     meta: {
       title: 'login',
       keepAlive: false,
-      fullScreen: true
     },
   },
   {

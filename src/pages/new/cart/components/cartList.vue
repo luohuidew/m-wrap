@@ -2,7 +2,6 @@
   <div class="cart-list"
     v-if="goodsData.length">
     <div class="total-cart-box">
-      <!-- <h2>Cart ({{all_data_length}})</h2> -->
       <div class="head-select">
         <div class="select-box">
           <div class="icon-box"
@@ -32,7 +31,7 @@
       :key="index"
       class="cart-lists">
       <li class="cart-lists-item">
-        <cart-item @checkout="get_item_checkout(index,$event)"
+        <cart-item @checkout="get_item_checkout"
           :lists-data="item"></cart-item>
       </li>
     </ul>
@@ -46,6 +45,9 @@ export default {
   name: "",
   data() {
     return {
+      selectStoreGoods: [],
+      all_store_is_select: false,
+
       cart_lists_item: [],
       total_data: {
         total: 0,
@@ -60,48 +62,35 @@ export default {
     }
   },
   created() {
-    this.init_data();
   },
   watch: {},
   mounted() {},
   computed: {
-    all_store_is_select() {
-      let temp_boolean = false;
-      let equal =
-        this.cart_lists_item.length === this.goodsData.length &&
-        this.cart_lists_item.length > 0;
-      if (equal) {
-        temp_boolean = this.cart_lists_item.every(item => {
-          return item.checked_store === true;
-        });
-      }
-      return temp_boolean;
-    },
-    all_data_length() {
-      let count = 0;
-      this.goodsData.forEach(item => {
-        item.goods_list.forEach(item_min => {
-          count += 1;
-        });
-      });
-      return count;
-    }
   },
   methods: {
-    init_data() {},
-    get_item_checkout(index, data) {
-      // debugger
-      this.$set(this.cart_lists_item, index, data);
-      let temp = {
-        cart_lists_item: this.cart_lists_item,
-        total_data: this.total_data
-      };
-      // debugger;
-      this.$emit("change", temp);
+    get_item_checkout(obj) {
+      let clock = false
+      this.selectStoreGoods.forEach((item) => {
+        if (item.store_id === obj.store_id) {
+          clock = true
+          item = obj
+        }
+      })
+      if (!clock) {
+        this.selectStoreGoods.push(obj)
+      }
+      this.$emit("change", this.selectStoreGoods);
+      this.findAllSelectStore()
     },
-    toggle_checked_all() {
+    findAllSelectStore() {
+     const selectedStore =  this.selectStoreGoods.filter(item=> {
+        return item.checkted_store === true
+      })
+      this.all_store_is_select = selectedStore.length === this.goodsData.length
+    },
+    toggle_checked_all(val) {
       this.$children.forEach(item => {
-        item.toggle_checked();
+        item.toggle_checked(val);
       });
     },
     remove_cart_items(cartIds = []) {
@@ -114,7 +103,6 @@ export default {
       CART.delShopCartGood(params)
         .then(res => {
           window.location.reload();
-          // this.$parent.init_data();
         })
         .then(() => {
           CART.getCartNum().then(res => {
