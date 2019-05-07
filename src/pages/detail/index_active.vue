@@ -1,16 +1,16 @@
 <template>
   <div class='detail'>
     <detail-content></detail-content>
-    <!--<van-popup v-model="show" class="popup-warp">-->
+    <van-popup v-model="show" class="popup-warp" :overlay="false">
       <!--<img class="close" @click="closePopup" src="@/assets/img/conponActive/X.png"/>-->
-      <!--<div class="main">-->
-        <!--<img class="bg" src="@/assets/img/conponActive/bg.png" />-->
+      <div class="main">
+        <img  src="@/assets/img/conponActive/bg.png" @click="closePopup" width="100%"/>
         <!--<img  v-if="isLogin" class="btn" @click="goConpon" src="@/assets/img/conponActive/use@2x.png" />-->
         <!--<img  v-if="!isLogin"  class="btn" @click="goLogin" src="@/assets/img/conponActive/Signup@2x.png" />-->
         <!--<p v-if="isLogin">Congratulations! Now you have $30 in your account. Use it NOW! </p>-->
         <!--<p v-if="!isLogin">Hello new friend,we have 30 for you,sign up and get it now!</p>-->
-      <!--</div>-->
-    <!--</van-popup>-->
+      </div>
+    </van-popup>
   </div>
 </template>
 
@@ -121,8 +121,9 @@ export default {
   display: flex;
   flex-direction: column;
   .popup-warp {
+    transform: translate3d(-50%,91%,0);
     background-color: rgba(1,1,1,0);
-    width: 60%;
+    width: 100%;
     img.close{
       width: 20px;
       display: block;
