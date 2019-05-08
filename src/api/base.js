@@ -4,7 +4,7 @@ import request from '@/utils/request'
 import store from '@/store';
 let token = store.state.token;
 import { GO_LANG } from "@/utils/config"
-import { getUserShareId } from "@/utils/auth"
+import { getUserShareId ,GetQueryString} from "@/utils/auth"
 
 export default {
   ins_info(data = {}) {
@@ -20,6 +20,7 @@ export default {
     data.pageUrl = window.location.href
     data.createTime = (new Date()).Format("yyyy-MM-dd hh:mm:ss")
     data.uid = getUserShareId()
+    data.magic = GetQueryString('magic') || undefined
     data.token = token
     return request({
       url: `${GO_LANG}middleware/public/common/v1/visit/saveLog`,

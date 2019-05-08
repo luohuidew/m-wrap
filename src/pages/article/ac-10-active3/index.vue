@@ -60,6 +60,7 @@ export default {
     },
     closePopup() {
       this.show = false
+      sessionStorage.setItem('conpon-first', true)
     }
   },
   components: {

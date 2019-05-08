@@ -30,6 +30,12 @@ export function removeUserShareId() {
 export function getUserShareId() {
   return Cookies.get(UserShareId)
 }
+export function GetQueryString(name)
+{
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+}
 export function getRect(el) {
   if (el instanceof window.SVGElement) {
     let rect = el.getBoundingClientRect()

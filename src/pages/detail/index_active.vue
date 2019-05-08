@@ -79,7 +79,8 @@ export default {
       });
     },
     closePopup() {
-      this.show = false
+      this.show = false,
+      sessionStorage.setItem('conpon-detail-first', true)
     },
     autoAddCart() {
       let auto_params = {
@@ -104,7 +105,8 @@ export default {
       this.$router.push({
         path: "/detailAcive",
         query: {
-          sku_id: sku_id
+          sku_id: sku_id,
+          activeList: 1,
         }
       });
     }
