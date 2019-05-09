@@ -71,6 +71,7 @@ export default {
   name: "layout",
   data() {
     return {
+      topBannerData: [],
       transitionName: "slide-left",
       keep_banner: true
     };

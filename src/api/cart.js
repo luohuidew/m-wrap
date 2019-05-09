@@ -10,10 +10,10 @@ export default {
       data: JSON.stringify(data),
     })
   },
-  shopCartList(data = {}) {
+  cartcheckoutConfirm(data = {}) {
     data.token = token;
     return request({
-      url: 'shopcart/shopCartList',
+      url: 'cartcheckout/confirm?loading=yes',
       method: 'post',
       data: JSON.stringify(data),
     })

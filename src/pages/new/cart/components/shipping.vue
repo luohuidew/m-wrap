@@ -3,9 +3,9 @@
     <h3>Select Delivery Meth</h3>
     <ul class="delivery-content">
       <li class="card"
-        v-for="(item,index) in delivery_lists"
+        v-for="(item,index) in shipping_lists.list"
         :key="index"
-        :class="is_selected===index?'active':''"
+        :class="is_selected===item.key ? 'active':''"
         @click="selected_shipping(item,index)">
         <div class="shipping-item">
           <p>
@@ -39,24 +39,26 @@ export default {
   name: "Shipping",
   data() {
     return {
-      delivery_lists: [],
-      is_selected: -1
+      is_selected: this.shipping_lists.default
     };
   },
   mounted() {
   },
-  created() {
-    this.init_data();
+  props: {
+    shipping_lists: {}
   },
-  computed: {},
+  created() {
+  },
   methods: {
-    init_data() {
-      this.delivery_lists = [];
-    },
-    selected_shipping() {
+    selected_shipping(item,index) {
+      this.is_selected = index
     },
     go_back() {
-      this.$emit('closeVant')
+      const seleced = this.shipping_lists.list[this.is_selected]
+      const obj = {
+        shippingKey: seleced.key,
+      }
+      this.$emit('closeVant', obj)
     },
   },
   components: {}

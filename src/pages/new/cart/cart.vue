@@ -1,9 +1,9 @@
 <template>
   <div class="cart-layout">
     <div class="scroll-lists"  v-if="req_data">
-      <template v-if="req_data.goods.length">
+      <template v-if="req_data.store_goods && req_data.store_goods.length>0">
         <cart-list @change="get_list_data"
-          :goods-data="req_data.goods" :isAllSelected = 'prop_all_goods_is_select'></cart-list>
+          :goods-data="req_data.store_goods" :isAllSelected = 'prop_all_goods_is_select'></cart-list>
       </template>
       <template v-else>
         <div class="no-cart-item">
@@ -30,7 +30,7 @@
          <span> Select items({{selectedNumber}})</span>
         </div>
         <div class="pr">
-          All Total: <span>$122.99</span>
+          All Total: <span>{{req_data.all_total}}</span>
         </div>
       </div>
       <div class="pay">
@@ -57,7 +57,7 @@ export default {
   name: "",
   data() {
     return {
-      req_data: null,
+      req_data: {},
       all_goods_is_select: false,
       prop_all_goods_is_select: {},
       selectedNumber: 0,
@@ -83,34 +83,32 @@ export default {
       }
     },
     init_data() {
-      CART.shopCartList().then(res => {
+      CART.cartcheckoutConfirm().then(res => {
         const data = res.data;
-        data.goods.forEach(good=> {
-          good.goods_list.forEach(item => {
+        data.store_goods.forEach(store=> {
+          store.goods_data.forEach(item => {
             item.checkted = false
           })
         })
         this.req_data = data
-
       });
     },
     get_list_data(data) {
-      // this.$set(this.footer_data, "cart_lists_item", data.cart_lists_item);
-      // this.$set(this.footer_data, "total_data", data.total_data);
-      let num = 0
+      let count = 0
       data.forEach(stroe => {      // data // 获取已选定的商品信息，按店铺分组
         stroe.goods.forEach(good=> {
-          num += Number(good.count)
+          count += Number(good.num)
         })
       })
-      this.selectedNumber = num
+      this.selectedNumber = count
       this.findAllSelectGood(data)
     },
     findAllSelectGood(data) {
+      console.log(data)
       const selectedStore =  data.filter(item=> {
         return item.checkted_store === true
       })
-      this.all_goods_is_select = selectedStore.length === this.req_data.goods.length
+      this.all_goods_is_select = selectedStore.length === this.req_data.store_goods.length
     },
     /* buy some goods */
     to_buy() {
@@ -217,60 +215,5 @@ export default {
   }
 }
 
-/* 优惠券领取入口 */
-.footer-buy {
-  height: 90px;
-  .get-coupon {
-    height: 40px;
-    border-top: 1px solid #e9e9e9;
-    border-bottom: 1px solid #e9e9e9;
-    padding-left: 20px;
-    padding-right: 20px;
-    vertical-align: middle;
-    img {
-      height: 18px;
-      width: auto;
-    }
-    span {
-      font-size: 14px;
-      padding-left: 10px;
-    }
-    .content {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      background: url("/static/images/icon/cart/分类 copy@3x.png") no-repeat
-        right center;
-      background-size: auto 18px;
-    }
-  }
-}
-/* 计算总价 */
-.to-buy {
-  display: flex;
-  justify-content: space-between;
-  height: 50px;
-  .total-box {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 20px;
-    .total-desc {
-      font-size: 12px;
-    }
-    .total-price {
-      font-size: 18px;
-      font-weight: bold;
-    }
-  }
-  .buy-btn {
-    width: 140px;
-    font-size: 16px;
-    color: #ffffff;
-    background-color: #d70e19;
-    line-height: 50px;
-    text-align: center;
-  }
-}
+
 </style>

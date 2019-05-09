@@ -32,8 +32,7 @@
       :key="index"
       class="cart-lists">
       <li class="cart-lists-item">
-        <cart-item @checkout="get_item_checkout"
-          :lists-data="item"></cart-item>
+        <cart-item @checkout="get_item_checkout" :lists-data="item" ref="StoreRef"></cart-item>
       </li>
     </ul>
     <div class="coupon" @click="showVantCouponMethod">
@@ -41,7 +40,7 @@
       <span>Save $4.00 优惠券的名字</span>
     </div>
     <van-popup v-model="showVantCoupon" position="bottom" >
-      <Coupon @closeVant = 'closeshowVantCoupon'></Coupon>
+      <Coupon @closeVant = 'closeshowVantCoupon' :couponData="coupon_list"></Coupon>
     </van-popup>
   </div>
 </template>
@@ -50,13 +49,17 @@
 import cartItem from "./cartItem";
 import Coupon from "@/components/coupon";
 import CART from "@/api/cart";
+import coupon from "@/api/coupon";
+
 export default {
   name: "",
   data() {
     return {
       selectStoreGoods: [],
       all_store_is_select: false,
+      user_coupon_id: undefined,
       showVantCoupon: false,
+      coupon_list: [],
     };
   },
   props: {
@@ -72,6 +75,7 @@ export default {
     }
   },
   created() {
+    this.getCoupon() //获取优惠券
   },
   watch: {
     isAllSelected: {
@@ -85,11 +89,18 @@ export default {
   computed: {
   },
   methods: {
+    getCoupon() {
+      coupon.coupon({ status: 2 }).then(res => {
+        this.coupon_list = res.data;
+      });
+    },
     showVantCouponMethod() {
       this.showVantCoupon = true
     },
-    closeshowVantCoupon() {
+    closeshowVantCoupon(obj) {
+      this.user_coupon_id = obj.id
       this.showVantCoupon = false
+      this.$emit("change", this.selectStoreGoods, this.user_coupon_id);
     },
     get_item_checkout(obj) {
       let clock = false
@@ -102,7 +113,7 @@ export default {
       if (!clock) {
         this.selectStoreGoods.push(obj)
       }
-      this.$emit("change", this.selectStoreGoods);
+      this.$emit("change", this.selectStoreGoods, this.user_coupon_id);
       // this.findAllSelectStore()
     },
     // findAllSelectStore() {
@@ -113,7 +124,7 @@ export default {
     //   this.all_store_is_select = selectedStore.length === this.goodsData.length
     // },
     toggle_checked_all(val) {
-      this.$children.forEach(item => {
+      this.$refs.StoreRef.forEach(item => {
         item.toggle_checked(val);
       });
     },

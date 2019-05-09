@@ -34,24 +34,36 @@ export default {
   name: "",
   data() {
     return {
-      coupon_list: [],
+      coupon_list:this.couponData,
       is_checked: -1,
-      cur_coupon: undefined
+      cur_coupon: {}
     };
   },
+  props: {
+    couponData: {
+      default: function () {
+        return []
+      }
+    }
+  },
   created() {
-    this.init_data();
+    if (this.coupon_list.length>0) {
+    } else {
+      this.init_data();
+    }
   },
   mounted() {},
   computed: {},
   methods: {
     go_back() {
-      this.$emit('closeVant')
+      const obj = {
+        id: this.cur_coupon.id
+      }
+      this.$emit('closeVant',obj)
     },
     init_data() {
       coupon.coupon({ status: 2 }).then(res => {
         this.coupon_list = res.data;
-        this.is_checked = this.$store.state.order_detail.is_selected_couponid;
       });
     },
     choice_cur(index, item) {

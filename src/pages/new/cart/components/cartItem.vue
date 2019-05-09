@@ -1,6 +1,7 @@
 <template>
+  <!--一个店铺-->
   <div class="cart-item"
-    v-if="cur_lists.length">
+    v-if="cur_lists.length>0">
     <div class="cart-lists-store">
       <div class="store-box">
         <div class="icon-box"
@@ -50,26 +51,26 @@
           </div>
           <div class="cover-img-box"
             @click="to_detail(item.sku_id)">
-            <img :src="item.goods_img"
+            <img :src="item.cover_img"
               alt=""
               srcset="">
           </div>
           <div class="title-box">
             <p class="goods-title text-line-clamp-1">
-              {{item.goods_title}}
+              {{item.title}}
             </p>
             <div class="attr-select">
               <span> {{item.attr_str}}</span>
             </div>
             <div class="card-count">
-              <span class="price">${{item.goods_price}}</span>
+              <span class="price">{{item.price}}</span>
               <span class="account-change">
                 <i @click="account(-1,index)">
                   <img src="/static/images/icon/cart/减@3x.png"
                     alt=""
                     srcset="">
                 </i>
-                <span>{{item.count}}</span>
+                <span>{{item.num}}</span>
                 <i @click="account(1,index)">
                   <img src="/static/images/icon/cart/加好@3x.png"
                     alt=""
@@ -83,17 +84,17 @@
     </ul>
     <div class="code">
       <div class="content">
-        <input type="text" placeholder="Apply shop coupon code" />
-        <div class="commit"></div>
+        <input type="text" v-model="code" @input="codeInput" placeholder="Apply shop coupon code"  />
+        <div class="commit" :class="{ actived: codeActived }" @click="codeChange"></div>
       </div>
       <div class="error"></div>
     </div>
     <div class="shipping" @click="showVantShippingMethod">
-      <h2>Free shipping over $69.00</h2>
-      <h3>Ready to ship in 5-12 business days</h3>
+      <h2>{{all_data.ship_method.list[selectShippingKey].key_name}}</h2>
+      <h3>{{all_data.ship_method.list[selectShippingKey].desc}}</h3>
     </div>
     <van-popup v-model="showVantShipping" position="bottom" >
-      <Shipping @closeVant = 'closeVantShipping'></Shipping>
+      <Shipping @closeVant = 'closeVantShipping' :shipping_lists="all_data.ship_method"></Shipping>
     </van-popup>
   </div>
 </template>
@@ -106,15 +107,20 @@
   data() {
     return {
       all_data: this.listsData,
-      cur_lists: this.listsData.goods_list,
+      cur_lists: this.listsData.goods_data,
       checked_store: false,
-      showVantShipping: false
+      showVantShipping: false,
+      selectShippingKey: this.listsData.ship_method.default,
+      code: '',
+      codeActived: false,
     };
   },
   props: {
     listsData: {
       type: Object,
-      default: []
+      default: {
+        goods_data: []
+      }
     },
   },
   computed: {
@@ -127,8 +133,20 @@
   watch: {
   },
   methods: {
-    closeVantShipping() {
+    codeInput() {
+      if(this.code) {
+        this.codeActived = true
+      } else {
+        this.codeActived = false
+      }
+    },
+    codeChange() {
+      this.codeActived && this.emitPrant()
+    },
+    closeVantShipping(obj) {
+      this.selectShippingKey = obj.shippingKey
       this.showVantShipping = false
+      this.emitPrant()
     },
     showVantShippingMethod() {
       this.showVantShipping = true
@@ -136,7 +154,7 @@
     account(num, index) {
       // debugger
       let cur_item = this.cur_lists[index];
-      let temp_number = Number(cur_item.count);
+      let temp_number = Number(cur_item.num);
       temp_number += num;
       if (temp_number == 0) {
         temp_number = 1;
@@ -144,7 +162,7 @@
       if (temp_number == 11) {
         temp_number = 10;
       }
-      cur_item.count = temp_number;
+      cur_item.num = temp_number;
       this.emitPrant()
     },
     findSelectAll() {
@@ -158,8 +176,8 @@
       this.cur_lists.forEach(item=> {
         if (item.checkted) {
           goods.push({
-            only: item.only,
-            count: item.count,
+            cart_id: item.cart_id,
+            num: item.num,
             checkted: item.checkted
           })
         }
@@ -167,9 +185,11 @@
         const obj = {
           checkted_store: this.checked_store,
           store_id: this.all_data.store_id,
-          goods: goods
+          goods: goods,
+          shipp_key: this.selectShippingKey,
+          code_number: this.code
         }
-        console.log(obj)
+        // console.log(obj)
       this.$emit("checkout", obj);
     },
     check_only(item) {
@@ -326,6 +346,12 @@
   }
 }
 .code {
+  .error {
+    color: red;
+    font-size: 12px;
+    line-height: 20px;
+    padding-left: 2px;
+  }
   .content {
     display: flex;
     justify-content: space-between;
@@ -342,11 +368,16 @@
       padding-left: 10px;
     }
     .commit {
+      transition: 0.3s;
       width:80px;
       height:45px;
       background:rgba(199,199,199,1);
       border-radius:4px;
+      &.actived {
+        background: black;
+      }
     }
+
   }
 }
 .shipping {

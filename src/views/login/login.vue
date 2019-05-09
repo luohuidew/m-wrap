@@ -80,12 +80,17 @@
           </a>
         </p>
         <p class="bold">ABOUT</p>
-        <p>About Us</p>
+        <p>
+          <router-link to="/about" class="btn" tag="p">
+            About Us
+          </router-link>
+        </p>
         <p>Privacy Policy</p>
         <p>Need help？Visit the <span>help center</span></p>
       </div>
 
     </div>
+
   </div>
 </template>
 
@@ -139,22 +144,35 @@ export default {
   methods: {
     shareReturn() {
       if (getToken()) {
-        // if (this.userNew) {
-        //
-        // } else {
-        //
-        // }
-        if (this.$route.query.redirect) {
-          const param = {
-            path: this.$route.query.redirect,
-          }
-          this.$router.replace(param)
+        if (this.userNew) {
+          this.$dialog.alert({
+            message: 'Sign up now！You’ll get $15 on us, and you can spend it on everything!',
+            confirmButtonText: 'confirm'
+          }).then(()=> {
+            this.toPage()
+          });
         } else {
-          const param = {
-            path: '/home'
-          }
-          this.$router.replace(param)
+          this.$dialog.alert({
+            message: 'Welcome back, we are ready to shop with you today!',
+            confirmButtonText: 'confirm'
+          }).then(()=>{
+            this.toPage()
+          });
         }
+
+      }
+    },
+    toPage() {
+      if (this.$route.query.redirect) {
+        const param = {
+          path: this.$route.query.redirect,
+        }
+        this.$router.replace(param)
+      } else {
+        const param = {
+          path: '/home'
+        }
+        this.$router.replace(param)
       }
     },
     check_pre_login(per_params, params) {
