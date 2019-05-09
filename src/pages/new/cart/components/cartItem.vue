@@ -81,18 +81,34 @@
         </div>
       </li>
     </ul>
-
+    <div class="code">
+      <div class="content">
+        <input type="text" placeholder="Apply shop coupon code" />
+        <div class="commit"></div>
+      </div>
+      <div class="error"></div>
+    </div>
+    <div class="shipping" @click="showVantShippingMethod">
+      <h2>Free shipping over $69.00</h2>
+      <h3>Ready to ship in 5-12 business days</h3>
+    </div>
+    <van-popup v-model="showVantShipping" position="bottom" >
+      <Shipping @closeVant = 'closeVantShipping'></Shipping>
+    </van-popup>
   </div>
 </template>
 
 <script>
-export default {
+  import Shipping from "./shipping";
+
+  export default {
   name: "",
   data() {
     return {
       all_data: this.listsData,
       cur_lists: this.listsData.goods_list,
       checked_store: false,
+      showVantShipping: false
     };
   },
   props: {
@@ -104,12 +120,19 @@ export default {
   computed: {
 
   },
+
   mounted() {
 
   },
   watch: {
   },
   methods: {
+    closeVantShipping() {
+      this.showVantShipping = false
+    },
+    showVantShippingMethod() {
+      this.showVantShipping = true
+    },
     account(num, index) {
       // debugger
       let cur_item = this.cur_lists[index];
@@ -122,6 +145,7 @@ export default {
         temp_number = 10;
       }
       cur_item.count = temp_number;
+      this.emitPrant()
     },
     findSelectAll() {
       const selctArray = this.cur_lists.filter(item => {
@@ -158,7 +182,7 @@ export default {
       this.findSelectAll()
       this.emitPrant()
     },
-    toggle_checked(cur_checked = this.checked_store) {
+    toggle_checked(cur_checked) {
       this.cur_lists.forEach(item => {
         if (!cur_checked) {
           item.checkted = true
@@ -188,11 +212,16 @@ export default {
       this.$router.push(params);
     }
   },
-  components: {}
+  components: {
+    Shipping
+  },
 };
 </script>
 
 <style lang='scss' scoped>
+  .cart-item {
+    padding-bottom: 20px;
+  }
 .cart-card {
   display: flex;
   align-items: center;
@@ -207,6 +236,7 @@ export default {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #f3f3f3;
+
   .total-store {
     display: flex;
     align-items: center;
@@ -293,6 +323,51 @@ export default {
         border: 1px solid #c9caca;
       }
     }
+  }
+}
+.code {
+  .content {
+    display: flex;
+    justify-content: space-between;
+    input {
+      width:250px;
+      height:45px;
+      background:rgba(255,255,255,1);
+      border-radius:4px;
+      border:1px solid rgba(225,225,225,1);
+      line-height: 45px;
+      font-size:14px;
+      font-weight:400;
+      color:rgba(74,74,74,1);
+      padding-left: 10px;
+    }
+    .commit {
+      width:80px;
+      height:45px;
+      background:rgba(199,199,199,1);
+      border-radius:4px;
+    }
+  }
+}
+.shipping {
+  height:45px;
+  background-color:rgba(255,255,255,1);
+  border-radius:4px;
+  border:1px solid rgba(225,225,225,1);
+  box-sizing: border-box;
+  padding: 5px 10px;
+  margin-top:10px ;
+  line-height: 18px;
+  background: url(/static/img/icon/right.png) no-repeat center right 13px;
+  h2 {
+    font-size:12px;
+    font-weight:400;
+    color:rgba(0,0,0,1);
+  }
+  h3 {
+    font-size:10px;
+    font-weight:400;
+    color:rgba(155,155,155,1);
   }
 }
 </style>

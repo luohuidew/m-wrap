@@ -3,7 +3,7 @@
     <div class="scroll-lists"  v-if="req_data">
       <template v-if="req_data.goods.length">
         <cart-list @change="get_list_data"
-          :goods-data="req_data.goods"></cart-list>
+          :goods-data="req_data.goods" :isAllSelected = 'prop_all_goods_is_select'></cart-list>
       </template>
       <template v-else>
         <div class="no-cart-item">
@@ -18,21 +18,24 @@
     </div>
     <footer>
       <div class="price">
-        <van-checkbox v-model="selectAll">
-          Select items(3)
-          <img
-                  slot="icon"
-                  slot-scope="props"
-                  :src="props.checked ? icon.active : icon.normal"
-          >
-        </van-checkbox>
+        <div class="selct">
+          <img v-if="all_goods_is_select" @click="noAllgoodSelect"
+               src="/static/images/icon/cart/多选 选中@3x.png"
+               alt=""
+               srcset="">
+          <img v-else @click="AllgoodSelect"
+               src="/static/images/icon/cart/多选 未选中@3x.png"
+               alt=""
+               srcset="">
+         <span> Select items({{selectedNumber}})</span>
+        </div>
         <div class="pr">
           All Total: <span>$122.99</span>
         </div>
       </div>
       <div class="pay">
         <div class="paypal">paypal</div>
-        <div class="paypal checkout">Secure checkout</div>
+        <div class="paypal checkout" @click="toCheckout">Secure checkout</div>
       </div>
     </footer>
     <!--<cart-footer v-if="req_data"-->
@@ -55,20 +58,30 @@ export default {
   data() {
     return {
       req_data: null,
-      totalPrice: 0,
-      selectAll: false,
-      icon: {
-        normal: '//img.yzcdn.cn/icon-normal.png',
-        active: '//img.yzcdn.cn/icon-active.png'
-      }
+      all_goods_is_select: false,
+      prop_all_goods_is_select: {},
+      selectedNumber: 0,
     };
   },
+
   created() {
     this.init_data();
   },
   mounted() {},
   computed: {},
   methods: {
+    toCheckout(){
+      const arra = ["42945637938178183271","42945637698810961302","65905591720429661943","53705593665106044093","53705599114555242198"]
+      let path_params = {
+        path: "/checkout",
+        query: {
+          cart_ids: arra.toString()
+        }
+      };
+      if (arra.toString()) {
+        this.$router.push(path_params);
+      }
+    },
     init_data() {
       CART.shopCartList().then(res => {
         const data = res.data;
@@ -84,6 +97,20 @@ export default {
     get_list_data(data) {
       // this.$set(this.footer_data, "cart_lists_item", data.cart_lists_item);
       // this.$set(this.footer_data, "total_data", data.total_data);
+      let num = 0
+      data.forEach(stroe => {      // data // 获取已选定的商品信息，按店铺分组
+        stroe.goods.forEach(good=> {
+          num += Number(good.count)
+        })
+      })
+      this.selectedNumber = num
+      this.findAllSelectGood(data)
+    },
+    findAllSelectGood(data) {
+      const selectedStore =  data.filter(item=> {
+        return item.checkted_store === true
+      })
+      this.all_goods_is_select = selectedStore.length === this.req_data.goods.length
     },
     /* buy some goods */
     to_buy() {
@@ -92,7 +119,21 @@ export default {
         query: {}
       };
       this.$router.push(router_params);
-    }
+    },
+    noAllgoodSelect() {
+      this.all_goods_is_select = false
+      this.prop_all_goods_is_select = {
+        val : false,
+        n: Date.now()
+      }
+    },
+    AllgoodSelect() {
+      this.all_goods_is_select = true
+      this.prop_all_goods_is_select = {
+        val : true,
+        n: Date.now()
+      }
+    },
   },
   components: {
     cartList,
@@ -121,6 +162,17 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      .selct {
+
+        img {
+          width: 20px;
+        }
+        span {
+          font-weight: 400;
+          font-size:14px;
+          vertical-align: middle;
+        }
+      }
       span {
         font-weight: bold;
         font-size:18px;
@@ -151,7 +203,7 @@ export default {
   background: #f3f3f3;
   display: flex;
   flex-direction: column;
-  height: 300px;
+  height: 100%;
   align-items: center;
   justify-content: center;
   img {

@@ -1,139 +1,147 @@
 <template>
   <div class="order-summary-box">
-    <h2>Order Summary ({{total_summary.good_nums}} items)</h2>
-    <div class="select-coupon" @click="to_coupon">
-      <img src="/static/images/icon/cart/搜索 copy 2@3x.png"
-        alt=""
-        srcset="">
-      <span v-if="coupon.name">{{coupon.name}}</span>
-      <span v-else class="no-select">Select Coupon</span>
+    <div class="title" @click="toogleOderSummary">
+      <div class="des">
+        <img src="/static/images/icon/footer/cart-black@3x.png" alt="">
+        <span>Show order summary</span>
+        <van-icon name="arrow-down" class="arrow" />
+      </div>
+      <div class="price">$122.99</div>
     </div>
-    <ul class="all-total-lists">
-      <li>
-        <span>
-          Total:
-        </span>
-        <span>
-          {{total_summary.total}}
-        </span>
-      </li>
-      <li v-if="total_summary.coupon_discount !== '$0.00'">
-        <span>
-          Weget Coupon:
-        </span>
-        <span class="color-red">
-          -{{total_summary.coupon_discount}}
-        </span>
-      </li>
-      <li>
-        <span>
-          Total Before Tax:
-        </span>
-        <span>
-          {{total_summary.total_before_tax}}
-        </span>
-      </li>
-      <li>
-        <span>
-          Tax:
-        </span>
-        <span>
-          {{total_summary.tax_total}}
-        </span>
-      </li>
-      <li>
-        <span>
-          Tax All Total:
-        </span>
-        <span>
-          {{total_summary.all_total}}
-        </span>
-      </li>
-    </ul>
+    <section :class="{'closed': !this.statusOderSummary}" ref="sectionsref">
+      <good-review :store_goods=store_goods></good-review>
+      <div class="total-des">
+        <p>
+          <span>Total</span>
+          <span class="price">$120.00</span>
+        </p>
+        <p>
+          <span class="">Shipping</span>
+          <span class="price">$10.00</span>
+        </p>
+        <p>
+          <span class="">Promo Code</span>
+          <span class="price">-$14.00</span>
+        </p>
+        <p>
+          <span class="">Weget Coupon</span>
+          <span class="price">-$60.00</span>
+        </p>
+        <div class="all-total">
+          All Total: <span> $122.99</span>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-export default {
+  import goodReview from "./goodReview";
+
+  export default {
   name: "",
   props: {
-    total_summary: {
-      type: Object,
+    store_goods: {
+      type: Array,
       default: function () {
-        return {}
-      }
+        return []
+      },
     },
-    address_item: {
-      type: Object
-    }
   },
   data() {
     return {
-      coupon: {}
+      statusOderSummary: true
     };
   },
   computed: {},
   created() {
-    this.coupon = this.$store.state.order_detail.coupon;
   },
   methods: {
-    to_coupon() {
-      let num = Object.keys(this.address_item).length
-      if (num === 0) {
-        this.$toast('Please add shipping address');
-        return
+    toogleOderSummary() {
+      this.statusOderSummary = !this.statusOderSummary
+      if (this.statusOderSummary) {
+        this.$refs.sectionsref.style.height=this.$refs.sectionsref.scrollHeight+'px'
+      } else {
+        this.$refs.sectionsref.style.height=0+'px'
       }
-      let params = {
-        path: "/coupon"
-      };
-      this.$router.push(params);
-    },
+    }
   },
-  components: {}
+  components: {
+    goodReview
+  }
 };
 </script>
 
 <style lang='scss' scoped>
 .order-summary-box {
-  h2 {
-    padding: 20px 0;
-  }
-  .no-select {
-    color: #d70e19;
-    float:right;
-  }
-}
-.select-coupon {
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  // padding-right: 20px;
-  padding: 20px 20px 20px 0;
-  background: url("/static/img/icon/right.png") no-repeat right center;
-  border-top: 1px solid #f3f3f3;
-  span {
-    font-size: 12px;
-    color: #9b9b9b;
-  }
-  img {
-    height: 20px;
-    width: auto;
-    vertical-align: middle;
-    margin-right: 10px;
-  }
-}
-/* jiagelibiao */
-.all-total-lists {
-  border-top: 1px solid #f3f3f3;
-  padding: 20px 0 40px 0;
-}
-/* zongjianjisuan  */
-.all-total-lists {
-  li {
+  background:rgba(250,250,250,1);
+  .title {
+    padding: 0px 15px;
+    height: 57px;
     display: flex;
+    border-bottom: 1px solid #E1E1E1;
+    align-items: center;
     justify-content: space-between;
-    font-size: 14px;
-    line-height: 2;
+    .des {
+      img {
+        height: 24px;
+        width: 24px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 8px ;
+
+      }
+      span{
+        font-size:14px;
+        font-weight:400;
+        color:rgba(0,0,0,1);
+        vertical-align: middle;
+        margin-right: 4px ;
+
+      }
+      .arrow{
+        transform: translateY(5px);
+      }
+    }
+    .price {
+      font-size:18px;
+      font-weight:400;
+      color:rgba(0,0,0,1);
+    }
+  }
+  section {
+    &.closed {
+      padding-bottom: 0px;
+    }
+    box-sizing: content-box;
+    transition:all 0.5s;
+    overflow: hidden;
+    padding:0px  15px;
+    padding-bottom: 20px;
+    border-bottom:1px solid rgba(231,231,231,1);
+    .total-des {
+      margin-top: 10px;
+      p {
+        display: flex;
+        justify-content: space-between;
+        font-size:12px;
+        font-weight:400;
+        color:rgba(74,74,74,1);
+        margin-bottom: 12px;
+      }
+      .all-total {
+        margin-top: 20px;
+        text-align: right;
+        font-size:14px;
+        font-weight:400;
+        color:rgba(0,0,0,1);
+        line-height:14px;
+        span {
+          font-size:18px;
+          font-weight:bold;
+        }
+      }
+    }
   }
 }
 </style>

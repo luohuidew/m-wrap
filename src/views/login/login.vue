@@ -42,23 +42,22 @@
         </div>
       </div>
     </temp-dialog>
-    <login-serve @submit-form="to_home" :is_selected = 'is_selected'>
-
-    </login-serve>
+    <login-serve @submit-form="to_home" :is_selected = 'is_selected'></login-serve>
     <div class="footer">
-     <div class="who-we-are">
-       <div class="title">
-         Who We Are
+      <div class="who-we-are" v-if="is_selected === 'signIn'">
+         <div class="title">
+           Who We Are
+         </div>
+         <section>
+           We are a global platform that doesn’t sleep. We’re 24/7 and always bringing something new with thousands of independent fashion designers and influencers. We believe in a world where you have the total freedom to be you, without judgement, and to be brave and grab life as the extraordinary adventure it is. We make sure everyone can express themselves and find a fashion leader that is on the same channel as you. We exist
+         </section>
+         <router-link to="/about" class="btn">
+             See all
+         </router-link>
        </div>
-       <section>
-         Who We AreWho We AreWho We AreWho We Are
-         Who We AreWho We AreWho We AreWho We Are
-         Who We AreWho We AreWho We AreWho We Are
-       </section>
-       <div class="btn">
-         See all
-       </div>
-     </div>
+      <div v-else>
+        <img src="./img/content.jpg" width="100%"/>
+      </div>
       <div class="store">
         <a  target="_blank" href = "https://play.google.com/store/apps/details?id=com.weget.www">
           <img src="./img/Google Play Badge US Copy@3x.png" />
@@ -68,17 +67,22 @@
         </a>
       </div>
       <div class="about_row1">
+        <p class="bold">Follow us</p>
         <p>
           <a href="https://www.facebook.com/wegetofficial">
-            <img src="/static/img/about/iconF@2x.png">
+            <img src="./img/f@3x.png">
           </a>
           <a href="https://www.instagram.com/shopweget">
-            <img src="/static/img/about/iconO@2x.png">
+            <img src="./img/ins@3x.png">
           </a>
           <a href="https://www.youtube.com/channel/UCJ2SmCasimMk8TCHxloaMtA">
-            <img src="/static/img/about/iconA@2x.png">
+            <img src="./img/Shape@3x.png">
           </a>
         </p>
+        <p class="bold">ABOUT</p>
+        <p>About Us</p>
+        <p>Privacy Policy</p>
+        <p>Need help？Visit the <span>help center</span></p>
       </div>
 
     </div>
@@ -114,7 +118,7 @@ export default {
     };
   },
   created() {
-    this.shareReturn()
+    // this.shareReturn()
     // this.login_pass = this.$route.query.autoshow == "1" ? true : false;
   },
   beforeRouteEnter (to, from, next) {
@@ -135,6 +139,11 @@ export default {
   methods: {
     shareReturn() {
       if (getToken()) {
+        // if (this.userNew) {
+        //
+        // } else {
+        //
+        // }
         if (this.$route.query.redirect) {
           const param = {
             path: this.$route.query.redirect,
@@ -323,6 +332,7 @@ export default {
     }
     .login-wrap {
       padding: 0px 15px;
+      margin-top: 10px;
       margin-bottom: 20px;
       img {
         margin-bottom: 15px;
@@ -342,7 +352,7 @@ export default {
           span {
             color: #D70E19
           }
-          margin-bottom: 20px;
+          margin-bottom: 10px;
         }
       }
       .lins {
@@ -395,6 +405,7 @@ export default {
           background:linear-gradient(0deg,rgba(248,248,248,1) 0%,rgba(248,248,248,0.6) 50%, rgba(248,248,248,0) 100%);        }
       }
       .btn {
+        display: block;
         height:36px;
         border-radius:23px;
         width: 80%;
@@ -410,6 +421,7 @@ export default {
     .store {
       padding: 5px 5px;
       display: flex;
+      margin-top: 20px;
       justify-content: space-between;
       a{
         width: 40%;
@@ -422,23 +434,23 @@ export default {
 
     }
     div.about_row1 {
-      width: 100%;
-      height: 60px;
-      background: rgb(33, 33, 33);
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      position: relative;
+      padding-bottom: 30px;
       p {
-        position: absolute;
-        width: 80%;
-        height: 22px;
-        top: 50%;
-        left: 10px;
-        transform: translate(0%, -50%);
         text-align: center;
+        margin-top: 15px;
+        font-size:12px;
+        font-weight:400;
+        color:rgba(0,0,0,1);
+        &.bold{
+          font-size:16px;
+          font-weight:800;
+          color:rgba(0,0,0,1);
+        }
+        span {
+          font-weight:800
+        }
         a {
-          float: left;
+          display: inline-block;
           margin: 0 15px;
           img {
             width: auto;

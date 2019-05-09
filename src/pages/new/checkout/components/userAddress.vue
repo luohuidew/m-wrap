@@ -5,13 +5,20 @@
       <p>
         <!-- <span> Add shipping Address</span> -->
         <template v-if="address_item.zipcode">
-          <span style="fontWeight:bold;">{{address_item.first_name}}</span>&nbsp;<span style="fontWeight:bold;">{{address_item.last_name}}</span><br />
-          <span> {{address_item.address1}} </span>
-          <span> {{address_item.city}} </span>
-          <span> {{address_item.state}} </span>
-          <span> {{address_item.zipcode}} </span><br />
-          <span style="fontWeight:bold;"> {{address_item.zipcode}} </span>
-          <span style="fontWeight:bold;"> {{address_item.tel}} </span>
+          <div class="title">
+            <span>Ship to</span>
+            <em>Change</em>
+          </div>
+          <div class="des">
+            <span style="fontWeight:bold;">{{address_item.first_name}}</span>&nbsp;<span style="fontWeight:bold;">{{address_item.last_name}}</span><br />
+            <span> {{address_item.address1}} </span>
+            <span> {{address_item.city}} </span>
+            <span> {{address_item.state}} </span>
+            <span> {{address_item.zipcode}} </span><br />
+            <span style="fontWeight:bold;"> {{address_item.zipcode}} </span>
+            <span style="fontWeight:bold;"> {{address_item.tel}} </span>
+          </div>
+
         </template>
         <template v-else>
           <span :style="{color:'#d70e19'}">Add Shipping Address</span>
@@ -57,11 +64,34 @@ export default {
 
 <style lang='scss' scoped>
 .address-box {
+  padding: 15px;
+  h3 {
+    font-size:18px;
+    font-weight:400;
+    color:rgba(0,0,0,1);
+    line-height: 20px;
+    margin-bottom: 10px;
+  }
   p {
     font-size: 16px;
-    // padding-right: 20px;
-    padding: 20px 20px 20px 0;
-    background: url("/static/img/icon/right.png") no-repeat right center;
+    border-radius:4px;
+    border:1px solid rgba(225,225,225,1);
+    font-size:14px;
+    font-weight:400;
+    color:rgba(74,74,74,1);
+    padding: 10px;
+    line-height:25px;
+    max-height: 130px;
+    overflow: hidden;
+    .title {
+      display: flex;
+      justify-content: space-between;
+      span {
+        font-size:12px;
+        font-weight:400;
+        color:rgba(155,155,155,1);
+      }
+    }
   }
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
   <div class="checkout-layout">
-      <orderSummary :store_goods=store_goods></orderSummary>
-      <addAddress v-if="noHaveAddress"></addAddress>
+    <div class="scroll-lists"
+      ref="scroll-lists">
+      <h2>Checkout</h2>
       <ul class="content-lists">
         <li @click="to_address()">
           <user-address :address_item='address_item'></user-address>
@@ -10,54 +11,43 @@
           <payment @changeSelectPay=changeSelectPay></payment>
         </li>
         <li>
-          <div class="footer">
-            <div class="total-des">
-              <p>
-                <span>Total</span>
-                <span class="price">$120.00</span>
-              </p>
-              <p>
-                <span class="">Tax</span>
-                <span class="price">$10.00</span>
-              </p>
-              <div class="all-total">
-                All Total: <span> $122.99</span>
-              </div>
-            </div>
-            <div class="pay-but">
-              Place your order
-            </div>
+          <order-review :store_goods=store_goods
+            @applyCode='total_price'
+            :address_item = 'address_item'
+            :store_total_price=store_total_price></order-review>
+        </li>
+        <li>
+          <order-summary :total_summary=total_summary :address_item = 'address_item'></order-summary>
+        </li>
+      </ul>
+    </div>
+    <div class="footer-buy">
+      <ul>
+        <li class="to-buy">
+          <div class="total-box">
+            <p class="total-desc">All Total</p>
+            <p class="total-price">{{all_total}}</p>
+          </div>
+          <div class="buy-btn"
+            @click="to_pay">
+            Checkout
           </div>
         </li>
       </ul>
-      <div class="footer-buy">
-        <ul>
-          <li class="to-buy">
-            <div class="total-box">
-              <p class="total-desc">All Total</p>
-              <p class="total-price">{{all_total}}</p>
-            </div>
-            <div class="buy-btn"
-              @click="to_pay">
-              Checkout
-            </div>
-          </li>
-        </ul>
-      </div>
-      <van-popup v-model="show_pay_methods"
-        position="bottom"
-        :overlay="true">
-        <payment-dialog :order-data="res_create_data"
-          :isSelectPay="change_select_pay"
-          @close="payClose"></payment-dialog>
-      </van-popup>
+    </div>
+    <van-popup v-model="show_pay_methods"
+      position="bottom"
+      :overlay="true">
+      <payment-dialog :order-data="res_create_data"
+        :isSelectPay="change_select_pay"
+        @close="payClose"></payment-dialog>
+    </van-popup>
   </div>
 </template>
 
 <script>
 import api from "@/api/pay";
 import userAddress from "./components/userAddress";
-import addAddress from "./components/addAddress";
 import payment from "./components/payment";
 import orderReview from "./components/orderReview";
 import orderSummary from "./components/orderSummary";
@@ -68,8 +58,6 @@ export default {
   name: "",
   data() {
     return {
-      noHaveAddress: false,
-
       change_select_pay: 1,
       res_create_data: {},
       show_pay_methods: false,
@@ -93,6 +81,12 @@ export default {
   },
   mounted() {},
   computed: {},
+  beforeRouteLeave(to, from, next) {
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 `this`
+    sessionStorage.checkoutScroll = this.$refs["scroll-lists"].scrollTop;
+    next();
+  },
   methods: {
     payClose() {
       this.show_pay_methods = false;
@@ -219,7 +213,10 @@ export default {
 
         if (this.fristRender) {
           this.fristRender = false;
-
+          this.$nextTick(() => {
+            this.$refs["scroll-lists"].scrollTop =
+              sessionStorage.checkoutScroll || 0;
+          });
         }
       }).catch((err) => {
         console.log(err)
@@ -270,8 +267,7 @@ export default {
     payment,
     orderReview,
     orderSummary,
-    paymentDialog,
-    addAddress
+    paymentDialog
   }
 };
 </script>
@@ -279,48 +275,22 @@ export default {
 <style lang='scss' scoped>
 .checkout-layout {
   height: 100%;
+}
+.scroll-lists {
+  height: calc(100% - 50px);
   overflow: auto;
-}
-.content-lists {
-  .footer {
-    padding: 15px;
-    .total-des {
-      margin-top: 10px;
-      p {
-        display: flex;
-        justify-content: space-between;
-        font-size:12px;
-        font-weight:400;
-        color:rgba(74,74,74,1);
-        margin-bottom: 12px;
-      }
-      .all-total {
-        margin-top: 20px;
-        text-align: right;
-        font-size:14px;
-        font-weight:400;
-        color:rgba(0,0,0,1);
-        line-height:14px;
-        span {
-          font-size:18px;
-          font-weight:bold;
-        }
-      }
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 30px 20px;
+  }
+  .content-lists {
+    li {
+      border-bottom: 10px solid #f3f3f3;
+      padding: 0 20px;
     }
-.pay-but{
-  height:45px;
-  background:rgba(0,0,0,1);
-  border-radius:30px;
-  line-height: 45px;
-  text-align: center;
-  font-size:14px;
-  margin-top: 20px;
-  font-weight:bold;
-  color:rgba(255,255,255,1);
-}
   }
 }
-
 /* 优惠券领取入口 */
 .footer-buy {
   height: 50px;
