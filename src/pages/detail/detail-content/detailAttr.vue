@@ -7,7 +7,7 @@
           alt=""
           srcset="">
       </div>
-      <p>Color,Size</p>
+      <p>{{attrDes.toString()}}</p>
     </div>
     <!--<attr-dialog v-if="show_dialog"-->
     <!--@close="show_dialog = false"-->
@@ -28,8 +28,15 @@ export default {
       show_dialog: false
     };
   },
-  computed: {},
-  created() {},
+  computed: {
+    attrDes() {
+      return this.attrList.map(item=> {
+        return item.attr_name
+      })
+    }
+  },
+  created() {
+  },
   methods: {},
   components: {
     attrDialog

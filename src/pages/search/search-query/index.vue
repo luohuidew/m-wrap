@@ -45,11 +45,11 @@ export default {
     };
   },
   mounted() {
-    
+
   },
   computed: {},
   methods: {
-   
+
     to_search(val) {
       if (val) {
         this.search_text = "";
@@ -67,14 +67,13 @@ export default {
             path: "/search/search-store-lists",
             query: {
               title: val,
-              page_label: val
             }
           };
         }
         this.$router.push(params);
       }
     },
-    
+
     go_back() {
       this.$router.go(-1);
     }

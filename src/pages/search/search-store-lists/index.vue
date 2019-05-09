@@ -1,11 +1,11 @@
 <template>
   <div class="fixed-content">
-    <noData v-if="finished">
+    <noData v-if="finished && storeListsData.length === 0">
       <span>It is empty here ...</span>
     </noData>
     <van-list v-model="loading"
+              :immediate-check="false"
       :finished="finished"
-      :finished-text="''"
       :loading-text="'Loading...'"
       @load="get_more_data()">
       <ul class="pick-lists"
@@ -36,7 +36,9 @@ export default {
     };
   },
   computed: {},
-  created() {},
+  created() {
+    this.get_more_data()
+  },
   methods: {
     get_more_data() {
       let params = {
@@ -68,7 +70,7 @@ export default {
 .fixed-content {
   height: 100%;
   background-color: #ffffff;
- 
+
   // padding-top: 0;
 }
 .pick-lists {
@@ -77,7 +79,7 @@ export default {
   // flex-wrap: wrap;
   // justify-content: space-between;
   // padding: 0 15px;
-  // padding-top: 10px;  
+  // padding-top: 10px;
   /* 保留高度 */
   // min-height:50vh;
   // & > li {
