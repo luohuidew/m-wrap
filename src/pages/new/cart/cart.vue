@@ -93,8 +93,9 @@ export default {
         this.req_data = data
       });
     },
-    get_list_data(data) {
+    get_list_data(data,couponId ) {
       let count = 0
+      clearTimeout(this.times)
       data.forEach(stroe => {      // data // 获取已选定的商品信息，按店铺分组
         stroe.goods.forEach(good=> {
           count += Number(good.num)
@@ -102,9 +103,39 @@ export default {
       })
       this.selectedNumber = count
       this.findAllSelectGood(data)
+      this.times = setTimeout(()=>{
+        this.totalPrices(data, couponId)
+      },100)
+    },
+    totalPrices(data, couponId) {
+      const params={
+        store_code: [],
+        store_ship_method: [],
+        cart_goods: [],
+        user_coupon_id: couponId
+      }
+      data.forEach(item=>{
+        params.store_code.push({
+          code_number:item.code_number,
+          store_id: item.store_id,
+        })
+        params.store_ship_method.push({
+          ship_method:item.shipp_key,
+          store_id: item.store_id,
+        })
+        item.goods.forEach((good)=>{
+          params.cart_goods.push({
+            cart_id:good.cart_id,
+            num: good.num,
+          })
+        })
+      })
+      CART.totalPrice(params).then(res => {
+
+      })
+
     },
     findAllSelectGood(data) {
-      console.log(data)
       const selectedStore =  data.filter(item=> {
         return item.checkted_store === true
       })

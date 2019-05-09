@@ -60,15 +60,16 @@ export default {
     let top_number = app_header.offsetHeight;
     let banner_number = app_banner.offsetHeight;
     this.offsetTop = top_number + banner_number;
-    let that = this;
-    document
-      .querySelector(".close-banner")
-      .addEventListener("click", function() {
-        // debugger
-        top_number = app_header.offsetHeight;
-        // banner_number = app_banner.offsetHeight;
-        that.offsetTop = top_number;
-      });
+    // 关闭顶部滚动信息方法
+    // let that = this;
+    // document
+    //   .querySelector(".close-banner")
+    //   .addEventListener("click", function() {
+    //     // debugger
+    //     top_number = app_header.offsetHeight;
+    //     // banner_number = app_banner.offsetHeight;
+    //     that.offsetTop = top_number;
+    //   });
 
     let home_footer = document.querySelector(".home-footer");
     let van_tabs = document.querySelector("#scroll-cate .van-tabs__wrap");

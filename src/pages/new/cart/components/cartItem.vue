@@ -371,10 +371,14 @@
       transition: 0.3s;
       width:80px;
       height:45px;
-      background:rgba(199,199,199,1);
+      background-color:rgba(199,199,199,1);
       border-radius:4px;
+      background-image: url("~@/assets/img/icon/arrow.png");
+      background-size: 30px;
+      background-repeat: no-repeat;
+      background-position: center;
       &.actived {
-        background: black;
+        background-color: black;
       }
     }
 

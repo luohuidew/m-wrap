@@ -18,6 +18,14 @@ export default {
       data: JSON.stringify(data),
     })
   },
+  totalPrice(data = {}) {
+    data.token = token;
+    return request({
+      url: 'cartcheckout/totalPrice?loading=yes',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
   delShopCartGood(data = {}) {
     data.token = token;
     return request({

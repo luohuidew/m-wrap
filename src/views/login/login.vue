@@ -85,8 +85,10 @@
             About Us
           </router-link>
         </p>
-        <p>Privacy Policy</p>
-        <p>Need help？Visit the <span>help center</span></p>
+        <router-link to="/statement" tag="p">
+          Privacy Policy
+        </router-link>
+        <p>Need help？Visit the <a class="email" href="mailto:service@weget.com">help center</a></p>
       </div>
 
     </div>
@@ -464,7 +466,8 @@ export default {
           font-weight:800;
           color:rgba(0,0,0,1);
         }
-        span {
+        a.email {
+          margin: 0px;
           font-weight:800
         }
         a {
