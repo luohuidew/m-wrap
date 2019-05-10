@@ -30,7 +30,7 @@
          <span> Select items({{selectedNumber}})</span>
         </div>
         <div class="pr">
-          All Total: <span>{{req_data.all_total}}</span>
+          All Total: <span>{{allTotal}}</span>
         </div>
       </div>
       <div class="pay">
@@ -61,6 +61,7 @@ export default {
       all_goods_is_select: false,
       prop_all_goods_is_select: {},
       selectedNumber: 0,
+      allTotal: '$0.00'
     };
   },
 
@@ -71,8 +72,14 @@ export default {
   computed: {},
   methods: {
     toCheckout(){
-      const arra = ["42945637938178183271","42945637698810961302","65905591720429661943","53705593665106044093","53705599114555242198"]
-      let path_params = {
+      if (this.selectedNumber === 0) {
+        return
+      }
+      CART.cartcheckoutConfirm(this.cachePrams).then(res => {
+
+      });
+
+       let path_params = {
         path: "/checkout",
         query: {
           cart_ids: arra.toString()
@@ -85,15 +92,17 @@ export default {
     init_data() {
       CART.cartcheckoutConfirm().then(res => {
         const data = res.data;
+        this.allTotal = data.all_total
         data.store_goods.forEach(store=> {
           store.goods_data.forEach(item => {
             item.checkted = false
           })
+          store.store_code_info = {}
         })
         this.req_data = data
       });
     },
-    get_list_data(data,couponId ) {
+    get_list_data(data,couponId ) { // 数据更新出发
       let count = 0
       clearTimeout(this.times)
       data.forEach(stroe => {      // data // 获取已选定的商品信息，按店铺分组
@@ -103,7 +112,11 @@ export default {
       })
       this.selectedNumber = count
       this.findAllSelectGood(data)
-      this.times = setTimeout(()=>{
+      if (count === 0) {
+        this.allTotal = '$0.00'
+        return
+      }
+      this.times = setTimeout(()=>{ // 防止同时提交多个请求
         this.totalPrices(data, couponId)
       },100)
     },
@@ -114,6 +127,7 @@ export default {
         cart_goods: [],
         user_coupon_id: couponId
       }
+      this.cachePrams = {...params}
       data.forEach(item=>{
         params.store_code.push({
           code_number:item.code_number,
@@ -131,7 +145,15 @@ export default {
         })
       })
       CART.totalPrice(params).then(res => {
-
+        this.allTotal = res.data.all_total
+        const datas= res.data.sub_order_info
+        this.req_data.store_goods.forEach((store)=> {
+          datas.forEach((price_store)=> {
+            if (store.store_id === price_store.store_id) {
+              store.store_code_info = price_store.store_code_info
+            }
+          })
+        })
       })
 
     },

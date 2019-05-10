@@ -19,7 +19,6 @@ export default {
     })
   },
   totalPrice(data = {}) {
-    data.token = token;
     return request({
       url: 'cartcheckout/totalPrice?loading=yes',
       method: 'post',

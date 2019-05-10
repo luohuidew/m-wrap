@@ -17,7 +17,7 @@
         </div>
         <p class="total-store"
           @click="to_store(all_data.store_id)">
-          <img src="/static/images/icon/cart/store@3x.png"
+          <img :src="all_data.logo"
             alt=""
             srcset="">
           <span class="text-line-clamp-1">{{all_data.store_name}}</span>
@@ -87,7 +87,9 @@
         <input type="text" v-model="code" @input="codeInput" placeholder="Apply shop coupon code"  />
         <div class="commit" :class="{ actived: codeActived }" @click="codeChange"></div>
       </div>
-      <div class="error"></div>
+      <div class="error">
+        {{all_data.store_code_info.error_msg}}
+      </div>
     </div>
     <div class="shipping" @click="showVantShippingMethod">
       <h2>{{all_data.ship_method.list[selectShippingKey].key_name}}</h2>
@@ -106,8 +108,6 @@
   name: "",
   data() {
     return {
-      all_data: this.listsData,
-      cur_lists: this.listsData.goods_data,
       checked_store: false,
       showVantShipping: false,
       selectShippingKey: this.listsData.ship_method.default,
@@ -124,7 +124,12 @@
     },
   },
   computed: {
-
+    all_data() {
+      return this.listsData
+    },
+    cur_lists() {
+      return this.listsData.goods_data
+    },
   },
 
   mounted() {
@@ -261,10 +266,10 @@
     display: flex;
     align-items: center;
     img {
-      width: 18px;
-      height: 18px;
+      width: 30px;
+      height: 30px;
       object-fit: contain;
-      vertical-align: middle;
+      border-radius: 50%
     }
     span {
       display: inline-block;
