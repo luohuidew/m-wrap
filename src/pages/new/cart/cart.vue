@@ -75,19 +75,22 @@ export default {
       if (this.selectedNumber === 0) {
         return
       }
-      CART.cartcheckoutConfirm(this.cachePrams).then(res => {
-
+      CART.orderConfirm(this.cachePrams).then(res => {
+        const StringParams = JSON.stringify(this.cachePrams)
+        sessionStorage.cartParams = StringParams
+         let path_params = {
+          path: "/checkout",
+        };
+        this.$router.push(path_params);
       });
 
-       let path_params = {
-        path: "/checkout",
-        query: {
-          cart_ids: arra.toString()
-        }
-      };
-      if (arra.toString()) {
-        this.$router.push(path_params);
-      }
+      //  let path_params = {
+      //   path: "/checkout",
+      //   query: {
+      //     cart_ids: arra.toString()
+      //   }
+      // };
+      // this.$router.push(path_params);
     },
     init_data() {
       CART.cartcheckoutConfirm().then(res => {

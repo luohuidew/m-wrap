@@ -25,6 +25,13 @@ export default {
       data: JSON.stringify(data),
     })
   },
+  orderConfirm(data = {}) {
+    return request({
+      url: 'order/orderConfirm?loading=yes',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
   delShopCartGood(data = {}) {
     data.token = token;
     return request({
