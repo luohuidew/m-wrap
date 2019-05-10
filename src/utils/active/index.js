@@ -220,9 +220,6 @@ let listData2 = [
       "alone_price": "24.99",
       "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/17236559775cd11d783faf2.jpg?width=800&height=800",
       "show_tag": [
-        {
-          "mask_bg_image": "https://we-get.s3.us-west-1.amazonaws.com/8615149555c07747552c13.png"
-        }
       ],
       "title": "High Rise Legging",
       "sku_id": "5720924784196460"
