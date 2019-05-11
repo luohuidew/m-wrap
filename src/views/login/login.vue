@@ -18,10 +18,10 @@
         <fb class="other-btn" @login="getUserFb"></fb>
         <google class="other-btn" @login="getUserGoogle"></google>
         <instagram @login="getUserIns" class="other-btn"></instagram>
+        <div class="lins">
+          <span>or continue with email</span>
+        </div>
       </template>
-      <div class="lins">
-        <span>or continue with email</span>
-      </div>
     </div>
     <temp-dialog v-if="show_dialog"
                  @close="show_dialog=false">
@@ -52,20 +52,21 @@
            We are a global platform that doesn’t sleep. We’re 24/7 and always bringing something new with thousands of independent fashion designers and influencers. We believe in a world where you have the total freedom to be you, without judgement, and to be brave and grab life as the extraordinary adventure it is. We make sure everyone can express themselves and find a fashion leader that is on the same channel as you. We exist
          </section>
          <router-link to="/about" class="btn">
-             See all
+             <span> See all </span><img src="./img/arrow.png" height="13"/>
          </router-link>
        </div>
       <div v-else>
         <img src="./img/content.jpg" width="100%"/>
       </div>
       <div class="store">
-        <a  target="_blank" href = "https://play.google.com/store/apps/details?id=com.weget.www">
-          <img src="./img/Google Play Badge US Copy@3x.png" />
-        </a>
         <a target="_blank" href = "https://itunes.apple.com/us/app/weget-fashion-marketplace/id1439887303?mt=8">
           <img src="./img/appStroe.png"  />
         </a>
+        <a  target="_blank" href = "https://play.google.com/store/apps/details?id=com.weget.www">
+          <img src="./img/Google Play Badge US Copy@3x.png" />
+        </a>
       </div>
+      <br>
       <div class="about_row1">
         <p class="bold">Follow us</p>
         <p>
@@ -79,6 +80,7 @@
             <img src="./img/Shape@3x.png">
           </a>
         </p>
+        <br>
         <p class="bold">ABOUT</p>
         <p>
           <router-link to="/about" class="btn" tag="p">
@@ -149,14 +151,16 @@ export default {
         if (this.userNew) {
           this.$dialog.alert({
             message: 'Thanks for signing up, a $15 coupon has been added to your WeGet Account.',
-            confirmButtonText: 'confirm'
+            confirmButtonText: 'Shop Now',
+            confirmButtonColor: '#000'
           }).then(()=> {
             this.toPage()
           });
         } else {
           this.$dialog.alert({
             message: 'Welcome back, we are ready to shop with you today!',
-            confirmButtonText: 'confirm'
+            confirmButtonText: 'Shop Now',
+            confirmButtonColor: '#000'
           }).then(()=>{
             this.toPage()
           });
@@ -361,7 +365,7 @@ export default {
         text-align: center;
         h2{
           font-size:26px;
-          font-weight:900;
+          font-weight:bold;
           color:rgba(0,0,0,1);
         }
         p {
@@ -370,7 +374,8 @@ export default {
           color:rgba(155,155,155,1);
           line-height:25px;
           span {
-            color: #D70E19
+            color: #D70E19;
+            text-decoration: underline;
           }
           margin-bottom: 10px;
         }
@@ -436,13 +441,21 @@ export default {
         text-align: center;
         border:1px solid rgba(0,0,0,1);
         margin: 10px auto;
+        span {
+          display: inline-block;
+        }
+        img {
+          display: inline-block;
+          margin-left: 20px;
+          transform: translateY(-2px);
+        }
       }
     }
     .store {
       padding: 5px 5px;
       display: flex;
       margin-top: 20px;
-      justify-content: space-between;
+      justify-content: space-around;
       a{
         width: 40%;
         display: inline-block;
@@ -468,7 +481,8 @@ export default {
         }
         a.email {
           margin: 0px;
-          font-weight:800
+          font-weight:800;
+          text-decoration: underline;
         }
         a {
           display: inline-block;

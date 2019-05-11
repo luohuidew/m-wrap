@@ -13,7 +13,7 @@
           <div class="footer">
             <div class="total-des">
               <p>
-                <span>Total</span>
+                <span>Sub_total</span>
                 <span class="price">{{ resSummary.all_total }}</span>
               </p>
               <p>
@@ -21,7 +21,7 @@
                 <span class="price">{{ resSummary.tax_total }}</span>
               </p>
               <div class="all-total">
-                All Total: <span> {{ resSummary.last_total }}</span>
+                Total: <span> {{ resSummary.last_total }}</span>
               </div>
             </div>
             <div class="pay-but" @click="createOrder">

@@ -13,13 +13,14 @@
     src: url('/static/font/Muli/Muli-Regular.ttf');
     /*字体源文件*/
 }
-//
-//@font-face {
-//    font-family: 'Mulis2';
-//    /*字体名称*/
-//    src: url('/static/font/Muli/Muli-Bold.ttf');
-//    /*字体源文件*/
-//}
+
+@font-face {
+    font-family: 'Muli';
+    font-weight: bold;
+    /*字体名称*/
+    src: url('/static/font/Muli/Muli-Bold.ttf');
+    /*字体源文件*/
+}
 
 html,
 body,

@@ -25,9 +25,13 @@ export default {
       data: JSON.stringify(data),
     })
   },
-  orderConfirm(data = {}) {
+  orderConfirm(data = {}, loading) {
+    let urls = 'order/orderConfirm?loading=yes'
+    if(loading) { // loading参数仅在购物车提交时使用
+      urls = 'order/orderConfirm'
+    }
     return request({
-      url: 'order/orderConfirm?loading=yes',
+      url: urls,
       method: 'post',
       data: JSON.stringify(data),
     })

@@ -236,6 +236,7 @@ input {
             margin-bottom: 10px;
           }
           dd {
+            text-decoration: underline;
             font-size:12px;
             font-weight:400;
             color:rgba(155,155,155,1);
@@ -250,7 +251,7 @@ input {
       }
     }
     input {
-      height: 36px;
+      height: 50px;
       width: 100%;
       background-color: #fff;
       border-radius:4px;

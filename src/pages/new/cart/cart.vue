@@ -34,7 +34,8 @@
         </div>
       </div>
       <div class="pay">
-        <div class="paypal">paypal</div>
+        <!--<div class="paypal">paypal</div>-->
+        <div class="paypal checkout" v-show="isLoading"><span>Secure checkout </span> <span> <van-loading size="20px" /></span></div>
         <div class="paypal checkout" @click="toCheckout">Secure checkout</div>
       </div>
     </footer>
@@ -61,7 +62,8 @@ export default {
       all_goods_is_select: false,
       prop_all_goods_is_select: {},
       selectedNumber: 0,
-      allTotal: '$0.00'
+      allTotal: '$0.00',
+      isLoading: false,
     };
   },
 
@@ -75,13 +77,17 @@ export default {
       if (this.selectedNumber === 0) {
         return
       }
-      CART.orderConfirm(this.cachePrams).then(res => {
+      this.isLoading = true
+      CART.orderConfirm(this.cachePrams, true).then(res => {
+        this.isLoading = false
         const StringParams = JSON.stringify(this.cachePrams)
         sessionStorage.cartParams = StringParams
          let path_params = {
           path: "/checkout",
         };
         this.$router.push(path_params);
+      }).catch(()=>{
+        this.isLoading = false
       });
 
       //  let path_params = {
@@ -236,11 +242,17 @@ export default {
     .pay {
       height: 46px;
       .paypal {
-        width: 50%;
+        width: 100%;
         background:rgba(255,196,56,1);
         display: inline-block;
         text-align: center;
         line-height: 46px;
+        span{
+          display: inline-block;
+          vertical-align: middle;
+          margin-left: 5px;
+          color: #aab2bd;
+        }
         &.checkout {
           color: #fff;
           background:rgba(0,0,0,1);

@@ -4,15 +4,15 @@
       <div class="des">
         <img src="/static/images/icon/footer/cart-black@3x.png" alt="">
         <span>Show order summary</span>
-        <van-icon name="arrow-down" class="arrow" />
+        <van-icon name="arrow-down" class="arrow" :class="{'closed': !this.statusOderSummary}" />
       </div>
       <div class="price">{{ resSummary.all_total }}</div>
     </div>
-    <section :class="{'closed': !this.statusOderSummary}" ref="sectionsref">
+    <section  ref="sectionsref">
       <good-review :store_goods= "resSummary.store_goods"></good-review>
       <div class="total-des">
         <p>
-          <span>Total</span>
+          <span>Sub_total</span>
           <span class="price">{{ resSummary.total }}</span>
         </p>
         <p>
@@ -28,7 +28,7 @@
           <span class="price">{{ resSummary.coupon_discount }}</span>
         </p>
         <div class="all-total">
-          All Total: <span> {{ resSummary.all_total }}</span>
+          Total: <span> {{ resSummary.all_total }}</span>
         </div>
       </div>
     </section>
@@ -100,7 +100,11 @@
 
       }
       .arrow{
+        transition: .5s;
         transform: translateY(5px);
+        &.closed {
+          transform: rotate(-90deg) translateX(-5px);
+        }
       }
     }
     .price {
@@ -110,14 +114,13 @@
     }
   }
   section {
-    &.closed {
-      padding-bottom: 0px;
-    }
+    /*&.closed {*/
+      /*padding-bottom: 0px;*/
+    /*}*/
     box-sizing: content-box;
     transition:all 0.5s;
     overflow: hidden;
     padding:0px  15px;
-    padding-bottom: 20px;
     border-bottom:1px solid rgba(231,231,231,1);
     .total-des {
       margin-top: 10px;
@@ -131,6 +134,7 @@
       }
       .all-total {
         margin-top: 20px;
+        margin-bottom: 20px;
         text-align: right;
         font-size:14px;
         font-weight:400;

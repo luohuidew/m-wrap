@@ -89,6 +89,7 @@
       </div>
       <div class="error">
         {{all_data.store_code_info.error_msg}}
+        {{all_data.store_code_info.price_desc}}
       </div>
     </div>
     <div class="shipping" @click="showVantShippingMethod">
