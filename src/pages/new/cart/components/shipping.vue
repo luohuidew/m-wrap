@@ -3,7 +3,7 @@
     <h3>Select Delivery Meth</h3>
     <ul class="delivery-content">
       <li class="card"
-        v-for="(item,index) in shipping_lists.list"
+        v-for="(item,index) in VantShippingStore.ship_method.list"
         :key="index"
         :class="is_selected===item.key ? 'active':''"
         @click="selected_shipping(item)">
@@ -39,12 +39,13 @@ export default {
   name: "Shipping",
   data() {
     return {
-      is_selected: 0
+      is_selected: 0,
+      is_selectedItem: {}
     };
   },
   computed:{
     default_selected(){
-      const defaultkey = this.shipping_lists.default
+      const defaultkey = this.VantShippingStore.ship_method.default
       return defaultkey
     }
   },
@@ -52,6 +53,10 @@ export default {
     default_selected:{
       handler(newVal) {
         this.is_selected = newVal
+        const de = this.VantShippingStore.ship_method.list.filter(item=>{
+         return item.key === newVal
+        })
+        this.is_selectedItem = de[0]
       },
       immediate: true,
     }
@@ -60,7 +65,14 @@ export default {
 
   },
   props: {
-    shipping_lists: {}
+    VantShippingStore: {
+      type: Object,
+      default() {
+        return {
+          ship_method: {}
+        }
+      }
+    }
   },
   created() {
   },
@@ -72,6 +84,7 @@ export default {
     go_back() {
       const obj = {
         shippingKey: this.is_selectedItem.key,
+        storeId: this.VantShippingStore.store_id
       }
       this.$emit('closeVant', obj)
     },

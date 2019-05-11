@@ -56,10 +56,7 @@ export default {
   computed: {},
   methods: {
     go_back() {
-      const obj = {
-        id: this.cur_coupon.id
-      }
-      this.$emit('closeVant',obj)
+      this.$emit('closeVant',this.cur_coupon)
     },
     init_data() {
       coupon.coupon({ status: 2 }).then(res => {

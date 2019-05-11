@@ -23,7 +23,7 @@
             </label>
           </p>
           <p class="link-btn"  @click="login">
-            Log In
+           Sign In
           </p>
         </li>
         <li v-else>

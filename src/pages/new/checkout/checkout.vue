@@ -13,7 +13,7 @@
           <div class="footer">
             <div class="total-des">
               <p>
-                <span>Sub_total</span>
+                <span>Subtotal</span>
                 <span class="price">{{ resSummary.all_total }}</span>
               </p>
               <p>
@@ -26,6 +26,11 @@
             </div>
             <div class="pay-but" @click="createOrder">
               Place your order
+            </div>
+            <div class="Policy">
+              <router-link to="/statement">
+                Privacy Policy & Terms of Use
+              </router-link>
             </div>
           </div>
         </li>
@@ -122,6 +127,9 @@ export default {
             }
           });
         } else {
+          CART.getCartNum().then(res => {
+            this.$store.commit("SET_CATR", res.data.num);
+          });
           // 老版支付
           this.show_pay_methods = true;
           // 新版支付
@@ -188,6 +196,16 @@ export default {
   font-weight:bold;
   color:rgba(255,255,255,1);
 }
+    .Policy{
+      border-top: 1px solid #E1E1E1;
+      margin: 20px -15px;
+      height: 40px;
+      padding-left: 15px;
+      line-height: 40px;
+      font-size:12px;
+      font-weight:400;
+      color:rgba(0,0,0,1);
+    }
   }
 }
 

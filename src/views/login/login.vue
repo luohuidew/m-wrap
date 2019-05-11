@@ -46,7 +46,7 @@
     <div class="footer">
       <div class="who-we-are" v-if="is_selected === 'signIn'">
          <div class="title">
-           Who We Are
+           WHO WE ARE
          </div>
          <section>
            We are a global platform that doesn’t sleep. We’re 24/7 and always bringing something new with thousands of independent fashion designers and influencers. We believe in a world where you have the total freedom to be you, without judgement, and to be brave and grab life as the extraordinary adventure it is. We make sure everyone can express themselves and find a fashion leader that is on the same channel as you. We exist
@@ -409,6 +409,7 @@ export default {
     background:rgba(248,248,248,1);
     .who-we-are {
       .title {
+        text-align: center;
         font-size:16px;
         font-weight:800;
         color:rgba(0,0,0,1);

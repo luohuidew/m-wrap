@@ -96,9 +96,7 @@
       <h2>{{shippingName}}</h2>
       <h3>{{shippingDesc}}</h3>
     </div>
-    <van-popup v-model="showVantShipping" position="bottom" >
-      <Shipping @closeVant = 'closeVantShipping' :shipping_lists="all_data.ship_method"></Shipping>
-    </van-popup>
+
   </div>
 </template>
 
@@ -123,6 +121,11 @@
       type: Object,
       default: {
         goods_data: []
+      },
+    },
+    shippSelectObj: {
+      type: Object,
+      default: {
       }
     },
   },
@@ -142,6 +145,19 @@
   mounted() {
   },
   watch: {
+    shippSelectObj: {
+      handler(newVal) {
+        if(this.all_data.store_id === newVal.storeId) {
+          const select = this.listsData.ship_method.list.filter(ship=>{
+            return ship.key === newVal.shippingKey
+          })
+          this.shippingName = select[0].key_name
+          this.shippingDesc = select[0].desc
+        }
+
+      },
+      deep:true
+    },
     defaultShippingKey:{
       handler(newVal) {
         const select = this.listsData.ship_method.list.filter(ship=>{
@@ -170,6 +186,8 @@
       this.emitPrant()
     },
     showVantShippingMethod() {
+      this.$emit('showVantShipping',{store_id:this.all_data.store_id})
+
       this.showVantShipping = true
     },
     account(num, index) {

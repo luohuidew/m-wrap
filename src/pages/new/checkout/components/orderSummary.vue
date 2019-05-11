@@ -12,7 +12,7 @@
       <good-review :store_goods= "resSummary.store_goods"></good-review>
       <div class="total-des">
         <p>
-          <span>Sub_total</span>
+          <span>Subtotal</span>
           <span class="price">{{ resSummary.total }}</span>
         </p>
         <p>

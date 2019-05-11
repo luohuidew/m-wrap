@@ -63,7 +63,7 @@ export default {
 .downLoad {
   position: fixed;
   right: 0;
-  top: 70px;
+  top: 90px;
   // transform: translateY(-50px);
   display: block;
   height: 32px;

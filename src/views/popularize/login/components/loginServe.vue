@@ -19,7 +19,7 @@
           <p class="forget"></p>
           <p class="link-btn">
             <a href="javascript:;"
-              @click="login">Log In</a>
+              @click="login">Sign In</a>
           </p>
         </li>
         <li v-else>

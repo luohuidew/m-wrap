@@ -32,16 +32,16 @@
       :key="index"
       class="cart-lists">
       <li class="cart-lists-item">
-        <cart-item @checkout="get_item_checkout" :lists-data="item" ref="StoreRef"></cart-item>
+        <cart-item @showVantShipping = "showVantShipping" :shippSelectObj="shippSelectObj" @checkout="get_item_checkout" :lists-data="item" ref="StoreRef"></cart-item>
       </li>
     </ul>
-    <div class="coupon" @click="showVantCouponMethod">
-      <img src="" alt="">
-      <span>Save $4.00 优惠券的名字</span>
-    </div>
-    <van-popup v-model="showVantCoupon" position="bottom" >
-      <Coupon @closeVant = 'closeshowVantCoupon' :couponData="coupon_list"></Coupon>
-    </van-popup>
+    <!--<div class="coupon" @click="showVantCouponMethod">-->
+      <!--<img src="" alt="">-->
+      <!--<span>Save $4.00 优惠券的名字</span>-->
+    <!--</div>-->
+    <!--<van-popup v-model="showVantCoupon" position="bottom" >-->
+      <!--<Coupon @closeVant = 'closeshowVantCoupon' :couponData="coupon_list"></Coupon>-->
+    <!--</van-popup>-->
   </div>
 </template>
 
@@ -63,6 +63,11 @@ export default {
     };
   },
   props: {
+    shippSelectObj: {
+      type: Object,
+      default: {
+      }
+    },
     goodsData: {
       type: Array,
       default: []
@@ -75,7 +80,7 @@ export default {
     }
   },
   created() {
-    this.getCoupon() //获取优惠券
+
   },
   watch: {
     isAllSelected: {
@@ -89,6 +94,9 @@ export default {
   computed: {
   },
   methods: {
+    showVantShipping(obj) {
+      this.$emit('showVantShipping',obj)
+    },
     getCoupon() {
       coupon.coupon({ status: 2 }).then(res => {
         this.coupon_list = res.data;
@@ -155,24 +163,7 @@ export default {
 
 <style lang='scss' scoped>
   .cart-list{
-    .coupon {
-      border-bottom: 10px solid #f3f3f3;
-      padding-left: 15px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      background: url(/static/img/icon/right.png) no-repeat center right 15px;
-      img {
-        display: inline-block;
-        height: 20px;
-      }
-      span {
-        line-height: 20px;
-        font-size:12px;
-        font-weight:400;
-        color:rgba(155,155,155,1);
-      }
-    }
+
   }
   .total-cart-box {
   padding: 20px 20px 13px 20px;

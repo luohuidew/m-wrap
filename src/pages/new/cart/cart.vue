@@ -2,8 +2,12 @@
   <div class="cart-layout">
     <div class="scroll-lists"  v-if="req_data">
       <template v-if="req_data.store_goods && req_data.store_goods.length>0">
-        <cart-list @change="get_list_data"
+        <cart-list @change="get_list_data" :shippSelectObj="shippSelectObj" @showVantShipping = "showVantShipping"
           :goods-data="req_data.store_goods" :isAllSelected = 'prop_all_goods_is_select'></cart-list>
+        <div class="coupon" @click="showVantCouponMethod">
+          <img src="" alt="">
+          <span>{{couponText}}</span>
+        </div>
       </template>
       <template v-else>
         <div class="no-cart-item">
@@ -39,25 +43,38 @@
         <div class="paypal checkout" @click="toCheckout">Secure checkout</div>
       </div>
     </footer>
-    <!--<cart-footer v-if="req_data"-->
-      <!--:total-price="totalPrice"-->
-      <!--:selectAll = 'selectAll'-->
-      <!--&gt;-->
-    <!--</cart-footer>-->
+    <van-popup v-model="showVantShippingPopu" position="bottom" >
+      <Shipping @closeVant = 'closeVantShipping' :VantShippingStore="VantShippingStore"></Shipping>
+    </van-popup>
+    <van-popup v-model="showVantCouponPopu" position="bottom" >
+      <Coupon @closeVant = 'closeshowVantCoupon' :couponData="coupon_list"></Coupon>
+    </van-popup>
   </div>
 </template>
 
 <script>
 import CART from "@/api/cart";
+import couponApi from "@/api/coupon";
 import cartList from "./components/cartList";
 import cartGuide from "./components/cartGuide";
 import cartExpired from "./components/cartExpired";
 import cartFooter from "./components/cartFooter";
+import Shipping from "./components/shipping";
+import Coupon from "@/components/coupon";
+
 import detailCouponDialog from "@/pages/detail/detail-content/detailCoupon/components/detailCouponDialog";
 export default {
   name: "",
   data() {
     return {
+      couponText: 'Select Coupon',
+      user_coupon_id: undefined,
+      showVantCouponPopu: false,
+      coupon_list: [],
+      shippingCatch: [],
+      VantShippingStore: {},
+      showVantShippingPopu: false,
+      shippSelectObj:{},
       req_data: {},
       all_goods_is_select: false,
       prop_all_goods_is_select: {},
@@ -68,11 +85,55 @@ export default {
   },
 
   created() {
+    this.ZANCUN_DDTA = []
+    this.ZANCUN_Coupon = undefined
     this.init_data();
+    this.getCoupon() //获取优惠券
   },
   mounted() {},
   computed: {},
   methods: {
+    closeshowVantCoupon(obj) {
+      this.user_coupon_id = obj.id
+      this.couponText = obj.name
+      this.showVantCouponPopu = false
+      if (this.ZANCUN_DDTA.length > 0) {
+        this.totalPrices(this.ZANCUN_DDTA, this.ZANCUN_Coupon)
+      }
+    },
+    showVantCouponMethod() {
+      this.showVantCouponPopu = true
+    },
+    getCoupon() {
+      couponApi.coupon({ status: 2 }).then(res => {
+        this.coupon_list = res.data;
+      });
+    },
+    showVantShipping(obj) {
+      const store_id = obj.store_id
+      const shipStore = this.req_data.store_goods.filter(store=>{
+        return store.store_id === store_id
+      })
+      this.VantShippingStore = shipStore[0]
+      this.showVantShippingPopu = true
+    },
+    closeVantShipping(obj) {
+      this.shippSelectObj = obj
+      let clock = false
+      this.shippingCatch.forEach((item, index) => {
+        if (item.storeId === obj.storeId) {
+          this.shippingCatch[index] = obj
+          clock = true
+        }
+      })
+      if (!clock) {
+        this.shippingCatch.push(obj)
+      }
+      if (this.ZANCUN_DDTA.length > 0) {
+        this.totalPrices(this.ZANCUN_DDTA, this.ZANCUN_Coupon)
+      }
+      this.showVantShippingPopu = false
+    },
     toCheckout(){
       if (this.selectedNumber === 0) {
         return
@@ -123,6 +184,8 @@ export default {
       this.findAllSelectGood(data)
       if (count === 0) {
         this.allTotal = '$0.00'
+        this.ZANCUN_DDTA = []
+        this.ZANCUN_Coupon = undefined
         return
       }
       this.times = setTimeout(()=>{ // 防止同时提交多个请求
@@ -130,21 +193,29 @@ export default {
       },100)
     },
     totalPrices(data, couponId) {
+      this.ZANCUN_DDTA = data
+      this.ZANCUN_Coupon = couponId
       const params={
         store_code: [],
         store_ship_method: [],
         cart_goods: [],
-        user_coupon_id: couponId
+        user_coupon_id: this.user_coupon_id
       }
       data.forEach(item=>{
         params.store_code.push({
           code_number:item.code_number,
           store_id: item.store_id,
         })
-        params.store_ship_method.push({
+        let ships = {
           ship_method:item.shipp_key,
           store_id: item.store_id,
+        }
+        this.shippingCatch.forEach(shipobj=>{
+          if (shipobj.storeId  === item.store_id) {
+            ships.ship_method = shipobj.shippingKey
+          }
         })
+        params.store_ship_method.push(ships)
         item.goods.forEach((good)=>{
           params.cart_goods.push({
             cart_id:good.cart_id,
@@ -201,7 +272,9 @@ export default {
     cartGuide,
     cartExpired,
     detailCouponDialog,
-    cartFooter
+    cartFooter,
+    Shipping,
+    Coupon
   }
 };
 </script>
@@ -264,6 +337,24 @@ export default {
 .scroll-lists {
   height: calc(100% - 100px);
   overflow: auto;
+}
+.coupon {
+  border-bottom: 10px solid #f3f3f3;
+  padding-left: 15px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  background: url(/static/img/icon/right.png) no-repeat center right 15px;
+  img {
+    display: inline-block;
+    height: 20px;
+  }
+  span {
+    line-height: 20px;
+    font-size:12px;
+    font-weight:400;
+    color:rgba(155,155,155,1);
+  }
 }
 /*  */
 .no-cart-item {
