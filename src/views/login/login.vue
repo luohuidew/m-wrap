@@ -90,7 +90,7 @@
         <router-link to="/statement" tag="p">
           Privacy Policy
         </router-link>
-        <p>Need help？Visit the <a class="email" href="mailto:service@weget.com">help center</a></p>
+        <p><img src="./img/question.png" height="15" /> Need help？Visit the <a class="email" href="mailto:service@weget.com">help center</a></p>
       </div>
 
     </div>

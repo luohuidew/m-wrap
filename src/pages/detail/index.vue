@@ -28,11 +28,11 @@ export default {
     // 可以访问组件实例 `this`
     // debugger;
      document.title = " Weget.com | stylish online fashion marketplace ";
-    setTimeout(()=>{      
+    setTimeout(()=>{
       next();
-    },0)    
+    },0)
   },
-  created() {    
+  created() {
     if (this.$route.query.type === "keep") {
       // debugger;
       if (this.$store.state.token) {
@@ -50,17 +50,15 @@ export default {
         count: this.$route.query.count
       };
       CART.addToCart(auto_params).then(res => {
-        // this.$emit("close", null);
-        // this.init_cart();
         this.init_cart();
       }, 0);
     },
     init_cart() {
-       CART.getCartNum().then(res => {                    
+       CART.getCartNum().then(res => {
         this.$store.commit("SET_CATR", res.data.num);
       });
         this.clearParams();
-      
+
     },
     clearParams() {
       let sku_id = this.$route.query.sku_id;

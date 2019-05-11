@@ -362,17 +362,23 @@ export default {
       this.$router.push(params);
     },
     like_goods() {
-      let params = {
-        sku_id: this.$route.query.sku_id
-      };
-      api.like(params).then(res => {
-        this.is_like = res.data;
-        // if (this.is_like === 1) {
-        //   this.sku.like_num += -1;
-        // } else {
-        //   this.sku.like_num += 1;
-        // }
-      });
+      if (!this.$store.state.token) {
+        const param = {
+          path: "/login",
+          query: {
+            redirect: this.$route.fullPath
+          }
+        }
+        this.$router.push(param)
+      } else {
+        let params = {
+          sku_id: this.$route.query.sku_id
+        };
+        api.like(params).then(res => {
+          this.is_like = res.data;
+        });
+      }
+
     }
   }
 };
