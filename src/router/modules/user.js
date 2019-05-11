@@ -1,5 +1,4 @@
 import store from '@/store'
-import Router from 'vue-router'
 let token  = store.state.token;
 export default {
   path: '/user',
@@ -35,7 +34,7 @@ export default {
         import('@/views/user/profile'),
       meta: {
         title: 'Profile',
-        keepAlive: false,        
+        keepAlive: false,
       }
     },
     {
@@ -45,7 +44,7 @@ export default {
         import('@/views/user/order'),
       meta: {
         title: 'My Orders',
-        keepAlive: false,        
+        keepAlive: false,
       }
     },
     {
@@ -55,7 +54,7 @@ export default {
         import('@/views/user/orderDetail'),
       meta: {
         title: 'My Orders',
-        keepAlive: false,        
+        keepAlive: false,
       }
     },
     {
@@ -65,7 +64,7 @@ export default {
         import('@/views/user/setting'),
       meta: {
         title: 'Settings',
-        keepAlive: false,        
+        keepAlive: false,
       }
     },
     {
@@ -75,7 +74,7 @@ export default {
         import('@/views/user/coupon'),
       meta: {
         title: 'My Coupons',
-        keepAlive: false,        
+        keepAlive: false,
       }
     },
     {
@@ -85,7 +84,7 @@ export default {
         import('@/views/user/like'),
       meta: {
         title: 'like',
-        keepAlive: false,        
+        keepAlive: false,
       }
     },
     {
@@ -95,7 +94,7 @@ export default {
         import('@/views/user/follow'),
       meta: {
         title: 'following',
-        keepAlive: false,        
+        keepAlive: false,
       }
     },
   ]

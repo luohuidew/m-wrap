@@ -132,19 +132,6 @@ export default {
 
 <style lang='scss' scoped>
 $basecolor: #d70e19;
-
-input {
-  outline-color: invert;
-  outline-style: none;
-  outline-width: 0px;
-  border: none;
-  border-style: none;
-  text-shadow: none;
-  -webkit-appearance: none;
-  -webkit-user-select: text;
-  outline-color: transparent;
-  box-shadow: none;
-}
 .form-content {
   width:100%;
   margin: 0 auto;

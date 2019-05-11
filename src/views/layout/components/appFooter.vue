@@ -21,6 +21,7 @@
 
 <script>
 import CART from "@/api/cart";
+import { getToken } from "@/utils/auth";
 export default {
   name: "",
   props: {},
@@ -58,7 +59,6 @@ export default {
   watch: {},
   computed: {
     storeCart() {
-      console.log(this.$store.state);
       return this.$store.state.cart;
     }
   },
@@ -67,9 +67,11 @@ export default {
   },
   methods: {
     init_cart() {
-      CART.getCartNum().then(res => {
-        this.$store.commit("SET_CATR", res.data.num);
-      });
+      if (getToken()) {
+        CART.getCartNum().then(res => {
+          this.$store.commit("SET_CATR", res.data.num);
+        });
+      }
     }
   },
   components: {}

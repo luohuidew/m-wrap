@@ -2,106 +2,130 @@
   <div class="cart-list"
     v-if="goodsData.length">
     <div class="total-cart-box">
-      <!-- <h2>Cart ({{all_data_length}})</h2> -->
-      <div class="head-select">
-        <div class="select-box">
-          <div class="icon-box"
-            @click="toggle_checked_all(all_store_is_select)">
-            <img v-if="all_store_is_select"
-              src="/static/images/icon/cart/多选 选中@3x.png"
-              alt=""
-              srcset="">
-            <img v-else
-              src="/static/images/icon/cart/多选 未选中@3x.png"
-              alt=""
-              srcset="">
-          </div>
-          <p class="total-select">
-            Select All Available Items <span>({{$store.state.cart.goods_num}})</span>
-          </p>
-        </div>
-        <p class="remove"
-          @click="remove_cart_items(total_data.cart_ids)">
-          <img src="/static/images/icon/cart/H5 删除 grey@3x.png"
-            alt=""
-            srcset="">
-        </p>
-      </div>
+      <div class="title">Cart</div>
+      <!--<div class="head-select">-->
+        <!--<div class="select-box">-->
+          <!--<div class="icon-box"-->
+            <!--@click="toggle_checked_all(all_store_is_select)">-->
+            <!--<img v-if="all_store_is_select"-->
+              <!--src="/static/images/icon/cart/多选 选中@3x.png"-->
+              <!--alt=""-->
+              <!--srcset="">-->
+            <!--<img v-else-->
+              <!--src="/static/images/icon/cart/多选 未选中@3x.png"-->
+              <!--alt=""-->
+              <!--srcset="">-->
+          <!--</div>-->
+          <!--<p class="total-select">-->
+            <!--Select All Available Items <span>({{$store.state.cart.goods_num}})</span>-->
+          <!--</p>-->
+        <!--</div>-->
+        <!--<p class="remove"-->
+          <!--@click="remove_cart_items(total_data.cart_ids)">-->
+          <!--<img src="/static/images/icon/cart/H5 删除 grey@3x.png"-->
+            <!--alt=""-->
+            <!--srcset="">-->
+        <!--</p>-->
+      <!--</div>-->
     </div>
     <ul v-for="(item,index) in goodsData"
       :key="index"
       class="cart-lists">
       <li class="cart-lists-item">
-        <cart-item @checkout="get_item_checkout(index,$event)"
-          :lists-data="item"></cart-item>
+        <cart-item @checkout="get_item_checkout" :lists-data="item" ref="StoreRef"></cart-item>
       </li>
     </ul>
+    <div class="coupon" @click="showVantCouponMethod">
+      <img src="" alt="">
+      <span>Save $4.00 优惠券的名字</span>
+    </div>
+    <van-popup v-model="showVantCoupon" position="bottom" >
+      <Coupon @closeVant = 'closeshowVantCoupon' :couponData="coupon_list"></Coupon>
+    </van-popup>
   </div>
 </template>
 
 <script>
 import cartItem from "./cartItem";
+import Coupon from "@/components/coupon";
 import CART from "@/api/cart";
+import coupon from "@/api/coupon";
+
 export default {
   name: "",
   data() {
     return {
-      cart_lists_item: [],
-      total_data: {
-        total: 0,
-        cart_ids: []
-      }
+      selectStoreGoods: [],
+      all_store_is_select: false,
+      user_coupon_id: undefined,
+      showVantCoupon: false,
+      coupon_list: [],
     };
   },
   props: {
     goodsData: {
       type: Array,
       default: []
+    },
+    isAllSelected: {
+      type: Object,
+      default: {
+        val: false
+      }
     }
   },
   created() {
-    this.init_data();
+    this.getCoupon() //获取优惠券
   },
-  watch: {},
-  mounted() {},
-  computed: {
-    all_store_is_select() {
-      let temp_boolean = false;
-      let equal =
-        this.cart_lists_item.length === this.goodsData.length &&
-        this.cart_lists_item.length > 0;
-      if (equal) {
-        temp_boolean = this.cart_lists_item.every(item => {
-          return item.checked_store === true;
-        });
-      }
-      return temp_boolean;
-    },
-    all_data_length() {
-      let count = 0;
-      this.goodsData.forEach(item => {
-        item.goods_list.forEach(item_min => {
-          count += 1;
-        });
-      });
-      return count;
+  watch: {
+    isAllSelected: {
+      handler(curobj){
+        this.toggle_checked_all(!curobj.val)
+      },
+      deep:true
     }
   },
+  mounted() {},
+  computed: {
+  },
   methods: {
-    init_data() {},
-    get_item_checkout(index, data) {
-      // debugger
-      this.$set(this.cart_lists_item, index, data);
-      let temp = {
-        cart_lists_item: this.cart_lists_item,
-        total_data: this.total_data
-      };
-      // debugger;
-      this.$emit("change", temp);
+    getCoupon() {
+      coupon.coupon({ status: 2 }).then(res => {
+        this.coupon_list = res.data;
+      });
     },
-    toggle_checked_all() {
-      this.$children.forEach(item => {
-        item.toggle_checked();
+    showVantCouponMethod() {
+      this.showVantCoupon = true
+    },
+    closeshowVantCoupon(obj) {
+      this.user_coupon_id = obj.id
+      this.showVantCoupon = false
+      this.$emit("change", this.selectStoreGoods, this.user_coupon_id);
+    },
+    get_item_checkout(obj) {
+      let clock = false
+      this.selectStoreGoods.forEach((item,index) => {
+        if (item.store_id === obj.store_id) {
+          clock = true
+          this.selectStoreGoods[index] = obj
+        }
+      })
+      if (!clock) {
+        this.selectStoreGoods.push(obj)
+      }
+      this.$emit("change", this.selectStoreGoods, this.user_coupon_id);
+      // this.findAllSelectStore()
+    },
+    // findAllSelectStore() {
+    //   console.log(this.selectStoreGoods, 5)
+    //  const selectedStore =  this.selectStoreGoods.filter(item=> {
+    //     return item.checkted_store === true
+    //   })
+    //   this.all_store_is_select = selectedStore.length === this.goodsData.length
+    // },
+    toggle_checked_all(val) {
+      this.$refs.StoreRef.forEach(item => {
+        item.toggle_checked(val);
       });
     },
     remove_cart_items(cartIds = []) {
@@ -114,7 +138,6 @@ export default {
       CART.delShopCartGood(params)
         .then(res => {
           window.location.reload();
-          // this.$parent.init_data();
         })
         .then(() => {
           CART.getCartNum().then(res => {
@@ -124,14 +147,40 @@ export default {
     }
   },
   components: {
-    cartItem
+    cartItem,
+    Coupon
   }
 };
 </script>
 
 <style lang='scss' scoped>
-.total-cart-box {
+  .cart-list{
+    .coupon {
+      border-bottom: 10px solid #f3f3f3;
+      padding-left: 15px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      background: url(/static/img/icon/right.png) no-repeat center right 15px;
+      img {
+        display: inline-block;
+        height: 20px;
+      }
+      span {
+        line-height: 20px;
+        font-size:12px;
+        font-weight:400;
+        color:rgba(155,155,155,1);
+      }
+    }
+  }
+  .total-cart-box {
   padding: 20px 20px 13px 20px;
+  .title {
+    font-size:26px;
+    font-weight:900;
+    color:rgba(0,0,0,1);
+  }
   h2 {
     font-size: 26px;
     padding-bottom: 28px;
@@ -156,9 +205,7 @@ export default {
   }
 }
 .cart-lists {
-  padding: 5px 20px;
-  border-top: 10px solid #f3f3f3;
-  .cart-lists-item {
-  }
+  padding: 5px 15px;
+  border-bottom: 10px solid #f3f3f3;
 }
 </style>

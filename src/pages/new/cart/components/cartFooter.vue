@@ -83,7 +83,7 @@ export default {
             this.buy_num += Number(item1.count);
             init_number += Number(item1.count) * Number(item1.goods_price);
           });
-        });        
+        });
         this.total_price = init_number;
       },
       deep: true

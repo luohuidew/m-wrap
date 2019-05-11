@@ -1,6 +1,7 @@
 <template>
+  <!--一个店铺-->
   <div class="cart-item"
-    v-if="cur_lists.length">
+    v-if="cur_lists.length>0">
     <div class="cart-lists-store">
       <div class="store-box">
         <div class="icon-box"
@@ -16,7 +17,7 @@
         </div>
         <p class="total-store"
           @click="to_store(all_data.store_id)">
-          <img src="/static/images/icon/cart/store@3x.png"
+          <img :src="all_data.logo"
             alt=""
             srcset="">
           <span class="text-line-clamp-1">{{all_data.store_name}}</span>
@@ -35,40 +36,41 @@
         <div class="card-item">
           <div class="store-box">
             <div class="icon-box">
-              <img v-if="checked_all_only.indexOf(item.only)===-1"
-                @click="check_only(item)"
-                src="/static/images/icon/cart/多选 未选中@3x.png"
-                alt=""
-                srcset="">
-              <img v-else
+
+              <img v-if="item.checkted"
                 @click="no_check_only(item)"
                 src="/static/images/icon/cart/多选 选中@3x.png"
                 alt=""
                 srcset="">
+              <img v-else
+                   @click="check_only(item)"
+                   src="/static/images/icon/cart/多选 未选中@3x.png"
+                   alt=""
+                   srcset="">
             </div>
           </div>
           <div class="cover-img-box"
             @click="to_detail(item.sku_id)">
-            <img :src="item.goods_img"
+            <img :src="item.cover_img"
               alt=""
               srcset="">
           </div>
           <div class="title-box">
             <p class="goods-title text-line-clamp-1">
-              {{item.goods_title}}
+              {{item.title}}
             </p>
             <div class="attr-select">
               <span> {{item.attr_str}}</span>
             </div>
             <div class="card-count">
-              <span class="price">${{item.goods_price}}</span>
+              <span class="price">{{item.price}}</span>
               <span class="account-change">
                 <i @click="account(-1,index)">
                   <img src="/static/images/icon/cart/减@3x.png"
                     alt=""
                     srcset="">
                 </i>
-                <span>{{item.count}}</span>
+                <span>{{item.num}}</span>
                 <i @click="account(1,index)">
                   <img src="/static/images/icon/cart/加好@3x.png"
                     alt=""
@@ -80,81 +82,99 @@
         </div>
       </li>
     </ul>
-
+    <div class="code">
+      <div class="content">
+        <input type="text" v-model="code" @input="codeInput" placeholder="Apply shop coupon code"  />
+        <div class="commit" :class="{ actived: codeActived }" @click="codeChange"></div>
+      </div>
+      <div class="error">
+        {{all_data.store_code_info.error_msg}}
+      </div>
+    </div>
+    <div class="shipping" @click="showVantShippingMethod">
+      <h2>{{shippingName}}</h2>
+      <h3>{{shippingDesc}}</h3>
+    </div>
+    <van-popup v-model="showVantShipping" position="bottom" >
+      <Shipping @closeVant = 'closeVantShipping' :shipping_lists="all_data.ship_method"></Shipping>
+    </van-popup>
   </div>
 </template>
 
 <script>
-import CART from "@/api/cart";
-export default {
+  import Shipping from "./shipping";
+
+  export default {
   name: "",
   data() {
     return {
-      all_data: this.listsData,
-      cur_lists: this.listsData.goods_list,
-      checked_all_only: [],
-      checked_all_item: []
+      checked_store: false,
+      showVantShipping: false,
+      code: '',
+      codeActived: false,
+      selectShippingKey: 0,
+      shippingName: '',
+      shippingDesc: '',
     };
   },
   props: {
     listsData: {
       type: Object,
-      default: []
+      default: {
+        goods_data: []
+      }
     },
-    checkoutData: {
-      type: Boolean,
-      default: false
-    }
   },
   computed: {
-    checked_store() {
-      return this.cur_lists.length === this.checked_all_only.length;
-    }
-  },
-  mounted() {},
-  watch: {
-    checked_all_item: {
-      handler(cur, old) {
-        // if(cur.length){
-        //   }
-        let temp_emit = {
-          checked_store: this.checked_store,
-          checked_all_only: this.checked_all_only,
-          checked_all_item: this.checked_all_item,
-          cur_lists: this.cur_lists
-        };
-        this.$emit("checkout", temp_emit);
-      },
-      deep: true
+    defaultShippingKey() {
+      const defaultkey = this.listsData.ship_method.default
+      return defaultkey
     },
-    parent_checkout: {
-      handler(cur, old) {
-        console.log(cur, old);
-        if (cur !== old) {
-          if (cur) {
-          } else {
-            // this.checked_all_only = [];
-            // this.checked_all_item = [];
-          }
-        }
+    all_data() {
+      return this.listsData
+    },
+    cur_lists() {
+      return this.listsData.goods_data
+    },
+  },
+
+  mounted() {
+  },
+  watch: {
+    defaultShippingKey:{
+      handler(newVal) {
+        const select = this.listsData.ship_method.list.filter(ship=>{
+          return ship.key === newVal
+        })
+        this.shippingName = select[0].key_name
+        this.shippingDesc = select[0].desc
       },
-      deep: true
+      immediate: true,
     }
   },
   methods: {
-    del_cur_cart_item(only_id, index) {
-      let params = {
-        only: [only_id]
-      };
-
-      CART.delShopCartGood(params).then(res => {
-        this.cur_lists.splice(index, 1);
-      });
+    codeInput() {
+      if(this.code) {
+        this.codeActived = true
+      } else {
+        this.codeActived = false
+      }
+    },
+    codeChange() {
+      this.codeActived && this.emitPrant()
+    },
+    closeVantShipping(obj) {
+      this.selectShippingKey = obj.shippingKey
+      this.showVantShipping = false
+      this.emitPrant()
+    },
+    showVantShippingMethod() {
+      this.showVantShipping = true
     },
     account(num, index) {
       // debugger
       let cur_item = this.cur_lists[index];
-      let temp_number = Number(cur_item.count);
+      let temp_number = Number(cur_item.num);
       temp_number += num;
       if (temp_number == 0) {
         temp_number = 1;
@@ -162,42 +182,56 @@ export default {
       if (temp_number == 11) {
         temp_number = 10;
       }
-      cur_item.count = temp_number;
+      cur_item.num = temp_number;
+      this.emitPrant()
+    },
+    findSelectAll() {
+      const selctArray = this.cur_lists.filter(item => {
+        return item.checkted
+      })
+      this.checked_store = selctArray.length === this.cur_lists.length
+    },
+    emitPrant() {
+      const goods = []
+      this.cur_lists.forEach(item=> {
+        if (item.checkted) {
+          goods.push({
+            cart_id: item.cart_id,
+            num: item.num,
+            checkted: item.checkted
+          })
+        }
+      })
+        const obj = {
+          checkted_store: this.checked_store,
+          store_id: this.all_data.store_id,
+          goods: goods,
+          shipp_key: this.selectShippingKey,
+          code_number: this.code
+        }
+        console.log(obj,4)
+      this.$emit("checkout", obj);
     },
     check_only(item) {
-      /* jubu */
-      this.checked_all_only.push(item.only);
-      /* quanju */
-      this.checked_all_item.push(item);
-      let cur_total = Number(
-        (Number(item.goods_price) * (item.count - 0)).toFixed(2)
-      );
-      // this.$parent.total_data.total += cur_total;
-      this.$parent.total_data.cart_ids.push(item.only);
+      item.checkted = true
+      this.findSelectAll()
+      this.emitPrant()
     },
     no_check_only(item) {
-      let index = this.checked_all_only.indexOf(item.only);
-      this.checked_all_only.splice(index, 1);
-      this.checked_all_item.splice(index, 1);
-      let cur_total = Number(
-        (Number(item.goods_price) * (item.count - 0)).toFixed(2)
-      );
-      // debugger;
-      // this.$parent.total_data.total  -=  cur_total;
-      this.$parent.total_data.cart_ids.pop(item.only);
-      // debugger
+      item.checkted = false
+      this.findSelectAll()
+      this.emitPrant()
     },
-    toggle_checked(cur_checked = this.checked_store) {
-      let temp_lists = this.cur_lists;
-      temp_lists.forEach(item => {
+    toggle_checked(cur_checked) {
+      this.cur_lists.forEach(item => {
         if (!cur_checked) {
-          if (this.checked_all_only.indexOf(item.only) == -1) {
-            this.check_only(item);
-          }
+          item.checkted = true
         } else {
-          this.no_check_only(item);
+          item.checkted = false
         }
       });
+      this.findSelectAll()
+      this.emitPrant()
     },
     to_store(store_id) {
       let params = {
@@ -218,11 +252,16 @@ export default {
       this.$router.push(params);
     }
   },
-  components: {}
+  components: {
+    Shipping
+  },
 };
 </script>
 
 <style lang='scss' scoped>
+  .cart-item {
+    padding-bottom: 20px;
+  }
 .cart-card {
   display: flex;
   align-items: center;
@@ -237,14 +276,15 @@ export default {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #f3f3f3;
+
   .total-store {
     display: flex;
     align-items: center;
     img {
-      width: 18px;
-      height: 18px;
+      width: 30px;
+      height: 30px;
       object-fit: contain;
-      vertical-align: middle;
+      border-radius: 50%
     }
     span {
       display: inline-block;
@@ -323,6 +363,66 @@ export default {
         border: 1px solid #c9caca;
       }
     }
+  }
+}
+.code {
+  .error {
+    color: red;
+    font-size: 12px;
+    line-height: 20px;
+    padding-left: 2px;
+  }
+  .content {
+    display: flex;
+    justify-content: space-between;
+    input {
+      width:250px;
+      height:45px;
+      background:rgba(255,255,255,1);
+      border-radius:4px;
+      border:1px solid rgba(225,225,225,1);
+      line-height: 45px;
+      font-size:14px;
+      font-weight:400;
+      color:rgba(74,74,74,1);
+      padding-left: 10px;
+    }
+    .commit {
+      transition: 0.3s;
+      width:80px;
+      height:45px;
+      background-color:rgba(199,199,199,1);
+      border-radius:4px;
+      background-image: url("~@/assets/img/icon/arrow.png");
+      background-size: 30px;
+      background-repeat: no-repeat;
+      background-position: center;
+      &.actived {
+        background-color: black;
+      }
+    }
+
+  }
+}
+.shipping {
+  height:45px;
+  background-color:rgba(255,255,255,1);
+  border-radius:4px;
+  border:1px solid rgba(225,225,225,1);
+  box-sizing: border-box;
+  padding: 5px 10px;
+  margin-top:10px ;
+  line-height: 18px;
+  background: url(/static/img/icon/right.png) no-repeat center right 13px;
+  h2 {
+    font-size:12px;
+    font-weight:400;
+    color:rgba(0,0,0,1);
+  }
+  h3 {
+    font-size:10px;
+    font-weight:400;
+    color:rgba(155,155,155,1);
   }
 }
 </style>

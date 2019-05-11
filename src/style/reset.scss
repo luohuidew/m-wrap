@@ -13,14 +13,13 @@
     src: url('/static/font/Muli/Muli-Regular.ttf');
     /*字体源文件*/
 }
-
-@font-face {
-    font-family: 'Muli';
-    font-weight: bold;
-    /*字体名称*/
-    src: url('/static/font/Muli/Muli-Bold.ttf');
-    /*字体源文件*/
-}
+//
+//@font-face {
+//    font-family: 'Mulis2';
+//    /*字体名称*/
+//    src: url('/static/font/Muli/Muli-Bold.ttf');
+//    /*字体源文件*/
+//}
 
 html,
 body,
@@ -116,4 +115,19 @@ button {
 
 .clearfix:after {
     clear: both;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-weight: 400;
+}
+input {
+    outline-color: invert;
+    outline-style: none;
+    outline-width: 0px;
+    border: none;
+    border-style: none;
+    text-shadow: none;
+    -webkit-appearance: none;
+    -webkit-user-select: text;
+    outline-color: transparent;
+    box-shadow: none;
 }

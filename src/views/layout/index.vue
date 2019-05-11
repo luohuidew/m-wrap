@@ -3,18 +3,19 @@
     ref="app_content">
     <div id="banner-box"
       v-show="show_banner">
-      <router-link :to="{path:'/about'}"
-        class="about-us">
-        <img src="/static/images/elements/home/H5@3x.jpg"
-          alt=""
-          srcset="">
-      </router-link>
-      <span class="close-banner"
-        @click="keep_banner=!keep_banner">
-        <img src="/static/images/icon/header/close-white.png"
-          alt=""
-          srcset="">
-      </span>
+      <bannerTop :bannerData="topBannerData"></bannerTop>
+      <!--<router-link :to="{path:'/about'}"-->
+        <!--class="about-us">-->
+        <!--<img src="/static/images/elements/home/H5@3x.jpg"-->
+          <!--alt=""-->
+          <!--srcset="">-->
+      <!--</router-link>-->
+      <!--<span class="close-banner"-->
+        <!--@click="keep_banner=!keep_banner">-->
+        <!--<img src="/static/images/icon/header/close-white.png"-->
+          <!--alt=""-->
+          <!--srcset="">-->
+      <!--</span>-->
     </div>
     <div id="layout"
       :class="{'no-banner':!show_banner}">
@@ -59,6 +60,7 @@
 
 <script>
 import shareApp from "./components/appShare";
+import bannerTop from "./components/bannerTop";
 import loginAuto from "@/pages/login/auth/facebook.vue";
 import homeHeader from "./components/appHeader";
 import homeTitleOptions from "./components/appTitleOptions";
@@ -69,6 +71,15 @@ export default {
   name: "layout",
   data() {
     return {
+      topBannerData: [
+        {
+          text: 'Refer friends get $15 ！',
+          url: '/popularize/popu-1',
+        },
+        {
+          text: 'Get $15 in coupons when you sign up!',
+        }
+      ],
       transitionName: "slide-left",
       keep_banner: true
     };
@@ -97,7 +108,7 @@ export default {
         "/home/index",
         "/user/index",
         "/welog/index",
-        "/cart/index",
+        // "/cart/index",
         "/store/theme",
         "/home/theme"
       ];
@@ -112,7 +123,7 @@ export default {
     $route: {
       handler(to, from) {
         this.init_meta();
-        this.visitSaveLog();
+        // this.visitSaveLog();
         this.init_transtion(to, from);
         // debugger;
         this.init_device();
@@ -163,6 +174,7 @@ export default {
     }
   },
   components: {
+    bannerTop,
     loginAuto,
     shareApp,
     homeHeader,
@@ -180,8 +192,12 @@ export default {
   height: 100%;
 }
 #banner-box {
-  position: relative;
-  height: 65px;
+  height: 33px;
+  background: black;
+  color: #fff;
+  text-align: center;
+  line-height: 33px;
+  padding: 0px 10px;
   transition: all 0.5s;
   // overflow: hidden;
   .close-banner {
@@ -210,7 +226,7 @@ export default {
 }
 #layout {
   // flex: 1;
-  height: calc(100% - 65px);
+  height: calc(100% - 33px);
 
   &.no-banner {
     height: 100%;
@@ -221,14 +237,12 @@ export default {
   /* margin-top:50px; */
 }
 #app-header-top {
-  position: relative;
-  z-index: 1000;
-  box-shadow: 0px 2px 4px 0px #d0d0d0;
-  // border-bottom: 2px solid #f8f8f8;
+  height: 55px;
+  border-bottom: 2px solid #f8f8f8;
 }
 .page-head {
-  height: 55px;
-
+  height: 53px;
+  box-shadow: 0px 1px 2px 0px #d0d0d0;
   /*background-color: #f3f3f3;*/
 }
 .page-body {

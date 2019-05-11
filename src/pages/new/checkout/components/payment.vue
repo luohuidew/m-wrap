@@ -50,18 +50,31 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-.payment-box { 
-  padding-bottom: 20px;
+.payment-box {
+  padding: 15px;
   h3 {
-    padding: 20px 0;
+    font-size:18px;
+    font-weight:400;
+    color:rgba(0,0,0,1);
+    line-height: 20px;
+    margin-bottom: 10px;
+  }
+  ul {
+    border-radius:4px;
+    padding: 10px;
+    border:1px solid rgba(225,225,225,1);
   }
   li {
+    border-bottom: 1px solid rgba(225,225,225,1);
+    &:last-child{
+      border-bottom: none
+    }
     padding: 10px 0;
     p {
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      background: url("/static/img/icon/选择 灰@2x.png") no-repeat right center;
+      /*background: url("/static/img/icon/选择 灰@2x.png") no-repeat right center;*/
       background-size: 15px;
     }
     span {
@@ -72,11 +85,11 @@ export default {
       width: 34px;
     }
   }
-  .active {
-    p {
-      background: url("/static/img/icon/选择红@2x.png") no-repeat right center;
-      background-size: 15px 15px;
-    }
-  }
+  /*.active {*/
+    /*p {*/
+      /*background: url("/static/img/icon/选择红@2x.png") no-repeat right center;*/
+      /*background-size: 15px 15px;*/
+    /*}*/
+  /*}*/
 }
 </style>

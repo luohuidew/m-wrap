@@ -10,10 +10,24 @@ export default {
       data: JSON.stringify(data),
     })
   },
-  shopCartList(data = {}) {
+  cartcheckoutConfirm(data = {}) {
     data.token = token;
     return request({
-      url: 'shopcart/shopCartList',
+      url: 'cartcheckout/confirm?loading=yes',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+  totalPrice(data = {}) {
+    return request({
+      url: 'cartcheckout/totalPrice?loading=yes',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
+  orderConfirm(data = {}) {
+    return request({
+      url: 'order/orderConfirm?loading=yes',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -43,22 +57,11 @@ export default {
     })
   },
   getCartNum(data = {}) {
-    data.token = token;
-    if (!token) {
-      return new Promise((resolve,reject)=>{
-        resolve({
-          data:{
-            num:0
-          }
-        })
-      })
-    } else {
-      return request({
-        url: 'shopcart/getCartNum ',
-        method: 'post',
-        data: JSON.stringify(data),
-      })
-    }
+    return request({
+      url: 'shopcart/getCartNum ',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
   },
 
 }

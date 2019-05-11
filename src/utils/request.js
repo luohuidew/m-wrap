@@ -24,8 +24,8 @@ let BASE_API;
 // BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
 if (process.env.NODE_ENV === 'development') {
   // dev
-  BASE_API = 'https://app.weget.com/wap/';
-  // BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
+  // BASE_API = 'https://app.weget.com/wap/';
+  BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
 } else if (process.env.VUE_APP_TITLE === 'testing') {
   // testing
   BASE_API = 'http://app.weget.pzjhw.com:8088/wap/';
@@ -57,13 +57,11 @@ service.interceptors.request.use(
   config => {
     // console.log(config);
     if (config.url.indexOf('loading=yes') !== -1) {
-      axios_num += 1;
       http_load = Toast.loading({
         mask: true,
         forbidClick:true,
         loadingType: "spinner",
         message: 'Loading',
-        // duration: 3000
       });
     }
     // Do something before request is sent
@@ -76,9 +74,9 @@ service.interceptors.request.use(
     // debugger;
     delete_emity_params(config.params);
     let obj = JSON.parse(config.data)
-    // if (config.method !== 'get') {
-    //   obj.token = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
-    // }
+    if (config.method !== 'get') {
+      obj.token = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+    }
     config.headers['Encrypt-Sign'] = set_header(obj);
     config.data = JSON.stringify(obj)
     // console.log(set_header(config.data),config.data);
@@ -108,8 +106,8 @@ service.interceptors.response.use(
     // console.warn(response);
     if (res.code !== 1000) {
       // console.log(config);
-      /* 处于weget的app下不显示弹框 或者在checkout页面不单出*/
-      if (!localStorage.getItem('device') && !config.url.includes('checkout/totalPrice')) {
+      /* 处于weget的app下不显示弹框 */
+      if (!localStorage.getItem('device')) {
         // Toast(res.message
         let toast_config = {
           message: res.message,
@@ -119,16 +117,6 @@ service.interceptors.response.use(
         Toast(toast_config)
       }
 
-      let show_tips = false;
-      if (res.code === 3001) {
-        show_tips = false;
-      }
-      if (config.url.indexOf('getInfoByToken') !== -1) {
-        show_tips = false;
-      }
-      if (show_tips) {
-        Toast(res.message);
-      }
       // console.log(JSON.stringify(res.message));
       if (res.code === 1207 || res.code === 1209) {
         /* 清空旧的token */
@@ -203,19 +191,8 @@ service.interceptors.response.use(
     } else {
       // console.log('走过拦截相应');
       if (response.config.url.indexOf('loading=yes') !== -1) {
-        axios_num += -1;
+        http_load.clear();
       }
-      if (axios_num === 0) {
-        if (http_load) {
-          http_load.clear();
-          setTimeout(()=>{
-            http_load.clear();
-         },6000)
-          // setTimeout(() => {
-          // }, 300)
-        }
-      }
-      // console.log(axios_num);
       return response.data;
     }
   },

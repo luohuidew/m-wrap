@@ -57,7 +57,7 @@ export default {
   },
   created() {
     this.init_user();
-    this.init_cart();
+    // this.init_cart();
   },
   mounted() {},
   watch:{
@@ -88,7 +88,7 @@ export default {
       }
     },
     init_cart() {
-      CART.getCartNum().then(res => {                    
+      CART.getCartNum().then(res => {
         this.$store.commit("SET_CATR", res.data.num);
       });
     },

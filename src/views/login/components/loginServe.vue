@@ -1,48 +1,67 @@
 <template>
-  <div class="login-server"
-    @click.stop="keep_open">
-    <div class="form-content"
-      :class="{'change':is_selected===1}">
-      <ul class="tab-btn">
-        <li v-for="(item,index) in tab_title"
-          @click="toggle_form(index)"
-          :class="{'active':index===is_selected}"
-          :key="index">{{item}}</li>
-      </ul>
+  <div >
+    <div class="form-content">
       <ul class="form-box">
-        <li v-if="is_selected===0">
-          <p class="email"><input type="text"
-              placeholder="Email Address"
-              v-model="login_data.email"></p>
-          <p class="password"><input type="password"
+        <li v-if="is_selected=='signIn'">
+          <p>
+            <label>
+              <h5>Email Address</h5>
+              <input type="text"
+                placeholder="Email Address"
+                v-model="login_data.email">
+            </label>
+          </p>
+          <p>
+            <label class="sign-in">
+              <dl>
+                <dt>Password</dt>
+                <dd @click.stop="to_reset">Forgot password?</dd>
+              </dl>
+              <input type="password"
               placeholder="Password"
-              v-model="login_data.password"></p>
-          <p class="forget"><span @click.stop="to_reset">Forgot Password？</span></p>
-          <p class="link-btn">
-            <a href="javascript:;"
-              @click="login">Log In</a>
+              v-model="login_data.password">
+            </label>
+          </p>
+          <p class="link-btn"  @click="login">
+            Log In
           </p>
         </li>
         <li v-else>
           <form>
             <p class="display-name">
-              <input type="text"
-                autocomplete="off"
-                class="first-name"
-                placeholder="First Name"
-                v-model="signup_data.first_name">
+              <label>
+                <h5>First Name</h5>
+                <input type="text"
+                       autocomplete="off"
+                       class="first-name"
+                       placeholder="First Name"
+                       v-model="signup_data.first_name">
+              </label>
+              <label>
+                <h5>Last Name</h5>
               <input type="text"
                 class="last-name"
                 autocomplete="off"
                 placeholder="Last Name"
                 v-model="signup_data.last_name">
+              </label>
             </p>
-            <p class="email"><input type="text"
+            <p >
+              <label>
+                <h5>Email Address</h5>
+              <input type="text"
                 placeholder="Email Address"
-                v-model="signup_data.email" autocomplete="rad"></p>
-            <p class="password"><input type="password"
+                v-model="signup_data.email" autocomplete="rad">
+              </label>
+            </p>
+            <p >
+              <label>
+                <h5>Password</h5>
+              <input type="password"
                 placeholder="Password"
-                v-model="signup_data.password" autocomplete="rad"></p>
+                v-model="signup_data.password" autocomplete="rad">
+              </label>
+            </p>
           </form>
           <div class="privacy-box">
             <span>Your Password must contain </span>
@@ -52,25 +71,16 @@
               <li>· At least one number</li> -->
             </ul>
             <div class="terms-box">
-              <span class="checked-icon"
-                @click="is_checked=!is_checked">
-                <img v-if="is_checked"
-                  src="/static/images/icon/login/选择红@2x.png"
-                  alt="">
-                <img v-else
-                  src="/static/images/icon/login/选择 灰@2x.png"
-                  alt="">
-              </span>
               <div class="agree-text">
-                <span>I agree to the</span>
-                <router-link to="/statement">Privacy Policy
+                <span> By clicking Sign up, Continue with Facebook, or Continue with Google, you agree to our </span>
+                <router-link to="/statement">
+                  Privacy Policy & Terms of Use
                 </router-link>
               </div>
             </div>
           </div>
-          <p class="link-btn">
-            <a href="javascript:;"
-              @click="singup">Create Account</a>
+          <p class="link-btn" @click="singup">
+            Create Account
           </p>
 
         </li>
@@ -87,7 +97,6 @@ export default {
   name: "",
   data() {
     return {
-      is_selected: 0,
       is_checked: true,
       tab_title: ["SIGN IN", "SIGN UP"],
       login_data: {
@@ -103,14 +112,13 @@ export default {
     };
   },
   mounted() {},
+  props: {
+    is_selected: {
+      default: 'signIn'
+    }
+  },
   computed: {},
   methods: {
-    toggle_form(index) {
-      this.is_selected = index;
-    },
-    keep_open() {
-      this.$emit("open", 1);
-    },
     singup() {
       let data = {
         type: "signup",
@@ -141,21 +149,25 @@ export default {
 
 <style lang='scss' scoped>
 $basecolor: #d70e19;
-.login-server {
-}
-.logo-box {
-  padding: 36px 0 20px 0;
-  text-align: center;
-  img {
-    // height:
-  }
+
+input {
+  outline-color: invert;
+  outline-style: none;
+  outline-width: 0px;
+  border: none;
+  border-style: none;
+  text-shadow: none;
+  -webkit-appearance: none;
+  -webkit-user-select: text;
+  outline-color: transparent;
+  box-shadow: none;
 }
 .form-content {
-  width: 300px;
+  width:100%;
   margin: 0 auto;
-  padding: 25px 20px 22px 20px;
+  padding: 15px;
+  padding-top: 0px;
   background-color: #fff;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
   border-radius: 7px;
   transform: rotateY(0);
   transition: all 0.8s;
@@ -177,8 +189,9 @@ $basecolor: #d70e19;
       }
     }
     .agree-text {
-      display: flex;
+
       a {
+        display: inline-block;
         font-size: 10px;
         color: #444444;
         text-decoration-line: underline;
@@ -209,23 +222,56 @@ $basecolor: #d70e19;
 /*  */
 .form-box {
   p {
-    width: 100%;
-    padding-top: 9px;
+    margin-top: 20px;
+    label {
+      width: 100%;
+      &.sign-in {
+        dl {
+          display: flex;
+          justify-content: space-between;
+          dt {
+            font-size:14px;
+            font-weight:bold;
+            color:rgba(0,0,0,1);
+            margin-bottom: 10px;
+          }
+          dd {
+            font-size:12px;
+            font-weight:400;
+            color:rgba(155,155,155,1);
+          }
+        }
+      }
+      h5 {
+        font-size:14px;
+        font-weight:bold;
+        color:rgba(0,0,0,1);
+        margin-bottom: 10px;
+      }
+    }
     input {
       height: 36px;
       width: 100%;
-      background-color: #efefef;
-      border: none;
+      background-color: #fff;
+      border-radius:4px;
+      border:1px solid rgba(225,225,225,1);
       outline: none;
       padding-left: 10px;
       font-size: 13px;
     }
   }
+
   .display-name {
     display: flex;
     justify-content: space-between;
-    input {
-      width: 49%;
+    label {
+      width: 48%;
+      h5 {
+        font-size:14px;
+        font-weight:bold;
+        color:rgba(0,0,0,1);
+        margin-bottom: 10px;
+      }
     }
   }
   .forget {
@@ -240,22 +286,18 @@ $basecolor: #d70e19;
     }
   }
   .link-btn {
-    height: 36px;
-    background: rgba(215, 14, 25, 1);
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 18px;
+    height: 46px;
+    background:rgba(0,0,0,1);
+    border-radius: 23px;
+    text-align: center;
+    line-height: 46px;
+    font-size:14px;
+    font-weight:bold;
+    color:rgba(255,255,255,1);
     &:hover {
       opacity: 0.8;
     }
-    a {
-      display: block;
-      height: 100%;
-      font-size: 14px;
-      font-weight: bold;
-      color: rgba(255, 255, 255, 1);
-      // line-height: 18px;
-      text-align: center;
-    }
+
   }
 }
 .tab-btn {

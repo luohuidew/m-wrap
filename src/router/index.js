@@ -214,16 +214,7 @@ export default new Router({
         title: 'address',
       }
     },
-    {
-      path: '/state-list',
-      name: 'state-list',
-      component: () =>
-        import('@/pages/address/address-state'),
-      meta: {
-        title: 'state',
-        fullScreen:false
-      }
-    },
+
     {
       path: '/delivery',
       name: 'delivery',

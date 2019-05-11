@@ -1,53 +1,98 @@
 <template>
   <div class="facebook-login-box">
-    <div class="facebook-box">
-
+    <div class="header" v-show="is_selected === 'signUp'">
+      <img src="./img/top.jpg"  width="100%"/>
+    </div>
+    <div class="login-wrap">
+      <div class="title">
+        <h2 v-show="is_selected === 'signIn'">Sign in</h2>
+        <p v-show="is_selected === 'signIn'">New to WeGet?
+          <span @click="is_selected = 'signUp'">Sign up</span>
+        </p>
+        <h2 v-show="is_selected === 'signUp'">Sign up</h2>
+        <p v-show="is_selected === 'signUp'">Already have an account?
+          <span @click="is_selected = 'signIn'">Sign in</span>
+        </p>
+      </div>
+      <template v-if="!ua.no_facebook">
+        <fb class="other-btn" @login="getUserFb"></fb>
+        <google class="other-btn" @login="getUserGoogle"></google>
+        <instagram @login="getUserIns" class="other-btn"></instagram>
+      </template>
+      <div class="lins">
+        <span>or continue with email</span>
+      </div>
     </div>
     <temp-dialog v-if="show_dialog"
-      @close="show_dialog=false">
+                 @close="show_dialog=false">
       <div slot="tips"
-        class="email-box"
-        @click.stop="show_dialog=true">
-        <!-- <bind-mail></bind-mail> -->
-        <!-- <div class="logo-box">
-          <img src="/static/img/icon/logo 白大.png"
-            alt="">
-        </div> -->
+           class="email-box"
+           @click.stop="show_dialog=true">
         <div class="bind-email-box">
           <p class="tips-title">Link with email address. <br />Get coupons and more.</p>
           <p>
             <input type="text"
-              v-model="other_form.email"
-              placeholder="Email Address">
+                   v-model="other_form.email"
+                   placeholder="Email Address">
           </p>
           <p class="link-btn">
             <a href="javascript:;"
-              @click="link_email(other_form.email)">Link Email Address</a>
+               @click="link_email(other_form.email)">Link Email Address</a>
           </p>
         </div>
       </div>
     </temp-dialog>
-    <!-- <temp-dialog v-if="login_pass"
-      @close="login_pass=false">
-      <div class="pass-box"
-        slot="tips">
+    <login-serve @submit-form="to_home" :is_selected = 'is_selected'></login-serve>
+    <div class="footer">
+      <div class="who-we-are" v-if="is_selected === 'signIn'">
+         <div class="title">
+           Who We Are
+         </div>
+         <section>
+           We are a global platform that doesn’t sleep. We’re 24/7 and always bringing something new with thousands of independent fashion designers and influencers. We believe in a world where you have the total freedom to be you, without judgement, and to be brave and grab life as the extraordinary adventure it is. We make sure everyone can express themselves and find a fashion leader that is on the same channel as you. We exist
+         </section>
+         <router-link to="/about" class="btn">
+             See all
+         </router-link>
+       </div>
+      <div v-else>
+        <img src="./img/content.jpg" width="100%"/>
       </div>
-    </temp-dialog> -->
-    <login-serve @submit-form="to_home"
-      @open="login_pass=true">
-      <template v-if="!ua.no_facebook">
-        <div class="other-box">
-          <p class="chang-other">— OR CREAT ACCOUNT —</p>
-          <div class="fg-box">
-            <fb class="other-btn"
-              @login="getUserFb"></fb>
-            <google class="other-btn"
-              @login="getUserGoogle"></google>
-            <instagram @login="getUserIns" class="other-btn"></instagram>
-          </div>
-        </div>
-      </template>
-    </login-serve>
+      <div class="store">
+        <a  target="_blank" href = "https://play.google.com/store/apps/details?id=com.weget.www">
+          <img src="./img/Google Play Badge US Copy@3x.png" />
+        </a>
+        <a target="_blank" href = "https://itunes.apple.com/us/app/weget-fashion-marketplace/id1439887303?mt=8">
+          <img src="./img/appStroe.png"  />
+        </a>
+      </div>
+      <div class="about_row1">
+        <p class="bold">Follow us</p>
+        <p>
+          <a href="https://www.facebook.com/wegetofficial">
+            <img src="./img/f@3x.png">
+          </a>
+          <a href="https://www.instagram.com/shopweget">
+            <img src="./img/ins@3x.png">
+          </a>
+          <a href="https://www.youtube.com/channel/UCJ2SmCasimMk8TCHxloaMtA">
+            <img src="./img/Shape@3x.png">
+          </a>
+        </p>
+        <p class="bold">ABOUT</p>
+        <p>
+          <router-link to="/about" class="btn" tag="p">
+            About Us
+          </router-link>
+        </p>
+        <router-link to="/statement" tag="p">
+          Privacy Policy
+        </router-link>
+        <p>Need help？Visit the <a class="email" href="mailto:service@weget.com">help center</a></p>
+      </div>
+
+    </div>
+
   </div>
 </template>
 
@@ -62,16 +107,15 @@ import tempdialog from "@/components/dialog/temp-dialog";
 import api from "@/api/login";
 import apiBase from "@/api/base";
 import getShareUserApi from "@/api/trial";
-import { setToken, getToken, setUserShareId, getUserShareId } from "@/utils/auth";
+import { setToken, getToken, setUserShareId } from "@/utils/auth";
 import { sha256 } from "js-sha256";
 export default {
   name: "login",
   data() {
     return {
       userNew: false,
-      share_user_id: this.$route.query.share_user_id,
       show_dialog: false,
-      login_pass: false,
+      is_selected: 'signIn',
       bind_email: "",
       other_form: {},
       ua: {
@@ -81,129 +125,56 @@ export default {
     };
   },
   created() {
-    this.shareReturn()
-    this.login_pass = this.$route.query.autoshow == "1" ? true : false;
+    // this.shareReturn()
+    // this.login_pass = this.$route.query.autoshow == "1" ? true : false;
   },
   beforeRouteEnter (to, from, next) {
     if (getToken()) {
-      const share_user_id = to.query.share_user_id;
-      if (share_user_id) { // 判断是否是分享的页面
-        if(!getUserShareId()) {
-          getShareUserApi.getUserInfo().then(res => { // 获取UserShareId
-            const id = res.data.id
-            setUserShareId(id)
-            if (id === share_user_id) {
-              // 已登录同一个用户
-              const urls = window.origin + '/popularize/popu-1?selefUser=true'
-              window.location.replace(urls);
-            }else {
-              // 已登录不是同一个用户 老用户
-              const urls = window.origin + '/popularize/popu-1?UserIsOld=true'
-              window.location.replace(urls);
-            }
-          });
-        } else{
-          if(getUserShareId() === share_user_id) {
-            // 已登录同一个用户
-            const urls = window.origin + '/popularize/popu-1?selefUser=true'
-            window.location.replace(urls);
-          } else { // 已登录不是同一个用户
-            const urls = window.origin +  '/popularize/popu-1?UserIsOld=true'
-            window.location.replace(urls);
-          }
-        }
-      } else { // 普通登陆页面跳转
         if (to.query.redirect) {
           window.location.replace(to.query.redirect);
         } else {
           window.location.replace(window.origin + "/home");
         }
-      }
     } else {
       next()
     }
 
   },
   mounted() {
-    // this.init_data();
   },
   computed: {},
   methods: {
     shareReturn() {
       if (getToken()) {
-        if (this.share_user_id) { // 判断是否是分享的页面
-          if(!getUserShareId()) {
-            getShareUserApi.getUserInfo().then(res => { // 获取UserShareId
-              const id = res.data.id
-              setUserShareId(id)
-              if (id === this.share_user_id) {
-                  // 已登录同一个用户
-                // const param = {
-                //   path:'/popularize/popu-1',
-                //   jquery: {
-                //     selefUser: true
-                //   }
-                // }
-                // this.$router.push(param)
-                const urls = window.origin + '/popularize/popu-1?selefUser=true'
-                window.location.replace(urls);
-              }else {
-                // 已登录不是同一个用户 老用户
-                // const param = {
-                //   path:'/popularize/popu-1',
-                //   jquery: {
-                //     selefUser: false
-                //   }
-                // }
-                // this.$router.push(param)
-                const urls = window.origin + '/popularize/popu-1?UserIsOld=true'
-                window.location.replace(urls);
-              }
-            });
-          } else{
-            if(getUserShareId() === this.share_user_id) {
-              // 已登录同一个用户
-              // const param = {
-              //   path:'/popularize/popu-1',
-              //   jquery: {
-              //     selefUser: true
-              //   }
-              // }
-              // this.$router.push(param)
-              const urls = window.origin + '/popularize/popu-1?selefUser=true'
-              window.location.replace(urls);
-            } else { // 已登录不是同一个用户
-              if(this.userNew) { // 新用户
-                // const param = {
-                //   path:'/popularize/popu-1',
-                //   jquery: {
-                //     selefUser: false,
-                //     UserIsNew: true
-                //   }
-                // }
-                // this.$router.push(param)
-                const urls = window.origin + '/popularize/popu-1?UserIsNew=true'
-                window.location.replace(urls);
-              } else { // 老用户
-                // const param = {
-                //   path:'/popularize/popu-1',
-                //   jquery: {
-                //     selefUser: false
-                //   }
-                // }
-                // this.$router.push(param)
-                const urls = window.origin +  '/popularize/popu-1?UserIsOld=true'
-                window.location.replace(urls);
-              }
-            }
-          }
-        } else { // 普通登陆页面跳转
-          if (this.$route.query.redirect) {
-            window.location.replace(this.$route.query.redirect);
-          } else {
-            window.location.replace(window.origin + "/home");
-          }
+        if (this.userNew) {
+          this.$dialog.alert({
+            message: 'Thanks for signing up, a $15 coupon has been added to your WeGet Account.',
+            confirmButtonText: 'confirm'
+          }).then(()=> {
+            this.toPage()
+          });
+        } else {
+          this.$dialog.alert({
+            message: 'Welcome back, we are ready to shop with you today!',
+            confirmButtonText: 'confirm'
+          }).then(()=>{
+            this.toPage()
+          });
         }
+
+      }
+    },
+    toPage() {
+      if (this.$route.query.redirect) {
+        const param = {
+          path: this.$route.query.redirect,
+        }
+        this.$router.replace(param)
+      } else {
+        const param = {
+          path: '/home'
+        }
+        this.$router.replace(param)
       }
     },
     check_pre_login(per_params, params) {
@@ -211,7 +182,6 @@ export default {
       api
         .preLogin(per_params)
         .then(res => {
-          console.log(res);
           return res;
         })
         .then(res => {
@@ -301,25 +271,7 @@ export default {
         type: params.type
       };
       this.check_pre_login(per_params, params);
-      // let that = this;
-      // api
-      //   .preLogin(per_params)
-      //   .then(res => {
-      //     console.log(res);
-      //     return res;
-      //   })
-      //   .then(res => {
-      //     if (res.data.is_signUp == 1) {
-      //       // this.show_dialog = true;
-      //       this.$set(this.other_form, "referer", this.$route.query.redirect);
-      //     } else {
-      //     }
-      //     api.thirdLogin(params).then(res => {
-      //       let data = res.data;
-      //       that.set_token(data.token);
-      //     });
-      //     // console.log(res, "第二个res");
-      //   });
+
     },
     link_email(email) {
       if (email) {
@@ -380,9 +332,6 @@ export default {
         this.shareReturn()
       });
     },
-    show_box_login() {
-      this.login_pass = true;
-    }
   },
   components: {
     fb,
@@ -394,122 +343,202 @@ export default {
 };
 </script>
 
-<style lang='scss'>
-.facebook-login-box {
-}
-.facebook-box {
-  // padding: 10px;
-  width: 75%;
-  height: auto;
+<style lang='scss' scoped>
+  .facebook-login-box {
+    background-color: #fff;
 
-  position: absolute;
-  left: 50%;
-  bottom: 10%;
-  transform: translateX(-50%);
-  button {
-    .spinner {
-      box-sizing: border-box;
-      width: 40px;
-      height: 74%;
-      left: 18px;
-      top: 8px;
+    .header{
+
     }
-  }
-}
-.pass-box {
-  position: relative;
-  height: 100%;
-  overflow: auto;
-}
-.other-box {
-  text-align: center;
-  .fg-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .chang-other {
-    font-size: 12px;
-    color: #9b9b9b;
-    padding-bottom: 10px;
-    text-align: center;
-  }
-  .other-btn {
-    margin: 0 5px;
-    display: flex;
-    align-items: center;
-  }
-}
-.login-server-btn {
-  width: 100%;
-  height: auto;
-  border-radius: 27px;
-  font-size: 14px;
-  font-weight: bold;
-  .face_login {
-    width: 100%;
-  }
-}
-.logo-box {
-  padding: 36px 0 20px 0;
-  text-align: center;
-}
-.email-box {
-  position: absolute;
-  left: 50%;
-  top: 40%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-}
-.bind-email-box {
-  width: 300px;
-  margin: 0 auto;
-  padding: 25px 20px 22px 20px;
-  background-color: #fff;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 7px;
-  transform: rotateY(0);
-  transition: all 0.8s;
-  p {
-    width: 100%;
-    // padding-top: 9px;
-    input {
-      height: 36px;
-      width: 100%;
-      background-color: #efefef;
-      border: none;
-      outline: none;
-      padding-left: 10px;
-      font-size: 13px;
+    .login-wrap {
+      padding: 0px 15px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      img {
+        margin-bottom: 15px;
+      }
+      .title {
+        text-align: center;
+        h2{
+          font-size:26px;
+          font-weight:900;
+          color:rgba(0,0,0,1);
+        }
+        p {
+          font-size:14px;
+          font-weight:400;
+          color:rgba(155,155,155,1);
+          line-height:25px;
+          span {
+            color: #D70E19
+          }
+          margin-bottom: 10px;
+        }
+      }
+      .lins {
+        position: relative;
+        border-top: 1px solid #9B9B9B;
+        margin-top: 5px;
+        width: 100%;
+        height: 1px;
+        span {
+          position: absolute;
+          left: 50%;
+          padding: 0px 10px;
+          background-color: #fff;
+          transform: translate(-50%, -50%);
+          height: 20px;
+          line-height: 20px;
+          color: #9B9B9B ;
+          font-size: 12px;
+        }
+      }
+      .other-btn {
+        margin-bottom: 10px;
+      }
     }
+
   }
-  .tips-title {
-    font-size: 18px;
-    font-weight: normal;
-    padding: 30px 10px;
-    color: rgba(155, 155, 155, 1);
-    line-height: 30px;
+  .footer {
+    padding: 15px;
+    background:rgba(248,248,248,1);
+    .who-we-are {
+      .title {
+        font-size:16px;
+        font-weight:800;
+        color:rgba(0,0,0,1);
+      }
+      section{
+        height: 80px;
+        overflow: hidden;
+        font-size: 12px;
+        line-height: 20px;
+        position: relative;
+        margin-top: 10px;
+        &:after{
+          position: absolute;
+          content: '';
+          width: 100%;
+          left: 0px;
+          top:0px;
+          height: 100%;
+          background:linear-gradient(0deg,rgba(248,248,248,1) 0%,rgba(248,248,248,0.6) 50%, rgba(248,248,248,0) 100%);        }
+      }
+      .btn {
+        display: block;
+        height:36px;
+        border-radius:23px;
+        width: 80%;
+        line-height: 36px;
+        font-size:14px;
+        font-weight:bold;
+        color:rgba(0,0,0,1);
+        text-align: center;
+        border:1px solid rgba(0,0,0,1);
+        margin: 10px auto;
+      }
+    }
+    .store {
+      padding: 5px 5px;
+      display: flex;
+      margin-top: 20px;
+      justify-content: space-between;
+      a{
+        width: 40%;
+        display: inline-block;
+        height: 40px;
+        img {
+          width: 100%;
+        }
+      }
+
+    }
+    div.about_row1 {
+      padding-bottom: 30px;
+      p {
+        text-align: center;
+        margin-top: 15px;
+        font-size:12px;
+        font-weight:400;
+        color:rgba(0,0,0,1);
+        &.bold{
+          font-size:16px;
+          font-weight:800;
+          color:rgba(0,0,0,1);
+        }
+        a.email {
+          margin: 0px;
+          font-weight:800
+        }
+        a {
+          display: inline-block;
+          margin: 0 15px;
+          img {
+            width: auto;
+            height: 20px;
+          }
+        }
+      }
+    }
+
   }
-  .link-btn {
-    height: 36px;
-    background: rgba(215, 14, 25, 1);
+
+  .email-box {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+  }
+  .bind-email-box {
+    width: 300px;
+    margin: 0 auto;
+    padding: 25px 20px 22px 20px;
+    background-color: #fff;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 18px;
-    margin-top: 20px;
-    &:hover {
-      opacity: 0.8;
+    border-radius: 7px;
+    transform: rotateY(0);
+    transition: all 0.8s;
+    p {
+      width: 100%;
+      // padding-top: 9px;
+      input {
+        height: 36px;
+        width: 100%;
+        background-color: #efefef;
+        border: none;
+        outline: none;
+        padding-left: 10px;
+        font-size: 13px;
+      }
     }
-    a {
-      display: block;
-      height: 100%;
-      font-size: 14px;
-      line-height: 36px;
-      font-weight: bold;
-      color: rgba(255, 255, 255, 1);
-      // line-height: 18px;
-      text-align: center;
+    .tips-title {
+      font-size: 18px;
+      font-weight: normal;
+      padding: 30px 10px;
+      color: rgba(155, 155, 155, 1);
+      line-height: 30px;
+    }
+    .link-btn {
+      height: 36px;
+      background: rgba(215, 14, 25, 1);
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+      border-radius: 18px;
+      margin-top: 20px;
+      &:hover {
+        opacity: 0.8;
+      }
+      a {
+        display: block;
+        height: 100%;
+        font-size: 14px;
+        line-height: 36px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 1);
+        // line-height: 18px;
+        text-align: center;
+      }
     }
   }
-}
 </style>
 

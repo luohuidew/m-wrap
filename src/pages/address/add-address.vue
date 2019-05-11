@@ -24,10 +24,6 @@
               v-model="address.city">
           </p>
         </li>
-        <!-- <li>
-        <p><span>State</span><input type="text"
-            v-model="address.state"></p>
-      </li> -->
         <li @click="goSelectState()">
           <p><span>State</span>
             <span class="state-selecet">
@@ -59,10 +55,6 @@
           @click="go_back">DONE</a>
       </div>
     </div>
-    <!-- <van-popup 
-      position="right"
-      :overlay="false">
-    </van-popup> -->
     <addressState class="state-box"
       v-show="showState"
       @select="changeState" />
@@ -70,9 +62,8 @@
 </template>
 
 <script>
-import { Switch } from "vant";
 import address from "@/api/address";
-import addressState from "./address-state";
+import addressState from "@/components/address-state";
 export default {
   name: "",
   data() {
@@ -93,7 +84,6 @@ export default {
         is_default: 1
       },
       is_default: false,
-      address_lists: []
     };
   },
   created() {
@@ -111,39 +101,21 @@ export default {
       let data = add_id;
       this.$emit("change", data);
     },
-    init_address() {
+    init_address() { // 获取编辑数据
       address.address_list().then(res => {
-        console.log(res);
-        this.address_lists = res.data;
+        const address_lists = res.data;
         if (this.$route.query.cur_index !== undefined) {
           let cur_index = this.$route.query.cur_index;
           for (let key in this.address) {
-            this.address[key] = this.address_lists[cur_index][key];
+            this.address[key] = address_lists[cur_index][key];
           }
           this.is_default = this.address.is_default === 1 ? false : true;
         }
-        // if (this.$route.query.state) {
-        //   this.address.state = this.$route.query.state;
-        // }
-        // this.selected_card(this.address_lists[0].id, 0);
+
       });
     },
-    // save_address() {
-    //   let params = this.address;
-    //   address.address_save(params).then(res => {
-    //     console.log(res);
-    //     this.is_editor = !this.is_editor;
-    //     this.init_address();
-    //   });
-    // },
+
     goSelectState() {
-      // let href_params = {
-      //   path: "/state-list",
-      //   query: {
-      //     cur_index: this.$route.query.cur_index
-      //   }
-      // };
-      // this.$router.replace(href_params);
       this.showState = true;
     },
     go_back() {
@@ -154,12 +126,6 @@ export default {
         params.is_default = 2;
       }
       address.address_save(params).then(res => {
-        // console.log(res);
-        // this.is_editor = !this.is_editor;
-        // this.init_address();
-        let href_params = {
-          path: "/"
-        };
         this.$router.go(-1);
       });
     }

@@ -1,10 +1,9 @@
 <template>
   <div class="cart-layout">
     <div class="scroll-lists"  v-if="req_data">
-      <template v-if="req_data.goods.length">
+      <template v-if="req_data.store_goods && req_data.store_goods.length>0">
         <cart-list @change="get_list_data"
-          :goods-data="req_data.goods"></cart-list>
-        <!-- <cart-expired></cart-expired> -->
+          :goods-data="req_data.store_goods" :isAllSelected = 'prop_all_goods_is_select'></cart-list>
       </template>
       <template v-else>
         <div class="no-cart-item">
@@ -14,13 +13,36 @@
           <p>Your Cart Is Empty</p>
         </div>
       </template>
-      <cart-guide v-if="req_data"
-        :gui-data="req_data.like"></cart-guide>
+      <!--<cart-guide v-if="req_data"-->
+        <!--:gui-data="req_data.like"></cart-guide>-->
     </div>
-    <cart-footer v-if="req_data"
-      :total-price="footer_data.total_data"
-      :goods-data="req_data.goods"
-      :total-data="footer_data.cart_lists_item"></cart-footer>
+    <footer>
+      <div class="price">
+        <div class="selct">
+          <img v-if="all_goods_is_select" @click="noAllgoodSelect"
+               src="/static/images/icon/cart/多选 选中@3x.png"
+               alt=""
+               srcset="">
+          <img v-else @click="AllgoodSelect"
+               src="/static/images/icon/cart/多选 未选中@3x.png"
+               alt=""
+               srcset="">
+         <span> Select items({{selectedNumber}})</span>
+        </div>
+        <div class="pr">
+          All Total: <span>{{allTotal}}</span>
+        </div>
+      </div>
+      <div class="pay">
+        <div class="paypal">paypal</div>
+        <div class="paypal checkout" @click="toCheckout">Secure checkout</div>
+      </div>
+    </footer>
+    <!--<cart-footer v-if="req_data"-->
+      <!--:total-price="totalPrice"-->
+      <!--:selectAll = 'selectAll'-->
+      <!--&gt;-->
+    <!--</cart-footer>-->
   </div>
 </template>
 
@@ -35,30 +57,115 @@ export default {
   name: "",
   data() {
     return {
-      req_data: null,
-      show_coupon_dialog: false,
-      footer_data: {
-        cart_lists_item: [],
-        total_data: {}
-      }
+      req_data: {},
+      all_goods_is_select: false,
+      prop_all_goods_is_select: {},
+      selectedNumber: 0,
+      allTotal: '$0.00'
     };
   },
+
   created() {
     this.init_data();
   },
   mounted() {},
   computed: {},
   methods: {
+    toCheckout(){
+      if (this.selectedNumber === 0) {
+        return
+      }
+      CART.orderConfirm(this.cachePrams).then(res => {
+        const StringParams = JSON.stringify(this.cachePrams)
+        sessionStorage.cartParams = StringParams
+         let path_params = {
+          path: "/checkout",
+        };
+        this.$router.push(path_params);
+      });
+
+      //  let path_params = {
+      //   path: "/checkout",
+      //   query: {
+      //     cart_ids: arra.toString()
+      //   }
+      // };
+      // this.$router.push(path_params);
+    },
     init_data() {
-      // debugger
-      CART.shopCartList().then(res => {
-        // this.req_data = null;
-        this.req_data = res.data;
+      CART.cartcheckoutConfirm().then(res => {
+        const data = res.data;
+        this.allTotal = data.all_total
+        data.store_goods.forEach(store=> {
+          store.goods_data.forEach(item => {
+            item.checkted = false
+          })
+          store.store_code_info = {}
+        })
+        this.req_data = data
       });
     },
-    get_list_data(data) {
-      this.$set(this.footer_data, "cart_lists_item", data.cart_lists_item);
-      this.$set(this.footer_data, "total_data", data.total_data);
+    get_list_data(data,couponId ) { // 数据更新出发
+      let count = 0
+      clearTimeout(this.times)
+      data.forEach(stroe => {      // data // 获取已选定的商品信息，按店铺分组
+        stroe.goods.forEach(good=> {
+          count += Number(good.num)
+        })
+      })
+      this.selectedNumber = count
+      this.findAllSelectGood(data)
+      if (count === 0) {
+        this.allTotal = '$0.00'
+        return
+      }
+      this.times = setTimeout(()=>{ // 防止同时提交多个请求
+        this.totalPrices(data, couponId)
+      },100)
+    },
+    totalPrices(data, couponId) {
+      const params={
+        store_code: [],
+        store_ship_method: [],
+        cart_goods: [],
+        user_coupon_id: couponId
+      }
+      data.forEach(item=>{
+        params.store_code.push({
+          code_number:item.code_number,
+          store_id: item.store_id,
+        })
+        params.store_ship_method.push({
+          ship_method:item.shipp_key,
+          store_id: item.store_id,
+        })
+        item.goods.forEach((good)=>{
+          params.cart_goods.push({
+            cart_id:good.cart_id,
+            num: good.num,
+          })
+        })
+      })
+      CART.totalPrice(params).then(res => {
+        this.cachePrams = res.data.params
+        this.allTotal = res.data.all_total
+        const datas= res.data.sub_order_info
+        this.req_data.store_goods.forEach((store)=> {
+          datas.forEach((price_store)=> {
+            if (store.store_id === price_store.store_id) {
+              store.store_code_info = price_store.store_code_info
+              store.ship_method = price_store.ship_method
+            }
+          })
+        })
+      })
+
+    },
+    findAllSelectGood(data) {
+      const selectedStore =  data.filter(item=> {
+        return item.checkted_store === true
+      })
+      this.all_goods_is_select = selectedStore.length === this.req_data.store_goods.length
     },
     /* buy some goods */
     to_buy() {
@@ -67,7 +174,21 @@ export default {
         query: {}
       };
       this.$router.push(router_params);
-    }
+    },
+    noAllgoodSelect() {
+      this.all_goods_is_select = false
+      this.prop_all_goods_is_select = {
+        val : false,
+        n: Date.now()
+      }
+    },
+    AllgoodSelect() {
+      this.all_goods_is_select = true
+      this.prop_all_goods_is_select = {
+        val : true,
+        n: Date.now()
+      }
+    },
   },
   components: {
     cartList,
@@ -82,9 +203,54 @@ export default {
 <style lang='scss' scoped>
 .cart-layout {
   height: 100%;
+  footer {
+    position: relative;
+    z-index: 1000;
+    height: 100px;
+    font-size:14px;
+    font-weight:400;
+    color:rgba(0,0,0,1);
+    .price {
+      box-shadow: 0px -1px 2px #c1c1c1;
+      padding: 0px 15px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .selct {
+
+        img {
+          width: 20px;
+        }
+        span {
+          font-weight: 400;
+          font-size:14px;
+          vertical-align: middle;
+        }
+      }
+      span {
+        font-weight: bold;
+        font-size:18px;
+      }
+    }
+    .pay {
+      height: 46px;
+      .paypal {
+        width: 50%;
+        background:rgba(255,196,56,1);
+        display: inline-block;
+        text-align: center;
+        line-height: 46px;
+        &.checkout {
+          color: #fff;
+          background:rgba(0,0,0,1);
+        }
+      }
+    }
+  }
 }
 .scroll-lists {
-  height: calc(100% - 90px);
+  height: calc(100% - 100px);
   overflow: auto;
 }
 /*  */
@@ -92,7 +258,7 @@ export default {
   background: #f3f3f3;
   display: flex;
   flex-direction: column;
-  height: 300px;
+  height: 100%;
   align-items: center;
   justify-content: center;
   img {
@@ -106,60 +272,5 @@ export default {
   }
 }
 
-/* 优惠券领取入口 */
-.footer-buy {
-  height: 90px;
-  .get-coupon {
-    height: 40px;
-    border-top: 1px solid #e9e9e9;
-    border-bottom: 1px solid #e9e9e9;
-    padding-left: 20px;
-    padding-right: 20px;
-    vertical-align: middle;
-    img {
-      height: 18px;
-      width: auto;
-    }
-    span {
-      font-size: 14px;
-      padding-left: 10px;
-    }
-    .content {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      background: url("/static/images/icon/cart/分类 copy@3x.png") no-repeat
-        right center;
-      background-size: auto 18px;
-    }
-  }
-}
-/* 计算总价 */
-.to-buy {
-  display: flex;
-  justify-content: space-between;
-  height: 50px;
-  .total-box {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 20px;
-    .total-desc {
-      font-size: 12px;
-    }
-    .total-price {
-      font-size: 18px;
-      font-weight: bold;
-    }
-  }
-  .buy-btn {
-    width: 140px;
-    font-size: 16px;
-    color: #ffffff;
-    background-color: #d70e19;
-    line-height: 50px;
-    text-align: center;
-  }
-}
+
 </style>
