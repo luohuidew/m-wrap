@@ -130,7 +130,6 @@ export default {
         cart_goods: [],
         user_coupon_id: couponId
       }
-      this.cachePrams = {...params}
       data.forEach(item=>{
         params.store_code.push({
           code_number:item.code_number,
@@ -148,12 +147,14 @@ export default {
         })
       })
       CART.totalPrice(params).then(res => {
+        this.cachePrams = res.data.params
         this.allTotal = res.data.all_total
         const datas= res.data.sub_order_info
         this.req_data.store_goods.forEach((store)=> {
           datas.forEach((price_store)=> {
             if (store.store_id === price_store.store_id) {
               store.store_code_info = price_store.store_code_info
+              store.ship_method = price_store.ship_method
             }
           })
         })

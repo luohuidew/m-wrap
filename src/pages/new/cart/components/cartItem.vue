@@ -92,8 +92,8 @@
       </div>
     </div>
     <div class="shipping" @click="showVantShippingMethod">
-      <h2>{{all_data.ship_method.list[selectShippingKey].key_name}}</h2>
-      <h3>{{all_data.ship_method.list[selectShippingKey].desc}}</h3>
+      <h2>{{shippingName}}</h2>
+      <h3>{{shippingDesc}}</h3>
     </div>
     <van-popup v-model="showVantShipping" position="bottom" >
       <Shipping @closeVant = 'closeVantShipping' :shipping_lists="all_data.ship_method"></Shipping>
@@ -110,9 +110,11 @@
     return {
       checked_store: false,
       showVantShipping: false,
-      selectShippingKey: this.listsData.ship_method.default,
       code: '',
       codeActived: false,
+      selectShippingKey: 0,
+      shippingName: '',
+      shippingDesc: '',
     };
   },
   props: {
@@ -124,6 +126,10 @@
     },
   },
   computed: {
+    defaultShippingKey() {
+      const defaultkey = this.listsData.ship_method.default
+      return defaultkey
+    },
     all_data() {
       return this.listsData
     },
@@ -133,9 +139,18 @@
   },
 
   mounted() {
-
   },
   watch: {
+    defaultShippingKey:{
+      handler(newVal) {
+        const select = this.listsData.ship_method.list.filter(ship=>{
+          return ship.key === newVal
+        })
+        this.shippingName = select[0].key_name
+        this.shippingDesc = select[0].desc
+      },
+      immediate: true,
+    }
   },
   methods: {
     codeInput() {
@@ -194,7 +209,7 @@
           shipp_key: this.selectShippingKey,
           code_number: this.code
         }
-        // console.log(obj)
+        console.log(obj,4)
       this.$emit("checkout", obj);
     },
     check_only(item) {

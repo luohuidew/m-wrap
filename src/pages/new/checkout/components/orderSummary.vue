@@ -6,29 +6,29 @@
         <span>Show order summary</span>
         <van-icon name="arrow-down" class="arrow" />
       </div>
-      <div class="price">$122.99</div>
+      <div class="price">{{ resSummary.all_total }}</div>
     </div>
     <section :class="{'closed': !this.statusOderSummary}" ref="sectionsref">
-      <good-review :store_goods=store_goods></good-review>
+      <good-review :store_goods= "resSummary.store_goods"></good-review>
       <div class="total-des">
         <p>
           <span>Total</span>
-          <span class="price">$120.00</span>
+          <span class="price">{{ resSummary.total }}</span>
         </p>
         <p>
           <span class="">Shipping</span>
-          <span class="price">$10.00</span>
+          <span class="price">{{ resSummary.ship_total }}</span>
         </p>
         <p>
           <span class="">Promo Code</span>
-          <span class="price">-$14.00</span>
+          <span class="price">{{ resSummary.code_discount }}</span>
         </p>
         <p>
           <span class="">Weget Coupon</span>
-          <span class="price">-$60.00</span>
+          <span class="price">{{ resSummary.coupon_discount }}</span>
         </p>
         <div class="all-total">
-          All Total: <span> $122.99</span>
+          All Total: <span> {{ resSummary.all_total }}</span>
         </div>
       </div>
     </section>
@@ -41,10 +41,10 @@
   export default {
   name: "",
   props: {
-    store_goods: {
-      type: Array,
+    resSummary: {
+      type: Object,
       default: function () {
-        return []
+        return {}
       },
     },
   },

@@ -74,7 +74,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      background: url("/static/img/icon/选择 灰@2x.png") no-repeat right center;
+      /*background: url("/static/img/icon/选择 灰@2x.png") no-repeat right center;*/
       background-size: 15px;
     }
     span {
@@ -85,11 +85,11 @@ export default {
       width: 34px;
     }
   }
-  .active {
-    p {
-      background: url("/static/img/icon/选择红@2x.png") no-repeat right center;
-      background-size: 15px 15px;
-    }
-  }
+  /*.active {*/
+    /*p {*/
+      /*background: url("/static/img/icon/选择红@2x.png") no-repeat right center;*/
+      /*background-size: 15px 15px;*/
+    /*}*/
+  /*}*/
 }
 </style>

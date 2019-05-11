@@ -15,7 +15,7 @@
    },
    data () {
      return {
-
+         payId: this.$route.query.pay_id
      }
    },
    computed: {
@@ -49,7 +49,16 @@
                    _this.toast.clear()
                    button.addEventListener('click', function () {
                        instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
-                           console.log(payload,'哈哈')
+                           console.log(payload,'哈哈',_this.payId)
+                           let params = {
+                               nonce: payload.nonce,
+                               pay_id: _this.payId
+                           };
+                           api.pay_paypal(params).then(res => {
+                               // this.pay_callback(res);
+                           }).catch(err=>{
+                               // this.pay_callback(err);
+                           });
                            // Submit payload.nonce to your server
                        });
                    });

@@ -6,7 +6,7 @@
         v-for="(item,index) in shipping_lists.list"
         :key="index"
         :class="is_selected===item.key ? 'active':''"
-        @click="selected_shipping(item,index)">
+        @click="selected_shipping(item)">
         <div class="shipping-item">
           <p>
             <span class="shipping-label">
@@ -39,10 +39,25 @@ export default {
   name: "Shipping",
   data() {
     return {
-      is_selected: this.shipping_lists.default
+      is_selected: 0
     };
   },
+  computed:{
+    default_selected(){
+      const defaultkey = this.shipping_lists.default
+      return defaultkey
+    }
+  },
+  watch: {
+    default_selected:{
+      handler(newVal) {
+        this.is_selected = newVal
+      },
+      immediate: true,
+    }
+  },
   mounted() {
+
   },
   props: {
     shipping_lists: {}
@@ -50,13 +65,13 @@ export default {
   created() {
   },
   methods: {
-    selected_shipping(item,index) {
-      this.is_selected = index
+    selected_shipping(item) {
+      this.is_selectedItem = item
+      this.is_selected = item.key
     },
     go_back() {
-      const seleced = this.shipping_lists.list[this.is_selected]
       const obj = {
-        shippingKey: seleced.key,
+        shippingKey: this.is_selectedItem.key,
       }
       this.$emit('closeVant', obj)
     },

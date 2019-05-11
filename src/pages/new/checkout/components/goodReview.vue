@@ -5,7 +5,7 @@
         v-for="(item, index) in store_goods"
         :key="index">
         <p class="total-store">
-          <img src="/static/images/icon/cart/store@3x.png"
+          <img :src="item.logo"
             alt=""
             srcset="">
           <span>{{item.store_name}}</span>
@@ -62,10 +62,7 @@ export default {
   },
   computed: {},
   created() {
-    setTimeout(()=> {
-      console.log(999998, this.store_goods)
 
-    },5000)
   },
   methods: {},
   components: {
@@ -88,12 +85,16 @@ export default {
   .total-store {
     padding-bottom: 18px;
     padding-top: 20px;
+    white-space: nowrap;
+    overflow: hidden;
     img {
-      width: 18px;
-      height: 18px;
+      width: 30px;
+      height: 30px;
       -o-object-fit: contain;
       object-fit: contain;
+      border-radius: 50%;
       vertical-align: middle;
+      display: inline-block;
     }
     span {
       font-size: 14px;

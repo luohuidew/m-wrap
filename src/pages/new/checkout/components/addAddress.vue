@@ -23,7 +23,7 @@
               <span>State</span>
             </div>
             <span class="state-selecet">
-              <span>{{address.state?address.state:''}} hahhaha</span>
+              <span>{{address.state?address.state:''}}</span>
               <van-icon name="arrow" class="jiant"/>
             </span>
         </li>
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-  import address from "@/api/address";
+  import addressApi from "@/api/address";
   import addressState from "@/components/address-state";
   export default {
     name: "",
@@ -59,7 +59,6 @@
         showState: false,
         vanTablesHieght: 1,
         address: {
-          id: "",
           first_name: "",
           last_name: "",
           address1: "",
@@ -78,7 +77,6 @@
       let app_banner = document.querySelector("#banner-box");
       let top_number = app_header.offsetHeight;
       let banner_number = app_banner.offsetHeight;
-
       this.vanTablesHieght = window.innerHeight - top_number - banner_number
 
     },
@@ -95,8 +93,10 @@
         // this.$refs.vanPpopupStateRef.$el.style.height = this.vanTablesHieght+'px'
       },
       go_back() {
-        address.address_save(params).then(res => {
-          alert('成功')
+        const param = {...this.address}
+        param.is_default = 1;
+        addressApi.address_save(param).then(res => {
+          this.$emit('addNewAddress', res.data)
         });
       }
     },

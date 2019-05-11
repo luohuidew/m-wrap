@@ -1,95 +1,68 @@
 <template>
   <div class="checkout-layout">
-      <orderSummary :store_goods=store_goods></orderSummary>
-      <addAddress v-if="noHaveAddress"></addAddress>
-      <ul class="content-lists">
-        <li @click="to_address()">
-          <user-address :address_item='address_item'></user-address>
+      <orderSummary :resSummary=resSummary></orderSummary>
+      <addAddress v-if="!curtAddress.first_name" @addNewAddress="addNewAddress"></addAddress>
+      <ul class="content-lists" v-if="curtAddress.first_name">
+        <li @click="to_address()" >
+          <user-address :address_item='curtAddress'></user-address>
         </li>
         <li>
-          <payment @changeSelectPay=changeSelectPay></payment>
+          <payment></payment>
         </li>
         <li>
           <div class="footer">
             <div class="total-des">
               <p>
                 <span>Total</span>
-                <span class="price">$120.00</span>
+                <span class="price">{{ resSummary.all_total }}</span>
               </p>
               <p>
                 <span class="">Tax</span>
-                <span class="price">$10.00</span>
+                <span class="price">{{ resSummary.tax_total }}</span>
               </p>
               <div class="all-total">
-                All Total: <span> $122.99</span>
+                All Total: <span> {{ resSummary.last_total }}</span>
               </div>
             </div>
-            <div class="pay-but">
+            <div class="pay-but" @click="createOrder">
               Place your order
             </div>
           </div>
         </li>
       </ul>
-      <div class="footer-buy">
-        <ul>
-          <li class="to-buy">
-            <div class="total-box">
-              <p class="total-desc">All Total</p>
-              <p class="total-price">{{all_total}}</p>
-            </div>
-            <div class="buy-btn"
-              @click="to_pay">
-              Checkout
-            </div>
-          </li>
-        </ul>
-      </div>
-      <van-popup v-model="show_pay_methods"
-        position="bottom"
-        :overlay="true">
-        <payment-dialog :order-data="res_create_data"
-          :isSelectPay="change_select_pay"
-          @close="payClose"></payment-dialog>
-      </van-popup>
+    <van-popup v-model="show_pay_methods"
+               position="bottom"
+               :overlay="true">
+      <payment-dialog :order-data="res_create_data"
+                      :isSelectPay="change_select_pay"
+                      @close="payClose">
+      </payment-dialog>
+    </van-popup>
   </div>
 </template>
 
 <script>
-import api from "@/api/pay";
-import userAddress from "./components/userAddress";
+import apiPay from "@/api/pay";
+import CART from "@/api/cart";
 import addAddress from "./components/addAddress";
-import payment from "./components/payment";
-import orderReview from "./components/orderReview";
-import orderSummary from "./components/orderSummary";
+import userAddress from "./components/userAddress";
 import paymentDialog from "./payment-dialog";
-import apiBase from "@/api/base";
+import payment from "./components/payment";
+import orderSummary from "./components/orderSummary";
 
 export default {
   name: "",
   data() {
     return {
-      noHaveAddress: false,
-
-      change_select_pay: 1,
-      res_create_data: {},
+      curtAddress: {},
+      resSummary: {},
       show_pay_methods: false,
-      req_data: null,
-      shipping_mothods_index: "", //选的运费
-      coupon: "",
-      address_item: {},
-      show_coupon_dialog: false,
-      store_goods: [],
-      total_summary: {},
-      all_total: "",
-      store_total_price: []
+      res_create_data: {},
+      change_select_pay: 1
     };
   },
   created() {
-    this.cart_ids = this.$route.query.cart_ids.split(",");
-
     this.init_data();
-
-    this.fristRender = true;
   },
   mounted() {},
   computed: {},
@@ -99,145 +72,48 @@ export default {
       this.$router.replace({
         path: "/callback",
         query: {
-          // error: 'Paymentcancellation',
           pay_id: this.res_create_data.pay_id
         }
       });
     },
-    changeSelectPay(val) {
-      this.change_select_pay = val;
+    init_data(NewAddressId) {
+      const Store_address = this.$store.state.order_detail.address;
+      const params = JSON.parse(sessionStorage.cartParams)
+      if (Store_address.id) { // 用户切换地址触发
+        params.address_id = Store_address.id;
+        this.$store.state.order_detail.address = {}
+        console.log(this.$store.state.order_detail.address, 'address-stroe')
+      }
+      if (NewAddressId) {  // 用户第一次添加地址触发
+        params.address_id = NewAddressId.id;
+      }
+      CART.orderConfirm(params).then(res => {
+        this.cachePrams = {...params}
+        const data = res.data
+        this.cachePrams.address_id = data.address.id
+        this.curtAddress = data.address
+        this.resSummary = data
+      });
+
     },
-    init_data() {
-      // let obj = {
-      //   cart_ids: ['24694873236595142052', '95564537746833116239', '95564546260833361230']
-      // }
-      let obj = {
-        cart_ids: this.cart_ids
-      };
-      api
-        .confirm_order(obj)
-        .then(res => {
-          let data = res.data;
-          this.address_item = data.address;
-          this.store_goods = data.store_goods;
-          let good_nums = 0;
-          data.store_goods.forEach(item => {
-            good_nums += item.goods_data.length;
-          });
-          this.total_summary = {
-            total: data.total,
-            coupon_discount: data.coupon_discount,
-            total_before_tax: data.total_before_tax,
-            tax_total: data.tax_total,
-            all_total: data.all_total,
-            good_nums: good_nums
-          };
-          this.all_total = data.all_total;
-          this.init_select_info();
-        })
-        .catch(res => {
-          if (res.code === 2209) {
-            this.$router.go(-1);
-          }
-        });
+    addNewAddress(NewAddressId) {
+      this.init_data(NewAddressId)
     },
     init_select_info() {
       /* 通过store获取的数据在下，优先级别高 */
-      let order_detail = this.$store.state.order_detail;
-      if (order_detail.address.id) {
-        this.address_item = order_detail.address;
-      }
+
       this.total_price();
-    },
-    total_price() {
-      let order_detail = this.$store.state.order_detail;
-      let store_ship_method = [];
-      this.store_goods.forEach(store => {
-        store_ship_method.push({
-          ship_method: store.ship_method.default,
-          store_id: store.store_id
-        });
-      });
-      if (order_detail.delivery.length > 0) {
-        order_detail.delivery.forEach(item => {
-          store_ship_method.forEach(defalt => {
-            if (item.store_id === defalt.store_id) {
-              defalt.ship_method = item.item.key;
-            }
-          });
-        });
-      }
-      let address_id = this.address_item.id;
-      if (order_detail.address.id) {
-        address_id = order_detail.address.id;
-      }
-      let coupon_id = undefined;
-      if (order_detail.coupon.id) {
-        coupon_id = order_detail.coupon.id;
-      }
-
-      let store_code = [];
-      if (order_detail.applyCode.length > 0) {
-        store_code = order_detail.applyCode;
-      }
-      let param = {
-        cart_ids: this.cart_ids,
-        store_code: store_code,
-        store_ship_method: store_ship_method,
-        address_id: address_id,
-        user_coupon_id: coupon_id
-      };
-      const ee = param.store_code.filter((item) => {
-        return item.code_number !== undefined
-      })
-      param.store_code = ee
-      this.totalPrice = param; //存起来复用
-      api.total_price(param).then(res => {
-        let data = res.data;
-        this.store_total_price = data.sub_order_info;
-        let good_nums = this.total_summary.good_nums;
-
-        this.total_summary = {
-          total: data.total,
-          coupon_discount: data.coupon_discount,
-          total_before_tax: data.total_before_tax,
-          tax_total: data.tax_total,
-          all_total: data.all_total,
-          good_nums
-        };
-        this.all_total = data.all_total;
-        // let temp = res.data;
-        // for (var key in temp) {
-        //     this.order_form[key] = temp[key];
-        // }
-        // if (res.data.ship_method) {
-        //     this.$store.state.info_lists = res.data.ship_method.list;
-        //     this.ship_method = res.data.ship_method.list[0];
-        //     this.$store.state.order_detail.delivery = undefined;
-        //     this.init_select_info(this.address_item);
-        // }
-
-        if (this.fristRender) {
-          this.fristRender = false;
-
-        }
-      }).catch((err) => {
-        console.log(err)
-      });
     },
     to_address() {
       let params = {
         path: "/address",
-        query: { id: this.address_item.id }
+        query: { id: this.curtAddress.id }
       };
       this.$router.push(params);
     },
-    /* buy some goods */
-    to_pay() {
-      let params = this.totalPrice;
-      api.create_order(params).then(res => {
-        apiBase.visitSaveLog({eventName: 'checkout'}).then(()=>{})
-        this.res_create_data = res.data;
+    createOrder() {
+      apiPay.create_order(this.cachePrams).then((res) => {
+        this.res_create_data = res.data
         if (res.data.free === 1) {
           this.$router.replace({
             path: "/callback",
@@ -246,32 +122,26 @@ export default {
             }
           });
         } else {
-          // this.show_pay_methods = true;
-          this.$router.replace({
-            path: '/checkout/pay',
-            query: {
-              pay_id: res.data.pay_id
-            }
-          })
-        }
-      });
-      // let router_params = {
-      //   path: "/pay",
-      //   query: {}
-      // };
-      // this.$router.push(router_params);
-    },
-    transFormObj(obj) {
+          // 老版支付
+          this.show_pay_methods = true;
+          // 新版支付
+          //   this.$router.replace({
+            //     path: '/checkout/pay',
+            //     query: {
+            //       pay_id: res.data.pay_id
+            //     }
+            //   })
+          }
+      })
 
-    }
+    },
   },
   components: {
-    userAddress,
     payment,
-    orderReview,
     orderSummary,
-    paymentDialog,
-    addAddress
+    addAddress,
+    userAddress,
+    paymentDialog
   }
 };
 </script>
@@ -321,61 +191,4 @@ export default {
   }
 }
 
-/* 优惠券领取入口 */
-.footer-buy {
-  height: 50px;
-  border-top: 1px solid #e9e9e9;
-  .get-coupon {
-    height: 40px;
-    border-top: 1px solid #e9e9e9;
-    border-bottom: 1px solid #e9e9e9;
-    padding-left: 20px;
-    padding-right: 20px;
-    vertical-align: middle;
-    img {
-      height: 18px;
-      width: auto;
-    }
-    span {
-      font-size: 14px;
-      padding-left: 10px;
-    }
-    .content {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      background: url("/static/images/icon/cart/分类 copy@3x.png") no-repeat
-        right center;
-      background-size: auto 18px;
-    }
-  }
-}
-/* 计算总价 */
-.to-buy {
-  display: flex;
-  justify-content: space-between;
-  height: 50px;
-  .total-box {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 20px;
-    .total-desc {
-      font-size: 12px;
-    }
-    .total-price {
-      font-size: 18px;
-      font-weight: bold;
-    }
-  }
-  .buy-btn {
-    width: 140px;
-    font-size: 16px;
-    color: #ffffff;
-    background-color: #d70e19;
-    line-height: 50px;
-    text-align: center;
-  }
-}
 </style>

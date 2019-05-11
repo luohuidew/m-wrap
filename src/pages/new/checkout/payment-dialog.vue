@@ -168,10 +168,10 @@ export default {
     }
   },
   components: {
-    // paypal,
-    // accept,
-    // acceptTest,
-    // paypalTest
+    paypal,
+    accept,
+    acceptTest,
+    paypalTest
   }
 };
 </script>

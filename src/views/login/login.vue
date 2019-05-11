@@ -1,6 +1,6 @@
 <template>
   <div class="facebook-login-box">
-    <div class="header">
+    <div class="header" v-show="is_selected === 'signUp'">
       <img src="./img/top.jpg"  width="100%"/>
     </div>
     <div class="login-wrap">
@@ -148,7 +148,7 @@ export default {
       if (getToken()) {
         if (this.userNew) {
           this.$dialog.alert({
-            message: 'Sign up now！You’ll get $15 on us, and you can spend it on everything!',
+            message: 'Thanks for signing up, a $15 coupon has been added to your WeGet Account.',
             confirmButtonText: 'confirm'
           }).then(()=> {
             this.toPage()
