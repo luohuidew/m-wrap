@@ -5,9 +5,9 @@
       <a :href="activitie_info.route_url">
            <img :src="activitie_info.img_url"
         alt=""
-        srcset=""> 
+        srcset="">
       </a>
-     
+
     </div>    -->
     <premium v-if="goods_info.length" :goods_info=goods_info></premium>
   </div>
@@ -35,8 +35,7 @@ export default {
   methods: {
     init_data() {
       api.PersonalCenter({}).then(res => {
-        console.log(res);
-        this.$store.state.user = res.data.user_info;
+        // this.$store.state.user = res.data.user_info;
         // setToken(res.data.token);
         this.activitie_info = res.data.activitie_info;
         this.goods_info = res.data.goods_info;

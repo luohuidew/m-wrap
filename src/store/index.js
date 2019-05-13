@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import api_user from "@/api/user";
 import {
-  getToken
+  getToken,
+  setToken,
+  removeToken,
+  removeUserShareId
 } from '@/utils/auth'
 import cart from "./modules/cart"
 Vue.use(Vuex)
@@ -47,6 +51,9 @@ const store = new Vuex.Store({
       // 变更状态
       state.token = data;
     },
+    set_user(state, data) {
+      state.user = data;
+    },
     set_share_token(state, data) {
       // 变更状态
       state.share_token = data;
@@ -73,8 +80,31 @@ const store = new Vuex.Store({
     },
   },
   actions: {
+    // SetToken({ commit }, val) {
+    //   commit('set_token', val)
+    // },
+
     SetToken({ commit }, val) {
       commit('set_token', val)
+      setToken(val)
+      return new Promise((resolve, reject) => {
+        api_user.PersonalCenter({}).then(res => {
+          const suerInfo = res.data.user_info;
+          commit('set_user', suerInfo)
+          resolve(suerInfo)
+        }).catch(error => {
+          reject(error)
+        });
+      })
+    },
+    removeToken({ commit }) {
+      return new Promise((resolve) =>{
+        commit('set_user', {})
+        removeToken()
+        removeUserShareId()
+        resolve()
+      })
+
     },
   }
 })

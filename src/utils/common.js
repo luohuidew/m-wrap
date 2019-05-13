@@ -38,7 +38,7 @@ const CM = {
     }
   },
   is_facebook() {
-    if (ua.indexOf('fbav') !== -1) {
+    if (ua.indexOf('fbss') !== -1) {
       return true;
     } else {
       return false;

@@ -52,8 +52,9 @@ export default {
   methods: {
     logout(){
       if(getToken()){
-        removeToken();
-        window.location.replace('/login');
+        this.$store.dispatch('removeToken').then(()=> {
+          this.$router.replace('/login');
+        })
       }
     }
   },
