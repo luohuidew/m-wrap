@@ -123,7 +123,7 @@ export default {
     $route: {
       handler(to, from) {
         this.init_meta();
-        // this.visitSaveLog();
+        this.visitSaveLog();
         this.init_transtion(to, from);
         // debugger;
         this.init_device();
