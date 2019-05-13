@@ -12,7 +12,7 @@
           srcset="">
       </li>
       <li class="gif">
-        <img src="./img/about-us_03.gif"
+        <img src="./img/about-us_03.jpg"
           alt=""
           srcset="">
       </li>
@@ -22,7 +22,7 @@
           srcset="">
       </li>
       <li class="gif">
-        <img src="./img/about-us_05.gif"
+        <img src="./img/about-us_05.jpg"
           alt=""
           srcset="">
       </li>
@@ -48,6 +48,11 @@
       </li>
       <li>
         <img src="./img/about-us_10.jpg"
+             alt=""
+             srcset="">
+      </li>
+      <li>
+        <img src="./img/about-us_11.jpg"
              alt=""
              srcset="">
       </li>
