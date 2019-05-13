@@ -31,7 +31,7 @@ export default {
       }, 4000);
     },
     onError(e) {
-      alert("Failed to copy!");
+       alert("Failed to copy!");
     }
   },
   components: {}

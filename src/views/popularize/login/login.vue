@@ -61,7 +61,8 @@ import tempdialog from "@/components/dialog/temp-dialog";
 // import "./css/base.scss";
 import api from "@/api/login";
 import getShareUserApi from "@/api/trial";
-import { setToken, getToken, setUserShareId, getUserShareId } from "@/utils/auth";
+import apiBase from "@/api/base";
+import { getToken, setUserShareId, getUserShareId } from "@/utils/auth";
 import { sha256 } from "js-sha256";
 export default {
   name: "login",
@@ -80,6 +81,7 @@ export default {
     };
   },
   created() {
+    this.TOAST = undefined //全局加载弹框
     this.shareReturn()
     this.login_pass = this.$route.query.autoshow == "1" ? true : false;
   },
@@ -207,6 +209,12 @@ export default {
     },
     check_pre_login(per_params, params) {
       let that = this;
+      this.TOAST = this.$toast.loading({
+        mask: true,
+        forbidClick:true,
+        loadingType: "spinner",
+        message: 'Loading',
+      });
       api
         .preLogin(per_params)
         .then(res => {
@@ -215,6 +223,7 @@ export default {
         })
         .then(res => {
           if (res.data.is_signUp == 1) {
+            this.TOAST.clear();
             this.show_dialog = true;
             this.$set(this.other_form, "referer", this.$route.query.redirect);
           } else {
@@ -324,6 +333,12 @@ export default {
       if (email) {
         let params = this.other_form;
         params.share_user_id = this.share_user_id
+        this.TOAST = this.$toast.loading({
+          mask: true,
+          forbidClick:true,
+          loadingType: "spinner",
+          message: 'Loading',
+        });
         api.thirdLogin(params).then(res => {
           let data = res.data;
           this.userNew = true;
@@ -338,6 +353,12 @@ export default {
           this.$toast("password format is incorrect.");
           return false;
         } else {
+          this.TOAST = this.$toast.loading({
+            mask: true,
+            forbidClick:true,
+            loadingType: "spinner",
+            message: 'Loading',
+          });
           let params = {
             email: data.res.email,
             password: sha256(data.res.password),
@@ -350,25 +371,37 @@ export default {
             console.log(res);
             this.userNew = true;
             this.set_token(res.data.token);
+            apiBase.visitSaveLog({eventName: 'signupSuccess'}).then(()=>{})
+
             // debugger;
           });
+          apiBase.visitSaveLog({eventName: 'signup'}).then(()=>{})
+
         }
       } else { // 登陆
         let params = {
           email: data.res.email,
           password: sha256(data.res.password)
         };
+        this.TOAST = this.$toast.loading({
+          mask: true,
+          forbidClick:true,
+          loadingType: "spinner",
+          message: 'Loading',
+        });
         api.loginByUsername(params).then(res => {
-          // console.log(res);
-          console.log(res.data.token);
+          apiBase.visitSaveLog({eventName: 'signinSuccess'}).then(()=>{})
           this.set_token(res.data.token);
         });
+        apiBase.visitSaveLog({eventName: 'signin'}).then(()=>{})
       }
     },
     set_token(token) { // 登陆注册第三方登录成功后调用方法
-      setToken(token);
-      this.$store.dispatch('SetToken', token)
-      this.setShareUId()
+      this.$store.dispatch('SetToken', token).then((suerInfo)=> {
+        setUserShareId(suerInfo.uid)
+        this.TOAST.clear();
+        this.shareReturn()
+      })
     },
     setShareUId() {
       getShareUserApi.getUserInfo().then(res => { // 获取UserShareId

@@ -54,7 +54,7 @@ export default {
         data: {}
       };
       let temp = this.$CM.weget_device_link(href_params);
-      alert(temp);
+      // alert(temp);
     }
   },
   components: {}
