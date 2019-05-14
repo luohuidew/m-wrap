@@ -481,16 +481,251 @@ let listData2 = [
 
   ]
 ]
+let listData4 = [
+  {
+    "alone_price": "34.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/17990753975cd0f536bfb96.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Printed Full-length Legging",
+    "sku_id": "5719846386369065"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/15110709545cd0f78f569f6.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Mesh Panel Mid Waist Legging",
+    "sku_id": "5719896248098311"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/21056938115cd0f8b9af147.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Mesh&leather Panel Mid Waist Legging",
+    "sku_id": "5719912606553413"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/19982691315cd0f968e9bbc.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Printed Full-lenth Work Out Legging",
+    "sku_id": "5719935710924726"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/21376202485cd0fac8e6802.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Tone Activewear",
+    "sku_id": "5720020732912010"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/1145080695cd0fe027ab5a.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Tone Activewear",
+    "sku_id": "5720088968682756"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/19959302185cd100f148790.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Two Tone Activewear",
+    "sku_id": "5720155439056130"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/21396381155cd10323b8771.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Striped Legging",
+    "sku_id": "5720176499141183"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/14121694315cd103b9d541a.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Color Print Legging",
+    "sku_id": "5720205061296182"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/15398497675cd105481714f.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Ankle Legging",
+    "sku_id": "5720296229867132"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/3506454195cd12147ec663.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Two Tone Legging",
+    "sku_id": "5720994378427439"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/17236559775cd11d783faf2.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "High Rise Legging",
+    "sku_id": "5720924784196460"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/4446023845cd1241985723.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Ruffle Legging",
+    "sku_id": "5721078640667597"
+  }
+]
+let listData5 = [
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/1018606715ccead7e6a490.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Snake Print T-shirt",
+    "sku_id": "5704880766227243"
+  },
+  {
+    "alone_price": "26.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/10080298325cce9b44f0965.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Snake Print Dress",
+    "sku_id": "5704410822157356"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/5872089595cc6e47e0e5dc.jpg?width=800&height=800",
+    "show_tag": [
+      {
+        "mask_bg_image": "https://we-get.s3.us-west-1.amazonaws.com/18691111655c564e9c071f6.png"
+      }
+    ],
+    "title": "Open Back Mini Dress",
+    "sku_id": "5637939491899645"
+  },
+  {
+    "alone_price": "19.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/19114177015cbd696c662e3.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Slim Oval Sunglasses",
+    "sku_id": "5591721041753722"
+  },
+  {
+    "alone_price": "39.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/3122956695cd644b473ac9.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Snake Print Heels",
+    "sku_id": "5619875389984855"
+  },
+  {
+    "alone_price": "39.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/5808007255cbf3591504ad.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Purse- Snake Printed Strap",
+    "sku_id": "5603402401829815"
+  },
+  {
+    "alone_price": "34.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/7001440295cbd8b3fc19a2.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Snake Print Crop Top",
+    "sku_id": "5592592030595764"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/7910094175cbd874282e9b.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Tube Top- Snake Print",
+    "sku_id": "5592496161965472"
+  },
+  {
+    "alone_price": "32.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/9119429985cac56a98a0e2.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Cheetah Print Skirt",
+    "sku_id": "5495371646761603"
+  },
+  {
+    "alone_price": "29.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/8746742845ca74be24f325.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Cropped Cheetah Print Turtleneck",
+    "sku_id": "5495434600192781"
+  },
+  {
+    "alone_price": "27.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/10223759375cca67955de8d.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Snake Print Spaghetti Strapped Dress",
+    "sku_id": "5676878781014968"
+  }
+]
 let listData = []
 listData2.forEach(item => {
   listData = [...listData, ...item]
 })
-function randomData() {
+function randomData(num) {
+  console.log(typeof  num)
+  let numb = num.toString()
+  let arrInit = []
+  if (numb === '1') {
+    arrInit = listData
+  }
+  if (numb === '4') {
+    arrInit = listData4
+  }
+  if (numb === '5') {
+    arrInit = listData5
+  }
   const arr = new Set();
   (function fs() {
-        const num = Math.floor((Math.random() * 20))
+
+        const num = Math.floor((Math.random() * (arrInit.length)))
         arr.add(num)
-        if (arr.size === 4) {
+        if (arr.size == 4) {
           return  arr
         } else {
           fs()
@@ -498,12 +733,14 @@ function randomData() {
       }
   )()
   const forth = [...arr]
-  return listData.filter((item, index) => {
+  return arrInit.filter((item, index) => {
     return forth.includes(index)
   })
 }
 export default {
   listData,
   randomData,
-  listData2
+  listData2,
+  listData4,
+  listData5,
 }

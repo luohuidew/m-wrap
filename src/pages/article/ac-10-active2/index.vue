@@ -1,7 +1,7 @@
 <template>
   <div class="article-detail">
     <section class="wrap">
-      <Item v-for="item in itemDdata" :cardData = "item" :activeFixed="true"></Item>
+      <Item v-for="item in itemDdata" :cardData = "item" :activeFixed="1"></Item>
     </section>
     <van-popup v-model="show" class="popup-warp" :overlay="false">
       <!--<img class="close" @click="closePopup" src="@/assets/img/conponActive/X.png"/>-->

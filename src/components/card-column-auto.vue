@@ -71,7 +71,7 @@ export default {
           path: "/detailAcive",
           query: {
             sku_id: sku_id,
-            activeList: 1
+            activeList: this.activeFixed
           }
         };
         this.$router.push(params);

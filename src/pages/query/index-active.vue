@@ -1,8 +1,9 @@
 <template>
   <div class="query-lists" v-if="sku_lists.length">
-    <ul v-if="activeList == '1'" >
+    <ul v-if="activeList" >
       <saleListActive v-for="(item,index) in sku_lists"
                       :sku="item"
+                      :activeList = 'activeList'
                       :key="index"></saleListActive>
     </ul>
     <ul v-else>

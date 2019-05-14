@@ -84,12 +84,12 @@ export default {
             sku_id: sku_id
           }
         };
-        if (this.activeList == '1' ) {
+        if (this.activeList) {
           params = {
             path: "/detailAcive",
             query: {
               sku_id: sku_id,
-              activeList: 1
+              activeList: this.activeList
             }
           };
         }

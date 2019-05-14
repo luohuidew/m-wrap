@@ -28,10 +28,12 @@ export default {
   },
   props: {
     dataList: {
-      default: []
+      default: function () {
+        return []
+      }
     },
     activeList: {
-      default: '0'
+      default: 0
     },
     title: {
       type: String
@@ -41,12 +43,11 @@ export default {
     }
   },
   created() {
-    // alert(this.activeList)
   },
   mounted() {
   },
   methods: {
-    to_similar() {
+    to_similar() { // 点击更多
       window.sessionStorage.activeData = JSON.stringify(this.dataList)
       let params = {
         path: "/queryActive", // 跳到列表
@@ -56,9 +57,9 @@ export default {
           activeList: this.activeList
         }
       };
-      if (this.titlelike) {
-        params.path = '/likeQueryActive'
-      }
+      // if (this.titlelike) {
+      //   params.path = '/likeQueryActive'
+      // }
       this.$router.push(params);
     }
   },
