@@ -3,7 +3,7 @@
     <div class="scroll-lists" :class="{'has-coupon': coupon_list.length>0}" v-if="req_data">
       <template v-if="req_data.store_goods && req_data.store_goods.length>0">
         <cart-list @deleteCartGood="deleteCartGood" @change="get_list_data" :shippSelectObj="shippSelectObj" @showVantShipping = "showVantShipping"
-          :goods-data="req_data.store_goods" :isAllSelected = 'prop_all_goods_is_select'></cart-list>
+          :goods-data="req_data.store_goods" :isAllSelected = 'prop_all_goods_is_select' ref="CarListRef"></cart-list>
       </template>
       <template v-else>
         <div class="no-cart-item">
@@ -98,12 +98,21 @@ export default {
         only : [obj.cart_id]
       }
       CART.delShopCartGood(param).then(()=>{
-        this.req_data.store_goods = this.req_data.store_goods.filter((store) => {
-          return store.store_id !== obj.store_id
+         this.req_data.store_goods.forEach((store) => { // 删除商品
+           store.goods_data.forEach((good, index) => {
+             if(good.cart_id === obj.cart_id) {
+               store.goods_data.splice(index, 1)
+             }
+           })
         })
+        this.$refs.CarListRef.selectStoreGoodsDelete(obj.cart_id)
         console.log(this.ZANCUN_DDTA )
-        this.ZANCUN_DDTA = this.ZANCUN_DDTA.filter((store) => {
-          return store.store_id !== obj.store_id
+        this.ZANCUN_DDTA.forEach((store) => {
+          store.goods.forEach((good, index) => {
+            if(good.cart_id === obj.cart_id) {
+              store.goods.splice(index, 1)
+            }
+          })
         })
         if (this.ZANCUN_DDTA.length > 0) {
           this.totalPrices(this.ZANCUN_DDTA, this.ZANCUN_Coupon)

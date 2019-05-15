@@ -94,6 +94,15 @@ export default {
   computed: {
   },
   methods: {
+    selectStoreGoodsDelete(cart_id) {
+      this.selectStoreGoods.forEach((store) => {
+        store.goods.forEach((good, index) => {
+          if(good.cart_id === cart_id) {
+            store.goods.splice(index, 1)
+          }
+        })
+      })
+    },
     deleteCartGood(obj) {
       this.$emit('deleteCartGood',obj)
     },
@@ -114,15 +123,15 @@ export default {
       this.$emit("change", this.selectStoreGoods, this.user_coupon_id);
     },
     get_item_checkout(obj) {
-      this.selectStoreGoods = this.selectStoreGoods.filter((store) => {
-        let clock = false
-        this.goodsData.forEach((item)=> {
-          if (store.store_id === item.store_id) {
-            clock = true
-          }
-        })
-        return clock
-      })
+      // this.selectStoreGoods = this.selectStoreGoods.filter((store) => {
+      //   let clock = false
+      //   this.goodsData.forEach((item)=> {
+      //     if (store.store_id === item.store_id) {
+      //       clock = true
+      //     }
+      //   })
+      //   return clock
+      // })
       let clock = false
       this.selectStoreGoods.forEach((item,index) => {
         if (item.store_id === obj.store_id) {
