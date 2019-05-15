@@ -1,9 +1,10 @@
 <template>
   <div class="query-lists">
-    <noData v-if="finished">
+    <noData v-if="finished && sku_lists.length === 0 ">
       <span>No Product in this category</span>
     </noData>
     <van-list v-model="loading"
+      :immediate-check="false"
       :finished="finished"
       :finished-text="''"
       :loading-text="'Loading...'"

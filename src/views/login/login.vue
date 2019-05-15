@@ -117,7 +117,7 @@ export default {
       is_facebook: false,
       userNew: false,
       show_dialog: false,
-      is_selected: 'signIn',
+      is_selected: this.$route.query.type || 'signIn',
       bind_email: "",
       other_form: {},
       ua: {

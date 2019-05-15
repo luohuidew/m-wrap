@@ -32,7 +32,7 @@
       :key="index"
       class="cart-lists">
       <li class="cart-lists-item">
-        <cart-item @showVantShipping = "showVantShipping" :shippSelectObj="shippSelectObj" @checkout="get_item_checkout" :lists-data="item" ref="StoreRef"></cart-item>
+        <cart-item @deleteCartGood="deleteCartGood" @showVantShipping = "showVantShipping" :shippSelectObj="shippSelectObj" @checkout="get_item_checkout" :lists-data="item" ref="StoreRef"></cart-item>
       </li>
     </ul>
     <!--<div class="coupon" @click="showVantCouponMethod">-->
@@ -94,6 +94,9 @@ export default {
   computed: {
   },
   methods: {
+    deleteCartGood(obj) {
+      this.$emit('deleteCartGood',obj)
+    },
     showVantShipping(obj) {
       this.$emit('showVantShipping',obj)
     },
@@ -111,6 +114,15 @@ export default {
       this.$emit("change", this.selectStoreGoods, this.user_coupon_id);
     },
     get_item_checkout(obj) {
+      this.selectStoreGoods = this.selectStoreGoods.filter((store) => {
+        let clock = false
+        this.goodsData.forEach((item)=> {
+          if (store.store_id === item.store_id) {
+            clock = true
+          }
+        })
+        return clock
+      })
       let clock = false
       this.selectStoreGoods.forEach((item,index) => {
         if (item.store_id === obj.store_id) {
