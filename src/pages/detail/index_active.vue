@@ -56,14 +56,14 @@ export default {
     if (this.activeList == '1' || sessionStorage.getItem('conpon-detail-first')) {
       this.show = false; // 只有第一次展示
     }
-    if (this.$route.query.type === "keep") {
-    // debugger;
-    if (this.$store.state.token) {
-      this.autoAddCart();
-    } else {
-      this.clearParams();
-    }
-    }
+    // if (this.$route.query.type === "keep") {
+    // // debugger;
+    // if (this.$store.state.token) {
+    //   this.autoAddCart();
+    // } else {
+    //   this.clearParams();
+    // }
+    // }
   },
   methods: {
     goConpon() {

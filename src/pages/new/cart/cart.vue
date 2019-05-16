@@ -98,7 +98,7 @@ export default {
         only : [obj.cart_id]
       }
       CART.delShopCartGood(param).then(()=>{
-         this.req_data.store_goods.forEach((store) => { // 删除商品
+        this.req_data.store_goods.forEach((store) => { // 删除商品
            store.goods_data.forEach((good, index) => {
              if(good.cart_id === obj.cart_id) {
                store.goods_data.splice(index, 1)
@@ -106,7 +106,6 @@ export default {
            })
         })
         this.$refs.CarListRef.selectStoreGoodsDelete(obj.cart_id)
-        console.log(this.ZANCUN_DDTA )
         this.ZANCUN_DDTA.forEach((store) => {
           store.goods.forEach((good, index) => {
             if(good.cart_id === obj.cart_id) {

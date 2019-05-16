@@ -32,7 +32,7 @@
       :key="index"
       class="cart-lists">
       <li class="cart-lists-item">
-        <cart-item @deleteCartGood="deleteCartGood" @showVantShipping = "showVantShipping" :shippSelectObj="shippSelectObj" @checkout="get_item_checkout" :lists-data="item" ref="StoreRef"></cart-item>
+        <cart-item @deleteCartGood="deleteCartGood" :key="item.store_id" @showVantShipping = "showVantShipping" :shippSelectObj="shippSelectObj" @checkout="get_item_checkout" :lists-data="item" ref="StoreRef"></cart-item>
       </li>
     </ul>
     <!--<div class="coupon" @click="showVantCouponMethod">-->
