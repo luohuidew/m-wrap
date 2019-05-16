@@ -108,7 +108,7 @@ export default {
   li {
     font-size: 0;
     text-align: center;
-    & /deep/ a {
+    & >>> a {
       margin: 0 8px;
     }
   }
