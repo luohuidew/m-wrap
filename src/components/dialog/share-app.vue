@@ -1,9 +1,9 @@
 <template>
-  <div v-if="show_share">
-    <a class="downLoad"
-      :href="to_app"
-      target="_blank">Open In App</a>
-  </div>
+  <!--<div v-if="show_share">-->
+    <!--<a class="downLoad"-->
+      <!--:href="to_app"-->
+      <!--target="_blank">Open In App</a>-->
+  <!--</div>-->
 </template>
 
 <script>

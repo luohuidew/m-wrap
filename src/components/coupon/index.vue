@@ -152,7 +152,8 @@ export default {
 }
 .coupon-item {
   height: 87px;
-  background: #fff url("/static/img/icon/coupon_no.png") 304px center no-repeat;
+  background: #fff url("/static/images/icon/cart/noSelected.png") 304px center  no-repeat;
+  background-size: 20px auto;
   padding: 15px;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
@@ -163,7 +164,9 @@ export default {
   }
 }
 .active {
-  background: #fff url("/static/img/icon/coupon_yes.png") 304px center no-repeat;
+  background: #fff url("/static/images/icon/cart/selected.png") 304px center no-repeat;
+  background-size: 20px auto;
+
 }
 .done-btn {
   text-align: center;
@@ -173,7 +176,7 @@ export default {
     display: inline-block;
     width: 250px;
     height: 40px;
-    background: #d70e19;
+    background: #000;
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     border-radius: 20px;

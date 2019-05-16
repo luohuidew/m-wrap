@@ -256,7 +256,7 @@ export default {
       //   "/login?redirect=" +
       //   encodeURIComponent(re_path);
       const param = {
-        path: "/login?redirect=" + encodeURIComponent(re_path),
+        path: "/login?redirect=" + encodeURIComponent(this.$route.fullPath),
         // query: {
         //   redirect: this.$route.fullPath
         // }
