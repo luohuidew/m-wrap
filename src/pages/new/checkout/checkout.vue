@@ -37,6 +37,7 @@
       </ul>
     <van-popup v-model="show_pay_methods"
                position="bottom"
+               :close-on-click-overlay="false"
                :overlay="true">
       <payment-dialog :order-data="res_create_data"
                       :isSelectPay="change_select_pay"

@@ -78,6 +78,7 @@ export default {
         },
         {
           text: 'Get $15 in coupons when you sign up!',
+          url: '/login?type=signUp',
         }
       ],
       transitionName: "slide-left",
@@ -86,7 +87,7 @@ export default {
   },
   computed: {
     show_banner() {
-      return this.keep_banner && !this.full_screen;
+      return this.keep_banner && !this.full_screen && !this.$route.fullPath.includes('cart/index');
     },
     share_token() {
       return this.$store.state.share_token;

@@ -1,13 +1,9 @@
 <template>
   <div class="cart-layout">
-    <div class="scroll-lists"  v-if="req_data">
+    <div class="scroll-lists" :class="{'has-coupon': coupon_list.length>0}" v-if="req_data">
       <template v-if="req_data.store_goods && req_data.store_goods.length>0">
-        <cart-list @change="get_list_data" :shippSelectObj="shippSelectObj" @showVantShipping = "showVantShipping"
-          :goods-data="req_data.store_goods" :isAllSelected = 'prop_all_goods_is_select'></cart-list>
-        <div class="coupon" @click="showVantCouponMethod">
-          <img src="" alt="">
-          <span>{{couponText}}</span>
-        </div>
+        <cart-list @deleteCartGood="deleteCartGood" @change="get_list_data" :shippSelectObj="shippSelectObj" @showVantShipping = "showVantShipping"
+          :goods-data="req_data.store_goods" :isAllSelected = 'prop_all_goods_is_select' ref="CarListRef"></cart-list>
       </template>
       <template v-else>
         <div class="no-cart-item">
@@ -21,14 +17,18 @@
         <!--:gui-data="req_data.like"></cart-guide>-->
     </div>
     <footer>
+      <div class="coupon" @click="showVantCouponMethod" v-if="coupon_list.length>0">
+        <img src="/static/images/icon/cart/selectCopy@3x.png" alt="">
+        <span>{{couponText}}</span>
+      </div>
       <div class="price">
         <div class="selct">
           <img v-if="all_goods_is_select" @click="noAllgoodSelect"
-               src="/static/images/icon/cart/多选 选中@3x.png"
+               src="/static/images/icon/cart/selected.png"
                alt=""
                srcset="">
           <img v-else @click="AllgoodSelect"
-               src="/static/images/icon/cart/多选 未选中@3x.png"
+               src="/static/images/icon/cart/noSelected.png"
                alt=""
                srcset="">
          <span> Select items({{selectedNumber}})</span>
@@ -39,8 +39,8 @@
       </div>
       <div class="pay">
         <!--<div class="paypal">paypal</div>-->
-        <div class="paypal checkout" v-show="isLoading"><span>Secure checkout </span> <span> <van-loading size="20px" /></span></div>
-        <div class="paypal checkout" @click="toCheckout">Secure checkout</div>
+        <div class="paypal " v-if="isLoading"><span>Secure checkout </span> <span class="load"> <van-loading size="20px" /></span></div>
+        <div class="paypal " v-else @click="toCheckout">Secure checkout</div>
       </div>
     </footer>
     <van-popup v-model="showVantShippingPopu" position="bottom" >
@@ -93,6 +93,31 @@ export default {
   mounted() {},
   computed: {},
   methods: {
+    deleteCartGood(obj) {
+      const param = {
+        only : [obj.cart_id]
+      }
+      CART.delShopCartGood(param).then(()=>{
+        this.req_data.store_goods.forEach((store) => { // 删除商品
+           store.goods_data.forEach((good, index) => {
+             if(good.cart_id === obj.cart_id) {
+               store.goods_data.splice(index, 1)
+             }
+           })
+        })
+        this.$refs.CarListRef.selectStoreGoodsDelete(obj.cart_id)
+        this.ZANCUN_DDTA.forEach((store) => {
+          store.goods.forEach((good, index) => {
+            if(good.cart_id === obj.cart_id) {
+              store.goods.splice(index, 1)
+            }
+          })
+        })
+        if (this.ZANCUN_DDTA.length > 0) {
+          this.totalPrices(this.ZANCUN_DDTA, this.ZANCUN_Coupon)
+        }
+      })
+    },
     closeshowVantCoupon(obj) {
       this.user_coupon_id = obj.id
       this.couponText = obj.name
@@ -180,8 +205,8 @@ export default {
           count += Number(good.num)
         })
       })
-      this.selectedNumber = count
-      this.findAllSelectGood(data)
+      this.selectedNumber = count  // 计算一共选中几个商品
+      this.findAllSelectGood(data) // 判断是否全选
       if (count === 0) {
         this.allTotal = '$0.00'
         this.ZANCUN_DDTA = []
@@ -283,14 +308,14 @@ export default {
 .cart-layout {
   height: 100%;
   footer {
+    box-shadow: 0px -1px 2px #c1c1c1;
     position: relative;
     z-index: 1000;
-    height: 100px;
+    height: 150px;
     font-size:14px;
     font-weight:400;
     color:rgba(0,0,0,1);
     .price {
-      box-shadow: 0px -1px 2px #c1c1c1;
       padding: 0px 15px;
       height: 54px;
       display: flex;
@@ -314,21 +339,24 @@ export default {
     }
     .pay {
       height: 46px;
+      overflow: hidden;
       .paypal {
         width: 100%;
         background:rgba(255,196,56,1);
         display: inline-block;
         text-align: center;
+        height: 46px;
+        overflow: hidden;
         line-height: 46px;
+        color: #fff;
+        background:rgba(0,0,0,1);
         span{
           display: inline-block;
           vertical-align: middle;
-          margin-left: 5px;
           color: #aab2bd;
-        }
-        &.checkout {
-          color: #fff;
-          background:rgba(0,0,0,1);
+          &.load{
+            margin-left: 8px;
+          }
         }
       }
     }
@@ -337,10 +365,14 @@ export default {
 .scroll-lists {
   height: calc(100% - 100px);
   overflow: auto;
+  &.has-coupon {
+    height: calc(100% - 150px);
+
+  }
 }
 .coupon {
-  border-bottom: 10px solid #f3f3f3;
   padding-left: 15px;
+  border-bottom: 1px solid #F8F8F8;
   height: 50px;
   display: flex;
   align-items: center;
@@ -348,6 +380,7 @@ export default {
   img {
     display: inline-block;
     height: 20px;
+    margin-right: 10px;
   }
   span {
     line-height: 20px;

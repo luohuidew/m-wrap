@@ -1,7 +1,7 @@
 <template>
   <div class="app-header">
     <ul>
-      <template v-if="appHome ||appUser || appTheme || appCart">
+      <template v-if="appHome ||appUser || appTheme || appCart|| appDetail">
         <li class="aside-btn-box">
           <img src="/static/images/icon/header/home-left-icon@3x.png"
             alt=""
@@ -17,14 +17,23 @@
             @click="go_back">
         </li>
       </template>
-      <li class="weget-logo">
+      <li class="weget-logo" v-if="!appDetail">
         <router-link to="/">
           <img src="/static/images/icon/header/big-logo.png"
             alt=""
             srcset="">
         </router-link>
       </li>
-      <template v-if="appHome">
+
+      <li class="weget-logo-detail" v-if="appDetail">
+        <router-link to="/">
+          <img src="/static/images/icon/header/big-logo.png"
+               alt=""
+               srcset="">
+        </router-link>
+      </li>
+
+      <template v-if="appHome||appDetail">
         <!-- <li class="search-box _bgf3"
           @click="to_search">
           <span></span>
@@ -37,11 +46,20 @@
         </li> -->
 
         <li class="setting-icon">
+          <a v-if="appDetail" >
+            <router-link :to="{path:'/login'}">
+              <span class="sign"  v-if="!$store.state.token">Sign in</span>
+            </router-link>
+            <img class="user-photo" v-if="$store.state.token" :src="photo"
+                 alt="">
+          </a>
+
           <router-link :to="{path:'/search/search-query'}">
             <img src="/static/images/icon/normal/search@2x.png"
               alt="">
           </router-link>
-          <router-link :to="{path:'/search/search-home'}">
+
+          <router-link v-if="!appDetail" :to="{path:'/search/search-home'}">
             <img src="/static/images/icon/header/home-right-icon@3x.png"
               alt="">
           </router-link>
@@ -105,7 +123,8 @@ export default {
     return {
       contractionShow: false,
       searchContent: "",
-      haveMessages: true
+      haveMessages: true,
+      photo:sessionStorage.getItem('photo')
     };
   },
   watch: {
@@ -118,6 +137,9 @@ export default {
       }
     }
   },
+  mounted(){
+
+  },
   computed: {
     noBack() {
       return this.$route.meta.noBack
@@ -127,6 +149,9 @@ export default {
     },
     appCart() {
       return this.$route.path === "/cart/index";
+    },
+    appDetail() {
+      return this.$route.path === "/detail";
     },
     appHome() {
       return this.$route.path === "/home/index";
@@ -189,7 +214,7 @@ export default {
         width: 24px;
       }
     }
-    .weget-logo {
+    .weget-logo,.weget-logo-detail {
       position: absolute;
       left: 50%;
       top: 50%;
@@ -238,6 +263,18 @@ export default {
     img {
       margin-left: 10px;
     }
+    .sign{
+      font-size: 11px;
+      color: #000;
+      width:51px;
+      height:24px;
+      border-radius:2px;
+      border:1px solid rgba(0,0,0,1);
+      display: inline-block;
+      text-align: center;
+      line-height: 24px;
+      font-weight: bold;
+    }
     .active {
       position: relative;
       &::after {
@@ -254,4 +291,14 @@ export default {
     }
   }
 }
+  .user-photo{
+    border-radius: 50%;
+  }
+  .weget-logo-detail{
+    left: 25%!important;
+    img{
+      width: 77px!important;
+      height: 28px!important;
+    }
+  }
 </style>

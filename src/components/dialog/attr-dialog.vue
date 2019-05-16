@@ -238,7 +238,9 @@ export default {
         };
         CART.addToCart(to_catr_params).then(res => {
           this.$emit("close", null);
-          apiBase.visitSaveLog({eventName: 'addCart'}).then(()=>{})
+          this.$emit("carting", true);
+          apiBase.visitSaveLog({eventName: 'addCart'}).then(()=>{
+          })
           this.init_cart();
         });
       }
@@ -254,7 +256,7 @@ export default {
       //   "/login?redirect=" +
       //   encodeURIComponent(re_path);
       const param = {
-        path: "/login?redirect=" + encodeURIComponent(re_path),
+        path: "/login?redirect=" + encodeURIComponent(this.$route.fullPath),
         // query: {
         //   redirect: this.$route.fullPath
         // }
