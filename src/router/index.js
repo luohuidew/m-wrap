@@ -155,7 +155,7 @@ export default new Router({
       path: '/detail',
       name: 'detail',
       component: () =>
-        import('@/pages/detail'),
+        import('@/pages/details'),
 
       meta: {
         title: 'Details',
@@ -163,6 +163,18 @@ export default new Router({
         fullScreen: false
       },
       //    redirect: '/detail/',
+    },
+    {
+      path: '/details',
+      name: 'details',
+      component: () =>
+        import('@/pages/details'),
+
+      meta: {
+        title: 'Detailss',
+        keepAlive: false,
+        fullScreen: false
+      },
     },
     {
       path: '/detailAcive',
