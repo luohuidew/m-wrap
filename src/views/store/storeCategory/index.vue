@@ -61,7 +61,7 @@ export default {
       if(!temp_flag_lists[0].children.length){
         this.to_store_list(data);
       }
-      console.log(data);
+      // console.log(data);
     },
     to_store_list(cate_id) {
       let query_params = {
@@ -83,7 +83,7 @@ export default {
 <style lang='scss' scoped>
 .store-cate-page {
   height: 100%;
-  & /deep/ .van-collapse-item__content {
+  & >>> .van-collapse-item__content {
     padding: 0;
   }
   .header-top {

@@ -26,6 +26,12 @@
           alt=""
           srcset="">
       </li>
+      <li class="jumpLink">
+        <a class="email" href="mailto:service@weget.com">
+          <span>CREATE YOUR STORE NOW</span>
+          <img src="./img/about-us-link.png" alt="" class="linkImg">
+        </a>
+      </li>
       <li>
         <img src="./img/about-us_06.jpg"
           alt=""
@@ -35,6 +41,12 @@
         <img src="./img/about-us_07.jpg"
           alt=""
           srcset="">
+      </li>
+      <li class="jumpLink">
+        <router-link to='/'>
+          <span>SHOP NOW</span>
+          <img src="./img/about-us-link.png" alt="" class="linkImg">
+        </router-link>
       </li>
       <li>
         <img src="./img/about-us_08.jpg"
@@ -52,9 +64,11 @@
              srcset="">
       </li>
       <li>
-        <img src="./img/about-us_11.jpg"
-             alt=""
-             srcset="">
+        <a class="email" href="mailto:service@weget.com">
+          <img src="./img/about-us_11.jpg"
+              alt=""
+              srcset="">
+        </a>
       </li>
     </ul>
     <div class="footer">
@@ -100,8 +114,24 @@ export default {
   img {
     width: 100%;
   }
-  .gif {
+  /*.gif {
     padding: 0 28px;
+  }*/ 
+  .jumpLink a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:2px 0;
+    span {
+      font-size: 10px;
+      font-weight: bold;
+      margin-right: 10px;
+      text-decoration: underline;
+    }
+    .linkImg {
+      width: 10px;
+      height: 8px;
+    }
   }
   .footer {
     background: #1f1f1f;
