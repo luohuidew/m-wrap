@@ -219,8 +219,12 @@ export default {
   },
   created() {
     this.init_data();
-    if(this.$route.query.open_cart!=undefined){
-      this.open=true
+    let open_cart=sessionStorage.getItem('open_cart');
+    if(open_cart!=undefined){
+      if(open_cart==1){
+        this.open=true;
+        sessionStorage.setItem('open_cart','');
+      }
     }
     //获取购物车数量
     if(this.$store.state.token){

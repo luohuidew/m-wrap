@@ -309,7 +309,8 @@ export default {
           this.$route.fullPath
           }&store_id=${
           this.sku.store_id
-          }&open_cart=1`;
+          }`;
+        sessionStorage.setItem('open_cart',1);
         const param = {
           path: "/login?redirect=" + encodeURIComponent(re_path),
         }
@@ -379,13 +380,11 @@ export default {
 
 <style lang='scss' scoped>
 .detail-pay-btn {
-  background: #fff;
-  position: fixed;
+  position: relative;
   font-size: 18px;
-  bottom: 0;
-  width: 100%;
   display: flex;
-  z-index: 99;
+  z-index: 0;
+  overflow: hidden;
   height: 50px;
   border-top: 1px solid #f3f3f3;
   .go-home-box {
