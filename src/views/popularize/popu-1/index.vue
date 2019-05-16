@@ -295,7 +295,7 @@ export default {
       }
     }
   }
-    & /deep/ .van-popup {
+    & >>> .van-popup {
         background-color: rgba(255,255,255,0);
     }
    .share-box {

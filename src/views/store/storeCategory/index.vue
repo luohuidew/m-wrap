@@ -83,7 +83,7 @@ export default {
 <style lang='scss' scoped>
 .store-cate-page {
   height: 100%;
-  & /deep/ .van-collapse-item__content {
+  & >>> .van-collapse-item__content {
     padding: 0;
   }
   .header-top {

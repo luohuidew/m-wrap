@@ -70,7 +70,7 @@ export default {
     height: auto;
   }
   .active-title {
-    p /deep/ {
+    p >>> {
       display: block;
       line-height: 20px;
       h1 {

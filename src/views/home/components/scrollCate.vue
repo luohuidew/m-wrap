@@ -106,13 +106,13 @@ export default {
 
 <style lang='scss' scoped>
 #scroll-cate {
-  & /deep/ .van-tabs--line {
+  & >>> .van-tabs--line {
     padding-top: 48px;
   }
-  & /deep/ .van-tabs--line .van-tabs__wrap {
+  & >>> .van-tabs--line .van-tabs__wrap {
     height: 48px;
   }
-  & /deep/ .van-tab {
+  & >>> .van-tab {
     background-color: #000000;
   }
   .icon-text {
