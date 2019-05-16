@@ -221,7 +221,7 @@ export default {
     this.init_data();
     let open_cart=sessionStorage.getItem('open_cart');
     if(open_cart!=undefined){
-      if(open_cart==1){
+      if(open_cart==1&&this.$store.state.token){
         this.open=true;
         sessionStorage.setItem('open_cart','');
       }
