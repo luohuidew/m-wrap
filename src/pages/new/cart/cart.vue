@@ -165,7 +165,7 @@ export default {
       }
       this.isLoading = true
       CART.orderConfirm(this.cachePrams, true).then(res => {
-        this.isLoading = false
+        // this.isLoading = false
         const StringParams = JSON.stringify(this.cachePrams)
         sessionStorage.cartParams = StringParams
          let path_params = {
@@ -248,6 +248,11 @@ export default {
           })
         })
       })
+      if (params.cart_goods.length === 0) {
+        this.selectedNumber = 0
+        this.allTotal = '$0.00'
+        return
+      }
       CART.totalPrice(params).then(res => {
         this.cachePrams = res.data.params
         this.allTotal = res.data.all_total
