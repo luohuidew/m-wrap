@@ -168,35 +168,37 @@ export default {
           let button = _this.$refs.submitButton;
           button.addEventListener('click', function () {
             instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
-              _this.createOrder().then((payId) => {
-                console.log(payload,'哈哈',payId)
-                let types = 2
-                if (payload.type === 'CreditCard') {
-                  types= 3
-                }
-                let params = {
-                  nonce: payload.nonce,
-                  pay_id: payId,
-                  pay_type: types
-                };
-                apiPay.pay_paypal(params).then(res => {
-                  _this.$router.replace({
-                    path: "/callback",
-                    query: {
-                      pay_id: payId
-                    }
+              if (payload) {
+                _this.createOrder().then((payId) => {
+                  console.log(payload,'哈哈',payId)
+                  let types = 2
+                  if (payload.type === 'CreditCard') {
+                    types= 3
+                  }
+                  let params = {
+                    nonce: payload.nonce,
+                    pay_id: payId,
+                    pay_type: types
+                  };
+                  apiPay.pay_paypal(params).then(res => {
+                    _this.$router.replace({
+                      path: "/callback",
+                      query: {
+                        pay_id: payId
+                      }
+                    });
+                  }).catch(err=>{
+                    _this.$router.replace({
+                      path: "/callback",
+                      query: {
+                        pay_id: payId
+                      }
+                    });
                   });
-                }).catch(err=>{
-                  _this.$router.replace({
-                    path: "/callback",
-                    query: {
-                      pay_id: payId
-                    }
-                  });
-                });
-                // Submit payload.nonce to your server
-              })
+                  // Submit payload.nonce to your server
+                })
 
+              }
             });
           });
         });
