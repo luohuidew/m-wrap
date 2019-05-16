@@ -485,4 +485,8 @@ export default {
       }
     }
   }
+  .van-popup{
+    top: 30%!important;
+  }
+
 </style>

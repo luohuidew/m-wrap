@@ -78,7 +78,7 @@ export default {
   }
   .store-title {
     display: flex;
-    padding: 10px 15px;
+    padding: 5px 15px;
     & > p {
       display: flex;
       align-items: flex-end;
