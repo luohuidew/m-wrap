@@ -45,7 +45,7 @@
           </ul>
         </li>
         <li class="quantity">
-          <span class="quant">QUANTITY</span>
+          <span class="quant">Quantity</span>
           <!-- <span class="quant">QUANTITY:{{have_goods?new_cur_goods.store_num:0}}</span> -->
           <ul class="buy-box"
             v-if="have_goods">

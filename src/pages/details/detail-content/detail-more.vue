@@ -4,9 +4,9 @@
       <p class="tips">Materials</p>
       <!-- <p class="more"></p> -->
     </div>
-    <ul class="des-info" :class="{moreshow:!is_more}">
-      <p v-html="detail_text"></p>
-      <div class="img-box">
+    <ul class="des-info" :class="{moreshow:!is_more&&more_height>100,desPadding:more_height>100}" >
+        <p v-html="detail_text" ref="more"></p>
+        <div class="img-box">
         <template v-if="sku.desc_imgs.length>0">
           <img v-for="(item,index) in sku.desc_imgs"
             :key="index"
@@ -15,9 +15,9 @@
             srcset="">
         </template>
       </div>
-      <div class="shade" v-if="!is_more"></div>
+      <div class="shade" v-if="!is_more&&more_height>100"></div>
     </ul>
-    <div class="more" @click="tab_more">{{!is_more?'+ More':'- Less'}}</div>
+    <div class="more" v-if="more_height>100" @click="tab_more">{{!is_more?'+ More':'- Less'}}</div>
   </div>
 </template>
 
@@ -27,6 +27,7 @@ export default {
   data() {
     return {
       is_more:false,
+      more_height:'',
       detail_text:
         "<p>" + this.sku.desc.toString().replace(/\n|\r\n/g, "<br/>") + "</p>"
     };
@@ -37,6 +38,9 @@ export default {
     tab_more(){
       this.is_more=!this.is_more
     }
+  },
+  mounted() {
+    this.more_height=this.$refs.more.offsetHeight;
   }
 };
 </script>
@@ -65,10 +69,12 @@ export default {
       center;
   }
 }
+.des-padding{
+  padding-bottom: 20px;
+}
 .des-info {
   font-size: 14px;
   position: relative;
-  padding-bottom: 20px;
   p {
     padding: 6px 0;
   }
