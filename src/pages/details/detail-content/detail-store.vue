@@ -117,10 +117,11 @@ export default {
         flex-direction: column;
         justify-content: center;
         .desc{
-          width: 200px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: inline-block;
+          /*width: 200px;*/
+          /*overflow: hidden;*/
+          /*text-overflow: ellipsis;*/
+          /*display: inline-block;*/
+          /*align-items: center;*/
           font-weight: bold;
         }
         span{

@@ -90,7 +90,7 @@ export default {
       // background-color: blueviolet;
       display: inline-block;
       vertical-align: middle;
-      margin-right: 15px;
+      margin-right: 5px;
       &:nth-child(1) {
         padding-left: 0;
       }

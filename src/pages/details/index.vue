@@ -78,6 +78,7 @@ export default {
 
 <style lang='scss' scoped>
 .detail {
+  padding-bottom: 30px;
   height: 100%;
   display: flex;
   flex-direction: column;

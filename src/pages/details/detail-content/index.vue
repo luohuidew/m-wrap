@@ -108,6 +108,7 @@
       :sku="sku"
       :goods="goods"
       :cur-goods="cur_goods"
+      :open="open"
       :attr-list="attr_list"
       :cur_group_id="cur_group_id"
       ref="change_btn"
@@ -162,6 +163,7 @@ import addPayBtn from "../detail-pay-btn.vue";
 import api from "@/api/product";
 import share from "@/api/share";
 import pay from "@/api/pay";
+import CART from "@/api/cart";
 
 export default {
   name: "detail",
@@ -206,7 +208,8 @@ export default {
       act_type: this.$route.query.act_type,
       cartAnimate:'',
       payisInfo:false,
-      moreName:['- Less','+ More']
+      moreName:['- Less','+ More'],
+      open:false
     };
   },
   beforeRouteLeave(to, from, next) {
@@ -216,8 +219,20 @@ export default {
   },
   created() {
     this.init_data();
+    if(this.$route.query.open_cart!=undefined){
+      this.open=true
+    }
+    //获取购物车数量
+    if(this.$store.state.token){
+      CART.getCartNum().then(res => {
+        this.$store.commit("SET_CATR", res.data.num);
+      });
+    }
+
   },
-  mounted() {},
+  mounted() {
+
+  },
   computed: {
     submit_info() {
       let params = {

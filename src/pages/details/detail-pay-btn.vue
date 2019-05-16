@@ -214,7 +214,7 @@ export default {
       return this.$store.state.cart;
     }
   },
-  props: ["goods", "sku", "attrList", "curGoods", "groupMainUser","cartAnimate"],
+  props: ["goods", "sku", "attrList", "curGoods", "groupMainUser","cartAnimate","open"],
   components: {
     attrDialog,
     tempDialog,
@@ -236,6 +236,9 @@ export default {
   },
   mounted() {
     this.init_data();
+    if(this.open){
+      this.$emit("show_dialog_show");
+    }
   },
   methods: {
     init_data() {
@@ -306,7 +309,7 @@ export default {
           this.$route.fullPath
           }&store_id=${
           this.sku.store_id
-          }`;
+          }&open_cart=1`;
         const param = {
           path: "/login?redirect=" + encodeURIComponent(re_path),
         }
@@ -315,7 +318,7 @@ export default {
     },
     /* 关闭弹窗，并决定是否是团购 */
     close_tips(type, group_id) {
-      this.checkedLogin()
+      this.checkedLogin();
       // if (type === 1) {
       //   // this.go_pay(1);
       // } else if (type === 2) {
@@ -323,12 +326,11 @@ export default {
       if (type !== 0) {
         this.$set(this, "cur_type", type);
         this.$set(this, "cur_group_id", group_id);
-
         //加入购物车
-        let _this=this
+        let _this=this;
         setTimeout(function () {
           _this.$emit("carting",false)
-        },800)
+        },800);
         this.$emit("show_dialog_show");
       }
 
@@ -377,10 +379,13 @@ export default {
 
 <style lang='scss' scoped>
 .detail-pay-btn {
-  position: relative;
+  background: #fff;
+  position: fixed;
   font-size: 18px;
+  bottom: 0;
+  width: 100%;
   display: flex;
-  z-index: 0;
+  z-index: 99;
   height: 50px;
   border-top: 1px solid #f3f3f3;
   .go-home-box {

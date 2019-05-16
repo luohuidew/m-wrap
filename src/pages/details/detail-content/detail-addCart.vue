@@ -152,10 +152,10 @@ props: ["goods", "sku", "attrList", "curGoods", "groupMainUser"],
       // }
       if (type !== 0) {
         //加入购物车
-        let _this=this
+        let _this=this;
         setTimeout(function () {
           _this.$emit("carting",false)
-        },800)
+        },800);
         this.$emit("show_dialog_show");
       }
 

@@ -23,10 +23,10 @@
       </div>
       <div class="price-box">
         <p class="like-number">
-          <img v-if="is_like==2"  class="is_like"  @click="onlike" src="/static/images/icon/detail/like2@3x.png" alt="">
-          <img v-if="is_like==1"  class="is_like_no"  @click="onlike" src="/static/images/icon/detail/like@3x.png" alt="">
+          <img v-if="is_like==1"  class="is_like"  @click="onlike" src="/static/images/icon/detail/like2@3x.png" alt="">
+          <img v-if="is_like==2"  class="is_like_no"  @click="onlike" src="/static/images/icon/detail/like@3x.png" alt="">
           <span>
-          {{is_like==2?sku.like_num:sku.like_num+1}}
+          {{is_like==1?sku.like_num:sku.like_num+1}}
         </span>
 
         </p>
@@ -239,7 +239,6 @@ export default {
   }
 }
 .goods-info {
-  word-break:break-all;
   width: 280px;
   margin-top: 6px;
   font-size: 14px;
