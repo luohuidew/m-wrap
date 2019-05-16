@@ -493,13 +493,13 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 50px;
-    width: 50px;
+    /*justify-content: center;*/
+    height:71px;
+    width: 71px;
     color: #000;
-    font-size: 14px;
+    margin-top: 7px;
     // padding: 6px 0;
-    font-size: 12px;
+    font-size: 10px;
     span{
       color: #9B9B9B;
     }
@@ -507,8 +507,8 @@ export default {
       position: relative;
       .cart-mun-icon {
         position: absolute;
-        top: 4px;
-        right: 4px;
+        top: 0px;
+        right: 11px;
         display: block;
         width: 14px;
         font-size: 10px;

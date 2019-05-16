@@ -118,6 +118,7 @@ export default {
         justify-content: center;
         .desc{
           width: 200px;
+          overflow: hidden;
           text-overflow: ellipsis;
           display: inline-block;
           font-weight: bold;

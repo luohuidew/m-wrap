@@ -23,10 +23,10 @@
       </div>
       <div class="price-box">
         <p class="like-number">
-          <img v-if="is_like==2"  class="is_like"  @click="onlike" src="/static/images/icon/detail/likea.png" alt="">
-          <img v-if="is_like==1"  class="is_like_no"  @click="onlike" src="/static/images/icon/detail/likexin.png" alt="">
+          <img v-if="is_like==2"  class="is_like"  @click="onlike" src="/static/images/icon/detail/like2@3x.png" alt="">
+          <img v-if="is_like==1"  class="is_like_no"  @click="onlike" src="/static/images/icon/detail/like@3x.png" alt="">
           <span>
-          {{sku.like_num}}
+          {{is_like==2?sku.like_num:sku.like_num+1}}
         </span>
 
         </p>
@@ -43,7 +43,7 @@
       </div>
 
       <div class="goods-info">
-        {{sku.title}}
+        <span>{{sku.title}}</span>
       </div>
       <div class="icon-box" v-if="sku.show_tag.length!=0">
         <template v-for="(mask_info,index) in sku.show_tag">
@@ -206,10 +206,15 @@ export default {
   align-items: center;
   font-size: 14px;
   color: #9b9b9b;
-  img {
-    width: 25px;
-    height: 23px;
+  .is_like {
+    width: 24px;
+    height: 22px;
     display: block;
+  }
+  .is_like_no{
+    width: 25px;
+    display: block;
+    height: 22px;
   }
   span{
     display: block;
@@ -234,8 +239,9 @@ export default {
   }
 }
 .goods-info {
+  word-break:break-all;
   width: 280px;
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 14px;
   line-height: 20px;
   color: #4a4a4a;

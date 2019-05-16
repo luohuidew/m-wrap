@@ -3,7 +3,7 @@
     <div class="content"
       @click="$emit('show_dialog_show')">
       <div class="icon-box">
-        <img src="/static/images/icon/detail/manjian.png"
+        <img src="/static/images/icon/detail/detailchi.png"
           alt=""
           srcset="">
       </div>

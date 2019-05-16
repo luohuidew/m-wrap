@@ -1,7 +1,7 @@
 <template>
   <div class="shipping-box">
     <div class="icon-box">
-      <img src="/static/images/icon/detail/manjiand1.png"
+      <img src="/static/images/icon/detail/detaildui.png"
         alt=""
         srcset="">
     </div>
