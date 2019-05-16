@@ -50,8 +50,11 @@
             <router-link :to="{path:'/login'}">
               <span class="sign"  v-if="!$store.state.token">Sign in</span>
             </router-link>
-            <img class="user-photo" v-if="$store.state.token" :src="photo"
-                 alt="">
+            <router-link :to="{path:'/user'}">
+              <img class="user-photo" v-if="$store.state.token" :src="photo"
+                   alt="">
+            </router-link>
+
           </a>
 
           <router-link :to="{path:'/search/search-query'}">

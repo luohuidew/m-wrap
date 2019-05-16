@@ -96,7 +96,7 @@
             <router-link to="/statement" tag="p">
               Privacy Policy
             </router-link>
-            <p><img class="question" src="/static/images/icon/detail/question.png" height="15" /> Need help？Visit the <a class="email" href="mailto:service@weget.com">help center</a></p>
+            <p><img class="question" src="/static/images/icon/detail/question.png" height="15" /> Need help？ <a class="email" href="mailto:service@weget.com"> Contact us</a></p>
           </div>
         </div>
       </div>
@@ -485,4 +485,8 @@ export default {
       }
     }
   }
+  .van-popup{
+    top: 30%!important;
+  }
+
 </style>

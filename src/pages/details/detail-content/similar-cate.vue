@@ -17,8 +17,8 @@
         </van-swipe> -->
     </div>
     <div class="shop-more" @click="to_similar">
-      Shop more similar items <span class="right">→</span>
-      <img src="/static/images/icon/question.png" alt="">
+      Shop more similar items
+      <img class="right" src="/static/images/icon/detail/箭头@3x.png" alt="">
     </div>
   </div>
 </template>
@@ -114,6 +114,9 @@ export default {
   border-radius:23px;
   text-align: center;
   line-height: 36px;
-
+.right{
+  width: 17px;
+  margin-left: 7px;
+}
 }
 </style>

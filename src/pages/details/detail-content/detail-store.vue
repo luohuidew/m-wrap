@@ -78,7 +78,7 @@ export default {
   }
   .store-title {
     display: flex;
-    padding: 10px 15px;
+    padding: 5px 15px;
     & > p {
       display: flex;
       align-items: flex-end;
@@ -118,6 +118,7 @@ export default {
         justify-content: center;
         .desc{
           width: 200px;
+          overflow: hidden;
           text-overflow: ellipsis;
           display: inline-block;
           font-weight: bold;
