@@ -1,6 +1,6 @@
 <template>
   <div class="cart-layout">
-    <div class="scroll-lists" :class="{'has-coupon': coupon_list.length>0}" v-if="req_data">
+    <div class="scroll-lists" :class="{'has-coupon': coupon_list.length>0, 'no-good': req_data.store_goods && req_data.store_goods.length ===0}" v-if="req_data">
       <template v-if="req_data.store_goods && req_data.store_goods.length>0">
         <cart-list @deleteCartGood="deleteCartGood" @change="get_list_data" :shippSelectObj="shippSelectObj" @showVantShipping = "showVantShipping"
           :goods-data="req_data.store_goods" :isAllSelected = 'prop_all_goods_is_select' ref="CarListRef"></cart-list>
@@ -16,7 +16,7 @@
       <!--<cart-guide v-if="req_data"-->
         <!--:gui-data="req_data.like"></cart-guide>-->
     </div>
-    <footer>
+    <footer v-if="req_data.store_goods && req_data.store_goods.length>0">
       <div class="coupon" @click="showVantCouponMethod" v-if="coupon_list.length>0">
         <img src="/static/images/icon/cart/selectCopy@3x.png" alt="">
         <span>{{couponText}}</span>
@@ -98,10 +98,16 @@ export default {
         only : [obj.cart_id]
       }
       CART.delShopCartGood(param).then(()=>{
-        this.req_data.store_goods.forEach((store) => { // 删除商品
+        CART.getCartNum().then(res => { // 更新购物车
+          this.$store.commit("SET_CATR", res.data.num);
+        });
+        this.req_data.store_goods.forEach((store,storeIndex) => { // 删除商品
            store.goods_data.forEach((good, index) => {
              if(good.cart_id === obj.cart_id) {
                store.goods_data.splice(index, 1)
+               if(store.goods_data.length === 0){
+                 this.req_data.store_goods.splice(storeIndex,1)
+               }
              }
            })
         })
@@ -165,7 +171,7 @@ export default {
       }
       this.isLoading = true
       CART.orderConfirm(this.cachePrams, true).then(res => {
-        this.isLoading = false
+        // this.isLoading = false
         const StringParams = JSON.stringify(this.cachePrams)
         sessionStorage.cartParams = StringParams
          let path_params = {
@@ -248,7 +254,15 @@ export default {
           })
         })
       })
+      if (params.cart_goods.length === 0) {
+        this.selectedNumber = 0
+        this.allTotal = '$0.00'
+        return
+      }
       CART.totalPrice(params).then(res => {
+        CART.getCartNum().then(res => { // 更新购物车
+          this.$store.commit("SET_CATR", res.data.num);
+        });
         this.cachePrams = res.data.params
         this.allTotal = res.data.all_total
         const datas= res.data.sub_order_info
@@ -367,7 +381,9 @@ export default {
   overflow: auto;
   &.has-coupon {
     height: calc(100% - 150px);
-
+  }
+  &.no-good{
+    height: 100%
   }
 }
 .coupon {

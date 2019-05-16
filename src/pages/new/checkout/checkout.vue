@@ -7,7 +7,9 @@
           <user-address :address_item='curtAddress'></user-address>
         </li>
         <li>
-          <payment></payment>
+          <div class="checkout-page">
+            <div id="dropin-container"></div>
+          </div>
         </li>
         <li>
           <div class="footer">
@@ -24,7 +26,7 @@
                 Total: <span> {{ resSummary.last_total }}</span>
               </div>
             </div>
-            <div class="pay-but" @click="createOrder">
+            <div class="pay-but" ref="submitButton">
               Place your order
             </div>
             <div class="Policy">
@@ -55,6 +57,8 @@ import userAddress from "./components/userAddress";
 import paymentDialog from "./payment-dialog";
 import payment from "./components/payment";
 import orderSummary from "./components/orderSummary";
+import dropin  from "braintree-web-drop-in";
+
 
 export default {
   name: "",
@@ -99,6 +103,9 @@ export default {
         this.cachePrams.address_id = data.address.id
         this.curtAddress = data.address
         this.resSummary = data
+        if (data.address.first_name) {
+          this.init_Pay() // 初始化支付
+        }
       });
 
     },
@@ -118,32 +125,86 @@ export default {
       this.$router.push(params);
     },
     createOrder() {
-      apiPay.create_order(this.cachePrams).then((res) => {
-        this.res_create_data = res.data
-        if (res.data.free === 1) {
-          this.$router.replace({
-            path: "/callback",
-            query: {
-              pay_id: res.data.pay_id
-            }
-          });
-        } else {
-          CART.getCartNum().then(res => {
-            this.$store.commit("SET_CATR", res.data.num);
-          });
-          // 老版支付
-          this.show_pay_methods = true;
-          // 新版支付
-          //   this.$router.replace({
-            //     path: '/checkout/pay',
-            //     query: {
-            //       pay_id: res.data.pay_id
-            //     }
-            //   })
+      return new Promise((resolve, reject) => {
+        apiPay.create_order(this.cachePrams).then((res) => {
+          this.res_create_data = res.data
+          if (res.data.free === 1) {
+            this.$router.replace({
+              path: "/callback",
+              query: {
+                pay_id: res.data.pay_id
+              }
+            });
+          } else {
+            CART.getCartNum().then(res => { // 更新购物车
+              this.$store.commit("SET_CATR", res.data.num);
+            });
+            resolve(res.data.pay_id)
+            // 老版支付
+            // this.show_pay_methods = true;
+            // 新版支付
+            // this.$router.replace({
+            //   path: '/checkout/pay',
+            //   query: {
+            //     pay_id: res.data.pay_id
+            //   }
+            // })
           }
+        })
       })
 
     },
+    init_Pay() {
+      const _this = this
+      apiPay.pay_key().then(res => {
+        const  clittoken = res.data;
+        dropin.create({
+          authorization: clittoken,
+          container: '#dropin-container',
+          paypal: {
+            flow: 'vault'
+          }
+        }, function (createErr, instance) {
+          let button = _this.$refs.submitButton;
+          button.addEventListener('click', function () {
+            instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+              if (payload) {
+                _this.createOrder().then((payId) => {
+                  console.log(payload,'哈哈',payId)
+                  let types = 2
+                  if (payload.type === 'CreditCard') {
+                    types= 3
+                  }
+                  let params = {
+                    nonce: payload.nonce,
+                    pay_id: payId,
+                    pay_type: types
+                  };
+                  apiPay.pay_paypal(params).then(res => {
+                    _this.$router.replace({
+                      path: "/callback",
+                      query: {
+                        pay_id: payId
+                      }
+                    });
+                  }).catch(err=>{
+                    _this.$router.replace({
+                      path: "/callback",
+                      query: {
+                        pay_id: payId
+                      }
+                    });
+                  });
+                  // Submit payload.nonce to your server
+                })
+
+              }
+            });
+          });
+        });
+      });
+    },
+
   },
   components: {
     payment,
@@ -207,6 +268,9 @@ export default {
       font-weight:400;
       color:rgba(0,0,0,1);
     }
+  }
+  .checkout-page{
+    padding: 15px;
   }
 }
 

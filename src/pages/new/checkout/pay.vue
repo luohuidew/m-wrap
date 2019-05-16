@@ -50,9 +50,14 @@
                    button.addEventListener('click', function () {
                        instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
                            console.log(payload,'哈哈',_this.payId)
+                           let types = 2
+                           if (payload.type === 'CreditCard') {
+                               types= 3
+                           }
                            let params = {
                                nonce: payload.nonce,
-                               pay_id: _this.payId
+                               pay_id: _this.payId,
+                               pay_type: types
                            };
                            api.pay_paypal(params).then(res => {
                                // this.pay_callback(res);

@@ -29,8 +29,8 @@ export default {
   pay_key(data={}) {
     data.token = token;
     return request({
-      // url: 'Cartpay/getCustomClientToken',
-      url: 'Cartpay/getTokenizationkey',
+      url: 'Cartpay/getCustomClientToken',
+      // url: 'Cartpay/getTokenizationkey',
       method: 'post',
       data: JSON.stringify(data),
     })
