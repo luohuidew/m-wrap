@@ -2,7 +2,15 @@
   <div class="app-header">
     <ul>
       <div>
-        <template>
+        <template v-if="checkOut">
+          <li class="aside-btn-box">
+            <img src="/static/images/icon/normal/返回 大@2x.png"
+                 alt=""
+                 srcset=""
+                 @click="go_back">
+          </li>
+        </template>
+        <template v-if="!checkOut">
           <li class="aside-btn-box">
             <img src="/static/images/icon/header/home-left-icon@3x.png"
                  alt=""
@@ -10,14 +18,7 @@
                  @click="contractionShow=!contractionShow">
           </li>
         </template>
-        <template>
-          <!--<li class="aside-btn-box" v-show="!noBack">-->
-          <!--<img src="/static/images/icon/normal/返回 大@2x.png"-->
-          <!--alt=""-->
-          <!--srcset=""-->
-          <!--@click="go_back">-->
-          <!--</li>-->
-        </template>
+
         <li class="weget-logo">
           <router-link to="/">
             <img src="/static/images/icon/header/big-logo.png"
@@ -26,74 +27,29 @@
           </router-link>
         </li>
       </div>
+      <div>
+        <template v-if="!checkOut">
+          <li class="setting-icon">
+            <a>
+              <router-link :to="{path:'/login'}">
+                <span class="sign"  v-if="!$store.state.token">Sign in</span>
+              </router-link>
+              <router-link :to="{path:'/user'}">
+                <img class="user-photo" v-if="$store.state.token" :src="userInfo.photo" alt="">
+              </router-link>
+            </a>
 
-<div>
-  <template>
-    <li class="setting-icon">
-      <a>
-        <router-link :to="{path:'/login'}">
-          <span class="sign"  v-if="!$store.state.token">Sign in</span>
-        </router-link>
-        <router-link :to="{path:'/user'}">
-          <img class="user-photo" v-if="$store.state.token" :src="photo"
-               alt="">
-        </router-link>
+            <router-link :to="{path:'/search/search-query'}">
+              <img class="search" src="/static/images/icon/normal/search@2x.png">
+            </router-link>
 
-      </a>
+            <router-link :to="{path:'/cart/index'}">
+              <img class="cart" src="/static/images/icon/header/H5-购物车@3x.png" alt="">
+            </router-link>
+          </li>
+        </template>
 
-      <router-link :to="{path:'/search/search-query'}">
-        <img src="/static/images/icon/normal/search@2x.png"
-             alt="">
-      </router-link>
-
-      <router-link v-if="!appDetail" :to="{path:'/search/search-home'}">
-        <img src="/static/images/icon/header/home-right-icon@3x.png"
-             alt="">
-      </router-link>
-    </li>
-  </template>
-  <template v-if="appWelog">
-    <!-- <li class="me">
-      <span>WELOG</span>
-    </li> -->
-    <li class="emity-block"></li>
-  </template>
-  <template v-if="appCart">
-    <!-- <li class="me">
-      <span>CART</span>
-    </li> -->
-    <li class="emity-block"></li>
-  </template>
-  <template v-if="appUser">
-    <!-- <li class="me">
-      <span>ME</span>
-    </li> -->
-    <li class="setting-icon">
-      <!-- <router-link :to="{path:'/'}"
-        :class="{'active':haveMessages}">
-        <img class="messages"
-          src="/static/images/icon/user/mine_notifi_nav_icon@3x.png"
-          alt="">
-      </router-link> -->
-      <router-link :to="{path:'/user/setting'}">
-        <img src="/static/images/icon/user/mine_setting_nav_icon@3x.png"
-             alt="">
-      </router-link>
-    </li>
-  </template>
-  <template v-if="appTheme">
-    <!-- <li class="me">
-      <span>{{$route.meta.title.toUpperCase()}}</span>
-    </li> -->
-    <li class="setting-icon">
-      <router-link :to="{path:'/search/search-query'}">
-        <img src="/static/images/icon/normal/search@2x.png"
-             alt="">
-      </router-link>
-    </li>
-  </template>
-</div>
-
+      </div>
     </ul>
     <van-popup v-model="contractionShow"
       position="left"
@@ -113,7 +69,6 @@ export default {
       contractionShow: false,
       searchContent: "",
       haveMessages: true,
-      photo:sessionStorage.getItem('photo')
     };
   },
   watch: {
@@ -130,33 +85,34 @@ export default {
 
   },
   computed: {
-    noBack() {
-      return this.$route.meta.noBack
+    userInfo() {
+      return this.$store.state.user
     },
-    appUser() {
-      return this.$route.path === "/user/index";
+    // noBack() {
+    //   return this.$route.meta.noBack
+    // },
+    // appUser() {
+    //   return this.$route.path === "/user/index";
+    // },
+    // appDetail() {
+    //   return this.$route.path === "/detail";
+    // },
+    // appHome() {
+    //   return this.$route.path === "/home/index";
+    // },
+    // appWelog() {
+    //   return this.$route.path === "/welog/index";
+    // },
+    checkOut() {
+      return this.$route.path === "/checkout/index";
     },
-    appCart() {
-      return this.$route.path === "/cart/index";
-    },
-    appDetail() {
-      return this.$route.path === "/detail";
-    },
-    appHome() {
-      return this.$route.path === "/home/index";
-    },
-    appWelog() {
-      return this.$route.path === "/welog/index";
-    },
-    appCart() {
-      return this.$route.path === "/cart/index";
-    },
-    appTheme() {
-      let configs = ["/store/theme", "/home/theme"];
-      return configs.indexOf(this.$route.path) !== -1;
-    }
+    // appTheme() {
+    //   let configs = ["/store/theme", "/home/theme"];
+    //   return configs.indexOf(this.$route.path) !== -1;
+    // }
   },
-  created() {},
+  created() {
+  },
   methods: {
     to_search() {
       let href_params = {
@@ -190,39 +146,51 @@ export default {
 <style lang='scss' scoped>
 .app-header {
   overflow: hidden;
-  height: 50px;
+  height: 100%;
   padding: 0 20px;
   & > ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
     div {
+      align-items: center;
+      display: flex;
       height: 100%;
-      border: 1px solid red;
       li {
-        display: inline-flex;
-        align-items: center;
-        height: 50px;
+        display: inline-block;
       }
       .aside-btn-box {
-        height: 50px;
-        display: inline-block;
         img {
           width: 21px;
         }
       }
       .weget-logo {
+        margin-left: 14px;
         img {
           height: auto;
           width: 77px;
         }
       }
       .setting-icon {
-        img {
-          margin-left: 10px;
-          width: 21px;
+        img.user-photo{
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-right: 14px;
+        }
+         img.search {
+           margin-right: 14px;
+           width: 24px;
+           height: 24px;
+        }
+        img.cart {
+          width: 24px;
+          height: 24px;
         }
         .sign{
+          margin-right: 14px;
           font-size: 11px;
           color: #000;
           width:51px;
@@ -233,6 +201,9 @@ export default {
           text-align: center;
           line-height: 24px;
           font-weight: bold;
+        }
+        .seeting {
+          height: 24px;
         }
         .active {
           position: relative;

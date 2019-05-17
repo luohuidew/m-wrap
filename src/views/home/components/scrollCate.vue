@@ -71,11 +71,11 @@ export default {
     //     that.offsetTop = top_number;
     //   });
 
-    let home_footer = document.querySelector(".home-footer");
+    // let home_footer = document.querySelector(".home-footer");
     let van_tabs = document.querySelector("#scroll-cate .van-tabs__wrap");
-    let footer_number = home_footer.offsetHeight;
+    // let footer_number = home_footer.offsetHeight;
     let van_tabs_number = van_tabs.offsetHeight;
-    let bannerHeight = top_number + banner_number + van_tabs_number + footer_number;
+    let bannerHeight = top_number + banner_number + van_tabs_number;
     this.vanTablesHieght = window.innerHeight - bannerHeight
   },
   methods: {

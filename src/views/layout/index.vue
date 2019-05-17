@@ -32,7 +32,7 @@
       </div> -->
       </div>
       <div class="page-body"
-        :class="{'in-app':full_screen,'home-page':home_page,'home-page-no-footer':home_page_no_footer}">
+        :class="{'in-app':full_screen}">
         <!-- <transition :name="transitionName"> -->
           <!-- <template v-if="$route.meta.keepAlive"> -->
             <!-- <keep-alive>
@@ -47,13 +47,11 @@
         <!-- </transition> -->
 
       </div>
-      <div class="home-footer"
-        v-show="home_page && !home_page_no_footer">
-        <home-footer />
-      </div>
-      <!-- <div class="auto-login"> -->
-      <!-- <login-auto></login-auto> -->
-      <!-- </div> -->
+      <!--<div class="home-footer"-->
+        <!--v-show="home_page && !home_page_no_footer">-->
+        <!--<home-footer />-->
+      <!--</div>-->
+
     </div>
   </div>
 </template>
