@@ -259,6 +259,7 @@ export default {
       this.payisInfo=!this.payisInfo
     },
     to_cart(e){
+      console.log(e)
       this.cartAnimate=e
     },
     close_emity(e) {
