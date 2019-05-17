@@ -27,7 +27,7 @@
           srcset="">
       </li>
       <li class="jumpLink">
-        <a class="email" href="mailto:service@weget.com">
+        <a class="email" href="mailto:business@weget.com">
           <span>CREATE YOUR STORE NOW</span>
           <img src="./img/about-us-link.png" alt="" class="linkImg">
         </a>
@@ -43,10 +43,10 @@
           srcset="">
       </li>
       <li class="jumpLink">
-        <router-link to='/'>
+        <a @click="shopNow">
           <span>SHOP NOW</span>
           <img src="./img/about-us-link.png" alt="" class="linkImg">
-        </router-link>
+        </a>
       </li>
       <li>
         <img src="./img/about-us_08.jpg"
@@ -64,7 +64,7 @@
              srcset="">
       </li>
       <li>
-        <a class="email" href="mailto:service@weget.com">
+        <a class="email" href="mailto:business@weget.com">
           <img src="./img/about-us_11.jpg"
               alt=""
               srcset="">
@@ -103,7 +103,20 @@ export default {
   },
   computed: {},
   created() {},
-  methods: {},
+  methods: {
+    shopNow(){
+      let href_params = {
+        "type": 106,
+        "data": {
+          "route": "wemall-inside://global?type=4"
+        }
+      };
+      let temp = this.$CM.weget_device_link(href_params);
+      if (temp === "h5") {
+        this.$router.push({path: "/",});
+      }
+    }
+  },
   components: {}
 };
 </script>
