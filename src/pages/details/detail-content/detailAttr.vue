@@ -74,13 +74,13 @@ export default {
   .content {
     display: flex;
     align-items: center;
-    padding: 20px 0;
+    padding: 17px 0;
     .icon-box {
       padding-right: 10px;
 
       img {
-        height: 20px;
-        width: auto;
+        height: 18px;
+        width: 18px;
       }
     }
   }

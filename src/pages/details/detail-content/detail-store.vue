@@ -84,8 +84,8 @@ export default {
       align-items: flex-end;
     }
     img {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
     }
     .store-desc {
@@ -113,6 +113,7 @@ export default {
       .store-name {
         height: 40px;
         font-size: 12px;
+        line-height: 1.5;
         display: flex;
         flex-direction: column;
         justify-content: center;

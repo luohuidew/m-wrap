@@ -53,8 +53,8 @@ export default {
   .icon-box {
     padding-right: 10px;
     img {
-      height: 20px;
-      width: auto;
+      height: 18px;
+      width: 18px;
     }
   }
 }
@@ -67,7 +67,7 @@ export default {
     center;
   background-size: auto 18px;
   border-bottom: 1px solid #e9e9e9;
-  padding: 20px 0;
+  padding: 17px 0;
   img {
     height: 18px;
     width: auto;

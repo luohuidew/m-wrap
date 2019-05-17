@@ -62,7 +62,7 @@ export default {
   justify-content: space-between;
   font-size: 14px;
   line-height: 17px;
-  padding-bottom: 19px;
+  padding-bottom: 16px;
   //   border-bottom: 1px solid #e9e9e9;
   .tips {
     font-size: 16px;
@@ -76,7 +76,7 @@ export default {
 }
 
 .show-list {
-  padding-left: 20px;
+  padding-left: 15px;
   width: 100%;
   //   height: 175px;
   overflow-x: auto;

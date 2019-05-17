@@ -398,7 +398,7 @@ export default {
   overflow: auto;
 }
 .select-box {
-  padding: 0 20px;
+  padding: 0 15px;
 }
   .pay{
     border-bottom: 8px solid #f8f8f8;
