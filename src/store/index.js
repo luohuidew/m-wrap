@@ -97,11 +97,12 @@ const store = new Vuex.Store({
         });
       })
     },
-    removeToken({ commit }) {
+    logOut({ commit }) {
       return new Promise((resolve) =>{
         commit('set_user', {})
         removeToken()
         removeUserShareId()
+        commit('set_token', undefined)
         resolve()
       })
 

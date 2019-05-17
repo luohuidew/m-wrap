@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import dropin  from "braintree-web-drop-in";
+    // import dropin  from "braintree-web-drop-in";
     import api from "@/api/pay";
 
     export default {

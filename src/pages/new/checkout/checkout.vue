@@ -41,10 +41,10 @@
                position="bottom"
                :close-on-click-overlay="false"
                :overlay="true">
-      <payment-dialog :order-data="res_create_data"
-                      :isSelectPay="change_select_pay"
-                      @close="payClose">
-      </payment-dialog>
+      <!--<payment-dialog :order-data="res_create_data"-->
+                      <!--:isSelectPay="change_select_pay"-->
+                      <!--@close="payClose">-->
+      <!--</payment-dialog>-->
     </van-popup>
   </div>
 </template>
@@ -54,7 +54,7 @@ import apiPay from "@/api/pay";
 import CART from "@/api/cart";
 import addAddress from "./components/addAddress";
 import userAddress from "./components/userAddress";
-import paymentDialog from "./payment-dialog";
+// import paymentDialog from "./payment-dialog";
 import payment from "./components/payment";
 import orderSummary from "./components/orderSummary";
 import dropin  from "braintree-web-drop-in";
@@ -161,6 +161,7 @@ export default {
         dropin.create({
           authorization: clittoken,
           container: '#dropin-container',
+          vaultManager: true,
           paypal: {
             flow: 'vault'
           }
@@ -211,7 +212,7 @@ export default {
     orderSummary,
     addAddress,
     userAddress,
-    paymentDialog
+    // paymentDialog
   }
 };
 </script>

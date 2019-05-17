@@ -59,131 +59,131 @@
 </template>
 
 <script>
-import shareApp from "./components/appShare";
-import bannerTop from "./components/bannerTop";
-import loginAuto from "@/pages/login/auth/facebook.vue";
-import homeHeader from "./components/appHeader";
-import homeTitleOptions from "./components/appTitleOptions";
-import homeTitle from "./components/appTitle";
-import homeFooter from "./components/appFooter";
-import apiBase from "@/api/base";
-export default {
-  name: "layout",
-  data() {
-    return {
-      topBannerData: [
-        {
-          text: 'Refer friends get $15 ！',
-          url: '/popularize/popu-1',
-        },
-        {
-          text: 'Get $15 in coupons when you sign up!',
-          url: '/login?type=signUp',
-        }
-      ],
-      transitionName: "slide-left",
-      keep_banner: true
-    };
-  },
-  computed: {
-    show_banner() {
-      return this.keep_banner && !this.full_screen && !this.$route.fullPath.includes('cart/index');
+  import { getToken } from "@/utils/auth";
+  import shareApp from "./components/appShare";
+  import bannerTop from "./components/bannerTop";
+  import loginAuto from "@/pages/login/auth/facebook.vue";
+  import homeHeader from "./components/appHeader";
+  import homeTitleOptions from "./components/appTitleOptions";
+  import homeTitle from "./components/appTitle";
+  import homeFooter from "./components/appFooter";
+  import apiBase from "@/api/base";
+  export default {
+    name: "layout",
+    data() {
+      return {
+        topBannerData: [
+          {
+            text: 'Refer friends get $15 ！',
+            url: '/popularize/popu-1',
+          },
+          {
+            text: 'Get $15 in coupons when you sign up!',
+            url: '/login?type=signUp',
+          }
+        ],
+        transitionName: "slide-left",
+        keep_banner: true
+      };
     },
-    share_token() {
-      return this.$store.state.share_token;
-    },
-    full_screen() {
-      let temp = this.$route.meta.fullScreen;
-      if (
-        temp ||
-        (localStorage.getItem("device") === "ios" ||
-          localStorage.getItem("device") === "android")
-      ) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    home_page() {
-      let home_page_lists = [
-        "/home/index",
-        "/user/index",
-        "/welog/index",
-        // "/cart/index",
-        "/store/theme",
-        "/home/theme"
-      ];
-      return home_page_lists.indexOf(this.$route.path) !== -1;
-    },
-    home_page_no_footer() {
-      let home_page_lists = ["/store/theme", "/home/theme"];
-      return home_page_lists.indexOf(this.$route.path) !== -1;
-    }
-  },
-  watch: {
-    $route: {
-      handler(to, from) {
-        this.init_meta();
-        this.visitSaveLog();
-        this.init_transtion(to, from);
-        // debugger;
-        this.init_device();
+    computed: {
+      show_banner() {
+        return this.keep_banner && !this.full_screen && !this.$route.fullPath.includes('cart/index');
       },
-      immediate: true,
-      deep: true
-    }
-  },
-  created() {
-    // let query_device_type = this.$route.query.device_type;
-    // console.log(query_device_type);
-    // console.log(this.$route);
-    // console.log(window.location.href);
-    // debugger;
-  },
-  mounted() {
-    // console.log("路由参数", this.$route.query.device_type);
-    // const ua = navigator.userAgent.toLowerCase();
-    // alert(ua);
-  },
-  methods: {
-    visitSaveLog() {
-      apiBase.visitSaveLog().then(()=>{})
-    },
-    init_meta() {
-      // document.title = this.$route.meta.title
-      //   ? this.$route.meta.title
-      //   : "Weget";
-    },
-    get_scroll_event(data) {
-      // console.log(this.$refs['app_content']);
-    },
-    init_transtion(to, from) {
-      /* 设置动画的类名 */
-      if (to.path == "/") {
-        this.transitionName = "slide-right";
-      } else {
-        this.transitionName = "slide-left";
+      share_token() {
+        return this.$store.state.share_token;
+      },
+      full_screen() {
+        let temp = this.$route.meta.fullScreen;
+        if (
+          temp ||
+          (localStorage.getItem("device") === "ios" ||
+            localStorage.getItem("device") === "android")
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      home_page() {
+        let home_page_lists = [
+          "/home/index",
+          "/user/index",
+          "/welog/index",
+          // "/cart/index",
+          "/store/theme",
+          "/home/theme"
+        ];
+        return home_page_lists.indexOf(this.$route.path) !== -1;
+      },
+      home_page_no_footer() {
+        let home_page_lists = ["/store/theme", "/home/theme"];
+        return home_page_lists.indexOf(this.$route.path) !== -1;
       }
     },
-    init_device() {
-      /* 开局获取设备的壳子 */
-      let query_device_type = this.$route.query.device_type;
-      if (query_device_type) {
-        // debugger;
-        localStorage.setItem("device", query_device_type);
+    watch: {
+      $route: {
+        handler(to, from) {
+          this.init_meta();
+          this.visitSaveLog();
+          this.init_transtion(to, from);
+          // debugger;
+          this.init_device();
+        },
+        immediate: true,
+        deep: true
       }
+    },
+    created() {
+      if (getToken()) {
+        this.$store.dispatch('SetToken', getToken()).then(()=> {
+        })
+      }
+    },
+    mounted() {
+      // console.log("路由参数", this.$route.query.device_type);
+      // const ua = navigator.userAgent.toLowerCase();
+      // alert(ua);
+    },
+    methods: {
+      visitSaveLog() {
+        apiBase.visitSaveLog().then(()=>{})
+      },
+      init_meta() {
+        // document.title = this.$route.meta.title
+        //   ? this.$route.meta.title
+        //   : "Weget";
+      },
+      get_scroll_event(data) {
+        // console.log(this.$refs['app_content']);
+      },
+      init_transtion(to, from) {
+        /* 设置动画的类名 */
+        if (to.path == "/") {
+          this.transitionName = "slide-right";
+        } else {
+          this.transitionName = "slide-left";
+        }
+      },
+      init_device() {
+        /* 开局获取设备的壳子 */
+        let query_device_type = this.$route.query.device_type;
+        if (query_device_type) {
+          // debugger;
+          localStorage.setItem("device", query_device_type);
+        }
+      }
+    },
+    components: {
+      bannerTop,
+      loginAuto,
+      shareApp,
+      homeHeader,
+      homeTitle,
+      homeTitleOptions,
+      homeFooter
     }
-  },
-  components: {
-    bannerTop,
-    loginAuto,
-    shareApp,
-    homeHeader,
-    homeTitle,
-    homeTitleOptions,
-    homeFooter
-  }
-};
+  };
 </script>
 
 <style lang="scss">
