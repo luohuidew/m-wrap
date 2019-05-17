@@ -1,113 +1,99 @@
 <template>
   <div class="app-header">
     <ul>
-      <template v-if="appHome ||appUser || appTheme || appCart|| appDetail">
-        <li class="aside-btn-box">
-          <img src="/static/images/icon/header/home-left-icon@3x.png"
-            alt=""
-            srcset=""
-            @click="contractionShow=!contractionShow">
+      <div>
+        <template>
+          <li class="aside-btn-box">
+            <img src="/static/images/icon/header/home-left-icon@3x.png"
+                 alt=""
+                 srcset=""
+                 @click="contractionShow=!contractionShow">
+          </li>
+        </template>
+        <template>
+          <!--<li class="aside-btn-box" v-show="!noBack">-->
+          <!--<img src="/static/images/icon/normal/返回 大@2x.png"-->
+          <!--alt=""-->
+          <!--srcset=""-->
+          <!--@click="go_back">-->
+          <!--</li>-->
+        </template>
+        <li class="weget-logo">
+          <router-link to="/">
+            <img src="/static/images/icon/header/big-logo.png"
+                 alt=""
+                 srcset="">
+          </router-link>
         </li>
-      </template>
-      <template v-else>
-        <li class="aside-btn-box" v-show="!noBack">
-          <img src="/static/images/icon/normal/返回 大@2x.png"
-            alt=""
-            srcset=""
-            @click="go_back">
-        </li>
-      </template>
-      <li class="weget-logo" v-if="!appDetail">
-        <router-link to="/">
-          <img src="/static/images/icon/header/big-logo.png"
-            alt=""
-            srcset="">
+      </div>
+
+<div>
+  <template>
+    <li class="setting-icon">
+      <a>
+        <router-link :to="{path:'/login'}">
+          <span class="sign"  v-if="!$store.state.token">Sign in</span>
         </router-link>
-      </li>
-
-      <li class="weget-logo-detail" v-if="appDetail">
-        <router-link to="/">
-          <img src="/static/images/icon/header/big-logo.png"
-               alt=""
-               srcset="">
+        <router-link :to="{path:'/user'}">
+          <img class="user-photo" v-if="$store.state.token" :src="photo"
+               alt="">
         </router-link>
-      </li>
 
-      <template v-if="appHome||appDetail">
-        <!-- <li class="search-box _bgf3"
-          @click="to_search">
-          <span></span>
-        </li>
-        <li class="get-more-box"
-          @click="to_category">
-          <img src="/static/images/icon/header/home-right-icon@3x.png"
-            alt=""
-            srcset="">
-        </li> -->
+      </a>
 
-        <li class="setting-icon">
-          <a v-if="appDetail" >
-            <router-link :to="{path:'/login'}">
-              <span class="sign"  v-if="!$store.state.token">Sign in</span>
-            </router-link>
-            <router-link :to="{path:'/user'}">
-              <img class="user-photo" v-if="$store.state.token" :src="photo"
-                   alt="">
-            </router-link>
+      <router-link :to="{path:'/search/search-query'}">
+        <img src="/static/images/icon/normal/search@2x.png"
+             alt="">
+      </router-link>
 
-          </a>
+      <router-link v-if="!appDetail" :to="{path:'/search/search-home'}">
+        <img src="/static/images/icon/header/home-right-icon@3x.png"
+             alt="">
+      </router-link>
+    </li>
+  </template>
+  <template v-if="appWelog">
+    <!-- <li class="me">
+      <span>WELOG</span>
+    </li> -->
+    <li class="emity-block"></li>
+  </template>
+  <template v-if="appCart">
+    <!-- <li class="me">
+      <span>CART</span>
+    </li> -->
+    <li class="emity-block"></li>
+  </template>
+  <template v-if="appUser">
+    <!-- <li class="me">
+      <span>ME</span>
+    </li> -->
+    <li class="setting-icon">
+      <!-- <router-link :to="{path:'/'}"
+        :class="{'active':haveMessages}">
+        <img class="messages"
+          src="/static/images/icon/user/mine_notifi_nav_icon@3x.png"
+          alt="">
+      </router-link> -->
+      <router-link :to="{path:'/user/setting'}">
+        <img src="/static/images/icon/user/mine_setting_nav_icon@3x.png"
+             alt="">
+      </router-link>
+    </li>
+  </template>
+  <template v-if="appTheme">
+    <!-- <li class="me">
+      <span>{{$route.meta.title.toUpperCase()}}</span>
+    </li> -->
+    <li class="setting-icon">
+      <router-link :to="{path:'/search/search-query'}">
+        <img src="/static/images/icon/normal/search@2x.png"
+             alt="">
+      </router-link>
+    </li>
+  </template>
+</div>
 
-          <router-link :to="{path:'/search/search-query'}">
-            <img src="/static/images/icon/normal/search@2x.png"
-              alt="">
-          </router-link>
-
-          <router-link v-if="!appDetail" :to="{path:'/search/search-home'}">
-            <img src="/static/images/icon/header/home-right-icon@3x.png"
-              alt="">
-          </router-link>
-        </li>
-      </template>
-      <template v-if="appWelog">
-        <!-- <li class="me">
-          <span>WELOG</span>
-        </li> -->
-        <li class="emity-block"></li>
-      </template>
-      <template v-if="appCart">
-        <!-- <li class="me">
-          <span>CART</span>
-        </li> -->
-        <li class="emity-block"></li>
-      </template>
-      <template v-if="appUser">
-        <!-- <li class="me">
-          <span>ME</span>
-        </li> -->
-        <li class="setting-icon">
-          <!-- <router-link :to="{path:'/'}"
-            :class="{'active':haveMessages}">
-            <img class="messages"
-              src="/static/images/icon/user/mine_notifi_nav_icon@3x.png"
-              alt="">
-          </router-link> -->
-          <router-link :to="{path:'/user/setting'}">
-            <img src="/static/images/icon/user/mine_setting_nav_icon@3x.png"
-              alt="">
-          </router-link>
-        </li>
-      </template>
-      <template v-if="appTheme">
-        <!-- <li class="me">
-          <span>{{$route.meta.title.toUpperCase()}}</span>
-        </li> -->
-        <li class="setting-icon">
-          <router-link :to="{path:'/search/search-query'}">
-            <img src="/static/images/icon/normal/search@2x.png"
-              alt="">
-          </router-link>
-        </li>
-      </template>
     </ul>
     <van-popup v-model="contractionShow"
       position="left"
@@ -204,35 +190,72 @@ export default {
 <style lang='scss' scoped>
 .app-header {
   overflow: hidden;
+  height: 50px;
+  padding: 0 20px;
   & > ul {
-    position: relative;
-    height: 55px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    & > li {
-      img {
-        height: 24px;
-        width: 24px;
+    div {
+      height: 100%;
+      border: 1px solid red;
+      li {
+        display: inline-flex;
+        align-items: center;
+        height: 50px;
       }
-    }
-    .weget-logo,.weget-logo-detail {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      img {
-        height: 40px;
-        width: auto;
+      .aside-btn-box {
+        height: 50px;
+        display: inline-block;
+        img {
+          width: 21px;
+        }
       }
+      .weget-logo {
+        img {
+          height: auto;
+          width: 77px;
+        }
+      }
+      .setting-icon {
+        img {
+          margin-left: 10px;
+          width: 21px;
+        }
+        .sign{
+          font-size: 11px;
+          color: #000;
+          width:51px;
+          height:24px;
+          border-radius:2px;
+          border:1px solid rgba(0,0,0,1);
+          display: inline-block;
+          text-align: center;
+          line-height: 24px;
+          font-weight: bold;
+        }
+        .active {
+          position: relative;
+          &::after {
+            display: block;
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #d70e19;
+          }
+        }
+      }
+
     }
   }
   .emity-block {
     width: 24px;
   }
-  .aside-btn-box {
-  }
+
   .search-box {
     width: 250px;
     height: 28px;
@@ -261,37 +284,6 @@ export default {
     text-align: center;
     font-weight: bold;
     // padding-left: 50px;
-  }
-  .setting-icon {
-    img {
-      margin-left: 10px;
-    }
-    .sign{
-      font-size: 11px;
-      color: #000;
-      width:51px;
-      height:24px;
-      border-radius:2px;
-      border:1px solid rgba(0,0,0,1);
-      display: inline-block;
-      text-align: center;
-      line-height: 24px;
-      font-weight: bold;
-    }
-    .active {
-      position: relative;
-      &::after {
-        display: block;
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: #d70e19;
-      }
-    }
   }
 }
   .user-photo{
