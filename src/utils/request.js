@@ -166,9 +166,9 @@ service.interceptors.response.use(
           /* h5环境的判断 */
           if ($CM.is_ins() || $CM.is_snapchat() || $CM.is_weixin()) {
             /* 第三方 */
-            window.location.href = window.location.origin + "/login?autoshow=1&redirect=" + encodeURIComponent(window.location.href);
+            window.location.href = window.location.origin + "/login?autoshow=1&redirect=" + encodeURIComponent(window.location.pathname+ window.location.search);
           } else {
-            window.location.href = window.location.origin + "/login?redirect=" + encodeURIComponent(window.location.href);
+            window.location.href = window.location.origin + "/login?redirect=" + encodeURIComponent(window.location.pathname + window.location.search);
           }
         }
       }

@@ -44,10 +44,15 @@ export default {
       default: function () {
         return []
       }
+    },
+    defaultCoupon: {
+      type:Object
     }
   },
   created() {
     if (this.coupon_list.length>0) {
+      this.is_checked = this.defaultCoupon.id
+      this.cur_coupon = this.defaultCoupon;
     } else {
       this.init_data();
     }

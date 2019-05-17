@@ -47,7 +47,7 @@
       <Shipping @closeVant = 'closeVantShipping' :VantShippingStore="VantShippingStore"></Shipping>
     </van-popup>
     <van-popup v-model="showVantCouponPopu" position="bottom" >
-      <Coupon @closeVant = 'closeshowVantCoupon' :couponData="coupon_list"></Coupon>
+      <Coupon @closeVant = 'closeshowVantCoupon' :couponData="coupon_list" :defaultCoupon="default_coupon" ></Coupon>
     </van-popup>
   </div>
 </template>
@@ -67,6 +67,7 @@ export default {
   name: "",
   data() {
     return {
+      default_coupon: {},
       couponText: 'Select Coupon',
       user_coupon_id: undefined,
       showVantCouponPopu: false,
@@ -194,6 +195,9 @@ export default {
       CART.cartcheckoutConfirm().then(res => {
         const data = res.data;
         this.allTotal = data.all_total
+        this.default_coupon = data.default_coupon
+        this.user_coupon_id =  data.default_coupon.id
+        this.couponText =  data.default_coupon.name
         data.store_goods.forEach(store=> {
           store.goods_data.forEach(item => {
             item.checkted = false
@@ -322,10 +326,10 @@ export default {
 .cart-layout {
   height: 100%;
   footer {
+    border-bottom: 1px solid #000;
     box-shadow: 0px -1px 2px #c1c1c1;
     position: relative;
     z-index: 1000;
-    height: 150px;
     font-size:14px;
     font-weight:400;
     color:rgba(0,0,0,1);
