@@ -102,18 +102,20 @@
       </div>
     </div>
 
+    <addcart-antion  :sku="sku" v-if="cartAnimate" @toggle="addcartAntion==true"></addcart-antion>
+
     <!-- <detail-cover :sku-data="sku" :goods-data="cur_goods"></detail-cover> -->
-    <detail-pay-btn :cartAnimate="cartAnimate" v-if="cur_goods" @carting="to_cart"
-      :group-main-user="group_main_info"
-      :sku="sku"
-      :goods="goods"
-      :cur-goods="cur_goods"
-      :open="open"
-      :attr-list="attr_list"
-      :cur_group_id="cur_group_id"
-      ref="change_btn"
-      v-on:show_dialog_show='show_dialog = true'
-      class="btn-detail"></detail-pay-btn>
+    <!--<detail-pay-btn :cartAnimate="cartAnimate" v-if="cur_goods" @carting="to_cart"-->
+      <!--:group-main-user="group_main_info"-->
+      <!--:sku="sku"-->
+      <!--:goods="goods"-->
+      <!--:cur-goods="cur_goods"-->
+      <!--:open="open"-->
+      <!--:attr-list="attr_list"-->
+      <!--:cur_group_id="cur_group_id"-->
+      <!--ref="change_btn"-->
+      <!--v-on:show_dialog_show='show_dialog = true'-->
+      <!--class="btn-detail"></detail-pay-btn>-->
 
     <attr-dialog v-if="show_dialog" @carting="to_cart"
       @close="close_emity"
