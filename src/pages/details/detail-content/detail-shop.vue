@@ -64,7 +64,7 @@
 <style lang='scss' scoped>
   .page {
 
-    padding: 20px 0 10px 20px;
+    padding: 20px 0 10px 15px;
     font-size: 14px;
      border-bottom: 8px solid #f8f8f8;
   }

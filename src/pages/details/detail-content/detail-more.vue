@@ -47,7 +47,7 @@ export default {
 
 <style lang='scss' scoped>
 .page {
-  padding: 15px 20px 30px 20px;
+  padding: 15px 15px 30px 15px;
   font-size: 14px;
   border-top: 10px solid #f8f8f8;
   border-bottom: 10px solid #f8f8f8;

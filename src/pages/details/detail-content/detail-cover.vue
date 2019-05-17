@@ -125,9 +125,9 @@ export default {
 .goods-des {
   background-color: #fff;
   border-bottom: 10px solid #f8f8f8;
-  padding-bottom: 16px;
+  padding-bottom: 10px;
   & > div {
-    padding: 0 20px;
+    padding: 0 15px;
   }
   .img-box {
     position: relative;
@@ -240,10 +240,10 @@ export default {
 }
 .goods-info {
   width: 280px;
-  margin-top: 6px;
+  /*margin-top: 6px;*/
   font-size: 14px;
   line-height: 20px;
-  color: #4a4a4a;
+  color: #000;
 }
   .is_like{
     animation: go_in .3s;

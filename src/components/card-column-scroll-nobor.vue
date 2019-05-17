@@ -115,7 +115,7 @@ export default {
 .goods-card {
   display: flex;
   width: 150px;
-  padding: 10px 0;
+  /*padding: 10px 0;*/
   padding-bottom: 0;
   flex-direction: column;
   justify-content: space-between;
@@ -209,13 +209,13 @@ export default {
     white-space: normal;
     text-align: center;
     font-size: 12px;
-    line-height: 16px;
+    /*line-height: 16px;*/
     display: -webkit-box;
     -webkit-line-clamp: 1;
     /*white-space: normal;*/
     -webkit-box-orient: vertical;
     color: #000;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
   }
   .icon-box {
     font-size: 0;
