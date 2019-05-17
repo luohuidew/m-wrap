@@ -1,7 +1,7 @@
 <template>
   <div class="detail-attr">
     <div class="content"
-      @click="$emit('show_dialog_show')">
+      @click="show_log">
       <div class="icon-box">
         <img src="/static/images/icon/detail/detailchi.png"
           alt=""
@@ -38,7 +38,25 @@ export default {
   },
   created() {
   },
-  methods: {},
+  methods: {
+    show_log(){
+      if (!this.$store.state.token){
+        let re_path = `${
+          this.$route.fullPath
+          }&store_id=${
+          this.sku.store_id
+          }`;
+        sessionStorage.setItem('open_cart',1);
+        const param = {
+          path: "/login?redirect=" + encodeURIComponent(re_path),
+        }
+        this.$router.push(param)
+      }else{
+        this.$emit('show_dialog_show')
+      }
+
+    }
+  },
   components: {
     attrDialog
   }

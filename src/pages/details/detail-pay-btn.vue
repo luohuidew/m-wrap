@@ -309,7 +309,8 @@ export default {
           this.$route.fullPath
           }&store_id=${
           this.sku.store_id
-          }&open_cart=1`;
+          }`;
+        sessionStorage.setItem('open_cart',1);
         const param = {
           path: "/login?redirect=" + encodeURIComponent(re_path),
         }
@@ -379,13 +380,11 @@ export default {
 
 <style lang='scss' scoped>
 .detail-pay-btn {
-  background: #fff;
-  position: fixed;
+  position: relative;
   font-size: 18px;
-  bottom: 0;
-  width: 100%;
   display: flex;
-  z-index: 99;
+  z-index: 0;
+  /*overflow: hidden;*/
   height: 50px;
   border-top: 1px solid #f3f3f3;
   .go-home-box {
@@ -499,10 +498,10 @@ export default {
     flex-direction: column;
     align-items: center;
     /*justify-content: center;*/
-    height:71px;
+    height:50px;
     width: 71px;
     color: #000;
-    margin-top: 7px;
+    padding-top: 7px;
     // padding: 6px 0;
     font-size: 10px;
     span{
@@ -512,7 +511,7 @@ export default {
       position: relative;
       .cart-mun-icon {
         position: absolute;
-        top: 0px;
+        top: 5px;
         right: 11px;
         display: block;
         width: 14px;

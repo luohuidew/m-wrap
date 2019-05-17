@@ -54,9 +54,11 @@ export default {
       }, 0);
     },
     init_cart() {
-       CART.getCartNum().then(res => {
-        this.$store.commit("SET_CATR", res.data.num);
-      });
+      if(this.$store.state.token){
+        CART.getCartNum().then(res => {
+          this.$store.commit("SET_CATR", res.data.num);
+        });
+      }
         this.clearParams();
 
     },
@@ -78,7 +80,6 @@ export default {
 
 <style lang='scss' scoped>
 .detail {
-  padding-bottom: 30px;
   height: 100%;
   display: flex;
   flex-direction: column;

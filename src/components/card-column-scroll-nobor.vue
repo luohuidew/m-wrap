@@ -115,7 +115,7 @@ export default {
 .goods-card {
   display: flex;
   width: 150px;
-  padding: 10px;
+  padding: 10px 0;
   padding-bottom: 0;
   flex-direction: column;
   justify-content: space-between;
@@ -150,8 +150,8 @@ export default {
 }
 .goods-img {
   position: relative;
-  width: 130px;
-  height: 130px;
+  width: 150px;
+  height: 150px;
   font-size: 0;
   object-fit: cover;
   .mask-info {

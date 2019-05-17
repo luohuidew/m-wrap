@@ -36,36 +36,36 @@ export default {
   .add-cart-antion{
     opacity:0;
     position: absolute;
-    left: 10%;
-    top: -10px;
+    left: 15%;
+    bottom: 20%;
     animation-fill-mode: both;
-    -webkit-animation: ver-animation .5s 0.5s 1;
+    -webkit-animation: ver-animation .4s 0.5s 1;
     -webkit-animation-timing-function:cubic-bezier(.4,0,.99,0);
-    animation: ver-animation .5s 0.5s 1;
+    animation: ver-animation .4s 0.5s 1;
     animation-timing-function: cubic-bezier(.4,0,.99,0)
   }
   .add-cart-antion .item{
     animation-fill-mode: both;
 
-    animation: hor-animation .5s linear .5s 1;
+    animation: hor-animation .4s linear .5s 1;
   }
   @keyframes hor-animation{
     0%{
 
-      transform: translateX(100px)
+      transform: translateX(200px)
     }
     100%{
-      transform: translateX(0)
+      transform: translateX(-50px)
     }
   }
   @keyframes ver-animation{
     0%{
       opacity:1;
-      transform: translateY(-100px)
+      transform: translateY(-200px)
     }
 
     100%{
-      transform: translateY(100px);
+      transform: translateY(230px);
     }
   }
 </style>
