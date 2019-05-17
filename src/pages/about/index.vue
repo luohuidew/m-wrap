@@ -65,6 +65,7 @@
       </li>
       <li>
         <a class="email" href="mailto:business@weget.com">
+
           <img src="./img/about-us_11.jpg"
               alt=""
               srcset="">
@@ -129,7 +130,7 @@ export default {
   }
   /*.gif {
     padding: 0 28px;
-  }*/ 
+  }*/
   .jumpLink a{
     display: flex;
     align-items: center;

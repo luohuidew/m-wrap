@@ -4,21 +4,21 @@ let token = store.state.token;
 export default {
   sign_up(data = {}) {
     return request({
-      url: 'user/signUp?loading=yes',
+      url: 'user/signUp',
       method: 'post',
       data: JSON.stringify(data),
     })
   },
   thirdLogin(data = {}) {
     return request({
-      url: 'user/thirdLogin?loading=yes',
+      url: 'user/thirdLogin',
       method: 'post',
       data: JSON.stringify(data),
     })
   },
   preLogin(data = {}) {
     return request({
-      url: 'user/preLogin?loading=yes',
+      url: 'user/preLogin',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -40,7 +40,7 @@ export default {
 
   loginByUsername(data = {}) {
     return request({
-      url: 'user/login?loading=yes',
+      url: 'user/login',
       method: 'post',
       data: JSON.stringify(data),
     })
@@ -61,5 +61,5 @@ export default {
     })
   },
   /*  */
- 
+
 }

@@ -1,92 +1,55 @@
 <template>
   <div class="app-header">
     <ul>
-      <template v-if="appHome ||appUser || appTheme || appCart">
-        <li class="aside-btn-box">
-          <img src="/static/images/icon/header/home-left-icon@3x.png"
-            alt=""
-            srcset=""
-            @click="contractionShow=!contractionShow">
-        </li>
-      </template>
-      <template v-else>
-        <li class="aside-btn-box" v-show="!noBack">
-          <img src="/static/images/icon/normal/返回 大@2x.png"
-            alt=""
-            srcset=""
-            @click="go_back">
-        </li>
-      </template>
-      <li class="weget-logo">
-        <router-link to="/">
-          <img src="/static/images/icon/header/big-logo.png"
-            alt=""
-            srcset="">
-        </router-link>
-      </li>
-      <template v-if="appHome">
-        <!-- <li class="search-box _bgf3"
-          @click="to_search">
-          <span></span>
-        </li>
-        <li class="get-more-box"
-          @click="to_category">
-          <img src="/static/images/icon/header/home-right-icon@3x.png"
-            alt=""
-            srcset="">
-        </li> -->
+      <div>
+        <template v-if="checkOut">
+          <li class="aside-btn-box">
+            <img src="/static/images/icon/normal/返回 大@2x.png"
+                 alt=""
+                 srcset=""
+                 @click="go_back">
+          </li>
+        </template>
+        <template v-if="!checkOut">
+          <li class="aside-btn-box">
+            <img src="/static/images/icon/header/home-left-icon@3x.png"
+                 alt=""
+                 srcset=""
+                 @click="contractionShow=!contractionShow">
+          </li>
+        </template>
 
-        <li class="setting-icon">
-          <router-link :to="{path:'/search/search-query'}">
-            <img src="/static/images/icon/normal/search@2x.png"
-              alt="">
-          </router-link>
-          <router-link :to="{path:'/search/search-home'}">
-            <img src="/static/images/icon/header/home-right-icon@3x.png"
-              alt="">
+        <li class="weget-logo">
+          <router-link to="/">
+            <img src="/static/images/icon/header/big-logo.png"
+                 alt=""
+                 srcset="">
           </router-link>
         </li>
-      </template>
-      <template v-if="appWelog">
-        <!-- <li class="me">
-          <span>WELOG</span>
-        </li> -->
-        <li class="emity-block"></li>
-      </template>
-      <template v-if="appCart">
-        <!-- <li class="me">
-          <span>CART</span>
-        </li> -->
-        <li class="emity-block"></li>
-      </template>
-      <template v-if="appUser">
-        <!-- <li class="me">
-          <span>ME</span>
-        </li> -->
-        <li class="setting-icon">
-          <!-- <router-link :to="{path:'/'}"
-            :class="{'active':haveMessages}">
-            <img class="messages"
-              src="/static/images/icon/user/mine_notifi_nav_icon@3x.png"
-              alt="">
-          </router-link> -->
-          <router-link :to="{path:'/user/setting'}">
-            <img src="/static/images/icon/user/mine_setting_nav_icon@3x.png"
-              alt="">
-          </router-link>
-        </li>
-      </template>
-      <template v-if="appTheme">
-        <!-- <li class="me">
-          <span>{{$route.meta.title.toUpperCase()}}</span>
-        </li> -->
-        <li class="setting-icon">
-          <router-link :to="{path:'/search/search-query'}">
-            <img src="/static/images/icon/normal/search@2x.png"
-              alt="">
-          </router-link>
-        </li>
-      </template>
+      </div>
+      <div>
+        <template v-if="!checkOut">
+          <li class="setting-icon">
+            <a>
+              <router-link :to="{path:'/login'}">
+                <span class="sign"  v-if="!$store.state.token">Sign in</span>
+              </router-link>
+              <router-link :to="{path:'/user'}">
+                <img class="user-photo" v-if="$store.state.token" :src="userInfo.photo" alt="">
+              </router-link>
+            </a>
+
+            <router-link :to="{path:'/search/search-query'}">
+              <img class="search" src="/static/images/icon/normal/search@2x.png">
+            </router-link>
+
+            <router-link :to="{path:'/cart/index'}">
+              <img class="cart" src="/static/images/icon/header/H5-购物车@3x.png" alt="">
+            </router-link>
+          </li>
+        </template>
+
+      </div>
     </ul>
     <van-popup v-model="contractionShow"
       position="left"
@@ -105,7 +68,7 @@ export default {
     return {
       contractionShow: false,
       searchContent: "",
-      haveMessages: true
+      haveMessages: true,
     };
   },
   watch: {
@@ -118,31 +81,38 @@ export default {
       }
     }
   },
-  computed: {
-    noBack() {
-      return this.$route.meta.noBack
-    },
-    appUser() {
-      return this.$route.path === "/user/index";
-    },
-    appCart() {
-      return this.$route.path === "/cart/index";
-    },
-    appHome() {
-      return this.$route.path === "/home/index";
-    },
-    appWelog() {
-      return this.$route.path === "/welog/index";
-    },
-    appCart() {
-      return this.$route.path === "/cart/index";
-    },
-    appTheme() {
-      let configs = ["/store/theme", "/home/theme"];
-      return configs.indexOf(this.$route.path) !== -1;
-    }
+  mounted(){
+
   },
-  created() {},
+  computed: {
+    userInfo() {
+      return this.$store.state.user
+    },
+    // noBack() {
+    //   return this.$route.meta.noBack
+    // },
+    // appUser() {
+    //   return this.$route.path === "/user/index";
+    // },
+    // appDetail() {
+    //   return this.$route.path === "/detail";
+    // },
+    // appHome() {
+    //   return this.$route.path === "/home/index";
+    // },
+    // appWelog() {
+    //   return this.$route.path === "/welog/index";
+    // },
+    checkOut() {
+      return this.$route.path === "/checkout/index";
+    },
+    // appTheme() {
+    //   let configs = ["/store/theme", "/home/theme"];
+    //   return configs.indexOf(this.$route.path) !== -1;
+    // }
+  },
+  created() {
+  },
   methods: {
     to_search() {
       let href_params = {
@@ -176,35 +146,87 @@ export default {
 <style lang='scss' scoped>
 .app-header {
   overflow: hidden;
+  height: 100%;
+  padding: 0 20px;
   & > ul {
-    position: relative;
-    height: 55px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
-    & > li {
-      img {
-        height: 24px;
-        width: 24px;
+    height: 100%;
+    div {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      li {
+        display: inline-block;
       }
-    }
-    .weget-logo {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      img {
-        height: 40px;
-        width: auto;
+      .aside-btn-box {
+        img {
+          width: 21px;
+        }
       }
+      .weget-logo {
+        margin-left: 14px;
+        img {
+          height: auto;
+          width: 77px;
+        }
+      }
+      .setting-icon {
+        img.user-photo{
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          overflow: hidden;
+          margin-right: 14px;
+        }
+         img.search {
+           margin-right: 14px;
+           width: 24px;
+           height: 24px;
+        }
+        img.cart {
+          width: 24px;
+          height: 24px;
+        }
+        .sign{
+          margin-right: 14px;
+          font-size: 11px;
+          color: #000;
+          width:51px;
+          height:24px;
+          border-radius:2px;
+          border:1px solid rgba(0,0,0,1);
+          display: inline-block;
+          text-align: center;
+          line-height: 24px;
+          font-weight: bold;
+        }
+        .seeting {
+          height: 24px;
+        }
+        .active {
+          position: relative;
+          &::after {
+            display: block;
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #d70e19;
+          }
+        }
+      }
+
     }
   }
   .emity-block {
     width: 24px;
   }
-  .aside-btn-box {
-  }
+
   .search-box {
     width: 250px;
     height: 28px;
@@ -234,24 +256,15 @@ export default {
     font-weight: bold;
     // padding-left: 50px;
   }
-  .setting-icon {
-    img {
-      margin-left: 10px;
-    }
-    .active {
-      position: relative;
-      &::after {
-        display: block;
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background-color: #d70e19;
-      }
+}
+  .user-photo{
+    border-radius: 50%;
+  }
+  .weget-logo-detail{
+    left: 25%!important;
+    img{
+      width: 77px!important;
+      height: 28px!important;
     }
   }
-}
 </style>

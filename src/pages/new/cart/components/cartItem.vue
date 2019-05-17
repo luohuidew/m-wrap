@@ -7,11 +7,12 @@
         <div class="icon-box"
           @click="toggle_checked(checked_store)">
           <img v-if="checked_store"
-            src="/static/images/icon/cart/多选 选中@3x.png"
+            src="/static/images/icon/cart/selected.png"
             alt=""
             srcset="">
+
           <img v-else
-            src="/static/images/icon/cart/多选 未选中@3x.png"
+            src="/static/images/icon/cart/noSelected.png"
             alt=""
             srcset="">
         </div>
@@ -39,12 +40,12 @@
 
               <img v-if="item.checkted"
                 @click="no_check_only(item)"
-                src="/static/images/icon/cart/多选 选中@3x.png"
+                src="/static/images/icon/cart/selected.png"
                 alt=""
                 srcset="">
               <img v-else
                    @click="check_only(item)"
-                   src="/static/images/icon/cart/多选 未选中@3x.png"
+                   src="/static/images/icon/cart/noSelected.png"
                    alt=""
                    srcset="">
             </div>
@@ -84,7 +85,7 @@
     </ul>
     <div class="code">
       <div class="content">
-        <input type="text" v-model="code" @input="codeInput" placeholder="Apply shop coupon code"  />
+        <input :class="{error: all_data.store_code_info.error_msg}" type="text" v-model="code" @input="codeInput" placeholder="Apply shop coupon code"  />
         <div class="commit" :class="{ actived: codeActived }" @click="codeChange"></div>
       </div>
       <div class="error">
@@ -196,13 +197,31 @@
       let temp_number = Number(cur_item.num);
       temp_number += num;
       if (temp_number == 0) {
-        temp_number = 1;
+        this.$emit('deleteCartGood',{
+          cart_id: cur_item.cart_id,
+          store_id: this.all_data.store_id
+        })
+        // this.$dialog.confirm({
+        //   message: 'Delete merchandise',
+        //   cancelButtonText: 'Cancel',
+        //   confirmButtonText: 'Confirm'
+        // }).then(() => {
+        //   this.$emit('deleteCartGood',{
+        //     cart_id: cur_item.cart_id,
+        //     store_id: this.all_data.store_id
+        //   })
+        // }).catch(() => {
+        //   temp_number = 1;
+        //   cur_item.num = temp_number;
+        // });
+      } else {
+        if (temp_number == 11) {
+          temp_number = 10;
+        }
+        cur_item.num = temp_number;
+        this.emitPrant()
       }
-      if (temp_number == 11) {
-        temp_number = 10;
-      }
-      cur_item.num = temp_number;
-      this.emitPrant()
+
     },
     findSelectAll() {
       const selctArray = this.cur_lists.filter(item => {
@@ -405,6 +424,9 @@
       font-weight:400;
       color:rgba(74,74,74,1);
       padding-left: 10px;
+      &.error{
+        border:1px solid red
+      }
     }
     .commit {
       transition: 0.3s;

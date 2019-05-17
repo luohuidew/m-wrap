@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { getToken, removeToken } from "@/utils/auth";
+import { getToken } from "@/utils/auth";
 export default {
   name: "",
   props: {},
@@ -52,8 +52,9 @@ export default {
   methods: {
     logout(){
       if(getToken()){
-        removeToken();
-        window.location.replace('/login');
+        this.$store.dispatch('logOut').then(()=> {
+          this.$router.replace('/login');
+        })
       }
     }
   },

@@ -116,7 +116,7 @@ $linecolor: #e9e9e9;
     i {
       width: 16px;
       height: 16px;
-      background: #fff url("/static/img/icon/nochecked.png") no-repeat center
+      background: #fff url("/static/images/icon/cart/noSelected.png") no-repeat center
         center;
       background-size: 15px;
     }
@@ -130,7 +130,7 @@ $linecolor: #e9e9e9;
   }
   .active {
     i {
-      background-image: url("/static/img/icon/havechecked.png");
+      background-image: url("/static/images/icon/cart/selected.png");
       background-size: 15px;
     }
   }
@@ -168,7 +168,7 @@ $linecolor: #e9e9e9;
     display: inline-block;
     width: 250px;
     height: 40px;
-    background: #d70e19;
+    background: #000;
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     border-radius: 20px;

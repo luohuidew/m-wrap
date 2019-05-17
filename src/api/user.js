@@ -1,10 +1,7 @@
 import request from '@/utils/request'
-import store from '@/store';
-let token = store.state.token;
 export default {
   /* 主页面的获取用户信息 */
   getInfoByToken(data={}) {
-    data.token = token;
     return request({
       url: '/user/getInfoByToken',
       method: 'post',
@@ -12,7 +9,6 @@ export default {
     })
   },
   PersonalCenter(data={}) {
-    data.token = token;
     return request({
       url: '/user/PersonalCenter',
       method: 'post',
@@ -20,7 +16,6 @@ export default {
     })
   },
   updateUserInfo(data={}) {
-    data.token = token;
     return request({
       url: '/user/updateUserInfo',
       method: 'post',
@@ -28,7 +23,6 @@ export default {
     })
   },
   messageList(data={}) {
-    data.token = token;
     return request({
       url: '/user/messageList',
       method: 'post',
@@ -36,7 +30,6 @@ export default {
     })
   },
   send_email(data={}) {
-    data.token = token;
     return request({
       url: 'user/sendEmailByPs',
       method: 'post',
@@ -44,7 +37,6 @@ export default {
     })
   },
   reset_pass(data={}) {
-    data.token = token;
     return request({
       url: 'user/changePassword',
       method: 'post',
@@ -52,7 +44,6 @@ export default {
     })
   },
   getUserHeaderInfo(data={}) {
-    data.token = token;
     return request({
       url: 'user/getUserInfo',
       method: 'post',
@@ -60,7 +51,6 @@ export default {
     })
   },
   forgetPassword(data={}) {
-    // data.token = token;
     return request({
       url: '/user/forgetPassword',
       method: 'post',
@@ -68,7 +58,6 @@ export default {
     })
   },
   updateForgetPassword(data={}) {
-    // data.token = token;
     return request({
       url: '/user/updateForgetPassword',
       method: 'post',

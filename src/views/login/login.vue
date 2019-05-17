@@ -16,7 +16,7 @@
       </div>
       <template v-if="!ua.no_facebook">
         <fb class="other-btn" @login="getUserFb"></fb>
-        <google class="other-btn" @login="getUserGoogle"></google>
+        <google v-if="!is_facebook" class="other-btn" @login="getUserGoogle"></google>
         <instagram @login="getUserIns" class="other-btn"></instagram>
         <div class="lins">
           <span>or continue with email</span>
@@ -108,16 +108,16 @@ import tempdialog from "@/components/dialog/temp-dialog";
 // import "./css/base.scss";
 import api from "@/api/login";
 import apiBase from "@/api/base";
-import getShareUserApi from "@/api/trial";
-import { setToken, getToken, setUserShareId } from "@/utils/auth";
+import { getToken, setUserShareId } from "@/utils/auth";
 import { sha256 } from "js-sha256";
 export default {
   name: "login",
   data() {
     return {
+      is_facebook: false,
       userNew: false,
       show_dialog: false,
-      is_selected: 'signIn',
+      is_selected: this.$route.query.type || 'signIn',
       bind_email: "",
       other_form: {},
       ua: {
@@ -127,6 +127,8 @@ export default {
     };
   },
   created() {
+    this.TOAST = undefined //全局加载弹框
+    this.is_facebook = this.$CM.is_ins() || this.$CM.is_facebook() || this.$CM.is_messenger()
     // this.shareReturn()
     // this.login_pass = this.$route.query.autoshow == "1" ? true : false;
   },
@@ -183,13 +185,17 @@ export default {
     },
     check_pre_login(per_params, params) {
       let that = this;
-      api
-        .preLogin(per_params)
-        .then(res => {
+      this.TOAST = this.$toast.loading({
+        mask: true,
+        forbidClick:true,
+        loadingType: "spinner",
+        message: 'Loading',
+      });
+      api.preLogin(per_params).then(res => {
           return res;
-        })
-        .then(res => {
+        }).then(res => {
           if (res.data.is_signUp == 1) {
+            this.TOAST.clear();
             this.show_dialog = true;
             this.$set(this.other_form, "referer", this.$route.query.redirect);
           } else {
@@ -281,6 +287,12 @@ export default {
       if (email) {
         let params = this.other_form;
         params.share_user_id = this.share_user_id
+        this.TOAST = this.$toast.loading({
+          mask: true,
+          forbidClick:true,
+          loadingType: "spinner",
+          message: 'Loading',
+        });
         api.thirdLogin(params).then(res => {
           let data = res.data;
           this.userNew = true;
@@ -294,6 +306,12 @@ export default {
           this.$toast("password format is incorrect.");
           return false;
         } else {
+          this.TOAST = this.$toast.loading({
+            mask: true,
+            forbidClick:true,
+            loadingType: "spinner",
+            message: 'Loading',
+          });
           let params = {
             email: data.res.email,
             password: sha256(data.res.password),
@@ -316,9 +334,14 @@ export default {
           email: data.res.email,
           password: sha256(data.res.password)
         };
+        this.TOAST = this.$toast.loading({
+          mask: true,
+          forbidClick:true,
+          loadingType: "spinner",
+          message: 'Loading',
+        });
         api.loginByUsername(params).then(res => {
           // console.log(res);
-          console.log(res.data.token);
           this.set_token(res.data.token);
           apiBase.visitSaveLog({eventName: 'signinSuccess'}).then(()=>{})
         });
@@ -326,15 +349,11 @@ export default {
       }
     },
     set_token(token) { // 登陆注册第三方登录成功后调用方法
-      setToken(token);
-      this.$store.dispatch('SetToken', token)
-      this.setShareUId()
-    },
-    setShareUId() {
-      getShareUserApi.getUserInfo().then(res => { // 获取UserShareId
-        setUserShareId(res.data.id)
+      this.$store.dispatch('SetToken', token).then((suerInfo)=> {
+        setUserShareId(suerInfo.uid)
+        this.TOAST.clear();
         this.shareReturn()
-      });
+      })
     },
   },
   components: {

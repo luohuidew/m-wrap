@@ -43,7 +43,7 @@ window.close = function(response) {
       window.location.origin + "/callback?order_no=" + response.data.order_no
     );
   }else {
-    alert(response.message);
+    // alert(response.message);
     // let callback_url = window.location.origin + '/pay' +  window.location.search;
     // console.log(callback_url);
     setTimeout(()=>{

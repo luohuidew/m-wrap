@@ -10,13 +10,13 @@
             <em>Change</em>
           </div>
           <div class="des">
-            <span style="fontWeight:bold;">{{address_item.first_name}}</span>&nbsp;<span style="fontWeight:bold;">{{address_item.last_name}}</span><br />
+            <span >{{address_item.first_name}}</span>&nbsp;<span >{{address_item.last_name}}</span><br />
             <span> {{address_item.address1}} </span>
             <span> {{address_item.city}} </span>
             <span> {{address_item.state}} </span>
             <span> {{address_item.zipcode}} </span><br />
-            <span style="fontWeight:bold;"> {{address_item.zipcode}} </span>
-            <span style="fontWeight:bold;"> {{address_item.tel}} </span>
+            <span > {{address_item.zipcode}} </span>
+            <span > {{address_item.tel}} </span>
           </div>
 
         </template>
@@ -81,8 +81,6 @@ export default {
     color:rgba(74,74,74,1);
     padding: 10px;
     line-height:25px;
-    max-height: 130px;
-    overflow: hidden;
     .title {
       display: flex;
       justify-content: space-between;

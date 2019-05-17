@@ -61,7 +61,7 @@ export default {
       if(!temp_flag_lists[0].children.length){
         this.to_store_list(data);
       }
-      console.log(data);
+      // console.log(data);
     },
     to_store_list(cate_id) {
       let query_params = {

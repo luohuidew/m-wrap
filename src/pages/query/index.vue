@@ -17,7 +17,8 @@ export default {
   data() {
     return {
       sku_lists: [],
-      cur_lists: undefined
+      cur_lists: undefined,
+      is_more:false
     };
   },
   created() {
@@ -30,12 +31,16 @@ export default {
       // let params = this.$route.query;
       api.query_lists(params).then(res => {
         this.cur_lists = res.data.extend;
+        this.is_more=res.data.length==0?false:true
         res.data.data.forEach(item => {
           this.sku_lists.push(item);
         });
       });
     },
     get_more_data(data) {
+      if(!this.is_more){
+        return
+      }
       let params = {
         last_id: this.cur_lists.select_id,
         limit: 4,

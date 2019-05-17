@@ -72,12 +72,13 @@ export default {
     sku:{
       type:Object,
       default:undefined
-    }
+    },
+    activeList: 0
   },
   components: {},
   methods: {
     to_detail(sku_id) {
-      this.$router.push({ name: "detailAcive", query: { sku_id: sku_id, activeList: 1} });
+      this.$router.push({ name: "detailAcive", query: { sku_id: sku_id, activeList: this.activeList} });
     }
   }
 };

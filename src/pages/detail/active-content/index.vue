@@ -20,7 +20,8 @@
             :attr-list="attr_list"></detail-attr>
         </section>
         <detail-store :item="store_info"></detail-store>
-        <similar-cate  :titlelike="true" :data-list="likeData" title = "You might also like" :activeList = 'activeList'></similar-cate>
+        <similar-cate  :titlelike="true" :data-list="likeData" title = "YOU MIGHT AlSO LIKE" :activeList = 'activeList'></similar-cate>
+        <similar-cate v-if="!activeList" :titlelike="true" :data-list="lookData" title = "GOMPLETE THE LOOK" ></similar-cate>
         <!--<similarCateLook   :data-list="lookData" title = "Complete the look" ></similarCateLook>-->
         <detail-more v-if="sku"
           :sku="sku"></detail-more>
@@ -202,16 +203,16 @@ export default {
       }
     },
     getLikeLook(skuId) { // todo
-
-      if (this.activeList == '1') {
-        this.likeData = activeData.randomData()
+      if (this.activeList) {
+        this.likeData = activeData.randomData(this.activeList)
       } else {
         const param = {
           store_sku_id: skuId,
-          type: 1 // 2 lookDate // 1 likeData
+          // type: 1 // 2 lookDate // 1 likeData
         }
         api.getLikeLook(param).then((res) => {
           this.likeData = res.data.like
+          this.lookData = res.data.look
         })
       }
     },
