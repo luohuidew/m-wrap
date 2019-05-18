@@ -39,7 +39,7 @@
       </div>
       <div class="pay">
         <!--<div class="paypal">paypal</div>-->
-        <div class="paypal " v-if="isLoading" ><span>Secure checkout </span> <span class="load"> <van-loading size="20px" /></span></div>
+        <div class="paypal "  @click="toCheckout" v-if="isLoading" ><span>Secure checkout </span> <span class="load"> <van-loading size="20px" /></span></div>
         <div class="paypals" v-else @click="toCheckout">
           <img src="/static/images/icon/cart/paypal.png" alt="">
         </div>
@@ -324,6 +324,7 @@ export default {
 .cart-layout {
   height: 100%;
   footer {
+    margin-bottom: 10px;
     position: relative;
     z-index: 1000;
     height: 150px;
@@ -403,7 +404,7 @@ export default {
   height: calc(100% - 100px);
   overflow: auto;
   &.has-coupon {
-    height: calc(100% - 150px);
+    /*height: calc(100% - 150px);*/
   }
   &.no-good{
     height: 100%
