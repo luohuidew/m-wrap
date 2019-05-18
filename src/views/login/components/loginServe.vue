@@ -7,6 +7,7 @@
             <label>
               <h5>Email Address</h5>
               <input type="text"
+                     @blur="passBlur"
                 placeholder="Email Address"
                 v-model="login_data.email">
             </label>
@@ -19,7 +20,9 @@
               </dl>
               <input type="password"
               placeholder="Password"
-              v-model="login_data.password">
+                     @blur="passBlur"
+
+                     v-model="login_data.password">
             </label>
           </p>
           <p class="link-btn"  @click="login">
@@ -33,6 +36,7 @@
                 <h5>First Name</h5>
                 <input type="text"
                        autocomplete="off"
+                       @blur="passBlur"
                        class="first-name"
                        placeholder="First Name"
                        v-model="signup_data.first_name">
@@ -42,6 +46,7 @@
               <input type="text"
                 class="last-name"
                 autocomplete="off"
+                     @blur="passBlur"
                 placeholder="Last Name"
                 v-model="signup_data.last_name">
               </label>
@@ -50,6 +55,7 @@
               <label>
                 <h5>Email Address</h5>
               <input type="text"
+                     @blur="passBlur"
                 placeholder="Email Address"
                 v-model="signup_data.email" autocomplete="rad">
               </label>
@@ -59,6 +65,7 @@
                 <h5>Password</h5>
               <input type="password"
                 placeholder="Password"
+                     @blur="passBlur"
                 v-model="signup_data.password" autocomplete="rad">
               </label>
             </p>
@@ -119,6 +126,9 @@ export default {
   },
   computed: {},
   methods: {
+    passBlur() {
+      document.activeElement.scrollIntoViewIfNeeded(true);
+    },
     singup() {
       let data = {
         type: "signup",

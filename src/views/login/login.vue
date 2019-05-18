@@ -150,24 +150,24 @@ export default {
   methods: {
     shareReturn() {
       if (getToken()) {
-        // if (this.userNew) {
-        //   this.$dialog.alert({
-        //     message: 'Thanks for signing up, a $15 coupon has been added to your WeGet Account.',
-        //     confirmButtonText: 'Shop Now',
-        //     confirmButtonColor: '#000'
-        //   }).then(()=> {
-        //     this.toPage()
-        //   });
-        // } else {
-        //   this.$dialog.alert({
-        //     message: 'Welcome back, we are ready to shop with you today!',
-        //     confirmButtonText: 'Shop Now',
-        //     confirmButtonColor: '#000'
-        //   }).then(()=>{
-        //     this.toPage()
-        //   });
-        // }
-        this.toPage()
+        if (this.userNew) {
+          this.$dialog.alert({
+            message: 'Thanks for signing up, a $15 coupon has been added to your WeGet Account.',
+            confirmButtonText: 'Shop Now',
+            confirmButtonColor: '#000'
+          }).then(()=> {
+            this.toPage()
+          });
+        } else {
+          this.toPage()
+          // this.$dialog.alert({
+          //   message: 'Welcome back, we are ready to shop with you today!',
+          //   confirmButtonText: 'Shop Now',
+          //   confirmButtonColor: '#000'
+          // }).then(()=>{
+          //   this.toPage()
+          // });
+        }
       }
     },
     toPage() {
