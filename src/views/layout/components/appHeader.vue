@@ -31,9 +31,7 @@
         <template v-if="!checkOut">
           <li class="setting-icon">
             <a>
-              <router-link :to="{path:'/login'}">
-                <span class="sign"  v-if="!$store.state.token">Sign in</span>
-              </router-link>
+              <span class="sign" @click="goLogin" v-if="!$store.state.token">Sign in</span>
               <router-link :to="{path:'/user'}">
                 <img class="user-photo" v-if="$store.state.token" :src="userInfo.photo" alt="">
               </router-link>
@@ -43,7 +41,8 @@
               <img class="search" src="/static/images/icon/normal/search@2x.png">
             </router-link>
 
-            <router-link :to="{path:'/cart/index'}">
+            <router-link :to="{path:'/cart/index'}" class="car-warp" :class="{'have-goods':storeCartNum}">
+              <span>{{storeCartNum}}</span>
               <img class="cart" src="/static/images/icon/header/H5-购物车@3x.png" alt="">
             </router-link>
           </li>
@@ -85,6 +84,9 @@ export default {
 
   },
   computed: {
+    storeCartNum() {
+      return this.$store.state.cart.goods_num;
+    },
     userInfo() {
       return this.$store.state.user
     },
@@ -114,6 +116,15 @@ export default {
   created() {
   },
   methods: {
+    goLogin() {
+      let href_params = {
+        path: "/login",
+        query:{
+          redirect: this.$route.fullPath
+        }
+      };
+      this.$router.push(href_params);
+    },
     to_search() {
       let href_params = {
         path: "/search/search-query"
@@ -157,6 +168,29 @@ export default {
       align-items: center;
       display: flex;
       height: 100%;
+      .car-warp {
+        position: relative;
+        span{
+          display: none;
+        }
+        &.have-goods{
+          span {
+            position: absolute;
+            right:-7px;
+            top:-5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: red;
+            color: #fff;
+            font-size: 10px;
+          }
+        }
+      }
+
       li {
         display: inline-block;
       }

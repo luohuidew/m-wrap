@@ -1,4 +1,5 @@
-import request from '@/utils/request'
+import CART from "@/api/cart";
+
 const cart = {
   state: {
     sidebar: {
@@ -17,6 +18,11 @@ const cart = {
     }
   },
   actions: {
+    GETCARTNUMBER({ commit }) {
+      CART.getCartNum().then(res => {
+        commit("SET_CATR", res.data.num);
+      });
+    },
     // addAction({commit}, data) {
     //   commit('SET_CATR', data);
     //   commit('SET_ANIMATE', false);

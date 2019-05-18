@@ -66,6 +66,7 @@
   import homeTitle from "./components/appTitle";
   import homeFooter from "./components/appFooter";
   import apiBase from "@/api/base";
+
   export default {
     name: "layout",
     data() {
@@ -134,8 +135,10 @@
     },
     created() {
       if (getToken()) {
-        this.$store.dispatch('SetToken', getToken()).then(()=> {
-        })
+        this.$store.dispatch('SetToken', getToken()).then(()=> {})
+        // CART.getCartNum().then(res => {
+        //   this.$store.commit("SET_CATR", res.data.num);
+        // });
       }
     },
     mounted() {

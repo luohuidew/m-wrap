@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import api_user from "@/api/user";
+
 import {
   getToken,
   setToken,
@@ -84,9 +85,10 @@ const store = new Vuex.Store({
     //   commit('set_token', val)
     // },
 
-    SetToken({ commit }, val) {
+    SetToken({dispatch, commit }, val) {
       commit('set_token', val)
       setToken(val)
+      dispatch('GETCARTNUMBER')
       return new Promise((resolve, reject) => {
         api_user.PersonalCenter({}).then(res => {
           const suerInfo = res.data.user_info;
@@ -100,6 +102,7 @@ const store = new Vuex.Store({
     logOut({ commit }) {
       return new Promise((resolve) =>{
         commit('set_user', {})
+        commit('SET_CATR', 0)
         removeToken()
         removeUserShareId()
         commit('set_token', undefined)

@@ -36,7 +36,7 @@
           <span class="old-price"
             v-if="cur_goods.crossed_price">${{cur_goods.crossed_price}}</span>
 
-          <span class="new-price" v-if="!$store.state.token">${{price_preference}} when you sign up (new customers only)</span>
+          <span class="new-price" v-if="!$store.state.token">{{cur_goods.promote_price}}</span>
 
         </p>
 

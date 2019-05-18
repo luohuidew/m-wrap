@@ -1,9 +1,7 @@
 import request from '@/utils/request'
-import store from '@/store'
-let token = store.state.token;
+
 export default {
   addToCart(data = {}) {
-    data.token = token;
     return request({
       url: 'shopcart/addToCart?loading=yes',
       method: 'post',
@@ -11,7 +9,6 @@ export default {
     })
   },
   cartcheckoutConfirm(data = {}) {
-    data.token = token;
     return request({
       url: 'cartcheckout/confirm?loading=yes',
       method: 'post',
@@ -37,7 +34,6 @@ export default {
     })
   },
   delShopCartGood(data = {}) {
-    data.token = token;
     return request({
       url: 'shopcart/delShopCartGood?loading=yes ',
       method: 'post',
@@ -45,7 +41,6 @@ export default {
     })
   },
   updateCount(data = {}) {
-    data.token = token;
     return request({
       url: 'shopcart/updateCount?loading=yes',
       method: 'post',
@@ -53,7 +48,6 @@ export default {
     })
   },
   likeList(data = {}) {
-    data.token = token;
     return request({
       url: 'shopcart/likeList ',
       method: 'post',
