@@ -219,5 +219,11 @@ export default {
 .cart-lists {
   padding: 5px 15px;
   border-bottom: 10px solid #f3f3f3;
+  &:last-child{
+    border-bottom: 0px solid #f3f3f3;
+    padding: 5px 15px 0px 15px;
+
+  }
+
 }
 </style>

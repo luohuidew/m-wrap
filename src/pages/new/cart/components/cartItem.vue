@@ -85,7 +85,7 @@
     </ul>
     <div class="code">
       <div class="content">
-        <input :class="{error: all_data.store_code_info.error_msg}" type="text" v-model="code" @input="codeInput" placeholder="Apply shop coupon code"  />
+        <input :class="{error: all_data.store_code_info.error_msg}" @blur="passBlur" type="text" v-model="code" @input="codeInput" placeholder="Apply shop coupon code"  />
         <div class="commit" :class="{ actived: codeActived }" @click="codeChange"></div>
       </div>
       <div class="error">
@@ -94,7 +94,7 @@
       </div>
     </div>
     <div class="shipping" @click="showVantShippingMethod">
-      <h2>{{shippingName}}</h2>
+      <h2>{{shippingName}} {{shippingPrice}}</h2>
       <h3>{{shippingDesc}}</h3>
     </div>
 
@@ -115,6 +115,7 @@
       selectShippingKey: 0,
       shippingName: '',
       shippingDesc: '',
+      shippingPrice: '0.00',
     };
   },
   props: {
@@ -154,6 +155,8 @@
           })
           this.shippingName = select[0].key_name
           this.shippingDesc = select[0].desc
+          this.shippingPrice = select[0].price_show
+
         }
 
       },
@@ -166,11 +169,15 @@
         })
         this.shippingName = select[0].key_name
         this.shippingDesc = select[0].desc
+        this.shippingPrice = select[0].price_show
       },
       immediate: true,
     }
   },
   methods: {
+    passBlur() {
+      document.activeElement.scrollIntoViewIfNeeded(true);
+    },
     codeInput() {
       if(this.code) {
         this.codeActived = true

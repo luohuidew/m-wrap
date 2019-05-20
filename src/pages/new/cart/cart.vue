@@ -39,10 +39,12 @@
       </div>
       <div class="pay">
         <!--<div class="paypal">paypal</div>-->
-        <div class="paypal "  @click="toCheckout" v-if="isLoading" ><span>Secure checkout </span> <span class="load"> <van-loading size="20px" /></span></div>
-        <div class="paypals" v-else @click="toCheckout">
-          <img src="/static/images/icon/cart/paypal.png" alt="">
-        </div>
+        <div class="paypal "  v-if="isLoading" ><span>Secure checkout </span> <span class="load"> <van-loading size="20px" /></span></div>
+        <div class="paypal " v-else @click="toCheckout"  >Secure checkout</div>
+
+        <!--<div class="paypals" v-else @click="toCheckout">-->
+          <!--<img src="/static/images/icon/cart/paypal.png" alt="">-->
+        <!--</div>-->
       </div>
     </footer>
     <van-popup v-model="showVantShippingPopu" position="bottom" >
@@ -328,7 +330,6 @@ export default {
 .cart-layout {
   height: 100%;
   footer {
-
     margin-bottom: 10px;
     position: relative;
     z-index: 1000;
@@ -405,11 +406,7 @@ export default {
   }
 }
 .scroll-lists {
-  height: calc(100% - 100px);
   overflow: auto;
-  &.has-coupon {
-    /*height: calc(100% - 150px);*/
-  }
   &.no-good{
     height: 100%
   }
@@ -419,7 +416,8 @@ export default {
   height: 50px;
   display: flex;
   align-items: center;
-  background:rgba(255,174,147,0.1);
+  background: rgba(255,174,147,0.1) url("/static/images/icon/cart/分类 copy@3x.png") no-repeat  center right 13px;
+  background-size: 20px;
   img {
     display: inline-block;
     width: 19px;

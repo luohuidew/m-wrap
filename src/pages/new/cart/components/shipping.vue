@@ -8,7 +8,7 @@
         :class="is_selected===item.key ? 'active':''"
         @click="selected_shipping(item)">
         <div class="shipping-item">
-          <p>
+          <p class="des">
             <span class="shipping-label">
               {{item.key_name}}
             </span>
@@ -143,6 +143,9 @@ $linecolor: #e9e9e9;
     // padding-left: 10px;
     border-bottom: 1px solid $linecolor;
     p {
+      &.des {
+        width: 200px;
+      }
       span {
         display: block;
       }
