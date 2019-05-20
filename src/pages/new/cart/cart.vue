@@ -18,17 +18,17 @@
     </div>
     <footer v-if="req_data.store_goods && req_data.store_goods.length>0">
       <div class="coupon" @click="showVantCouponMethod" v-if="coupon_list.length>0">
-        <img src="/static/images/icon/cart/selectCopy@3x.png" alt="">
+        <img src="/static/images/icon/cart/youhuij.png" alt="">
         <span>{{couponText}}</span>
       </div>
       <div class="price">
         <div class="selct">
           <img v-if="all_goods_is_select" @click="noAllgoodSelect"
-               src="/static/images/icon/cart/selected.png"
+               src="/static/images/icon/cart/duoxuana.png"
                alt=""
                srcset="">
           <img v-else @click="AllgoodSelect"
-               src="/static/images/icon/cart/noSelected.png"
+               src="/static/images/icon/cart/duoxuann.png"
                alt=""
                srcset="">
          <span> Select items({{selectedNumber}})</span>
@@ -39,8 +39,10 @@
       </div>
       <div class="pay">
         <!--<div class="paypal">paypal</div>-->
-        <div class="paypal " v-if="isLoading"><span>Secure checkout </span> <span class="load"> <van-loading size="20px" /></span></div>
-        <div class="paypal " v-else @click="toCheckout">Secure checkout</div>
+        <div class="paypal "  @click="toCheckout" v-if="isLoading" ><span>Secure checkout </span> <span class="load"> <van-loading size="20px" /></span></div>
+        <div class="paypals" v-else @click="toCheckout">
+          <img src="/static/images/icon/cart/paypal.png" alt="">
+        </div>
       </div>
     </footer>
     <van-popup v-model="showVantShippingPopu" position="bottom" >
@@ -326,8 +328,8 @@ export default {
 .cart-layout {
   height: 100%;
   footer {
-    border-bottom: 1px solid #000;
-    box-shadow: 0px -1px 2px #c1c1c1;
+
+    margin-bottom: 10px;
     position: relative;
     z-index: 1000;
     font-size:14px;
@@ -340,11 +342,12 @@ export default {
       align-items: center;
       justify-content: space-between;
       .selct {
-
         img {
-          width: 20px;
+          width: 18px;
         }
         span {
+          margin-left: 10px;
+          color: #000;
           font-weight: 400;
           font-size:14px;
           vertical-align: middle;
@@ -359,19 +362,40 @@ export default {
       height: 46px;
       overflow: hidden;
       .paypal {
-        width: 100%;
-        background:rgba(255,196,56,1);
-        display: inline-block;
         text-align: center;
         height: 46px;
         overflow: hidden;
         line-height: 46px;
         color: #fff;
         background:rgba(0,0,0,1);
+        width: 345px;
+        margin: 0 auto;
+        display: block;
+        border-radius: 30px;
+        font-weight: bold;
         span{
           display: inline-block;
           vertical-align: middle;
           color: #aab2bd;
+          &.load{
+            margin-left: 8px;
+          }
+        }
+      }
+      .paypals {
+        text-align: center;
+        height: 46px;
+        overflow: hidden;
+        line-height: 46px;
+        background:rgba(255,196,56,1);
+        width: 345px;
+        margin: 0 auto;
+        display: block;
+        border-radius: 30px;
+        font-weight: bold;
+        img{
+          width: 78px;
+          display: inline-block;
           &.load{
             margin-left: 8px;
           }
@@ -384,7 +408,7 @@ export default {
   height: calc(100% - 100px);
   overflow: auto;
   &.has-coupon {
-    height: calc(100% - 150px);
+    /*height: calc(100% - 150px);*/
   }
   &.no-good{
     height: 100%
@@ -392,21 +416,23 @@ export default {
 }
 .coupon {
   padding-left: 15px;
-  border-bottom: 1px solid #F8F8F8;
   height: 50px;
   display: flex;
   align-items: center;
-  background: url(/static/img/icon/right.png) no-repeat center right 15px;
+  background:rgba(255,174,147,0.1);
   img {
     display: inline-block;
-    height: 20px;
+    width: 19px;
+    height: 18px;
     margin-right: 10px;
   }
   span {
+    margin-top: 2px;
+    display: inline-block;
     line-height: 20px;
     font-size:12px;
-    font-weight:400;
-    color:rgba(155,155,155,1);
+    font-weight:bold;
+    color:#000;
   }
 }
 /*  */
