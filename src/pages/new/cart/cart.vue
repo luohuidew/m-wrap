@@ -328,12 +328,8 @@ export default {
 .cart-layout {
   height: 100%;
   footer {
-<<<<<<< HEAD
-    border-bottom: 1px solid #000;
-    box-shadow: 0px -1px 2px #c1c1c1;
-=======
+
     margin-bottom: 10px;
->>>>>>> xiamu_dev
     position: relative;
     z-index: 1000;
     font-size:14px;
