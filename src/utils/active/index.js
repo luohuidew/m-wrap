@@ -703,6 +703,99 @@ let listData5 = [
     "sku_id": "5676878781014968"
   }
 ]
+let listData6 = [
+  {
+    "alone_price": "29.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/13124984915cdbc5a44e333.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Gold-blonde Synthetic Lace Front Mono Top Wig",
+    "sku_id": "5790690042574993"
+  },
+  {
+    "alone_price": "29.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/7773043805cdbc68407556.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Ash Blonde Synthetic Lace Front Wig (mono Part)",
+    "sku_id": "5790711760349630"
+  },
+  {
+    "alone_price": "29.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/9035179035cdbc6d04e407.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Golden Blonde Long Lace Front Feminine Wavy Wig",
+    "sku_id": "5790719318431206"
+  },
+  {
+    "alone_price": "29.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/3267669695cdbc75038e79.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Ash Blonde Synthetic Lace Front Wig (mono Part)",
+    "sku_id": "5790732237069264"
+  },
+  {
+    "alone_price": "39.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/19589617165cdbc8181fc29.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Black Long Lace Front Feminine Wavy Wig",
+    "sku_id": "5790753159911365"
+  },
+  {
+    "alone_price": "39.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/15759685345cdbc90aef342.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Black Layered Super Straight Synthetic Wig",
+    "sku_id": "5790795043924204"
+  },
+  {
+    "alone_price": "39.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/16150234195cdbca0e8b63b.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Ash Blonde Synthetic Lace Front Wavy Wig",
+    "sku_id": "5790811486985363"
+  },
+  {
+    "alone_price": "29.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/14920433215cdbcb2da464a.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Lavender Purple Synthetic Lace Front Wavy Wig",
+    "sku_id": "5790830718466822"
+  },
+  {
+    "alone_price": "39.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/19757996115cdbcbb7822b4.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Ash Pink Synthetic Lace Front Wavy Wig (mono Part)",
+    "sku_id": "5790848566563558"
+  },
+  {
+    "alone_price": "39.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/8488487445cdbcc2e1700d.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Black Super Straight Synthetic Wig",
+    "sku_id": "5790872283031961"
+  }
+
+]
 let listData = []
 listData2.forEach(item => {
   listData = [...listData, ...item]
@@ -743,4 +836,5 @@ export default {
   listData2,
   listData4,
   listData5,
+  listData6,
 }

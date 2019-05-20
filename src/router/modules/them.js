@@ -173,6 +173,17 @@ export default {
       }
     },
     {
+      path: 'active6',
+      name: 'articleActive6',
+      component: () =>
+          import('@/pages/article/ac-10-active6'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: false
+      }
+    },
+    {
       path: 'ac-11',
       name: 'ac-11',
       component: () =>
