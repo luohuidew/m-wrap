@@ -184,6 +184,17 @@ export default {
       }
     },
     {
+      path: 'active7',
+      name: 'articleActive7',
+      component: () =>
+          import('@/pages/article/ac-10-active7'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: false
+      }
+    },
+    {
       path: 'ac-11',
       name: 'ac-11',
       component: () =>
