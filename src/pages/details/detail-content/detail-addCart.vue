@@ -63,9 +63,13 @@ computed: {
     return this.$store.state.cart;
   }
 },
-props: ["goods", "sku", "attrList", "curGoods", "groupMainUser"],
+props: ["goods", "sku", "attrList", "curGoods", "groupMainUser","open"],
   mounted() {
     this.init_data();
+    console.log(this.open)
+    if(this.open){
+      this.$emit("show_dialog_show");
+    }
   },
   methods: {
     init_data() {
@@ -137,9 +141,10 @@ props: ["goods", "sku", "attrList", "curGoods", "groupMainUser"],
           }&store_id=${
           this.sku.store_id
           }`;
+        sessionStorage.setItem('open_cart',1);
         const param = {
           path: "/login?redirect=" + encodeURIComponent(re_path),
-        }
+        };
         this.$router.push(param)
       }
     },
