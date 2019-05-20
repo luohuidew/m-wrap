@@ -21,6 +21,7 @@
         </section>
 
         <detailaddCart
+          :open="open"
           v-if="cur_goods" @carting="to_cart"
           :group-main-user="group_main_info"
           :sku="sku"
@@ -67,7 +68,7 @@
       </div>
     </div>
 
-    <addcart-antion  :sku="sku" v-if="cartAnimate" @toggle="addcartAntion==true"></addcart-antion>
+    <addcart-antion   :sku="sku" v-if="cartAnimate" @toggle="addcartAntion==true"></addcart-antion>
 
     <!-- <detail-cover :sku-data="sku" :goods-data="cur_goods"></detail-cover> -->
     <!--<detail-pay-btn :cartAnimate="cartAnimate" v-if="cur_goods" @carting="to_cart"-->
