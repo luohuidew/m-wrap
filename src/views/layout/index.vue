@@ -82,12 +82,12 @@
           }
         ],
         transitionName: "slide-left",
-        keep_banner: true
+        showTopPath: ['/cart/index','/checkout/index']
       };
     },
     computed: {
       show_banner() {
-        return this.keep_banner && !this.full_screen && !this.$route.fullPath.includes('cart/index');
+        return !this.full_screen && !this.showTopPath.includes(this.$route.fullPath);
       },
       share_token() {
         return this.$store.state.share_token;

@@ -195,6 +195,29 @@ export default {
       }
     },
     {
+      path: 'active8',
+      name: 'articleActive8',
+      component: () =>
+          import('@/pages/article/ac-10-active8'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: false
+      }
+    },
+    {
+      path: 'active9',
+      name: 'articleActive9',
+      component: () =>
+          import('@/pages/article/ac-10-active9'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: false
+      }
+    },
+
+    {
       path: 'ac-11',
       name: 'ac-11',
       component: () =>

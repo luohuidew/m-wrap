@@ -995,6 +995,300 @@ let listData7 = [
   }
 
 ]
+let listData8 = [
+    {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/13363637595ce20c556d513.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Rivet Oval Frame Sunglasses",
+    "sku_id": 5833407341421083
+    },
+   {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/6488227575ce24ae86269e.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Small Square Sunglasses",
+    "sku_id": 5833438138172426
+  }, {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/8658906745ce24c144ff83.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Cat's Eye Metal Sunglasses",
+    "sku_id": 5833464442712630
+  }, {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/6989703135ce24d2b1d733.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Square Metal Sunglasses",
+    "sku_id": 5833484875014556
+  }, {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/9378680755ce24da412f31.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Square Sunglasses",
+    "sku_id": 5833501806937741
+  }, {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/14362984355ce24e91a130a.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Vintage Cat's Eye Sunglasses",
+    "sku_id": 5833526363113614
+  }, {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/16911432155ce24fab8cb5c.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Small Square Sunglasses",
+    "sku_id": 5833575748812159
+  }, {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/7816840695ce254b45cb15.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Large Square Sunglasses",
+    "sku_id": 5833675439525996
+  }, {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/13061205345ce2555283b94.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Narrow Frame Metal Sunglasses",
+    "sku_id": 5833696418194625
+  }, {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/3690321055ce256143d859.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Big Square Translucent Sunglasses",
+    "sku_id": 5833719641435821
+  }, {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/11070190715ce256d95d7a1.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Vintage Square Sunglasses",
+    "sku_id": 5833729555554785
+  }, {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/14404275015ce257323311d.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Double Beam Color Sunglasses",
+    "sku_id": 5833750077402554
+  }, {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/13211129155ce2580217e26.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Vintage Double Flip Sunglasses",
+    "sku_id": 5833774284432482
+  }, {
+    "alone_price": "21.90",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/9780211535ce258f79a457.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Ultra Small Frame Sunglasses",
+    "sku_id": 5833790251314816
+  }, {
+    "alone_price": "21.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/644331655ce25ae01d200.jpg?width=800&height=800",
+    "show_tag": [],
+    "title": "Retro Half-rimmed Glasses",
+    "sku_id": 5833842536313863
+}]
+let listData9= [
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/17685530885ce21182a2c1f.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Blingin Cloud Phone Case",
+    "sku_id": "5831971594896055"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/6944351315ce212e806537.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Blingin Laser Sequin Phone Case",
+    "sku_id": "5831991400094081"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/96064445ce2135de72d9.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Blingin Crystal Mirror Phone Case",
+    "sku_id": "5835233063239625"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/14224691095ce214513912a.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Blingin Ocean Flow Phone Case",
+    "sku_id": "5832032663851681"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/14761707535ce2151cb159a.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Gold Glitter Copper Coin Phone Case",
+    "sku_id": "5832069798858892"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/12717864995ce216708c99c.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Super Girl Phone Case",
+    "sku_id": "5832085380794199"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/8107202065ce217806a945.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Kim K Ratchet Phone Case",
+    "sku_id": "5832119894331555"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/8143575355ce218661c291.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Shiny Marble Phone Case",
+    "sku_id": "5832147404443471"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/6275087065ce220c212059.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Marble Phone Case",
+    "sku_id": "5832352266426178"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/12791551305ce221c9679fa.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "3d Drinks And Glam Phone Case",
+    "sku_id": "5832374138937398"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/9717807515ce2228838010.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "More Please! Phone Case",
+    "sku_id": "5832394655882723"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/4726023845ce2230e641c3.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Pink What? Girl Phone Case",
+    "sku_id": "5832406298191237"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/21017289775ce22387eefd7.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Blingin Pink Laser Phone Case",
+    "sku_id": "5832415218667648"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/709184365ce223e33653a.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Kanye Bae Phone Case",
+    "sku_id": "5832424798093136"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/14252657395ce2244dd353f.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Super Girl Phone Case",
+    "sku_id": "5832440431359660"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/12812671375ce224dc68757.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Albert Einstein The Real G Phone Case",
+    "sku_id": "5832449720804673"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/15556527175ce2252e538ab.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Kiss Me Trump Phone Case",
+    "sku_id": "5832459509077886"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/13273727955ce243f39ff29.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Custom Lettering Handle Phone Case",
+    "sku_id": "5833259665642453"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/20745560825ce245113b799.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Nordic Wind Phone Case",
+    "sku_id": "5833308373173142"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/8072641085ce2477fd2d71.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Sesame Street Quicksand Phone Case",
+    "sku_id": "5833338506308148"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/13422055555ce2481766bd6.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Bizzcut Smirk Boy Phone Case",
+    "sku_id": "5833359457142294"
+  },
+  {
+    "alone_price": "24.99",
+    "cover_img": "https://we-get.s3.us-west-1.amazonaws.com/12305007825ce248c66a960.jpg?width=800&height=800",
+    "show_tag": [
+
+    ],
+    "title": "Bizzcut Unicorn Painting Phone Case",
+    "sku_id": "5833373364815198"
+  }
+
+]
 let listData = []
 listData2.forEach(item => {
   listData = [...listData, ...item]
@@ -1037,4 +1331,6 @@ export default {
   listData5,
   listData6,
   listData7,
+  listData8,
+  listData9
 }
