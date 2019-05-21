@@ -5,9 +5,9 @@
     </div>
     <div class="login-wrap">
       <template v-if="!ua.no_facebook">
-        <fb class="other-btn"
+        <fb class="other-btn" v-if="!is_ins"
             @login="getUserFb"></fb>
-        <google class="other-btn" @login="getUserGoogle"></google>
+        <google class="other-btn" @login="getUserGoogle" v-if="!is_facebook"></google>
         <instagram @login="getUserIns" class="other-btn"></instagram>
       </template>
       <div class="lins">
@@ -68,6 +68,8 @@ export default {
   name: "login",
   data() {
     return {
+      is_facebook: false,
+      is_ins: false,
       userNew: false,
       share_user_id: this.$route.query.share_user_id,
       show_dialog: false,
@@ -84,6 +86,8 @@ export default {
     this.TOAST = undefined //全局加载弹框
     this.shareReturn()
     this.login_pass = this.$route.query.autoshow == "1" ? true : false;
+    this.is_facebook = this.$CM.is_ins() || this.$CM.is_facebook() || this.$CM.is_messenger()
+    this.is_ins = this.$CM.is_ins()
   },
   beforeRouteEnter (to, from, next) {
     if (getToken()) {

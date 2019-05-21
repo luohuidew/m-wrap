@@ -15,9 +15,9 @@
         </p>
       </div>
       <template v-if="!ua.no_facebook">
-        <fb class="other-btn" @login="getUserFb"></fb>
+        <fb class="other-btn" @login="getUserFb" v-if="!is_ins" ></fb>
         <google v-if="!is_facebook" class="other-btn" @login="getUserGoogle"></google>
-        <instagram @login="getUserIns" class="other-btn"></instagram>
+        <instagram  @login="getUserIns" class="other-btn"></instagram>
         <div class="lins">
           <span>or continue with email</span>
         </div>
@@ -115,6 +115,7 @@ export default {
   data() {
     return {
       is_facebook: false,
+      is_ins: false,
       userNew: false,
       show_dialog: false,
       is_selected: this.$route.query.type || 'signIn',
@@ -129,6 +130,7 @@ export default {
   created() {
     this.TOAST = undefined //全局加载弹框
     this.is_facebook = this.$CM.is_ins() || this.$CM.is_facebook() || this.$CM.is_messenger()
+    this.is_ins = this.$CM.is_ins()
     // this.shareReturn()
     // this.login_pass = this.$route.query.autoshow == "1" ? true : false;
   },

@@ -67,6 +67,7 @@ export default {
       right: 0px;
     }
     .text {
+      font-size: 13px;
       width: 85%;
       margin: 0px auto;
       overflow: hidden;

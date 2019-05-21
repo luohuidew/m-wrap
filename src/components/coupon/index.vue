@@ -1,5 +1,7 @@
 <template>
   <div class="coupons">
+    <h2>Coupons</h2>
+    <img src="/static/images/icon/cart/关闭@3x.png" @click="go_back" class="close"/>
     <ul class="coupon-list">
       <template v-if="coupon_list.length">
         <li class="coupon-item"
@@ -79,12 +81,26 @@ export default {
 
 <style lang='scss' scoped>
 .coupons {
-  background-color: #f3f3f3;
-  padding-top: 30px;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   height: 100%;
   overflow: auto;
+  position: relative;
+  img.close{
+    position: absolute;
+    top: 16px;
+    left: 30px;
+    width: 13px;
+  }
+  h2{
+    font-size:14px;
+    font-weight:800;
+    color:rgba(0,0,0,1);
+    text-align: center;
+    line-height: 40px;
+    margin-bottom: 10px;
+  }
 }
 .get-coupon {
   // padding:0 12px;
@@ -119,7 +135,7 @@ export default {
   .coupon-title {
     font-size: 24px;
     font-weight: bold;
-    color: rgba(215, 14, 25, 1);
+    color: #000;
     line-height: 17px;
     padding-bottom: 6px;
   }
@@ -157,10 +173,10 @@ export default {
 }
 .coupon-item {
   height: 87px;
-  background: #fff url("/static/images/icon/cart/noSelected.png") 304px center  no-repeat;
+  background: #fff url("/static/images/icon/cart/Group@3xhei.png") 304px center  no-repeat;
   background-size: 20px auto;
   padding: 15px;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  border:1px solid rgba(225,225,225,1);
   border-radius: 8px;
   margin-bottom: 14px;
   cursor: pointer;
@@ -169,7 +185,7 @@ export default {
   }
 }
 .active {
-  background: #fff url("/static/images/icon/cart/selected.png") 304px center no-repeat;
+  background: #fff url("/static/images/icon/cart/Group@3x.png") 304px center no-repeat;
   background-size: 20px auto;
 
 }
@@ -182,8 +198,8 @@ export default {
     width: 250px;
     height: 40px;
     background: #000;
-    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    /*-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);*/
+    /*box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);*/
     border-radius: 20px;
     text-align: center;
     line-height: 40px;

@@ -130,7 +130,7 @@
         font-size:12px;
         font-weight:400;
         color:rgba(74,74,74,1);
-        margin-bottom: 12px;
+        margin-bottom: 10px;
       }
       .all-total {
         margin-top: 20px;

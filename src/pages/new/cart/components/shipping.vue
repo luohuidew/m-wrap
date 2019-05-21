@@ -1,6 +1,7 @@
 <template>
   <div class="my-delivery">
     <h3>Select Delivery Meth</h3>
+    <img src="/static/images/icon/cart/关闭@3x.png" @click="go_back" class="close"/>
     <ul class="delivery-content">
       <li class="card"
         v-for="(item,index) in VantShippingStore.ship_method.list"
@@ -29,7 +30,7 @@
     </ul>
     <div class="done-btn">
       <a href="javascript:;"
-        @click="go_back">DONE</a>
+        @click="go_back">Done</a>
     </div>
   </div>
 </template>
@@ -98,8 +99,20 @@ $color1: #d70e19;
 $bgcolor: #f3f3f3;
 $linecolor: #e9e9e9;
 .my-delivery {
+  padding-top: 10px;
+  position: relative;
   h3 {
-    padding: 30px 0 10px 20px;
+    font-size:14px;
+    font-weight:800;
+    color:rgba(0,0,0,1);
+    text-align: center;
+    line-height: 40px;
+  }
+  img.close{
+    position: absolute;
+    top: 16px;
+    left: 30px;
+    width: 13px;
   }
 }
 .delivery-content {
@@ -116,7 +129,7 @@ $linecolor: #e9e9e9;
     i {
       width: 16px;
       height: 16px;
-      background: #fff url("/static/images/icon/cart/noSelected.png") no-repeat center
+      background: #fff url("/static/images/icon/cart/shipingNoSelect@3x.png") no-repeat center
         center;
       background-size: 15px;
     }
@@ -130,7 +143,7 @@ $linecolor: #e9e9e9;
   }
   .active {
     i {
-      background-image: url("/static/images/icon/cart/selected.png");
+      background-image: url("/static/images/icon/cart/shipingSelect@3x.png");
       background-size: 15px;
     }
   }
@@ -150,11 +163,12 @@ $linecolor: #e9e9e9;
         display: block;
       }
       .shipping-label {
-        font-size: 16px;
-        line-height: 20px;
+        font-size: 14px;
+        line-height: 25px;
       }
       .shipping-time {
-        color: $linecolor;
+        font-size: 12px;
+        color: #9B9B9B;
       }
     }
     .shipping-price {
@@ -172,8 +186,6 @@ $linecolor: #e9e9e9;
     width: 250px;
     height: 40px;
     background: #000;
-    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     text-align: center;
     line-height: 40px;

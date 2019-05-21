@@ -244,7 +244,6 @@
 }
 .page-head {
   height: 53px;
-  box-shadow: 0px 1px 2px 0px #d0d0d0;
   /*background-color: #f3f3f3;*/
 }
 .page-body {

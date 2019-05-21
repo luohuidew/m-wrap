@@ -24,11 +24,11 @@
       <div class="price">
         <div class="selct">
           <img v-if="all_goods_is_select" @click="noAllgoodSelect"
-               src="/static/images/icon/cart/duoxuana.png"
+               src="/static/images/icon/cart/selected.png"
                alt=""
                srcset="">
           <img v-else @click="AllgoodSelect"
-               src="/static/images/icon/cart/duoxuann.png"
+               src="/static/images/icon/cart/noSelected.png"
                alt=""
                srcset="">
          <span> Select items({{selectedNumber}})</span>
@@ -360,7 +360,7 @@ export default {
       }
     }
     .pay {
-      height: 46px;
+      height: 66px;
       overflow: hidden;
       .paypal {
         text-align: center;

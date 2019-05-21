@@ -168,6 +168,9 @@ export default {
       align-items: center;
       display: flex;
       height: 100%;
+      a{
+        display: inline-block;
+      }
       .car-warp {
         position: relative;
         span{
@@ -184,7 +187,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: red;
+            background-color: #D70E19;
             color: #fff;
             font-size: 10px;
           }
@@ -208,8 +211,8 @@ export default {
       }
       .setting-icon {
         img.user-photo{
-          width: 24px;
-          height: 24px;
+          width: 25px;
+          height: 25px;
           border-radius: 50%;
           overflow: hidden;
           margin-right: 14px;

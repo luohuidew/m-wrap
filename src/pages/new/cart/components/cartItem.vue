@@ -315,12 +315,17 @@
 /*  */
 .store-box {
   display: flex;
+  .icon-box{
+    img {
+      width: 18px;
+      height: 18px;
+    }
+  }
 }
 .cart-lists-store {
   padding: 15px 0;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #f3f3f3;
 
   .total-store {
     display: flex;
@@ -343,7 +348,7 @@
     display: flex;
     align-items: center;
     img {
-      height: 24px;
+      height: 18px;
       width: auto;
     }
   }
@@ -371,12 +376,13 @@
   justify-content: space-between;
   padding-left: 20px;
   .goods-title {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 18px;
+    color:rgba(155,155,155,1);
   }
   .attr-select {
-    color: #9b9b9b;
-    font-size: 14px;
+    color:rgba(0,0,0,1);
+    font-size:12px;
     span {
       padding-right: 30px;
       // background: url("/static/images/icon/cart/分类 copy 2.png") no-repeat
@@ -412,13 +418,15 @@
 }
 .code {
   .error {
-    color: red;
+    color: #D70E19;
     font-size: 12px;
     line-height: 20px;
     padding-left: 2px;
   }
   .content {
     display: flex;
+    height:45px;
+align-items: center;
     justify-content: space-between;
     input {
       width:250px;
@@ -426,13 +434,13 @@
       background:rgba(255,255,255,1);
       border-radius:4px;
       border:1px solid rgba(225,225,225,1);
-      line-height: 45px;
+      line-height: 18px;
       font-size:14px;
       font-weight:400;
       color:rgba(74,74,74,1);
       padding-left: 10px;
       &.error{
-        border:1px solid red
+        border:1px solid #D70E19;
       }
     }
     .commit {
@@ -442,7 +450,7 @@
       background-color:rgba(199,199,199,1);
       border-radius:4px;
       background-image: url("~@/assets/img/icon/arrow.png");
-      background-size: 30px;
+      background-size: 20px;
       background-repeat: no-repeat;
       background-position: center;
       &.actived {
@@ -461,7 +469,8 @@
   padding: 5px 10px;
   margin-top:10px ;
   line-height: 18px;
-  background: url(/static/img/icon/right.png) no-repeat center right 13px;
+  background: url('/static/images/icon/cart/分类 copy@3x.png') no-repeat center right 13px;
+  background-size: 18px;
   h2 {
     font-size:12px;
     font-weight:400;
