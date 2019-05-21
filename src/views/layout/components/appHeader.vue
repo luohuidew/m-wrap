@@ -120,7 +120,7 @@ export default {
       let href_params = {
         path: "/login",
         query:{
-          redirect: this.$route.fullPath
+          redirect: this.$route.path ==='/login/index'? undefined: this.$route.fullPath
         }
       };
       this.$router.push(href_params);
