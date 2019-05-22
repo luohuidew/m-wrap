@@ -373,7 +373,7 @@ export default {
   .group-price {
     font-size: 20px;
     font-weight: 600;
-    color: rgba(216, 12, 24, 1);
+    color: #000;
     line-height: 18px;
   }
   .attr-tips {
@@ -405,14 +405,15 @@ export default {
   text-align: center;
   span {
     display: inline-block;
-    width: 250px;
-    height: 40px;
-    background-color: rgba(215, 14, 25, 1);
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
     text-align: center;
-    line-height: 40px;
     color: #fff;
+    line-height: 46px;
+    width: 345px;
+    height: 46px;
+    background: #000;
+    border-radius: 23px;
+    margin: 15px auto;
     &:hover {
       opacity: 0.8;
     }
@@ -441,7 +442,7 @@ export default {
     }
     .active {
       color: #fff;
-      background-color: #d70e19;
+      background-color: #000;
     }
     .no_select {
       color: #c9caca;
