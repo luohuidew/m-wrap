@@ -55,7 +55,6 @@ export default {
 
 
   .home-banner-wrap {
-  margin-bottom: 200px;
   height: 300px;
   & /deep/ .swiper-wrapper {
     height: 280px;

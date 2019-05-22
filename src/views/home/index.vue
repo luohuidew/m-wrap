@@ -2,7 +2,8 @@
   <div id="weget" v-if="homeData">
     <category :listsData="homeData.recommend_category"></category>
     <banner :bannerData="homeData.home_banner"></banner>
-    <store :bannerData="homeData.store_banner" :listsData="homeData.recommend_store"></store>
+    <getApp></getApp>
+    <store  :listsData="homeData.recommend_store"></store>
     <pick :listsData="homeData.influence_pick"></pick>
     <topic :listsData="homeData.topic_data"></topic>
     <scrollCate :listData="homeData.category_row"></scrollCate>
@@ -17,8 +18,9 @@
 
 <script>
 import banner from "./components/banner";
+import getApp from "./components/getApp";
 import category from "./components/homeCate";
-import store from "./components/homeStore";
+import store from "./components/newStore";
 import pick from "./components/homePick";
 import topic from "./components/homeTopic";
 import scrollCate from "./components/scrollCate"
@@ -63,6 +65,7 @@ export default {
   },
   components: {
     banner,
+    getApp,
     category,
     store,
     pick,
