@@ -1291,7 +1291,7 @@ let listData9= [
 ]
 let listData10 = [
   {
-    "alone_price":"24.00",
+    "alone_price":"24.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/18929710695cc176aa6c268.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1300,7 +1300,7 @@ let listData10 = [
     "sku_id":"5618297997286712"
   },
   {
-    "alone_price":"21.00",
+    "alone_price":"24.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/14662223985cc175f3de90b.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1309,7 +1309,7 @@ let listData10 = [
     "sku_id":"5618264513623414"
   },
   {
-    "alone_price":"26.00",
+    "alone_price":"24.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/1894004055cc180433e57d.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1539,7 +1539,7 @@ let listData11 = [
 ]
 let listData12 = [
   {
-    "alone_price":"26.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/19360567155cbec8dc53c6e.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1548,7 +1548,7 @@ let listData12 = [
     "sku_id":"5600723312395113"
   },
   {
-    "alone_price":"25.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/20364158825cbeaa0d4d269.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1557,7 +1557,7 @@ let listData12 = [
     "sku_id":"5599943344074650"
   },
   {
-    "alone_price":"24.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/4632336945cc2a0dba17ca.jpg?width=800&height=800",
     "show_tag":[
       {
@@ -1571,7 +1571,7 @@ let listData12 = [
     "sku_id":"5625914947051235"
   },
   {
-    "alone_price":"23.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/19359588435cc269380d853.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1580,7 +1580,7 @@ let listData12 = [
     "sku_id":"5624489957257447"
   },
   {
-    "alone_price":"35.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/13041498075cbf21d6f2387.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1589,7 +1589,7 @@ let listData12 = [
     "sku_id":"5602997242792844"
   },
   {
-    "alone_price":"22.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/10296303175cbfc7d209b44.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1598,7 +1598,7 @@ let listData12 = [
     "sku_id":"5607259695977155"
   },
   {
-    "alone_price":"26.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/14477482575cbee6c7a8dae.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1607,7 +1607,7 @@ let listData12 = [
     "sku_id":"5601574725628201"
   },
   {
-    "alone_price":"32.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/12439148075cbe4c13b9116.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1616,7 +1616,7 @@ let listData12 = [
     "sku_id":"5597529835888055"
   },
   {
-    "alone_price":"29.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/4755685095cbe4d0e0b023.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1625,7 +1625,7 @@ let listData12 = [
     "sku_id":"5597551103206818"
   },
   {
-    "alone_price":"28.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/14804376435cbe4d90844c5.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1634,7 +1634,7 @@ let listData12 = [
     "sku_id":"5597563168492355"
   },
   {
-    "alone_price":"24.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/15477566795cb98e8cf08d0.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1643,7 +1643,7 @@ let listData12 = [
     "sku_id":"5572827029315886"
   },
   {
-    "alone_price":"26.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/17941930825cb99605bc0b0.jpg?width=800&height=800",
     "show_tag":[
       {
@@ -1657,8 +1657,8 @@ let listData12 = [
     "sku_id":"5572846089115896"
   },
   {
-    "alone_price":"24.00",
-    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/13356142845cbdc184c1dd3.jpg?width=800&height=800",
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/5142412695cbdc1854f463.jpg?width=800&height=800",
     "show_tag":[
 
     ],
@@ -1666,7 +1666,7 @@ let listData12 = [
     "sku_id":"5594003775178277"
   },
   {
-    "alone_price":"32.00",
+    "alone_price":"19.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/13680079215cbd5b81c2a08.jpg?width=800&height=800",
     "show_tag":[
 
@@ -1684,6 +1684,20 @@ let listData13 = [
     ],
     "title":"Honeycomb Candles",
     "sku_id":"5572955163787172"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/19592262995cd3d5f3a3033.jpg?width=800&height=800",
+    "show_tag":[
+      {
+        "mask_title":"best_sellers",
+        "mask_type":4,
+        "scale":5.3,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/18440875985c4ab796652dc.png"
+      }
+    ],
+    "title":"Avocado Candle",
+    "sku_id":"5566160342659645"
   },
   {
     "alone_price":"19.99",

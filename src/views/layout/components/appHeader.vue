@@ -199,7 +199,7 @@ export default {
       }
       .aside-btn-box {
         img {
-          width: 21px;
+          width: 23px;
         }
       }
       .weget-logo {
