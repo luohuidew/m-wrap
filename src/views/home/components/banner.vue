@@ -1,33 +1,32 @@
-<template>
-  <div id="banner"
-    v-if="bannerData">
-    <!-- <el-carousel trigger="click" height="188px">
-      <el-carousel-item v-for="(item,index) in banner_lists" :key="index">
-        <img :src="item.img_url" alt="" srcset="">
-      </el-carousel-item>
-    </el-carousel> -->
-    <van-swipe :autoplay="3000">
-      <van-swipe-item v-for="(item,index) in bannerData"
-        :key="index">
-        <img :src="item.image_url"
-          alt=""
-          srcset=""
-          @click="to_path(item.route)">
-      </van-swipe-item>
-    </van-swipe>
-  </div>
-</template>
 
+<template>
+  <swiper :options="swiperOption" ref="mySwiper"  v-if="bannerData" class="home-banner-wrap">
+    <!-- slides -->
+    <swiper-slide  v-for="(item,index) in bannerData"  :key="index">
+      <img :src="item.image_url" alt="" srcset="" @click="to_path(item.route)">
+    </swiper-slide>
+    <!-- Optional controls -->
+    <div class="swiper-pagination"  slot="pagination"></div>
+  </swiper>
+</template>
 <script>
-import weget from "@/api/weget";
 export default {
   data() {
     return {
+      swiperOption: {
+        loop : true,
+        pagination: {
+          el: '.swiper-pagination',
+        },
+        // some swiper options/callbacks
+        // 所有的参数同 swiper 官方 api 参数
+        // ...
+      },
       banner_lists: this.bannerData
     };
   },
   props:["bannerData"],
-  created() {    
+  created() {
   },
   methods: {
     to_path(path) {
@@ -38,15 +37,41 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-#banner {
-  height: 190px;
-  img {
-    width: 100%;
-    height: 100%;
+<style lang='scss' scoped>
+
+     .swiper-pagination-bullets {
+      bottom: 0px;
+      & /deep/ .swiper-pagination-bullet {
+        width:30px;
+        height:2px;
+        background:rgba(199,199,199,1);
+        border-radius:1px;
+        &.swiper-pagination-bullet-active{
+          background:rgba(74,74,74,1);
+        }
+      }
+    }
+
+
+
+  .home-banner-wrap {
+  margin-bottom: 200px;
+  height: 300px;
+  & /deep/ .swiper-wrapper {
+    height: 280px;
+    .swiper-slide {
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
+
 }
-.van-swipe {
-  height: 100%;
-}
+
+/*.van-swipe {*/
+  /*height: 100%;*/
+
+/*}*/
+
 </style>

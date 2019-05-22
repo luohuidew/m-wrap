@@ -1,10 +1,8 @@
 <template>
-  <div id="weget"
-    v-if="homeData">
-    <banner :bannerData="homeData.home_banner"></banner>
+  <div id="weget" v-if="homeData">
     <category :listsData="homeData.recommend_category"></category>
-    <store :bannerData="homeData.store_banner"
-      :listsData="homeData.recommend_store"></store>
+    <banner :bannerData="homeData.home_banner"></banner>
+    <store :bannerData="homeData.store_banner" :listsData="homeData.recommend_store"></store>
     <pick :listsData="homeData.influence_pick"></pick>
     <topic :listsData="homeData.topic_data"></topic>
     <scrollCate :listData="homeData.category_row"></scrollCate>
@@ -55,12 +53,6 @@ export default {
           if(this.popupObj.image_url) {
             this.show = true
           }
-          // const _this = this
-          // var newImg = new Image()
-          // newImg.src = res.data.image_url
-          // newImg.onload = function () {
-          //   _this.popupObj = res.data;
-          // };
         });
       }
     },
@@ -82,6 +74,7 @@ export default {
 
 <style lang='scss' scoped>
 #weget {
+  background-color: #fff;
   & >>> .van-popup{
     border-radius: 5px;
     width: 60%;
@@ -101,7 +94,6 @@ export default {
       }
     }
   }
-  background-color: #f3f3f3;
 }
 h1{
   margin: 50px;
