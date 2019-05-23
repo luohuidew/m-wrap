@@ -1,17 +1,7 @@
 <template>
-  <div class="home-cate"
-    v-if="cateData">
-    <ul>
-      <li v-for="(item,index) in listsData"
-        :key="index">
-        <router-link class="remo-box"
-          :to="{path:item.route}">
-          <img :src="item.image_url"
-            alt="">
-          <span class="text-line-clamp-1">{{item.title}}</span>
-        </router-link>
-      </li>
-    </ul>
+  <div class="home-cate" v-if="cateData">
+    <h1>STYLISH ONLINE FASHION <br>MARKETPLACE</h1>
+    <div style="height: 30px;border:1px solid red"></div>
   </div>
 </template>
 
@@ -38,29 +28,14 @@ export default {
 
 <style lang='scss' scoped>
 .home-cate {
-  padding: 15px 10px;
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    & > li {
-      width: 20%;
-    }
-  }
-}
-/* hezi */
-.remo-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  text-align: center;
-  img {
-    height: 57px;
-    width: 57px;
-  }
-  span {
-    width: 100%;
-    font-size: 10px;
+  background: #fff;
+  h1 {
+    font-size:20px;
+    font-weight:800;
+    color:rgba(0,0,0,1);
+    text-align: center;
+    padding-top: 18px;
+    line-height: 28px;
   }
 }
 </style>

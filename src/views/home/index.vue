@@ -1,13 +1,15 @@
 <template>
-  <div id="weget"
-    v-if="homeData">
-    <banner :bannerData="homeData.home_banner"></banner>
+  <div id="weget" v-if="homeData">
     <category :listsData="homeData.recommend_category"></category>
-    <store :bannerData="homeData.store_banner"
-      :listsData="homeData.recommend_store"></store>
-    <pick :listsData="homeData.influence_pick"></pick>
-    <topic :listsData="homeData.topic_data"></topic>
-    <scrollCate :listData="homeData.category_row"></scrollCate>
+    <banner :bannerData="homeData.home_banner"></banner>
+    <getApp></getApp>
+    <store  :listsData="homeData.recommend_store"></store>
+    <sacleGood  :listsData="homeData.recommend_store"></sacleGood>
+    <shops  :listsData="homeData.recommend_store"></shops>
+    <appleGoole></appleGoole>
+    <!--<pick :listsData="homeData.influence_pick"></pick>-->
+    <!--<topic :listsData="homeData.topic_data"></topic>-->
+    <!--<scrollCate :listData="homeData.category_row"></scrollCate>-->
     <van-popup v-model="show" class="popu">
       <div class="wrap">
         <van-icon name="close" @click="closePopu" class="icons"/>
@@ -19,12 +21,14 @@
 
 <script>
 import banner from "./components/banner";
+import getApp from "./components/getApp";
 import category from "./components/homeCate";
-import store from "./components/homeStore";
-import pick from "./components/homePick";
-import topic from "./components/homeTopic";
-import scrollCate from "./components/scrollCate"
+import store from "./components/newStore";
+import sacleGood from "./components/sacleGood";
+import shops from "./components/shops";
 import api from "@/api/weget";
+import appleGoole from "@/components/apple-google";
+
 export default {
   name: "",
   props: {},
@@ -55,12 +59,6 @@ export default {
           if(this.popupObj.image_url) {
             this.show = true
           }
-          // const _this = this
-          // var newImg = new Image()
-          // newImg.src = res.data.image_url
-          // newImg.onload = function () {
-          //   _this.popupObj = res.data;
-          // };
         });
       }
     },
@@ -71,17 +69,19 @@ export default {
   },
   components: {
     banner,
+    getApp,
     category,
     store,
-    pick,
-    topic,
-    scrollCate
+    sacleGood,
+    shops,
+    appleGoole
   }
 };
 </script>
 
 <style lang='scss' scoped>
 #weget {
+  background-color: #fff;
   & >>> .van-popup{
     border-radius: 5px;
     width: 60%;
@@ -101,7 +101,6 @@ export default {
       }
     }
   }
-  background-color: #f3f3f3;
 }
 h1{
   margin: 50px;

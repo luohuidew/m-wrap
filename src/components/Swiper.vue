@@ -65,7 +65,6 @@
 <style lang="scss" scoped>
 .wrap-banner{
   padding: 20px 0px;
-  background:rgba(74,74,74,1);
   .slide{
     background: #fff;
     width: 100%;
