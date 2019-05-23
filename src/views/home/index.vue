@@ -4,9 +4,12 @@
     <banner :bannerData="homeData.home_banner"></banner>
     <getApp></getApp>
     <store  :listsData="homeData.recommend_store"></store>
-    <pick :listsData="homeData.influence_pick"></pick>
-    <topic :listsData="homeData.topic_data"></topic>
-    <scrollCate :listData="homeData.category_row"></scrollCate>
+    <sacleGood  :listsData="homeData.recommend_store"></sacleGood>
+    <shops  :listsData="homeData.recommend_store"></shops>
+    <appleGoole></appleGoole>
+    <!--<pick :listsData="homeData.influence_pick"></pick>-->
+    <!--<topic :listsData="homeData.topic_data"></topic>-->
+    <!--<scrollCate :listData="homeData.category_row"></scrollCate>-->
     <van-popup v-model="show" class="popu">
       <div class="wrap">
         <van-icon name="close" @click="closePopu" class="icons"/>
@@ -21,10 +24,11 @@ import banner from "./components/banner";
 import getApp from "./components/getApp";
 import category from "./components/homeCate";
 import store from "./components/newStore";
-import pick from "./components/homePick";
-import topic from "./components/homeTopic";
-import scrollCate from "./components/scrollCate"
+import sacleGood from "./components/sacleGood";
+import shops from "./components/shops";
 import api from "@/api/weget";
+import appleGoole from "@/components/apple-google";
+
 export default {
   name: "",
   props: {},
@@ -68,9 +72,9 @@ export default {
     getApp,
     category,
     store,
-    pick,
-    topic,
-    scrollCate
+    sacleGood,
+    shops,
+    appleGoole
   }
 };
 </script>

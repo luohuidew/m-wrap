@@ -24,7 +24,7 @@
   props: {
     listsData: {
       type: Array,
-      default: null
+      default: []
     }
   },
   data() {
