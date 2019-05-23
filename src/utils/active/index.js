@@ -1289,7 +1289,7 @@ let listData9= [
   }
 
 ]
-let listData10 = [
+let listData10 =[
   {
     "alone_price":"24.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/18929710695cc176aa6c268.jpg?width=800&height=800",
@@ -1386,7 +1386,7 @@ let listData10 = [
     "sku_id":"5575649557975999"
   }
 ]
-let listData11 = [
+let listData11 =[
   {
     "alone_price":"28.00",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/14458400195c11df230d7a8.jpg",
@@ -1397,7 +1397,7 @@ let listData11 = [
     "sku_id":"5495276918793992"
   },
   {
-    "alone_price":"19.90",
+    "alone_price":"29.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/12566207485c0a4cdecb1a9.jpg",
     "show_tag":[
       {
@@ -1435,7 +1435,7 @@ let listData11 = [
     "sku_id":"5495285827974483"
   },
   {
-    "alone_price":"29.00",
+    "alone_price":"31.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/9694010465c1202ae5c7e1.jpg",
     "show_tag":[
       {
@@ -1477,7 +1477,7 @@ let listData11 = [
     "sku_id":"5495508687475129"
   },
   {
-    "alone_price":"35.00",
+    "alone_price":"31.99",
     "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/18793028985c0a47d84f51a.jpg",
     "show_tag":[
       {

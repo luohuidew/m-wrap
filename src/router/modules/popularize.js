@@ -90,5 +90,16 @@ export default {
         },
       ]
     },
+    {
+      path: 'active',
+      name: 'popu-active',
+      component: () =>
+          import('@/views/popularize/active/index'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: false
+      }
+    },
   ]
 }
