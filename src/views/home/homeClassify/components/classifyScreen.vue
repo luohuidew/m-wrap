@@ -1,7 +1,7 @@
 <template>
     <ul class="classify-screen-page">
         <li 
-          v-for="(item,index) in screenLists" 
+          v-for="(item,index) in skuList" 
           :key="index">
           <span>{{item.title}}</span>
           <img 
@@ -15,23 +15,15 @@
 <script>
 export default {
     name: "",
-    props: {},
+     props: {
+        skuList:{
+            type:Array,
+            default:undefined
+        }
+    },
     data(){
       return{ 
       active: 0,
-        screenLists:[
-          {
-            title:'All',
-            src:"/static/images/icon/cart/分类 copy 2.png"
-          },
-          {
-            title:"Sort",
-            src:"/static/images/icon/cart/分类 copy 2.png"
-          },
-          {
-            title:"Free shipping",
-          }
-        ],
       }
     },
     watch: {},

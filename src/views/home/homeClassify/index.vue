@@ -3,7 +3,7 @@
       <classifyHead :lists="classifyLists" @parentId="updateId"/>
       <classifyScreen/>
       <!--  加载列表-->
-      <!-- <div class="scrollBox">
+      <div class="scrollBox">
         <span>111</span>
        <span>333</span>
        <span>222336663</span>
@@ -12,7 +12,7 @@
        <span>88883888833</span>
        <span>5555333</span>
        <span>121355555333</span>
-      </div> -->
+      </div>
       
     </div>
 </template>
@@ -27,6 +27,7 @@ export default {
       return{
         classifyLists:[],
         parentId:'',
+        skuList:[]
       }
     },
     watch: {},
@@ -35,16 +36,27 @@ export default {
       this.init_data();
     },
     methods: {
+      updateId(data){
+        this.parentId = data.id;
+        this.init_skuList();
+      },
       init_data() {   // 获取分类列表
         let _this = this;
         api.getCateList().then(res => {
           _this.classifyLists = res.data;
         });
       }, 
-      updateId(data){
-        this.parentId = data.id;
-        console.log(this.parentId,'=====')
-      }
+      init_skuList(){   //商品搜索列表
+        let _this = this;
+        let params = {
+          categoryId: this.parentId
+        };
+        api.getSkuList(params).then(res => {
+          _this.skuList = res.data.data
+        });
+        console.log(_this.skuList,_this.skuList.length);
+      },
+      
     },
     components: {
       classifyHead,
