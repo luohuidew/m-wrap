@@ -51,7 +51,7 @@
             </div>
           </div>
           <div class="cover-img-box"
-            @click="to_detail(item.sku_id)">
+            @click="to_detail(item.store_sku_id)">
             <img :src="item.cover_img"
               alt=""
               srcset="">

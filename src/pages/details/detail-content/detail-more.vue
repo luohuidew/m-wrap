@@ -1,9 +1,8 @@
 <template>
   <div class='page'>
-    <div class="title-box">
-      <p class="tips">Materials</p>
-      <!-- <p class="more"></p> -->
-    </div>
+    <!--<div class="title-box">-->
+      <!--&lt;!&ndash; <p class="mre"></p> &ndash;&gt;-->
+    <!--</div>-->
     <ul class="des-info" :class="{moreshow:!is_more&&more_height>100,desPadding:more_height>100}" >
         <p v-html="detail_text" ref="more"></p>
         <div class="img-box">
@@ -77,6 +76,7 @@ export default {
   position: relative;
   p {
     padding: 6px 0;
+    padding-top: 0;
   }
   img {
     width: 100%;

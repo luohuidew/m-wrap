@@ -1289,6 +1289,513 @@ let listData9= [
   }
 
 ]
+let listData10 =[
+  {
+    "alone_price":"24.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/18929710695cc176aa6c268.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Embossed Golden Stainless Steel Cutlery Set",
+    "sku_id":"5618297997286712"
+  },
+  {
+    "alone_price":"24.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/14662223985cc175f3de90b.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Marbled Gold-rimmed Ceramic Plate",
+    "sku_id":"5618264513623414"
+  },
+  {
+    "alone_price":"24.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/1894004055cc180433e57d.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Ins Style Ornaments",
+    "sku_id":"5618533971914078"
+  },
+  {
+    "alone_price":"18.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/10298725665cbb03c85a479.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Retro Gold Foil Glass Cups",
+    "sku_id":"5576014544668452"
+  },
+  {
+    "alone_price":"18.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/18496888065cbb3ccfbc5b7.jpg?width=800&height=800",
+    "show_tag":[
+      {
+        "mask_title":"editor_picks",
+        "mask_type":5,
+        "scale":4.25,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
+      }
+    ],
+    "title":"Salad Bowl",
+    "sku_id":"5577485563846890"
+  },
+  {
+    "alone_price":"42.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/2100657765cbb3a154e58e.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Double Cake Stand Dessert Table Tray",
+    "sku_id":"5577402221048421"
+  },
+  {
+    "alone_price":"19.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/12353492355cbb1424815ca.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Plate With Wooden Handle",
+    "sku_id":"5576436849506902"
+  },
+  {
+    "alone_price":"19.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/10167355355cc31669d2fd5.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Silver Stainless Steel Cutlery Three Pieces",
+    "sku_id":"5628923387837467"
+  },
+  {
+    "alone_price":"16.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/1868861635cbb2fa60f17d.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Square Tray",
+    "sku_id":"5577139002515567"
+  },
+  {
+    "alone_price":"19.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/2568959225cbaf571c3a4b.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Coffee Cup And Saucer Set",
+    "sku_id":"5575649557975999"
+  }
+]
+let listData11 =[
+  {
+    "alone_price":"28.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/14458400195c11df230d7a8.jpg",
+    "show_tag":[
+
+    ],
+    "title":"Nars Pure Matte Lipstick",
+    "sku_id":"5495276918793992"
+  },
+  {
+    "alone_price":"29.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/12566207485c0a4cdecb1a9.jpg",
+    "show_tag":[
+      {
+        "mask_title":"best_sellers",
+        "mask_type":4,
+        "scale":5.3,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/18440875985c4ab796652dc.png"
+      },
+      {
+        "mask_title":"editor_picks",
+        "mask_type":5,
+        "scale":4.25,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
+      }
+    ],
+    "title":"Mac Multicolor Eye Shadow",
+    "sku_id":"5495277525883717"
+  },
+  {
+    "alone_price":"45.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/10312325935c5e1bfe0181a.png",
+    "show_tag":[
+
+    ],
+    "title":"Anastasia Beverly Hills Dream Glow Kit",
+    "sku_id":"5495274591147045"
+  },
+  {
+    "alone_price":"40.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/13364962245c5e1521ad49e.png",
+    "show_tag":[
+
+    ],
+    "title":"Anastasia Beverly Hills Sun Dipped Glow Kit",
+    "sku_id":"5495285827974483"
+  },
+  {
+    "alone_price":"31.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/9694010465c1202ae5c7e1.jpg",
+    "show_tag":[
+      {
+        "mask_title":"hot",
+        "mask_type":1,
+        "scale":2.5,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/8899838845c4ab6432535b.png"
+      }
+    ],
+    "title":"Becca  Lowlight/highlight Perfecting Palette Pressde",
+    "sku_id":"5495509395772823"
+  },
+  {
+    "alone_price":"21.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/8933442805bbde59b52bf9.jpg",
+    "show_tag":[
+      {
+        "mask_title":"hot",
+        "mask_type":1,
+        "scale":2.5,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/8899838845c4ab6432535b.png"
+      }
+    ],
+    "title":"Smashbox Cover Shot Eye Palettes",
+    "sku_id":"5495508282052383"
+  },
+  {
+    "alone_price":"19.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/12405312555c0a4c6dae664.jpg",
+    "show_tag":[
+      {
+        "mask_title":"hot",
+        "mask_type":1,
+        "scale":2.5,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/8899838845c4ab6432535b.png"
+      }
+    ],
+    "title":"Estee Lauder Pure Color Love Lipstick Rouge A Levres",
+    "sku_id":"5495508687475129"
+  },
+  {
+    "alone_price":"31.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/18793028985c0a47d84f51a.jpg",
+    "show_tag":[
+      {
+        "mask_title":"hot",
+        "mask_type":1,
+        "scale":2.5,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/8899838845c4ab6432535b.png"
+      }
+    ],
+    "title":"Estee Lauder Double Wear Stay-in-place Makeup",
+    "sku_id":"5495508180912107"
+  },
+  {
+    "alone_price":"35.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/2899539895bcd79dccac2f.jpg",
+    "show_tag":[
+
+    ],
+    "title":"Laura Mercier Loose Setting Powder",
+    "sku_id":"5495504639691873"
+  },
+  {
+    "alone_price":"88.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/15002885705c1869598f3dc.jpg",
+    "show_tag":[
+      {
+        "mask_title":"hot",
+        "mask_type":1,
+        "scale":2.5,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/8899838845c4ab6432535b.png"
+      }
+    ],
+    "title":"Tom Ford Eye Color Quad Ombres A Paupieres 4 Couleurs",
+    "sku_id":"5495508079786598"
+  },
+  {
+    "alone_price":"32.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/5888458685c0a441a585ef.jpg",
+    "show_tag":[
+
+    ],
+    "title":"Yves Saint Laurent Rouge Pur Couture Glossy Stain",
+    "sku_id":"5495507574028929"
+  },
+  {
+    "alone_price":"45.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/8487597425c0a485311e7c.jpg",
+    "show_tag":[
+      {
+        "mask_title":"hot",
+        "mask_type":1,
+        "scale":2.5,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/8899838845c4ab6432535b.png"
+      }
+    ],
+    "title":"Urban Decay Naked Heat Palette",
+    "sku_id":"5495509092265798"
+  }
+]
+let listData12 = [
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/19360567155cbec8dc53c6e.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Coin Gold Chain",
+    "sku_id":"5600723312395113"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/20364158825cbeaa0d4d269.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Crystal Necklace",
+    "sku_id":"5599943344074650"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/4632336945cc2a0dba17ca.jpg?width=800&height=800",
+    "show_tag":[
+      {
+        "mask_title":"editor_picks",
+        "mask_type":5,
+        "scale":4.25,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
+      }
+    ],
+    "title":"C-shaped Golden Spiral Earrings",
+    "sku_id":"5625914947051235"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/19359588435cc269380d853.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Double-layer Square Wood Chip Earrings",
+    "sku_id":"5624489957257447"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/13041498075cbf21d6f2387.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Disc Chain",
+    "sku_id":"5602997242792844"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/10296303175cbfc7d209b44.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Heart Chocker",
+    "sku_id":"5607259695977155"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/14477482575cbee6c7a8dae.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Good Luck Necklace",
+    "sku_id":"5601574725628201"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/12439148075cbe4c13b9116.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Basic Ring",
+    "sku_id":"5597529835888055"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/4755685095cbe4d0e0b023.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Large Hoops",
+    "sku_id":"5597551103206818"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/14804376435cbe4d90844c5.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Crystal Ear Clips",
+    "sku_id":"5597563168492355"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/15477566795cb98e8cf08d0.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Titanium Steel Necklace",
+    "sku_id":"5572827029315886"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/17941930825cb99605bc0b0.jpg?width=800&height=800",
+    "show_tag":[
+      {
+        "mask_title":"editor_picks",
+        "mask_type":5,
+        "scale":4.25,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
+      }
+    ],
+    "title":"Rome Letter Necklace",
+    "sku_id":"5572846089115896"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/5142412695cbdc1854f463.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Gold Chain Set",
+    "sku_id":"5594003775178277"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/13680079215cbd5b81c2a08.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Twisted Stud Earrings",
+    "sku_id":"5591366612062377"
+  }
+]
+let listData13 = [
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/2446376125cba8c5ad8d2d.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Honeycomb Candles",
+    "sku_id":"5572955163787172"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/19592262995cd3d5f3a3033.jpg?width=800&height=800",
+    "show_tag":[
+      {
+        "mask_title":"best_sellers",
+        "mask_type":4,
+        "scale":5.3,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/18440875985c4ab796652dc.png"
+      }
+    ],
+    "title":"Avocado Candle",
+    "sku_id":"5566160342659645"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/10668748465cb9822454202.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Peach Candle",
+    "sku_id":"5566144051531436"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/11573142465cba8cf97282f.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Ice Cream Cake Candle",
+    "sku_id":"5572970845686099"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/20779117165cb9a4898ffd5.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Macaron Scented Candle",
+    "sku_id":"5567033583472694"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/7210626375cb9880bd139b.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Cheesecake Scented Candles",
+    "sku_id":"5566293415645215"
+  },
+  {
+    "alone_price":"39.00",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/5352506275cb97582f1b36.jpg?width=800&height=800",
+    "show_tag":[
+      {
+        "mask_title":"editor_picks",
+        "mask_type":5,
+        "scale":4.25,
+        "mask_bg_image":"https://we-get.s3.us-west-1.amazonaws.com/8719163795ca61d9da88b0.png?width=204&height=48"
+      }
+    ],
+    "title":"Scented Candles",
+    "sku_id":"5566039543068217"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/18920323375cb988dc3e3dc.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Pudding Scented Candles",
+    "sku_id":"5566339903579134"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/12486841035ce3ad7807ef9.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Strawberry-shaped Soy Wax Incent Candles",
+    "sku_id":"5842501010943588"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/5201671775ce3acd71f788.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Lemon-shaped Soy Wax Tea Incent Candles",
+    "sku_id":"5842484799763224"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/16598783795ce3abd635482.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Banana-shaped Soy Wax Incent Candles",
+    "sku_id":"5842475124346685"
+  },
+  {
+    "alone_price":"19.99",
+    "cover_img":"https://we-get.s3.us-west-1.amazonaws.com/8481456475ce3aa908e4ce.jpg?width=800&height=800",
+    "show_tag":[
+
+    ],
+    "title":"Macaron-shaped Soy Wax Candles",
+    "sku_id":"5842449897789967"
+  }
+]
+
 let listData = []
 listData2.forEach(item => {
   listData = [...listData, ...item]
@@ -1332,5 +1839,10 @@ export default {
   listData6,
   listData7,
   listData8,
-  listData9
+  listData9,
+  listData10,
+  listData11,
+  listData12,
+  listData13,
+
 }

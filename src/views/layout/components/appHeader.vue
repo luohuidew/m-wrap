@@ -2,22 +2,35 @@
   <div class="app-header">
     <ul>
       <div>
-        <template v-if="checkOut">
-          <li class="aside-btn-box">
+        <template v-if="is_ins">
+          <li v-if="appHome" class="aside-btn-box">
+            <img src="/static/images/icon/header/home-left-icon@3x.png"
+                 alt=""
+                 srcset=""
+                 @click="contractionShow=!contractionShow">
+          </li>
+          <li v-else class="aside-btn-box">
             <img src="/static/images/icon/normal/返回 大@2x.png"
                  alt=""
                  srcset=""
                  @click="go_back">
           </li>
         </template>
-        <template v-if="!checkOut">
-          <li class="aside-btn-box">
+        <template v-else>
+          <li v-if="checkOut" class="aside-btn-box">
+            <img src="/static/images/icon/normal/返回 大@2x.png"
+                 alt=""
+                 srcset=""
+                 @click="go_back">
+          </li>
+          <li v-if="!checkOut" class="aside-btn-box">
             <img src="/static/images/icon/header/home-left-icon@3x.png"
                  alt=""
                  srcset=""
                  @click="contractionShow=!contractionShow">
           </li>
         </template>
+
 
         <li class="weget-logo">
           <router-link to="/">
@@ -65,6 +78,7 @@ export default {
   props: {},
   data() {
     return {
+      is_ins : this.$CM.is_ins(),
       contractionShow: false,
       searchContent: "",
       haveMessages: true,
@@ -99,9 +113,9 @@ export default {
     // appDetail() {
     //   return this.$route.path === "/detail";
     // },
-    // appHome() {
-    //   return this.$route.path === "/home/index";
-    // },
+    appHome() {
+      return this.$route.path === "/home/index";
+    },
     // appWelog() {
     //   return this.$route.path === "/welog/index";
     // },
@@ -199,7 +213,7 @@ export default {
       }
       .aside-btn-box {
         img {
-          width: 21px;
+          width: 23px;
         }
       }
       .weget-logo {

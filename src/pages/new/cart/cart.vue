@@ -50,7 +50,7 @@
     <van-popup v-model="showVantShippingPopu" position="bottom" >
       <Shipping @closeVant = 'closeVantShipping' :VantShippingStore="VantShippingStore"></Shipping>
     </van-popup>
-    <van-popup v-model="showVantCouponPopu" position="bottom" >
+    <van-popup v-if="coupon_list.length>0" v-model="showVantCouponPopu" position="bottom" style="height: 450px;overflow: scroll">
       <Coupon @closeVant = 'closeshowVantCoupon' :couponData="coupon_list" :defaultCoupon="default_coupon" ></Coupon>
     </van-popup>
   </div>

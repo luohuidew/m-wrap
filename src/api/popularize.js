@@ -10,5 +10,12 @@ export default {
       data: JSON.stringify(data),
     })
   },
-
+  getActiveState(data={}) {
+    data.token = token;
+    return request({
+      url: 'product/getActivityProduct?loading=yes',
+      method: 'post',
+      data: JSON.stringify(data),
+    })
+  },
 }

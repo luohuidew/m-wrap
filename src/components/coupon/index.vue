@@ -84,8 +84,9 @@ export default {
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
   height: 100%;
-  overflow: auto;
+  padding-bottom: 20px;
   position: relative;
   img.close{
     position: absolute;
@@ -101,32 +102,6 @@ export default {
     line-height: 40px;
     margin-bottom: 10px;
   }
-}
-.get-coupon {
-  // padding:0 12px;
-  margin: 0 12px 22px;
-  height: 40px;
-  border-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  // background-color: #000;
-  input {
-    flex: 1;
-    height: 100%;
-    border: none;
-    padding: 20px;
-  }
-  span {
-    height: 100%;
-    line-height: 40px;
-    color: #fff;
-    background-color: #000;
-    width: 84px;
-    text-align: center;
-    font-size: 14px;
-  }
-  // width:335px;
-  // margin:40px auto 0;
 }
 .coupon-list {
   flex: 1;

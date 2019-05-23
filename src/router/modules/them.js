@@ -216,6 +216,50 @@ export default {
         fullScreen: false
       }
     },
+    {
+      path: 'active10',
+      name: 'articleActive10',
+      component: () =>
+          import('@/pages/article/ac-10-active10'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: false
+      }
+    },
+    {
+      path: 'active11',
+      name: 'articleActive11',
+      component: () =>
+          import('@/pages/article/ac-10-active11'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: false
+      }
+    },
+    {
+      path: 'active12',
+      name: 'articleActive12',
+      component: () =>
+          import('@/pages/article/ac-10-active12'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: false
+      }
+    },
+    {
+      path: 'active13',
+      name: 'articleActive13',
+      component: () =>
+          import('@/pages/article/ac-10-active13'),
+      meta: {
+        title: '',
+        keepAlive: false,
+        fullScreen: false
+      }
+    },
 
     {
       path: 'ac-11',
