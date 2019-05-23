@@ -1,101 +1,104 @@
 <template>
-  <div class="dialog-box">
-    <div class="content"
-      :class="show_transtion">
-      <li class="img-box">
-        <!-- <img :src="sku.cover_img"
-          alt=""
-          srcset=""> -->
-        <img :src="new_cur_goods.goods_img_thumb"
-          alt=""
-          srcset=""
-          @click.stop="zoom_img(new_cur_goods)">
-      </li>
-      <ul class="choice-box">
-        <li class="goods-title">
-          <i class="close-dialog"
-            @click.stop="close_dialog()"><img src="/static/img/icon/关闭.png"
-              alt=""
-              srcset=""></i>
-          <p class="group-price">
-            <template v-if="submit_form.purchase_type===2">
-              {{new_cur_goods.money_unit}}{{new_cur_goods.group_price}}
+  <scroll-lock bodyLock="true">
+    <div class="dialog-box">
+      <div class="content"
+           :class="show_transtion">
+        <li class="img-box">
+          <!-- <img :src="sku.cover_img"
+            alt=""
+            srcset=""> -->
+          <img :src="new_cur_goods.goods_img_thumb"
+               alt=""
+               srcset=""
+               @click.stop="zoom_img(new_cur_goods)">
+        </li>
+        <ul class="choice-box">
+          <li class="goods-title">
+            <i class="close-dialog"
+               @click.stop="close_dialog()"><img src="/static/img/icon/关闭.png"
+                                                 alt=""
+                                                 srcset=""></i>
+            <p class="group-price">
+              <template v-if="submit_form.purchase_type===2">
+                {{new_cur_goods.money_unit}}{{new_cur_goods.group_price}}
+              </template>
+              <template v-else>
+                {{new_cur_goods.money_unit}}{{new_cur_goods.alone_price}}
+              </template>
+            </p>
+            <p class="attr-tips">
+              Please select：<span v-for="(item,index) in new_attrList"
+                                  :key="index"> {{item.attr_name}} &nbsp; </span>
+            </p>
+          </li>
+          <li class="attr-blocks">
+            <ul>
+              <li v-for="(item,index) in new_attrList"
+                  :key="index">
+                <h3>{{item.attr_name}}</h3>
+                <ul class="attr-lists">
+                  <li v-for="(attr,index_attr) in item.attr_value"
+                      :key="index_attr"
+                      @click.stop="get_cur_goods(index,index_attr,attr.id)"
+                      :class="{'active':index_attr===is_selected_index_list[index],'no_select':attr.no_select}">{{attr.attr_value}}</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="quantity">
+            <span class="quant">Quantity</span>
+            <!-- <span class="quant">QUANTITY:{{have_goods?new_cur_goods.store_num:0}}</span> -->
+            <ul class="buy-box"
+                v-if="have_goods">
+              <li class="count re"
+                  @click="account(-1)"></li>
+              <li class="show-number"
+                  :disabled="true">{{pay_number}}</li>
+              <li class="count"
+                  @click="account(1)"></li>
+            </ul>
+          </li>
+          <li class="done-btn">
+            <template v-if="have_goods">
+            <span v-if="only_cart"
+                  href="javacript:;"
+                  @click="add_to_cart">Add To Cart</span>
+              <span href="javacript:;"
+                    v-else
+                    @click="create_order">Done</span>
             </template>
             <template v-else>
-              {{new_cur_goods.money_unit}}{{new_cur_goods.alone_price}}
+              <a href="javacript:;"
+                 class="no-goods">out of stock</a>
             </template>
-          </p>
-          <p class="attr-tips">
-            Please select：<span v-for="(item,index) in new_attrList"
-              :key="index"> {{item.attr_name}} &nbsp; </span>
-          </p>
-        </li>
-        <li class="attr-blocks">
-          <ul>
-            <li v-for="(item,index) in new_attrList"
-              :key="index">
-              <h3>{{item.attr_name}}</h3>
-              <ul class="attr-lists">
-                <li v-for="(attr,index_attr) in item.attr_value"
-                  :key="index_attr"
-                  @click.stop="get_cur_goods(index,index_attr,attr.id)"
-                  :class="{'active':index_attr===is_selected_index_list[index],'no_select':attr.no_select}">{{attr.attr_value}}</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="quantity">
-          <span class="quant">Quantity</span>
-          <!-- <span class="quant">QUANTITY:{{have_goods?new_cur_goods.store_num:0}}</span> -->
-          <ul class="buy-box"
-            v-if="have_goods">
-            <li class="count re"
-              @click="account(-1)"></li>
-            <li class="show-number"
-              :disabled="true">{{pay_number}}</li>
-            <li class="count"
-              @click="account(1)"></li>
-          </ul>
-        </li>
-        <li class="done-btn">
-          <template v-if="have_goods">
-            <span v-if="only_cart"
-              href="javacript:;"
-              @click="add_to_cart">Add To Cart</span>
-            <span href="javacript:;"
-              v-else
-              @click="create_order">Done</span>
-          </template>
-          <template v-else>
-            <a href="javacript:;"
-              class="no-goods">out of stock</a>
-          </template>
-        </li>
-      </ul>
-    </div>
-    <!-- <van-popup v-model="show_join_self"
-      position="top"
-      :overlay="false">
-      You have already in the group. Invite your friends join now.
-    </van-popup> -->
-    <!-- <temp-dialog v-show="show_join_self">
-      <p class="can-join">
-        sss
-      </p>
-    </temp-dialog> -->
-    <div class="big-img-box"
-      v-if="show_big_img"
-      @click.stop="show_big_img=false">
-      <div class="img-wrapper">
-        <img :src="new_cur_goods.goods_img"
-          alt=""
-          @click.stop="show_big_img=false">
+          </li>
+        </ul>
       </div>
-      <div class="img-desc">
-        {{new_cur_goods.attr_first_value}}
+      <!-- <van-popup v-model="show_join_self"
+        position="top"
+        :overlay="false">
+        You have already in the group. Invite your friends join now.
+      </van-popup> -->
+      <!-- <temp-dialog v-show="show_join_self">
+        <p class="can-join">
+          sss
+        </p>
+      </temp-dialog> -->
+      <div class="big-img-box"
+           v-if="show_big_img"
+           @click.stop="show_big_img=false">
+        <div class="img-wrapper">
+          <img :src="new_cur_goods.goods_img"
+               alt=""
+               @click.stop="show_big_img=false">
+        </div>
+        <div class="img-desc">
+          {{new_cur_goods.attr_first_value}}
+        </div>
       </div>
     </div>
-  </div>
+  </scroll-lock>
+
 </template>
 
 <script>
