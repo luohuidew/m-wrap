@@ -9,6 +9,7 @@
       <scrollCate :listData="homeData.categoryList" />
     </div>
   </div>
+  
 </template>
 
 <script>
