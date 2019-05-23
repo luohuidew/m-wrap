@@ -51,6 +51,16 @@ export default new Router({
       }
     },
     {
+      path: '/home/classify',
+      name: 'classify',
+      component: () =>
+        import('@/views/home/homeClassify'),
+      meta: {
+        title: 'HOME CLASSIFY',
+        keepAlive: false,
+      }
+    },
+    {
       path: '/hot',
       name: 'hot',
       component: () =>
