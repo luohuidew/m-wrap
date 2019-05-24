@@ -1,13 +1,13 @@
 <template>
   <div class="classify-screen-page">
     <ul>
-      <li 
-        v-for="(item,index) in screenLists" 
+      <li
+        v-for="(item,index) in screenLists"
         :key="index"
         @click="showPopup(item.type)"
         >
         <span>{{item.title}}</span>
-        <img 
+        <img
           v-if="item.src"
           :src=item.src
           alt="">
@@ -26,21 +26,22 @@
           <span>clear</span>
         </h3>
         <ul class="all-list">
-          <li 
-            v-for="(item,index) in childData"
+          <li
+            v-for="(twoItem,index) in listData"
             :key='index'
-            @click="childShow()">
+            @click="childShow(twoItem)">
             <p>
-              <van-icon name="plus" color="#9B9B9B" size='12' v-if="item.chlid.length > 0"/>
+              <van-icon name="plus" color="#9B9B9B" size='12' v-if="twoItem.chlid.length > 0"/>
               <label v-else class="hidden"></label>
-              <span> {{item.cat_name}}</span>
+              <span> {{twoItem.cat_name}}</span>
             </p>
-            <ol :class="{active : listShow == item.id}">
-              <li 
-                v-for="(items,index) in item.chlid"
+            <ol  v-bind:class="twoItem.open == true ? 'open': ''">
+              <li
+                v-for="(items,index) in twoItem.chlid"
+                @click.stop="SlectThree(items)"
                 :key='index'>
                 <span>{{items.cat_name}}</span>
-                <van-icon name="success" :class="{active : actives == item.id}"/>
+                <van-icon name="success" v-show="actives == items.id "/>
               </li>
             </ol>
           </li>
@@ -60,7 +61,7 @@
           <span></span>
         </h3>
         <ul class="sort-list">
-          <li 
+          <li
             v-for="(item,index) in sortList"
             :key='index'
             @click="sortSelect(item.type)">
@@ -73,7 +74,7 @@
         </p>
       </div>
     </van-popup>
-    
+
     <!-- free -->
     <van-popup v-model="show_free"
       position="bottom"
@@ -86,7 +87,7 @@
           <span></span>
         </h3>
         <ul class="sort-list">
-          <li 
+          <li
             v-for="(item,index) in freeList"
             :key='index'
             @click="freeSelect(item.type)"
@@ -99,10 +100,10 @@
           <span>View results</span>
         </p>
       </div>
-      
+
     </van-popup>
   </div>
-    
+
 </template>
 
 <script>
@@ -143,15 +144,23 @@ export default {
             title:"Free shipping",
           }
         ],
-        
+
       }
     },
     watch: {},
-    computed: {},
+    computed: {
+      listData() {
+       return this.childData
+      },
+    },
     created() {
-      
+
     },
     methods: {
+      SlectThree(item) {
+        this.actives = item.id
+
+      },
       sortSelect(type){
         this.active = type;
         this.par.sort = type;
@@ -170,9 +179,9 @@ export default {
         this.show_free = false;
         console.log(this.par.free);
       },
-      childShow(id){
-        // this.listShow = id;
-        console.log(1111)
+      childShow(item){
+        item.open = !item.open
+        this.$forceUpdate();
       },
       showPopup(type){
         if(type == 1) {
@@ -206,15 +215,15 @@ export default {
 }
 </script>>
 
-<style  lang='scss' scoped>  
-  .classify-screen-page { 
+<style  lang='scss' scoped>
+  .classify-screen-page {
     position: -webkit-sticky;
     position: sticky;
-    top: -1px;     
-    background: #fff; 
+    top: -1px;
+    background: #fff;
     & > ul {
       padding: 15px;
-      display: flex;  
+      display: flex;
       li {
         margin-left:10px;
         display: flex;
@@ -238,7 +247,7 @@ export default {
           text-align: center;
         }
       }
-    } 
+    }
     .van-height {
       // height: 100%;
     }
@@ -288,7 +297,11 @@ export default {
           ol {
             display: flex;
             flex-direction: column;
-            display: none;
+            height: 0px;
+            overflow: hidden;
+            &.open{
+              height: auto;
+            }
             li {
               line-height: 38px;
               padding: 0 70px;
@@ -302,7 +315,7 @@ export default {
           //   display: block;
           // }
         }
-        
+
       }
       .sort-list {
         li {
@@ -334,7 +347,7 @@ export default {
           color: #fff;
           font-size: 14px;
           font-weight: bold;
-          
+
         }
       }
     }

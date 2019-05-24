@@ -1,6 +1,6 @@
 <template>
   <div class="home-classify-page">
-    <classifyHead @parentId="updateId"/>
+    <classifyHead @parentId="updateId" :classId="classId"/>
     <classifyScreen @getChild="getAll" :childData="childList"/>
     <van-list v-model="loading"
       :finished="finished"
@@ -9,9 +9,9 @@
       @load="init_skuList"
       >
       <ul class="sku-list">
-        <li 
-          v-for="(good,index) in skuList" 
-          :key="index" 
+        <li
+          v-for="(good,index) in skuList"
+          :key="index"
           class="store-item"
         >
           <goodItem :cardData = good></goodItem>
@@ -33,6 +33,7 @@ export default {
     },
     data(){
       return{
+        classId: this.$route.query.id,
         parentId:undefined,
         skuList:[],
         loading: false,
@@ -58,12 +59,18 @@ export default {
         api.getCateChlid(params).then(res => {
           console.log(res.data);
           this.childList = res.data;
+          this.childList.forEach((item) => {
+            item.open=false
+            item.chlid.forEach((chid)=>{
+              chid.open = false
+            })
+          })
           console.log(this.childList,'====')
         })
       },
       init_skuList(){   // 商品搜索列表
         let params = {
-          categoryId: this.parentId,
+          categoryId: this.parentId || this.classId,
         };
         api.getSkuList(params).then(res => {
           this.skuList = res.data.data;
@@ -87,7 +94,7 @@ export default {
       closePopup() {
         this.show = false
       },
-      
+
     },
     components: {
       classifyHead,
@@ -95,7 +102,7 @@ export default {
       goodItem
     },
     mounted(){
-      
+
     }
 }
 </script>
