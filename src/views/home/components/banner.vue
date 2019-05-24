@@ -41,7 +41,7 @@ export default {
 
      .swiper-pagination-bullets {
       bottom: 0px;
-      & /deep/ .swiper-pagination-bullet {
+      & >>> .swiper-pagination-bullet {
         width:30px;
         height:2px;
         background:rgba(199,199,199,1);
@@ -56,7 +56,7 @@ export default {
 
   .home-banner-wrap {
   height: 300px;
-  & /deep/ .swiper-wrapper {
+  & >>> .swiper-wrapper {
     height: 280px;
     .swiper-slide {
       img {

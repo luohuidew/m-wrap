@@ -1,6 +1,6 @@
 <template>
     <ul class="classify-Lists-box">
-        <li v-for="(item,index) in lists" :key="index" @click="change_classify_bg(index,item.id)">
+        <li v-for="(item,index) in classifyLists" :key="index" @click="change_classify_bg(index,item.id)">
             <div :class="circleAct == index?'circle-container':'container-bg'" >
                 <div class="circle-con">
                    <img 
@@ -18,20 +18,18 @@ import api from "@/api/classify";
 export default {
     name: "",
     props: {
-        lists:{
-            type:Array,
-            default:undefined
-        }
+       
     },
     data(){
         return{
+            classifyLists:[],
             circleAct:-1,
         }
     },
     watch: {},
     computed: {},
     created() {
-        // this.init_data();
+        this.init_data();
     },
     methods: {
         change_classify_bg(index,id){
@@ -39,7 +37,13 @@ export default {
            this.parent_id = id;
            this.$emit("parentId",{id:this.parent_id,index:this.circleAct})
         },
-    },
+         init_data() {   // 获取分类列表
+            // let _this = this;
+            api.getCateList().then(res => {
+               this.classifyLists = res.data;
+            });
+        }, 
+    },  
     components: {}
 }
 </script>

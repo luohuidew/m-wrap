@@ -1,80 +1,110 @@
 <template>
-    <div class="home-classify-page">
-      <classifyHead :lists="classifyLists" @parentId="updateId"/>
-      <classifyScreen/>
-      <!--  加载列表-->
-      <div class="scrollBox">
-        <span>111</span>
-       <span>333</span>
-       <span>222336663</span>
-       <span>000300033</span>
-       <span>3999933</span>
-       <span>88883888833</span>
-       <span>5555333</span>
-       <span>121355555333</span>
+  <div class="home-classify-page">
+    <classifyHead @parentId="updateId"/>
+    <classifyScreen/>
+    <van-list v-model="loading"
+      :finished="finished"
+      finished-text="No more data"
+      :loading-text="'Loading...'"
+      @load="get_more_data"
+      :offset="100"
+      >
+      <ul class="sku-list">
+        <li 
+          v-for="(good,index) in skuList" 
+          :key="index" 
+          class="store-item"
+        >
+          <goodItem :cardData = good></goodItem>
+        </li>
+      </ul>
+    </van-list>
+    <van-popup v-model="show" class="popup-warp" :overlay="true">
+      <!--<img class="close" @click="closePopup" src="@/assets/img/conponActive/X.png"/>-->
+      <div class="main">
+        <img  src="@/assets/img/conponActive/bg.png" @click="closePopup" width="100%"/>
       </div>
-      
+    </van-popup>
+    <div @click="POPU">
+      fsdfsfsfsfsdds
     </div>
+  </div>
 </template>
 
 <script>
 import api from "@/api/classify";
 import classifyHead from "./components/classifyHead";
 import classifyScreen from './components/classifyScreen';
+import goodItem from "@/components/good-column-auto";
 export default {
     name: "",
     data(){
       return{
-        classifyLists:[],
         parentId:'',
-        skuList:[]
+        skuList:[],
+        loading: false,
+        finished: false,
+        show:false
       }
     },
     watch: {},
     computed: {},
     created() {
-      this.init_data();
+      // this.init_data();
     },
     methods: {
       updateId(data){
         this.parentId = data.id;
         this.init_skuList();
       },
-      init_data() {   // 获取分类列表
-        let _this = this;
-        api.getCateList().then(res => {
-          _this.classifyLists = res.data;
-        });
-      }, 
-      init_skuList(){   //商品搜索列表
-        let _this = this;
+      // init_data() {   // 获取分类列表
+      //   // let _this = this;
+      //   api.getCateList().then(res => {
+      //     this.classifyLists = res.data;
+      //   });
+      // }, 
+      init_skuList(){   // 商品搜索列表
+        // let _this = this;
         let params = {
           categoryId: this.parentId
         };
         api.getSkuList(params).then(res => {
-          _this.skuList = res.data.data
+          this.skuList = res.data.data
         });
-        console.log(_this.skuList,_this.skuList.length);
+        // console.log(_this.skuList,_this.skuList.length);
       },
+      get_more_data(){
+
+      },
+      closePopup() {
+        this.show = false
+        sessionStorage.setItem('conpon-first', true)
+      },
+      POPU(){
+        this.show = true
+      }
       
     },
     components: {
       classifyHead,
       classifyScreen,
+      goodItem
     },
     mounted(){
       
     }
 }
 </script>
-<style>
-.scrollBox {
-    height: 2000px;
-    display: flex;
-    flex-direction: column;
-    background: #ccc;
-   justify-content: space-between;
-    overflow: scroll;
+<style lang='scss' scoped>
+.sku-list {
+  padding: 0 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  & > li {
+    width: 48%;
+    margin-bottom: 15px;
+  }
 }
 </style>
 

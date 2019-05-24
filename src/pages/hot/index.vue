@@ -27,7 +27,6 @@ export default {
   computed: {},
   methods: {
     init_data(params = this.$route.query) {
-      // let params = this.$route.query;
       api.get_lists(params).then(res => {
         this.cur_lists_data = res.data.extend;
         res.data.data.forEach(item => {
