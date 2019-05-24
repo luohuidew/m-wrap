@@ -18,7 +18,7 @@
       position="bottom"
       :overlay="true">
       <div class="show-all-wrapper">
-           all
+          
       </div>
     </van-popup>
     <!-- sort -->
@@ -27,35 +27,55 @@
       :overlay="true">
       <div class="show-sort-wraper">
         <h3>
-          <img src="" alt="">
+          <van-icon name="cross" />
           <p>Sort</p>
           <span></span>
         </h3>
+        <ul class="sort-list">
+          <li 
+            v-for="(item,index) in sortList"
+            :key='index'>
+            {{item.title}}
+          </li>
+        </ul>
       </div>
     </van-popup>
     <!-- free -->
     <van-popup v-model="show_free"
       position="bottom"
       :overlay="true">
-      gsgsgsgs
-      <!-- <shipping-dialog v-if="all_data"
-        :shipping-data="all_data.shipment"
-        @close="show_shipping=false"></shipping-dialog> -->
+      <div class="show-free-wrapper">
+        <h3>
+          <van-icon name="cross" />
+          <p>Sort</p>
+          <span></span>
+        </h3>
+        <ul class="sort-list">
+          <li 
+            v-for="(item,index) in sortList"
+            :key='index'>
+            {{item.title}}
+          </li>
+        </ul>
+      </div>
+      
     </van-popup>
   </div>
     
 </template>
 
 <script>
+import data from './config.js'
 export default {
     name: "",
     props: {},
     data(){
       return{ 
-      active: 0,
-      show_all:false,
-      show_sort:false,
-      show_free:false,
+        active: 0,
+        show_all:false,
+        show_sort:false,
+        show_free:false,
+        sortList:data.sortList,
         screenLists:[
           {
             type:1,
@@ -72,6 +92,7 @@ export default {
             title:"Free shipping",
           }
         ],
+        
       }
     },
     watch: {},
@@ -104,7 +125,7 @@ export default {
     position: sticky;
     top: -1px;     
     background: #fff; 
-    ul {
+    & > ul {
       padding: 15px;
       display: flex;  
       li {
@@ -131,5 +152,18 @@ export default {
         }
       }
     } 
+    .show-sort-wraper,.show-free-wrapper {
+      padding: 13px 0 28px;
+      h3 {
+        padding: 0 30px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        p {
+          font-size: 14px;
+          font-weight: bold;
+        }
+      }
+    }
   }
 </style>

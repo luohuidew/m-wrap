@@ -19,15 +19,6 @@
         </li>
       </ul>
     </van-list>
-    <van-popup v-model="show" class="popup-warp" :overlay="true">
-      <!--<img class="close" @click="closePopup" src="@/assets/img/conponActive/X.png"/>-->
-      <div class="main">
-        <img  src="@/assets/img/conponActive/bg.png" @click="closePopup" width="100%"/>
-      </div>
-    </van-popup>
-    <div @click="POPU">
-      fsdfsfsfsfsdds
-    </div>
   </div>
 </template>
 
