@@ -1,17 +1,17 @@
 <template>
   <div class="home-classify-page">
-    <classifyHead @parentId="updateId"/>
+    <classifyHead @parentId="updateId" :classId="classId"/>
     <classifyScreen @getChild="getAll" :childData="childList"/>
     <van-list v-model="loading"
-      :finished="finished"
-      finished-text="No more data"
-      :loading-text="'Loading...'"
-      @load="init_skuList()"
-      >
+              :immediate-check="false"
+              :finished="finished"
+              :finished-text="''"
+              :loading-text="'Loading...'"
+              @load="init_skuList">
       <ul class="sku-list">
-        <li 
-          v-for="(good,index) in skuList" 
-          :key="index" 
+        <li
+          v-for="(good,index) in skuList"
+          :key="index"
           class="store-item"
         >
           <goodItem :cardData = good></goodItem>
@@ -33,6 +33,7 @@ export default {
     },
     data(){
       return{
+        classId: this.$route.query.id,
         parentId:undefined,
         skuList:[],
         loading: false,
@@ -44,7 +45,7 @@ export default {
     watch: {},
     computed: {},
     created() {
-      // this.init_data();
+      this.init_skuList()
     },
     methods: {
       updateId(data){
@@ -69,10 +70,22 @@ export default {
         }
         this.init_skuList();
         console.log(this.sort,this.free)
+        api.getCateChlid(params).then(res => {
+          console.log(res.data);
+          this.childList = res.data;
+          this.childList.forEach((item) => {
+            item.open=false
+            item.chlid.forEach((chid)=>{
+              chid.open = false
+            })
+          })
+          console.log(this.childList,'====')
+        })
       },
       init_skuList(){   // 商品搜索列表
+        alert(222)
         let params = {
-          categoryId: this.parentId,
+          categoryId: this.parentId || this.classId,
           sort:this.sort,
           free:this.free,
           pageSize:12
@@ -93,13 +106,10 @@ export default {
         // });
         // console.log(_this.skuList,_this.skuList.length);
       },
-      get_more_data(){
-        // console.log(123)
-      },
       closePopup() {
         this.show = false
       },
-      
+
     },
     components: {
       classifyHead,
@@ -107,11 +117,19 @@ export default {
       goodItem
     },
     mounted(){
-      
+
     }
 }
 </script>
 <style lang='scss' scoped>
+  .home-classify-page{
+    border: 1px solid red;
+    height: 100%;
+  }
+  .vant-list{
+    border: 1px solid #000;
+
+  }
 .sku-list {
   padding: 0 15px;
   display: flex;
