@@ -47,7 +47,7 @@
             </ol>
           </li>
         </ul>
-        <p class="select-btn" @click="allBtn">
+        <p class="select-btn" >
           <span>View results</span>
         </p>
       </div>

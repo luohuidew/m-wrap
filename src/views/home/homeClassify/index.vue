@@ -5,7 +5,7 @@
     <van-list v-model="loading"
               :immediate-check="false"
               :finished="finished"
-              :finished-text="''"
+              finished-text="No more data"
               :loading-text="'Loading...'"
               @load="init_skuList">
       <ul class="sku-list">
@@ -50,6 +50,8 @@ export default {
     methods: {
       updateId(data){
         this.parentId = data.id;
+        this.finished = false
+        this.skuList = []
         this.init_skuList();
       },
       getAll(data){   //获取子类列表
@@ -68,8 +70,7 @@ export default {
         if(data[0] == "free") {
           this.free = data[1];
         }
-        this.init_skuList();
-        console.log(this.sort,this.free)
+        // this.init_skuList();
         api.getCateChlid(params).then(res => {
           console.log(res.data);
           this.childList = res.data;
@@ -79,11 +80,9 @@ export default {
               chid.open = false
             })
           })
-          console.log(this.childList,'====')
         })
       },
       init_skuList(){   // 商品搜索列表
-        alert(222)
         let params = {
           categoryId: this.parentId || this.classId,
           sort:this.sort,
@@ -91,20 +90,14 @@ export default {
           pageSize:12
         };
         api.getSkuList(params).then(res => {
-          this.skuList = res.data.data;
+          const data =  res.data.data;
+          if (data.length === 0) {
+            this.finished = true
+          } else {
+            this.skuList = [...this.skuList, ...data]
+            this.loading = false
+          }
         });
-        // api.getSkuList(params).then(res => {
-        //   if (!res.data.data.length) {
-        //     this.finished = true;
-        //     this.loading = false;
-        //   }
-        //   res.data.data.forEach(item => {
-        //     // this.selectId = res.data.extend.selectId;
-        //     this.loading = false;
-        //     this.skuList.push(item);
-        //   });
-        // });
-        // console.log(_this.skuList,_this.skuList.length);
       },
       closePopup() {
         this.show = false
@@ -123,7 +116,6 @@ export default {
 </script>
 <style lang='scss' scoped>
   .home-classify-page{
-    border: 1px solid red;
     height: 100%;
   }
   .vant-list{
