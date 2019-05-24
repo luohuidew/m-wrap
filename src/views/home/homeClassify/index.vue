@@ -65,7 +65,7 @@ export default {
         // console.log(_this.skuList,_this.skuList.length);
       },
       get_more_data(){
-
+         
       },
       closePopup() {
         this.show = false

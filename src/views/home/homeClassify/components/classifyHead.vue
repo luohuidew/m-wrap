@@ -59,15 +59,13 @@ export default {
            display: flex;
            flex-direction: column;
            align-items: center;
-           justify-content: space-between;
-
             img {
                 width: 60px;
                 height: 60px;
                 display: block;
                 box-sizing: border-box;
                 border-radius: 50%;
-                   }
+                }
             & > div {
                 width: 68px;
                 height: 68px;
@@ -108,7 +106,7 @@ export default {
             }
             span {
                 text-align: center;
-                font-size: 14px;
+                font-size: 12px;
                 margin-top: 10px;
             }
         }

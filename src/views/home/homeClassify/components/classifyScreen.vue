@@ -18,16 +18,29 @@
       position="bottom"
       :overlay="true">
       <div class="show-all-wrapper">
-          
+        <h3>
+          <van-icon name="cross" color="#9B9B9B" size="13" @click="closePopup(1)"/>
+          <p>Clothing</p>
+          <span>clear</span>
+        </h3>
+        <ul class="sort-list">
+          <li 
+            v-for="(item,index) in sortList"
+            :key='index'>
+            {{item.title}}
+          </li>
+        </ul>
       </div>
     </van-popup>
+
     <!-- sort -->
     <van-popup v-model="show_sort"
       position="bottom"
-      :overlay="true">
+      :overlay="true"
+      class="van-radius">
       <div class="show-sort-wraper">
         <h3>
-          <van-icon name="cross" />
+          <van-icon name="cross" color="#9B9B9B" size="13" @click="closePopup(2)"/>
           <p>Sort</p>
           <span></span>
         </h3>
@@ -40,14 +53,16 @@
         </ul>
       </div>
     </van-popup>
+    
     <!-- free -->
     <van-popup v-model="show_free"
       position="bottom"
-      :overlay="true">
+      :overlay="true"
+      class="van-radius">
       <div class="show-free-wrapper">
         <h3>
-          <van-icon name="cross" />
-          <p>Sort</p>
+          <van-icon name="cross"  @click="closePopup(3)"/>
+          <p>Free shipping</p>
           <span></span>
         </h3>
         <ul class="sort-list">
@@ -76,6 +91,7 @@ export default {
         show_sort:false,
         show_free:false,
         sortList:data.sortList,
+        freeList:data.freeList,
         screenLists:[
           {
             type:1,
@@ -100,17 +116,20 @@ export default {
     created() {},
     methods: {
       showPopup(type){
-        console.log(type,'0000')
+        // console.log(type,'0000')
         switch (type) {
-        case 1:
-          return this.show_all = true;
-        case 2:
-          return this.show_sort = true;
-        case 3:
-          return this.show_free = true;
-        default:
-          return "this is default";
-      }
+          case 1:
+            return this.show_all = true;
+          case 2:
+            return this.show_sort = true;
+          case 3:
+            return this.show_free = true;
+          default:
+            return "this is default";
+        }
+      },
+      closePopup(type) {
+        // this.show = false
       }
     },
     components: {},
@@ -152,7 +171,13 @@ export default {
         }
       }
     } 
-    .show-sort-wraper,.show-free-wrapper {
+    .van-radius {
+      border-top-left-radius: 6px!important;
+      border-top-right-radius: 6px!important;
+    }
+    .show-sort-wraper,
+    .show-free-wrapper,
+    .show-all-wrapper {
       padding: 13px 0 28px;
       h3 {
         padding: 0 30px 20px;
