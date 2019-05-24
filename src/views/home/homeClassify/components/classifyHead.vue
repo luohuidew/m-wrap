@@ -1,10 +1,10 @@
 <template>
     <ul class="classify-Lists-box">
-        <li v-for="(item,index) in classifyLists" :key="index" @click="change_classify_bg(index,item.id)">
-            <div :class="circleAct == index?'circle-container':'container-bg'" >
+        <li v-for="(item,index) in classifyLists" :key="index" @click="change_classify_bg(item.id)">
+            <div :class="activeIndex == item.id?'circle-container':'container-bg'" >
                 <div class="circle-con">
-                   <img 
-                    :src="item.img_url" 
+                   <img
+                    :src="item.img_url"
                     alt="">
                 </div>
             </div>
@@ -17,13 +17,11 @@
 import api from "@/api/classify";
 export default {
     name: "",
-    props: {
-       
-    },
+    props: ['classId'],
     data(){
         return{
             classifyLists:[],
-            circleAct:-1,
+            activeIndex: this.classId,
         }
     },
     watch: {},
@@ -32,18 +30,24 @@ export default {
         this.init_data();
     },
     methods: {
-        change_classify_bg(index,id){
-           this.circleAct = index;
-           this.parent_id = id;
-           this.$emit("parentId",{id:this.parent_id,index:this.circleAct})
+        change_classify_bg(id){
+           if (this.$route.path === '/home/index') {
+               this.$router.push({
+                   path: '/home/classify',
+                   query:{
+                        id: id
+                   }
+               })
+           }
+           this.activeIndex = id
+           this.$emit("parentId",{id:id})
         },
          init_data() {   // 获取分类列表
-            // let _this = this;
             api.getCateList().then(res => {
                this.classifyLists = res.data;
             });
-        }, 
-    },  
+        },
+    },
     components: {}
 }
 </script>

@@ -1,15 +1,23 @@
 <template>
   <div id="weget" v-if="homeData">
-    <category :listsData="homeData.recommend_category"></category>
-    <banner :bannerData="homeData.home_banner"></banner>
+    <homeCate></homeCate>
+    <banner :bannerData="homeData.home_banner" style="margin-top: 25px"></banner>
     <getApp></getApp>
-    <store  :listsData="homeData.recommend_store"></store>
-    <sacleGood  :listsData="homeData.recommend_store"></sacleGood>
+    <themeOne  :listsData="homeData.theme1"></themeOne>
+    <section class="theme2">
+      <router-link :to="homeData.theme2.route" >
+        <img :src="homeData.theme2.image_url" alt="">
+      </router-link>
+    </section>
+    <sacleGood  :listsData="homeData.new_arrivals"></sacleGood>
+    <themeOne  :listsData="homeData.theme3"></themeOne>
+    <section class="theme4">
+      <router-link :to="homeData.theme4.route" >
+        <img :src="homeData.theme4.image_url" alt="">
+      </router-link>
+    </section>
     <shops  :listsData="homeData.recommend_store"></shops>
     <appleGoole></appleGoole>
-    <!--<pick :listsData="homeData.influence_pick"></pick>-->
-    <!--<topic :listsData="homeData.topic_data"></topic>-->
-    <!--<scrollCate :listData="homeData.category_row"></scrollCate>-->
     <van-popup v-model="show" class="popu">
       <div class="wrap">
         <van-icon name="close" @click="closePopu" class="icons"/>
@@ -22,8 +30,8 @@
 <script>
 import banner from "./components/banner";
 import getApp from "./components/getApp";
-import category from "./components/homeCate";
-import store from "./components/newStore";
+import homeCate from "./components/homeCate";
+import themeOne from "./components/newStore";
 import sacleGood from "./components/sacleGood";
 import shops from "./components/shops";
 import api from "@/api/weget";
@@ -70,8 +78,8 @@ export default {
   components: {
     banner,
     getApp,
-    category,
-    store,
+    homeCate,
+    themeOne,
     sacleGood,
     shops,
     appleGoole
@@ -82,6 +90,20 @@ export default {
 <style lang='scss' scoped>
 #weget {
   background-color: #fff;
+  .theme2, .theme4{
+    margin-top: 10px;
+    height: 375px;
+    width: 375px;
+    a{
+      display: block;
+      height: 100%;
+    }
+    img {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  }
   & >>> .van-popup{
     border-radius: 5px;
     width: 60%;
