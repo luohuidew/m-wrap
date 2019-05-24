@@ -47,10 +47,15 @@
         <ul class="sort-list">
           <li 
             v-for="(item,index) in sortList"
-            :key='index'>
-            {{item.title}}
+            :key='index'
+            @click="sortSelect(item.type)">
+            <span>{{item.title}}</span>
+            <van-icon name="success" :class="{active : active == item.type}"/>
           </li>
         </ul>
+        <p class="select-btn" @click="sortBtn">
+          <span>View results</span>
+        </p>
       </div>
     </van-popup>
     
@@ -67,9 +72,11 @@
         </h3>
         <ul class="sort-list">
           <li 
-            v-for="(item,index) in sortList"
-            :key='index'>
-            {{item.title}}
+            v-for="(item,index) in freeList"
+            :key='index'
+            >
+            <span>{{item.title}}</span>
+            <van-icon name="success" />
           </li>
         </ul>
       </div>
@@ -85,11 +92,12 @@ export default {
     name: "",
     props: {},
     data(){
-      return{ 
-        active: 0,
+      return{
         show_all:false,
         show_sort:false,
         show_free:false,
+        active:"",
+        sort:"", 
         sortList:data.sortList,
         freeList:data.freeList,
         screenLists:[
@@ -115,6 +123,13 @@ export default {
     computed: {},
     created() {},
     methods: {
+      sortSelect(type){
+        this.active = type;
+        this.sort = type;
+      },
+      sortBtn(){
+        
+      },
       showPopup(type){
         // console.log(type,'0000')
         switch (type) {
@@ -130,6 +145,16 @@ export default {
       },
       closePopup(type) {
         // this.show = false
+        switch (type) {
+          case 1:
+            return this.show_all = false;
+          case 2:
+            return this.show_sort = false;
+          case 3:
+            return this.show_free = false;
+          default:
+            return "this is default";
+        }
       }
     },
     components: {},
@@ -187,6 +212,38 @@ export default {
         p {
           font-size: 14px;
           font-weight: bold;
+        }
+      }
+      .sort-list {
+        li {
+          padding: 0 30px;
+          line-height: 38px;
+          border-bottom: 1px solid #E1E1E1;
+          display: flex;
+          justify-content: space-between;
+          align-items:  center;
+          .van-icon {
+            display: none;
+          }
+          .active {
+            display: block;
+          }
+        }
+      }
+      .select-btn {
+        padding: 0 15px;
+        text-align: center;
+        margin-top: 37px;
+        span {
+          display: inline-block;
+          width: 100%;
+          line-height: 46px;
+          background: #000000;
+          border-radius: 23px;
+          color: #fff;
+          font-size: 14px;
+          font-weight: bold;
+          
         }
       }
     }

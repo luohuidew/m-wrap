@@ -6,8 +6,7 @@
       :finished="finished"
       finished-text="No more data"
       :loading-text="'Loading...'"
-      @load="get_more_data"
-      :offset="100"
+      @load="init_skuList"
       >
       <ul class="sku-list">
         <li 
@@ -55,25 +54,32 @@ export default {
       //   });
       // }, 
       init_skuList(){   // 商品搜索列表
-        // let _this = this;
         let params = {
-          categoryId: this.parentId
+          categoryId: this.parentId,
         };
         api.getSkuList(params).then(res => {
-          this.skuList = res.data.data
+          this.skuList = res.data.data;
+          // this.loading = false;
         });
+        // api.getSkuList(params).then(res => {
+        //   if (!res.data.data.length) {
+        //     this.finished = true;
+        //     this.loading = false;
+        //   }
+        //   res.data.data.forEach(item => {
+        //     // this.selectId = res.data.extend.selectId;
+        //     this.loading = false;
+        //     this.skuList.push(item);
+        //   });
+        // });
         // console.log(_this.skuList,_this.skuList.length);
       },
       get_more_data(){
-         
+        // console.log(123)
       },
       closePopup() {
         this.show = false
-        sessionStorage.setItem('conpon-first', true)
       },
-      POPU(){
-        this.show = true
-      }
       
     },
     components: {
