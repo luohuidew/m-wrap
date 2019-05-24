@@ -1,7 +1,7 @@
 <template>
   <div id="weget" v-if="homeData">
     <homeCate></homeCate>
-    <banner :bannerData="homeData.home_banner"></banner>
+    <banner :bannerData="homeData.home_banner" style="margin-top: 25px"></banner>
     <getApp></getApp>
     <themeOne  :listsData="homeData.theme1"></themeOne>
     <section class="theme2">
@@ -10,9 +10,10 @@
       </router-link>
     </section>
     <sacleGood  :listsData="homeData.new_arrivals"></sacleGood>
-    <section class="theme3">
-      <router-link :to="homeData.theme3.route" >
-        <img :src="homeData.theme3.image_url" alt="">
+    <themeOne  :listsData="homeData.theme3"></themeOne>
+    <section class="theme4">
+      <router-link :to="homeData.theme4.route" >
+        <img :src="homeData.theme4.image_url" alt="">
       </router-link>
     </section>
     <shops  :listsData="homeData.recommend_store"></shops>
@@ -89,11 +90,16 @@ export default {
 <style lang='scss' scoped>
 #weget {
   background-color: #fff;
-  .theme2, .theme3{
+  .theme2, .theme4{
     margin-top: 10px;
     height: 375px;
     width: 375px;
+    a{
+      display: block;
+      height: 100%;
+    }
     img {
+      display: block;
       height: 100%;
       width: 100%;
     }
