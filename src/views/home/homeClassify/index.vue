@@ -3,11 +3,11 @@
     <classifyHead @parentId="updateId" :classId="classId"/>
     <classifyScreen @getChild="getAll" :childData="childList"/>
     <van-list v-model="loading"
-      :finished="finished"
-      finished-text="No more data"
-      :loading-text="'Loading...'"
-      @load="init_skuList"
-      >
+              :immediate-check="false"
+              :finished="finished"
+              :finished-text="''"
+              :loading-text="'Loading...'"
+              @load="init_skuList">
       <ul class="sku-list">
         <li
           v-for="(good,index) in skuList"
@@ -45,7 +45,7 @@ export default {
     watch: {},
     computed: {},
     created() {
-      // this.init_data();
+      this.init_skuList()
     },
     methods: {
       updateId(data){
@@ -69,6 +69,7 @@ export default {
         })
       },
       init_skuList(){   // 商品搜索列表
+        alert(222)
         let params = {
           categoryId: this.parentId || this.classId,
         };
@@ -88,9 +89,6 @@ export default {
         // });
         // console.log(_this.skuList,_this.skuList.length);
       },
-      get_more_data(){
-        // console.log(123)
-      },
       closePopup() {
         this.show = false
       },
@@ -107,6 +105,14 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
+  .home-classify-page{
+    border: 1px solid red;
+    height: 100%;
+  }
+  .vant-list{
+    border: 1px solid #000;
+
+  }
 .sku-list {
   padding: 0 15px;
   display: flex;
