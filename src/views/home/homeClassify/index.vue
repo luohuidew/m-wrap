@@ -6,7 +6,7 @@
       :finished="finished"
       finished-text="No more data"
       :loading-text="'Loading...'"
-      @load="init_skuList"
+      @load="init_skuList()"
       >
       <ul class="sku-list">
         <li 
@@ -51,19 +51,31 @@ export default {
         this.parentId = data.id;
         this.init_skuList();
       },
-      getAll(){   //获取子类列表
-        let params = {
-          parent_id: this.parentId,
+      getAll(data){   //获取子类列表
+        if(data == "click") {
+          let params = {
+            parent_id: this.parentId,
+          }
+          api.getCateChlid(params).then(res => {
+            console.log(res.data);
+            this.childList = res.data;
+          })
         }
-        api.getCateChlid(params).then(res => {
-          console.log(res.data);
-          this.childList = res.data;
-          console.log(this.childList,'====')
-        })
+        if(data[0] == "sort") {
+          this.sort = data[1];
+        }
+        if(data[0] == "free") {
+          this.free = data[1];
+        }
+        this.init_skuList();
+        console.log(this.sort,this.free)
       },
       init_skuList(){   // 商品搜索列表
         let params = {
           categoryId: this.parentId,
+          sort:this.sort,
+          free:this.free,
+          pageSize:12
         };
         api.getSkuList(params).then(res => {
           this.skuList = res.data.data;

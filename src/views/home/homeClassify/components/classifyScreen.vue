@@ -45,6 +45,9 @@
             </ol>
           </li>
         </ul>
+        <p class="select-btn" @click="allBtn">
+          <span>View results</span>
+        </p>
       </div>
     </van-popup>
 
@@ -152,31 +155,33 @@ export default {
       
     },
     methods: {
+      allBtn(){
+
+      },
       sortSelect(type){
         this.active = type;
         this.par.sort = type;
-        console.log(this.par.sort,'000')
       },
       sortBtn(){
         this.show_sort = false;
-        console.log(this.par.sort);
+        this.$emit('getChild', ["sort",this.par.sort])
       },
       freeSelect(type){
         this.active1 = type;
         this.par.free = type;
-        console.log(type,'1111')
       },
       freeBtn(){
         this.show_free = false;
-        console.log(this.par.free);
+        this.$emit('getChild', ["free",this.par.free])
       },
       childShow(id){
         // this.listShow = id;
         console.log(1111)
       },
       showPopup(type){
+        // this.$parent.init_nit_skuList();
         if(type == 1) {
-          this.$emit('getChild','click')
+          this.$emit('getChild','click');
           this.show_all = true;
         } else if(type == 2) {
           this.show_sort = true;
