@@ -16,18 +16,33 @@
     <!-- all  -->
     <van-popup v-model="show_all"
       position="bottom"
-      :overlay="true">
+      :overlay="true"
+      :style="{height:maxH}"
+    >
       <div class="show-all-wrapper">
         <h3>
           <van-icon name="cross" color="#9B9B9B" size="13" @click="closePopup(1)"/>
           <p>Clothing</p>
           <span>clear</span>
         </h3>
-        <ul class="sort-list">
+        <ul class="all-list">
           <li 
-            v-for="(item,index) in sortList"
-            :key='index'>
-            {{item.title}}
+            v-for="(item,index) in childData"
+            :key='index'
+            @click="childShow()">
+            <p>
+              <van-icon name="plus" color="#9B9B9B" size='12' v-if="item.chlid.length > 0"/>
+              <label v-else class="hidden"></label>
+              <span> {{item.cat_name}}</span>
+            </p>
+            <ol :class="{active : listShow == item.id}">
+              <li 
+                v-for="(items,index) in item.chlid"
+                :key='index'>
+                <span>{{items.cat_name}}</span>
+                <van-icon name="success" :class="{active : actives == item.id}"/>
+              </li>
+            </ol>
           </li>
         </ul>
       </div>
@@ -66,7 +81,7 @@
       class="van-radius">
       <div class="show-free-wrapper">
         <h3>
-          <van-icon name="cross"  @click="closePopup(3)"/>
+          <van-icon name="cross"  color="#9B9B9B" size="13" @click="closePopup(3)"/>
           <p>Free shipping</p>
           <span></span>
         </h3>
@@ -74,11 +89,15 @@
           <li 
             v-for="(item,index) in freeList"
             :key='index'
+            @click="freeSelect(item.type)"
             >
             <span>{{item.title}}</span>
-            <van-icon name="success" />
+            <van-icon name="success" :class="{active : active1 == item.type}"/>
           </li>
         </ul>
+        <p class="select-btn" @click="freeBtn">
+          <span>View results</span>
+        </p>
       </div>
       
     </van-popup>
@@ -88,16 +107,24 @@
 
 <script>
 import data from './config.js'
+import api from "@/api/classify";
 export default {
     name: "",
-    props: {},
+    props: ['childData'],
     data(){
       return{
         show_all:false,
         show_sort:false,
         show_free:false,
         active:"",
-        sort:"", 
+        active1:"",
+        actives:"",
+        listShow:"",
+        maxH:undefined,
+        par:{
+          sort:undefined,
+          free:undefined,
+        },
         sortList:data.sortList,
         freeList:data.freeList,
         screenLists:[
@@ -121,30 +148,43 @@ export default {
     },
     watch: {},
     computed: {},
-    created() {},
+    created() {
+      
+    },
     methods: {
       sortSelect(type){
         this.active = type;
-        this.sort = type;
+        this.par.sort = type;
+        console.log(this.par.sort,'000')
       },
       sortBtn(){
-        
+        this.show_sort = false;
+        console.log(this.par.sort);
+      },
+      freeSelect(type){
+        this.active1 = type;
+        this.par.free = type;
+        console.log(type,'1111')
+      },
+      freeBtn(){
+        this.show_free = false;
+        console.log(this.par.free);
+      },
+      childShow(id){
+        // this.listShow = id;
+        console.log(1111)
       },
       showPopup(type){
-        // console.log(type,'0000')
-        switch (type) {
-          case 1:
-            return this.show_all = true;
-          case 2:
-            return this.show_sort = true;
-          case 3:
-            return this.show_free = true;
-          default:
-            return "this is default";
+        if(type == 1) {
+          this.$emit('getChild','click')
+          this.show_all = true;
+        } else if(type == 2) {
+          this.show_sort = true;
+        }else if (type == 3){
+          this.show_free = true;
         }
       },
       closePopup(type) {
-        // this.show = false
         switch (type) {
           case 1:
             return this.show_all = false;
@@ -159,6 +199,9 @@ export default {
     },
     components: {},
     mounted(){
+      let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      this.maxH = (h - 88) + 'px';
+      // console.log(this.maxH)
     }
 }
 </script>>
@@ -196,6 +239,9 @@ export default {
         }
       }
     } 
+    .van-height {
+      // height: 100%;
+    }
     .van-radius {
       border-top-left-radius: 6px!important;
       border-top-right-radius: 6px!important;
@@ -211,8 +257,52 @@ export default {
         align-items: center;
         p {
           font-size: 14px;
-          font-weight: bold;
         }
+        span {
+          font-weight: normal;
+          color: #9B9B9B;
+        }
+      }
+      .all-list {
+        & > li {
+          line-height: 38px;
+          border-bottom: none;
+          display: flex;
+          flex-direction: column;
+          // align-items:  center;
+          font-size: 13px;
+          p {
+            padding: 0 30px;
+            // margin-left:12px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #E1E1E1;
+            .hidden {
+              display: inline-block;
+              width:15px;
+            }
+            span {
+              margin-left: 10px;
+            }
+          }
+          ol {
+            display: flex;
+            flex-direction: column;
+            display: none;
+            li {
+              line-height: 38px;
+              padding: 0 70px;
+              border-bottom: 1px solid #E1E1E1;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            }
+          }
+          // .listShow {
+          //   display: block;
+          // }
+        }
+        
       }
       .sort-list {
         li {
@@ -222,6 +312,7 @@ export default {
           display: flex;
           justify-content: space-between;
           align-items:  center;
+          font-size: 13px;
           .van-icon {
             display: none;
           }

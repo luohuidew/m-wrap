@@ -1,7 +1,7 @@
 <template>
   <div class="home-classify-page">
     <classifyHead @parentId="updateId"/>
-    <classifyScreen/>
+    <classifyScreen @getChild="getAll" :childData="childList"/>
     <van-list v-model="loading"
       :finished="finished"
       finished-text="No more data"
@@ -28,13 +28,17 @@ import classifyScreen from './components/classifyScreen';
 import goodItem from "@/components/good-column-auto";
 export default {
     name: "",
+    props:{
+      type:Array,
+    },
     data(){
       return{
-        parentId:'',
+        parentId:undefined,
         skuList:[],
         loading: false,
         finished: false,
-        show:false
+        show:false,
+        childList:[]
       }
     },
     watch: {},
@@ -47,19 +51,22 @@ export default {
         this.parentId = data.id;
         this.init_skuList();
       },
-      // init_data() {   // 获取分类列表
-      //   // let _this = this;
-      //   api.getCateList().then(res => {
-      //     this.classifyLists = res.data;
-      //   });
-      // }, 
+      getAll(){   //获取子类列表
+        let params = {
+          parent_id: this.parentId,
+        }
+        api.getCateChlid(params).then(res => {
+          console.log(res.data);
+          this.childList = res.data;
+          console.log(this.childList,'====')
+        })
+      },
       init_skuList(){   // 商品搜索列表
         let params = {
           categoryId: this.parentId,
         };
         api.getSkuList(params).then(res => {
           this.skuList = res.data.data;
-          // this.loading = false;
         });
         // api.getSkuList(params).then(res => {
         //   if (!res.data.data.length) {

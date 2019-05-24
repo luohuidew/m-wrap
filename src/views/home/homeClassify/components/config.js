@@ -19,15 +19,15 @@ const sortList = [
 
 const freeList = [
     {
-        type:0,
+        type:1,
         title: "All"
     },
     {
-        type:1,
+        type:2,
         title: "Free shipping"
     },
     {
-        type:2,
+        type:3,
         title: "No post"
     },
 ]
