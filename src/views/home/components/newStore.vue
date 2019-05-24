@@ -1,14 +1,13 @@
 <template>
-  <div class="new-store" v-if="req_data">
+  <div class="new-store" v-if="listsData">
     <div class="main">
-      <img :src="req_data[0].image_url" alt="">
+      <router-link :to="listsData.route">
+        <img :src="listsData.image_url" alt="">
+      </router-link>
     </div>
     <div class="card-box">
       <ul>
-        <li v-for="(good,index) in req_data[0].product" :key="index" class="store-item">
-          <goodItem :cardData = good></goodItem>
-        </li>
-        <li v-for="(good,index) in req_data[0].product" :key="index" class="store-item">
+        <li v-for="(good) in listsData.product" :key="good.sku_id" class="store-item">
           <goodItem :cardData = good></goodItem>
         </li>
       </ul>
@@ -23,8 +22,8 @@
   name: "",
   props: {
     listsData: {
-      type: Array,
-      default: []
+      type: Object,
+      default: {}
     }
   },
   data() {
@@ -38,9 +37,7 @@
 
   },
   computed: {
-    req_data() {
-      return this.listsData;
-    }
+
   },
   methods: {},
   components: {

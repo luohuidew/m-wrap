@@ -2,66 +2,23 @@
   <div class="shops-wrap" v-if="listsData">
     <h4>POPULAR SHOPS</h4>
     <section>
-      <div class="store">
+      <div v-for="(storeSingle,index) in listsData" class="store" :key="index">
         <div class="imgs">
-          <img :src="listsData[0].image_url" alt="">
-          <img :src="listsData[0].image_url" alt="">
-          <img :src="listsData[0].image_url" alt="">
-          <img :src="listsData[0].image_url" alt="">
+          <img v-for="good in storeSingle.product" @click="goDetails(good.sku_id)" :key="good.id" :src="good.cover_img" alt="">
         </div>
         <div class="footer">
+          <router-link :to="storeSingle.route">
           <div class="poho">
-            <img :src="listsData[0].image_url" alt="">
+            <img :src="storeSingle.image_url" alt="">
             <div class="title">
               <h1>Sold by</h1>
-              <h2>ENERGY GIRLS</h2>
+              <h2>{{storeSingle.name}}</h2>
             </div>
           </div>
+          </router-link>
           <div class="producs">
             <span>products</span>
-            <em>46</em>
-          </div>
-        </div>
-      </div>
-      <div class="store">
-        <div class="imgs">
-          <img :src="listsData[0].image_url" alt="">
-          <img :src="listsData[0].image_url" alt="">
-          <img :src="listsData[0].image_url" alt="">
-          <img :src="listsData[0].image_url" alt="">
-        </div>
-        <div class="footer">
-          <div class="poho">
-            <img :src="listsData[0].image_url" alt="">
-            <div class="title">
-              <h1>Sold by</h1>
-              <h2>ENERGY GIRLS</h2>
-            </div>
-          </div>
-          <div class="producs">
-            <span>products</span>
-            <em>46</em>
-          </div>
-        </div>
-      </div>
-      <div class="store">
-        <div class="imgs">
-          <img :src="listsData[0].image_url" @click="goDetails" alt="">
-          <img :src="listsData[0].image_url" alt="">
-          <img :src="listsData[0].image_url" alt="">
-          <img :src="listsData[0].image_url" alt="">
-        </div>
-        <div class="footer">
-          <div class="poho">
-            <img :src="listsData[0].image_url" alt="">
-            <div class="title">
-              <h1>Sold by</h1>
-              <h2>ENERGY GIRLS</h2>
-            </div>
-          </div>
-          <div class="producs">
-            <span>products</span>
-            <em>46</em>
+            <em>{{storeSingle.total_num}}</em>
           </div>
         </div>
       </div>
@@ -91,14 +48,20 @@
 
   },
   methods: {
-    goDetails(skuid){
-
+    goDetails(sku_id) {
+      let params = {
+        path: "/detail",
+        query: {
+          sku_id: sku_id
+        }
+      }
+      this.$router.push(params);
     }
   },
   components: {
     goodItem
   }
-};
+}
 </script>
 
 <style lang='scss' scoped>

@@ -1,28 +1,31 @@
 <template>
-  <div class="home-cate" v-if="cateData">
+  <div class="home-cate" >
     <h1>STYLISH ONLINE FASHION <br>MARKETPLACE</h1>
-    <div style="height: 30px;border:1px solid red"></div>
+    <ScrollHead></ScrollHead>
   </div>
 </template>
 
 <script>
-export default {
+  import ScrollHead from "../homeClassify/components/classifyHead";
+
+  export default {
   name: "",
   props: {
-    listsData: {
-      type: Array,
-      default: undefined
-    }
+    // listsData: {
+    //   type: Array,
+    //   default: undefined
+    // }
   },
   data() {
     return {
-      cateData: this.listsData
     };
   },
   computed: {},
   created() {},
   methods: {},
-  components: {}
+  components: {
+    ScrollHead
+  }
 };
 </script>
 

@@ -2,9 +2,11 @@
   <section class="wrap">
     <div class="title">
       <h2>NEW ARRIVALS</h2>
-      <span>SHOP ALL</span>
+      <router-link to="/search/search-lists">
+        <span>SHOP ALL</span>
+      </router-link>
     </div>
-    <Swiper :datas='listsData[0].product'>
+    <Swiper :datas='listsData'>
       <template slot="default" slot-scope="{item}">
         <GoodItem :cardData = item></GoodItem>
       </template>

@@ -37,26 +37,25 @@ export default {
 };
 </script>
 
-<style lang='scss' scoped>
-
-     .swiper-pagination-bullets {
-      bottom: 0px;
-      & >>> .swiper-pagination-bullet {
-        width:30px;
-        height:2px;
-        background:rgba(199,199,199,1);
-        border-radius:1px;
-        &.swiper-pagination-bullet-active{
-          background:rgba(74,74,74,1);
-        }
+<style lang='scss' >
+.home-banner-wrap{
+ .swiper-pagination-bullets {
+    bottom: 0px;
+    .swiper-pagination-bullet {
+      width:30px;
+      height:2px;
+      background:rgba(199,199,199,1);
+      border-radius:1px;
+      &.swiper-pagination-bullet-active{
+        background:rgba(74,74,74,1);
       }
     }
+  }
 
-
-
+}
   .home-banner-wrap {
   height: 300px;
-  & >>> .swiper-wrapper {
+  .swiper-wrapper {
     height: 280px;
     .swiper-slide {
       img {
