@@ -5,7 +5,7 @@
         v-for="(item,index) in screenLists" 
         :key="index"
         @click="showPopup(item.type)"
-        
+
         >
         <span>{{item.title}}</span>
         <img 
@@ -176,8 +176,7 @@ export default {
         this.$emit('getChild', ["free",this.par.free])
       },
       childShow(id){
-        // this.listShow = id;
-        console.log(1111)
+        
       },
       showPopup(type){
         // this.$parent.init_nit_skuList();
@@ -244,9 +243,6 @@ export default {
           text-align: center;
         }
       }
-    } 
-    .van-height {
-      // height: 100%;
     }
     .van-radius {
       border-top-left-radius: 6px!important;
