@@ -13,6 +13,9 @@ import 'amfe-flexible';
 import Vant from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Vant);
+import VueScrollLock from 'vue-scroll-lock'
+
+Vue.use(VueScrollLock)
 
 import VueClipboard from 'vue-clipboard2';
 Vue.use(VueClipboard);
