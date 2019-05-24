@@ -5,6 +5,7 @@
         v-for="(item,index) in screenLists" 
         :key="index"
         @click="showPopup(item.type)"
+        
         >
         <span>{{item.title}}</span>
         <img 
