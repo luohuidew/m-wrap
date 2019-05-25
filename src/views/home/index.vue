@@ -1,7 +1,7 @@
 <template>
   <div id="weget" v-if="homeData">
     <homeCate></homeCate>
-    <banner :bannerData="homeData.home_banner" style="margin-top: 25px"></banner>
+    <banner :bannerData="homeData.home_banner" style="margin-top: 15px"></banner>
     <getApp></getApp>
     <themeOne  :listsData="homeData.theme1"></themeOne>
     <section class="theme2">

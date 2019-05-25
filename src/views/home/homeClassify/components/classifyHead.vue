@@ -1,6 +1,6 @@
 <template>
     <ul class="classify-Lists-box" id="classify-Lists-box">
-        <li v-for="(item,index) in classifyLists" :key="index" @click="change_classify_bg(item.id)">
+        <li v-for="(item,index) in classifyLists" :key="index" @click="change_classify_bg(item)">
             <div :class="activeIndex == item.id?'circle-container':'container-bg'" >
                 <div class="circle-con">
                    <img
@@ -30,17 +30,18 @@ export default {
         this.init_data();
     },
     methods: {
-        change_classify_bg(id){
+        change_classify_bg(item){
            if (this.$route.path === '/home/index') {
                this.$router.push({
                    path: '/home/classify',
                    query:{
-                        id: id
+                        id: item.id,
+                        name: item.cat_name
                    }
                })
            }
-           this.activeIndex = id
-           this.$emit("parentId",id)
+           this.activeIndex = item.id
+           this.$emit("parentId",item.id, item.cat_name)
         },
          init_data() {   // 获取分类列表
             api.getCateList().then(res => {
@@ -60,7 +61,7 @@ export default {
        overflow: scroll;
        height: 110px;
        -webkit-overflow-scrolling: touch;
-       padding: 15px 0 0 15px;
+       padding: 10px 0 10px 15px;
         li {
            margin-left: 15px;
            display: flex;
@@ -80,15 +81,15 @@ export default {
                 background: -webkit-linear-gradient(137deg, rgba(255,109,112,1), rgba(255,109,112,0.19));
                 border-radius: 50%;
                 display: flex;
+                overflow: hidden;
                 justify-content: center;
                 align-items: center;
                 .circle-con {
-                    width: 64px;
-                    height: 64px;
+                    width: 63px;
+                    height: 63px;
                     display: flex;
-                    justify-content: center;
-                    align-items: center;
                     background: #fff;
+                    overflow: hidden;
                     border-radius: 50%;
                     img {
                         width: 60px;

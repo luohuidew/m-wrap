@@ -3,7 +3,7 @@
     <classifyHead @parentId="updateId" :classId="classId"/>
     <ul class="screenList" id = "listFirstCate">
       <li @click="showAll()" v-if="this.threeName || this.twoName">
-        <span v-show="!this.threeName || this.threeName" class="mr5">{{this.twoName}} </span>
+        <span class="mr5">{{this.twoName}} </span>
         <span v-show="this.threeName"> > {{this.threeName}}</span>
         <img
           src="/static/images/icon/cart/分类 copy 2.png"
@@ -55,7 +55,7 @@
       <div class="show-all-wrapper">
         <h3>
           <van-icon name="cross" color="#9B9B9B" size="13" @click="closePopup(1)"/>
-          <p>Clothing</p>
+          <p>{{popAllName}}</p>
           <span @click="clearId">clear</span>
         </h3>
         <ul class="all-list">
@@ -168,6 +168,7 @@ export default {
     },
     data(){
       return{
+        popAllName: this.$route.query.name,
         classId: this.$route.query.id,
         parentId:undefined,
         skuList:[],
@@ -245,9 +246,11 @@ export default {
           this.childList = res.data;
         })
       },
-      updateId(id){
+      updateId(id, name){
+        this.popAllName = name
         this.parentId = id
         this.classId = id;
+        this.getCate()
         this.getSkuListData()
       },
       // classifyScreen
@@ -255,21 +258,23 @@ export default {
         this.actives = itemId.id;
         this.parentId = itemId.id;
         this._twoName = name;
+        this._threeName = ''
         console.log(this._twoName)
       },
       SlectThree(item,e) {
         this.actives = item.id;
         this.parentId = item.id;
-        this._twoName = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerHTML;
+        // this._twoName = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerHTML;
         this._threeName = e.currentTarget.innerText;
         console.log(this._twoName,this._threeName)
       },
       allBtn(){
         this.show_all = false;
         this.getSkuListData();
+        console.log(this._twoName)
         this.twoName = this._twoName;
         this.threeName = this._threeName
-        
+
       },
       showAll(){    // 请求all子类接口
         this.show_all = true;
@@ -277,8 +282,10 @@ export default {
       clearId(){
         this.actives = '';
         this.parentId = undefined
-        this.twoName = '';
-        this.threeName = '';
+        this._twoName = "";
+        this.twoName =  this._twoName;
+        this._threeName = "";
+        this.threeName = this._threeName;
         this.getSkuListData();
       },
       sortSelect(type,name){
@@ -310,6 +317,7 @@ export default {
         this.freeName = this._freeName;
       },
       childShow(item){
+        this._twoName = item.cat_name
         item.open = !item.open
         this.$forceUpdate();
       },
