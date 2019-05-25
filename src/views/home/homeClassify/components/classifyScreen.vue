@@ -4,21 +4,21 @@
       <li @click="showAll()" v-if="this.threeName || this.twoName">
         <span v-show="!this.threeName || this.threeName" class="mr5">{{this.twoName}} </span>
         <span v-show="this.threeName"> > {{this.threeName}}</span>
-        <img 
-          src="/static/images/icon/cart/分类 copy 2.png" 
+        <img
+          src="/static/images/icon/cart/分类 copy 2.png"
           alt="">
       </li>
       <li @click="showAll()" v-else>
         <span>All</span>
-        <img 
-          src="/static/images/icon/cart/分类 copy 2.png" 
+        <img
+          src="/static/images/icon/cart/分类 copy 2.png"
           alt="">
       </li>
-      
+
       <li @click="showPopup(2)">
         <span>Sort</span>
-        <img 
-          src="/static/images/icon/cart/分类 copy 2.png" 
+        <img
+          src="/static/images/icon/cart/分类 copy 2.png"
           alt="">
       </li>
        <li @click="showPopup(3)">
@@ -54,18 +54,18 @@
             :key='index'
             >
             <p>
-              <span @click="childShow(twoItem)">
+              <span @click="childShow(twoItem)" class="left-icon">
                 <span class="selec-icon-wrapper">
                   <label v-if="twoItem.chlid.length > 0">
-                    <img src="/static/images/icon/home/add.png" alt="" class="selcect-img1"  v-if="twoItem.chlid.length > 0 || twoItem.open == true">
-                    <img src="/static/images/icon/home/line.png" alt="" class="selcect-img2" v-if="twoItem.open == false">
+                    <img src="/static/images/icon/home/add.png" alt="" class="selcect-img1"  v-if="!twoItem.open">
+                    <img src="/static/images/icon/home/line.png" alt="" class="selcect-img2" v-if="twoItem.open">
                   </label>
                   <label class="hidden" v-else></label>
                 </span>
-                <span> {{twoItem.cat_name}}</span>
               </span>
               <span @click.stop="twoShow(twoItem,twoItem.cat_name)" class="twoShow">
-                <van-icon name="success" v-show="actives == twoItem.id "/>
+                <span>{{twoItem.cat_name}}</span>
+                <van-icon name="success" class="all-selected" v-show="actives == twoItem.id "/>
               </span>
             </p>
             <ol  v-bind:class="twoItem.open == true ? 'open': ''">
@@ -206,10 +206,11 @@ export default {
       SlectThree(item,e) {
         this.actives = item.id;
         this.par.categoryId = item.id;
-        this.twoName = e.target.parentElement.previousElementSibling.firstElementChild.lastElementChild.innerHTML;
+        // this.twoName = e.target.parentElement.previousElementSibling.firstElementChild.lastElementChild
+        this.twoName = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerHTML;
         this.threeName = e.currentTarget.innerText;
         console.log(this.twoName,this.threeName)
-        
+
       },
       allBtn(){
         this.show_all = false;
@@ -217,7 +218,7 @@ export default {
       },
       clearId(){
         this.actives = '';
-        this.categoryId = '';
+        this.par.categoryId = '';
         this.twoName = false;
       },
       sortSelect(type){
@@ -275,6 +276,8 @@ export default {
 
 <style  lang='scss' scoped>
   .classify-screen-page {
+    width: 100%;
+    overflow: hidden;
     position: -webkit-sticky;
     position: sticky;
     top: -1px;
@@ -291,11 +294,14 @@ export default {
       height: 2px;
     }
     & > ul {
+      width: 100%;
+      overflow: scroll;
+      overflow-scrolling: touch;
       padding: 15px;
-      display: flex;
+      white-space: nowrap;
       li {
-        margin-left:10px;
-        display: flex;
+        margin-right:10px;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
         font-size: 12px;
@@ -305,8 +311,8 @@ export default {
         box-sizing: border-box;
         border:1px solid #E1E1E1;
         border-radius: 18px;
-        &:nth-child(1){
-          margin-left: 0;
+        &:last-child{
+          margin-right: 0px;
         }
         img {
             width: 18px;
@@ -352,19 +358,27 @@ export default {
           // align-items:  center;
           font-size: 13px;
           p {
-            padding: 0 0 0 28px;
             // margin-left:12px;
             display: flex;
             align-items: center;
             border-bottom: 1px solid #E1E1E1;
-            justify-content: space-between;
+            /*justify-content: space-between;*/
+            .all-selected {
+              float: right;
+            }
             .hidden {
               display: inline-block;
               width:15px;
             }
-            .twoShow {
+            .left-icon{
+              width: 20px;
               display: inline-block;
-              width: 25%;
+            }
+            .twoShow {
+              flex: 1;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
               height: 38px;
               text-align: right;
               padding-right: 28px;
@@ -383,7 +397,7 @@ export default {
             }
             li {
               line-height: 38px;
-              padding: 0 80px;
+              padding: 0 28px 0 78px;
               border-bottom: 1px solid #E1E1E1;
               display: flex;
               justify-content: space-between;
