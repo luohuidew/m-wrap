@@ -17,13 +17,18 @@
       </li>
 
       <li @click="showPopup(2)">
-        <span>Sort</span>
+        <span v-if="this.sortName">{{this.sortName}}</span>
+        <span v-else>Sort</span>
         <img
           src="/static/images/icon/cart/分类 copy 2.png"
           alt="">
       </li>
        <li @click="showPopup(3)">
-        <span>Free shipping</span>
+        <span v-if="this.freeName">{{this.freeName}}</span>
+        <span v-else>Postage</span>
+        <img
+          src="/static/images/icon/cart/分类 copy 2.png"
+          alt="">
       </li>
     </ul>
     <van-list v-model="loading"
@@ -105,7 +110,7 @@
           <li
             v-for="(item,index) in sortList"
             :key='index'
-            @click="sortSelect(item.type)">
+            @click="sortSelect(item.type,item.title)">
             <span>{{item.title}}</span>
             <van-icon name="success" :class="{active : active == item.type}"/>
           </li>
@@ -131,7 +136,7 @@
           <li
             v-for="(item,index) in freeList"
             :key='index'
-            @click="freeSelect(item.type)"
+            @click="freeSelect(item.type,item.title)"
             >
             <span>{{item.title}}</span>
             <van-icon name="success" :class="{active : active1 == item.type}"/>
@@ -176,8 +181,14 @@ export default {
         actives:"",
         listShow:"",
         maxH:undefined,
+        _twoName:'',
         twoName:'',
+        _threeName:'',
         threeName:'',
+        sortName:'',
+        _sortName:'',
+        freeName:'',
+        _freeName:'',
         innerChange:undefined,
         par:{
           sort:undefined,
@@ -249,19 +260,20 @@ export default {
       twoShow(itemId,name){
         this.actives = itemId.id;
         this.par.categoryId = itemId.id;
-        this.twoName = name;
-        console.log(this.twoName)
+        this._twoName = name;
       },
       SlectThree(item,e) {
         this.actives = item.id;
         this.par.categoryId = item.id;
-        this.twoName = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerHTML;
-        this.threeName = e.currentTarget.innerText;
+        this._twoName = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerHTML;
+        this._threeName = e.currentTarget.innerText;
       },
       allBtn(){
         this.show_all = false;
         this.page = 1;
         this.skuList = [];
+        this.twoName = this._twoName;
+        this.three = this._threeName;
         this.parentId = this.par.categoryId;
         this.init_skuList();
         
@@ -275,13 +287,16 @@ export default {
         this.twoName = '';
         this.threeName = '';
       },
-      sortSelect(type){
+      sortSelect(type,name){
         this.active = type;
         this.par.sort = type;
+        this._sortName = name;
       },
-      freeSelect(type){
+      freeSelect(type,name){
         this.active1 = type;
         this.par.free = type;
+        this._freeName = name;
+        console.log(name,'0000')
       },
       sortBtn(){
         this.page = 1;
@@ -289,7 +304,7 @@ export default {
         this.sort = this.par.sort;
         this.skuList = [];
         this.init_skuList();
-        
+        this.sortName = this._sortName;
       },
       freeBtn(){
         this.page = 1;
@@ -297,6 +312,7 @@ export default {
         this.free = this.par.free;
         this.skuList = [];
         this.init_skuList();
+        this.freeName = this._freeName;
       },
       childShow(item){
         item.open = !item.open
@@ -310,7 +326,6 @@ export default {
         }
       },
       closePopup(type) {
-        console.log(2133)
         switch (type) {
           case 1:
             return this.show_all = false;
