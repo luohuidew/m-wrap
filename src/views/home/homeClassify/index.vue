@@ -1,7 +1,31 @@
 <template>
   <div class="home-classify-page">
     <classifyHead @parentId="updateId" :classId="classId"/>
-    <classifyScreen @getChild="getAll" :childData="childList"/>
+    <ul class="screenList">
+      <li @click="showAll()" v-if="this.threeName || this.twoName">
+        <span v-show="!this.threeName || this.threeName" class="mr5">{{this.twoName}} </span>
+        <span v-show="this.threeName"> > {{this.threeName}}</span>
+        <img
+          src="/static/images/icon/cart/分类 copy 2.png"
+          alt="">
+      </li>
+      <li @click="showAll()" v-else>
+        <span>All</span>
+        <img
+          src="/static/images/icon/cart/分类 copy 2.png"
+          alt="">
+      </li>
+
+      <li @click="showPopup(2)">
+        <span>Sort</span>
+        <img
+          src="/static/images/icon/cart/分类 copy 2.png"
+          alt="">
+      </li>
+       <li @click="showPopup(3)">
+        <span>Free shipping</span>
+      </li>
+    </ul>
     <van-list v-model="loading"
               :immediate-check="false"
               :finished="finished"
@@ -18,11 +42,114 @@
         </li>
       </ul>
     </van-list>
+    <!-- all  -->
+    <van-popup v-model="show_all"
+      position="bottom"
+      :overlay="true"
+      :style="{height:maxH}">
+      <div class="show-all-wrapper">
+        <h3>
+          <van-icon name="cross" color="#9B9B9B" size="13" @click="closePopup(1)"/>
+          <p>Clothing</p>
+          <span @click="clearId">clear</span>
+        </h3>
+        <ul class="all-list">
+          <li
+            v-for="(twoItem,index) in childList"
+            :key='index'
+            >
+            <p>
+              <span @click="childShow(twoItem)" class="left-icon">
+                <span class="selec-icon-wrapper">
+                  <label v-if="twoItem.chlid.length > 0">
+                    <img src="/static/images/icon/home/add.png" alt="" class="selcect-img1"  v-if="!twoItem.open">
+                    <img src="/static/images/icon/home/line.png" alt="" class="selcect-img2" v-if="twoItem.open">
+                  </label>
+                  <label class="hidden" v-else></label>
+                </span>
+              </span>
+              <span @click.stop="twoShow(twoItem,twoItem.cat_name)" class="twoShow">
+                <span>{{twoItem.cat_name}}</span>
+                <van-icon name="success" class="all-selected" v-show="actives == twoItem.id "/>
+              </span>
+            </p>
+            <ol  v-bind:class="twoItem.open == true ? 'open': ''">
+              <li
+                v-for="(items,index) in twoItem.chlid"
+                @click.stop="SlectThree(items,$event)"
+                :key='index'>
+                <span>{{items.cat_name}}</span>
+                <van-icon name="success" v-show="actives == items.id "/>
+              </li>
+            </ol>
+          </li>
+        </ul>
+        <p class="select-btn" @click="allBtn">
+          <span>View results</span>
+        </p>
+      </div>
+    </van-popup>
+
+    <!-- sort -->
+    <van-popup v-model="show_sort"
+      position="bottom"
+      :overlay="true"
+      class="van-radius">
+      <div class="show-sort-wraper">
+        <h3>
+          <van-icon name="cross" color="#9B9B9B" size="13" @click="closePopup(2)"/>
+          <p>Sort</p>
+          <span></span>
+        </h3>
+        <ul class="sort-list">
+          <li
+            v-for="(item,index) in sortList"
+            :key='index'
+            @click="sortSelect(item.type)">
+            <span>{{item.title}}</span>
+            <van-icon name="success" :class="{active : active == item.type}"/>
+          </li>
+        </ul>
+        <p class="select-btn" @click="sortBtn">
+          <span>View results</span>
+        </p>
+      </div>
+    </van-popup>
+
+    <!-- free -->
+    <van-popup v-model="show_free"
+      position="bottom"
+      :overlay="true"
+      class="van-radius">
+      <div class="show-free-wrapper">
+        <h3>
+          <van-icon name="cross"  color="#9B9B9B" size="13" @click="closePopup(3)"/>
+          <p>Free shipping</p>
+          <span></span>
+        </h3>
+        <ul class="sort-list">
+          <li
+            v-for="(item,index) in freeList"
+            :key='index'
+            @click="freeSelect(item.type)"
+            >
+            <span>{{item.title}}</span>
+            <van-icon name="success" :class="{active : active1 == item.type}"/>
+          </li>
+        </ul>
+        <p class="select-btn" @click="freeBtn">
+          <span>View results</span>
+        </p>
+      </div>
+
+    </van-popup>
+
   </div>
 </template>
 
 <script>
 import api from "@/api/classify";
+import data from './components/config.js'
 import classifyHead from "./components/classifyHead";
 import classifyScreen from './components/classifyScreen';
 import goodItem from "@/components/good-column-auto";
@@ -35,13 +162,47 @@ export default {
       return{
         classId: this.$route.query.id,
         parentId:undefined,
-        // categoryId:undefined,
         skuList:[],
         loading: false,
         finished: false,
         show:false,
         page:1,
-        childList:[]
+        childList:[],
+        show_all:false,
+        show_sort:false,
+        show_free:false,
+        active:"",
+        active1:"",
+        actives:"",
+        listShow:"",
+        maxH:undefined,
+        twoName:'',
+        threeName:'',
+        innerChange:undefined,
+        par:{
+          sort:undefined,
+          free:undefined,
+          categoryId:undefined
+        },
+        sortList:data.sortList,
+        freeList:data.freeList,
+        screenLists:[
+          {
+            type:1,
+            title:'All',
+            src:"/static/images/icon/cart/分类 copy 2.png"
+          },
+          {
+            type:2,
+            title:"Sort",
+            src:"/static/images/icon/cart/分类 copy 2.png"
+          },
+          {
+            type:3,
+            title:"Free shipping",
+          }
+        ],
+
       }
     },
     watch: {},
@@ -70,19 +231,76 @@ export default {
           this.childList = res.data;
         })
       },
-      getAll(data){   //获取子类列表
-
-        if(data[0] == "sort") {
-          this.sort = data[1];
-        }
-        if(data[0] == "free") {
-          this.free = data[1];
-        }
-        if(data[0] == "categoryId") {
-          this.parentId = data[1];
-        }
+      // classifyScreen
+      twoShow(itemId,name){
+        this.actives = itemId.id;
+        this.par.categoryId = itemId.id;
+        this.twoName = name;
+        console.log(this.twoName)
+      },
+      SlectThree(item,e) {
+        this.actives = item.id;
+        this.par.categoryId = item.id;
+        this.twoName = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerHTML;
+        this.threeName = e.currentTarget.innerText;
+      },
+      allBtn(){
+        this.show_all = false;
+      },
+      showAll(){    // 请求all子类接口
+        this.show_all = true;
         this.page = 1;
+        this.parentId = this.par.categoryId;
         this.init_skuList();
+      },
+      clearId(){
+        this.actives = '';
+        this.par.categoryId = '';
+        this.twoName = '';
+        this.threeName = '';
+      },
+      sortSelect(type){
+        this.active = type;
+        this.par.sort = type;
+      },
+      freeSelect(type){
+        this.active1 = type;
+        this.par.free = type;
+      },
+      sortBtn(){
+        this.show_sort = false;
+        this.sort = this.par.sort;
+        this.init_skuList();
+        
+      },
+      freeBtn(){
+        this.show_free = false;
+        this.free = this.par.sort;
+        this.init_skuList();
+      },
+      childShow(item){
+        item.open = !item.open
+        this.$forceUpdate();
+      },
+      showPopup(type){
+        if(type == 2) {
+          this.show_sort = true;
+        }else if (type == 3){
+          this.show_free = true;
+        }
+      },
+      closePopup(type) {
+        console.log(2133)
+        switch (type) {
+          case 1:
+            return this.show_all = false;
+          case 2:
+            return this.show_sort = false;
+          case 3:
+            return this.show_free = false;
+          default:
+            return "this is default";
+        }
       },
       init_skuList(){   // 商品搜索列表
         let params = {
@@ -103,10 +321,7 @@ export default {
             this.page++;
           }
         });
-      },
-      closePopup() {
-        this.show = false
-      },
+      }
 
     },
     components: {
@@ -115,27 +330,195 @@ export default {
       goodItem
     },
     mounted(){
-
+      let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      this.maxH = (h - 88) + 'px';
     }
 }
 </script>
 <style lang='scss' scoped>
   .home-classify-page{
     height: 100%;
-  }
-  .vant-list{
-    border: 1px solid #000;
+    .screenList {
+      width: 100%;
+      overflow: scroll;
+      overflow-scrolling: touch;
+      padding: 15px;
+      white-space: nowrap;
+      position: -webkit-sticky;
+      position: sticky;
+      top: -1px;
+      background: #fff;
+      li {
+        margin-right:10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 0 15px;
+        height: 32px;
+        box-sizing: border-box;
+        border:1px solid #E1E1E1;
+        border-radius: 18px;
+        &:last-child{
+          margin-right: 0px;
+        }
+        img {
+            width: 18px;
+            height: 10px;
+            margin-left: 3px;
+        }
+        span {
+          text-align: center;
+          white-space: nowrap;
+        }
+      }
+    }
+    .show-sort-wraper,
+    .show-free-wrapper,
+    .show-all-wrapper {
+      padding: 13px 0 28px;
+      h3 {
+        padding: 0 30px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        p {
+          font-size: 14px;
+        }
+        span {
+          font-weight: normal;
+          color: #9B9B9B;
+        }
+      }
+      .all-list {
+        & > li {
+          line-height: 38px;
+          border-bottom: none;
+          display: flex;
+          flex-direction: column;
+          // align-items:  center;
+          font-size: 13px;
+          p {
+            // margin-left:12px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #E1E1E1;
+            /*justify-content: space-between;*/
+            .all-selected {
+              float: right;
+            }
+            .hidden {
+              display: inline-block;
+              width:15px;
+            }
+            .left-icon{
+              width: 20px;
+              display: inline-block;
+            }
+            .twoShow {
+              flex: 1;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              height: 38px;
+              text-align: right;
+              padding-right: 28px;
+            }
+            span {
+              margin-left: 10px;
+            }
+          }
+          ol {
+            display: flex;
+            flex-direction: column;
+            height: 0px;
+            overflow: hidden;
+            &.open{
+              height: auto;
+            }
+            li {
+              line-height: 38px;
+              padding: 0 28px 0 78px;
+              border-bottom: 1px solid #E1E1E1;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            }
+          }
+        }
 
+      }
+      .sort-list {
+        li {
+          padding: 0 30px;
+          line-height: 38px;
+          border-bottom: 1px solid #E1E1E1;
+          display: flex;
+          justify-content: space-between;
+          align-items:  center;
+          font-size: 13px;
+          .van-icon {
+            display: none;
+          }
+          .active {
+            display: block;
+          }
+        }
+      }
+      .select-btn {
+        padding: 0 15px;
+        text-align: center;
+        margin-top: 37px;
+        span {
+          display: inline-block;
+          width: 100%;
+          line-height: 46px;
+          background: #000000;
+          border-radius: 23px;
+          color: #fff;
+          font-size: 14px;
+          font-weight: bold;
+
+        }
+      }
+    }
+    .show-all-wrapper {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .all-list {
+        flex: 1;
+        overflow: auto;
+      }
+    }
   }
-.sku-list {
-  padding: 0 15px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  & > li {
-    width: 48%;
-    margin-bottom: 15px;
+  .mr5  {
+    margin-right: 5px;
   }
-}
+  .selcect-img1 {
+    width: 10px;
+    height: 10px;
+  }
+  .selcect-img2 {
+    width: 10px;
+    height: 2px;
+  }
+  .van-radius {
+    border-top-left-radius: 6px!important;
+    border-top-right-radius: 6px!important;
+  }
+  .sku-list {
+    padding: 0 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    & > li {
+      width: 48%;
+      margin-bottom: 15px;
+    }
+  }
+
 </style>
 
