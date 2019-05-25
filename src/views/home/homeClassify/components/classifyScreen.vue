@@ -57,12 +57,10 @@
               <span @click="childShow(twoItem)">
                 <span class="selec-icon-wrapper">
                   <label v-if="twoItem.chlid.length > 0">
-                    <van-icon name="plus" color="#9B9B9B" size='12' v-if="twoItem.chlid.length > 0"/>
-                    <div v-else>-</div>
+                    <img src="/static/images/icon/home/add.png" alt="" class="selcect-img1"  v-if="twoItem.chlid.length > 0 && twoItem.open == true">
+                    <img src="/static/images/icon/home/line.png" alt="" class="selcect-img2" v-if="twoItem.chlid.length = 0 && twoItem.open == false">
                   </label>
                   <label class="hidden" v-else></label>
-                  <!-- <van-icon name="plus" color="#9B9B9B" size='12' v-if="twoItem.chlid.length > 0"/>
-                  <label v-else class="hidden"></label> -->
                 </span>
                 <span> {{twoItem.cat_name}}</span>
               </span>
@@ -203,7 +201,7 @@ export default {
         this.actives = itemId.id;
         this.par.categoryId = itemId.id;
         this.twoName = name;
-        // console.log(this.twoName)
+        console.log(this.twoName)
       },
       SlectThree(item,e) {
         this.actives = item.id;
@@ -216,7 +214,6 @@ export default {
       allBtn(){
         this.show_all = false;
         this.$emit('getChild', ["categoryId",this.par.categoryId]);
-         console.log(this.twoName,this.threeName,'====')
       },
       clearId(){
         this.actives = '';
@@ -284,6 +281,14 @@ export default {
     background: #fff;
     .mr5  {
       margin-right: 5px;
+    }
+    .selcect-img1 {
+      width: 10px;
+      height: 10px;
+    }
+    .selcect-img2 {
+      width: 10px;
+      height: 2px;
     }
     & > ul {
       padding: 15px;

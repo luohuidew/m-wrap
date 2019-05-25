@@ -5,7 +5,7 @@
     <van-list v-model="loading"
               :immediate-check="false"
               :finished="finished"
-              :finished-text="''"
+              finished-text="No more data"
               :loading-text="'Loading...'"
               @load="init_skuList">
       <ul class="sku-list">
@@ -40,6 +40,7 @@ export default {
         loading: false,
         finished: false,
         show:false,
+        page:1,
         childList:[]
       }
     },
@@ -51,47 +52,55 @@ export default {
     methods: {
       updateId(data){
         this.parentId = data.id;
+        this.finished = false
+        this.skuList = [];
+        this.page = 1;
         this.init_skuList();
+        let params = {
+          parent_id: this.parentId,
+        }
+        api.getCateChlid(params).then(res => {   
+          this.childList.forEach((item) => {
+            item.open=false
+            item.chlid.forEach((chid)=>{
+              chid.open = false
+            })
+          })
+          this.childList = res.data;
+        })
       },
       getAll(data){   //获取子类列表
-        if(data == "click") {
-          let params = {
-            parent_id: this.parentId,
-          }
-          api.getCateChlid(params).then(res => {
-          // console.log(res.data);
-            this.childList = res.data;
-            this.childList.forEach((item) => {
-              item.open=false
-              item.chlid.forEach((chid)=>{
-                chid.open = false
-              })
-            })
-            // console.log(this.childList,'====')
-          })
-        }else {
-          if(data[0] == "sort") {
-            this.sort = data[1];
-          }
-          if(data[0] == "free") {
-            this.free = data[1];
-          }
-          if(data[0] == "categoryId") {
-            this.parentId = data[1];
-          }
+   
+        if(data[0] == "sort") {
+          this.sort = data[1];
         }
+        if(data[0] == "free") {
+          this.free = data[1];
+        }
+        if(data[0] == "categoryId") {
+          this.parentId = data[1];
+        }
+        this.page = 1;
         this.init_skuList();
-        
       },
       init_skuList(){   // 商品搜索列表
         let params = {
           categoryId: this.parentId || this.classId,
           sort:this.sort,
           free:this.free,
-          pageSize:12
+          pageSize:12,
+          page:this.page
         };
         api.getSkuList(params).then(res => {
-          this.skuList = res.data.data;
+          const data =  res.data.data;
+          if (data.length === 0) {
+            this.finished = true;
+            this.loading = false
+          } else {
+            this.skuList = [...this.skuList, ...data]
+            this.loading = false
+            this.page++;
+          }
         });
       },
       closePopup() {
@@ -111,7 +120,6 @@ export default {
 </script>
 <style lang='scss' scoped>
   .home-classify-page{
-    border: 1px solid red;
     height: 100%;
   }
   .vant-list{
