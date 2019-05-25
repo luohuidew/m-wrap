@@ -1,18 +1,40 @@
 <template>
   <div class="classify-screen-page">
     <ul>
-      <li
+      <li @click="showAll()" v-if="this.threeName || this.twoName">
+        <span v-show="!this.threeName || this.threeName" class="mr5">{{this.twoName}} </span>
+        <span v-show="this.threeName"> > {{this.threeName}}</span>
+        <img 
+          src="/static/images/icon/cart/分类 copy 2.png" 
+          alt="">
+      </li>
+      <li @click="showAll()" v-else>
+        <span>All</span>
+        <img 
+          src="/static/images/icon/cart/分类 copy 2.png" 
+          alt="">
+      </li>
+      
+      <li @click="showPopup(2)">
+        <span>Sort</span>
+        <img 
+          src="/static/images/icon/cart/分类 copy 2.png" 
+          alt="">
+      </li>
+       <li @click="showPopup(3)">
+        <span>Free shipping</span>
+      </li>
+      <!-- <li
         v-for="(item,index) in screenLists"
         :key="index"
         @click="showPopup(item.type)"
-
         >
         <span>{{item.title}}</span>
         <img
           v-if="item.src"
           :src=item.src
           alt="">
-      </li>
+      </li> -->
     </ul>
     <!-- all  -->
     <van-popup v-model="show_all"
@@ -24,22 +46,34 @@
         <h3>
           <van-icon name="cross" color="#9B9B9B" size="13" @click="closePopup(1)"/>
           <p>Clothing</p>
-          <span>clear</span>
+          <span @click="clearId">clear</span>
         </h3>
         <ul class="all-list">
           <li
             v-for="(twoItem,index) in listData"
             :key='index'
-            @click="childShow(twoItem)">
+            >
             <p>
-              <van-icon name="plus" color="#9B9B9B" size='12' v-if="twoItem.chlid.length > 0"/>
-              <label v-else class="hidden"></label>
-              <span> {{twoItem.cat_name}}</span>
+              <span @click="childShow(twoItem)">
+                <span class="selec-icon-wrapper">
+                  <label v-if="twoItem.chlid.length > 0">
+                    <van-icon name="plus" color="#9B9B9B" size='12' v-if="twoItem.chlid.length > 0"/>
+                    <div v-else>-</div>
+                  </label>
+                  <label class="hidden" v-else></label>
+                  <!-- <van-icon name="plus" color="#9B9B9B" size='12' v-if="twoItem.chlid.length > 0"/>
+                  <label v-else class="hidden"></label> -->
+                </span>
+                <span> {{twoItem.cat_name}}</span>
+              </span>
+              <span @click.stop="twoShow(twoItem,twoItem.cat_name)" class="twoShow">
+                <van-icon name="success" v-show="actives == twoItem.id "/>
+              </span>
             </p>
             <ol  v-bind:class="twoItem.open == true ? 'open': ''">
               <li
                 v-for="(items,index) in twoItem.chlid"
-                @click.stop="SlectThree(items)"
+                @click.stop="SlectThree(items,$event)"
                 :key='index'>
                 <span>{{items.cat_name}}</span>
                 <van-icon name="success" v-show="actives == items.id "/>
@@ -126,9 +160,13 @@ export default {
         actives:"",
         listShow:"",
         maxH:undefined,
+        twoName:'',
+        threeName:'',
+        innerChange:undefined,
         par:{
           sort:undefined,
           free:undefined,
+          categoryId:undefined
         },
         sortList:data.sortList,
         freeList:data.freeList,
@@ -161,9 +199,29 @@ export default {
 
     },
     methods: {
-      SlectThree(item) {
-        this.actives = item.id
-
+      twoShow(itemId,name){
+        this.actives = itemId.id;
+        this.par.categoryId = itemId.id;
+        this.twoName = name;
+        // console.log(this.twoName)
+      },
+      SlectThree(item,e) {
+        this.actives = item.id;
+        this.par.categoryId = item.id;
+        this.twoName = e.target.parentElement.previousElementSibling.firstElementChild.lastElementChild.innerHTML;
+        this.threeName = e.currentTarget.innerText;
+        console.log(this.twoName,this.threeName)
+        
+      },
+      allBtn(){
+        this.show_all = false;
+        this.$emit('getChild', ["categoryId",this.par.categoryId]);
+         console.log(this.twoName,this.threeName,'====')
+      },
+      clearId(){
+        this.actives = '';
+        this.categoryId = '';
+        this.twoName = false;
       },
       sortSelect(type){
         this.active = type;
@@ -186,15 +244,15 @@ export default {
         this.$forceUpdate();
       },
       showPopup(type){
-        // this.$parent.init_nit_skuList();
-        if(type == 1) {
-          this.$emit('getChild','click');
-          this.show_all = true;
-        } else if(type == 2) {
+        if(type == 2) {
           this.show_sort = true;
         }else if (type == 3){
           this.show_free = true;
         }
+      },
+      showAll(){
+        this.$emit('getChild','click');
+        this.show_all = true;
       },
       closePopup(type) {
         switch (type) {
@@ -224,6 +282,9 @@ export default {
     position: sticky;
     top: -1px;
     background: #fff;
+    .mr5  {
+      margin-right: 5px;
+    }
     & > ul {
       padding: 15px;
       display: flex;
@@ -234,7 +295,8 @@ export default {
         justify-content: center;
         font-size: 12px;
         font-weight: bold;
-        padding: 10px 15px;
+        padding: 0 15px;
+        height: 32px;
         box-sizing: border-box;
         border:1px solid #E1E1E1;
         border-radius: 18px;
@@ -248,6 +310,7 @@ export default {
         }
         span {
           text-align: center;
+          white-space: nowrap;
         }
       }
     }
@@ -284,14 +347,22 @@ export default {
           // align-items:  center;
           font-size: 13px;
           p {
-            padding: 0 30px;
+            padding: 0 0 0 28px;
             // margin-left:12px;
             display: flex;
             align-items: center;
             border-bottom: 1px solid #E1E1E1;
+            justify-content: space-between;
             .hidden {
               display: inline-block;
               width:15px;
+            }
+            .twoShow {
+              display: inline-block;
+              width: 25%;
+              height: 38px;
+              text-align: right;
+              padding-right: 28px;
             }
             span {
               margin-left: 10px;
@@ -307,16 +378,13 @@ export default {
             }
             li {
               line-height: 38px;
-              padding: 0 70px;
+              padding: 0 80px;
               border-bottom: 1px solid #E1E1E1;
               display: flex;
               justify-content: space-between;
               align-items: center;
             }
           }
-          // .listShow {
-          //   display: block;
-          // }
         }
 
       }
@@ -352,6 +420,16 @@ export default {
           font-weight: bold;
 
         }
+      }
+    }
+    .show-all-wrapper {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .all-list {
+        flex: 1;
+        overflow: auto;
       }
     }
   }

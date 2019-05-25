@@ -35,6 +35,7 @@ export default {
       return{
         classId: this.$route.query.id,
         parentId:undefined,
+        // categoryId:undefined,
         skuList:[],
         loading: false,
         finished: false,
@@ -58,32 +59,31 @@ export default {
             parent_id: this.parentId,
           }
           api.getCateChlid(params).then(res => {
-            console.log(res.data);
+          // console.log(res.data);
             this.childList = res.data;
+            this.childList.forEach((item) => {
+              item.open=false
+              item.chlid.forEach((chid)=>{
+                chid.open = false
+              })
+            })
+            // console.log(this.childList,'====')
           })
-        }
-        if(data[0] == "sort") {
-          this.sort = data[1];
-        }
-        if(data[0] == "free") {
-          this.free = data[1];
+        }else {
+          if(data[0] == "sort") {
+            this.sort = data[1];
+          }
+          if(data[0] == "free") {
+            this.free = data[1];
+          }
+          if(data[0] == "categoryId") {
+            this.parentId = data[1];
+          }
         }
         this.init_skuList();
-        console.log(this.sort,this.free)
-        api.getCateChlid(params).then(res => {
-          console.log(res.data);
-          this.childList = res.data;
-          this.childList.forEach((item) => {
-            item.open=false
-            item.chlid.forEach((chid)=>{
-              chid.open = false
-            })
-          })
-          console.log(this.childList,'====')
-        })
+        
       },
       init_skuList(){   // 商品搜索列表
-        alert(222)
         let params = {
           categoryId: this.parentId || this.classId,
           sort:this.sort,
@@ -93,18 +93,6 @@ export default {
         api.getSkuList(params).then(res => {
           this.skuList = res.data.data;
         });
-        // api.getSkuList(params).then(res => {
-        //   if (!res.data.data.length) {
-        //     this.finished = true;
-        //     this.loading = false;
-        //   }
-        //   res.data.data.forEach(item => {
-        //     // this.selectId = res.data.extend.selectId;
-        //     this.loading = false;
-        //     this.skuList.push(item);
-        //   });
-        // });
-        // console.log(_this.skuList,_this.skuList.length);
       },
       closePopup() {
         this.show = false
