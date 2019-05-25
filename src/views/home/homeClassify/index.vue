@@ -208,15 +208,29 @@ export default {
     watch: {},
     computed: {},
     created() {
-      this.init_skuList()
+      this.init_skuList();
+      let params = {
+          parent_id: this.parentId,
+        }
+      api.getCateChlid(params).then(res => {
+          this.childList.forEach((item) => {
+            item.open=false
+            item.chlid.forEach((chid)=>{
+              chid.open = false
+            })
+          })
+          this.childList = res.data;
+        })
     },
     methods: {
       updateId(data){
-        this.parentId = data.id;
-        this.finished = false
+        // console.log(111111)
         this.skuList = [];
+        this.parentId = data.id; 
+        // this.firstId = data.first;
+        this.finished = false;
         this.page = 1;
-        this.classId = this.parentId
+        this.classId = this.parentId;
         this.init_skuList();
         let params = {
           parent_id: this.parentId,
@@ -246,16 +260,18 @@ export default {
       },
       allBtn(){
         this.show_all = false;
+        this.page = 1;
+        this.skuList = [];
+        this.parentId = this.par.categoryId;
+        this.init_skuList();
+        
       },
       showAll(){    // 请求all子类接口
         this.show_all = true;
-        this.page = 1;
-        this.parentId = this.par.categoryId;
-        this.init_skuList();
       },
       clearId(){
         this.actives = '';
-        this.par.categoryId = '';
+        this.par.categoryId = this.classId;
         this.twoName = '';
         this.threeName = '';
       },
@@ -268,14 +284,18 @@ export default {
         this.par.free = type;
       },
       sortBtn(){
+        this.page = 1;
         this.show_sort = false;
         this.sort = this.par.sort;
+        this.skuList = [];
         this.init_skuList();
         
       },
       freeBtn(){
+        this.page = 1;
         this.show_free = false;
-        this.free = this.par.sort;
+        this.free = this.par.free;
+        this.skuList = [];
         this.init_skuList();
       },
       childShow(item){

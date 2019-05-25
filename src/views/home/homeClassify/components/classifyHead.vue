@@ -40,7 +40,7 @@ export default {
                })
            }
            this.activeIndex = id
-           this.$emit("parentId",{id:id})
+           this.$emit("parentId",{id:id,first:id})
         },
          init_data() {   // 获取分类列表
             api.getCateList().then(res => {
@@ -53,11 +53,17 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+  
    .classify-Lists-box {
+        ::webkit-scrollbar {
+           display: none!important;
+        }
        display: flex;
        flex-wrap: nowrap;
-       overflow: auto;
+       overflow: scroll;
+       -webkit-overflow-scrolling: touch;
        padding: 15px 0 0 15px;
+       
         li {
            margin-left: 15px;
            display: flex;
