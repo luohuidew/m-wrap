@@ -109,7 +109,7 @@ export default {
   width: 100%;
   .goods-title {
     text-align: center;
-    height: 43px;
+    height: 40px;
     font-size: 12px;
     line-height: 20px;
     overflow: hidden;
@@ -123,6 +123,7 @@ export default {
 
   .pay-price {
     .current {
+      margin-top: 3px;
       display: block;
       text-align: center;
       font-size:14px;

@@ -55,11 +55,12 @@ export default {
         this.finished = false
         this.skuList = [];
         this.page = 1;
+        this.classId = this.parentId
         this.init_skuList();
         let params = {
           parent_id: this.parentId,
         }
-        api.getCateChlid(params).then(res => {   
+        api.getCateChlid(params).then(res => {
           this.childList.forEach((item) => {
             item.open=false
             item.chlid.forEach((chid)=>{
@@ -70,7 +71,7 @@ export default {
         })
       },
       getAll(data){   //获取子类列表
-   
+
         if(data[0] == "sort") {
           this.sort = data[1];
         }
