@@ -1,5 +1,5 @@
 <template>
-    <ul class="classify-Lists-box">
+    <ul class="classify-Lists-box" id="classify-Lists-box">
         <li v-for="(item,index) in classifyLists" :key="index" @click="change_classify_bg(item.id)">
             <div :class="activeIndex == item.id?'circle-container':'container-bg'" >
                 <div class="circle-con">
@@ -40,7 +40,7 @@ export default {
                })
            }
            this.activeIndex = id
-           this.$emit("parentId",{id:id,first:id})
+           this.$emit("parentId",id)
         },
          init_data() {   // 获取分类列表
             api.getCateList().then(res => {
@@ -53,17 +53,14 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  
+
    .classify-Lists-box {
-        ::webkit-scrollbar {
-           display: none!important;
-        }
        display: flex;
        flex-wrap: nowrap;
        overflow: scroll;
+       height: 110px;
        -webkit-overflow-scrolling: touch;
        padding: 15px 0 0 15px;
-       
         li {
            margin-left: 15px;
            display: flex;

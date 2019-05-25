@@ -1,7 +1,7 @@
 <template>
-  <div class="home-classify-page">
+  <div class="home-classify-page" v-scroll>
     <classifyHead @parentId="updateId" :classId="classId"/>
-    <ul class="screenList">
+    <ul class="screenList" id = "listFirstCate">
       <li @click="showAll()" v-if="this.threeName || this.twoName">
         <span v-show="!this.threeName || this.threeName" class="mr5">{{this.twoName}} </span>
         <span v-show="this.threeName"> > {{this.threeName}}</span>
@@ -153,6 +153,9 @@ import data from './components/config.js'
 import classifyHead from "./components/classifyHead";
 import classifyScreen from './components/classifyScreen';
 import goodItem from "@/components/good-column-auto";
+let classify_Lists_box_height = 0
+let listFirstCate
+let bannerOffsetTop
 export default {
     name: "",
     props:{
@@ -208,32 +211,18 @@ export default {
     watch: {},
     computed: {},
     created() {
-      this.init_skuList();
-      let params = {
-          parent_id: this.parentId,
-        }
-      api.getCateChlid(params).then(res => {
-          this.childList.forEach((item) => {
-            item.open=false
-            item.chlid.forEach((chid)=>{
-              chid.open = false
-            })
-          })
-          this.childList = res.data;
-        })
+      this.getSkuListData();
+      this.getCate()
     },
     methods: {
-      updateId(data){
-        // console.log(111111)
+      getSkuListData(){
         this.skuList = [];
-        this.parentId = data.id; 
-        // this.firstId = data.first;
-        this.finished = false;
         this.page = 1;
-        this.classId = this.parentId;
         this.init_skuList();
+      },
+      getCate(){
         let params = {
-          parent_id: this.parentId,
+          parent_id: this.classId,
         }
         api.getCateChlid(params).then(res => {
           this.childList.forEach((item) => {
@@ -245,35 +234,37 @@ export default {
           this.childList = res.data;
         })
       },
+      updateId(id){
+        this.parentId = id
+        this.classId = id;
+        this.getSkuListData()
+      },
       // classifyScreen
       twoShow(itemId,name){
         this.actives = itemId.id;
-        this.par.categoryId = itemId.id;
+        this.parentId = itemId.id;
         this.twoName = name;
         console.log(this.twoName)
       },
       SlectThree(item,e) {
         this.actives = item.id;
-        this.par.categoryId = item.id;
+        this.parentId = item.id;
         this.twoName = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerHTML;
         this.threeName = e.currentTarget.innerText;
       },
       allBtn(){
         this.show_all = false;
-        this.page = 1;
-        this.skuList = [];
-        this.parentId = this.par.categoryId;
-        this.init_skuList();
-        
+        this.getSkuListData();
       },
       showAll(){    // 请求all子类接口
         this.show_all = true;
       },
       clearId(){
         this.actives = '';
-        this.par.categoryId = this.classId;
+        this.parentId = undefined
         this.twoName = '';
         this.threeName = '';
+        this.getSkuListData();
       },
       sortSelect(type){
         this.active = type;
@@ -289,7 +280,7 @@ export default {
         this.sort = this.par.sort;
         this.skuList = [];
         this.init_skuList();
-        
+
       },
       freeBtn(){
         this.page = 1;
@@ -310,19 +301,11 @@ export default {
         }
       },
       closePopup(type) {
-        console.log(2133)
-        switch (type) {
-          case 1:
-            return this.show_all = false;
-          case 2:
-            return this.show_sort = false;
-          case 3:
-            return this.show_free = false;
-          default:
-            return "this is default";
-        }
+        this.show_sort = false;
+        this.show_all = false;
+        this.show_free = false;
       },
-      init_skuList(){   // 商品搜索列表
+      init_skuList(){// 商品搜索列表
         let params = {
           categoryId: this.parentId || this.classId,
           sort:this.sort,
@@ -339,6 +322,7 @@ export default {
             this.skuList = [...this.skuList, ...data]
             this.loading = false
             this.page++;
+            this.finished = false;
           }
         });
       }
@@ -349,24 +333,50 @@ export default {
       classifyScreen,
       goodItem
     },
+  directives: {
+    scroll: {
+      bind: (el, binding) => {
+        // 监听滚动事件
+        el.onscroll = (e) => {
+          let top =  e.target.scrollTop
+          if (top > classify_Lists_box_height){
+            listFirstCate.style.top= bannerOffsetTop+ 'px'
+            listFirstCate.style.position= 'fixed'
+            console.log(222)
+          }
+          else {
+            console.log(33)
+            listFirstCate.style.position= 'inherit'
+          }
+        }
+      }
+    }
+  },
     mounted(){
+      let app_header = document.querySelector("#app-header-top");
+      let app_banner = document.querySelector("#banner-box");
+      classify_Lists_box_height = document.querySelector("#classify-Lists-box").offsetHeight;
+      listFirstCate = document.querySelector("#listFirstCate")
+      let top_number = app_header.offsetHeight;
+      let banner_number = app_banner.offsetHeight;
+      bannerOffsetTop = this.offsetTop = top_number + banner_number;
       let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-      this.maxH = (h - 88) + 'px';
+      this.maxH = (h - this.offsetTop) + 'px';
     }
 }
 </script>
 <style lang='scss' scoped>
   .home-classify-page{
     height: 100%;
+    overflow: scroll;
     .screenList {
       width: 100%;
       overflow: scroll;
       overflow-scrolling: touch;
       padding: 15px;
       white-space: nowrap;
-      position: -webkit-sticky;
-      position: sticky;
-      top: -1px;
+      /*position: -webkit-sticky;*/
+      /*position: sticky;*/
       background: #fff;
       li {
         margin-right:10px;
