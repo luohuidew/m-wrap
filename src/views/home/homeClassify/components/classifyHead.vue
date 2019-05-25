@@ -110,7 +110,7 @@ export default {
             }
             span {
                 text-align: center;
-                font-size: 12px;
+                font-size: 11px;
                 margin-top: 10px;
             }
         }

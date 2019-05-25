@@ -72,7 +72,6 @@ export default {
     span {
       text-decoration: underline;
       font-size:10px;
-      font-family:Muli-ExtraBold;
       font-weight:800;
       color:rgba(155,155,155,1);
     }

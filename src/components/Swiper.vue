@@ -21,7 +21,7 @@
         // ],
         swiperOption: {
           watchSlidesProgress: true,
-          slidesPerView : 1.5,
+          slidesPerView :1.8,
           centeredSlides : true,
           loop:true,
           loopAdditionalSlides:2,
@@ -33,7 +33,7 @@
               var swiper = this;
               for (var i = 0; i < swiper.slides.length; i++) {
                 let slideProgress = swiper.slides[i].progress; // -1 0 1 2
-                let scale = 1-Math.abs(slideProgress)*0.2;
+                let scale = 1-Math.abs(slideProgress)*.2;
                 swiper.slides[i].style.transform =
                         "scale(" + scale + ")";
               }

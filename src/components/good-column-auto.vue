@@ -112,7 +112,7 @@ export default {
     text-align: center;
     height: 40px;
     font-size: 12px;
-    line-height: 20px;
+    line-height: 18px;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -124,7 +124,7 @@ export default {
 
   .pay-price {
     .current {
-      margin-top: 3px;
+      margin-top: 0px;
       display: block;
       text-align: center;
       font-size:14px;
