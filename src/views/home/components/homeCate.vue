@@ -1,6 +1,6 @@
 <template>
   <div class="home-cate" >
-    <h1>A STYLISH ONLINE FASHION <br>MARKETPLACE</h1>
+    <h1>A STYLISH ONLINE  <br> FASHION MARKETPLACE</h1>
     <ScrollHead></ScrollHead>
   </div>
 </template>
