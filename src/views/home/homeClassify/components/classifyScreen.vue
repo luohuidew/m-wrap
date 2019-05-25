@@ -57,8 +57,8 @@
               <span @click="childShow(twoItem)">
                 <span class="selec-icon-wrapper">
                   <label v-if="twoItem.chlid.length > 0">
-                    <img src="/static/images/icon/home/add.png" alt="" class="selcect-img1"  v-if="twoItem.chlid.length > 0 && twoItem.open == true">
-                    <img src="/static/images/icon/home/line.png" alt="" class="selcect-img2" v-if="twoItem.chlid.length = 0 && twoItem.open == false">
+                    <img src="/static/images/icon/home/add.png" alt="" class="selcect-img1"  v-if="twoItem.chlid.length > 0 || twoItem.open == true">
+                    <img src="/static/images/icon/home/line.png" alt="" class="selcect-img2" v-if="twoItem.open == false">
                   </label>
                   <label class="hidden" v-else></label>
                 </span>
