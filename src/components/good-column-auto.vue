@@ -1,6 +1,6 @@
 <template>
   <div class='goods-card'
-    @click="to_detail(card_data.sku_id)">
+    @click="to_detail(card_data)">
     <div class="goods-img">
       <img :src="card_data.cover_img"
         alt=""
@@ -49,7 +49,8 @@ export default {
   props: ["cardData", "groupId", "activeFixed"],
   components: {},
   methods: {
-    to_detail(sku_id) {
+    to_detail(good) {
+      const sku_id = good.route_sku_id || good.sku_id
       if (this.activeFixed) {
         let params = {
           path: "/detailAcive",

@@ -4,7 +4,7 @@
     <section>
       <div v-for="(storeSingle,index) in listsData" class="store" :key="index">
         <div class="imgs">
-          <img v-for="good in storeSingle.product" @click="goDetails(good.route)" :key="good.id" :src="good.cover_img" alt="">
+          <img v-for="good in storeSingle.product" @click="goDetails(good.route_sku_id)" :key="good.id" :src="good.cover_img" alt="">
         </div>
         <div class="footer">
           <router-link :to="storeSingle.route">
@@ -48,14 +48,14 @@
 
   },
   methods: {
-    goDetails(route) {
-      // let params = {
-      //   path: "/detail",
-      //   query: {
-      //     sku_id: sku_id
-      //   }
-      // }
-      this.$router.push(route);
+    goDetails(sku_id) {
+      let params = {
+        path: "/detail",
+        query: {
+          sku_id: sku_id
+        }
+      }
+      this.$router.push(params);
     }
   },
   components: {
