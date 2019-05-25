@@ -64,7 +64,7 @@
                 </span>
               </span>
               <span @click.stop="twoShow(twoItem,twoItem.cat_name)" class="twoShow">
-                 <span> {{twoItem.cat_name}}</span>
+                <span>{{twoItem.cat_name}}</span>
                 <van-icon name="success" class="all-selected" v-show="actives == twoItem.id "/>
               </span>
             </p>
@@ -206,7 +206,8 @@ export default {
       SlectThree(item,e) {
         this.actives = item.id;
         this.par.categoryId = item.id;
-        this.twoName = e.target.parentElement.previousElementSibling.firstElementChild.lastElementChild.innerHTML;
+        // this.twoName = e.target.parentElement.previousElementSibling.firstElementChild.lastElementChild
+        this.twoName = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerHTML;
         this.threeName = e.currentTarget.innerText;
         console.log(this.twoName,this.threeName)
 
@@ -396,7 +397,7 @@ export default {
             }
             li {
               line-height: 38px;
-              padding: 0 80px;
+              padding: 0 28px 0 78px;
               border-bottom: 1px solid #E1E1E1;
               display: flex;
               justify-content: space-between;
