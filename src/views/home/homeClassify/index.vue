@@ -23,12 +23,14 @@
           src="/static/images/icon/cart/分类 copy 2.png"
           alt="">
       </li>
-       <li @click="showPopup(3)">
-        <span v-if="this.freeName">{{this.freeName}}</span>
+
+      <li @click="showPopup(3)" :class="freeActive?'screenListActive':''">
+        <span>Free shipping</span>
+        <!-- <span v-if="this.freeName">{{this.freeName}}</span>
         <span v-else>Postage</span>
         <img
           src="/static/images/icon/cart/分类 copy 2.png"
-          alt="">
+          alt=""> -->
       </li>
     </ul>
     <van-list v-model="loading"
@@ -190,14 +192,16 @@ export default {
         threeName:'',
         sortName:'',
         _sortName:'',
-        freeName:'',
-        _freeName:'',
+        // freeName:'',
+        // _freeName:'',
+        freeActive:false,
         innerChange:undefined,
         par:{
           sort:undefined,
           free:undefined,
           categoryId:undefined
         },
+        free:0,
         sortList:data.sortList,
         freeList:data.freeList,
         screenLists:[
@@ -223,7 +227,7 @@ export default {
     computed: {},
     created() {
       this.getSkuListData();
-      this.getCate()
+      this.getCate();
     },
     methods: {
       getSkuListData(){
@@ -248,19 +252,26 @@ export default {
       updateId(id){
         this.parentId = id
         this.classId = id;
-        this.getSkuListData()
+        
+        // this._twoName = '';
+        // this.two = this._twoName;
+        // this._threeName = '';
+        // this.threeName = this._threeName;
+
+        this.getSkuListData();
+        this.getCate();
+       
+        console.log(this._twoName,this._threeName,'0000',this.twoName,this.threeName,)
       },
-      // classifyScreen
       twoShow(itemId,name){
         this.actives = itemId.id;
         this.parentId = itemId.id;
         this._twoName = name;
-        console.log(this._twoName)
       },
       SlectThree(item,e) {
         this.actives = item.id;
         this.parentId = item.id;
-        this._twoName = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerHTML;
+        this._twoName = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerText;
         this._threeName = e.currentTarget.innerText;
         console.log(this._twoName,this._threeName)
       },
@@ -276,9 +287,11 @@ export default {
       },
       clearId(){
         this.actives = '';
-        this.parentId = undefined
-        this.twoName = '';
-        this.threeName = '';
+        this.parentId = undefined;
+        this._twoName = "";
+        this.twoName =  this._twoName;
+        this._threeName = "";
+        this.threeName = this._threeName;
         this.getSkuListData();
       },
       sortSelect(type,name){
@@ -302,12 +315,12 @@ export default {
 
       },
       freeBtn(){
-        this.page = 1;
-        this.show_free = false;
-        this.free = this.par.free;
-        this.skuList = [];
-        this.init_skuList();
-        this.freeName = this._freeName;
+        // this.page = 1;
+        // this.show_free = false;
+        // this.free = this.par.free;
+        // this.skuList = [];
+        // this.init_skuList();
+        // this.freeName = this._freeName;
       },
       childShow(item){
         item.open = !item.open
@@ -317,7 +330,15 @@ export default {
         if(type == 2) {
           this.show_sort = true;
         }else if (type == 3){
-          this.show_free = true;
+          if(this.freeActive){
+            this.freeActive = false;
+            this.free = 0;
+            this.getSkuListData();
+          }else {     // 包邮
+            this.freeActive = true;
+            this.free = 1;
+            this.getSkuListData();
+          }
         }
       },
       closePopup(type) {
@@ -395,8 +416,6 @@ export default {
       overflow-scrolling: touch;
       padding: 15px;
       white-space: nowrap;
-      /*position: -webkit-sticky;*/
-      /*position: sticky;*/
       background: #fff;
       li {
         margin-right:10px;
@@ -414,15 +433,18 @@ export default {
           margin-right: 0px;
         }
         img {
-            width: 18px;
-            height: 10px;
-            margin-left: 3px;
+          width: 18px;
+          height: 10px;
+          margin-left: 3px;
         }
         span {
           text-align: center;
           white-space: nowrap;
         }
       }
+      .screenListActive {
+        border-color: #000;
+      } 
     }
     .show-sort-wraper,
     .show-free-wrapper,
