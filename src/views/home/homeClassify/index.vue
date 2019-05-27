@@ -83,7 +83,7 @@
             <ol  v-bind:class="twoItem.open == true ? 'open': ''">
               <li
                 v-for="(items,index) in twoItem.chlid"
-                @click.stop="SlectThree(items,$event)"
+                @click.stop="SlectThree(items,twoItem.cat_name)"
                 :key='index'>
                 <span>{{items.cat_name}}</span>
                 <van-icon name="success" v-show="actives == items.id "/>
@@ -286,19 +286,17 @@ export default {
         this.parentId = itemId.id;
         this._twoName = name;
         this._threeName = ''
-        console.log(this._twoName)
       },
-      SlectThree(item,e) {
+      SlectThree(item,twoItem) {
         this.actives = item.id;
         this.parentId = item.id;
-        this._twoName = e.currentTarget.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerText;
-        this._threeName = e.currentTarget.innerText;
-        console.log(this._twoName,this._threeName)
+        this._twoName = twoItem;
+        this._threeName = item.cat_name;
+        console.log(item,'0000')
       },
       allBtn(){
         this.show_all = false;
         this.getSkuListData();
-        // this.opens = false;
         this.twoName = this._twoName;
         this.threeName = this._threeName;
         if(this.actives == ""){
@@ -333,9 +331,7 @@ export default {
         this.sort = this.par.sort;
         this.skuList = [];
         this.sortName = this._sortName;
-
         this.init_skuList();
-        // console.log(this.active,'=====')
         if(this.active === "") {
           this.sortActive = false;
         }else {
