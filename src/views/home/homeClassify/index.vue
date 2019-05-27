@@ -2,7 +2,7 @@
   <div class="home-classify-page" v-scroll>
     <classifyHead @parentId="updateId" :classId="classId"/>
     <ul class="screenList" id = "listFirstCate">
-      <li @click="showAll()" v-if="this.threeName || this.twoName">
+      <li @click="showAll()" v-if="this.threeName || this.twoName"  :class="allActive?'screenListActive':''">
         <span class="mr5">{{this.twoName}} </span>
         <span v-show="this.threeName"> > {{this.threeName}}</span>
         <img
@@ -16,7 +16,7 @@
           alt="">
       </li>
 
-      <li @click="showPopup(2)">
+      <li @click="showPopup(2)" :class="sortActive?'screenListActive':''">
         <span v-if="this.sortName">{{this.sortName}}</span>
         <span v-else>Sort</span>
         <img
@@ -34,11 +34,11 @@
       </li>
     </ul>
     <van-list v-model="loading"
-              :immediate-check="false"
-              :finished="finished"
-              finished-text="No more data"
-              :loading-text="'Loading...'"
-              @load="init_skuList">
+      :immediate-check="false"
+      :finished="finished"
+      finished-text="No more data"
+      :loading-text="'Loading...'"
+      @load="init_skuList">
       <ul class="sku-list">
         <li
           v-for="(good,index) in skuList"
@@ -160,6 +160,7 @@ import data from './components/config.js'
 import classifyHead from "./components/classifyHead";
 import classifyScreen from './components/classifyScreen';
 import goodItem from "@/components/good-column-auto";
+import { constants } from 'crypto';
 let classify_Lists_box_height = 0
 let listFirstCate
 let bannerOffsetTop
@@ -193,10 +194,11 @@ export default {
         threeName:'',
         sortName:'',
         _sortName:'',
-        // freeName:'',
-        // _freeName:'',
+        allActive:false,
+        sortActive:false,
         freeActive:false,
         innerChange:undefined,
+        // opens:undefined,
         par:{
           sort:undefined,
           free:undefined,
@@ -254,12 +256,30 @@ export default {
         this.popAllName = name
         this.parentId = id
         this.classId = id;
-        this.getCate();
+        this.clearAllSelectdName();
+        this.clearSortSelectdName();
+        this.clearFreeSelected();
         this.getSkuListData();
+        this.getCate(); 
+      },
+      clearAllSelectdName(){
         this._twoName = '';
         this._threeName = '';
         this.twoName = this._twoName;
         this.threeName = this._threeName;
+        this.actives = '';
+        this.allActive = false;
+      },
+      clearSortSelectdName(){
+        this.sort = '';
+        this._sortName = '';
+        this.sortName = this._sortName;
+        this.active = '';
+        this.sortActive = false;
+      },
+      clearFreeSelected(){
+        this.free = 0;
+        this.freeActive = false;
       },
       twoShow(itemId,name){
         this.actives = itemId.id;
@@ -271,16 +291,21 @@ export default {
       SlectThree(item,e) {
         this.actives = item.id;
         this.parentId = item.id;
-        // this._twoName = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerHTML;
+        this._twoName = e.currentTarget.parentElement.previousElementSibling.lastElementChild.firstElementChild.innerText;
         this._threeName = e.currentTarget.innerText;
         console.log(this._twoName,this._threeName)
       },
       allBtn(){
         this.show_all = false;
         this.getSkuListData();
-        console.log(this._twoName)
+        // this.opens = false;
         this.twoName = this._twoName;
-        this.threeName = this._threeName
+        this.threeName = this._threeName;
+        if(this.actives == ""){
+          this.allActive = false;
+        }else {
+          this.allActive = true;
+        }
 
       },
       showAll(){    // 请求all子类接口
@@ -288,11 +313,8 @@ export default {
       },
       clearId(){
         this.actives = '';
-        this.parentId = undefined
-        this._twoName = "";
-        this.twoName =  this._twoName;
-        this._threeName = "";
-        this.threeName = this._threeName;
+        this.parentId = undefined;
+        this.clearAllSelectdName();
         this.getSkuListData();
       },
       sortSelect(type,name){
@@ -304,28 +326,27 @@ export default {
         this.active1 = type;
         this.par.free = type;
         this._freeName = name;
-        console.log(name,'0000')
       },
       sortBtn(){
         this.page = 1;
         this.show_sort = false;
         this.sort = this.par.sort;
         this.skuList = [];
-        this.init_skuList();
         this.sortName = this._sortName;
 
+        this.init_skuList();
+        // console.log(this.active,'=====')
+        if(this.active === "") {
+          this.sortActive = false;
+        }else {
+          this.sortActive = true;
+        }
+
       },
-      freeBtn(){
-        // this.page = 1;
-        // this.show_free = false;
-        // this.free = this.par.free;
-        // this.skuList = [];
-        // this.init_skuList();
-        // this.freeName = this._freeName;
-      },
+      freeBtn(){},
       childShow(item){
-        this._twoName = item.cat_name
-        item.open = !item.open
+        this._twoName = item.cat_name;
+        item.open = !item.open;
         this.$forceUpdate();
       },
       showPopup(type){
@@ -404,7 +425,7 @@ export default {
       let banner_number = app_banner.offsetHeight;
       bannerOffsetTop = this.offsetTop = top_number + banner_number;
       let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-      this.maxH = (h - this.offsetTop) + 'px';
+      this.maxH = (h - this.offsetTop-classify_Lists_box_height) + 'px';
     }
 }
 </script>
