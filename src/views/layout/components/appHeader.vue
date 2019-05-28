@@ -73,6 +73,7 @@
 
 <script>
 import OptionsBox from "./optionsBox";
+import {getToken} from "@/utils/auth";
 export default {
   name: "",
   props: {},
@@ -134,6 +135,7 @@ export default {
       let href_params = {
         path: "/login",
         query:{
+          name: 999,
           redirect: this.$route.path ==='/login/index'? undefined: this.$route.fullPath
         }
       };
@@ -156,7 +158,16 @@ export default {
         path: data
       };
       this.contractionShow = false;
-      this.$router.push(hef_parmas);
+      if(data.includes('user')) {
+        if(getToken()){
+          this.$router.push(hef_parmas);
+        } else {
+          this.$router.push('/login/index');
+        }
+      } else {
+        this.$router.push(hef_parmas);
+      }
+
     },
     go_back(){
       this.$router.go(-1);
