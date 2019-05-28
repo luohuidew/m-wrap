@@ -253,14 +253,23 @@ export default {
         })
       },
       updateId(id, name){
-        this.popAllName = name
-        this.parentId = id
+        const obj={
+          query: {
+            name,
+            id
+          },
+          path: this.$route.path
+        }
+        this.$router.replace(obj);
+        this.popAllName = name;
+        this.parentId = id;
         this.classId = id;
         this.clearAllSelectdName();
         this.clearSortSelectdName();
         this.clearFreeSelected();
         this.getSkuListData();
         this.getCate(); 
+        
       },
       clearAllSelectdName(){
         this._twoName = '';
@@ -422,6 +431,9 @@ export default {
       bannerOffsetTop = this.offsetTop = top_number + banner_number;
       let h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
       this.maxH = (h - this.offsetTop-classify_Lists_box_height) + 'px';
+
+      // let getFirstId = localStorage.getItem(firstId);
+      // console.log(getFirstId,'00000')
     }
 }
 </script>

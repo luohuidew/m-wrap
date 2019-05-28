@@ -26,7 +26,7 @@
           <img v-if="is_like==1"  class="is_like"  @click="onlike" src="/static/images/icon/detail/like2@3x.png" alt="">
           <img v-if="is_like==2"  class="is_like_no"  @click="onlike" src="/static/images/icon/detail/like@3x.png" alt="">
           <span>
-          {{is_like==1?sku.like_num:sku.like_num+1}}
+          {{like_num}}
         </span>
 
         </p>
@@ -79,6 +79,7 @@ export default {
   },
   data() {
     return {
+      like_num:this.skuData.like_num,
       is_like:1,
       price_preference:0
     };
@@ -107,6 +108,11 @@ export default {
           sku_id: this.$route.query.sku_id
         };
         api.like(params).then(res => {
+          if(res.data==1){
+            this.like_num-=1
+          }else{
+            this.like_num+=1
+          }
           this.is_like = res.data;
         });
       }
