@@ -2,10 +2,10 @@
 <template>
   <div class="app-wrap">
     <span>GET THE APP:</span>
-    <a href="https://itunes.apple.com/us/app/weget-mall/id1439887303?mt=8">
+    <a v-if="$CM.is_ipone()" href="https://itunes.apple.com/us/app/weget-mall/id1439887303?mt=8">
       <img src="../img/Icon@3x.png" />
     </a>
-    <a href="https://play.google.com/store/apps/details?id=com.weget.www">
+    <a v-else href="https://play.google.com/store/apps/details?id=com.weget.www">
       <img src="../img/Clip 2@3x.png" />
 
     </a>
