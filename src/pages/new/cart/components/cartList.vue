@@ -95,13 +95,19 @@ export default {
   },
   methods: {
     selectStoreGoodsDelete(cart_id) {
-      this.selectStoreGoods.forEach((store) => {
+      this.selectStoreGoods.forEach((store, storeIndex) => {
         store.goods.forEach((good, index) => {
           if(good.cart_id === cart_id) {
             store.goods.splice(index, 1)
+            if(store.goods.length === 0){
+              this.selectStoreGoods.splice(storeIndex,1)
+            }
           }
         })
       })
+      console.log(this.selectStoreGoods)
+      this.$emit("change", this.selectStoreGoods, this.user_coupon_id);
+
     },
     deleteCartGood(obj) {
       this.$emit('deleteCartGood',obj)

@@ -117,16 +117,16 @@ export default {
            })
         })
         this.$refs.CarListRef.selectStoreGoodsDelete(obj.cart_id)
-        this.ZANCUN_DDTA.forEach((store) => {
-          store.goods.forEach((good, index) => {
-            if(good.cart_id === obj.cart_id) {
-              store.goods.splice(index, 1)
-            }
-          })
-        })
-        if (this.ZANCUN_DDTA.length > 0) {
-          this.totalPrices(this.ZANCUN_DDTA, this.ZANCUN_Coupon)
-        }
+        // this.ZANCUN_DDTA.forEach((store) => {
+        //   store.goods.forEach((good, index) => {
+        //     if(good.cart_id === obj.cart_id) {
+        //       store.goods.splice(index, 1)
+        //     }
+        //   })
+        // })
+        // if (this.ZANCUN_DDTA.length > 0) {
+        //   this.totalPrices(this.ZANCUN_DDTA, this.ZANCUN_Coupon)
+        // }
       })
     },
     closeshowVantCoupon(obj) {
