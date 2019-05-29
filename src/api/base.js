@@ -24,7 +24,7 @@ export default {
     data.token = token
     return request({
       url: `${GO_LANG}middleware/public/common/v1/visit/saveLog`,
-      withCredentials: true,
+      withCredentials: false,
       method: 'post',
       data: JSON.stringify(data),
     })
