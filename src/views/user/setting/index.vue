@@ -53,7 +53,7 @@ export default {
     logout(){
       if(getToken()){
         this.$store.dispatch('logOut').then(()=> {
-          this.$router.replace('/login');
+          this.$router.replace('/');
         })
       }
     }
