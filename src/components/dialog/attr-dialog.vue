@@ -1,5 +1,5 @@
 <template>
-  <scroll-lock bodyLock="true">
+  <scroll-lock >
     <div class="dialog-box">
       <div class="content"
            :class="show_transtion">
