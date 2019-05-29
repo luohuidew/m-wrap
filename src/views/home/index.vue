@@ -104,7 +104,7 @@ export default {
       width: 100%;
     }
   }
-  & >>> .van-popup{
+  & ::v-deep .van-popup{
     border-radius: 5px;
     width: 60%;
     min-height: 40px;
