@@ -18,6 +18,7 @@ export default {
     {
       path: 'popu-1',
       name: 'popu-1',
+      redirect: '/',
       component: () =>
           import('@/views/popularize/popu-1'),
       meta: {

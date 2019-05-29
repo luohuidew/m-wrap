@@ -73,10 +73,6 @@
       return {
         topBannerData: [
           {
-            text: 'Refer friends get $15 ！',
-            url: '/popularize/popu-1',
-          },
-          {
             text: 'Get $15 in coupons when you sign up!',
             url: '/login?type=signUp',
           }

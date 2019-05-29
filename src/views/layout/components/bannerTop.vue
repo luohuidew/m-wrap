@@ -1,13 +1,13 @@
 <template>
   <div v-if="bannerData" class="banner">
-    <van-icon name="arrow-left" class="arrow" />
+    <!--<van-icon name="arrow-left" class="arrow" />-->
     <van-swipe :autoplay="5000" :show-indicators="false">
       <van-swipe-item v-for="(item,index) in bannerData"
         :key="index">
         <p class="text" @click="to_path(item.url)">{{item.text}}</p>
       </van-swipe-item>
     </van-swipe>
-    <van-icon name="arrow" class="rights" />
+    <!--<van-icon name="arrow" class="rights" />-->
 
   </div>
 </template>

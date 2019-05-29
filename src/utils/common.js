@@ -2,7 +2,7 @@ import Vue from 'vue';
 // import Meta from 'vue-meta';
 // Vue.use(Meta);
 const ua = navigator.userAgent.toLowerCase();
-// alert(ua);
+console.log(ua);
 const CM = {
   goback(that) {
     // Vue.$router.back(-1);
@@ -10,6 +10,13 @@ const CM = {
   },
   is_safari() {
     if (ua.indexOf('safari') !== -1 && (ua.indexOf('chrome') == -1) && (ua.indexOf('crios') == -1)) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  is_ipone() {
+    if (ua.indexOf('iphone') !== -1 ) {
       return true;
     } else {
       return false;

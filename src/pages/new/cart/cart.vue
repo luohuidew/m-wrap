@@ -172,6 +172,7 @@ export default {
     },
     toCheckout(){
       if (this.selectedNumber === 0) {
+        this.$toast('Please select your items first.')
         return
       }
       this.isLoading = true
