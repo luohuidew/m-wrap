@@ -1,13 +1,22 @@
 
 <template>
-  <swiper :options="swiperOption" ref="mySwiper"  v-if="bannerData" class="home-banner-wrap">
-    <!-- slides -->
-    <swiper-slide  v-for="(item,index) in bannerData"  :key="index">
-      <img :src="item.image_url" alt="" srcset="" @click="to_path(item.route)">
-    </swiper-slide>
-    <!-- Optional controls -->
-    <div class="swiper-pagination"  slot="pagination"></div>
-  </swiper>
+  <div>
+  <div v-if="bannerData.length===1">
+    <img :src="bannerData[0].image_url" alt="" style="width: 100%"  srcset="" @click="to_path(bannerData[0].route)">
+  </div>
+    <template v-else>
+      <swiper :options="swiperOption" ref="mySwiper"  v-if="bannerData" class="home-banner-wrap">
+        <!-- slides -->
+        <swiper-slide  v-for="(item,index) in bannerData"  :key="index">
+          <img :src="item.image_url" alt="" srcset="" @click="to_path(item.route)">
+        </swiper-slide>
+        <!-- Optional controls -->
+        <div class="swiper-pagination"  slot="pagination"></div>
+      </swiper>
+
+
+    </template>
+  </div>
 </template>
 <script>
 export default {
