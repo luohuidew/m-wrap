@@ -3,8 +3,8 @@
     <!--<div class="title-box">-->
       <!--&lt;!&ndash; <p class="mre"></p> &ndash;&gt;-->
     <!--</div>-->
-    <ul class="des-info" :class="{moreshow:!is_more&&more_height>100,desPadding:more_height>100}" >
-        <p v-html="detail_text" ref="more"></p>
+    <ul class="des-info" ref="more" :class="{moreshow:!is_more&&more_height>100,desPadding:more_height>100}" >
+        <p v-html="detail_text" ></p>
         <div class="img-box">
         <template v-if="sku.desc_imgs.length>0">
           <img v-for="(item,index) in sku.desc_imgs"
