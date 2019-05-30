@@ -45,7 +45,7 @@ export default {
         last_id: this.cur_lists.select_id,
         limit: 4,
         sku_id: this.$route.query.sku_id,
-        type: 5
+        type: 7
       };
       this.init_data(params);
       // console.log(data);
