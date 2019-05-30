@@ -40,8 +40,12 @@
             </keep-alive>
           </template> -->
           <template>
-            <router-view class="child-view"
-              :key="$route.fullPath"></router-view>
+            <!--<div class="wraps" style="position: absolute;width: 100%;right:0px;top: 0px;left: 0px;bottom: 0px;">-->
+              <!--<transition :name="transitionName">-->
+                 <router-view class="child-view " :key="$route.fullPath"></router-view>
+              <!--</transition>-->
+            <!--</div>-->
+
           </template>
           <!-- <router-view></router-view> -->
         <!-- </transition> -->
@@ -71,13 +75,14 @@
     name: "layout",
     data() {
       return {
+        chachHistory: [],
         topBannerData: [
           {
             text: 'Get $15 in coupons when you sign up!',
             url: '/login?type=signUp',
           }
         ],
-        transitionName: "slide-left",
+        transitionName: "",
         showTopPath: ['/cart/index','/checkout/index']
       };
     },
@@ -155,12 +160,38 @@
         // console.log(this.$refs['app_content']);
       },
       init_transtion(to, from) {
-        /* 设置动画的类名 */
-        if (to.path == "/") {
-          this.transitionName = "slide-right";
-        } else {
-          this.transitionName = "slide-left";
+        const toPath = to.path
+        const formPath = from && from.path
+        if (from && (toPath === formPath)) {
+          this.transitionName = "";
+          return
         }
+        if(toPath.includes('/home/index') && this.chachHistory.length>0) {
+          this.transitionName = "slide-move-right";
+          this.chachHistory = []
+          return
+        }
+        if (from) {
+          const index = this.chachHistory.indexOf(toPath)
+          if (index !== -1) {
+            this.transitionName = "slide-move-right";
+            const index2 = this.chachHistory.indexOf(formPath)
+            this.chachHistory.splice(index2, 1)
+          } else {
+            this.transitionName = "slide-move-left";
+            this.chachHistory.push(toPath)
+          }
+        }
+
+        console.log(this.chachHistory, 888)
+
+        /* 设置动画的类名 */
+
+        // if (to.path == "/") {
+        //   this.transitionName = "slide-move-right";
+        // } else {
+        //   this.transitionName = "slide-move-left";
+        // }
       },
       init_device() {
         /* 开局获取设备的壳子 */
@@ -269,28 +300,32 @@
 // .in-app.page-body {
 // }
 .child-view {
-  /* position: absolute; */
-  /* left: 0; */
-  /* top: 0; */
+   /*position: absolute;*/
+   /*left: 0;*/
+   /*top: 0;*/
 
   width: 100%;
   height: 100%;
   overflow: auto;
   /* height: 100%; */
-  // transition: transform 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  /*transition: transform 23.5s cubic-bezier(0.55, 0, 0.1, 1);*/
 }
-// .slide-left-enter,
-// .slide-right-leave-active {
-//   opacity: 0;
-//   -webkit-transform: translate(30px, 0);
-//   transform: translate(30px, 0);
-// }
-// .slide-left-leave-active,
-// .slide-right-enter {
-//   opacity: 0;
-//   -webkit-transform: translate(-30px, 0);
-//   transform: translate(-30px, 0);
-// }
+.slide-move-left-enter-active {
+  transform: translate(0, 0);
+}
+
+ .slide-move-left-enter,
+ .slide-move-right-leave-active{
+   opacity: 0.1;
+   -webkit-transform: translate(100px, 0);
+   transform: translate(100px, 0);
+ }
+  .slide-move-right-enter,
+  .slide-move-left-leave-active{
+    opacity: 0.1;
+   -webkit-transform: translate(-100px, 0);
+   transform: translate(-100px, 0);
+ }
 .auto-login {
   display: none;
 }
