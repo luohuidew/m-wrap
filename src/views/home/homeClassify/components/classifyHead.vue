@@ -41,7 +41,7 @@ export default {
                })
            }
            this.activeIndex = item.id
-           this.$emit("parentId",item.id, item.cat_name)
+           this.$emit("parentId",item.id,item.cat_name)
         },
          init_data() {   // 获取分类列表
             api.getCateList().then(res => {
