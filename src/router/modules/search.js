@@ -43,7 +43,7 @@ export default {
       import('@/pages/search/search-lists'),
     meta: {
       title: 'Query Lists',
-      keepAlive: false,
+      keepAlive: true,
     },
   },{
     path: 'search-store-lists',

@@ -1,23 +1,25 @@
 <template>
-  <div class="query-lists">
+  <div class="query-lists"  ref="list">
     <noData v-if="finished && sku_lists.length === 0 ">
       <span>No Product in this category</span>
     </noData>
-    <van-list v-model="loading"
-      :immediate-check="false"
-      :finished="finished"
-      :finished-text="''"
-      :loading-text="'Loading...'"
-      @load="get_more_data">
-      <ul class="pick-lists"
-        slot="default">
-        <li v-for="(item,index) in sku_lists"
-          :key="index">
-          <goods-card :key="index"
-            :cardData="item"></goods-card>
-        </li>
-      </ul>
-    </van-list>
+      <van-list v-model="loading"
+                :immediate-check="false"
+                :finished="finished"
+                :finished-text="''"
+                :loading-text="'Loading...'"
+                @load="get_more_data">
+        <ul class="pick-lists"
+            ref="scoorl"
+            slot="default">
+          <li v-for="(item,index) in sku_lists"
+              :key="index">
+            <goods-card :key="index"
+                        :cardData="item"></goods-card>
+          </li>
+        </ul>
+      </van-list>
+
   </div>
 </template>
 
@@ -34,14 +36,31 @@ export default {
       selectId: undefined,
       goodsListsData: [],
       sku_lists: [],
-      cur_lists_data: undefined
+      cur_lists_data: undefined,
+      sctop:0
     };
   },
   created() {
     this.init_data();
   },
-  mounted() {},
+  mounted() {
+  },
+  beforeRouteLeave(to, from, next){
+    localStorage.setItem('scroolTop',this.$refs.list.scrollTop );
+    next()
+  },
+  activated () {
+    this.$nextTick(function(){
+      let scroolTop = localStorage.getItem('scroolTop');
+      this.$refs.list.scrollTop=scroolTop;
+      localStorage.setItem('scroolTop','')
+    })
+  },
   computed: {},
+  beforRouteLeave (to, from, next) {
+    localStorage.setItem('scroolTop',this.$refs.list.scrollTop);
+    next()
+  },
   methods: {
     init_data(params = this.$route.query) {
       // let params = this.$route.query;
