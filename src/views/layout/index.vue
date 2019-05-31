@@ -35,17 +35,13 @@
         :class="{'in-app':full_screen}">
         <!-- <transition :name="transitionName"> -->
           <!-- <template v-if="$route.meta.keepAlive"> -->
-            <!-- <keep-alive>
-              <router-view class="child-view"></router-view>
-            </keep-alive>
-          </template> -->
-          <template>
-            <!--<div class="wraps" style="position: absolute;width: 100%;right:0px;top: 0px;left: 0px;bottom: 0px;">-->
-              <!--<transition :name="transitionName">-->
-                 <router-view class="child-view " :key="$route.fullPath"></router-view>
-              <!--</transition>-->
-            <!--</div>-->
 
+          <!--</template> &ndash;&gt;-->
+          <template>
+            <keep-alive>
+              <router-view v-if="$route.meta.keepAlive" class="child-view"></router-view>
+            </keep-alive>
+            <router-view v-if="!$route.meta.keepAlive" class="child-view" :key="$route.fullPath"></router-view>
           </template>
           <!-- <router-view></router-view> -->
         <!-- </transition> -->
